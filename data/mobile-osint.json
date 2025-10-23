@@ -1,0 +1,497 @@
+{
+  "moduleTitle": "Module 7: Mobile Security & OSINT",
+  "moduleDescription": "Mobile application security testing, APK analysis, reverse engineering aur OSINT techniques",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Mobile Security Fundamentals",
+      "content": {
+        "intro": "Mobile security ki basics - Android architecture, security model aur common vulnerabilities samajhna zaroori hai.",
+        "sections": [
+          {
+            "heading": "Android Security Architecture",
+            "text": "Android Security Layers:\n\n• Application Layer\n  - App permissions\n  - Code signing\n  - Sandboxing\n\n• Framework Layer\n  - Android APIs\n  - System services\n  - IPC mechanisms\n\n• Native Layer\n  - Native libraries\n  - Hardware abstraction\n  - Kernel drivers\n\n• Kernel Layer\n  - Linux kernel\n  - SELinux policies\n  - Hardware security"
+          },
+          {
+            "heading": "Mobile Attack Vectors",
+            "text": "Common Mobile Threats:\n\n• Malicious Apps\n• Data Leakage\n• Insecure Communication\n• Weak Authentication\n• Insecure Data Storage\n• Code Tampering\n• Reverse Engineering\n• Binary Attacks\n• Runtime Manipulation\n• Physical Device Access"
+          },
+          {
+            "heading": "Mobile Testing Environment Setup",
+            "commands": [
+              {
+                "description": "ADB Install",
+                "command": "apt install android-tools-adb android-tools-fastboot -y",
+                "explanation": "Android Debug Bridge tools install karta hai"
+              },
+              {
+                "description": "Device Connection Check",
+                "command": "adb devices",
+                "explanation": "Connected Android devices list karta hai"
+              },
+              {
+                "description": "Enable USB Debugging",
+                "command": "adb shell settings put global development_settings_enabled 1",
+                "explanation": "Developer options enable karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "APK Analysis Tools",
+            "commands": [
+              {
+                "description": "APKTool Install",
+                "command": "apt install apktool -y",
+                "explanation": "APK reverse engineering tool"
+              },
+              {
+                "description": "Jadx Install",
+                "command": "apt install jadx -y",
+                "explanation": "Java decompiler for Android APK"
+              },
+              {
+                "description": "Dex2jar Install",
+                "command": "wget https://github.com/pxb1988/dex2jar/releases/download/v2.1/dex2jar-2.1.zip && unzip dex2jar-2.1.zip",
+                "explanation": "DEX to JAR converter tool"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "APK Analysis & Reverse Engineering",
+      "content": {
+        "intro": "Android APK files ki detailed analysis - static analysis, dynamic analysis aur reverse engineering techniques.",
+        "sections": [
+          {
+            "heading": "APK Structure Analysis",
+            "text": "APK File Components:\n\n• AndroidManifest.xml - App permissions aur components\n• classes.dex - Compiled Java code\n• resources.arsc - App resources\n• res/ - Images, layouts, strings\n• lib/ - Native libraries\n• assets/ - Additional files\n• META-INF/ - Signing information",
+            "commands": [
+              {
+                "description": "APK Information",
+                "command": "aapt dump badging app.apk",
+                "explanation": "APK basic information extract karta hai"
+              },
+              {
+                "description": "APK Contents List",
+                "command": "unzip -l app.apk",
+                "explanation": "APK file contents list karta hai"
+              },
+              {
+                "description": "Extract APK",
+                "command": "unzip app.apk -d extracted_apk/",
+                "explanation": "APK contents extract karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Static Analysis",
+            "commands": [
+              {
+                "description": "APK Decompile",
+                "command": "apktool d app.apk -o decompiled_app",
+                "explanation": "APK ko human-readable format mein decompile karta hai"
+              },
+              {
+                "description": "Manifest Analysis",
+                "command": "cat decompiled_app/AndroidManifest.xml | grep -E '(permission|activity|service)'",
+                "explanation": "Manifest file mein permissions aur components analyze karta hai"
+              },
+              {
+                "description": "Java Code Decompile",
+                "command": "jadx -d output_dir app.apk",
+                "explanation": "APK ko Java source code mein convert karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Security Analysis",
+            "text": "Security Issues to Look For:\n\n• Hardcoded Credentials\n• API Keys in Code\n• Insecure Data Storage\n• Weak Encryption\n• Debug Information\n• Backup Flags\n• Network Security Config\n• Certificate Pinning\n• Root Detection Bypass\n• Anti-tampering Mechanisms",
+            "commands": [
+              {
+                "description": "Search Hardcoded Secrets",
+                "command": "grep -r -i 'password\\|api_key\\|secret\\|token' decompiled_app/",
+                "explanation": "Hardcoded credentials aur secrets search karta hai"
+              },
+              {
+                "description": "Find URLs",
+                "command": "grep -r -E 'https?://[^\\s]+' decompiled_app/",
+                "explanation": "Code mein embedded URLs find karta hai"
+              },
+              {
+                "description": "Database Files Check",
+                "command": "find decompiled_app/ -name '*.db' -o -name '*.sqlite'",
+                "explanation": "Database files search karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Analysis Tools",
+            "commands": [
+              {
+                "description": "MobSF Install",
+                "command": "git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git && cd Mobile-Security-Framework-MobSF && ./setup.sh",
+                "explanation": "Mobile Security Framework install karta hai"
+              },
+              {
+                "description": "QARK Install",
+                "command": "pip3 install qark",
+                "explanation": "Quick Android Review Kit install karta hai"
+              },
+              {
+                "description": "AndroBugs Install",
+                "command": "git clone https://github.com/AndroBugs/AndroBugs_Framework.git",
+                "explanation": "Android vulnerability scanner install karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Dynamic Analysis & Runtime Manipulation",
+      "content": {
+        "intro": "Runtime mein app behavior analyze karna - debugging, hooking aur runtime manipulation techniques.",
+        "sections": [
+          {
+            "heading": "Frida Framework",
+            "text": "Frida - Dynamic instrumentation toolkit:\n\n• Runtime code injection\n• Function hooking\n• Memory manipulation\n• API monitoring\n• Bypass security controls\n• Real-time analysis",
+            "commands": [
+              {
+                "description": "Frida Install",
+                "command": "pip3 install frida-tools",
+                "explanation": "Frida dynamic analysis framework install karta hai"
+              },
+              {
+                "description": "Frida Server Download",
+                "command": "wget https://github.com/frida/frida/releases/download/15.1.17/frida-server-15.1.17-android-arm64.xz",
+                "explanation": "Android ke liye Frida server download karta hai"
+              },
+              {
+                "description": "Push Frida Server",
+                "command": "adb push frida-server /data/local/tmp/ && adb shell chmod 755 /data/local/tmp/frida-server",
+                "explanation": "Frida server device mein push karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Runtime Hooking",
+            "text": "Common Frida Scripts:\n\nSSL Pinning Bypass:\nJava.perform(function() {\n    var X509TrustManager = Java.use('javax.net.ssl.X509TrustManager');\n    X509TrustManager.checkServerTrusted.implementation = function(chain, authType) {\n        console.log('[+] SSL Pinning bypassed');\n    };\n});\n\nRoot Detection Bypass:\nJava.perform(function() {\n    var RootBeer = Java.use('com.scottyab.rootbeer.RootBeer');\n    RootBeer.isRooted.implementation = function() {\n        console.log('[+] Root detection bypassed');\n        return false;\n    };\n});",
+            "commands": [
+              {
+                "description": "List Running Apps",
+                "command": "frida-ps -U",
+                "explanation": "Device mein running applications list karta hai"
+              },
+              {
+                "description": "Hook Application",
+                "command": "frida -U -l script.js com.example.app",
+                "explanation": "Target app mein Frida script inject karta hai"
+              },
+              {
+                "description": "Spawn and Hook",
+                "command": "frida -U -f com.example.app -l script.js --no-pause",
+                "explanation": "App spawn kar ke immediately hook karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Traffic Analysis",
+            "commands": [
+              {
+                "description": "Proxy Setup",
+                "command": "adb shell settings put global http_proxy 192.168.1.100:8080",
+                "explanation": "Device mein HTTP proxy configure karta hai"
+              },
+              {
+                "description": "Certificate Install",
+                "command": "adb push burp_cert.crt /sdcard/ && adb shell am start -a android.credentials.INSTALL",
+                "explanation": "Burp Suite certificate device mein install karta hai"
+              },
+              {
+                "description": "Traffic Capture",
+                "command": "tcpdump -i any -w mobile_traffic.pcap host 192.168.1.100",
+                "explanation": "Mobile device traffic capture karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Memory Analysis",
+            "commands": [
+              {
+                "description": "Memory Dump",
+                "command": "adb shell su -c 'dd if=/proc/$(pidof com.example.app)/mem of=/sdcard/memory_dump.bin'",
+                "explanation": "App memory dump create karta hai"
+              },
+              {
+                "description": "Strings Analysis",
+                "command": "strings memory_dump.bin | grep -i 'password\\|token\\|key'",
+                "explanation": "Memory dump mein sensitive strings search karta hai"
+              },
+              {
+                "description": "Heap Dump",
+                "command": "adb shell am dumpheap com.example.app /sdcard/heap_dump.hprof",
+                "explanation": "Application heap dump create karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "OSINT Fundamentals",
+      "content": {
+        "intro": "Open Source Intelligence (OSINT) - publicly available information se intelligence gathering techniques.",
+        "sections": [
+          {
+            "heading": "OSINT Methodology",
+            "text": "OSINT Process:\n\n1. Requirements Definition\n   • Information needs\n   • Target identification\n   • Scope definition\n\n2. Source Identification\n   • Public databases\n   • Social media\n   • Government records\n   • Technical sources\n\n3. Data Collection\n   • Automated tools\n   • Manual research\n   • API access\n   • Web scraping\n\n4. Analysis & Correlation\n   • Data validation\n   • Pattern recognition\n   • Timeline creation\n   • Relationship mapping\n\n5. Reporting\n   • Intelligence products\n   • Actionable insights\n   • Risk assessment"
+          },
+          {
+            "heading": "Search Engine Intelligence",
+            "text": "Google Dorking Techniques:\n\n• site:example.com - Specific site search\n• filetype:pdf - File type search\n• intitle:\"admin panel\" - Title search\n• inurl:admin - URL search\n• cache:example.com - Cached pages\n• \"exact phrase\" - Exact match\n• wildcard * search - Pattern matching\n• daterange: - Time-based search\n• related:example.com - Similar sites\n• info:example.com - Site information",
+            "commands": [
+              {
+                "description": "Google Dorking",
+                "command": "curl 'https://www.google.com/search?q=site:example.com+filetype:pdf'",
+                "explanation": "Google search API se dorking queries run karta hai"
+              },
+              {
+                "description": "Shodan Search",
+                "command": "shodan search 'apache 2.4.7'",
+                "explanation": "Shodan se vulnerable services search karta hai"
+              },
+              {
+                "description": "Censys Search",
+                "command": "censys search 'services.service_name: HTTP'",
+                "explanation": "Censys database se services search karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Domain Intelligence",
+            "commands": [
+              {
+                "description": "Subdomain Enumeration",
+                "command": "sublist3r -d example.com",
+                "explanation": "Target domain ke subdomains find karta hai"
+              },
+              {
+                "description": "DNS Records",
+                "command": "dig example.com ANY +noall +answer",
+                "explanation": "Domain ke sare DNS records retrieve karta hai"
+              },
+              {
+                "description": "Certificate Transparency",
+                "command": "curl 'https://crt.sh/?q=%.example.com&output=json'",
+                "explanation": "Certificate transparency logs se subdomains find karta hai"
+              },
+              {
+                "description": "Wayback Machine",
+                "command": "curl 'https://web.archive.org/cdx/search/cdx?url=example.com&output=json'",
+                "explanation": "Historical website data retrieve karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Social Media Intelligence",
+            "text": "Social Media OSINT Sources:\n\n• Facebook - Personal information, connections\n• Twitter - Real-time updates, opinions\n• LinkedIn - Professional information\n• Instagram - Location data, lifestyle\n• YouTube - Video content, comments\n• TikTok - Trends, user behavior\n• Reddit - Discussions, communities\n• GitHub - Code repositories, projects\n\nData Points to Collect:\n• Personal information\n• Location data\n• Social connections\n• Interests and hobbies\n• Work information\n• Contact details\n• Photos and metadata\n• Timeline of activities"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Advanced OSINT Techniques",
+      "content": {
+        "intro": "Advanced OSINT methods - automated tools, data correlation aur advanced search techniques.",
+        "sections": [
+          {
+            "heading": "OSINT Automation Tools",
+            "commands": [
+              {
+                "description": "theHarvester Install",
+                "command": "apt install theharvester -y",
+                "explanation": "Email, subdomain, IP harvesting tool"
+              },
+              {
+                "description": "Email Harvesting",
+                "command": "theHarvester -d example.com -l 100 -b google",
+                "explanation": "Domain se email addresses harvest karta hai"
+              },
+              {
+                "description": "Recon-ng Install",
+                "command": "apt install recon-ng -y",
+                "explanation": "Modular reconnaissance framework"
+              },
+              {
+                "description": "Maltego Install",
+                "command": "apt install maltego -y",
+                "explanation": "Link analysis aur data mining tool"
+              }
+            ]
+          },
+          {
+            "heading": "Image Intelligence",
+            "text": "Image OSINT Techniques:\n\n• Reverse Image Search\n• EXIF Data Analysis\n• Geolocation from Images\n• Facial Recognition\n• Object Recognition\n• Metadata Extraction\n• Image Verification\n• Deepfake Detection",
+            "commands": [
+              {
+                "description": "EXIF Data Extraction",
+                "command": "exiftool image.jpg",
+                "explanation": "Image metadata aur EXIF data extract karta hai"
+              },
+              {
+                "description": "Reverse Image Search",
+                "command": "curl 'https://www.google.com/searchbyimage?image_url=https://example.com/image.jpg'",
+                "explanation": "Google reverse image search karta hai"
+              },
+              {
+                "description": "GPS Coordinates",
+                "command": "exiftool -GPS* image.jpg",
+                "explanation": "Image se GPS coordinates extract karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "People Search",
+            "text": "People Intelligence Sources:\n\n• Public Records\n• Voter Registrations\n• Property Records\n• Court Documents\n• Business Registrations\n• Professional Licenses\n• Social Security Death Index\n• Marriage/Divorce Records\n• Criminal Records\n• Bankruptcy Filings\n\nSearch Strategies:\n• Name variations\n• Associated addresses\n• Phone numbers\n• Email addresses\n• Social media profiles\n• Professional associations\n• Educational background\n• Family connections"
+          },
+          {
+            "heading": "Technical Intelligence",
+            "commands": [
+              {
+                "description": "IP Geolocation",
+                "command": "curl 'http://ip-api.com/json/8.8.8.8'",
+                "explanation": "IP address geolocation information retrieve karta hai"
+              },
+              {
+                "description": "ASN Lookup",
+                "command": "whois -h whois.radb.net -- '-i origin AS15169'",
+                "explanation": "Autonomous System Number information"
+              },
+              {
+                "description": "SSL Certificate Info",
+                "command": "openssl s_client -connect example.com:443 -servername example.com < /dev/null 2>/dev/null | openssl x509 -text",
+                "explanation": "SSL certificate details analyze karta hai"
+              },
+              {
+                "description": "Technology Stack",
+                "command": "whatweb example.com",
+                "explanation": "Website technologies aur frameworks identify karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Data Correlation & Analysis",
+            "text": "Data Analysis Techniques:\n\n• Timeline Analysis\n• Geospatial Analysis\n• Network Analysis\n• Pattern Recognition\n• Anomaly Detection\n• Sentiment Analysis\n• Frequency Analysis\n• Correlation Analysis\n\nVisualization Tools:\n• Maltego - Link analysis\n• Gephi - Network visualization\n• Palantir - Data integration\n• i2 Analyst's Notebook - Intelligence analysis\n• Tableau - Data visualization\n• R/Python - Statistical analysis"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Google Dorking & Search Techniques",
+      "content": {
+        "intro": "Advanced Google search techniques - Google dorking, search operators aur information discovery methods.",
+        "sections": [
+          {
+            "heading": "Google Search Operators",
+            "text": "Basic Search Operators:\n\n• \"exact phrase\" - Exact match search\n• site:example.com - Site-specific search\n• filetype:pdf - File type search\n• intitle:admin - Title search\n• inurl:login - URL search\n• intext:password - Body text search\n• cache:example.com - Cached version\n• related:example.com - Similar sites\n• info:example.com - Site information\n• define:cybersecurity - Definition search\n\nAdvanced Operators:\n• wildcard * - Pattern matching\n• OR operator - Alternative search\n• - (minus) - Exclude terms\n• .. (range) - Number ranges\n• daterange: - Time-based search\n• location: - Geographic search"
+          },
+          {
+            "heading": "Security-focused Dorks",
+            "text": "Common Security Dorks:\n\n• intitle:\"index of\" password\n• filetype:sql \"INSERT INTO\"\n• inurl:admin intitle:login\n• \"config.php\" \"database\"\n• filetype:log \"password\"\n• intitle:\"phpMyAdmin\" \"Welcome to phpMyAdmin\"\n• inurl:\"/proc/self/cwd\"\n• filetype:env \"DB_PASSWORD\"\n• \"Server Status\" \"Apache Server Information\"\n• intitle:\"Apache2 Ubuntu Default Page\"",
+            "commands": [
+              {
+                "description": "Admin Panel Search",
+                "command": "curl 'https://www.google.com/search?q=site:example.com+intitle:admin+intitle:login'",
+                "explanation": "Target site mein admin panels search karta hai"
+              },
+              {
+                "description": "Configuration Files",
+                "command": "curl 'https://www.google.com/search?q=site:example.com+filetype:conf+OR+filetype:config'",
+                "explanation": "Configuration files search karta hai"
+              },
+              {
+                "description": "Database Files",
+                "command": "curl 'https://www.google.com/search?q=site:example.com+filetype:sql+OR+filetype:db'",
+                "explanation": "Database files search karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Document Intelligence",
+            "text": "Document OSINT Techniques:\n\n• PDF Metadata Analysis\n• Office Document Properties\n• Version History\n• Author Information\n• Creation/Modification Dates\n• Software Used\n• Template Information\n• Hidden Content\n• Revision Tracking\n• Comments and Annotations",
+            "commands": [
+              {
+                "description": "PDF Metadata",
+                "command": "exiftool document.pdf | grep -E '(Author|Creator|Producer|Title)'",
+                "explanation": "PDF document metadata extract karta hai"
+              },
+              {
+                "description": "Document Search",
+                "command": "curl 'https://www.google.com/search?q=site:example.com+filetype:pdf+OR+filetype:doc+OR+filetype:docx'",
+                "explanation": "Target site se documents search karta hai"
+              },
+              {
+                "description": "Sensitive Documents",
+                "command": "curl 'https://www.google.com/search?q=filetype:pdf+\"confidential\"+\"internal use only\"'",
+                "explanation": "Confidential documents search karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "IoT & Device Discovery",
+            "text": "IoT Device Dorking:\n\n• intitle:\"webcamXP 5\"\n• inurl:\"/view.shtml\"\n• intitle:\"Live View / - AXIS\"\n• inurl:\"MultiCameraFrame?Mode=\"\n• intitle:\"EvoCam\" inurl:\"webcam.html\"\n• intitle:\"Live NetSnap Cam-Server feed\"\n• intitle:\"WJ-NT104 Main Page\"\n• inurl:\"axis-cgi/mjpg\"\n• intitle:\"i-Catcher Console\"\n• \"Server: yawcam\" \"Mime-Type: text/html\"",
+            "commands": [
+              {
+                "description": "Webcam Search",
+                "command": "curl 'https://www.google.com/search?q=intitle:\"webcamXP+5\"+OR+inurl:\"/view.shtml\"'",
+                "explanation": "Publicly accessible webcams search karta hai"
+              },
+              {
+                "description": "Router Interfaces",
+                "command": "curl 'https://www.google.com/search?q=intitle:\"DD-WRT\"+OR+intitle:\"pfSense\"'",
+                "explanation": "Router admin interfaces search karta hai"
+              },
+              {
+                "description": "Printer Interfaces",
+                "command": "curl 'https://www.google.com/search?q=intitle:\"HP+LaserJet\"+OR+intitle:\"Canon\"'",
+                "explanation": "Network printer interfaces search karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Shodan & Specialized Search Engines",
+            "commands": [
+              {
+                "description": "Shodan Install",
+                "command": "pip3 install shodan",
+                "explanation": "Shodan command line tool install karta hai"
+              },
+              {
+                "description": "Shodan Search",
+                "command": "shodan search 'apache country:PK'",
+                "explanation": "Pakistan mein Apache servers search karta hai"
+              },
+              {
+                "description": "Vulnerable Services",
+                "command": "shodan search 'product:\"OpenSSH\" version:\"7.4\"'",
+                "explanation": "Specific vulnerable service versions search karta hai"
+              },
+              {
+                "description": "Industrial Systems",
+                "command": "shodan search 'tag:scada country:US'",
+                "explanation": "SCADA systems search karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

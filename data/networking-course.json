@@ -1,0 +1,1097 @@
+{
+  "moduleTitle": "Module 5: Networking Course",
+  "moduleDescription": "Complete networking fundamentals - IP addressing, subnetting, port scanning, network reconnaissance aur vulnerability assessment",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Network Fundamentals",
+      "content": {
+        "intro": "Networking ki basic concepts - OSI model, TCP/IP, protocols aur network architecture samajhna zaroori hai ethical hacking ke liye.",
+        "sections": [
+          {
+            "heading": "OSI Model Layers",
+            "text": "7 Layers of OSI Model:\\n\\n1. Physical Layer - Cables, signals\\n2. Data Link Layer - MAC addresses, switches\\n3. Network Layer - IP addresses, routers\\n4. Transport Layer - TCP, UDP ports\\n5. Session Layer - Sessions management\\n6. Presentation Layer - Encryption, compression\\n7. Application Layer - HTTP, FTP, SSH"
+          },
+          {
+            "heading": "TCP/IP Model",
+            "text": "4 Layers of TCP/IP:\\n\\n1. Network Access Layer (Physical + Data Link)\\n2. Internet Layer (Network)\\n3. Transport Layer (TCP/UDP)\\n4. Application Layer (Session + Presentation + Application)"
+          },
+          {
+            "heading": "Common Protocols",
+            "commands": [
+              {
+                "description": "Protocol Information",
+                "command": "cat /etc/protocols | head -20",
+                "explanation": "System mein defined protocols list karta hai"
+              },
+              {
+                "description": "Service Ports",
+                "command": "cat /etc/services | grep -E '(http|ssh|ftp|smtp)'",
+                "explanation": "Common services ke default ports dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Interface Information",
+            "commands": [
+              {
+                "description": "Interface Configuration",
+                "command": "ip addr show",
+                "explanation": "Network interfaces aur IP addresses dikhata hai"
+              },
+              {
+                "description": "Routing Table",
+                "command": "ip route show",
+                "explanation": "System routing table display karta hai"
+              },
+              {
+                "description": "ARP Table",
+                "command": "arp -a",
+                "explanation": "ARP cache mein stored MAC addresses dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Statistics",
+            "commands": [
+              {
+                "description": "Network Connections",
+                "command": "netstat -tuln",
+                "explanation": "Active network connections aur listening ports"
+              },
+              {
+                "description": "Socket Statistics",
+                "command": "ss -tuln",
+                "explanation": "Modern alternative to netstat"
+              },
+              {
+                "description": "Network Traffic",
+                "command": "cat /proc/net/dev",
+                "explanation": "Network interface traffic statistics"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "IP Addressing & Subnetting",
+      "content": {
+        "intro": "IP addressing aur subnetting master karna - network segmentation aur addressing schemes samajhna ethical hacking ke liye essential hai.",
+        "sections": [
+          {
+            "heading": "IPv4 Address Classes",
+            "text": "IPv4 Address Classes:\\n\\nClass A: 1.0.0.0 to 126.255.255.255 (/8)\\n- Private: 10.0.0.0/8\\n\\nClass B: 128.0.0.0 to 191.255.255.255 (/16)\\n- Private: 172.16.0.0/12\\n\\nClass C: 192.0.0.0 to 223.255.255.255 (/24)\\n- Private: 192.168.0.0/16\\n\\nClass D: 224.0.0.0 to 239.255.255.255 (Multicast)\\nClass E: 240.0.0.0 to 255.255.255.255 (Reserved)"
+          },
+          {
+            "heading": "Subnet Mask Calculations",
+            "text": "Common Subnet Masks:\\n\\n/24 = 255.255.255.0 (256 hosts)\\n/25 = 255.255.255.128 (128 hosts)\\n/26 = 255.255.255.192 (64 hosts)\\n/27 = 255.255.255.224 (32 hosts)\\n/28 = 255.255.255.240 (16 hosts)\\n/29 = 255.255.255.248 (8 hosts)\\n/30 = 255.255.255.252 (4 hosts)"
+          },
+          {
+            "heading": "Subnetting Tools",
+            "commands": [
+              {
+                "description": "ipcalc Install",
+                "command": "apt install ipcalc -y",
+                "explanation": "IP calculator tool install karta hai"
+              },
+              {
+                "description": "Subnet Calculation",
+                "command": "ipcalc 192.168.1.0/24",
+                "explanation": "Network range aur broadcast address calculate karta hai"
+              },
+              {
+                "description": "CIDR to Netmask",
+                "command": "ipcalc 192.168.1.0/26",
+                "explanation": "CIDR notation ko subnet mask mein convert karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Discovery Commands",
+            "commands": [
+              {
+                "description": "Ping Sweep",
+                "command": "for i in {1..254}; do ping -c 1 192.168.1.$i | grep '64 bytes'; done",
+                "explanation": "Network range mein live hosts find karta hai"
+              },
+              {
+                "description": "Nmap Host Discovery",
+                "command": "nmap -sn 192.168.1.0/24",
+                "explanation": "Network mein active devices scan karta hai"
+              },
+              {
+                "description": "ARP Scan",
+                "command": "arp-scan -l",
+                "explanation": "Local network mein devices find karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "VLSM (Variable Length Subnet Masking)",
+            "text": "VLSM Example:\\n\\nMain Network: 192.168.1.0/24\\n\\nSubnet 1: 192.168.1.0/26 (62 hosts)\\nSubnet 2: 192.168.1.64/26 (62 hosts)\\nSubnet 3: 192.168.1.128/27 (30 hosts)\\nSubnet 4: 192.168.1.160/27 (30 hosts)\\nSubnet 5: 192.168.1.192/28 (14 hosts)\\nSubnet 6: 192.168.1.208/28 (14 hosts)"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Port Scanning Techniques",
+      "content": {
+        "intro": "Port scanning - network reconnaissance ka foundation. Different scanning techniques aur unke use cases samajhna zaroori hai.",
+        "sections": [
+          {
+            "heading": "TCP Scan Types",
+            "commands": [
+              {
+                "description": "TCP Connect Scan",
+                "command": "nmap -sT google.com",
+                "explanation": "Full TCP connection establish karta hai (noisy but reliable)"
+              },
+              {
+                "description": "TCP SYN Scan",
+                "command": "nmap -sS google.com",
+                "explanation": "Half-open scan - stealth aur fast"
+              },
+              {
+                "description": "TCP ACK Scan",
+                "command": "nmap -sA google.com",
+                "explanation": "Firewall rules aur filtering detect karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "UDP Scanning",
+            "commands": [
+              {
+                "description": "UDP Scan",
+                "command": "nmap -sU google.com",
+                "explanation": "UDP ports scan karta hai (slow but important)"
+              },
+              {
+                "description": "Top UDP Ports",
+                "command": "nmap -sU --top-ports 100 google.com",
+                "explanation": "Top 100 UDP ports scan karta hai"
+              },
+              {
+                "description": "UDP Version Detection",
+                "command": "nmap -sUV google.com",
+                "explanation": "UDP services aur versions detect karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Stealth Scanning Techniques",
+            "commands": [
+              {
+                "description": "FIN Scan",
+                "command": "nmap -sF google.com",
+                "explanation": "FIN flag set kar ke scan karta hai"
+              },
+              {
+                "description": "NULL Scan",
+                "command": "nmap -sN google.com",
+                "explanation": "Koi TCP flag set nahi karta"
+              },
+              {
+                "description": "Xmas Scan",
+                "command": "nmap -sX google.com",
+                "explanation": "FIN, PSH, URG flags set karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Timing & Performance",
+            "commands": [
+              {
+                "description": "Timing Templates",
+                "command": "nmap -T4 google.com",
+                "explanation": "T0 (paranoid) se T5 (insane) tak timing options"
+              },
+              {
+                "description": "Custom Timing",
+                "command": "nmap --min-rate 1000 --max-rate 5000 google.com",
+                "explanation": "Custom packet rate set karta hai"
+              },
+              {
+                "description": "Parallel Scanning",
+                "command": "nmap --min-parallelism 10 --max-parallelism 50 google.com",
+                "explanation": "Parallel probe count control karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Port Range Specifications",
+            "commands": [
+              {
+                "description": "Specific Ports",
+                "command": "nmap -p 22,80,443 google.com",
+                "explanation": "Specific ports scan karta hai"
+              },
+              {
+                "description": "Port Range",
+                "command": "nmap -p 1-1000 google.com",
+                "explanation": "Port range scan karta hai"
+              },
+              {
+                "description": "All Ports",
+                "command": "nmap -p- google.com",
+                "explanation": "All 65535 ports scan karta hai"
+              },
+              {
+                "description": "Top Ports",
+                "command": "nmap --top-ports 1000 google.com",
+                "explanation": "Most common 1000 ports scan karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Firewall Evasion",
+            "commands": [
+              {
+                "description": "Fragment Packets",
+                "command": "nmap -f google.com",
+                "explanation": "Packets ko fragment kar ke firewall bypass karta hai"
+              },
+              {
+                "description": "Decoy Scan",
+                "command": "nmap -D RND:10 google.com",
+                "explanation": "Random decoy IPs use kar ke scan karta hai"
+              },
+              {
+                "description": "Source Port",
+                "command": "nmap --source-port 53 google.com",
+                "explanation": "Specific source port use karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Network Reconnaissance",
+      "content": {
+        "intro": "Network reconnaissance - target network ke bare mein information gathering. Passive aur active reconnaissance techniques.",
+        "sections": [
+          {
+            "heading": "DNS Reconnaissance",
+            "commands": [
+              {
+                "description": "DNS Lookup",
+                "command": "nslookup google.com",
+                "explanation": "Domain name resolution aur DNS records"
+              },
+              {
+                "description": "Dig Command",
+                "command": "dig google.com ANY",
+                "explanation": "Detailed DNS information retrieve karta hai"
+              },
+              {
+                "description": "Reverse DNS",
+                "command": "dig -x 8.8.8.8",
+                "explanation": "IP address se domain name find karta hai"
+              },
+              {
+                "description": "DNS Zone Transfer",
+                "command": "dig @ns1.google.com google.com AXFR",
+                "explanation": "DNS zone transfer attempt karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "WHOIS Information",
+            "commands": [
+              {
+                "description": "WHOIS Lookup",
+                "command": "whois google.com",
+                "explanation": "Domain registration information dikhata hai"
+              },
+              {
+                "description": "IP WHOIS",
+                "command": "whois 8.8.8.8",
+                "explanation": "IP address ownership information"
+              }
+            ]
+          },
+          {
+            "heading": "Network Mapping",
+            "commands": [
+              {
+                "description": "Traceroute",
+                "command": "traceroute google.com",
+                "explanation": "Network path aur hops dikhata hai"
+              },
+              {
+                "description": "MTR (My Traceroute)",
+                "command": "mtr google.com",
+                "explanation": "Continuous traceroute with statistics"
+              },
+              {
+                "description": "Network Topology",
+                "command": "nmap --traceroute google.com",
+                "explanation": "Nmap ke saath traceroute information"
+              }
+            ]
+          },
+          {
+            "heading": "Service Enumeration",
+            "commands": [
+              {
+                "description": "Service Version Detection",
+                "command": "nmap -sV google.com",
+                "explanation": "Running services ke versions detect karta hai"
+              },
+              {
+                "description": "OS Detection",
+                "command": "nmap -O google.com",
+                "explanation": "Operating system fingerprinting"
+              },
+              {
+                "description": "Aggressive Scan",
+                "command": "nmap -A google.com",
+                "explanation": "OS, version, script scanning combined"
+              }
+            ]
+          },
+          {
+            "heading": "Banner Grabbing",
+            "commands": [
+              {
+                "description": "Netcat Banner Grab",
+                "command": "nc google.com 80",
+                "explanation": "Manual banner grabbing using netcat"
+              },
+              {
+                "description": "Telnet Banner",
+                "command": "telnet google.com 80",
+                "explanation": "Telnet se service banner grab karta hai"
+              },
+              {
+                "description": "Nmap Script Scan",
+                "command": "nmap --script banner google.com",
+                "explanation": "Nmap script se banner information"
+              }
+            ]
+          },
+          {
+            "heading": "SNMP Enumeration",
+            "commands": [
+              {
+                "description": "SNMP Walk",
+                "command": "snmpwalk -v2c -c public 192.168.1.1",
+                "explanation": "SNMP community string se information gather karta hai"
+              },
+              {
+                "description": "SNMP Check",
+                "command": "nmap -sU --script snmp-sysdescr 192.168.1.1",
+                "explanation": "SNMP service aur system description check karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Vulnerability Assessment",
+      "content": {
+        "intro": "Network vulnerability assessment - discovered services mein security weaknesses find karna aur risk assessment.",
+        "sections": [
+          {
+            "heading": "Nmap Vulnerability Scripts",
+            "commands": [
+              {
+                "description": "Vulnerability Scan",
+                "command": "nmap --script vuln google.com",
+                "explanation": "Known vulnerabilities ke liye scan karta hai"
+              },
+              {
+                "description": "SMB Vulnerabilities",
+                "command": "nmap --script smb-vuln-* 192.168.1.1",
+                "explanation": "SMB service vulnerabilities check karta hai"
+              },
+              {
+                "description": "HTTP Vulnerabilities",
+                "command": "nmap --script http-vuln-* google.com",
+                "explanation": "Web server vulnerabilities scan karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "OpenVAS Vulnerability Scanner",
+            "commands": [
+              {
+                "description": "OpenVAS Install",
+                "command": "apt install openvas -y",
+                "explanation": "Comprehensive vulnerability scanner install karta hai"
+              },
+              {
+                "description": "OpenVAS Setup",
+                "command": "gvm-setup",
+                "explanation": "OpenVAS initial configuration karta hai"
+              },
+              {
+                "description": "OpenVAS Start",
+                "command": "gvm-start",
+                "explanation": "OpenVAS services start karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Nikto Web Scanner",
+            "commands": [
+              {
+                "description": "Basic Nikto Scan",
+                "command": "nikto -h http://google.com",
+                "explanation": "Web server vulnerabilities scan karta hai"
+              },
+              {
+                "description": "Comprehensive Scan",
+                "command": "nikto -h http://google.com -C all",
+                "explanation": "All checks ke saath detailed scan"
+              },
+              {
+                "description": "Output to File",
+                "command": "nikto -h http://google.com -o nikto_results.txt",
+                "explanation": "Scan results file mein save karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "SSL/TLS Assessment",
+            "commands": [
+              {
+                "description": "SSLyze Install",
+                "command": "pip3 install sslyze",
+                "explanation": "SSL/TLS configuration analyzer install karta hai"
+              },
+              {
+                "description": "SSL Scan",
+                "command": "sslyze google.com",
+                "explanation": "SSL/TLS configuration aur vulnerabilities check karta hai"
+              },
+              {
+                "description": "Nmap SSL Scripts",
+                "command": "nmap --script ssl-* google.com",
+                "explanation": "SSL related vulnerability scripts run karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Database Vulnerability Assessment",
+            "commands": [
+              {
+                "description": "MySQL Enumeration",
+                "command": "nmap --script mysql-* 192.168.1.1",
+                "explanation": "MySQL database vulnerabilities check karta hai"
+              },
+              {
+                "description": "MSSQL Enumeration",
+                "command": "nmap --script ms-sql-* 192.168.1.1",
+                "explanation": "Microsoft SQL Server vulnerabilities scan karta hai"
+              },
+              {
+                "description": "Oracle Enumeration",
+                "command": "nmap --script oracle-* 192.168.1.1",
+                "explanation": "Oracle database security assessment"
+              }
+            ]
+          },
+          {
+            "heading": "Vulnerability Reporting",
+            "text": "Vulnerability Assessment Report mein ye sections hone chahiye:\\n\\n1. Executive Summary\\n2. Methodology\\n3. Network Architecture\\n4. Vulnerability Findings\\n   - Critical\\n   - High\\n   - Medium\\n   - Low\\n5. Risk Assessment\\n6. Recommendations\\n7. Appendices",
+            "commands": [
+              {
+                "description": "Generate Report",
+                "command": "nmap -oA full_scan google.com",
+                "explanation": "Multiple formats mein scan results save karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Network Security Best Practices",
+      "content": {
+        "intro": "Network security implementation - discovered vulnerabilities ko fix karna aur network hardening techniques.",
+        "sections": [
+          {
+            "heading": "Firewall Configuration",
+            "commands": [
+              {
+                "description": "UFW Enable",
+                "command": "ufw enable",
+                "explanation": "Ubuntu firewall enable karta hai"
+              },
+              {
+                "description": "Allow SSH",
+                "command": "ufw allow 22/tcp",
+                "explanation": "SSH port allow karta hai"
+              },
+              {
+                "description": "Deny All Incoming",
+                "command": "ufw default deny incoming",
+                "explanation": "Default incoming traffic deny karta hai"
+              },
+              {
+                "description": "Firewall Status",
+                "command": "ufw status verbose",
+                "explanation": "Firewall rules aur status dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Monitoring",
+            "commands": [
+              {
+                "description": "Netstat Monitoring",
+                "command": "watch -n 1 'netstat -tuln'",
+                "explanation": "Real-time network connections monitor karta hai"
+              },
+              {
+                "description": "TCPDump Capture",
+                "command": "tcpdump -i eth0 -w capture.pcap",
+                "explanation": "Network traffic capture karta hai"
+              },
+              {
+                "description": "Wireshark Install",
+                "command": "apt install wireshark -y",
+                "explanation": "Network protocol analyzer install karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Intrusion Detection",
+            "commands": [
+              {
+                "description": "Fail2ban Install",
+                "command": "apt install fail2ban -y",
+                "explanation": "Intrusion prevention system install karta hai"
+              },
+              {
+                "description": "Fail2ban Status",
+                "command": "fail2ban-client status",
+                "explanation": "Fail2ban jails status check karta hai"
+              },
+              {
+                "description": "AIDE Install",
+                "command": "apt install aide -y",
+                "explanation": "File integrity monitoring system install karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Segmentation",
+            "text": "Network Segmentation Best Practices:\\n\\n• DMZ (Demilitarized Zone) setup\\n• VLAN implementation\\n• Network Access Control (NAC)\\n• Micro-segmentation\\n• Zero Trust Architecture\\n\\nSegmentation Benefits:\\n• Lateral movement prevention\\n• Reduced attack surface\\n• Better monitoring\\n• Compliance requirements\\n• Performance optimization"
+          },
+          {
+            "heading": "Secure Network Protocols",
+            "text": "Replace Insecure Protocols:\\n\\n❌ Insecure → ✅ Secure\\n• Telnet → SSH\\n• HTTP → HTTPS\\n• FTP → SFTP/FTPS\\n• SNMP v1/v2 → SNMP v3\\n• POP3 → POP3S\\n• IMAP → IMAPS\\n• SMTP → SMTPS"
+          },
+          {
+            "heading": "Network Hardening Checklist",
+            "text": "✅ Network Hardening Tasks:\\n\\n• Change default passwords\\n• Disable unnecessary services\\n• Update firmware regularly\\n• Implement strong authentication\\n• Configure logging\\n• Regular vulnerability scans\\n• Network documentation\\n• Incident response plan\\n• Employee security training\\n• Regular security audits",
+            "commands": [
+              {
+                "description": "Service Audit",
+                "command": "systemctl list-unit-files --type=service --state=enabled",
+                "explanation": "Enabled services list karta hai"
+              },
+              {
+                "description": "Open Ports Check",
+                "command": "ss -tuln | grep LISTEN",
+                "explanation": "Listening ports check karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "title": "Network Protocols Deep Dive",
+      "content": {
+        "intro": "Network protocols ki detailed understanding - TCP/IP stack, protocol analysis aur network communication mechanisms.",
+        "sections": [
+          {
+            "heading": "TCP Protocol Analysis",
+            "text": "TCP (Transmission Control Protocol) Features:\n\n• Connection-oriented protocol\n• Reliable data delivery\n• Flow control mechanism\n• Error detection aur correction\n• Sequence numbering\n• Acknowledgment system\n\nTCP Header Fields:\n• Source Port (16 bits)\n• Destination Port (16 bits)\n• Sequence Number (32 bits)\n• Acknowledgment Number (32 bits)\n• Window Size (16 bits)\n• Checksum (16 bits)",
+            "commands": [
+              {
+                "description": "TCP Connections Monitor",
+                "command": "netstat -ant | grep ESTABLISHED",
+                "explanation": "Active TCP connections dikhata hai"
+              },
+              {
+                "description": "TCP Packet Capture",
+                "command": "tcpdump -i eth0 tcp port 80 -w tcp_capture.pcap",
+                "explanation": "TCP traffic capture karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "UDP Protocol Analysis",
+            "text": "UDP (User Datagram Protocol) Characteristics:\n\n• Connectionless protocol\n• Unreliable delivery\n• No flow control\n• Minimal overhead\n• Fast transmission\n• Used for DNS, DHCP, SNMP\n\nUDP Header (8 bytes only):\n• Source Port (16 bits)\n• Destination Port (16 bits)\n• Length (16 bits)\n• Checksum (16 bits)",
+            "commands": [
+              {
+                "description": "UDP Services Check",
+                "command": "netstat -anu",
+                "explanation": "UDP listening services dikhata hai"
+              },
+              {
+                "description": "UDP Packet Send",
+                "command": "echo 'test message' | nc -u 192.168.1.1 53",
+                "explanation": "UDP packet send karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "ICMP Protocol",
+            "text": "ICMP (Internet Control Message Protocol):\n\n• Network layer protocol\n• Error reporting mechanism\n• Network diagnostics\n• No data transfer\n\nCommon ICMP Types:\n• Type 0: Echo Reply (Ping Response)\n• Type 3: Destination Unreachable\n• Type 8: Echo Request (Ping)\n• Type 11: Time Exceeded\n• Type 30: Traceroute",
+            "commands": [
+              {
+                "description": "ICMP Ping Test",
+                "command": "ping -c 4 google.com",
+                "explanation": "ICMP echo request/reply test karta hai"
+              },
+              {
+                "description": "ICMP Types Capture",
+                "command": "tcpdump -i eth0 icmp -v",
+                "explanation": "ICMP packets capture aur analyze karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "ARP Protocol",
+            "text": "ARP (Address Resolution Protocol):\n\n• IP to MAC address mapping\n• Layer 2 protocol\n• Broadcast based\n• Cache mechanism\n\nARP Process:\n1. ARP Request (Broadcast)\n2. ARP Reply (Unicast)\n3. Cache Update\n4. Communication Start",
+            "commands": [
+              {
+                "description": "ARP Table View",
+                "command": "arp -a",
+                "explanation": "ARP cache table dikhata hai"
+              },
+              {
+                "description": "ARP Cache Clear",
+                "command": "sudo arp -d -a",
+                "explanation": "ARP cache clear karta hai"
+              },
+              {
+                "description": "ARP Scan Network",
+                "command": "arp-scan -l",
+                "explanation": "Local network ARP scan karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "title": "Advanced Network Scanning",
+      "content": {
+        "intro": "Advanced network scanning techniques - comprehensive reconnaissance, service enumeration aur vulnerability discovery methods.",
+        "sections": [
+          {
+            "heading": "Comprehensive Network Discovery",
+            "commands": [
+              {
+                "description": "Multi-technique Discovery",
+                "command": "nmap -sn -PS21,22,25,53,80,110,443,993,995 192.168.1.0/24",
+                "explanation": "Multiple TCP ports se host discovery karta hai"
+              },
+              {
+                "description": "ICMP Discovery",
+                "command": "nmap -sn -PE -PP -PM 192.168.1.0/24",
+                "explanation": "Different ICMP types se host discovery"
+              },
+              {
+                "description": "ARP Discovery",
+                "command": "nmap -sn -PR 192.168.1.0/24",
+                "explanation": "ARP requests se local network discovery"
+              }
+            ]
+          },
+          {
+            "heading": "Service Version Detection",
+            "commands": [
+              {
+                "description": "Aggressive Version Scan",
+                "command": "nmap -sV --version-intensity 9 192.168.1.1",
+                "explanation": "Maximum intensity se service version detect karta hai"
+              },
+              {
+                "description": "Version Light Scan",
+                "command": "nmap -sV --version-intensity 0 192.168.1.1",
+                "explanation": "Light version detection - fast but less accurate"
+              },
+              {
+                "description": "Version All Ports",
+                "command": "nmap -sV -p- 192.168.1.1",
+                "explanation": "All ports pe version detection"
+              }
+            ]
+          },
+          {
+            "heading": "Operating System Detection",
+            "text": "OS Detection Techniques:\n\n• TCP/IP Stack Fingerprinting\n• TCP Window Size Analysis\n• TCP Options Analysis\n• ICMP Response Analysis\n• Service Banner Analysis\n\nOS Detection Accuracy Factors:\n• Open ports availability\n• Firewall presence\n• Network distance\n• Target responsiveness",
+            "commands": [
+              {
+                "description": "OS Detection",
+                "command": "nmap -O 192.168.1.1",
+                "explanation": "Operating system fingerprinting karta hai"
+              },
+              {
+                "description": "Aggressive OS Detection",
+                "command": "nmap -O --osscan-guess 192.168.1.1",
+                "explanation": "Aggressive OS detection with guessing"
+              },
+              {
+                "description": "OS Scan Limit Skip",
+                "command": "nmap -O --osscan-limit 192.168.1.0/24",
+                "explanation": "OS scan sirf promising targets pe karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "NSE Script Categories",
+            "text": "Nmap Script Engine Categories:\n\n• auth - Authentication scripts\n• broadcast - Network broadcast discovery\n• brute - Brute force attacks\n• default - Default safe scripts\n• discovery - Network discovery\n• dos - Denial of service\n• exploit - Exploitation scripts\n• external - External resource scripts\n• fuzzer - Fuzzing scripts\n• intrusive - Intrusive scripts\n• malware - Malware detection\n• safe - Safe scripts\n• version - Version detection\n• vuln - Vulnerability detection",
+            "commands": [
+              {
+                "description": "Script Categories List",
+                "command": "nmap --script-help all | grep Categories",
+                "explanation": "Available script categories dikhata hai"
+              },
+              {
+                "description": "Discovery Scripts",
+                "command": "nmap --script discovery 192.168.1.1",
+                "explanation": "Discovery category ke scripts run karta hai"
+              },
+              {
+                "description": "Safe Scripts Only",
+                "command": "nmap --script safe 192.168.1.1",
+                "explanation": "Sirf safe scripts run karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "title": "Network Traffic Analysis",
+      "content": {
+        "intro": "Network traffic analysis aur packet inspection - Wireshark, tcpdump aur network forensics techniques.",
+        "sections": [
+          {
+            "heading": "Packet Capture Fundamentals",
+            "text": "Packet Capture Process:\n\n1. Network Interface Selection\n2. Capture Filter Application\n3. Packet Collection\n4. Storage Management\n5. Analysis Preparation\n\nCapture Considerations:\n• Storage space requirements\n• Network performance impact\n• Legal and ethical issues\n• Data privacy concerns\n• Capture duration planning",
+            "commands": [
+              {
+                "description": "Interface List",
+                "command": "tcpdump -D",
+                "explanation": "Available network interfaces list karta hai"
+              },
+              {
+                "description": "Basic Packet Capture",
+                "command": "tcpdump -i eth0 -w capture.pcap",
+                "explanation": "Network traffic capture karta hai"
+              },
+              {
+                "description": "Capture with Count Limit",
+                "command": "tcpdump -i eth0 -c 1000 -w limited_capture.pcap",
+                "explanation": "Limited packet count capture karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Filtering Techniques",
+            "commands": [
+              {
+                "description": "HTTP Traffic Only",
+                "command": "tcpdump -i eth0 'tcp port 80 or tcp port 443' -w http_traffic.pcap",
+                "explanation": "Sirf HTTP/HTTPS traffic capture karta hai"
+              },
+              {
+                "description": "Specific Host Traffic",
+                "command": "tcpdump -i eth0 'host 192.168.1.100' -w host_traffic.pcap",
+                "explanation": "Specific host ka traffic capture karta hai"
+              },
+              {
+                "description": "DNS Queries Capture",
+                "command": "tcpdump -i eth0 'udp port 53' -w dns_queries.pcap",
+                "explanation": "DNS queries aur responses capture karta hai"
+              },
+              {
+                "description": "Large Packets Filter",
+                "command": "tcpdump -i eth0 'greater 1000' -w large_packets.pcap",
+                "explanation": "1000 bytes se bade packets capture karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Wireshark Analysis",
+            "text": "Wireshark Analysis Features:\n\n• Protocol Dissection\n• Statistical Analysis\n• Flow Analysis\n• Expert Analysis\n• Conversation Tracking\n\nCommon Analysis Tasks:\n• Bandwidth utilization\n• Protocol distribution\n• Error detection\n• Security analysis\n• Performance troubleshooting",
+            "commands": [
+              {
+                "description": "Wireshark CLI",
+                "command": "tshark -r capture.pcap -T fields -e ip.src -e ip.dst -e tcp.port",
+                "explanation": "Command line se packet analysis karta hai"
+              },
+              {
+                "description": "Protocol Statistics",
+                "command": "tshark -r capture.pcap -q -z io,phs",
+                "explanation": "Protocol hierarchy statistics dikhata hai"
+              },
+              {
+                "description": "Conversation Analysis",
+                "command": "tshark -r capture.pcap -q -z conv,tcp",
+                "explanation": "TCP conversations analyze karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Forensics",
+            "commands": [
+              {
+                "description": "Extract HTTP Objects",
+                "command": "tshark -r capture.pcap --export-objects http,extracted_files/",
+                "explanation": "HTTP traffic se files extract karta hai"
+              },
+              {
+                "description": "Password Extraction",
+                "command": "tshark -r capture.pcap -Y 'http.request.method==POST' -T fields -e http.file_data",
+                "explanation": "HTTP POST data extract karta hai"
+              },
+              {
+                "description": "Email Analysis",
+                "command": "tshark -r capture.pcap -Y 'smtp or pop or imap' -T fields -e tcp.payload",
+                "explanation": "Email traffic analyze karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "title": "Wireless Network Security",
+      "content": {
+        "intro": "Wireless network security assessment - WiFi protocols, encryption methods, aur wireless attack techniques.",
+        "sections": [
+          {
+            "heading": "WiFi Security Protocols",
+            "text": "WiFi Security Evolution:\n\n1. WEP (Wired Equivalent Privacy)\n   • RC4 encryption\n   • 24-bit IV\n   • Easily crackable\n   • Deprecated\n\n2. WPA (WiFi Protected Access)\n   • TKIP encryption\n   • Dynamic keys\n   • Better than WEP\n   • Still vulnerable\n\n3. WPA2 (WiFi Protected Access 2)\n   • AES encryption\n   • CCMP protocol\n   • Strong security\n   • Current standard\n\n4. WPA3 (WiFi Protected Access 3)\n   • SAE (Simultaneous Authentication of Equals)\n   • Enhanced Open\n   • 192-bit security\n   • Latest standard"
+          },
+          {
+            "heading": "Wireless Reconnaissance",
+            "commands": [
+              {
+                "description": "WiFi Interface Check",
+                "command": "iwconfig",
+                "explanation": "Wireless interfaces aur capabilities check karta hai"
+              },
+              {
+                "description": "Available Networks",
+                "command": "iwlist scan | grep -E 'ESSID|Encryption|Quality'",
+                "explanation": "Nearby WiFi networks scan karta hai"
+              },
+              {
+                "description": "Monitor Mode Check",
+                "command": "iw list | grep monitor",
+                "explanation": "Monitor mode support check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "WEP Cracking Process",
+            "text": "WEP Cracking Steps:\n\n1. Monitor Mode Enable\n2. Target Network Selection\n3. Traffic Capture\n4. IV Collection\n5. Statistical Analysis\n6. Key Recovery\n\nWEP Vulnerabilities:\n• Weak IV generation\n• Key reuse\n• RC4 weaknesses\n• Authentication flaws",
+            "commands": [
+              {
+                "description": "WEP Capture Start",
+                "command": "airodump-ng -c 6 --bssid 00:11:22:33:44:55 -w wep_capture wlan0mon",
+                "explanation": "WEP network traffic capture karta hai"
+              },
+              {
+                "description": "WEP Crack Attempt",
+                "command": "aircrack-ng -b 00:11:22:33:44:55 wep_capture-*.cap",
+                "explanation": "Captured WEP traffic crack karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "WPA/WPA2 Security Assessment",
+            "text": "WPA/WPA2 Attack Methods:\n\n1. Dictionary Attack\n   • Wordlist based\n   • Common passwords\n   • Time consuming\n\n2. Brute Force Attack\n   • All combinations\n   • Very time consuming\n   • Guaranteed success\n\n3. Rainbow Tables\n   • Pre-computed hashes\n   • Fast lookup\n   • Storage intensive\n\n4. WPS Attack\n   • PIN brute force\n   • Pixie dust attack\n   • Quick results",
+            "commands": [
+              {
+                "description": "Handshake Capture",
+                "command": "airodump-ng -c 6 --bssid 00:11:22:33:44:55 -w wpa_handshake wlan0mon",
+                "explanation": "WPA handshake capture karta hai"
+              },
+              {
+                "description": "Deauth Clients",
+                "command": "aireplay-ng -0 5 -a 00:11:22:33:44:55 wlan0mon",
+                "explanation": "Clients ko deauthenticate kar ke handshake force karta hai"
+              },
+              {
+                "description": "WPA Crack",
+                "command": "aircrack-ng -w /usr/share/wordlists/rockyou.txt wpa_handshake-01.cap",
+                "explanation": "WPA handshake wordlist se crack karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "title": "Network Defense & Monitoring",
+      "content": {
+        "intro": "Network defense strategies, intrusion detection systems, aur continuous monitoring techniques.",
+        "sections": [
+          {
+            "heading": "Intrusion Detection Systems (IDS)",
+            "text": "IDS Types:\n\n1. Network-based IDS (NIDS)\n   • Network traffic monitoring\n   • Signature-based detection\n   • Anomaly detection\n   • Real-time alerts\n\n2. Host-based IDS (HIDS)\n   • System log monitoring\n   • File integrity checking\n   • Process monitoring\n   • Registry monitoring\n\nDetection Methods:\n• Signature-based (Known attacks)\n• Anomaly-based (Unusual behavior)\n• Hybrid approach (Both methods)",
+            "commands": [
+              {
+                "description": "Suricata Install",
+                "command": "apt install suricata -y",
+                "explanation": "Open source IDS/IPS install karta hai"
+              },
+              {
+                "description": "Suricata Rules Update",
+                "command": "suricata-update",
+                "explanation": "IDS rules update karta hai"
+              },
+              {
+                "description": "Suricata Start",
+                "command": "systemctl start suricata",
+                "explanation": "Suricata IDS service start karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Access Control (NAC)",
+            "text": "NAC Components:\n\n• Authentication Server\n• Policy Server\n• Network Enforcement\n• Endpoint Assessment\n\nNAC Benefits:\n• Device identification\n• Compliance checking\n• Access control\n• Quarantine capability\n• Remediation support",
+            "commands": [
+              {
+                "description": "802.1X Configuration",
+                "command": "nano /etc/freeradius/3.0/users",
+                "explanation": "RADIUS server configuration edit karta hai"
+              },
+              {
+                "description": "FreeRADIUS Start",
+                "command": "systemctl start freeradius",
+                "explanation": "RADIUS authentication server start karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Security Information Event Management (SIEM)",
+            "text": "SIEM Capabilities:\n\n• Log Collection\n• Event Correlation\n• Real-time Monitoring\n• Incident Response\n• Compliance Reporting\n\nSIEM Architecture:\n1. Data Collection Layer\n2. Processing Layer\n3. Storage Layer\n4. Analysis Layer\n5. Presentation Layer",
+            "commands": [
+              {
+                "description": "ELK Stack Install",
+                "command": "apt install elasticsearch logstash kibana -y",
+                "explanation": "Elasticsearch, Logstash, Kibana install karta hai"
+              },
+              {
+                "description": "Splunk Free Install",
+                "command": "wget -O splunk.tgz 'https://download.splunk.com/products/splunk/releases/8.2.0/linux/splunk-8.2.0-linux-2.6-x86_64.tgz'",
+                "explanation": "Splunk SIEM platform download karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Incident Response Planning",
+            "text": "Incident Response Phases:\n\n1. Preparation\n   • Team formation\n   • Tool preparation\n   • Process documentation\n\n2. Identification\n   • Incident detection\n   • Initial assessment\n   • Classification\n\n3. Containment\n   • Short-term containment\n   • Long-term containment\n   • Evidence preservation\n\n4. Eradication\n   • Threat removal\n   • Vulnerability patching\n   • System hardening\n\n5. Recovery\n   • System restoration\n   • Monitoring\n   • Validation\n\n6. Lessons Learned\n   • Post-incident review\n   • Process improvement\n   • Documentation update",
+            "commands": [
+              {
+                "description": "Incident Response Toolkit",
+                "command": "apt install volatility3 autopsy sleuthkit -y",
+                "explanation": "Digital forensics tools install karta hai"
+              },
+              {
+                "description": "Memory Dump Analysis",
+                "command": "volatility -f memory.dump imageinfo",
+                "explanation": "Memory dump analyze karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "title": "Network Security Architecture",
+      "content": {
+        "intro": "Enterprise network security architecture design - defense in depth, network segmentation, aur security controls implementation.",
+        "sections": [
+          {
+            "heading": "Defense in Depth Strategy",
+            "text": "Defense in Depth Layers:\n\n1. Physical Security\n   • Facility access control\n   • Equipment protection\n   • Environmental controls\n\n2. Perimeter Security\n   • Firewalls\n   • IDS/IPS\n   • VPN gateways\n\n3. Network Security\n   • Network segmentation\n   • Access control lists\n   • Network monitoring\n\n4. Host Security\n   • Endpoint protection\n   • Host-based firewalls\n   • Antivirus/anti-malware\n\n5. Application Security\n   • Secure coding\n   • Input validation\n   • Authentication\n\n6. Data Security\n   • Encryption\n   • Access controls\n   • Data loss prevention"
+          },
+          {
+            "heading": "Network Segmentation Design",
+            "text": "Segmentation Benefits:\n\n• Lateral movement prevention\n• Reduced attack surface\n• Improved monitoring\n• Compliance support\n• Performance optimization\n\nSegmentation Methods:\n\n1. Physical Segmentation\n   • Separate hardware\n   • Air-gapped networks\n   • Dedicated infrastructure\n\n2. Logical Segmentation\n   • VLANs\n   • Subnets\n   • Software-defined networking\n\n3. Micro-segmentation\n   • Application-level isolation\n   • Zero-trust architecture\n   • Dynamic policies",
+            "commands": [
+              {
+                "description": "VLAN Configuration",
+                "command": "vconfig add eth0 100",
+                "explanation": "VLAN interface create karta hai"
+              },
+              {
+                "description": "VLAN IP Assignment",
+                "command": "ip addr add 192.168.100.1/24 dev eth0.100",
+                "explanation": "VLAN interface ko IP assign karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Zero Trust Architecture",
+            "text": "Zero Trust Principles:\n\n• Never trust, always verify\n• Least privilege access\n• Assume breach mentality\n• Continuous verification\n\nZero Trust Components:\n\n1. Identity Verification\n   • Multi-factor authentication\n   • Identity governance\n   • Privileged access management\n\n2. Device Security\n   • Device compliance\n   • Endpoint detection\n   • Mobile device management\n\n3. Network Security\n   • Micro-segmentation\n   • Software-defined perimeter\n   • Encrypted communications\n\n4. Application Security\n   • Application-aware policies\n   • API security\n   • Cloud security\n\n5. Data Protection\n   • Data classification\n   • Rights management\n   • Data loss prevention"
+          },
+          {
+            "heading": "Security Controls Implementation",
+            "commands": [
+              {
+                "description": "IPTables Firewall Rules",
+                "command": "iptables -A INPUT -p tcp --dport 22 -s 192.168.1.0/24 -j ACCEPT",
+                "explanation": "SSH access sirf internal network se allow karta hai"
+              },
+              {
+                "description": "Network Monitoring",
+                "command": "iftop -i eth0",
+                "explanation": "Real-time network bandwidth monitoring"
+              },
+              {
+                "description": "Security Audit",
+                "command": "lynis audit system",
+                "explanation": "System security audit perform karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Compliance & Governance",
+            "text": "Security Frameworks:\n\n• NIST Cybersecurity Framework\n• ISO 27001/27002\n• CIS Controls\n• COBIT\n• PCI DSS\n• HIPAA\n• SOX\n\nGovernance Activities:\n\n• Risk assessment\n• Policy development\n• Security awareness training\n• Incident response planning\n• Business continuity planning\n• Vendor risk management\n• Compliance monitoring\n• Security metrics reporting",
+            "commands": [
+              {
+                "description": "CIS Benchmark Check",
+                "command": "wget https://downloads.cisecurity.org/tools/cis-cat-lite.zip",
+                "explanation": "CIS benchmark assessment tool download karta hai"
+              },
+              {
+                "description": "Security Baseline",
+                "command": "oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis /usr/share/xml/scap/ssg/content/ssg-ubuntu1804-ds.xml",
+                "explanation": "Security baseline compliance check karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

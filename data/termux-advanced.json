@@ -1,0 +1,542 @@
+{
+  "moduleTitle": "Module 2: Termux Advanced",
+  "moduleDescription": "Python programming, Git usage, SSH connections aur automation scripts seekhiye",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Python Programming Basics",
+      "content": {
+        "intro": "Python ek powerful programming language hai jo ethical hacking mein bohot use hoti hai. Yahan Python install karna aur basic programming seekhiye.",
+        "sections": [
+          {
+            "heading": "Python Kyu Zaroori Hai?",
+            "text": "• Hacking tools banane ke liye\n• Automation scripts likhne ke liye\n• Network scanning aur penetration testing\n• Data analysis aur web scraping\n• Simple syntax - seekhna easy hai"
+          },
+          {
+            "heading": "Python Install Karna",
+            "commands": [
+              {
+                "description": "Python Install",
+                "command": "pkg install python",
+                "explanation": "Latest Python version install karta hai"
+              },
+              {
+                "description": "Python Version Check",
+                "command": "python --version",
+                "explanation": "Installed Python version dikhata hai"
+              },
+              {
+                "description": "Pip Install (Package Manager)",
+                "command": "pkg install python-pip",
+                "explanation": "Python packages install karne ke liye pip"
+              }
+            ]
+          },
+          {
+            "heading": "First Python Program",
+            "text": "Chaliye pehla Python program likhte hain:",
+            "commands": [
+              {
+                "description": "Python File Banaye",
+                "command": "nano hello.py",
+                "explanation": "hello.py naam ki Python file create karta hai"
+              }
+            ],
+            "text": "File mein ye code type kariye:\nprint(\"Hello World!\")\nprint(\"Welcome to Ethical Hacking\")\n\nSave karne ke liye Ctrl+O, exit ke liye Ctrl+X"
+          },
+          {
+            "heading": "Python Script Run Karna",
+            "commands": [
+              {
+                "description": "Script Execute",
+                "command": "python hello.py",
+                "explanation": "Python script ko run karta hai"
+              },
+              {
+                "description": "Interactive Python",
+                "command": "python",
+                "explanation": "Python interactive mode start karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Python Libraries for Hacking",
+      "content": {
+        "intro": "Ethical hacking ke liye important Python libraries install karna aur use karna seekhiye.",
+        "sections": [
+          {
+            "heading": "Essential Libraries Install",
+            "commands": [
+              {
+                "description": "Requests Library",
+                "command": "pip install requests",
+                "explanation": "HTTP requests bhejne ke liye (web scraping, API calls)"
+              },
+              {
+                "description": "BeautifulSoup",
+                "command": "pip install beautifulsoup4",
+                "explanation": "HTML parsing aur web scraping ke liye"
+              },
+              {
+                "description": "Scapy",
+                "command": "pip install scapy",
+                "explanation": "Network packet manipulation ke liye"
+              },
+              {
+                "description": "All Essential Libraries",
+                "command": "pip install requests beautifulsoup4 scapy urllib3",
+                "explanation": "Sab important libraries ek sath install"
+              }
+            ]
+          },
+          {
+            "heading": "Simple Port Scanner Banaye",
+            "text": "Python mein basic port scanner likhte hain:",
+            "commands": [
+              {
+                "description": "Port Scanner File",
+                "command": "nano port_scanner.py",
+                "explanation": "Port scanner script banate hain"
+              }
+            ],
+            "text": "File mein ye code paste kariye:\n\nimport socket\nimport sys\n\ndef scan_port(host, port):\n    try:\n        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n        sock.settimeout(1)\n        result = sock.connect_ex((host, port))\n        sock.close()\n        return result == 0\n    except:\n        return False\n\nhost = input(\"Enter host: \")\nfor port in range(20, 100):\n    if scan_port(host, port):\n        print(f\"Port {port} is open\")"
+          },
+          {
+            "heading": "Script Test Karna",
+            "commands": [
+              {
+                "description": "Port Scanner Run",
+                "command": "python port_scanner.py",
+                "explanation": "Port scanner script execute karta hai"
+              }
+            ],
+            "text": "Script run karne ke baad host enter kariye (jaise: google.com)\nScript common ports check karega aur open ports dikhayega"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Git & GitHub Usage",
+      "content": {
+        "intro": "Git version control system aur GitHub se hacking tools download karna seekhiye. Git se aap code manage kar sakte hain aur GitHub se tools clone kar sakte hain.",
+        "sections": [
+          {
+            "heading": "Git Kya Hai?",
+            "text": "Git ek version control system hai jo code changes track karta hai. GitHub ek online platform hai jahan developers apna code share karte hain.\n\nFayde:\n• Hacking tools download kar sakte hain\n• Apna code backup kar sakte hain\n• Team ke sath collaborate kar sakte hain"
+          },
+          {
+            "heading": "Git Install aur Setup",
+            "commands": [
+              {
+                "description": "Git Install",
+                "command": "pkg install git",
+                "explanation": "Git version control system install karta hai"
+              },
+              {
+                "description": "Git Configuration",
+                "command": "git config --global user.name \"Your Name\"",
+                "explanation": "Apna naam set karta hai (quotes mein apna naam likhe)"
+              },
+              {
+                "description": "Email Configuration",
+                "command": "git config --global user.email \"your.email@example.com\"",
+                "explanation": "Apna email set karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Popular Hacking Tools Clone Karna",
+            "commands": [
+              {
+                "description": "Sqlmap Clone",
+                "command": "git clone https://github.com/sqlmapproject/sqlmap.git",
+                "explanation": "SQL injection testing tool download karta hai"
+              },
+              {
+                "description": "Social Engineering Toolkit",
+                "command": "git clone https://github.com/trustedsec/social-engineer-toolkit.git",
+                "explanation": "Social engineering attacks ke liye toolkit"
+              },
+              {
+                "description": "Nmap Scripts",
+                "command": "git clone https://github.com/vulnersCom/nmap-vulners.git",
+                "explanation": "Nmap ke liye additional vulnerability scripts"
+              }
+            ]
+          },
+          {
+            "heading": "Git Basic Commands",
+            "commands": [
+              {
+                "description": "Repository Status",
+                "command": "git status",
+                "explanation": "Current repository ki status dikhata hai"
+              },
+              {
+                "description": "Changes Add",
+                "command": "git add .",
+                "explanation": "Sari changes staging area mein add karta hai"
+              },
+              {
+                "description": "Commit Changes",
+                "command": "git commit -m \"Your message\"",
+                "explanation": "Changes ko commit karta hai with message"
+              },
+              {
+                "description": "Repository Update",
+                "command": "git pull",
+                "explanation": "Remote repository se latest changes download karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "SSH Connections & Remote Access",
+      "content": {
+        "intro": "SSH (Secure Shell) se remote servers access karna aur secure connections banana seekhiye. SSH ethical hacking mein bohot important hai.",
+        "sections": [
+          {
+            "heading": "SSH Kya Hai?",
+            "text": "SSH (Secure Shell) ek secure protocol hai jo remote computers access karne ke liye use hota hai.\n\nUses:\n• Remote servers access karna\n• File transfer karna\n• Secure tunneling\n• Port forwarding\n• Remote command execution"
+          },
+          {
+            "heading": "SSH Install aur Setup",
+            "commands": [
+              {
+                "description": "OpenSSH Install",
+                "command": "pkg install openssh",
+                "explanation": "SSH client aur server install karta hai"
+              },
+              {
+                "description": "SSH Key Generate",
+                "command": "ssh-keygen -t rsa -b 4096",
+                "explanation": "4096-bit RSA key pair generate karta hai"
+              },
+              {
+                "description": "SSH Server Start",
+                "command": "sshd",
+                "explanation": "SSH server start karta hai (port 8022 pe)"
+              }
+            ]
+          },
+          {
+            "heading": "Remote Connections",
+            "commands": [
+              {
+                "description": "SSH Connect",
+                "command": "ssh username@hostname",
+                "explanation": "Remote server se connect karta hai"
+              },
+              {
+                "description": "SSH with Port",
+                "command": "ssh -p 2222 username@hostname",
+                "explanation": "Specific port pe SSH connection"
+              },
+              {
+                "description": "SSH with Key",
+                "command": "ssh -i ~/.ssh/id_rsa username@hostname",
+                "explanation": "Private key use kar ke connect karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "File Transfer with SCP",
+            "commands": [
+              {
+                "description": "File Upload",
+                "command": "scp file.txt username@hostname:/path/",
+                "explanation": "Local file ko remote server pe upload karta hai"
+              },
+              {
+                "description": "File Download",
+                "command": "scp username@hostname:/path/file.txt .",
+                "explanation": "Remote file ko local system pe download karta hai"
+              },
+              {
+                "description": "Directory Upload",
+                "command": "scp -r folder/ username@hostname:/path/",
+                "explanation": "Complete folder upload karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "SSH Tunneling",
+            "commands": [
+              {
+                "description": "Local Port Forwarding",
+                "command": "ssh -L 8080:localhost:80 username@hostname",
+                "explanation": "Local port 8080 ko remote port 80 se connect karta hai"
+              },
+              {
+                "description": "Dynamic Port Forwarding",
+                "command": "ssh -D 1080 username@hostname",
+                "explanation": "SOCKS proxy banata hai port 1080 pe"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Automation Scripts Banaye",
+      "content": {
+        "intro": "Repetitive tasks ko automate karne ke liye bash scripts aur Python automation seekhiye. Time save karne aur efficiency badhane ke liye automation zaroori hai.",
+        "sections": [
+          {
+            "heading": "Bash Scripting Basics",
+            "text": "Bash scripts se aap multiple commands ko ek sath run kar sakte hain.\n\nFayde:\n• Time saving\n• Error reduction\n• Consistent execution\n• Complex tasks automation"
+          },
+          {
+            "heading": "Simple Bash Scripts",
+            "commands": [
+              {
+                "description": "System Update Script",
+                "command": "nano auto_update.sh",
+                "explanation": "System update automation script banate hain"
+              }
+            ],
+            "text": "File mein ye content add kariye:\n\n#!/bin/bash\necho \"Starting system update...\"\npkg update && pkg upgrade -y\necho \"Update completed!\"\necho \"System is up to date.\""
+          },
+          {
+            "heading": "Script Executable Banaye",
+            "commands": [
+              {
+                "description": "Execute Permission",
+                "command": "chmod +x auto_update.sh",
+                "explanation": "Script ko executable banata hai"
+              },
+              {
+                "description": "Script Run",
+                "command": "./auto_update.sh",
+                "explanation": "Script execute karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Scanning Script",
+            "commands": [
+              {
+                "description": "Network Scanner Script",
+                "command": "nano network_scan.sh",
+                "explanation": "Network scanning automation script"
+              }
+            ],
+            "text": "Network scanner script content:\n\n#!/bin/bash\necho \"Starting network scan...\"\necho \"Checking connectivity...\"\nping -c 3 google.com\necho \"Scanning local network...\"\nnmap -sn 192.168.1.0/24\necho \"Scan completed!\""
+          },
+          {
+            "heading": "Python Automation Scripts",
+            "commands": [
+              {
+                "description": "Python Automation File",
+                "command": "nano auto_tools.py",
+                "explanation": "Python automation script banate hain"
+              }
+            ],
+            "text": "Python automation script:\n\nimport os\nimport subprocess\nimport time\n\ndef update_system():\n    print(\"Updating packages...\")\n    os.system(\"pkg update && pkg upgrade -y\")\n    print(\"Update complete!\")\n\ndef install_tools():\n    tools = ['python', 'git', 'curl', 'wget', 'nano']\n    for tool in tools:\n        print(f\"Installing {tool}...\")\n        os.system(f\"pkg install {tool} -y\")\n    print(\"All tools installed!\")\n\nif __name__ == \"__main__\":\n    update_system()\n    install_tools()"
+          },
+          {
+            "heading": "Cron Jobs - Scheduled Tasks",
+            "commands": [
+              {
+                "description": "Cron Install",
+                "command": "pkg install cronie",
+                "explanation": "Cron job scheduler install karta hai"
+              },
+              {
+                "description": "Crontab Edit",
+                "command": "crontab -e",
+                "explanation": "Cron jobs edit karne ke liye"
+              }
+            ],
+            "text": "Cron job examples:\n# Daily system update at 2 AM\n0 2 * * * /data/data/com.termux/files/home/auto_update.sh\n\n# Weekly network scan every Sunday at 10 PM\n0 22 * * 0 /data/data/com.termux/files/home/network_scan.sh"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Web Scraping & Data Collection",
+      "content": {
+        "intro": "Python se websites ka data extract karna aur information gathering techniques seekhiye. Web scraping ethical hacking mein reconnaissance ke liye use hoti hai.",
+        "sections": [
+          {
+            "heading": "Web Scraping Kya Hai?",
+            "text": "Web scraping se aap websites se automatically data extract kar sakte hain.\n\nUses in Ethical Hacking:\n• Target website ki information gather karna\n• Email addresses aur contact details find karna\n• Technology stack identify karna\n• Hidden directories discover karna"
+          },
+          {
+            "heading": "Required Libraries Install",
+            "commands": [
+              {
+                "description": "Web Scraping Libraries",
+                "command": "pip install requests beautifulsoup4 lxml",
+                "explanation": "Web scraping ke liye essential libraries"
+              },
+              {
+                "description": "Additional Tools",
+                "command": "pip install selenium urllib3",
+                "explanation": "Advanced web scraping aur automation"
+              }
+            ]
+          },
+          {
+            "heading": "Simple Web Scraper Banaye",
+            "commands": [
+              {
+                "description": "Web Scraper Script",
+                "command": "nano web_scraper.py",
+                "explanation": "Basic web scraping script banate hain"
+              }
+            ],
+            "text": "Web scraper code:\n\nimport requests\nfrom bs4 import BeautifulSoup\n\ndef scrape_website(url):\n    try:\n        response = requests.get(url)\n        soup = BeautifulSoup(response.content, 'html.parser')\n        \n        # Title extract\n        title = soup.find('title').text\n        print(f\"Title: {title}\")\n        \n        # All links extract\n        links = soup.find_all('a')\n        print(f\"Found {len(links)} links\")\n        \n        for link in links[:10]:\n            href = link.get('href')\n            text = link.text.strip()\n            if href:\n                print(f\"{text}: {href}\")\n                \n    except Exception as e:\n        print(f\"Error: {e}\")\n\nurl = input(\"Enter website URL: \")\nscrape_website(url)"
+          },
+          {
+            "heading": "Email Extractor Script",
+            "commands": [
+              {
+                "description": "Email Extractor",
+                "command": "nano email_extractor.py",
+                "explanation": "Website se email addresses extract karta hai"
+              }
+            ],
+            "text": "Email extraction code:\n\nimport requests\nimport re\nfrom bs4 import BeautifulSoup\n\ndef extract_emails(url):\n    try:\n        response = requests.get(url)\n        text = response.text\n        \n        # Email regex pattern\n        email_pattern = r'\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b'\n        emails = re.findall(email_pattern, text)\n        \n        unique_emails = list(set(emails))\n        print(f\"Found {len(unique_emails)} unique emails:\")\n        \n        for email in unique_emails:\n            print(email)\n            \n    except Exception as e:\n        print(f\"Error: {e}\")\n\nurl = input(\"Enter website URL: \")\nextract_emails(url)"
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "title": "Network Tools & Utilities",
+      "content": {
+        "intro": "Network analysis aur monitoring ke liye useful tools install karna aur use karna seekhiye. Network reconnaissance ke liye zaroori tools.",
+        "sections": [
+          {
+            "heading": "Network Tools Install",
+            "commands": [
+              {
+                "description": "Network Utilities",
+                "command": "pkg install nmap netcat-openbsd dnsutils",
+                "explanation": "Basic network scanning aur analysis tools"
+              },
+              {
+                "description": "Additional Tools",
+                "command": "pkg install traceroute whois curl wget",
+                "explanation": "Network troubleshooting aur information gathering"
+              }
+            ]
+          },
+          {
+            "heading": "Basic Network Scanning",
+            "commands": [
+              {
+                "description": "Host Discovery",
+                "command": "nmap -sn 192.168.1.0/24",
+                "explanation": "Local network mein live hosts find karta hai"
+              },
+              {
+                "description": "Port Scan",
+                "command": "nmap -sS google.com",
+                "explanation": "Target host ke open ports scan karta hai"
+              },
+              {
+                "description": "Service Detection",
+                "command": "nmap -sV google.com",
+                "explanation": "Running services aur versions detect karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Information Gathering",
+            "commands": [
+              {
+                "description": "WHOIS Lookup",
+                "command": "whois google.com",
+                "explanation": "Domain registration information"
+              },
+              {
+                "description": "DNS Lookup",
+                "command": "nslookup google.com",
+                "explanation": "DNS records aur IP addresses"
+              },
+              {
+                "description": "Traceroute",
+                "command": "traceroute google.com",
+                "explanation": "Network path aur hops dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Netcat Usage",
+            "commands": [
+              {
+                "description": "Port Listening",
+                "command": "nc -l -p 4444",
+                "explanation": "Port 4444 pe listen karta hai"
+              },
+              {
+                "description": "Connect to Port",
+                "command": "nc google.com 80",
+                "explanation": "Specific port pe connect karta hai"
+              },
+              {
+                "description": "Banner Grabbing",
+                "command": "echo \"GET / HTTP/1.0\" | nc google.com 80",
+                "explanation": "HTTP banner grab karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "title": "Advanced Scripting & Automation",
+      "content": {
+        "intro": "Complex automation tasks aur advanced scripting techniques seekhiye. Multiple tools ko combine kar ke powerful scripts banaye.",
+        "sections": [
+          {
+            "heading": "Multi-Tool Automation Script",
+            "commands": [
+              {
+                "description": "Recon Automation Script",
+                "command": "nano recon_automation.py",
+                "explanation": "Complete reconnaissance automation script"
+              }
+            ],
+            "text": "Advanced automation script:\n\nimport os\nimport subprocess\nimport time\nimport requests\n\ndef run_command(command):\n    try:\n        result = subprocess.run(command, shell=True, capture_output=True, text=True)\n        return result.stdout\n    except Exception as e:\n        return f\"Error: {e}\"\n\ndef recon_target(target):\n    print(f\"Starting reconnaissance on {target}\")\n    \n    # WHOIS lookup\n    print(\"\\n[+] WHOIS Information:\")\n    whois_result = run_command(f\"whois {target}\")\n    print(whois_result[:500])\n    \n    # Nmap scan\n    print(\"\\n[+] Port Scanning:\")\n    nmap_result = run_command(f\"nmap -sS {target}\")\n    print(nmap_result)\n    \n    # DNS lookup\n    print(\"\\n[+] DNS Information:\")\n    dns_result = run_command(f\"nslookup {target}\")\n    print(dns_result)\n    \n    print(\"\\n[+] Reconnaissance completed!\")\n\nif __name__ == \"__main__\":\n    target = input(\"Enter target domain: \")\n    recon_target(target)"
+          },
+          {
+            "heading": "Log Analysis Script",
+            "commands": [
+              {
+                "description": "Log Analyzer",
+                "command": "nano log_analyzer.py",
+                "explanation": "System logs analyze karne ke liye script"
+              }
+            ],
+            "text": "Log analysis script:\n\nimport re\nfrom collections import Counter\n\ndef analyze_logs(log_file):\n    try:\n        with open(log_file, 'r') as f:\n            logs = f.readlines()\n        \n        # IP addresses extract\n        ip_pattern = r'\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b'\n        ips = []\n        \n        for line in logs:\n            found_ips = re.findall(ip_pattern, line)\n            ips.extend(found_ips)\n        \n        # Most common IPs\n        ip_counts = Counter(ips)\n        print(\"Top 10 IP addresses:\")\n        for ip, count in ip_counts.most_common(10):\n            print(f\"{ip}: {count} requests\")\n            \n    except Exception as e:\n        print(f\"Error: {e}\")\n\nlog_file = input(\"Enter log file path: \")\nanalyze_logs(log_file)"
+          },
+          {
+            "heading": "System Monitoring Script",
+            "commands": [
+              {
+                "description": "System Monitor",
+                "command": "nano system_monitor.py",
+                "explanation": "Real-time system monitoring script"
+              }
+            ],
+            "text": "System monitoring script:\n\nimport os\nimport time\nimport psutil\n\ndef monitor_system():\n    while True:\n        # CPU usage\n        cpu_percent = psutil.cpu_percent(interval=1)\n        \n        # Memory usage\n        memory = psutil.virtual_memory()\n        memory_percent = memory.percent\n        \n        # Disk usage\n        disk = psutil.disk_usage('/')\n        disk_percent = (disk.used / disk.total) * 100\n        \n        # Network stats\n        network = psutil.net_io_counters()\n        \n        print(f\"\\rCPU: {cpu_percent}% | Memory: {memory_percent}% | Disk: {disk_percent:.1f}%\", end='')\n        \n        time.sleep(2)\n\nif __name__ == \"__main__\":\n    try:\n        monitor_system()\n    except KeyboardInterrupt:\n        print(\"\\nMonitoring stopped.\")"
+          }
+        ]
+      }
+    }
+  ]
+}

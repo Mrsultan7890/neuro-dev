@@ -1,0 +1,814 @@
+{
+  "moduleTitle": "Module 8: NetHunter Troubleshooting",
+  "moduleDescription": "NetHunter mein aane wale har tarah ke errors ka complete solution - VNC, KEX, Terminal, Installation aur Performance issues",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Installation Errors & Solutions",
+      "content": {
+        "intro": "NetHunter installation ke dauran aane wale common errors aur unke step-by-step solutions.",
+        "sections": [
+          {
+            "heading": "Installation Script Errors",
+            "text": "Common Installation Issues:\n\n• Script download failed\n• Permission denied errors\n• Network connectivity issues\n• Storage space insufficient\n• Termux version compatibility\n• Architecture mismatch\n• Corrupted download files",
+            "commands": [
+              {
+                "description": "Check Termux Version",
+                "command": "pkg list-installed | grep termux",
+                "explanation": "Termux version check karta hai compatibility ke liye"
+              },
+              {
+                "description": "Update Termux",
+                "command": "pkg update && pkg upgrade -y",
+                "explanation": "Termux ko latest version mein update karta hai"
+              },
+              {
+                "description": "Check Storage Space",
+                "command": "df -h $HOME",
+                "explanation": "Available storage space check karta hai"
+              },
+              {
+                "description": "Clear Package Cache",
+                "command": "pkg clean",
+                "explanation": "Package cache clear kar ke space free karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Download & Network Issues",
+            "text": "Network Related Problems:\n\n• Slow internet connection\n• DNS resolution failures\n• Proxy/firewall blocking\n• Server unavailable\n• Incomplete downloads\n• Certificate errors",
+            "commands": [
+              {
+                "description": "Test Internet Connection",
+                "command": "ping -c 4 8.8.8.8",
+                "explanation": "Internet connectivity test karta hai"
+              },
+              {
+                "description": "DNS Test",
+                "command": "nslookup kali.org",
+                "explanation": "DNS resolution test karta hai"
+              },
+              {
+                "description": "Alternative Download",
+                "command": "wget --no-check-certificate -O install-nethunter-termux https://offs.ec/2MceZWr",
+                "explanation": "Certificate check bypass kar ke download karta hai"
+              },
+              {
+                "description": "Resume Download",
+                "command": "wget -c -O install-nethunter-termux https://offs.ec/2MceZWr",
+                "explanation": "Incomplete download resume karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Permission & Access Errors",
+            "text": "Permission Related Issues:\n\n• Script not executable\n• Storage permission denied\n• Root access required\n• SELinux blocking\n• App permission issues",
+            "commands": [
+              {
+                "description": "Make Script Executable",
+                "command": "chmod +x install-nethunter-termux",
+                "explanation": "Installation script ko executable permission deta hai"
+              },
+              {
+                "description": "Storage Permission",
+                "command": "termux-setup-storage",
+                "explanation": "Storage access permission setup karta hai"
+              },
+              {
+                "description": "Check Permissions",
+                "command": "ls -la install-nethunter-termux",
+                "explanation": "File permissions check karta hai"
+              },
+              {
+                "description": "Fix Permissions",
+                "command": "chmod 755 $PREFIX/bin/*",
+                "explanation": "Binary files ke permissions fix karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Architecture & Compatibility",
+            "text": "Device Compatibility Issues:\n\n• ARM64 vs ARM32\n• Android version compatibility\n• Kernel version issues\n• Hardware limitations\n• Manufacturer restrictions",
+            "commands": [
+              {
+                "description": "Check Architecture",
+                "command": "uname -m",
+                "explanation": "Device architecture check karta hai"
+              },
+              {
+                "description": "Android Version",
+                "command": "getprop ro.build.version.release",
+                "explanation": "Android version check karta hai"
+              },
+              {
+                "description": "Kernel Version",
+                "command": "uname -r",
+                "explanation": "Kernel version information dikhata hai"
+              },
+              {
+                "description": "Device Info",
+                "command": "getprop ro.product.model && getprop ro.product.manufacturer",
+                "explanation": "Device model aur manufacturer information"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "VNC Server Issues & Fixes",
+      "content": {
+        "intro": "VNC server setup, connection problems aur performance issues ka complete troubleshooting guide.",
+        "sections": [
+          {
+            "heading": "VNC Installation Problems",
+            "text": "VNC Installation Issues:\n\n• Package not found\n• Dependencies missing\n• Installation failed\n• Version conflicts\n• Repository issues",
+            "commands": [
+              {
+                "description": "Update Package Lists",
+                "command": "apt update",
+                "explanation": "Package repository lists update karta hai"
+              },
+              {
+                "description": "Install VNC Server",
+                "command": "apt install tightvncserver -y",
+                "explanation": "TightVNC server install karta hai"
+              },
+              {
+                "description": "Alternative VNC Server",
+                "command": "apt install tigervnc-standalone-server -y",
+                "explanation": "TigerVNC server alternative install karta hai"
+              },
+              {
+                "description": "Fix Broken Packages",
+                "command": "apt --fix-broken install",
+                "explanation": "Broken package dependencies fix karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "VNC Server Startup Issues",
+            "text": "Server Startup Problems:\n\n• Server won't start\n• Port already in use\n• Display number conflicts\n• Permission errors\n• Configuration issues",
+            "commands": [
+              {
+                "description": "Kill Existing VNC",
+                "command": "vncserver -kill :1",
+                "explanation": "Running VNC server ko terminate karta hai"
+              },
+              {
+                "description": "Check Running VNC",
+                "command": "ps aux | grep vnc",
+                "explanation": "Running VNC processes check karta hai"
+              },
+              {
+                "description": "Start VNC with Debug",
+                "command": "vncserver :1 -geometry 1024x768 -depth 24 -dpi 96",
+                "explanation": "VNC server detailed parameters ke saath start karta hai"
+              },
+              {
+                "description": "Check VNC Log",
+                "command": "cat ~/.vnc/*.log",
+                "explanation": "VNC server log files check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "VNC Connection Problems",
+            "text": "Connection Issues:\n\n• Can't connect to server\n• Authentication failed\n• Black screen\n• Connection timeout\n• Network issues",
+            "commands": [
+              {
+                "description": "Check VNC Status",
+                "command": "vncserver -list",
+                "explanation": "Active VNC sessions list karta hai"
+              },
+              {
+                "description": "Test Local Connection",
+                "command": "netstat -tlnp | grep :590",
+                "explanation": "VNC port listening status check karta hai"
+              },
+              {
+                "description": "Reset VNC Password",
+                "command": "vncpasswd",
+                "explanation": "VNC access password reset karta hai"
+              },
+              {
+                "description": "Check Firewall",
+                "command": "iptables -L | grep 590",
+                "explanation": "VNC port firewall rules check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "VNC Display Issues",
+            "text": "Display Problems:\n\n• Black/blank screen\n• Wrong resolution\n• Color depth issues\n• Font problems\n• Desktop environment not loading",
+            "commands": [
+              {
+                "description": "Install Desktop Environment",
+                "command": "apt install xfce4 xfce4-goodies -y",
+                "explanation": "XFCE desktop environment install karta hai"
+              },
+              {
+                "description": "Configure Startup Script",
+                "command": "echo 'startxfce4 &' > ~/.vnc/xstartup && chmod +x ~/.vnc/xstartup",
+                "explanation": "VNC startup script configure karta hai"
+              },
+              {
+                "description": "Install Fonts",
+                "command": "apt install fonts-dejavu-core fonts-liberation -y",
+                "explanation": "Essential fonts install karta hai"
+              },
+              {
+                "description": "Fix Display Resolution",
+                "command": "vncserver -kill :1 && vncserver :1 -geometry 1280x720",
+                "explanation": "VNC display resolution fix karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "VNC Performance Optimization",
+            "text": "Performance Issues:\n\n• Slow response\n• High CPU usage\n• Memory consumption\n• Network bandwidth\n• Lag in display updates",
+            "commands": [
+              {
+                "description": "Low Quality Mode",
+                "command": "vncserver :1 -geometry 1024x768 -depth 16",
+                "explanation": "Low color depth se performance improve karta hai"
+              },
+              {
+                "description": "Disable Compositing",
+                "command": "xfconf-query -c xfwm4 -p /general/use_compositing -s false",
+                "explanation": "Desktop compositing disable kar ke performance improve karta hai"
+              },
+              {
+                "description": "Optimize VNC Config",
+                "command": "echo 'geometry=1024x768\\ndepth=16\\ndpi=96' > ~/.vnc/config",
+                "explanation": "VNC configuration optimize karta hai"
+              },
+              {
+                "description": "Monitor Resources",
+                "command": "top -p $(pgrep Xvnc)",
+                "explanation": "VNC server resource usage monitor karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "KEX (Kali Experience) Troubleshooting",
+      "content": {
+        "intro": "KEX desktop environment issues, GUI problems aur performance optimization techniques.",
+        "sections": [
+          {
+            "heading": "KEX Installation Issues",
+            "text": "KEX Setup Problems:\n\n• KEX not found\n• Installation incomplete\n• Dependencies missing\n• Desktop environment conflicts\n• Configuration errors",
+            "commands": [
+              {
+                "description": "Install KEX",
+                "command": "apt update && apt install kali-win-kex -y",
+                "explanation": "Kali Win-KEX package install karta hai"
+              },
+              {
+                "description": "KEX Dependencies",
+                "command": "apt install kali-desktop-xfce -y",
+                "explanation": "KEX ke liye required desktop environment install karta hai"
+              },
+              {
+                "description": "Check KEX Installation",
+                "command": "which kex",
+                "explanation": "KEX binary installation verify karta hai"
+              },
+              {
+                "description": "KEX Version Check",
+                "command": "kex --version",
+                "explanation": "Installed KEX version check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "KEX Startup Problems",
+            "text": "KEX Launch Issues:\n\n• KEX won't start\n• Command not found\n• Display errors\n• Authentication issues\n• Service conflicts",
+            "commands": [
+              {
+                "description": "Start KEX",
+                "command": "kex --start",
+                "explanation": "KEX desktop environment start karta hai"
+              },
+              {
+                "description": "KEX with Password",
+                "command": "kex --start --passwd",
+                "explanation": "KEX password setup ke saath start karta hai"
+              },
+              {
+                "description": "KEX Status Check",
+                "command": "kex --status",
+                "explanation": "KEX service status check karta hai"
+              },
+              {
+                "description": "KEX Stop",
+                "command": "kex --stop",
+                "explanation": "KEX services stop karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "KEX Display Issues",
+            "text": "Display Problems:\n\n• Black screen\n• Resolution issues\n• Color problems\n• Font rendering\n• Window manager issues",
+            "commands": [
+              {
+                "description": "KEX Win Mode",
+                "command": "kex --win --start",
+                "explanation": "KEX Windows-style mode mein start karta hai"
+              },
+              {
+                "description": "KEX ESM Mode",
+                "command": "kex --esm --start",
+                "explanation": "KEX Enhanced Session Mode start karta hai"
+              },
+              {
+                "description": "KEX SL Mode",
+                "command": "kex --sl --start",
+                "explanation": "KEX Seamless mode start karta hai"
+              },
+              {
+                "description": "Reset KEX Config",
+                "command": "rm -rf ~/.vnc && kex --start --passwd",
+                "explanation": "KEX configuration reset kar ke fresh start karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "KEX Performance Issues",
+            "text": "Performance Problems:\n\n• Slow GUI response\n• High memory usage\n• CPU consumption\n• Network lag\n• Application crashes",
+            "commands": [
+              {
+                "description": "KEX Resource Monitor",
+                "command": "ps aux | grep -E '(kex|vnc|Xvnc)'",
+                "explanation": "KEX related processes aur resource usage check karta hai"
+              },
+              {
+                "description": "Optimize KEX",
+                "command": "kex --start --passwd --shared",
+                "explanation": "KEX shared mode mein start kar ke performance improve karta hai"
+              },
+              {
+                "description": "Kill KEX Processes",
+                "command": "pkill -f kex && pkill -f vnc",
+                "explanation": "Stuck KEX processes terminate karta hai"
+              },
+              {
+                "description": "Clean KEX Logs",
+                "command": "rm -f ~/.vnc/*.log ~/.vnc/*.pid",
+                "explanation": "KEX log files clean karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "KEX Connection Issues",
+            "text": "Connection Problems:\n\n• Can't connect via RDP\n• VNC connection failed\n• Authentication errors\n• Network connectivity\n• Port conflicts",
+            "commands": [
+              {
+                "description": "Check KEX Ports",
+                "command": "netstat -tlnp | grep -E '(590|330)'",
+                "explanation": "KEX listening ports check karta hai"
+              },
+              {
+                "description": "KEX RDP Mode",
+                "command": "kex --start --rdp",
+                "explanation": "KEX RDP mode mein start karta hai"
+              },
+              {
+                "description": "Test VNC Connection",
+                "command": "vncviewer localhost:1",
+                "explanation": "Local VNC connection test karta hai"
+              },
+              {
+                "description": "KEX Debug Mode",
+                "command": "kex --start --verbose",
+                "explanation": "KEX debug mode mein start kar ke detailed logs dekh sakte hain"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Terminal & Shell Issues",
+      "content": {
+        "intro": "Terminal access problems, shell configuration issues aur command execution errors ka solution.",
+        "sections": [
+          {
+            "heading": "Terminal Access Problems",
+            "text": "Terminal Issues:\n\n• Terminal won't open\n• Shell not responding\n• Command not found errors\n• Path issues\n• Environment variables missing",
+            "commands": [
+              {
+                "description": "Check Shell",
+                "command": "echo $SHELL",
+                "explanation": "Current shell check karta hai"
+              },
+              {
+                "description": "Available Shells",
+                "command": "cat /etc/shells",
+                "explanation": "System mein available shells list karta hai"
+              },
+              {
+                "description": "Change Shell",
+                "command": "chsh -s /bin/bash",
+                "explanation": "Default shell change karta hai"
+              },
+              {
+                "description": "Reset Terminal",
+                "command": "reset",
+                "explanation": "Terminal display reset karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Command Path Issues",
+            "text": "PATH Problems:\n\n• Commands not found\n• Binary not in PATH\n• Environment not loaded\n• Profile not sourced\n• Custom paths missing",
+            "commands": [
+              {
+                "description": "Check PATH",
+                "command": "echo $PATH",
+                "explanation": "Current PATH environment variable dikhata hai"
+              },
+              {
+                "description": "Add to PATH",
+                "command": "export PATH=$PATH:/usr/local/bin",
+                "explanation": "PATH mein new directory add karta hai"
+              },
+              {
+                "description": "Reload Profile",
+                "command": "source ~/.bashrc",
+                "explanation": "Bash profile reload karta hai"
+              },
+              {
+                "description": "Find Command Location",
+                "command": "which nmap || whereis nmap",
+                "explanation": "Command ka exact location find karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Permission & Sudo Issues",
+            "text": "Permission Problems:\n\n• Permission denied\n• Sudo not working\n• User not in sudoers\n• Root access issues\n• File ownership problems",
+            "commands": [
+              {
+                "description": "Check User Groups",
+                "command": "groups",
+                "explanation": "Current user ke groups dikhata hai"
+              },
+              {
+                "description": "Check Sudo Access",
+                "command": "sudo -l",
+                "explanation": "Sudo permissions check karta hai"
+              },
+              {
+                "description": "Fix File Ownership",
+                "command": "sudo chown -R $USER:$USER $HOME",
+                "explanation": "Home directory ownership fix karta hai"
+              },
+              {
+                "description": "Add User to Sudo",
+                "command": "sudo usermod -aG sudo $USER",
+                "explanation": "User ko sudo group mein add karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Environment Configuration",
+            "text": "Environment Issues:\n\n• Variables not set\n• Aliases not working\n• Functions missing\n• Prompt issues\n• History problems",
+            "commands": [
+              {
+                "description": "Check Environment",
+                "command": "env | head -20",
+                "explanation": "Environment variables list karta hai"
+              },
+              {
+                "description": "Set Environment Variable",
+                "command": "export EDITOR=nano",
+                "explanation": "Environment variable set karta hai"
+              },
+              {
+                "description": "Check Aliases",
+                "command": "alias",
+                "explanation": "Defined aliases list karta hai"
+              },
+              {
+                "description": "Reload Environment",
+                "command": "exec $SHELL",
+                "explanation": "Shell environment reload karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Terminal Performance Issues",
+            "text": "Performance Problems:\n\n• Slow command execution\n• High memory usage\n• Terminal lag\n• History issues\n• Tab completion slow",
+            "commands": [
+              {
+                "description": "Clear History",
+                "command": "history -c && history -w",
+                "explanation": "Command history clear karta hai"
+              },
+              {
+                "description": "Optimize Bash",
+                "command": "echo 'set +h' >> ~/.bashrc",
+                "explanation": "Bash hash table disable kar ke performance improve karta hai"
+              },
+              {
+                "description": "Check Terminal Size",
+                "command": "stty size",
+                "explanation": "Terminal dimensions check karta hai"
+              },
+              {
+                "description": "Reset Terminal Settings",
+                "command": "stty sane",
+                "explanation": "Terminal settings reset karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Tool Installation & Configuration Errors",
+      "content": {
+        "intro": "NetHunter tools installation problems, configuration issues aur dependency conflicts ka solution.",
+        "sections": [
+          {
+            "heading": "Package Installation Errors",
+            "text": "Installation Problems:\n\n• Package not found\n• Dependencies unmet\n• Repository issues\n• GPG key errors\n• Network timeouts",
+            "commands": [
+              {
+                "description": "Update Package Lists",
+                "command": "apt update",
+                "explanation": "Package repository lists update karta hai"
+              },
+              {
+                "description": "Fix Broken Packages",
+                "command": "apt --fix-broken install",
+                "explanation": "Broken package dependencies repair karta hai"
+              },
+              {
+                "description": "Clean Package Cache",
+                "command": "apt clean && apt autoclean",
+                "explanation": "Package cache clean karta hai"
+              },
+              {
+                "description": "Force Package Install",
+                "command": "apt install --reinstall package-name",
+                "explanation": "Package ko force reinstall karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Repository & GPG Issues",
+            "text": "Repository Problems:\n\n• GPG signature verification failed\n• Repository not accessible\n• Mirror issues\n• SSL certificate errors\n• Outdated repository lists",
+            "commands": [
+              {
+                "description": "Add Kali GPG Key",
+                "command": "wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add -",
+                "explanation": "Kali Linux GPG key add karta hai"
+              },
+              {
+                "description": "Update GPG Keys",
+                "command": "apt-key update",
+                "explanation": "GPG keys update karta hai"
+              },
+              {
+                "description": "Check Repository Sources",
+                "command": "cat /etc/apt/sources.list",
+                "explanation": "Repository sources list check karta hai"
+              },
+              {
+                "description": "Fix Repository Sources",
+                "command": "echo 'deb http://http.kali.org/kali kali-rolling main non-free contrib' > /etc/apt/sources.list",
+                "explanation": "Kali repository sources fix karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Tool-Specific Issues",
+            "text": "Common Tool Problems:\n\n• Nmap not working\n• Metasploit errors\n• Aircrack-ng issues\n• Sqlmap problems\n• Burp Suite crashes",
+            "commands": [
+              {
+                "description": "Install Essential Tools",
+                "command": "apt install nmap metasploit-framework aircrack-ng sqlmap -y",
+                "explanation": "Essential penetration testing tools install karta hai"
+              },
+              {
+                "description": "Update Metasploit",
+                "command": "msfupdate",
+                "explanation": "Metasploit framework update karta hai"
+              },
+              {
+                "description": "Initialize Metasploit DB",
+                "command": "msfdb init",
+                "explanation": "Metasploit database initialize karta hai"
+              },
+              {
+                "description": "Check Tool Versions",
+                "command": "nmap --version && msfconsole --version",
+                "explanation": "Installed tools ke versions check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Python & Pip Issues",
+            "text": "Python Problems:\n\n• Python version conflicts\n• Pip not working\n• Module import errors\n• Virtual environment issues\n• Package conflicts",
+            "commands": [
+              {
+                "description": "Check Python Version",
+                "command": "python3 --version && pip3 --version",
+                "explanation": "Python aur pip versions check karta hai"
+              },
+              {
+                "description": "Upgrade Pip",
+                "command": "python3 -m pip install --upgrade pip",
+                "explanation": "Pip ko latest version mein upgrade karta hai"
+              },
+              {
+                "description": "Install Python Tools",
+                "command": "pip3 install requests beautifulsoup4 scapy",
+                "explanation": "Common Python libraries install karta hai"
+              },
+              {
+                "description": "Fix Python Path",
+                "command": "export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.9/site-packages",
+                "explanation": "Python path environment variable fix karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Database & Service Issues",
+            "text": "Service Problems:\n\n• PostgreSQL not starting\n• Apache service issues\n• SSH daemon problems\n• Database connection errors\n• Service permission issues",
+            "commands": [
+              {
+                "description": "Start PostgreSQL",
+                "command": "service postgresql start",
+                "explanation": "PostgreSQL database service start karta hai"
+              },
+              {
+                "description": "Check Service Status",
+                "command": "service --status-all | grep -E '(postgresql|apache|ssh)'",
+                "explanation": "Important services ka status check karta hai"
+              },
+              {
+                "description": "Enable Service Auto-start",
+                "command": "systemctl enable postgresql",
+                "explanation": "Service ko boot time pe auto-start enable karta hai"
+              },
+              {
+                "description": "Fix Service Permissions",
+                "command": "chmod +x /etc/init.d/postgresql",
+                "explanation": "Service script permissions fix karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Performance & Memory Issues",
+      "content": {
+        "intro": "NetHunter performance optimization, memory management aur system resource issues ka solution.",
+        "sections": [
+          {
+            "heading": "Memory Management Issues",
+            "text": "Memory Problems:\n\n• Out of memory errors\n• High RAM usage\n• Swap space issues\n• Memory leaks\n• Application crashes",
+            "commands": [
+              {
+                "description": "Check Memory Usage",
+                "command": "free -h",
+                "explanation": "System memory usage dikhata hai"
+              },
+              {
+                "description": "Memory by Process",
+                "command": "ps aux --sort=-%mem | head -10",
+                "explanation": "Memory usage ke hisab se processes sort karta hai"
+              },
+              {
+                "description": "Clear Cache",
+                "command": "sync && echo 3 > /proc/sys/vm/drop_caches",
+                "explanation": "System cache clear karta hai"
+              },
+              {
+                "description": "Kill Heavy Processes",
+                "command": "pkill -f 'process_name'",
+                "explanation": "Memory consuming processes terminate karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Storage Space Issues",
+            "text": "Storage Problems:\n\n• Disk space full\n• Temporary files accumulation\n• Log files growing\n• Package cache bloat\n• Large file identification",
+            "commands": [
+              {
+                "description": "Check Disk Usage",
+                "command": "df -h",
+                "explanation": "Disk space usage dikhata hai"
+              },
+              {
+                "description": "Find Large Files",
+                "command": "du -h --max-depth=1 | sort -hr",
+                "explanation": "Large files aur directories find karta hai"
+              },
+              {
+                "description": "Clean Temporary Files",
+                "command": "rm -rf /tmp/* ~/.cache/*",
+                "explanation": "Temporary files aur cache clean karta hai"
+              },
+              {
+                "description": "Clean Package Cache",
+                "command": "apt clean && apt autoremove -y",
+                "explanation": "Package cache aur unused packages remove karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "CPU Performance Issues",
+            "text": "CPU Problems:\n\n• High CPU usage\n• System slowdown\n• Process hanging\n• Thermal throttling\n• Background processes",
+            "commands": [
+              {
+                "description": "CPU Usage Monitor",
+                "command": "top -o %CPU",
+                "explanation": "CPU usage ke hisab se processes monitor karta hai"
+              },
+              {
+                "description": "Process Tree",
+                "command": "pstree -p",
+                "explanation": "Process hierarchy tree dikhata hai"
+              },
+              {
+                "description": "Kill CPU Heavy Process",
+                "command": "pkill -f 'heavy_process'",
+                "explanation": "CPU intensive process terminate karta hai"
+              },
+              {
+                "description": "System Load Average",
+                "command": "uptime",
+                "explanation": "System load average dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Performance Issues",
+            "text": "Network Problems:\n\n• Slow internet speed\n• Connection timeouts\n• DNS resolution slow\n• High latency\n• Bandwidth limitations",
+            "commands": [
+              {
+                "description": "Network Speed Test",
+                "command": "wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip",
+                "explanation": "Network download speed test karta hai"
+              },
+              {
+                "description": "DNS Performance",
+                "command": "dig @8.8.8.8 google.com | grep 'Query time'",
+                "explanation": "DNS query response time check karta hai"
+              },
+              {
+                "description": "Network Connections",
+                "command": "netstat -i",
+                "explanation": "Network interface statistics dikhata hai"
+              },
+              {
+                "description": "Ping Test",
+                "command": "ping -c 10 8.8.8.8 | tail -1",
+                "explanation": "Network latency aur packet loss test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "System Optimization",
+            "text": "Optimization Techniques:\n\n• Service management\n• Startup optimization\n• Resource allocation\n• Background processes\n• System tuning",
+            "commands": [
+              {
+                "description": "Disable Unnecessary Services",
+                "command": "systemctl disable bluetooth cups",
+                "explanation": "Unnecessary services disable karta hai"
+              },
+              {
+                "description": "Optimize Swappiness",
+                "command": "echo 'vm.swappiness=10' >> /etc/sysctl.conf",
+                "explanation": "System swappiness optimize karta hai"
+              },
+              {
+                "description": "Clean System Logs",
+                "command": "journalctl --vacuum-time=7d",
+                "explanation": "7 din se purane system logs clean karta hai"
+              },
+              {
+                "description": "System Resource Summary",
+                "command": "vmstat 1 5",
+                "explanation": "System resource usage summary dikhata hai"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

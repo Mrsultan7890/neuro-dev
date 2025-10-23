@@ -1,0 +1,406 @@
+{
+  "moduleTitle": "Module 5: Networking Course",
+  "moduleDescription": "Complete networking fundamentals - IP addressing, subnetting, port scanning, network reconnaissance aur vulnerability assessment",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Network Fundamentals",
+      "content": {
+        "intro": "Networking ki complete foundation - protocols, addressing, communication methods aur network architecture ki detailed understanding.",
+        "sections": [
+          {
+            "heading": "OSI Model Complete Guide",
+            "text": "7 Layers of OSI Model (Detailed):\n\n1. Physical Layer (Layer 1)\n   • Electrical signals, cables, hubs\n   • Bit transmission over physical medium\n   • Examples: Ethernet cables, fiber optic\n\n2. Data Link Layer (Layer 2)\n   • MAC addresses, frame formatting\n   • Error detection, flow control\n   • Examples: Switches, bridges\n\n3. Network Layer (Layer 3)\n   • IP addressing, routing\n   • Path determination\n   • Examples: Routers, IP protocol\n\n4. Transport Layer (Layer 4)\n   • TCP/UDP protocols\n   • Port numbers, reliability\n   • Examples: TCP, UDP\n\n5. Session Layer (Layer 5)\n   • Session establishment, management\n   • Dialog control\n   • Examples: NetBIOS, RPC\n\n6. Presentation Layer (Layer 6)\n   • Data encryption, compression\n   • Format conversion\n   • Examples: SSL/TLS, JPEG\n\n7. Application Layer (Layer 7)\n   • User interface, network services\n   • End-user applications\n   • Examples: HTTP, FTP, SMTP"
+          },
+          {
+            "heading": "TCP vs UDP Detailed Comparison",
+            "text": "TCP (Transmission Control Protocol):\n\n• Connection-oriented protocol\n• Reliable data delivery\n• Error checking aur correction\n• Flow control mechanism\n• Sequence numbering\n• Acknowledgment system\n• Slower but reliable\n• Used for: HTTP, HTTPS, FTP, SMTP\n\nUDP (User Datagram Protocol):\n\n• Connectionless protocol\n• Unreliable delivery (best effort)\n• No error correction\n• No flow control\n• Faster transmission\n• Lower overhead\n• Used for: DNS, DHCP, streaming"
+          },
+          {
+            "heading": "IP Addressing Fundamentals",
+            "text": "IPv4 Address Structure:\n\n• 32-bit address (4 octets)\n• Dotted decimal notation\n• Example: 192.168.1.1\n• Network + Host portions\n\nIPv6 Address Structure:\n\n• 128-bit address\n• Hexadecimal notation\n• Example: 2001:0db8:85a3::8a2e:0370:7334\n• Solves IPv4 exhaustion\n\nSpecial IP Ranges:\n\n• 127.0.0.1 - Loopback\n• 0.0.0.0 - Default route\n• 255.255.255.255 - Broadcast\n• 169.254.x.x - APIPA\n• 224.0.0.0-239.255.255.255 - Multicast"
+          },
+          {
+            "heading": "Domain Name System (DNS)",
+            "text": "DNS Hierarchy:\n\n1. Root Domain (.)\n2. Top-Level Domain (.com, .org, .pk)\n3. Second-Level Domain (google, facebook)\n4. Subdomain (www, mail, ftp)\n\nDNS Record Types:\n\n• A Record - IPv4 address\n• AAAA Record - IPv6 address\n• CNAME - Canonical name\n• MX - Mail exchange\n• NS - Name server\n• PTR - Reverse lookup\n• TXT - Text information\n• SOA - Start of authority\n\nDNS Resolution Process:\n1. Browser cache check\n2. OS cache check\n3. Router cache check\n4. ISP DNS server\n5. Root name servers\n6. TLD name servers\n7. Authoritative name servers"
+          },
+          {
+            "heading": "HTTP/HTTPS Protocols",
+            "text": "HTTP (HyperText Transfer Protocol):\n\n• Port 80 (default)\n• Stateless protocol\n• Request-response model\n• Plain text communication\n\nHTTP Methods:\n• GET - Retrieve data\n• POST - Submit data\n• PUT - Update resource\n• DELETE - Remove resource\n• HEAD - Headers only\n• OPTIONS - Available methods\n\nHTTPS (HTTP Secure):\n\n• Port 443 (default)\n• SSL/TLS encryption\n• Certificate-based authentication\n• Data integrity protection\n\nHTTP Status Codes:\n• 1xx - Informational\n• 2xx - Success (200 OK)\n• 3xx - Redirection (301, 302)\n• 4xx - Client Error (404, 403)\n• 5xx - Server Error (500, 502)"
+          },
+          {
+            "heading": "SSL/TLS Security",
+            "text": "SSL/TLS Handshake Process:\n\n1. Client Hello\n   • Supported cipher suites\n   • Random number\n   • Session ID\n\n2. Server Hello\n   • Selected cipher suite\n   • Server certificate\n   • Server random number\n\n3. Key Exchange\n   • Pre-master secret\n   • Master secret generation\n   • Session keys derivation\n\n4. Finished Messages\n   • Handshake verification\n   • Secure communication starts\n\nTLS Versions:\n• TLS 1.0 - Deprecated\n• TLS 1.1 - Deprecated\n• TLS 1.2 - Widely used\n• TLS 1.3 - Latest, most secure"
+          },
+          {
+            "heading": "Common Network Protocols & Ports",
+            "text": "Well-Known Ports (0-1023):\n\n• 20/21 - FTP (File Transfer Protocol)\n• 22 - SSH (Secure Shell)\n• 23 - Telnet\n• 25 - SMTP (Simple Mail Transfer Protocol)\n• 53 - DNS (Domain Name System)\n• 67/68 - DHCP (Dynamic Host Configuration Protocol)\n• 80 - HTTP (HyperText Transfer Protocol)\n• 110 - POP3 (Post Office Protocol)\n• 143 - IMAP (Internet Message Access Protocol)\n• 443 - HTTPS (HTTP Secure)\n• 993 - IMAPS (IMAP Secure)\n• 995 - POP3S (POP3 Secure)\n\nRegistered Ports (1024-49151):\n\n• 1433 - Microsoft SQL Server\n• 1521 - Oracle Database\n• 3306 - MySQL Database\n• 3389 - RDP (Remote Desktop Protocol)\n• 5432 - PostgreSQL Database\n• 8080 - HTTP Alternate\n• 8443 - HTTPS Alternate",
+            "commands": [
+              {
+                "description": "Protocol Information",
+                "command": "cat /etc/protocols | head -20",
+                "explanation": "System mein defined protocols list karta hai"
+              },
+              {
+                "description": "Service Ports",
+                "command": "cat /etc/services | grep -E '(http|ssh|ftp|smtp)'",
+                "explanation": "Common services ke default ports dikhata hai"
+              },
+              {
+                "description": "Port Scan Check",
+                "command": "nmap -sS -O --top-ports 100 google.com",
+                "explanation": "Top 100 ports scan kar ke services identify karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Configuration & Analysis",
+            "text": "Network Interface Types:\n\n• Ethernet (eth0, ens33)\n• Wireless (wlan0, wlp2s0)\n• Loopback (lo)\n• Virtual (tun0, tap0)\n\nMAC Address Structure:\n• 48-bit identifier\n• 6 octets in hex\n• First 3 octets - OUI (Organizationally Unique Identifier)\n• Last 3 octets - Device identifier\n• Example: 00:1B:44:11:3A:B7",
+            "commands": [
+              {
+                "description": "Interface Configuration",
+                "command": "ip addr show",
+                "explanation": "Network interfaces aur IP addresses dikhata hai"
+              },
+              {
+                "description": "Interface Statistics",
+                "command": "ip -s link show",
+                "explanation": "Network interface statistics aur packet counts"
+              },
+              {
+                "description": "Routing Table",
+                "command": "ip route show",
+                "explanation": "System routing table display karta hai"
+              },
+              {
+                "description": "ARP Table",
+                "command": "arp -a",
+                "explanation": "ARP cache mein stored MAC addresses dikhata hai"
+              },
+              {
+                "description": "DNS Configuration",
+                "command": "cat /etc/resolv.conf",
+                "explanation": "System DNS server configuration dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Monitoring & Troubleshooting",
+            "text": "Network Troubleshooting Steps:\n\n1. Physical Layer Check\n   • Cable connections\n   • Link lights\n   • Interface status\n\n2. Data Link Layer Check\n   • MAC address conflicts\n   • Switch port status\n   • VLAN configuration\n\n3. Network Layer Check\n   • IP configuration\n   • Subnet mask\n   • Default gateway\n\n4. Transport Layer Check\n   • Port accessibility\n   • Firewall rules\n   • Service status\n\n5. Application Layer Check\n   • Service configuration\n   • DNS resolution\n   • Application logs",
+            "commands": [
+              {
+                "description": "Network Connections",
+                "command": "netstat -tuln",
+                "explanation": "Active network connections aur listening ports"
+              },
+              {
+                "description": "Socket Statistics",
+                "command": "ss -tuln",
+                "explanation": "Modern alternative to netstat with more details"
+              },
+              {
+                "description": "Network Traffic",
+                "command": "cat /proc/net/dev",
+                "explanation": "Network interface traffic statistics"
+              },
+              {
+                "description": "Real-time Traffic",
+                "command": "iftop -i eth0",
+                "explanation": "Real-time network bandwidth usage monitor"
+              },
+              {
+                "description": "Ping Test",
+                "command": "ping -c 4 8.8.8.8",
+                "explanation": "Basic connectivity test to Google DNS"
+              },
+              {
+                "description": "Traceroute",
+                "command": "traceroute google.com",
+                "explanation": "Network path tracing to destination"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "IP Addressing & Subnetting",
+      "content": {
+        "intro": "IP addressing aur subnetting master karna - network segmentation aur addressing schemes samajhna ethical hacking ke liye essential hai.",
+        "sections": [
+          {
+            "heading": "IPv4 Address Classes",
+            "text": "IPv4 Address Classes:\n\nClass A: 1.0.0.0 to 126.255.255.255 (/8)\n- Private: 10.0.0.0/8\n\nClass B: 128.0.0.0 to 191.255.255.255 (/16)\n- Private: 172.16.0.0/12\n\nClass C: 192.0.0.0 to 223.255.255.255 (/24)\n- Private: 192.168.0.0/16\n\nClass D: 224.0.0.0 to 239.255.255.255 (Multicast)\nClass E: 240.0.0.0 to 255.255.255.255 (Reserved)"
+          },
+          {
+            "heading": "Subnet Mask Calculations",
+            "text": "Common Subnet Masks:\n\n/24 = 255.255.255.0 (256 hosts)\n/25 = 255.255.255.128 (128 hosts)\n/26 = 255.255.255.192 (64 hosts)\n/27 = 255.255.255.224 (32 hosts)\n/28 = 255.255.255.240 (16 hosts)\n/29 = 255.255.255.248 (8 hosts)\n/30 = 255.255.255.252 (4 hosts)"
+          },
+          {
+            "heading": "Subnetting Tools",
+            "commands": [
+              {
+                "description": "ipcalc Install",
+                "command": "apt install ipcalc -y",
+                "explanation": "IP calculator tool install karta hai"
+              },
+              {
+                "description": "Subnet Calculation",
+                "command": "ipcalc 192.168.1.0/24",
+                "explanation": "Network range aur broadcast address calculate karta hai"
+              },
+              {
+                "description": "CIDR to Netmask",
+                "command": "ipcalc 192.168.1.0/26",
+                "explanation": "CIDR notation ko subnet mask mein convert karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Port Scanning Techniques",
+      "content": {
+        "intro": "Port scanning - network reconnaissance ka foundation. Different scanning techniques aur unke use cases samajhna zaroori hai.",
+        "sections": [
+          {
+            "heading": "TCP Scan Types",
+            "commands": [
+              {
+                "description": "TCP Connect Scan",
+                "command": "nmap -sT google.com",
+                "explanation": "Full TCP connection establish karta hai (noisy but reliable)"
+              },
+              {
+                "description": "TCP SYN Scan",
+                "command": "nmap -sS google.com",
+                "explanation": "Half-open scan - stealth aur fast"
+              },
+              {
+                "description": "TCP ACK Scan",
+                "command": "nmap -sA google.com",
+                "explanation": "Firewall rules aur filtering detect karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "UDP Scanning",
+            "commands": [
+              {
+                "description": "UDP Scan",
+                "command": "nmap -sU google.com",
+                "explanation": "UDP ports scan karta hai (slow but important)"
+              },
+              {
+                "description": "Top UDP Ports",
+                "command": "nmap -sU --top-ports 100 google.com",
+                "explanation": "Top 100 UDP ports scan karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Stealth Scanning",
+            "commands": [
+              {
+                "description": "FIN Scan",
+                "command": "nmap -sF google.com",
+                "explanation": "FIN flag set kar ke scan karta hai"
+              },
+              {
+                "description": "NULL Scan",
+                "command": "nmap -sN google.com",
+                "explanation": "Koi TCP flag set nahi karta"
+              },
+              {
+                "description": "Xmas Scan",
+                "command": "nmap -sX google.com",
+                "explanation": "FIN, PSH, URG flags set karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Network Reconnaissance",
+      "content": {
+        "intro": "Network reconnaissance - target network ke bare mein information gathering. Passive aur active reconnaissance techniques.",
+        "sections": [
+          {
+            "heading": "DNS Reconnaissance",
+            "commands": [
+              {
+                "description": "DNS Lookup",
+                "command": "nslookup google.com",
+                "explanation": "Domain name resolution aur DNS records"
+              },
+              {
+                "description": "Dig Command",
+                "command": "dig google.com ANY",
+                "explanation": "Detailed DNS information retrieve karta hai"
+              },
+              {
+                "description": "Reverse DNS",
+                "command": "dig -x 8.8.8.8",
+                "explanation": "IP address se domain name find karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "WHOIS Information",
+            "commands": [
+              {
+                "description": "WHOIS Lookup",
+                "command": "whois google.com",
+                "explanation": "Domain registration information dikhata hai"
+              },
+              {
+                "description": "IP WHOIS",
+                "command": "whois 8.8.8.8",
+                "explanation": "IP address ownership information"
+              }
+            ]
+          },
+          {
+            "heading": "Network Mapping",
+            "commands": [
+              {
+                "description": "Traceroute",
+                "command": "traceroute google.com",
+                "explanation": "Network path aur hops dikhata hai"
+              },
+              {
+                "description": "MTR Tool",
+                "command": "mtr google.com",
+                "explanation": "Continuous traceroute with statistics"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Vulnerability Assessment",
+      "content": {
+        "intro": "Network vulnerability assessment - discovered services mein security weaknesses find karna aur risk assessment.",
+        "sections": [
+          {
+            "heading": "Nmap Vulnerability Scripts",
+            "commands": [
+              {
+                "description": "Vulnerability Scan",
+                "command": "nmap --script vuln google.com",
+                "explanation": "Known vulnerabilities ke liye scan karta hai"
+              },
+              {
+                "description": "SMB Vulnerabilities",
+                "command": "nmap --script smb-vuln-* 192.168.1.1",
+                "explanation": "SMB service vulnerabilities check karta hai"
+              },
+              {
+                "description": "HTTP Vulnerabilities",
+                "command": "nmap --script http-vuln-* google.com",
+                "explanation": "Web server vulnerabilities scan karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Nikto Web Scanner",
+            "commands": [
+              {
+                "description": "Basic Nikto Scan",
+                "command": "nikto -h http://google.com",
+                "explanation": "Web server vulnerabilities scan karta hai"
+              },
+              {
+                "description": "Comprehensive Scan",
+                "command": "nikto -h http://google.com -C all",
+                "explanation": "All checks ke saath detailed scan"
+              }
+            ]
+          },
+          {
+            "heading": "SSL/TLS Assessment",
+            "commands": [
+              {
+                "description": "SSL Scan",
+                "command": "nmap --script ssl-enum-ciphers -p 443 google.com",
+                "explanation": "SSL/TLS configuration aur cipher suites check karta hai"
+              },
+              {
+                "description": "SSL Certificate Check",
+                "command": "nmap --script ssl-cert -p 443 google.com",
+                "explanation": "SSL certificate details analyze karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Network Security Best Practices",
+      "content": {
+        "intro": "Network security implementation - discovered vulnerabilities ko fix karna aur network hardening techniques.",
+        "sections": [
+          {
+            "heading": "Firewall Configuration",
+            "commands": [
+              {
+                "description": "UFW Enable",
+                "command": "ufw enable",
+                "explanation": "Ubuntu firewall enable karta hai"
+              },
+              {
+                "description": "Allow SSH",
+                "command": "ufw allow 22/tcp",
+                "explanation": "SSH port allow karta hai"
+              },
+              {
+                "description": "Firewall Status",
+                "command": "ufw status verbose",
+                "explanation": "Firewall rules aur status dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Monitoring",
+            "commands": [
+              {
+                "description": "Netstat Monitoring",
+                "command": "watch -n 1 'netstat -tuln'",
+                "explanation": "Real-time network connections monitor karta hai"
+              },
+              {
+                "description": "TCPDump Capture",
+                "command": "tcpdump -i eth0 -w capture.pcap",
+                "explanation": "Network traffic capture karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Security Hardening",
+            "text": "Network Hardening Checklist:\n\n• Change default passwords\n• Disable unnecessary services\n• Update firmware regularly\n• Implement strong authentication\n• Configure logging\n• Regular vulnerability scans\n• Network documentation\n• Incident response plan",
+            "commands": [
+              {
+                "description": "Service Audit",
+                "command": "systemctl list-unit-files --type=service --state=enabled",
+                "explanation": "Enabled services list karta hai"
+              },
+              {
+                "description": "Open Ports Check",
+                "command": "ss -tuln | grep LISTEN",
+                "explanation": "Listening ports check karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

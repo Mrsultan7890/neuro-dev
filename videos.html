@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data: https://i.ytimg.com https://img.youtube.com; connect-src 'self'; frame-src 'self' https://www.youtube.com https://youtube.com;">
+    <title>Neuro-Dev Videos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        .videos-container {
+            padding-top: 70px;
+            background: #0a0a0a;
+            min-height: 100vh;
+        }
+        .videos-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #111, #1a1a1a);
+        }
+        .videos-header h1 {
+            color: #00ff41;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .videos-header p {
+            color: #ccc;
+            font-size: 1.2rem;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .video-card {
+            background: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-info {
+            padding: 20px;
+        }
+        .video-title {
+            color: #00ff41;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .video-module {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .video-description {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            background: transparent;
+            border: 1px solid #333;
+            color: #ccc;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-tab:hover, .filter-tab.active {
+            background: #00ff41;
+            color: #000;
+            border-color: #00ff41;
+        }
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+                padding: 20px 10px;
+            }
+            .videos-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#courses" class="nav-link">Courses</a>
+                <a href="videos.html" class="nav-link active">Videos</a>
+                <a href="donate.html" class="nav-link">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="videos-container">
+        <div class="videos-header">
+            <h1><i class="fab fa-youtube"></i> Video Tutorials</h1>
+            <p>Har lesson ke liye detailed video explanations</p>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterVideos('all')">All Videos</button>
+            <button class="filter-tab" onclick="filterVideos('termux-basics')">Termux Basics</button>
+            <button class="filter-tab" onclick="filterVideos('termux-advanced')">Termux Advanced</button>
+            <button class="filter-tab" onclick="filterVideos('nethunter-rootless')">NetHunter</button>
+            <button class="filter-tab" onclick="filterVideos('networking')">Networking</button>
+            <button class="filter-tab" onclick="filterVideos('web-security')">Web Security</button>
+        </div>
+
+        <div class="video-grid" id="video-grid">
+            <!-- Videos will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Google Ads Section -->
+    <div class="ads-container">
+        <div class="ad-label">Advertisement</div>
+        <div class="google-ad">
+            <!-- Google AdSense code yahan paste kariye -->
+        </div>
+    </div>
+
+    <script>
+        let videoData = [];
+
+        // Load videos from JSON file
+        async function loadVideosData() {
+            try {
+                const response = await fetch('data/videos.json');
+                const data = await response.json();
+                videoData = data.videos;
+                loadVideos();
+            } catch (error) {
+                console.error('Error loading videos:', error);
+                // Fallback data if JSON fails to load
+                videoData = [
+                    {
+                        id: 1,
+                        title: "Termux Installation Complete Guide",
+                        videoId: "VPvmyiLZWtY",
+                        module: "termux-basics",
+                        moduleName: "Module 1: Termux Basics",
+                        description: "Is video mein step by step dekh sakte hain ke Termux kaise download aur install karte hain."
+                    }
+                ];
+                loadVideos();
+            }
+        }
+
+        function loadVideos(filter = 'all') {
+            const videoGrid = document.getElementById('video-grid');
+            videoGrid.innerHTML = '';
+
+            const filteredVideos = filter === 'all' ? videoData : videoData.filter(video => video.module === filter);
+
+            filteredVideos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-module">${video.moduleName}</div>
+                        <div class="video-description">${video.description}</div>
+                    </div>
+                `;
+                videoGrid.appendChild(videoCard);
+            });
+        }
+
+        function filterVideos(filter) {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            loadVideos(filter);
+        }
+
+        // Load videos data on page load
+        loadVideosData();
+    </script>
+</body>
+</html>
