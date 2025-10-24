@@ -2,14 +2,15 @@
   "videos": [
     {
       "id": 1,
-      "title": "Termux Installation Complete Guide",
+      "title": "subfinder tool explained",
+
       "videoId": "VPvmyiLZWtY",
       "module": "termux-basics",
-      "moduleName": "Module 1: Termux Basics",
+      "moduleName": "subfinder explained",
       "lesson": 1,
-      "description": "Is video mein step by step dekh sakte hain ke Termux kaise download aur install karte hain. F-Droid se download karne ka complete process.",
-      "duration": "10:30",
-      "tags": ["termux", "installation", "android", "f-droid"]
+      "description": "is video mai hum dekhenge ki kaise subfinder tool ka use kiya jata hai ",
+      "duration": "5;:34",
+      "tags": ["termux", "usage", "nethunter", "linux"]
     },
     {
       "id": 2,
