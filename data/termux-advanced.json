@@ -537,6 +537,45 @@
           }
         ]
       }
+    },
+    {
+      "id": 9,
+      "title": "Termux Backup & Recovery",
+      "content": {
+        "intro": "Termux data backup karna aur restore karna - important files aur configurations safe rakhna.",
+        "sections": [
+          {
+            "heading": "Data Backup",
+            "commands": [
+              {
+                "description": "Home Directory Backup",
+                "command": "tar -czf termux-backup.tar.gz -C /data/data/com.termux/files ./home",
+                "explanation": "Complete home directory ka backup banata hai"
+              },
+              {
+                "description": "Specific Files Backup",
+                "command": "cp -r ~/important-files /sdcard/termux-backup/",
+                "explanation": "Important files ko SD card mein backup karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Configuration Backup",
+            "commands": [
+              {
+                "description": "Bash Config Backup",
+                "command": "cp ~/.bashrc /sdcard/bashrc-backup",
+                "explanation": "Bash configuration backup karta hai"
+              },
+              {
+                "description": "SSH Keys Backup",
+                "command": "cp -r ~/.ssh /sdcard/ssh-backup/",
+                "explanation": "SSH keys safely backup karta hai"
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

@@ -888,6 +888,50 @@
           }
         ]
       }
+    },
+    {
+      "id": 13,
+      "title": "NetHunter Custom Tools Installation",
+      "content": {
+        "intro": "NetHunter mein additional tools install karna aur custom scripts setup karna.",
+        "sections": [
+          {
+            "heading": "Additional Security Tools",
+            "commands": [
+              {
+                "description": "Gobuster Install",
+                "command": "apt install gobuster -y",
+                "explanation": "Directory aur file brute forcing tool"
+              },
+              {
+                "description": "Ffuf Install",
+                "command": "apt install ffuf -y",
+                "explanation": "Fast web fuzzer tool"
+              },
+              {
+                "description": "Sublist3r Install",
+                "command": "pip3 install sublist3r",
+                "explanation": "Subdomain enumeration tool"
+              }
+            ]
+          },
+          {
+            "heading": "Custom Scripts Setup",
+            "commands": [
+              {
+                "description": "Scripts Directory",
+                "command": "mkdir ~/scripts && cd ~/scripts",
+                "explanation": "Custom scripts ke liye directory banata hai"
+              },
+              {
+                "description": "Quick Scan Script",
+                "command": "echo '#!/bin/bash\nnmap -sS -O $1' > quick-scan.sh && chmod +x quick-scan.sh",
+                "explanation": "Quick network scan script banata hai"
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

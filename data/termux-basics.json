@@ -425,6 +425,46 @@
           }
         ]
       }
+    },
+    {
+      "id": 8,
+      "title": "Termux Customization & Themes",
+      "content": {
+        "intro": "Termux ko customize karna - colors, fonts, shortcuts aur productivity tools setup karna.",
+        "sections": [
+          {
+            "heading": "Termux Styling",
+            "text": "Termux Colors aur Fonts:\n\n• Color schemes change karna\n• Custom fonts install karna\n• Terminal appearance customize karna\n• Productivity ke liye setup",
+            "commands": [
+              {
+                "description": "Termux Styling Install",
+                "command": "pkg install termux-api",
+                "explanation": "Termux API access ke liye install karta hai"
+              },
+              {
+                "description": "Color Scheme Setup",
+                "command": "mkdir ~/.termux && echo 'background=#000000\nforeground=#00ff41' > ~/.termux/colors.properties",
+                "explanation": "Custom color scheme set karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Useful Aliases",
+            "commands": [
+              {
+                "description": "Create Aliases",
+                "command": "echo 'alias ll=\"ls -la\"\nalias c=\"clear\"\nalias ..=\"cd ..\"' >> ~/.bashrc",
+                "explanation": "Useful shortcuts banata hai"
+              },
+              {
+                "description": "Reload Aliases",
+                "command": "source ~/.bashrc",
+                "explanation": "Naye aliases activate karta hai"
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

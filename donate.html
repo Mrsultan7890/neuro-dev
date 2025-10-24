@@ -181,6 +181,24 @@
             .donation-amounts {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .upi-id {
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+            .upi-id span {
+                font-size: 0.9rem !important;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .upi-id span {
+                font-size: 0.8rem !important;
+            }
+            .copy-upi-btn {
+                width: 100%;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -240,11 +258,13 @@
                 
                 <div class="upi-section">
                     <h3 style="color: #00ff41; margin-bottom: 15px;">UPI ID</h3>
-                    <div class="upi-id">
-                        <span id="upi-id">khansalahuddin2023@okicici</span>
-                        <button class="copy-upi-btn" onclick="copyUPI()">
-                            <i class="fas fa-copy"></i> Copy
-                        </button>
+                    <div class="upi-id" style="flex-direction: column; gap: 10px; align-items: stretch;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <span id="upi-id" style="word-break: break-all; flex: 1; min-width: 200px;">khansalahuddin2023@okicici</span>
+                            <button class="copy-upi-btn" onclick="copyUPI()" style="flex-shrink: 0;">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
                     </div>
                     <p style="color: #888; font-size: 0.9rem;">UPI ID copy kar ke apne payment app mein paste kare</p>
                 </div>
@@ -260,12 +280,8 @@
 
                 <div class="qr-section">
                     <h3 style="color: #00ff41;">QR Code</h3>
-                    <div class="qr-placeholder">
-                        <div>
-                            <i class="fas fa-qrcode" style="font-size: 3rem; color: #333; margin-bottom: 10px;"></i>
-                            <br>
-                            <span>QR Code yahan add kar sakte hain</span>
-                        </div>
+                    <div style="text-align: center; margin: 20px 0; overflow: hidden;">
+                        <img src="IMG_20251024_135844.png" alt="UPI QR Code" style="max-width: 200px; width: 100%; height: auto; border-radius: 10px; border: 2px solid #333;">
                     </div>
                     <p style="color: #888; font-size: 0.9rem;">Payment app se QR code scan kare</p>
                 </div>
@@ -279,6 +295,11 @@
             <div class="donate-card">
                 <h2>Other Ways to Support</h2>
                 <div class="support-methods">
+                    <div class="method-card">
+                        <i class="fab fa-instagram" style="color: #e4405f;"></i>
+                        <h3>Instagram Follow</h3>
+                        <p><a href="https://instagram.com/who_is_the_black_hat" target="_blank" style="color: #e4405f; text-decoration: none;">@who_is_the_black_hat</a> follow kare</p>
+                    </div>
                     <div class="method-card">
                         <i class="fab fa-youtube"></i>
                         <h3>YouTube Subscribe</h3>

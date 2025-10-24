@@ -679,6 +679,50 @@
           }
         ]
       }
+    },
+    {
+      "id": 7,
+      "title": "Advanced Reconnaissance Tools",
+      "content": {
+        "intro": "Advanced information gathering tools - Recon-ng, theHarvester, aur OSINT techniques.",
+        "sections": [
+          {
+            "heading": "Recon-ng Framework",
+            "commands": [
+              {
+                "description": "Recon-ng Install",
+                "command": "apt install recon-ng -y",
+                "explanation": "Web reconnaissance framework install karta hai"
+              },
+              {
+                "description": "Recon-ng Start",
+                "command": "recon-ng",
+                "explanation": "Recon-ng framework start karta hai"
+              },
+              {
+                "description": "Domain Recon",
+                "command": "use recon/domains-hosts/hackertarget && set SOURCE example.com && run",
+                "explanation": "Domain reconnaissance perform karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "theHarvester Tool",
+            "commands": [
+              {
+                "description": "theHarvester Install",
+                "command": "apt install theharvester -y",
+                "explanation": "Email aur subdomain harvesting tool"
+              },
+              {
+                "description": "Email Harvesting",
+                "command": "theharvester -d example.com -b google",
+                "explanation": "Domain se emails collect karta hai"
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }
