@@ -83,18 +83,7 @@ neuro-dev/
 └── README.md               # This file
 ```
 
-## How to Host
 
-### GitHub Pages
-1. GitHub pe repository banaye
-2. Sari files upload kariye
-3. Settings > Pages mein source set kariye
-4. Website live ho jayegi
-
-### Netlify
-1. Netlify.com pe account banaye
-2. Drag & drop karke files upload kariye
-3. Automatic deployment ho jayegi
 
 ## Technologies Used
 
