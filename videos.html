@@ -153,6 +153,13 @@
             <p>Har lesson ke liye detailed video explanations</p>
         </div>
 
+        <div style="max-width: 600px; margin: 0 auto 30px; padding: 0 20px;">
+            <div style="position: relative;">
+                <input type="text" id="video-search" placeholder="Video search kariye..." style="width: 100%; padding: 15px 50px 15px 20px; background: #111; border: 1px solid #333; color: #ccc; border-radius: 25px; font-size: 1rem;" oninput="searchVideos()">
+                <i class="fas fa-search" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #666;"></i>
+            </div>
+        </div>
+
         <div class="filter-tabs">
             <button class="filter-tab active" onclick="filterVideos('all')">All Videos</button>
             <button class="filter-tab" onclick="filterVideos('termux-basics')">Termux Basics</button>
@@ -230,7 +237,47 @@
                 tab.classList.remove('active');
             });
             event.target.classList.add('active');
+            document.getElementById('video-search').value = '';
             loadVideos(filter);
+        }
+
+        function searchVideos() {
+            const searchTerm = document.getElementById('video-search').value.toLowerCase();
+            const videoGrid = document.getElementById('video-grid');
+            
+            if (searchTerm === '') {
+                loadVideos('all');
+                return;
+            }
+            
+            const filteredVideos = videoData.filter(video => 
+                video.title.toLowerCase().includes(searchTerm) ||
+                video.description.toLowerCase().includes(searchTerm) ||
+                video.moduleName.toLowerCase().includes(searchTerm)
+            );
+            
+            videoGrid.innerHTML = '';
+            
+            if (filteredVideos.length === 0) {
+                videoGrid.innerHTML = '<div style="text-align: center; color: #666; padding: 50px;"><i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px;"></i><br>Koi video nahi mila</div>';
+                return;
+            }
+            
+            filteredVideos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-module">${video.moduleName}</div>
+                        <div class="video-description">${video.description}</div>
+                    </div>
+                `;
+                videoGrid.appendChild(videoCard);
+            });
         }
 
         // Load videos data on page load
