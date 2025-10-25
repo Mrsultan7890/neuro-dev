@@ -97,14 +97,6 @@ neuro-dev/
 
 Yeh website sirf educational purposes ke liye hai. Ethical hacking seekhiye aur responsible use kariye. Kisi bhi illegal activity ke liye use na kariye.
 
-## Contributing
-
-Agar aap is project mein contribute karna chahte hain:
-1. Repository fork kariye
-2. Naya branch banaye
-3. Changes kariye
-4. Pull request submit kariye
-
 ## License
 
 This project is for educational purposes only. Use responsibly.
