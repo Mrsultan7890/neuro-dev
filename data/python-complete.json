@@ -1,0 +1,517 @@
+{
+    "moduleTitle": "Python Complete Course - Beginner to Advanced",
+    "lessons": [
+        {
+            "id": 1,
+            "title": "Python Introduction aur Installation",
+            "content": {
+                "intro": "Python ek powerful programming language hai jo beginners ke liye perfect hai. Is lesson mein hum Python ke bare mein janenge aur ise install karenge.",
+                "sections": [
+                    {
+                        "heading": "Python Kya Hai?",
+                        "text": "Python ek high-level programming language hai jo:\n• Simple aur easy to learn hai\n• Readable code likhne mein help karta hai\n• Web development, data science, AI mein use hota hai\n• Cross-platform hai (Windows, Mac, Linux)\n• Free aur open source hai"
+                    },
+                    {
+                        "heading": "Python Installation (Termux)",
+                        "commands": [
+                            {
+                                "description": "Package list update karo",
+                                "command": "pkg update && pkg upgrade",
+                                "explanation": "Termux ke packages ko latest version mein update karta hai"
+                            },
+                            {
+                                "description": "Python install karo",
+                                "command": "pkg install python",
+                                "explanation": "Python interpreter install karta hai Termux mein"
+                            },
+                            {
+                                "description": "Python version check karo",
+                                "command": "python --version",
+                                "explanation": "Installed Python ka version dekhta hai"
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "First Python Program",
+                        "commands": [
+                            {
+                                "description": "Python interactive mode start karo",
+                                "command": "python",
+                                "explanation": "Python REPL (Read-Eval-Print Loop) start karta hai"
+                            },
+                            {
+                                "description": "Hello World print karo",
+                                "command": "print(\"Hello World!\")",
+                                "explanation": "Screen par Hello World message print karta hai"
+                            },
+                            {
+                                "description": "Python exit karo",
+                                "command": "exit()",
+                                "explanation": "Python interactive mode se bahar aata hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "title": "Variables aur Data Types",
+            "content": {
+                "intro": "Variables data store karne ke liye use hote hain. Python mein different types ka data store kar sakte hain.",
+                "sections": [
+                    {
+                        "heading": "Variables Kya Hain?",
+                        "text": "Variable ek container hai jo data store karta hai:\n• Variable name case-sensitive hota hai\n• Numbers se start nahi kar sakte\n• Special characters use nahi kar sakte (except underscore)\n• Keywords use nahi kar sakte"
+                    },
+                    {
+                        "heading": "Basic Data Types",
+                        "commands": [
+                            {
+                                "description": "String variable banao",
+                                "command": "name = \"Ahmed\"\nprint(name)\nprint(type(name))",
+                                "explanation": "Text data store karta hai, quotes mein likhte hain"
+                            },
+                            {
+                                "description": "Integer variable banao",
+                                "command": "age = 25\nprint(age)\nprint(type(age))",
+                                "explanation": "Whole numbers store karta hai"
+                            },
+                            {
+                                "description": "Float variable banao",
+                                "command": "height = 5.8\nprint(height)\nprint(type(height))",
+                                "explanation": "Decimal numbers store karta hai"
+                            },
+                            {
+                                "description": "Boolean variable banao",
+                                "command": "is_student = True\nprint(is_student)\nprint(type(is_student))",
+                                "explanation": "True ya False values store karta hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "title": "Input aur Output Operations",
+            "content": {
+                "intro": "User se input lena aur output show karna programming ka basic part hai. Python mein input() aur print() functions use karte hain.",
+                "sections": [
+                    {
+                        "heading": "Print Function",
+                        "commands": [
+                            {
+                                "description": "Simple print statement",
+                                "command": "print(\"Welcome to Python!\")",
+                                "explanation": "Screen par message display karta hai"
+                            },
+                            {
+                                "description": "Multiple values print karo",
+                                "command": "name = \"Ali\"\nage = 20\nprint(\"Name:\", name, \"Age:\", age)",
+                                "explanation": "Ek saath multiple values print kar sakte hain"
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "Input Function",
+                        "commands": [
+                            {
+                                "description": "User se name input lo",
+                                "command": "name = input(\"Enter your name: \")\nprint(\"Hello\", name)",
+                                "explanation": "User se text input leta hai aur variable mein store karta hai"
+                            },
+                            {
+                                "description": "Number input lo aur convert karo",
+                                "command": "age_str = input(\"Enter your age: \")\nage = int(age_str)\nprint(f\"You are {age} years old\")",
+                                "explanation": "Input hamesha string hota hai, number ke liye int() use karte hain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "title": "Operators aur Expressions",
+            "content": {
+                "intro": "Operators mathematical aur logical operations perform karne ke liye use hote hain. Python mein different types ke operators hain.",
+                "sections": [
+                    {
+                        "heading": "Arithmetic Operators",
+                        "commands": [
+                            {
+                                "description": "Basic math operations",
+                                "command": "a = 10\nb = 3\nprint(\"Addition:\", a + b)\nprint(\"Subtraction:\", a - b)\nprint(\"Multiplication:\", a * b)\nprint(\"Division:\", a / b)",
+                                "explanation": "Basic mathematical operations perform karte hain"
+                            },
+                            {
+                                "description": "Advanced math operations",
+                                "command": "print(\"Floor Division:\", a // b)\nprint(\"Modulus:\", a % b)\nprint(\"Power:\", a ** b)",
+                                "explanation": "Floor division, remainder aur power operations"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "title": "Conditional Statements (if-else)",
+            "content": {
+                "intro": "Conditional statements program mein decisions lene ke liye use hote hain. Conditions ke base par different code execute hota hai.",
+                "sections": [
+                    {
+                        "heading": "Simple if Statement",
+                        "commands": [
+                            {
+                                "description": "Basic if condition",
+                                "command": "age = 18\nif age >= 18:\n    print(\"You are eligible to vote\")",
+                                "explanation": "Agar condition true hai to if block execute hota hai"
+                            },
+                            {
+                                "description": "if-else statement",
+                                "command": "age = 16\nif age >= 18:\n    print(\"You can vote\")\nelse:\n    print(\"You cannot vote yet\")",
+                                "explanation": "Condition false hone par else block execute hota hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "title": "Loops - for aur while",
+            "content": {
+                "intro": "Loops code ko repeatedly execute karne ke liye use hote hain. Python mein for aur while loops hain.",
+                "sections": [
+                    {
+                        "heading": "for Loop",
+                        "commands": [
+                            {
+                                "description": "Simple for loop",
+                                "command": "for i in range(5):\n    print(f\"Number: {i}\")",
+                                "explanation": "0 se 4 tak numbers print karta hai"
+                            },
+                            {
+                                "description": "Range with start and end",
+                                "command": "for i in range(1, 6):\n    print(f\"Count: {i}\")",
+                                "explanation": "1 se 5 tak numbers print karta hai"
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "while Loop",
+                        "commands": [
+                            {
+                                "description": "Simple while loop",
+                                "command": "count = 1\nwhile count <= 5:\n    print(f\"Count: {count}\")\n    count += 1",
+                                "explanation": "Jab tak condition true hai tab tak loop chalta hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "title": "Lists aur List Operations",
+            "content": {
+                "intro": "Lists multiple values store karne ke liye use hote hain. Ye ordered, changeable aur duplicate values allow karte hain.",
+                "sections": [
+                    {
+                        "heading": "List Creation",
+                        "commands": [
+                            {
+                                "description": "Empty list banao",
+                                "command": "empty_list = []\nprint(empty_list)\nprint(type(empty_list))",
+                                "explanation": "Square brackets use karke empty list banate hain"
+                            },
+                            {
+                                "description": "Numbers ki list banao",
+                                "command": "numbers = [1, 2, 3, 4, 5]\nprint(numbers)\nprint(len(numbers))",
+                                "explanation": "Numbers ko comma se separate karke list banate hain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "title": "Strings aur String Methods",
+            "content": {
+                "intro": "Strings text data handle karne ke liye use hote hain. Python mein strings immutable hain aur bahut sare built-in methods hain.",
+                "sections": [
+                    {
+                        "heading": "String Operations",
+                        "commands": [
+                            {
+                                "description": "String concatenation",
+                                "command": "first_name = \"Ahmed\"\nlast_name = \"Ali\"\nfull_name = first_name + \" \" + last_name\nprint(full_name)",
+                                "explanation": "Plus operator se strings join kar sakte hain"
+                            },
+                            {
+                                "description": "String methods",
+                                "command": "text = \"Python Programming\"\nprint(\"Upper:\", text.upper())\nprint(\"Lower:\", text.lower())\nprint(\"Title:\", text.title())",
+                                "explanation": "String ko uppercase, lowercase ya title case mein convert karte hain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "title": "Dictionaries aur Dictionary Operations",
+            "content": {
+                "intro": "Dictionaries key-value pairs store karte hain. Ye unordered, changeable aur duplicate keys allow nahi karte.",
+                "sections": [
+                    {
+                        "heading": "Dictionary Creation",
+                        "commands": [
+                            {
+                                "description": "Student information dictionary",
+                                "command": "student = {\n    \"name\": \"Ahmed\",\n    \"age\": 20,\n    \"grade\": \"A\"\n}\nprint(student)",
+                                "explanation": "Key-value pairs use karke dictionary banate hain"
+                            },
+                            {
+                                "description": "Dictionary access",
+                                "command": "print(\"Name:\", student[\"name\"])\nprint(\"Age:\", student.get(\"age\"))",
+                                "explanation": "Square brackets ya get() method use karke values access karte hain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "title": "Functions - Code Reusability",
+            "content": {
+                "intro": "Functions code ko reusable banane ke liye use hote hain. Ek baar define karke multiple times use kar sakte hain.",
+                "sections": [
+                    {
+                        "heading": "Function Definition",
+                        "commands": [
+                            {
+                                "description": "Simple function banao",
+                                "command": "def greet():\n    print(\"Hello, Welcome to Python!\")\n\n# Function call karo\ngreet()",
+                                "explanation": "def keyword use karke function define karte hain"
+                            },
+                            {
+                                "description": "Parameters ke saath function",
+                                "command": "def greet_user(name):\n    print(f\"Hello {name}, Welcome!\")\n\ngreet_user(\"Ahmed\")\ngreet_user(\"Sara\")",
+                                "explanation": "Parameters pass karke function ko flexible banate hain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "title": "File Handling - Files ke saath kaam",
+            "content": {
+                "intro": "File handling se hum files read, write aur modify kar sakte hain. Python mein built-in functions hain file operations ke liye.",
+                "sections": [
+                    {
+                        "heading": "File Operations",
+                        "commands": [
+                            {
+                                "description": "File create aur write karo",
+                                "command": "with open('sample.txt', 'w') as file:\n    file.write('Hello Python!')\n    file.write('\\nThis is line 2')",
+                                "explanation": "'w' mode file ko write karne ke liye open karta hai"
+                            },
+                            {
+                                "description": "File read karo",
+                                "command": "with open('sample.txt', 'r') as file:\n    content = file.read()\n    print(content)",
+                                "explanation": "'r' mode file ko read karne ke liye open karta hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "title": "Exception Handling - Error Management",
+            "content": {
+                "intro": "Exception handling se hum runtime errors ko handle kar sakte hain aur program crash hone se rok sakte hain.",
+                "sections": [
+                    {
+                        "heading": "Try-Except Blocks",
+                        "commands": [
+                            {
+                                "description": "Basic exception handling",
+                                "command": "try:\n    number = int(input('Enter a number: '))\n    result = 10 / number\n    print(f'Result: {result}')\nexcept ValueError:\n    print('Invalid input! Please enter a number.')\nexcept ZeroDivisionError:\n    print('Cannot divide by zero!')",
+                                "explanation": "Different types ke errors ko separately handle kar sakte hain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 13,
+            "title": "Classes aur Objects - OOP Basics",
+            "content": {
+                "intro": "Object-Oriented Programming (OOP) real-world entities ko code mein represent karne ka tarika hai.",
+                "sections": [
+                    {
+                        "heading": "Class Definition",
+                        "commands": [
+                            {
+                                "description": "Simple class banao",
+                                "command": "class Student:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n    \n    def introduce(self):\n        print(f'Hi, I am {self.name} and I am {self.age} years old')\n\n# Object create karo\nstudent1 = Student('Ahmed', 20)\nstudent1.introduce()",
+                                "explanation": "__init__ method constructor hai jo object create karte time chalti hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 14,
+            "title": "Modules aur Packages",
+            "content": {
+                "intro": "Modules code ko organize karne aur reuse karne ke liye use hote hain. Python mein built-in modules bhi hain.",
+                "sections": [
+                    {
+                        "heading": "Built-in Modules",
+                        "commands": [
+                            {
+                                "description": "Math module use karo",
+                                "command": "import math\n\nprint('Square root of 16:', math.sqrt(16))\nprint('Pi value:', math.pi)\nprint('Factorial of 5:', math.factorial(5))",
+                                "explanation": "math module mathematical functions provide karta hai"
+                            },
+                            {
+                                "description": "Random module use karo",
+                                "command": "import random\n\nprint('Random number:', random.randint(1, 10))\ncolors = ['red', 'blue', 'green', 'yellow']\nprint('Random color:', random.choice(colors))",
+                                "explanation": "random module random numbers aur choices generate karta hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 15,
+            "title": "List Comprehensions aur Advanced Features",
+            "content": {
+                "intro": "List comprehensions Python ka powerful feature hai jo concise way mein lists create karne ke liye use hota hai.",
+                "sections": [
+                    {
+                        "heading": "List Comprehensions",
+                        "commands": [
+                            {
+                                "description": "Simple list comprehension",
+                                "command": "# Traditional way\nsquares = []\nfor i in range(1, 6):\n    squares.append(i ** 2)\nprint('Traditional:', squares)\n\n# List comprehension way\nsquares_comp = [i ** 2 for i in range(1, 6)]\nprint('Comprehension:', squares_comp)",
+                                "explanation": "List comprehension ek line mein list create karta hai"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 16,
+            "title": "Working with APIs aur JSON",
+            "content": {
+                "intro": "APIs se data fetch karna aur JSON format handle karna modern programming ka important part hai.",
+                "sections": [
+                    {
+                        "heading": "JSON Handling",
+                        "commands": [
+                            {
+                                "description": "JSON data create aur parse karo",
+                                "command": "import json\n\n# Python dict to JSON\nstudent_data = {\n    'name': 'Ahmed',\n    'age': 20,\n    'subjects': ['Math', 'Physics']\n}\n\njson_string = json.dumps(student_data)\nprint('JSON string:', json_string)\n\n# JSON to Python dict\nparsed_data = json.loads(json_string)\nprint('Parsed data:', parsed_data)",
+                                "explanation": "json.dumps() dict ko JSON mein convert karta hai, json.loads() JSON ko dict mein"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 17,
+            "title": "Regular Expressions (Regex)",
+            "content": {
+                "intro": "Regular expressions text patterns match karne ke liye use hote hain. Data validation aur text processing mein useful hain.",
+                "sections": [
+                    {
+                        "heading": "Basic Regex",
+                        "commands": [
+                            {
+                                "description": "Simple pattern matching",
+                                "command": "import re\n\ntext = 'My phone number is 03001234567'\npattern = r'\\d{11}'  # 11 digits\n\nmatch = re.search(pattern, text)\nif match:\n    print('Phone number found:', match.group())\nelse:\n    print('No phone number found')",
+                                "explanation": "\\d digits ko match karta hai, {11} exactly 11 times"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 18,
+            "title": "Database Operations with SQLite",
+            "content": {
+                "intro": "SQLite lightweight database hai jo Python mein built-in hai. Data storage aur retrieval ke liye use hota hai.",
+                "sections": [
+                    {
+                        "heading": "Database Setup",
+                        "commands": [
+                            {
+                                "description": "Database connection aur table create karo",
+                                "command": "import sqlite3\n\n# Database connect karo\nconn = sqlite3.connect('students.db')\ncursor = conn.cursor()\n\n# Table create karo\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS students (\n        id INTEGER PRIMARY KEY,\n        name TEXT NOT NULL,\n        age INTEGER,\n        grade TEXT\n    )\n''')\n\nconn.commit()",
+                                "explanation": "SQLite database create karte hain aur students table banate hain"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 19,
+            "title": "Web Scraping Basics",
+            "content": {
+                "intro": "Web scraping websites se data extract karne ka process hai. Python mein requests aur BeautifulSoup libraries use karte hain.",
+                "sections": [
+                    {
+                        "heading": "Required Libraries Install",
+                        "commands": [
+                            {
+                                "description": "Required packages install karo",
+                                "command": "pip install requests beautifulsoup4",
+                                "explanation": "requests HTTP requests ke liye, beautifulsoup4 HTML parsing ke liye"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 20,
+            "title": "Final Project - Complete Application",
+            "content": {
+                "intro": "Ab tak jo kuch sikha hai, usse ek complete application banate hain - Student Management System.",
+                "sections": [
+                    {
+                        "heading": "Student Management System",
+                        "commands": [
+                            {
+                                "description": "Complete application code",
+                                "command": "import json\nimport os\nfrom datetime import datetime\n\nclass StudentManager:\n    def __init__(self):\n        self.filename = 'students_data.json'\n        self.students = self.load_data()\n    \n    def load_data(self):\n        if os.path.exists(self.filename):\n            with open(self.filename, 'r') as file:\n                return json.load(file)\n        return []\n    \n    def save_data(self):\n        with open(self.filename, 'w') as file:\n            json.dump(self.students, file, indent=2)\n    \n    def add_student(self, name, age, grade):\n        student = {\n            'id': len(self.students) + 1,\n            'name': name,\n            'age': age,\n            'grade': grade,\n            'added_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n        }\n        self.students.append(student)\n        self.save_data()\n        print(f'Student {name} added successfully!')\n\n# Main function\ndef main():\n    manager = StudentManager()\n    print('Student Management System Ready!')\n\nif __name__ == '__main__':\n    main()",
+                                "explanation": "Complete application jo file handling, JSON, classes, functions sab use karta hai"
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "Congratulations!",
+                        "text": "Congratulations! Aapne Python Complete Course successfully complete kar liya hai!\n\nAb aap ye sab kar sakte hain:\n• Variables aur Data Types use karna\n• Control Structures (if-else, loops)\n• Functions banana\n• File operations\n• Object-oriented programming\n• Database operations\n• Web scraping basics\n• Complete applications banana\n\nNext Steps:\n1. Practice more projects\n2. Learn advanced libraries (Django, Flask, Pandas, NumPy)\n3. Contribute to open source projects\n4. Build your portfolio\n\nHappy Coding!"
+                    }
+                ]
+            }
+        }
+    ]
+}

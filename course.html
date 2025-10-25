@@ -1,29 +1,8 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; connect-src 'self'; frame-src 'self' https://www.youtube.com https://youtube.com https://googleads.g.doubleclick.net;">
-    <meta name="google-adsense-account" content="ca-pub-1916892851128865">
-    <script async src="https://fundingchoicesmessages.google.com/i/pub-1916892851128865?https%3A%2F%2Fneuroshade.duckdns.org" nonce="RANDOM_NUMBER"></script>
-    <script>
-      (function() {
-        function setup() {
-          if (!window.frames['__cmp_stub_frame']) {
-            if (window.frames['__cmp_stub_frame']) return;
-            var frame = document.createElement('iframe');
-            frame.style.display = 'none';
-            frame.name = '__cmp_stub_frame';
-            document.body.appendChild(frame);
-          }
-        }
-        setup();
-      })();
-    </script>
     <title>Neuro-Dev Course</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -279,7 +258,7 @@
             const allowedModules = [
                 'termux-basics', 'termux-advanced', 'nethunter-rootless', 
                 'nethunter-tools', 'networking', 'web-security', 
-                'mobile-osint', 'nethunter-troubleshooting'
+                'mobile-osint', 'nethunter-troubleshooting', 'python-complete'
             ];
             
             if (!allowedModules.includes(module)) {
@@ -348,7 +327,8 @@
 
                 if (section.commands) {
                     section.commands.forEach(cmd => {
-                        const safeCommand = cmd.command.replace(/'/g, "\\'");
+                        const safeCommand = cmd.command.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
+                            .replace(/"/g, '\\"').replace(/`/g, '\\`').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
                         html += `<div class="command-box"><div class="command-header"><span>${cmd.description}</span><button class="copy-btn" onclick="copyToClipboard('${safeCommand}')"><i class="fas fa-copy"></i></button></div><div class="command-code">${cmd.command}</div><div class="command-explanation">${cmd.explanation}</div></div>`;
                     });
                 }
