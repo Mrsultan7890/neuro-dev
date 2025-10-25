@@ -102,10 +102,22 @@
             background: #00ff41;
             color: #000;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 12px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #00cc33;
+            transform: scale(1.05);
+        }
+        .copy-btn i {
+            font-size: 14px;
         }
         .command-code {
             padding: 15px;
@@ -200,6 +212,59 @@
         .watch-video-btn:hover {
             background: #cc0000;
         }
+        
+        @media (max-width: 768px) {
+            .course-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            .lesson-title {
+                font-size: 1.5rem;
+            }
+            .command-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .lesson-title {
+                font-size: 1.2rem;
+            }
+            .lesson-intro {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            .section h3 {
+                font-size: 1.1rem;
+            }
+            .command-code {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -213,7 +278,7 @@
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="index.html#courses" class="nav-link">Courses</a>
                 <a href="videos.html" class="nav-link">Videos</a>
-                <a href="donate.html" class="nav-link">Donate</a>
+                <a href="python-ide.html" class="nav-link">Python IDE</a>
                 <a href="donate.html" class="nav-link">Donate</a>
             </div>
         </div>
@@ -272,16 +337,20 @@
                 }
                 courseData = await response.json();
                 
-                if (!courseData || !courseData.moduleTitle || !courseData.lessons) {
+                if (!courseData || !courseData.moduleTitle || !courseData.lessons || !Array.isArray(courseData.lessons)) {
                     throw new Error('Invalid course data structure');
                 }
                 
                 document.getElementById('module-title').textContent = courseData.moduleTitle;
+                document.title = `${courseData.moduleTitle} - Neuro-Dev Course`;
                 loadLessonNav();
                 showLesson(1);
             } catch (error) {
                 console.error('Error loading course:', error);
-                document.getElementById('lesson-content').innerHTML = '<h2>Error loading course data. Please try again.</h2>';
+                const content = document.getElementById('lesson-content');
+                const moduleTitle = document.getElementById('module-title');
+                if (content) content.innerHTML = '<h2 style="color: #ff6b6b;">⚠️ Error loading course data. Please refresh the page or try again.</h2>';
+                if (moduleTitle) moduleTitle.textContent = 'Error Loading Course';
             }
         }
 
@@ -304,39 +373,61 @@
             currentLesson = lessonId;
             const lesson = courseData.lessons.find(l => l.id === lessonId);
             
-            if (!lesson) return;
+            if (!lesson) {
+                console.error('Lesson not found:', lessonId);
+                return;
+            }
 
+            // Update navigation buttons
             document.querySelectorAll('.lesson-nav button').forEach(btn => {
                 btn.classList.remove('active');
             });
-            document.querySelectorAll('.lesson-nav button')[lessonId - 1].classList.add('active');
+            const navButtons = document.querySelectorAll('.lesson-nav button');
+            if (navButtons[lessonId - 1]) {
+                navButtons[lessonId - 1].classList.add('active');
+            }
 
             const content = document.getElementById('lesson-content');
-            let html = `<h1 class="lesson-title">${lesson.title}</h1><div class="lesson-intro">${lesson.content.intro}</div>`;
+            if (!content) return;
+            
+            // Sanitize lesson title and intro
+            const sanitizedTitle = lesson.title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const sanitizedIntro = lesson.content.intro.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            let html = `<h1 class="lesson-title">${sanitizedTitle}</h1><div class="lesson-intro">${sanitizedIntro}</div>`;
 
-            lesson.content.sections.forEach(section => {
-                html += `<div class="section"><h3>${section.heading}</h3>`;
-                
-                if (section.text) {
-                    html += `<div class="section-text">${section.text}</div>`;
-                }
+            if (lesson.content.sections && Array.isArray(lesson.content.sections)) {
+                lesson.content.sections.forEach((section, sectionIndex) => {
+                    const sanitizedHeading = section.heading.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    html += `<div class="section"><h3>${sanitizedHeading}</h3>`;
+                    
+                    if (section.text) {
+                        const sanitizedText = section.text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        html += `<div class="section-text">${sanitizedText}</div>`;
+                    }
 
-                if (section.video) {
-                    html += `<div class="video-container"><div class="video-header"><h4><i class="fab fa-youtube"></i> ${section.video.title}</h4><a href="videos.html" class="video-link">All Videos <i class="fas fa-external-link-alt"></i></a></div><div class="video-description">${section.video.description}</div><a href="videos.html" class="watch-video-btn"><i class="fab fa-youtube"></i> Watch Video</a></div>`;
-                }
+                    if (section.video) {
+                        const sanitizedVideoTitle = section.video.title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        const sanitizedVideoDesc = section.video.description.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        html += `<div class="video-container"><div class="video-header"><h4><i class="fab fa-youtube"></i> ${sanitizedVideoTitle}</h4><a href="videos.html" class="video-link" rel="noopener noreferrer">All Videos <i class="fas fa-external-link-alt"></i></a></div><div class="video-description">${sanitizedVideoDesc}</div><a href="videos.html" class="watch-video-btn" rel="noopener noreferrer"><i class="fab fa-youtube"></i> Watch Video</a></div>`;
+                    }
 
-                if (section.commands) {
-                    section.commands.forEach(cmd => {
-                        const safeCommand = cmd.command.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
-                            .replace(/"/g, '\\"').replace(/`/g, '\\`').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
-                        html += `<div class="command-box"><div class="command-header"><span>${cmd.description}</span><button class="copy-btn" onclick="copyToClipboard('${safeCommand}')"><i class="fas fa-copy"></i></button></div><div class="command-code">${cmd.command}</div><div class="command-explanation">${cmd.explanation}</div></div>`;
-                    });
-                }
+                    if (section.commands && Array.isArray(section.commands)) {
+                        section.commands.forEach((cmd, index) => {
+                            const commandId = `cmd_${lessonId}_${sectionIndex}_${index}`;
+                            const sanitizedDesc = cmd.description.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                            const sanitizedCommand = cmd.command.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                            const sanitizedExplanation = cmd.explanation.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                            html += `<div class="command-box"><div class="command-header"><span>${sanitizedDesc}</span><button class="copy-btn" onclick="copyCommand('${commandId}')" title="Copy to clipboard" aria-label="Copy command"><i class="fas fa-copy"></i></button></div><div class="command-code" id="${commandId}">${sanitizedCommand}</div><div class="command-explanation">${sanitizedExplanation}</div></div>`;
+                        });
+                    }
 
-                html += `</div>`;
-            });
+                    html += `</div>`;
+                });
+            }
 
             content.innerHTML = html;
+            content.scrollTop = 0;
             updateNavButtons();
         }
 
@@ -357,13 +448,28 @@
             }
         }
 
-        function copyToClipboard(text) {
-            if (!navigator.clipboard) {
+        function copyCommand(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                showNotification('Error: Command not found!', 'error');
+                return;
+            }
+            
+            let text = element.textContent || element.innerText;
+            text = text.trim();
+            
+            if (!text) {
+                showNotification('Error: No text to copy!', 'error');
+                return;
+            }
+            
+            if (!navigator.clipboard || !window.isSecureContext) {
                 fallbackCopyTextToClipboard(text);
                 return;
             }
+            
             navigator.clipboard.writeText(text).then(() => {
-                showNotification('Command copied!');
+                showNotification('Command copied!', 'success');
             }).catch(err => {
                 console.error('Failed to copy: ', err);
                 fallbackCopyTextToClipboard(text);
@@ -389,14 +495,43 @@
             document.body.removeChild(textArea);
         }
 
-        function showNotification(message) {
+        function showNotification(message, type = 'success') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.course-notification');
+            existingNotifications.forEach(notif => notif.remove());
+            
             const notification = document.createElement('div');
+            notification.className = 'course-notification';
             notification.textContent = message;
-            notification.style.cssText = 'position:fixed;top:90px;right:20px;background:#00ff41;color:#000;padding:12px 20px;border-radius:8px;font-weight:bold;z-index:10000;box-shadow:0 4px 6px rgba(0,0,0,0.1);';
+            
+            const bgColor = type === 'error' ? '#ff6b6b' : '#00ff41';
+            const textColor = type === 'error' ? '#fff' : '#000';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 90px;
+                right: 20px;
+                background: ${bgColor};
+                color: ${textColor};
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: bold;
+                z-index: 10000;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+                word-wrap: break-word;
+            `;
+            
             document.body.appendChild(notification);
             setTimeout(() => {
                 if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
+                    notification.style.animation = 'slideOutRight 0.3s ease';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
                 }
             }, 2000);
         }
@@ -404,7 +539,49 @@
         document.getElementById('prev-btn').onclick = previousLesson;
         document.getElementById('next-btn').onclick = nextLesson;
 
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
         window.addEventListener('DOMContentLoaded', loadCourse);
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        previousLesson();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        nextLesson();
+                        break;
+                }
+            }
+        });
     </script>
 </body>
 </html>

@@ -2,15 +2,14 @@
   "videos": [
     {
       "id": 1,
-      "title": "termux installation ",
-
+      "title": "Termux Installation",
       "videoId": "i2tG_v3Q3KI",
       "module": "termux-basics",
-      "moduleName": "termux installation explained",
+      "moduleName": "Module 1: Termux Basics",
       "lesson": 1,
-      "description": "is video mai hum dekhenge ki kaise or kaha se termux install karna hai ",
-      "duration": "5;:34",
-      "tags": ["termux", "usage", "nethunter", "linux"]
+      "description": "Is video mein hum dekhenge ki kaise aur kaha se termux install karna hai",
+      "duration": "5:34",
+      "tags": ["termux", "installation", "nethunter", "linux"]
     },
     {
       "id": 2,

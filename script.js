@@ -1,10 +1,28 @@
-// Mobile Navigation Toggle with error handling
+// Mobile Navigation Toggle with enhanced error handling
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 
 if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
+    hamburger.addEventListener('click', (e) => {
+        e.preventDefault();
         navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
     });
 }
 
@@ -12,7 +30,10 @@ if (hamburger && navMenu) {
 if (navMenu) {
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                if (hamburger) hamburger.classList.remove('active');
+            }
         });
     });
 }
@@ -46,39 +67,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Navbar background on scroll with throttling
 let scrollTimeout;
-window.addEventListener('scroll', () => {
-    if (scrollTimeout) return;
-    
-    scrollTimeout = setTimeout(() => {
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(0, 0, 0, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
-            }
-        }
-        scrollTimeout = null;
-    }, 16); // ~60fps
-});
+let ticking = false;
 
-// Copy to clipboard function with enhanced error handling
+function updateNavbar() {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+        } else {
+            navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+        }
+    }
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(updateNavbar);
+        ticking = true;
+    }
+}, { passive: true });
+
+// Enhanced copy to clipboard with input sanitization
 function copyToClipboard(text) {
+    // Input validation and sanitization
     if (!text || typeof text !== 'string') {
         console.error('Invalid text provided for copying');
+        showCopyError('Invalid text to copy');
         return;
     }
+    
+    // Sanitize text to prevent XSS
+    const sanitizedText = text.replace(/<script[^>]*>.*?<\/script>/gi, '')
+                             .replace(/<[^>]*>/g, '')
+                             .trim();
     
     if (!navigator.clipboard || !window.isSecureContext) {
-        fallbackCopyTextToClipboard(text);
+        fallbackCopyTextToClipboard(sanitizedText);
         return;
     }
     
-    navigator.clipboard.writeText(text).then(() => {
+    navigator.clipboard.writeText(sanitizedText).then(() => {
         showCopySuccess();
     }).catch(err => {
         console.error('Clipboard API failed:', err);
-        fallbackCopyTextToClipboard(text);
+        fallbackCopyTextToClipboard(sanitizedText);
     });
 }
 
@@ -101,26 +134,42 @@ function fallbackCopyTextToClipboard(text) {
 }
 
 function showCopySuccess() {
-    // Create and show copy success notification
+    showNotification('Command copied!', '#00ff41', '#000');
+}
+
+function showCopyError(message) {
+    showNotification(message || 'Copy failed!', '#ff6b6b', '#fff');
+}
+
+function showNotification(message, bgColor = '#00ff41', textColor = '#000') {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.copy-notification');
+    existingNotifications.forEach(notif => notif.remove());
+    
+    // Create and show notification
     const notification = document.createElement('div');
-    notification.textContent = 'Command copied!';
+    notification.className = 'copy-notification';
+    notification.textContent = message;
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: #00ff41;
-        color: #000;
+        background: ${bgColor};
+        color: ${textColor};
         padding: 10px 20px;
         border-radius: 5px;
         font-weight: bold;
         z-index: 10000;
         animation: slideIn 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     `;
     
     document.body.appendChild(notification);
     
     setTimeout(() => {
-        notification.remove();
+        if (notification.parentNode) {
+            notification.remove();
+        }
     }, 2000);
 }
 

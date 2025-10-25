@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Python IDE - NeuroHacker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Mobile First Responsive IDE */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: #0a0a0a; 
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .ide-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ide-header {
+            background: #1e1e1e;
+            border-bottom: 1px solid #333;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            height: 50px;
+        }
+        
+        .ide-title {
+            color: #00ff41;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .ide-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .control-btn {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .control-btn:hover { background: #555; }
+        .control-btn.run { background: #4CAF50; }
+        .control-btn.clear { background: #f44336; }
+        .control-btn.save { background: #2196F3; }
+        
+        .ide-main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+
+        
+        .ide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .editor-container {
+            flex: 1;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            position: relative;
+            min-height: 300px;
+        }
+        
+        #editor {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+        }
+        
+        .terminal-container {
+            height: 200px;
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            resize: vertical;
+            overflow: hidden;
+        }
+        
+        .terminal-header {
+            background: #1e1e1e;
+            padding: 8px 15px;
+            border-bottom: 1px solid #333;
+            color: #fff;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .terminal-output {
+            flex: 1;
+            background: #0a0a0a;
+            color: #00ff41;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        .notes-panel {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+        }
+        
+        .notes-textarea {
+            width: 100%;
+            height: 200px;
+            background: #0a0a0a;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            outline: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .course-panel {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+        }
+        
+        .course-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .course-item {
+            background: #333;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .course-item:hover {
+            background: #555;
+        }
+        
+        .input-prompt {
+            background: #333;
+            color: #fff;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        
+        .user-input {
+            background: #0a0a0a;
+            color: #00ff41;
+            border: 1px solid #333;
+            padding: 8px;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+            outline: none;
+            border-radius: 3px;
+        }
+        
+        /* Mobile Landscape Optimization */
+        @media (max-width: 768px) {
+            .ide-header {
+                padding: 5px 10px;
+                height: 45px;
+            }
+            
+            .control-btn {
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+            
+            .terminal-container {
+                height: 150px;
+            }
+            
+            .ide-sidebar.open {
+                width: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ide-controls {
+                gap: 4px;
+            }
+            
+            .control-btn {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+            
+            .terminal-container {
+                height: 120px;
+            }
+        }
+        
+        /* Force landscape on mobile for better IDE experience */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .landscape-prompt {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                color: #fff;
+                text-align: center;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Landscape Prompt for Mobile -->
+    <div class="landscape-prompt" id="landscapePrompt" style="display: none;">
+        <div>
+            <i class="fas fa-mobile-alt" style="font-size: 3rem; color: #00ff41; margin-bottom: 20px;"></i>
+            <h2>बेहतर अनुभव के लिए</h2>
+            <p>कृपया अपना फोन landscape mode में घुमाएं</p>
+            <p style="margin-top: 10px; font-size: 14px; color: #ccc;">IDE का उपयोग करने के लिए horizontal orientation बेहतर है</p>
+        </div>
+    </div>
+
+    <div class="ide-wrapper">
+        <!-- IDE Header -->
+        <div class="ide-header">
+            <div class="ide-title">
+                <i class="fas fa-code"></i> NeuroHacker Python IDE
+            </div>
+            <div class="ide-controls">
+                <button class="control-btn run" onclick="runCode()">
+                    <i class="fas fa-play"></i> Run Code
+                </button>
+                <button class="control-btn clear" onclick="clearOutput()">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+                <button class="control-btn save" onclick="saveCode()">
+                    <i class="fas fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+
+        <!-- IDE Main Content -->
+        <div class="ide-main">
+            <!-- Main IDE Content -->
+            <div class="ide-content">
+                <!-- Code Editor -->
+                <div class="editor-container">
+                    <div id="editor"></div>
+                </div>
+
+                <!-- Terminal/Output -->
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <span><i class="fas fa-terminal"></i> Python Terminal</span>
+                        <span style="font-size: 10px; color: #888;">Ctrl+Enter to run | Auto-save enabled</span>
+                    </div>
+                    <div class="terminal-output" id="output">
+                        <div style="color: #888;">🐍 Python IDE ready... Type your code above and press Run!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let editor;
+        let outputDiv;
+        let sidebar;
+        let sidebarContent;
+        let currentSidebarMode = null;
+        
+        // Define all functions first
+        function saveCode() {
+            if (!editor) return;
+            const code = editor.getValue();
+            localStorage.setItem('python-code', code);
+            addOutput('✓ Code saved to browser storage!', 'success');
+        }
+        
+        function loadSavedCode() {
+            const savedCode = localStorage.getItem('python-code');
+            if (savedCode && editor) {
+                editor.setValue(savedCode);
+                addOutput('✓ Previous code loaded!', 'success');
+            }
+        }
+        
+        function clearOutput() {
+            if (!outputDiv) outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '<div style="color: #888;">Terminal cleared...</div>';
+        }
+        
+
+        
+        function addOutput(text, type = 'output') {
+            if (!outputDiv) outputDiv = document.getElementById('output');
+            const div = document.createElement('div');
+            div.style.marginBottom = '4px';
+            div.style.padding = '2px 0';
+            
+            switch(type) {
+                case 'error':
+                    div.style.color = '#ff6b6b';
+                    div.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${text}`;
+                    break;
+                case 'success':
+                    div.style.color = '#4CAF50';
+                    div.innerHTML = `<i class="fas fa-check"></i> ${text}`;
+                    break;
+                default:
+                    div.style.color = '#00ff41';
+                    div.textContent = text;
+            }
+            
+            outputDiv.appendChild(div);
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        }
+        
+        async function runCode() {
+            if (!editor) {
+                addOutput('Error: Editor not initialized', 'error');
+                return;
+            }
+            
+            const code = editor.getValue().trim();
+            if (!code) {
+                addOutput('Error: No code to run', 'error');
+                return;
+            }
+            
+            clearOutput();
+            addOutput('कोड चलाया जा रहा है...', 'success');
+            
+            try {
+                const lines = code.split('\n').filter(line => line.trim() && !line.trim().startsWith('#'));
+                const variables = {};
+                let hasError = false;
+                
+                for (let line of lines) {
+                    if (hasError) break;
+                    
+                    line = line.trim();
+                    
+                    if (line.startsWith('import ')) {
+                        addOutput(`✓ Module imported: ${line}`, 'success');
+                        continue;
+                    }
+                    
+                    if (line.includes('input(')) {
+                        const match = line.match(/(\w+)\s*=\s*input\(['"]([^'"]*)['"]\)/);
+                        if (match) {
+                            const [, varName, prompt] = match;
+                            try {
+                                const userInput = await createInputPrompt(prompt);
+                                variables[varName] = userInput;
+                            } catch (e) {
+                                addOutput(`Error in input: ${e.message}`, 'error');
+                                hasError = true;
+                            }
+                        }
+                    }
+                    else if (line.includes('int(input(')) {
+                        const match = line.match(/(\w+)\s*=\s*int\(input\(['"]([^'"]*)['"]\)\)/);
+                        if (match) {
+                            const [, varName, prompt] = match;
+                            try {
+                                const userInput = await createInputPrompt(prompt);
+                                const intValue = parseInt(userInput);
+                                if (isNaN(intValue)) {
+                                    throw new Error(`Invalid integer: ${userInput}`);
+                                }
+                                variables[varName] = intValue;
+                            } catch (e) {
+                                addOutput(`Error: ${e.message}`, 'error');
+                                hasError = true;
+                            }
+                        }
+                    }
+                    else if (line.includes('float(input(')) {
+                        const match = line.match(/(\w+)\s*=\s*float\(input\(['"]([^'"]*)['"]\)\)/);
+                        if (match) {
+                            const [, varName, prompt] = match;
+                            try {
+                                const userInput = await createInputPrompt(prompt);
+                                const floatValue = parseFloat(userInput);
+                                if (isNaN(floatValue)) {
+                                    throw new Error(`Invalid float: ${userInput}`);
+                                }
+                                variables[varName] = floatValue;
+                            } catch (e) {
+                                addOutput(`Error: ${e.message}`, 'error');
+                                hasError = true;
+                            }
+                        }
+                    }
+                    else if (line.includes('=') && !line.includes('==') && !line.startsWith('print')) {
+                        try {
+                            const [varName, value] = line.split('=').map(s => s.trim());
+                            if (value.startsWith('"') || value.startsWith("'")) {
+                                variables[varName] = value.slice(1, -1);
+                            } else if (value === 'True') {
+                                variables[varName] = true;
+                            } else if (value === 'False') {
+                                variables[varName] = false;
+                            } else if (value.includes('random.randint')) {
+                                const match = value.match(/random\.randint\((\d+),\s*(\d+)\)/);
+                                if (match) {
+                                    const min = parseInt(match[1]);
+                                    const max = parseInt(match[2]);
+                                    variables[varName] = Math.floor(Math.random() * (max - min + 1)) + min;
+                                }
+                            } else {
+                                const numValue = parseFloat(value);
+                                variables[varName] = isNaN(numValue) ? value : numValue;
+                            }
+                        } catch (e) {
+                            addOutput(`Error in assignment: ${e.message}`, 'error');
+                            hasError = true;
+                        }
+                    }
+                    else if (line.startsWith('print(')) {
+                        try {
+                            const printMatch = line.match(/print\((.+)\)/);
+                            if (!printMatch) continue;
+                            
+                            const content = printMatch[1];
+                            let output = content;
+                            
+                            if (content.startsWith('f"') || content.startsWith("f'")) {
+                                output = content.slice(2, -1);
+                                for (let [key, value] of Object.entries(variables)) {
+                                    output = output.replace(new RegExp(`{${key}}`, 'g'), value);
+                                }
+                            }
+                            else if (content.startsWith('"') || content.startsWith("'")) {
+                                output = content.slice(1, -1);
+                            }
+                            else {
+                                let expr = content;
+                                for (let [key, value] of Object.entries(variables)) {
+                                    expr = expr.replace(new RegExp(`\\b${key}\\b`, 'g'), 
+                                        typeof value === 'string' ? `"${value}"` : value);
+                                }
+                                try {
+                                    output = Function('"use strict"; return (' + expr + ')')();
+                                } catch (e) {
+                                    output = variables[content] !== undefined ? variables[content] : content;
+                                }
+                            }
+                            
+                            addOutput(output);
+                        } catch (e) {
+                            addOutput(`Error in print: ${e.message}`, 'error');
+                            hasError = true;
+                        }
+                    }
+                }
+                
+                if (!hasError) {
+                    addOutput('\n✓ कोड सफलतापूर्वक चला!', 'success');
+                }
+            } catch (error) {
+                addOutput(`Execution Error: ${error.message}`, 'error');
+            }
+        }
+        
+        function createInputPrompt(prompt) {
+            return new Promise((resolve, reject) => {
+                if (!outputDiv) {
+                    reject(new Error('Output div not available'));
+                    return;
+                }
+                
+                // Sanitize prompt
+                const sanitizedPrompt = prompt.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                
+                const inputDiv = document.createElement('div');
+                inputDiv.className = 'input-prompt';
+                inputDiv.innerHTML = `
+                    <div><i class="fas fa-keyboard"></i> ${sanitizedPrompt}</div>
+                    <input type="text" class="user-input" placeholder="यहाँ टाइप करें..." autocomplete="off" />
+                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">Press Enter to submit</div>
+                `;
+                
+                const input = inputDiv.querySelector('.user-input');
+                
+                const handleInput = (e) => {
+                    if (e.key === 'Enter') {
+                        const value = input.value.trim();
+                        addOutput(`${sanitizedPrompt} ${value}`);
+                        inputDiv.remove();
+                        resolve(value);
+                    } else if (e.key === 'Escape') {
+                        inputDiv.remove();
+                        reject(new Error('Input cancelled'));
+                    }
+                };
+                
+                input.addEventListener('keydown', handleInput);
+                
+                // Timeout after 30 seconds
+                const timeout = setTimeout(() => {
+                    inputDiv.remove();
+                    reject(new Error('Input timeout'));
+                }, 30000);
+                
+                input.addEventListener('keydown', () => {
+                    clearTimeout(timeout);
+                });
+                
+                outputDiv.appendChild(inputDiv);
+                input.focus();
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+            });
+        }
+
+        // Check orientation and show prompt if needed
+        function checkOrientation() {
+            const landscapePrompt = document.getElementById('landscapePrompt');
+            if (!landscapePrompt) return;
+            
+            if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
+                landscapePrompt.style.display = 'flex';
+            } else {
+                landscapePrompt.style.display = 'none';
+            }
+        }
+
+        // Initialize Monaco Editor with fallback
+
+
+    </script>
+    <script src="https://unpkg.com/monaco-editor@0.34.1/min/vs/loader.js"></script>
+    <script>
+        // Initialize Monaco Editor
+        require.config({ paths: { vs: 'https://unpkg.com/monaco-editor@0.34.1/min/vs' }});
+        require(['vs/editor/editor.main'], function () {
+            editor = monaco.editor.create(document.getElementById('editor'), {
+                value: `# Welcome to NeuroHacker Python IDE
+# Write your Python code here and press Ctrl+Enter or Run button to execute
+
+# Example: Simple Calculator
+print("Simple Calculator")
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+operation = input("Enter operation (+, -, *, /): ")
+
+if operation == "+":
+    result = num1 + num2
+elif operation == "-":
+    result = num1 - num2
+elif operation == "*":
+    result = num1 * num2
+elif operation == "/":
+    if num2 != 0:
+        result = num1 / num2
+    else:
+        result = "Error: Division by zero!"
+else:
+    result = "Error: Invalid operation!"
+
+print(f"Result: {result}")
+
+# Try running this code with Ctrl+Enter!`,
+                language: 'python',
+                theme: 'vs-dark',
+                fontSize: 14,
+                minimap: { enabled: false },
+                wordWrap: 'on',
+                automaticLayout: true,
+                scrollBeyondLastLine: false
+            });
+            
+            editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode);
+            
+            // Auto-save on change
+            editor.onDidChangeModelContent(() => {
+                const code = editor.getValue();
+                localStorage.setItem('python-code', code);
+            });
+            
+            // Load saved code
+            setTimeout(loadSavedCode, 500);
+        });
+
+
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            outputDiv = document.getElementById('output');
+            checkOrientation();
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    runCode();
+                } else if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    saveCode();
+                } else if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+                    e.preventDefault();
+                    clearOutput();
+                }
+            });
+        });
+        
+        window.addEventListener('load', () => {
+            checkOrientation();
+        });
+        
+        window.addEventListener('orientationchange', () => {
+            setTimeout(checkOrientation, 100);
+        });
+        
+        window.addEventListener('resize', () => {
+            setTimeout(checkOrientation, 100);
+        });
+    </script>
+</body>
+</html>

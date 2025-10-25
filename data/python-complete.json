@@ -56,13 +56,13 @@
         },
         {
             "id": 2,
-            "title": "Variables aur Data Types",
+            "title": "Variables aur Data Types - Complete Beginner Guide",
             "content": {
-                "intro": "Variables data store karne ke liye use hote hain. Python mein different types ka data store kar sakte hain.",
+                "intro": "Variables programming ki soul hain! Ye data store karne ke containers hain. Jaise aap ghar mein different boxes mein different cheezein rakhte hain, waise hi variables mein different types ka data rakhte hain. Is lesson mein hum detail mein samjhenge ki variables kya hain, kaise banate hain, aur kaise use karte hain.",
                 "sections": [
                     {
                         "heading": "Variables Kya Hain?",
-                        "text": "Variable ek container hai jo data store karta hai:\n• Variable name case-sensitive hota hai\n• Numbers se start nahi kar sakte\n• Special characters use nahi kar sakte (except underscore)\n• Keywords use nahi kar sakte"
+                        "text": "Variable = Data ka Dabba\n\nVariable ek container hai jo data store karta hai. Real life example: Jaise aap boxes mein different items rakhte hain, waise hi variables mein data rakhte hain.\n\nVariable Rules:\n• Case-sensitive: 'name' aur 'Name' alag hain\n• Letters ya underscore se start karo\n• Numbers se start NAHI kar sakte\n• Spaces nahi, underscore use karo\n• Special characters avoid karo\n• Python keywords nahi use karo"
                     },
                     {
                         "heading": "Basic Data Types",
@@ -70,22 +70,22 @@
                             {
                                 "description": "String variable banao",
                                 "command": "name = \"Ahmed\"\nprint(name)\nprint(type(name))",
-                                "explanation": "Text data store karta hai, quotes mein likhte hain"
+                                "explanation": "STRING EXPLANATION:\n\nKya hai String?\n• Text/words store karta hai\n• Quotes mein likhna ZAROORI hai\n• Single (') ya double (\") quotes use kar sakte hain\n• type() function data type batata hai\n\nString Operations:\n• + operator se strings join karte hain\n• len() function length batata hai\n• Strings immutable hain (change nahi hote)\n\nExamples: Names, addresses, messages"
                             },
                             {
                                 "description": "Integer variable banao",
                                 "command": "age = 25\nprint(age)\nprint(type(age))",
-                                "explanation": "Whole numbers store karta hai"
+                                "explanation": "INTEGER EXPLANATION:\n\nKya hai Integer?\n• Whole numbers (0, 1, -5, 1000)\n• Decimal point NAHI hota\n• Positive, negative, zero sab allowed\n• Math operations kar sakte hain\n\nMath Operations:\n• +, -, *, / (basic math)\n• ** (power), % (remainder)\n• Memory efficient\n\nExamples: Age, count, roll numbers"
                             },
                             {
                                 "description": "Float variable banao",
                                 "command": "height = 5.8\nprint(height)\nprint(type(height))",
-                                "explanation": "Decimal numbers store karta hai"
+                                "explanation": "FLOAT EXPLANATION:\n\nKya hai Float?\n• Decimal point wale numbers\n• Scientific calculations ke liye\n• Precision important hai\n• Memory zyada use karta hai\n\nOperations:\n• round() function se round kar sakte hain\n• Math operations same as integers\n• Precision issues ho sakte hain\n\nExamples: Height, weight, prices, measurements"
                             },
                             {
                                 "description": "Boolean variable banao",
                                 "command": "is_student = True\nprint(is_student)\nprint(type(is_student))",
-                                "explanation": "True ya False values store karta hai"
+                                "explanation": "BOOLEAN EXPLANATION:\n\nKya hai Boolean?\n• Sirf 2 values: True ya False\n• Capital T aur F zaroori hai\n• Conditions check karne ke liye\n• Decision making mein use hote hain\n\nBoolean Operations:\n• Comparisons se automatically ban jate hain\n• and, or, not operators use kar sakte hain\n• Memory mein 1 bit use karte hain\n\nExamples: Status flags, conditions, yes/no answers"
                             }
                         ]
                     }
@@ -94,37 +94,37 @@
         },
         {
             "id": 3,
-            "title": "Input aur Output Operations",
+            "title": "Input aur Output - User Communication Master",
             "content": {
-                "intro": "User se input lena aur output show karna programming ka basic part hai. Python mein input() aur print() functions use karte hain.",
+                "intro": "Programming mein sabse important cheez hai user ke saath communicate karna! Input se user se data lete hain, Output se user ko results dikhate hain. Ye dono functions har program mein use hote hain. Real life example: ATM machine - aap PIN input karte hain, machine balance output dikhati hai.",
                 "sections": [
                     {
-                        "heading": "Print Function",
+                        "heading": "PRINT Function - Output Master",
                         "commands": [
                             {
                                 "description": "Simple print statement",
                                 "command": "print(\"Welcome to Python!\")",
-                                "explanation": "Screen par message display karta hai"
+                                "explanation": "PRINT BASICS:\n\nKya karta hai:\n• Screen par message show karta hai\n• Variables ki values display karta hai\n• Debugging mein help karta hai\n• User ko information deta hai\n\nFeatures:\n• Quotes mein text likhte hain\n• Numbers direct likh sakte hain\n• Har print() new line mein output deta hai\n• Python ka sabse zyada use hone wala function"
                             },
                             {
                                 "description": "Multiple values print karo",
                                 "command": "name = \"Ali\"\nage = 20\nprint(\"Name:\", name, \"Age:\", age)",
-                                "explanation": "Ek saath multiple values print kar sakte hain"
+                                "explanation": "ADVANCED PRINT TECHNIQUES:\n\nMultiple Values:\n• Comma se multiple values join karte hain\n• Automatic space add hota hai\n• Different data types mix kar sakte hain\n\nFormatting Options:\n• sep parameter se separator change karo\n• end parameter se ending change karo\n• F-strings modern way hai formatting ka"
                             }
                         ]
                     },
                     {
-                        "heading": "Input Function",
+                        "heading": "INPUT Function - User se Data Lena",
                         "commands": [
                             {
                                 "description": "User se name input lo",
                                 "command": "name = input(\"Enter your name: \")\nprint(\"Hello\", name)",
-                                "explanation": "User se text input leta hai aur variable mein store karta hai"
+                                "explanation": "INPUT BASICS:\n\nKya karta hai:\n• User se text input leta hai\n• Prompt message user ko guide karta hai\n• Enter press karne par input complete\n• Return value hamesha STRING hoti hai\n\nImportant Points:\n• Variable mein store karna zaroori\n• User-friendly prompts likhiye\n• Hamesha string return karta hai"
                             },
                             {
                                 "description": "Number input lo aur convert karo",
                                 "command": "age_str = input(\"Enter your age: \")\nage = int(age_str)\nprint(f\"You are {age} years old\")",
-                                "explanation": "Input hamesha string hota hai, number ke liye int() use karte hain"
+                                "explanation": "NUMBER INPUT PROCESS:\n\nStep-by-step:\n1. input() se string milti hai\n2. int() ya float() se convert karte hain\n3. Converted value use karte hain\n\nCommon Errors:\n• '25' + 5 = Error (string + int)\n• int('abc') = Error (invalid conversion)\n\nShortcut: age = int(input('Age: '))"
                             }
                         ]
                     }
@@ -157,22 +157,22 @@
         },
         {
             "id": 5,
-            "title": "Conditional Statements (if-else)",
+            "title": "Conditional Statements - Decision Making Master",
             "content": {
-                "intro": "Conditional statements program mein decisions lene ke liye use hote hain. Conditions ke base par different code execute hota hai.",
+                "intro": "Programming mein decisions lena sabse important skill hai! Real life mein jaise hum conditions ke base par decisions lete hain (agar barish ho to umbrella le jao), waise hi programming mein if-else use karte hain. Ye program ko smart banata hai!",
                 "sections": [
                     {
-                        "heading": "Simple if Statement",
+                        "heading": "IF Statement - Basic Decision Making",
                         "commands": [
                             {
                                 "description": "Basic if condition",
                                 "command": "age = 18\nif age >= 18:\n    print(\"You are eligible to vote\")",
-                                "explanation": "Agar condition true hai to if block execute hota hai"
+                                "explanation": "IF STATEMENT GUIDE:\n\nStructure:\nif condition:\n    code block (4 spaces indentation)\n\nHow it works:\n1. Condition check hoti hai\n2. True hai to if block runs\n3. False hai to if block skip\n\nINDENTATION ZAROORI! (4 spaces)"
                             },
                             {
                                 "description": "if-else statement",
                                 "command": "age = 16\nif age >= 18:\n    print(\"You can vote\")\nelse:\n    print(\"You cannot vote yet\")",
-                                "explanation": "Condition false hone par else block execute hota hai"
+                                "explanation": "IF-ELSE COMPLETE GUIDE:\n\nStructure:\nif condition:\n    code for true\nelse:\n    code for false\n\nLogic:\n• True = if block runs\n• False = else block runs\n• Sirf ek block hi chalega\n• Guarantee hai ki koi na koi block chalega\n\nComparison Operators: ==, !=, >, <, >=, <="
                             }
                         ]
                     }
@@ -181,32 +181,32 @@
         },
         {
             "id": 6,
-            "title": "Loops - for aur while",
+            "title": "Loops - Repetition Master (for aur while)",
             "content": {
-                "intro": "Loops code ko repeatedly execute karne ke liye use hote hain. Python mein for aur while loops hain.",
+                "intro": "Loops programming ki power hain! Jab aapko same kaam baar baar karna ho to loops use karte hain. Real life example: 100 students ke marks print karne ke liye 100 baar print() likhne ki zaroorat nahi, sirf ek loop laga do! Python mein 2 types ke loops hain: for aur while.",
                 "sections": [
                     {
-                        "heading": "for Loop",
+                        "heading": "FOR Loop - Fixed Repetitions",
                         "commands": [
                             {
                                 "description": "Simple for loop",
                                 "command": "for i in range(5):\n    print(f\"Number: {i}\")",
-                                "explanation": "0 se 4 tak numbers print karta hai"
+                                "explanation": "FOR LOOP BASICS:\n\nKya hai FOR loop?\n• Fixed number of times repeat karta hai\n• range() function use karte hain\n• Automatic counting karta hai\n\nrange() Function:\n• range(5) = 0,1,2,3,4 (5 numbers)\n• range(1,6) = 1,2,3,4,5\n• range(0,10,2) = 0,2,4,6,8 (step=2)\n\nUse Cases: Tables, counting, lists processing"
                             },
                             {
                                 "description": "Range with start and end",
                                 "command": "for i in range(1, 6):\n    print(f\"Count: {i}\")",
-                                "explanation": "1 se 5 tak numbers print karta hai"
+                                "explanation": "RANGE FUNCTION DETAIL:\n\nRange Syntax:\n• range(stop) - 0 se stop-1 tak\n• range(start, stop) - start se stop-1 tak\n• range(start, stop, step) - custom step\n\nExamples:\n• range(3) = [0,1,2]\n• range(2,5) = [2,3,4]\n• range(0,10,3) = [0,3,6,9]\n• range(10,0,-1) = [10,9,8...1] (reverse)"
                             }
                         ]
                     },
                     {
-                        "heading": "while Loop",
+                        "heading": "WHILE Loop - Condition-based Repetition",
                         "commands": [
                             {
                                 "description": "Simple while loop",
                                 "command": "count = 1\nwhile count <= 5:\n    print(f\"Count: {count}\")\n    count += 1",
-                                "explanation": "Jab tak condition true hai tab tak loop chalta hai"
+                                "explanation": "WHILE LOOP COMPLETE GUIDE:\n\nKya hai WHILE?\n• Condition-based repetition\n• Jab tak condition True, tab tak chalta hai\n• Manual counter maintain karna padta hai\n\nDANGER - Infinite Loop:\n• Condition kabhi False na ho to infinite loop\n• Counter increment karna ZAROORI\n• Ctrl+C se stop kar sakte hain\n\nUse Cases: User input validation, game loops, unknown iterations"
                             }
                         ]
                     }
@@ -215,22 +215,22 @@
         },
         {
             "id": 7,
-            "title": "Lists aur List Operations",
+            "title": "Lists - Multiple Data Storage Master",
             "content": {
-                "intro": "Lists multiple values store karne ke liye use hote hain. Ye ordered, changeable aur duplicate values allow karte hain.",
+                "intro": "Lists Python ka superpower hain! Jaise aap shopping list banate hain (bread, milk, eggs), waise hi programming mein multiple items ek saath store karne ke liye lists use karte hain. Lists ordered, changeable aur duplicate values allow karte hain. Real example: students names, marks, products list.",
                 "sections": [
                     {
-                        "heading": "List Creation",
+                        "heading": "LIST Creation aur Operations",
                         "commands": [
                             {
                                 "description": "Empty list banao",
                                 "command": "empty_list = []\nprint(empty_list)\nprint(type(empty_list))",
-                                "explanation": "Square brackets use karke empty list banate hain"
+                                "explanation": "LIST BASICS:\n\nList Structure:\n• Square brackets [] use karte hain\n• Items comma se separate karte hain\n• Different data types mix kar sakte hain\n• Index 0 se start hota hai\n\nList Properties:\n• Ordered (sequence maintain)\n• Changeable (mutable)\n• Duplicates allowed\n• len() function se length check karo"
                             },
                             {
                                 "description": "Numbers ki list banao",
                                 "command": "numbers = [1, 2, 3, 4, 5]\nprint(numbers)\nprint(len(numbers))",
-                                "explanation": "Numbers ko comma se separate karke list banate hain"
+                                "explanation": "LIST OPERATIONS:\n\nIndexing:\n• list[0] = first item\n• list[-1] = last item\n• list[1:3] = slicing\n\nMethods:\n• append() - end mein add\n• insert() - specific position\n• remove() - item remove\n• pop() - last item remove\n• sort() - arrange karna\n\nUse Cases: Shopping lists, student names, scores"
                             }
                         ]
                     }
@@ -239,22 +239,22 @@
         },
         {
             "id": 8,
-            "title": "Strings aur String Methods",
+            "title": "Strings aur String Methods - Text Processing Master",
             "content": {
-                "intro": "Strings text data handle karne ke liye use hote hain. Python mein strings immutable hain aur bahut sare built-in methods hain.",
+                "intro": "Strings text processing ka powerhouse hain! Real life mein jaise aap messages, names, addresses handle karte hain, programming mein bhi text data ke liye strings use karte hain. Python mein strings immutable hain (change nahi hote) aur 50+ built-in methods hain jo text manipulation ko easy banate hain.",
                 "sections": [
                     {
-                        "heading": "String Operations",
+                        "heading": "STRING Operations aur Methods",
                         "commands": [
                             {
                                 "description": "String concatenation",
                                 "command": "first_name = \"Ahmed\"\nlast_name = \"Ali\"\nfull_name = first_name + \" \" + last_name\nprint(full_name)",
-                                "explanation": "Plus operator se strings join kar sakte hain"
+                                "explanation": "STRING CONCATENATION:\n\nJoining Methods:\n• + operator se join karte hain\n• Space manually add karna padta hai\n• Multiple strings join kar sakte hain\n\nBest Practices:\n• F-strings use karo (modern way)\n• .join() method for multiple strings\n• Performance ke liye f-strings better\n\nRemember: Strings immutable hain!"
                             },
                             {
                                 "description": "String methods",
                                 "command": "text = \"Python Programming\"\nprint(\"Upper:\", text.upper())\nprint(\"Lower:\", text.lower())\nprint(\"Title:\", text.title())",
-                                "explanation": "String ko uppercase, lowercase ya title case mein convert karte hain"
+                                "explanation": "STRING METHODS POWER:\n\nCase Methods:\n• .upper() - ALL CAPITAL\n• .lower() - all small\n• .title() - Title Case\n• .capitalize() - First letter capital\n\nUtility Methods:\n• .strip() - spaces remove\n• .replace() - text replace\n• .split() - string ko list banao\n• .find() - text search\n\nUse Cases: Data cleaning, formatting, validation"
                             }
                         ]
                     }
@@ -263,22 +263,22 @@
         },
         {
             "id": 9,
-            "title": "Dictionaries aur Dictionary Operations",
+            "title": "Dictionaries - Key-Value Storage Master",
             "content": {
-                "intro": "Dictionaries key-value pairs store karte hain. Ye unordered, changeable aur duplicate keys allow nahi karte.",
+                "intro": "Dictionaries real-world data storage ka best way hain! Jaise phone book mein name-number pairs hote hain, waise hi dictionaries mein key-value pairs hote hain. Real examples: student-marks, country-capital, product-price. Ye unordered, changeable aur duplicate keys allow nahi karte.",
                 "sections": [
                     {
-                        "heading": "Dictionary Creation",
+                        "heading": "DICTIONARY Creation aur Access",
                         "commands": [
                             {
                                 "description": "Student information dictionary",
                                 "command": "student = {\n    \"name\": \"Ahmed\",\n    \"age\": 20,\n    \"grade\": \"A\"\n}\nprint(student)",
-                                "explanation": "Key-value pairs use karke dictionary banate hain"
+                                "explanation": "DICTIONARY STRUCTURE:\n\nSyntax:\n• Curly braces {} use karte hain\n• key: value pairs\n• Comma se separate karte hain\n• Keys unique honi chahiye\n\nKey Rules:\n• Strings, numbers, tuples allowed\n• Lists as keys NOT allowed\n• Case-sensitive\n• Duplicate keys overwrite previous"
                             },
                             {
                                 "description": "Dictionary access",
                                 "command": "print(\"Name:\", student[\"name\"])\nprint(\"Age:\", student.get(\"age\"))",
-                                "explanation": "Square brackets ya get() method use karke values access karte hain"
+                                "explanation": "DICTIONARY ACCESS METHODS:\n\nAccess Ways:\n• dict[key] - direct access (error if key missing)\n• dict.get(key) - safe access (None if missing)\n• dict.get(key, default) - custom default\n\nDictionary Methods:\n• .keys() - all keys\n• .values() - all values\n• .items() - key-value pairs\n• .update() - merge dictionaries\n\nUse Cases: Database records, configuration, JSON data"
                             }
                         ]
                     }
@@ -287,22 +287,22 @@
         },
         {
             "id": 10,
-            "title": "Functions - Code Reusability",
+            "title": "Functions - Code Reusability Master",
             "content": {
-                "intro": "Functions code ko reusable banane ke liye use hote hain. Ek baar define karke multiple times use kar sakte hain.",
+                "intro": "Functions programming ki soul hain! Jaise aap daily life mein same kaam baar baar karte hain (brush karna, khana banana), waise hi programming mein same code baar baar likhne ki zaroorat nahi. Functions banao aur reuse karo! DRY principle: Don't Repeat Yourself.",
                 "sections": [
                     {
-                        "heading": "Function Definition",
+                        "heading": "FUNCTION Definition aur Usage",
                         "commands": [
                             {
                                 "description": "Simple function banao",
                                 "command": "def greet():\n    print(\"Hello, Welcome to Python!\")\n\n# Function call karo\ngreet()",
-                                "explanation": "def keyword use karke function define karte hain"
+                                "explanation": "FUNCTION BASICS:\n\nStructure:\n• def keyword se start\n• function_name()\n• Colon (:) zaroori\n• Indented code block\n\nFunction Call:\n• function_name() se call karte hain\n• Parentheses () zaroori\n• Multiple times call kar sakte hain\n\nBenefits: Code reuse, organization, debugging easy"
                             },
                             {
                                 "description": "Parameters ke saath function",
                                 "command": "def greet_user(name):\n    print(f\"Hello {name}, Welcome!\")\n\ngreet_user(\"Ahmed\")\ngreet_user(\"Sara\")",
-                                "explanation": "Parameters pass karke function ko flexible banate hain"
+                                "explanation": "PARAMETERS & ARGUMENTS:\n\nParameters vs Arguments:\n• Parameters = function definition mein\n• Arguments = function call mein values\n• Flexible functions banate hain\n\nTypes:\n• Required parameters\n• Default parameters\n• *args (multiple arguments)\n• **kwargs (keyword arguments)\n\nReturn values bhi kar sakte hain"
                             }
                         ]
                     }
@@ -311,22 +311,22 @@
         },
         {
             "id": 11,
-            "title": "File Handling - Files ke saath kaam",
+            "title": "File Handling - Data Storage Master",
             "content": {
-                "intro": "File handling se hum files read, write aur modify kar sakte hain. Python mein built-in functions hain file operations ke liye.",
+                "intro": "File handling programming ka powerful feature hai! Real life mein jaise aap documents, photos, videos save karte hain, waise hi programming mein data permanently store karne ke liye files use karte hain. Python mein built-in functions hain jo file operations ko easy banate hain.",
                 "sections": [
                     {
-                        "heading": "File Operations",
+                        "heading": "FILE Operations - Read, Write, Modify",
                         "commands": [
                             {
                                 "description": "File create aur write karo",
                                 "command": "with open('sample.txt', 'w') as file:\n    file.write('Hello Python!')\n    file.write('\\nThis is line 2')",
-                                "explanation": "'w' mode file ko write karne ke liye open karta hai"
+                                "explanation": "FILE WRITE MODES:\n\nWrite Modes:\n• 'w' - Write (overwrite existing)\n• 'a' - Append (add to end)\n• 'x' - Exclusive create (fail if exists)\n\nBest Practice:\n• with statement use karo\n• Automatic file close\n• Error handling built-in\n• Memory efficient\n\n'w' mode existing content delete kar deta hai!"
                             },
                             {
                                 "description": "File read karo",
                                 "command": "with open('sample.txt', 'r') as file:\n    content = file.read()\n    print(content)",
-                                "explanation": "'r' mode file ko read karne ke liye open karta hai"
+                                "explanation": "FILE READ MODES:\n\nRead Methods:\n• 'r' - Read mode (default)\n• .read() - entire file\n• .readline() - single line\n• .readlines() - all lines as list\n\nFile Processing:\n• for line in file: (memory efficient)\n• File pointer automatically moves\n• Always check if file exists\n\nUse Cases: Config files, data processing, logs"
                             }
                         ]
                     }
@@ -335,17 +335,17 @@
         },
         {
             "id": 12,
-            "title": "Exception Handling - Error Management",
+            "title": "Exception Handling - Error Prevention Master",
             "content": {
-                "intro": "Exception handling se hum runtime errors ko handle kar sakte hain aur program crash hone se rok sakte hain.",
+                "intro": "Exception handling programming mein safety net ka kaam karta hai! Real life mein jaise aap precautions lete hain (helmet, seatbelt), waise hi programming mein errors se bachne ke liye exception handling use karte hain. Ye program crash hone se rokta hai aur user-friendly error messages deta hai.",
                 "sections": [
                     {
-                        "heading": "Try-Except Blocks",
+                        "heading": "TRY-EXCEPT Blocks - Error Safety",
                         "commands": [
                             {
                                 "description": "Basic exception handling",
                                 "command": "try:\n    number = int(input('Enter a number: '))\n    result = 10 / number\n    print(f'Result: {result}')\nexcept ValueError:\n    print('Invalid input! Please enter a number.')\nexcept ZeroDivisionError:\n    print('Cannot divide by zero!')",
-                                "explanation": "Different types ke errors ko separately handle kar sakte hain"
+                                "explanation": "EXCEPTION HANDLING GUIDE:\n\nStructure:\n• try: risky code\n• except ErrorType: handle specific error\n• except: handle any error\n• finally: always runs\n\nCommon Exceptions:\n• ValueError - wrong value type\n• ZeroDivisionError - division by zero\n• FileNotFoundError - file missing\n• IndexError - list index out of range\n\nBest Practice: Specific exceptions handle karo"
                             }
                         ]
                     }
@@ -354,17 +354,17 @@
         },
         {
             "id": 13,
-            "title": "Classes aur Objects - OOP Basics",
+            "title": "Classes aur Objects - OOP Foundation",
             "content": {
-                "intro": "Object-Oriented Programming (OOP) real-world entities ko code mein represent karne ka tarika hai.",
+                "intro": "Object-Oriented Programming (OOP) real-world thinking ko code mein convert karne ka powerful way hai! Jaise real life mein Car, Student, Bank Account hote hain, waise hi programming mein classes banate hain. Classes blueprint hain, Objects actual instances hain. Modern programming ka foundation hai!",
                 "sections": [
                     {
-                        "heading": "Class Definition",
+                        "heading": "CLASS Definition aur Objects",
                         "commands": [
                             {
                                 "description": "Simple class banao",
                                 "command": "class Student:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n    \n    def introduce(self):\n        print(f'Hi, I am {self.name} and I am {self.age} years old')\n\n# Object create karo\nstudent1 = Student('Ahmed', 20)\nstudent1.introduce()",
-                                "explanation": "__init__ method constructor hai jo object create karte time chalti hai"
+                                "explanation": "CLASS & OBJECT GUIDE:\n\nClass Structure:\n• class keyword se define\n• __init__ method = constructor\n• self parameter zaroori\n• Methods = functions inside class\n\nObject Creation:\n• obj = ClassName() se object banate hain\n• __init__ automatically call hoti hai\n• self current object ko refer karta hai\n\nBenefits: Code organization, reusability, real-world modeling"
                             }
                         ]
                     }
@@ -373,9 +373,9 @@
         },
         {
             "id": 14,
-            "title": "Modules aur Packages",
+            "title": "Modules aur Packages - Code Organization",
             "content": {
-                "intro": "Modules code ko organize karne aur reuse karne ke liye use hote hain. Python mein built-in modules bhi hain.",
+                "intro": "Modules Python ki superpower hain! Jaise aap tools different boxes mein organize karte hain, waise hi programming mein related functions ko modules mein organize karte hain. Python mein 200+ built-in modules hain jo ready-to-use functionality provide karte hain. Wheel reinvent karne ki zaroorat nahi!",
                 "sections": [
                     {
                         "heading": "Built-in Modules",
@@ -383,12 +383,12 @@
                             {
                                 "description": "Math module use karo",
                                 "command": "import math\n\nprint('Square root of 16:', math.sqrt(16))\nprint('Pi value:', math.pi)\nprint('Factorial of 5:', math.factorial(5))",
-                                "explanation": "math module mathematical functions provide karta hai"
+                                "explanation": "MATH MODULE POWER:\n\nFunctions Available:\n• sqrt() - square root\n• pow() - power calculation\n• factorial() - factorial calculation\n• ceil(), floor() - rounding\n• sin(), cos(), tan() - trigonometry\n\nConstants:\n• math.pi - 3.14159...\n• math.e - 2.71828...\n\nUse Cases: Scientific calculations, geometry, statistics"
                             },
                             {
                                 "description": "Random module use karo",
                                 "command": "import random\n\nprint('Random number:', random.randint(1, 10))\ncolors = ['red', 'blue', 'green', 'yellow']\nprint('Random color:', random.choice(colors))",
-                                "explanation": "random module random numbers aur choices generate karta hai"
+                                "explanation": "RANDOM MODULE MAGIC:\n\nNumber Generation:\n• randint(a,b) - random integer between a,b\n• random() - float between 0,1\n• uniform(a,b) - float between a,b\n\nSelection Functions:\n• choice(list) - random item from list\n• shuffle(list) - randomize list order\n• sample(list,k) - k random items\n\nUse Cases: Games, simulations, testing, passwords"
                             }
                         ]
                     }
@@ -397,17 +397,17 @@
         },
         {
             "id": 15,
-            "title": "List Comprehensions aur Advanced Features",
+            "title": "List Comprehensions - One-Line List Magic",
             "content": {
-                "intro": "List comprehensions Python ka powerful feature hai jo concise way mein lists create karne ke liye use hota hai.",
+                "intro": "List comprehensions Python ka magic feature hai! Jo kaam 4-5 lines mein karte the, wo sirf 1 line mein kar sakte hain. Ye code ko concise, readable aur fast banata hai. Professional Python developers ka favorite feature hai. Loops ko ek line mein convert kar deta hai!",
                 "sections": [
                     {
-                        "heading": "List Comprehensions",
+                        "heading": "LIST Comprehensions - Python Magic",
                         "commands": [
                             {
                                 "description": "Simple list comprehension",
                                 "command": "# Traditional way\nsquares = []\nfor i in range(1, 6):\n    squares.append(i ** 2)\nprint('Traditional:', squares)\n\n# List comprehension way\nsquares_comp = [i ** 2 for i in range(1, 6)]\nprint('Comprehension:', squares_comp)",
-                                "explanation": "List comprehension ek line mein list create karta hai"
+                                "explanation": "LIST COMPREHENSION MAGIC:\n\nSyntax:\n[expression for item in iterable if condition]\n\nTraditional vs Comprehension:\n• Traditional: 4-5 lines\n• Comprehension: 1 line\n• Faster execution\n• More readable (once learned)\n\nAdvanced Features:\n• Nested comprehensions\n• Multiple conditions\n• Dictionary comprehensions\n• Set comprehensions\n\nProfessional Python developers ka favorite!"
                             }
                         ]
                     }
@@ -416,17 +416,17 @@
         },
         {
             "id": 16,
-            "title": "Working with APIs aur JSON",
+            "title": "APIs aur JSON - Internet Data Master",
             "content": {
-                "intro": "APIs se data fetch karna aur JSON format handle karna modern programming ka important part hai.",
+                "intro": "APIs modern programming ki backbone hain! Jaise aap WhatsApp se messages, YouTube se videos, Google se maps use karte hain, waise hi programming mein APIs se different services ka data use karte hain. JSON format internet ka common language hai data exchange ke liye.",
                 "sections": [
                     {
-                        "heading": "JSON Handling",
+                        "heading": "JSON Handling - Data Exchange Format",
                         "commands": [
                             {
                                 "description": "JSON data create aur parse karo",
                                 "command": "import json\n\n# Python dict to JSON\nstudent_data = {\n    'name': 'Ahmed',\n    'age': 20,\n    'subjects': ['Math', 'Physics']\n}\n\njson_string = json.dumps(student_data)\nprint('JSON string:', json_string)\n\n# JSON to Python dict\nparsed_data = json.loads(json_string)\nprint('Parsed data:', parsed_data)",
-                                "explanation": "json.dumps() dict ko JSON mein convert karta hai, json.loads() JSON ko dict mein"
+                                "explanation": "JSON COMPLETE GUIDE:\n\nWhat is JSON?\n• JavaScript Object Notation\n• Text-based data format\n• Human readable\n• Language independent\n\nPython JSON Methods:\n• json.dumps() - Python to JSON string\n• json.loads() - JSON string to Python\n• json.dump() - Python to JSON file\n• json.load() - JSON file to Python\n\nUse Cases: APIs, config files, data storage"
                             }
                         ]
                     }
@@ -435,17 +435,17 @@
         },
         {
             "id": 17,
-            "title": "Regular Expressions (Regex)",
+            "title": "Regular Expressions - Pattern Matching Master",
             "content": {
-                "intro": "Regular expressions text patterns match karne ke liye use hote hain. Data validation aur text processing mein useful hain.",
+                "intro": "Regular Expressions (Regex) text processing ka superpower hain! Jaise aap phone numbers, emails, passwords validate karte hain, waise hi regex patterns use karke complex text matching kar sakte hain. Data validation, text extraction, aur cleaning mein bahut useful hai.",
                 "sections": [
                     {
-                        "heading": "Basic Regex",
+                        "heading": "REGEX Patterns - Text Matching",
                         "commands": [
                             {
                                 "description": "Simple pattern matching",
                                 "command": "import re\n\ntext = 'My phone number is 03001234567'\npattern = r'\\d{11}'  # 11 digits\n\nmatch = re.search(pattern, text)\nif match:\n    print('Phone number found:', match.group())\nelse:\n    print('No phone number found')",
-                                "explanation": "\\d digits ko match karta hai, {11} exactly 11 times"
+                                "explanation": "REGEX PATTERN GUIDE:\n\nCommon Patterns:\n• \\d - any digit (0-9)\n• \\w - any word character\n• \\s - any whitespace\n• . - any character\n• * - zero or more\n• + - one or more\n• {n} - exactly n times\n\nMethods:\n• re.search() - find first match\n• re.findall() - find all matches\n• re.match() - match from start\n\nUse Cases: Email validation, phone numbers, data extraction"
                             }
                         ]
                     }
@@ -454,17 +454,27 @@
         },
         {
             "id": 18,
-            "title": "Database Operations with SQLite",
+            "title": "Database Operations - Data Storage Pro Master",
             "content": {
-                "intro": "SQLite lightweight database hai jo Python mein built-in hai. Data storage aur retrieval ke liye use hota hai.",
+                "intro": "Database programming ka heart hai! Jaise aap contacts, photos, documents organize karte hain, waise hi programming mein structured data store karne ke liye databases use karte hain. SQLite Python mein built-in hai, installation ki zaroorat nahi. Professional applications ka foundation! Real example: Banking systems, social media, e-commerce sab databases use karte hain.",
                 "sections": [
                     {
-                        "heading": "Database Setup",
+                        "heading": "DATABASE Basics - Structured Storage",
                         "commands": [
                             {
                                 "description": "Database connection aur table create karo",
-                                "command": "import sqlite3\n\n# Database connect karo\nconn = sqlite3.connect('students.db')\ncursor = conn.cursor()\n\n# Table create karo\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS students (\n        id INTEGER PRIMARY KEY,\n        name TEXT NOT NULL,\n        age INTEGER,\n        grade TEXT\n    )\n''')\n\nconn.commit()",
-                                "explanation": "SQLite database create karte hain aur students table banate hain"
+                                "command": "import sqlite3\n\n# Database connect karo\nconn = sqlite3.connect('students.db')\ncursor = conn.cursor()\n\n# Table create karo\ncursor.execute('''\n    CREATE TABLE IF NOT EXISTS students (\n        id INTEGER PRIMARY KEY,\n        name TEXT NOT NULL,\n        age INTEGER,\n        grade TEXT\n    )\n''')\n\nconn.commit()\nprint('Database aur table successfully created!')",
+                                "explanation": "DATABASE SETUP GUIDE:\n\nDatabase Structure:\n• Tables = Excel sheets ki tarah\n• Rows = Records (individual entries)\n• Columns = Fields (data types)\n• Primary Key = Unique identifier\n\nSQLite Benefits:\n• File-based database\n• No server required\n• Built-in Python support\n• Perfect for learning\n• Production-ready for small apps\n\nSQL Commands:\n• CREATE TABLE - table banana\n• INSERT - data add karna\n• SELECT - data retrieve karna\n• UPDATE - data modify karna\n• DELETE - data remove karna"
+                            },
+                            {
+                                "description": "Data insert karo",
+                                "command": "# Single student add karo\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES (?, ?, ?)\", \n               ('Ahmed Ali', 20, 'A'))\n\n# Multiple students add karo\nstudents_data = [\n    ('Sara Khan', 19, 'B'),\n    ('Ali Hassan', 21, 'A'),\n    ('Fatima Sheikh', 18, 'B+')\n]\n\ncursor.executemany(\"INSERT INTO students (name, age, grade) VALUES (?, ?, ?)\", \n                   students_data)\n\nconn.commit()\nprint('Students data successfully inserted!')",
+                                "explanation": "DATA INSERTION METHODS:\n\nSafe Insertion:\n• ? placeholders use karo (SQL injection se bachne ke liye)\n• execute() - single record\n• executemany() - multiple records\n• commit() zaroori hai changes save karne ke liye\n\nSecurity Best Practices:\n• Never use string formatting in SQL\n• Always use parameterized queries\n• Validate input data\n• Handle exceptions properly\n\nReal Use Cases: User registration, product catalog, order management"
+                            },
+                            {
+                                "description": "Data retrieve karo",
+                                "command": "# All students fetch karo\ncursor.execute(\"SELECT * FROM students\")\nall_students = cursor.fetchall()\n\nprint('All Students:')\nfor student in all_students:\n    print(f'ID: {student[0]}, Name: {student[1]}, Age: {student[2]}, Grade: {student[3]}')\n\n# Specific condition ke saath\ncursor.execute(\"SELECT * FROM students WHERE grade = ?\", ('A',))\ntop_students = cursor.fetchall()\n\nprint('\\nTop Students (Grade A):')\nfor student in top_students:\n    print(f'Name: {student[1]}, Age: {student[2]}')",
+                                "explanation": "DATA RETRIEVAL GUIDE:\n\nFetch Methods:\n• fetchall() - all records as list\n• fetchone() - single record\n• fetchmany(n) - n records\n\nSQL Query Features:\n• WHERE clause - conditions\n• ORDER BY - sorting\n• LIMIT - restrict results\n• COUNT, SUM, AVG - aggregations\n\nProfessional Tips:\n• Use indexes for faster queries\n• Limit results for large datasets\n• Always close connections\n• Use context managers (with statement)"
                             }
                         ]
                     }
@@ -473,17 +483,27 @@
         },
         {
             "id": 19,
-            "title": "Web Scraping Basics",
+            "title": "Web Scraping Basics - Internet Data Extraction Master",
             "content": {
-                "intro": "Web scraping websites se data extract karne ka process hai. Python mein requests aur BeautifulSoup libraries use karte hain.",
+                "intro": "Web scraping internet ka data mine karne ka powerful technique hai! Jaise aap manually websites se information copy karte hain, waise hi programming se automatically data extract kar sakte hain. News websites, e-commerce sites, social media se data collect karne ke liye use hota hai. Legal aur ethical guidelines follow karna zaroori hai!",
                 "sections": [
                     {
-                        "heading": "Required Libraries Install",
+                        "heading": "WEB SCRAPING Setup - Tools Installation",
                         "commands": [
                             {
                                 "description": "Required packages install karo",
-                                "command": "pip install requests beautifulsoup4",
-                                "explanation": "requests HTTP requests ke liye, beautifulsoup4 HTML parsing ke liye"
+                                "command": "# Termux mein packages install karo\npkg install python\npip install requests beautifulsoup4\n\n# Installation verify karo\npython -c \"import requests, bs4; print('Libraries successfully installed!')\"",
+                                "explanation": "REQUIRED LIBRARIES:\n\nRequests Library:\n• HTTP requests bhejne ke liye\n• GET, POST methods support\n• Headers, cookies handle karta hai\n• Session management\n• Error handling built-in\n\nBeautifulSoup4:\n• HTML/XML parsing\n• CSS selectors support\n• Tag navigation\n• Text extraction\n• Robust error handling\n\nAlternative: Selenium (for JavaScript-heavy sites)"
+                            },
+                            {
+                                "description": "Simple website scraping",
+                                "command": "import requests\nfrom bs4 import BeautifulSoup\n\n# Website se data fetch karo\nurl = 'https://httpbin.org/html'\nresponse = requests.get(url)\n\nif response.status_code == 200:\n    print('Website successfully accessed!')\n    \n    # HTML parse karo\n    soup = BeautifulSoup(response.content, 'html.parser')\n    \n    # Title extract karo\n    title = soup.find('title')\n    if title:\n        print(f'Page Title: {title.text}')\n    \n    # All headings find karo\n    headings = soup.find_all('h1')\n    for heading in headings:\n        print(f'Heading: {heading.text}')\nelse:\n    print(f'Error: {response.status_code}')",
+                                "explanation": "WEB SCRAPING PROCESS:\n\nStep-by-step Process:\n1. HTTP request bhejo\n2. Response check karo (200 = success)\n3. HTML content parse karo\n4. Required elements find karo\n5. Data extract karo\n\nCommon Selectors:\n• find() - first match\n• find_all() - all matches\n• select() - CSS selectors\n• get_text() - text content only\n\nEthical Guidelines:\n• robots.txt check karo\n• Rate limiting use karo\n• Terms of service respect karo\n• Personal data avoid karo"
+                            },
+                            {
+                                "description": "Advanced scraping with error handling",
+                                "command": "import requests\nfrom bs4 import BeautifulSoup\nimport time\n\ndef scrape_website(url):\n    try:\n        # Headers add karo (bot detection avoid karne ke liye)\n        headers = {\n            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'\n        }\n        \n        response = requests.get(url, headers=headers, timeout=10)\n        response.raise_for_status()  # HTTP errors ke liye exception raise\n        \n        soup = BeautifulSoup(response.content, 'html.parser')\n        \n        # Data extract karo\n        data = {\n            'title': soup.find('title').text if soup.find('title') else 'No title',\n            'paragraphs': [p.text.strip() for p in soup.find_all('p')[:3]]\n        }\n        \n        return data\n        \n    except requests.RequestException as e:\n        print(f'Request error: {e}')\n        return None\n    except Exception as e:\n        print(f'Parsing error: {e}')\n        return None\n\n# Example usage\nresult = scrape_website('https://httpbin.org/html')\nif result:\n    print('Scraped Data:', result)",
+                                "explanation": "PROFESSIONAL SCRAPING GUIDE:\n\nBest Practices:\n• User-Agent headers use karo\n• Timeout set karo (10 seconds)\n• Exception handling zaroori\n• Rate limiting implement karo\n• Respectful scraping karo\n\nPerformance Tips:\n• Session objects use karo multiple requests ke liye\n• Connection pooling\n• Async requests for speed\n• Caching implement karo\n\nReal Applications:\n• Price monitoring\n• News aggregation\n• Research data collection\n• Market analysis\n• Job listings scraping"
                             }
                         ]
                     }
@@ -492,23 +512,33 @@
         },
         {
             "id": 20,
-            "title": "Final Project - Complete Application",
+            "title": "Final Project - Complete Application Master",
             "content": {
-                "intro": "Ab tak jo kuch sikha hai, usse ek complete application banate hain - Student Management System.",
+                "intro": "Congratulations! Ab tak jo kuch sikha hai, usse ek complete professional application banate hain - Advanced Student Management System! Ye project sabhi concepts ko combine karta hai: Classes, File Handling, JSON, Exception Handling, User Interface, aur Database Operations. Real-world application development ka perfect example!",
                 "sections": [
                     {
-                        "heading": "Student Management System",
+                        "heading": "COMPLETE Student Management System",
                         "commands": [
                             {
-                                "description": "Complete application code",
-                                "command": "import json\nimport os\nfrom datetime import datetime\n\nclass StudentManager:\n    def __init__(self):\n        self.filename = 'students_data.json'\n        self.students = self.load_data()\n    \n    def load_data(self):\n        if os.path.exists(self.filename):\n            with open(self.filename, 'r') as file:\n                return json.load(file)\n        return []\n    \n    def save_data(self):\n        with open(self.filename, 'w') as file:\n            json.dump(self.students, file, indent=2)\n    \n    def add_student(self, name, age, grade):\n        student = {\n            'id': len(self.students) + 1,\n            'name': name,\n            'age': age,\n            'grade': grade,\n            'added_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n        }\n        self.students.append(student)\n        self.save_data()\n        print(f'Student {name} added successfully!')\n\n# Main function\ndef main():\n    manager = StudentManager()\n    print('Student Management System Ready!')\n\nif __name__ == '__main__':\n    main()",
-                                "explanation": "Complete application jo file handling, JSON, classes, functions sab use karta hai"
+                                "description": "Complete professional application",
+                                "command": "import json\nimport os\nfrom datetime import datetime\nimport sqlite3\n\nclass StudentManager:\n    def __init__(self):\n        self.db_name = 'students.db'\n        self.setup_database()\n        print('Student Management System Initialized!')\n    \n    def setup_database(self):\n        \"\"\"Database setup with error handling\"\"\"\n        try:\n            conn = sqlite3.connect(self.db_name)\n            cursor = conn.cursor()\n            \n            cursor.execute('''\n                CREATE TABLE IF NOT EXISTS students (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    name TEXT NOT NULL,\n                    age INTEGER NOT NULL,\n                    grade TEXT NOT NULL,\n                    email TEXT UNIQUE,\n                    phone TEXT,\n                    created_date TEXT NOT NULL\n                )\n            ''')\n            \n            conn.commit()\n            conn.close()\n            print('Database setup completed!')\n            \n        except Exception as e:\n            print(f'Database setup error: {e}')\n    \n    def add_student(self):\n        \"\"\"Interactive student addition with validation\"\"\"\n        try:\n            print('\\nAdd New Student')\n            print('-' * 30)\n            \n            # Input validation\n            name = input('Enter student name: ').strip()\n            if not name:\n                print('Name cannot be empty!')\n                return\n            \n            age = int(input('Enter age: '))\n            if age < 5 or age > 100:\n                print('Invalid age! Must be between 5-100')\n                return\n            \n            grade = input('Enter grade (A/B/C/D/F): ').upper().strip()\n            if grade not in ['A', 'B', 'C', 'D', 'F']:\n                print('Invalid grade! Use A, B, C, D, or F')\n                return\n            \n            email = input('Enter email (optional): ').strip()\n            phone = input('Enter phone (optional): ').strip()\n            \n            # Database insertion\n            conn = sqlite3.connect(self.db_name)\n            cursor = conn.cursor()\n            \n            cursor.execute('''\n                INSERT INTO students (name, age, grade, email, phone, created_date)\n                VALUES (?, ?, ?, ?, ?, ?)\n            ''', (name, age, grade, email, phone, datetime.now().strftime('%Y-%m-%d %H:%M:%S')))\n            \n            conn.commit()\n            conn.close()\n            \n            print(f'Student {name} added successfully!')\n            \n        except ValueError:\n            print('Invalid age! Please enter a number.')\n        except sqlite3.IntegrityError:\n            print('Email already exists!')\n        except Exception as e:\n            print(f'Error adding student: {e}')\n\n# Usage example\nmanager = StudentManager()\nmanager.add_student()",
+                                "explanation": "PROFESSIONAL APPLICATION FEATURES:\n\nAdvanced Features:\n• SQLite database integration\n• Input validation & sanitization\n• Exception handling for all operations\n• User-friendly interface\n• Data integrity checks\n• Professional error messages\n\nDatabase Design:\n• Auto-incrementing IDs\n• Required & optional fields\n• Unique constraints\n• Timestamp tracking\n• Normalized structure\n\nSecurity Features:\n• SQL injection prevention\n• Input validation\n• Error handling\n• Data type checking\n• Boundary validation"
+                            },
+                            {
+                                "description": "Complete CRUD operations",
+                                "command": "    def view_students(self):\n        \"\"\"Display all students in formatted table\"\"\"\n        try:\n            conn = sqlite3.connect(self.db_name)\n            cursor = conn.cursor()\n            \n            cursor.execute('SELECT * FROM students ORDER BY name')\n            students = cursor.fetchall()\n            conn.close()\n            \n            if not students:\n                print('No students found!')\n                return\n            \n            print('\\nAll Students')\n            print('=' * 80)\n            print(f'{'ID':<5} {'Name':<20} {'Age':<5} {'Grade':<7} {'Email':<25} {'Phone':<15}')\n            print('-' * 80)\n            \n            for student in students:\n                print(f'{student[0]:<5} {student[1]:<20} {student[2]:<5} {student[3]:<7} {student[4] or \"N/A\":<25} {student[5] or \"N/A\":<15}')\n            \n            print(f'\\nTotal Students: {len(students)}')\n            \n        except Exception as e:\n            print(f'Error viewing students: {e}')\n    \n    def search_student(self):\n        \"\"\"Search students by name or ID\"\"\"\n        try:\n            search_term = input('\\nEnter student name or ID to search: ').strip()\n            \n            conn = sqlite3.connect(self.db_name)\n            cursor = conn.cursor()\n            \n            # Try searching by ID first, then by name\n            if search_term.isdigit():\n                cursor.execute('SELECT * FROM students WHERE id = ?', (int(search_term),))\n            else:\n                cursor.execute('SELECT * FROM students WHERE name LIKE ?', (f'%{search_term}%',))\n            \n            results = cursor.fetchall()\n            conn.close()\n            \n            if results:\n                print(f'\\nSearch Results for \"{search_term}\":')\n                for student in results:\n                    print(f'ID: {student[0]}, Name: {student[1]}, Age: {student[2]}, Grade: {student[3]}')\n            else:\n                print(f'No students found matching \"{search_term}\"')\n                \n        except Exception as e:\n            print(f'Search error: {e}')\n\n# Add these methods to StudentManager class",
+                                "explanation": "ADVANCED CRUD OPERATIONS:\n\nView Features:\n• Formatted table display\n• Sorted results\n• Professional layout\n• Statistics display\n• Empty state handling\n\nSearch Capabilities:\n• ID-based search\n• Name-based search (partial matching)\n• Case-insensitive search\n• Multiple result handling\n• User-friendly feedback\n\nProfessional Tips:\n• Always close database connections\n• Use parameterized queries\n• Handle empty results gracefully\n• Provide clear user feedback\n• Format output professionally"
+                            },
+                            {
+                                "description": "Main application menu",
+                                "command": "    def main_menu(self):\n        \"\"\"Interactive main menu\"\"\"\n        while True:\n            print('\\n' + '='*50)\n            print('STUDENT MANAGEMENT SYSTEM')\n            print('='*50)\n            print('1. Add New Student')\n            print('2. View All Students')\n            print('3. Search Student')\n            print('4. Generate Report')\n            print('5. Exit')\n            print('-'*50)\n            \n            try:\n                choice = input('Enter your choice (1-5): ').strip()\n                \n                if choice == '1':\n                    self.add_student()\n                elif choice == '2':\n                    self.view_students()\n                elif choice == '3':\n                    self.search_student()\n                elif choice == '4':\n                    self.generate_report()\n                elif choice == '5':\n                    print('Thank you for using Student Management System!')\n                    break\n                else:\n                    print('Invalid choice! Please select 1-5.')\n                    \n            except KeyboardInterrupt:\n                print('\\n\\nGoodbye!')\n                break\n            except Exception as e:\n                print(f'Unexpected error: {e}')\n    \n    def generate_report(self):\n        \"\"\"Generate statistical report\"\"\"\n        try:\n            conn = sqlite3.connect(self.db_name)\n            cursor = conn.cursor()\n            \n            # Total students\n            cursor.execute('SELECT COUNT(*) FROM students')\n            total = cursor.fetchone()[0]\n            \n            # Grade distribution\n            cursor.execute('SELECT grade, COUNT(*) FROM students GROUP BY grade')\n            grades = cursor.fetchall()\n            \n            # Average age\n            cursor.execute('SELECT AVG(age) FROM students')\n            avg_age = cursor.fetchone()[0]\n            \n            conn.close()\n            \n            print('\\nSTUDENT REPORT')\n            print('='*40)\n            print(f'Total Students: {total}')\n            print(f'Average Age: {avg_age:.1f}' if avg_age else 'Average Age: N/A')\n            print('\\nGrade Distribution:')\n            for grade, count in grades:\n                percentage = (count/total)*100 if total > 0 else 0\n                print(f'  Grade {grade}: {count} students ({percentage:.1f}%)')\n                \n        except Exception as e:\n            print(f'Report generation error: {e}')\n\n# Run the application\nif __name__ == '__main__':\n    app = StudentManager()\n    app.main_menu()",
+                                "explanation": "COMPLETE APPLICATION FEATURES:\n\nUser Interface:\n• Interactive menu system\n• Professional formatting\n• Clear navigation\n• Error handling\n• Graceful exit\n\nReporting System:\n• Statistical analysis\n• Grade distribution\n• Average calculations\n• Percentage breakdowns\n• Professional formatting\n\nProduction-Ready Features:\n• Exception handling everywhere\n• Input validation\n• Database connection management\n• User-friendly error messages\n• Keyboard interrupt handling\n\nThis is a complete, professional application that demonstrates all Python concepts learned in this course!"
                             }
                         ]
                     },
                     {
-                        "heading": "Congratulations!",
-                        "text": "Congratulations! Aapne Python Complete Course successfully complete kar liya hai!\n\nAb aap ye sab kar sakte hain:\n• Variables aur Data Types use karna\n• Control Structures (if-else, loops)\n• Functions banana\n• File operations\n• Object-oriented programming\n• Database operations\n• Web scraping basics\n• Complete applications banana\n\nNext Steps:\n1. Practice more projects\n2. Learn advanced libraries (Django, Flask, Pandas, NumPy)\n3. Contribute to open source projects\n4. Build your portfolio\n\nHappy Coding!"
+                        "heading": "CONGRATULATIONS - Course Complete!",
+                        "text": "AMAZING! Aapne Python Complete Course successfully finish kar liya hai!\n\nAB AAP YE SAB KAR SAKTE HAIN:\n\nPROGRAMMING SKILLS:\n• Variables aur Data Types mastery\n• Control Structures (if-else, loops) expert\n• Functions creation aur usage\n• File operations professional\n• Object-oriented programming foundation\n• Database operations (SQLite)\n• Exception handling expert\n• Web scraping basics\n• JSON data handling\n• Complete applications development\n\nNEXT LEVEL JOURNEY:\n\nADVANCED LIBRARIES:\n1. Django/Flask - Web development\n2. Pandas/NumPy - Data science\n3. Matplotlib/Seaborn - Data visualization\n4. Requests/Selenium - Advanced web scraping\n5. TensorFlow/PyTorch - Machine learning\n\nCAREER OPPORTUNITIES:\n• Python Developer\n• Data Analyst\n• Web Developer\n• Automation Engineer\n• Machine Learning Engineer\n\nIMMEDIATE ACTION PLAN:\n1. Build 3-5 personal projects\n2. Create GitHub portfolio\n3. Contribute to open source\n4. Join Python communities\n5. Practice coding daily\n\nREMEMBER:\n\"Programming is not about what you know; it's about what you can figure out.\" - Chris Pine\n\nHappy Coding! Keep building amazing things!"
                     }
                 ]
             }

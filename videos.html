@@ -9,7 +9,7 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; connect-src 'self'; frame-src 'self' https://www.youtube.com https://youtube.com https://googleads.g.doubleclick.net;">
     <meta name="google-adsense-account" content="ca-pub-1916892851128865">
-    <script async src="https://fundingchoicesmessages.google.com/i/pub-1916892851128865?https%3A%2F%2Fneuroshade.duckdns.org" nonce="RANDOM_NUMBER"></script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-1916892851128865?https%3A%2F%2Fneuroshade.duckdns.org"></script>
     <script>
       (function() {
         function setup() {
@@ -189,23 +189,32 @@
         async function loadVideosData() {
             try {
                 const response = await fetch('data/videos.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const data = await response.json();
+                
+                if (!data || !data.videos || !Array.isArray(data.videos)) {
+                    throw new Error('Invalid video data structure');
+                }
+                
                 videoData = data.videos;
                 loadVideos();
             } catch (error) {
                 console.error('Error loading videos:', error);
-                // Fallback data if JSON fails to load
-                videoData = [
-                    {
-                        id: 1,
-                        title: "Termux Installation Complete Guide",
-                        videoId: "VPvmyiLZWtY",
-                        module: "termux-basics",
-                        moduleName: "Module 1: Termux Basics",
-                        description: "Is video mein step by step dekh sakte hain ke Termux kaise download aur install karte hain."
-                    }
-                ];
-                loadVideos();
+                
+                // Show error message to user
+                const videoGrid = document.getElementById('video-grid');
+                videoGrid.innerHTML = `
+                    <div style="text-align: center; color: #ff6b6b; padding: 50px; grid-column: 1 / -1;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3>Videos load nahi ho sake</h3>
+                        <p>Kripya page refresh kare ya baad mein try kare</p>
+                        <button onclick="location.reload()" style="background: #00ff41; color: #000; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 15px; cursor: pointer;">
+                            <i class="fas fa-refresh"></i> Refresh Page
+                        </button>
+                    </div>
+                `;
             }
         }
 
@@ -215,21 +224,63 @@
 
             const filteredVideos = filter === 'all' ? videoData : videoData.filter(video => video.module === filter);
 
-            filteredVideos.forEach(video => {
+            if (filteredVideos.length === 0) {
+                videoGrid.innerHTML = `
+                    <div style="text-align: center; color: #666; padding: 50px; grid-column: 1 / -1;">
+                        <i class="fas fa-video-slash" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3>Koi video nahi mila</h3>
+                        <p>Is category mein abhi videos available nahi hain</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredVideos.forEach((video, index) => {
+                // Validate video data
+                if (!video.videoId || !video.title) {
+                    console.warn(`Invalid video data at index ${index}:`, video);
+                    return;
+                }
+                
                 const videoCard = document.createElement('div');
                 videoCard.className = 'video-card';
+                
+                // Sanitize content to prevent XSS
+                const safeTitle = video.title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                const safeDescription = video.description.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                const safeModuleName = video.moduleName.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                
                 videoCard.innerHTML = `
                     <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1" allowfullscreen></iframe>
+                        <iframe 
+                            src="https://www.youtube.com/embed/${encodeURIComponent(video.videoId)}?rel=0&modestbranding=1" 
+                            allowfullscreen
+                            loading="lazy"
+                            onerror="handleVideoError(this)"
+                            title="${safeTitle}">
+                        </iframe>
                     </div>
                     <div class="video-info">
-                        <div class="video-title">${video.title}</div>
-                        <div class="video-module">${video.moduleName}</div>
-                        <div class="video-description">${video.description}</div>
+                        <div class="video-title">${safeTitle}</div>
+                        <div class="video-module">${safeModuleName}</div>
+                        <div class="video-description">${safeDescription}</div>
                     </div>
                 `;
                 videoGrid.appendChild(videoCard);
             });
+        }
+        
+        function handleVideoError(iframe) {
+            const wrapper = iframe.parentElement;
+            wrapper.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; height: 200px; background: #1a1a1a; color: #666; flex-direction: column;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px; color: #ff6b6b;"></i>
+                    <p>Video load nahi ho saka</p>
+                    <button onclick="location.reload()" style="background: #00ff41; color: #000; border: none; padding: 8px 15px; border-radius: 5px; margin-top: 10px; cursor: pointer;">
+                        Retry
+                    </button>
+                </div>
+            `;
         }
 
         function filterVideos(filter) {
