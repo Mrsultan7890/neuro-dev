@@ -292,49 +292,37 @@ body {
     line-height: 1.6;
 }
 
-/* Google Ads Section */
-.ads-container {
+/* Google AdSense Section */
+.ads-section {
     background: #0a0a0a;
-    padding: 20px;
-    text-align: center;
+    padding: 40px 0;
     border-top: 1px solid #333;
-    margin-top: 50px;
 }
 
 .ad-label {
     color: #666;
     font-size: 0.8rem;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 .google-ad {
-    max-width: 728px;
+    max-width: 100%;
     margin: 0 auto;
-    min-height: 90px;
-    background: #111;
-    border: 1px solid #333;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #666;
-    font-size: 0.9rem;
+    text-align: center;
 }
 
-.google-ad:empty::before {
-    content: "Google Ad Space - 728x90";
+.adsbygoogle {
+    display: block;
+    margin: 0 auto;
 }
 
+/* Responsive Ad Sizes */
 @media (max-width: 768px) {
-    .google-ad {
-        max-width: 320px;
-        min-height: 50px;
-    }
-    
-    .google-ad:empty::before {
-        content: "Google Ad - 320x50";
+    .ads-section {
+        padding: 20px 0;
     }
 }
 
@@ -345,6 +333,7 @@ body {
     text-align: center;
     padding: 40px 0;
     border-top: 1px solid #333;
+    margin-top: 0;
 }
 
 .footer p {

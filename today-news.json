@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Microsoft Releases Emergency Patch for Zero-Day Vulnerability",
+    "excerpt": "Critical security update addresses remote code execution flaw being actively exploited by APT groups targeting Windows systems worldwide.",
+    "category": "Security Alert",
+    "time": "2 hours ago",
+    "source": "Microsoft Security Response Center",
+    "icon": "fas fa-shield-alt",
+    "severity": "critical"
+  },
+  {
+    "id": 2,
+    "title": "New Android Banking Malware 'FakeCalls' Discovered",
+    "excerpt": "Sophisticated malware intercepts banking calls and steals OTP codes from popular Pakistani banking apps including HBL, UBL, and Easypaisa.",
+    "category": "Malware Alert",
+    "time": "4 hours ago",
+    "source": "Cybersecurity Research Lab",
+    "icon": "fas fa-virus",
+    "severity": "high"
+  },
+  {
+    "id": 3,
+    "title": "ChatGPT-5 Announces Advanced Security Features",
+    "excerpt": "OpenAI reveals AI-powered malware detection, ethical hacking assistance, and automated vulnerability assessment capabilities.",
+    "category": "AI News",
+    "time": "6 hours ago",
+    "source": "OpenAI Official Blog",
+    "icon": "fas fa-robot",
+    "severity": "info"
+  },
+  {
+    "id": 4,
+    "title": "International Police Shut Down Major Dark Web Marketplace",
+    "excerpt": "Operation DarkNet results in closure of 'ShadowBazaar' and 150+ arrests across 52 countries in coordinated law enforcement action.",
+    "category": "Law Enforcement",
+    "time": "8 hours ago",
+    "source": "Europol Press Release",
+    "icon": "fas fa-handcuffs",
+    "severity": "medium"
+  },
+  {
+    "id": 5,
+    "title": "5 New Hacking Tools Released for Termux Platform",
+    "excerpt": "Mobile security researchers release advanced penetration testing tools including MobileRecon v3.0 and TermuxSploit v2.5 for Android devices.",
+    "category": "Tools Release",
+    "time": "10 hours ago",
+    "source": "Termux Security Community",
+    "icon": "fas fa-tools",
+    "severity": "info"
+  },
+  {
+    "id": 6,
+    "title": "Critical Vulnerability Found in Popular VPN Service",
+    "excerpt": "Security researchers discover DNS leak vulnerability affecting millions of users worldwide, potentially exposing real IP addresses.",
+    "category": "VPN Security",
+    "time": "12 hours ago",
+    "source": "Security Research Institute",
+    "icon": "fas fa-user-secret",
+    "severity": "high"
+  },
+  {
+    "id": 7,
+    "title": "New Ransomware Group Targets Healthcare Sector",
+    "excerpt": "CyberHealth ransomware group launches coordinated attacks against hospitals and medical facilities using advanced encryption techniques.",
+    "category": "Ransomware",
+    "time": "14 hours ago",
+    "source": "Healthcare Cybersecurity Alliance",
+    "icon": "fas fa-lock",
+    "severity": "critical"
+  },
+  {
+    "id": 8,
+    "title": "GitHub Patches Critical Code Execution Vulnerability",
+    "excerpt": "Remote code execution flaw in GitHub Actions could allow attackers to compromise CI/CD pipelines and steal source code.",
+    "category": "Platform Security",
+    "time": "16 hours ago",
+    "source": "GitHub Security Advisory",
+    "icon": "fab fa-github",
+    "severity": "high"
+  }
+]

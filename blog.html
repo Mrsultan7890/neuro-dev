@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Neuro-Dev</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117; 
+            color: #f0f6fc; 
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: #161b22;
+            padding: 15px 0;
+            border-bottom: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #f0f6fc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #58a6ff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .blog-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #58a6ff, #3fb950);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .blog-header p {
+            font-size: 1.2rem;
+            color: #7d8590;
+        }
+        
+        .blog-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 10px 15px;
+            min-width: 300px;
+        }
+        
+        .search-box input {
+            background: none;
+            border: none;
+            color: #f0f6fc;
+            outline: none;
+            width: 100%;
+            margin-left: 10px;
+        }
+        
+        .category-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: #21262d;
+            color: #f0f6fc;
+            border: 1px solid #30363d;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #58a6ff;
+            border-color: #58a6ff;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .blog-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: #58a6ff;
+            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #21262d, #30363d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #58a6ff;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
+        }
+        
+        .fallback-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #58a6ff;
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .blog-category {
+            background: #238636;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .blog-date {
+            color: #7d8590;
+            font-size: 14px;
+        }
+        
+        .blog-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #f0f6fc;
+        }
+        
+        .blog-excerpt {
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .blog-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .blog-tag {
+            background: #21262d;
+            color: #58a6ff;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        
+        .blog-stats {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #30363d;
+        }
+        
+        .view-count {
+            color: #7d8590;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .no-posts {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7d8590;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #58a6ff;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-header h1 { font-size: 2rem; }
+            .blog-controls { flex-direction: column; align-items: stretch; }
+            .search-box { min-width: auto; }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blog.html" class="nav-link active">Blog</a>
+                <a href="news.html" class="nav-link">Today's News</a>
+                <a href="python-ide.html" class="nav-link">Python IDE</a>
+                <a href="videos.html" class="nav-link">Videos</a>
+                <a href="donate.html" class="nav-link">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="blog-header">
+            <h1>🔥 Neuro-Dev Blog</h1>
+            <p>Latest updates on Hacking, AI, Tech, Dark Web aur Cybersecurity</p>
+        </div>
+
+        <div class="blog-controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search posts...">
+            </div>
+            
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="hacking">Hacking</button>
+                <button class="category-btn" data-category="ai">AI</button>
+                <button class="category-btn" data-category="tech">Tech</button>
+                <button class="category-btn" data-category="darkweb">Dark Web</button>
+                <button class="category-btn" data-category="news">News</button>
+            </div>
+        </div>
+
+        <div id="blog-grid" class="blog-grid">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading posts...</p>
+            </div>
+        </div>
+        
+    <!-- Google Ad Box -->
+    <div style="text-align: center; padding: 20px; background: #111; border-top: 1px solid #333; margin-top: 30px;">
+        <div style="color: #666; font-size: 12px; margin-bottom: 10px;">Advertisement</div>
+        <div style="max-width: 320px; margin: 0 auto; min-height: 100px; background: #222; border: 1px solid #444; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1916892851128865"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="rectangle"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        let allPosts = [];
+        let currentCategory = 'all';
+
+        // Category icons
+        const categoryIcons = {
+            hacking: 'fas fa-user-secret',
+            ai: 'fas fa-robot',
+            tech: 'fas fa-microchip',
+            darkweb: 'fas fa-mask',
+            news: 'fas fa-newspaper'
+        };
+
+        // Category colors
+        const categoryColors = {
+            hacking: '#f85149',
+            ai: '#a5a5a5',
+            tech: '#58a6ff',
+            darkweb: '#8b5cf6',
+            news: '#3fb950'
+        };
+
+        // Load blog posts
+        async function loadPosts() {
+            try {
+                const response = await fetch('blog-posts.json');
+                allPosts = await response.json();
+                // Sort by date (newest first)
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                displayPosts(allPosts);
+            } catch (error) {
+                document.getElementById('blog-grid').innerHTML = `
+                    <div class="no-posts">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px; color: #f85149;"></i>
+                        <h3>Posts load nahi ho sake</h3>
+                        <p>Kuch technical issue hai. Thodi der baad try kariye.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Display posts
+        function displayPosts(posts) {
+            const grid = document.getElementById('blog-grid');
+            
+            if (posts.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-posts">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; color: #7d8590;"></i>
+                        <h3>Koi post nahi mili</h3>
+                        <p>Different category ya search term try kariye.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort posts by date (newest first)
+            const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            grid.innerHTML = sortedPosts.map(post => `
+                <div class="blog-card" onclick="openPost('${post.slug}')">
+                    <div class="blog-image">
+                        ${post.image ? 
+                            `<img src="${post.image}" alt="${post.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
+                            `<div class="fallback-icon" style="display:none;"><i class="${categoryIcons[post.category] || 'fas fa-file-alt'}"></i></div>` :
+                            `<i class="${categoryIcons[post.category] || 'fas fa-file-alt'}"></i>`
+                        }
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category" style="background: ${categoryColors[post.category] || '#238636'}">
+                                ${post.category.toUpperCase()}
+                            </span>
+                            <span class="blog-date">${formatDate(post.date)}</span>
+                        </div>
+                        <div class="blog-stats">
+                            <span class="view-count">
+                                <i class="fas fa-eye"></i> ${formatViews(getViewCount(post.slug, post.views))}
+                            </span>
+                        </div>
+                        <h3 class="blog-title">${post.title}</h3>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <div class="blog-tags">
+                            ${post.tags.map(tag => `<span class="blog-tag">#${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            
+            // Filter posts
+            const filteredPosts = category === 'all' 
+                ? allPosts 
+                : allPosts.filter(post => post.category === category);
+            
+            displayPosts(filteredPosts);
+        }
+
+        // Search posts
+        function searchPosts(query) {
+            const filteredPosts = allPosts.filter(post => {
+                const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
+                const matchesSearch = query === '' || 
+                    post.title.toLowerCase().includes(query.toLowerCase()) ||
+                    post.excerpt.toLowerCase().includes(query.toLowerCase()) ||
+                    post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()));
+                
+                return matchesCategory && matchesSearch;
+            });
+            
+            displayPosts(filteredPosts);
+        }
+
+        // View count functions
+        function getViewCount(slug, defaultViews) {
+            const stored = localStorage.getItem(`views_${slug}`);
+            return stored ? parseInt(stored) : defaultViews;
+        }
+        
+        function incrementViewCount(slug, defaultViews) {
+            // Check if already viewed in this session
+            const sessionKey = `session_${slug}`;
+            const sessionViewed = sessionStorage.getItem(sessionKey);
+            
+            if (!sessionViewed) {
+                const currentViews = getViewCount(slug, defaultViews);
+                const newViews = currentViews + 1;
+                localStorage.setItem(`views_${slug}`, newViews);
+                sessionStorage.setItem(sessionKey, 'true');
+                return newViews;
+            }
+            
+            return getViewCount(slug, defaultViews);
+        }
+        
+        function formatViews(views) {
+            if (views >= 1000000) {
+                return (views / 1000000).toFixed(1) + 'M';
+            } else if (views >= 1000) {
+                return (views / 1000).toFixed(1) + 'K';
+            }
+            return views.toString();
+        }
+        
+        // Open post
+        function openPost(slug) {
+            // Increment view count when opening post
+            const post = allPosts.find(p => p.slug === slug);
+            if (post) {
+                incrementViewCount(slug, post.views);
+            }
+            window.location.href = `post.html?slug=${slug}`;
+        }
+
+        // Event listeners
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterByCategory(btn.dataset.category);
+            });
+        });
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            searchPosts(e.target.value);
+        });
+
+        // Load posts on page load
+        loadPosts();
+    </script>
+</body>
+</html>

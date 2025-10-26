@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's News - Neuro-Dev</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117; 
+            color: #f0f6fc; 
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: #161b22;
+            padding: 15px 0;
+            border-bottom: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #f0f6fc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #58a6ff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .news-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .news-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #f85149, #58a6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .news-header p {
+            font-size: 1.2rem;
+            color: #7d8590;
+        }
+        
+        .date-display {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .date-display h2 {
+            color: #58a6ff;
+            margin-bottom: 10px;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .news-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: #58a6ff;
+            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #21262d, #30363d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #58a6ff;
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .news-category {
+            background: #f85149;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .news-time {
+            color: #7d8590;
+            font-size: 14px;
+        }
+        
+        .news-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #f0f6fc;
+        }
+        
+        .news-excerpt {
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .news-source {
+            color: #58a6ff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #58a6ff;
+        }
+        
+        @media (max-width: 768px) {
+            .news-header h1 { font-size: 2rem; }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="news.html" class="nav-link active">Today's News</a>
+                <a href="python-ide.html" class="nav-link">Python IDE</a>
+                <a href="videos.html" class="nav-link">Videos</a>
+                <a href="donate.html" class="nav-link">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="news-header">
+            <h1>📰 Today's Cybersecurity News</h1>
+            <p>Latest breaking news from hacking, AI, tech aur cybersecurity world</p>
+        </div>
+
+        <div class="date-display">
+            <h2 id="current-date">Loading...</h2>
+            <p>Real-time updates from trusted sources</p>
+        </div>
+
+        <div id="news-grid" class="news-grid">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                <h3>Loading today's news...</h3>
+            </div>
+        </div>
+        
+    <!-- Google Ad Box -->
+    <div style="text-align: center; padding: 20px; background: #111; border-top: 1px solid #333; margin-top: 30px;">
+        <div style="color: #666; font-size: 12px; margin-bottom: 10px;">Advertisement</div>
+        <div style="max-width: 320px; margin: 0 auto; min-height: 100px; background: #222; border: 1px solid #444; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1916892851128865"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="rectangle"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // Display current date
+        function displayCurrentDate() {
+            const today = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', options);
+        }
+
+        let todaysNews = [];
+        
+        // Fetch today's news from blog posts
+        async function fetchTodaysNews() {
+            try {
+                const response = await fetch('blog-posts.json');
+                const allPosts = await response.json();
+                
+                // Get today's date
+                const today = new Date();
+                const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+                
+                // Filter posts from today
+                todaysNews = allPosts.filter(post => post.date === todayStr).map(post => {
+                    return {
+                        title: post.title,
+                        excerpt: post.excerpt,
+                        category: post.category.toUpperCase(),
+                        time: getTimeAgo(post.date),
+                        source: post.author,
+                        icon: getCategoryIcon(post.category),
+                        severity: getCategorySeverity(post.category),
+                        slug: post.slug,
+                        image: post.image
+                    };
+                });
+                
+                // If no posts today, show recent posts
+                if (todaysNews.length === 0) {
+                    todaysNews = allPosts.slice(0, 6).map(post => {
+                        return {
+                            title: post.title,
+                            excerpt: post.excerpt,
+                            category: post.category.toUpperCase(),
+                            time: getTimeAgo(post.date),
+                            source: post.author,
+                            icon: getCategoryIcon(post.category),
+                            severity: getCategorySeverity(post.category),
+                            slug: post.slug,
+                            image: post.image
+                        };
+                    });
+                }
+                
+                displayNews();
+            } catch (error) {
+                console.error('Error fetching news:', error);
+                todaysNews = [
+                    {
+                        title: "Unable to Load Latest News",
+                        excerpt: "Please refresh the page to get the latest updates.",
+                        category: "System Message",
+                        time: "Now",
+                        source: "Neuro-Dev",
+                        icon: "fas fa-exclamation-triangle",
+                        severity: "warning"
+                    }
+                ];
+                displayNews();
+            }
+        }
+        
+        // Get category icon
+        function getCategoryIcon(category) {
+            const icons = {
+                'hacking': 'fas fa-user-secret',
+                'ai': 'fas fa-robot',
+                'tech': 'fas fa-microchip',
+                'darkweb': 'fas fa-mask',
+                'news': 'fas fa-newspaper'
+            };
+            return icons[category] || 'fas fa-info-circle';
+        }
+        
+        // Get category severity
+        function getCategorySeverity(category) {
+            const severity = {
+                'hacking': 'high',
+                'darkweb': 'critical',
+                'ai': 'info',
+                'tech': 'medium',
+                'news': 'info'
+            };
+            return severity[category] || 'info';
+        }
+        
+        // Calculate time ago
+        function getTimeAgo(dateStr) {
+            const postDate = new Date(dateStr);
+            const now = new Date();
+            const diffTime = Math.abs(now - postDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return 'Today';
+            if (diffDays === 2) return 'Yesterday';
+            return `${diffDays - 1} days ago`;
+        }
+
+        // Get category color based on severity
+        function getCategoryColor(severity) {
+            switch(severity) {
+                case 'critical': return '#f85149';
+                case 'high': return '#ff8c00';
+                case 'medium': return '#d29922';
+                case 'info': return '#58a6ff';
+                case 'warning': return '#f85149';
+                default: return '#7d8590';
+            }
+        }
+        
+        // Display news
+        function displayNews() {
+            const grid = document.getElementById('news-grid');
+            
+            if (todaysNews.length === 0) {
+                grid.innerHTML = `
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3>Loading today's news...</h3>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = todaysNews.map(news => `
+                <div class="news-card" ${news.slug ? `onclick="openPost('${news.slug}')" style="cursor: pointer;"` : ''}>
+                    <div class="news-image">
+                        ${news.image ? 
+                            `<img src="${news.image}" alt="${news.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
+                            `<div style="display:none; width: 100%; height: 100%; align-items: center; justify-content: center; font-size: 3rem; color: #58a6ff;"><i class="${news.icon}"></i></div>` :
+                            `<i class="${news.icon}"></i>`
+                        }
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category" style="background: ${getCategoryColor(news.severity)}">${news.category}</span>
+                            <span class="news-time">${news.time}</span>
+                        </div>
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-excerpt">${news.excerpt}</p>
+                        <div class="news-source">
+                            <i class="fas fa-external-link-alt"></i> ${news.source}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Open blog post
+        function openPost(slug) {
+            window.location.href = `post.html?slug=${slug}`;
+        }
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            displayCurrentDate();
+            fetchTodaysNews();
+        });
+    </script>
+</body>
+</html>
