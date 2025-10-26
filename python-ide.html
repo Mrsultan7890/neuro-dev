@@ -1,656 +1,652 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="ur">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Python IDE - NeuroHacker</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Python IDE - Neuro-Dev</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Mobile First Responsive IDE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            margin: 0; 
-            padding: 0; 
-            background: #0a0a0a; 
-            overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .ide-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+            background: #0d1117; 
+            color: #f0f6fc; 
             height: 100vh;
-            background: #0a0a0a;
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
+            touch-action: manipulation;
+            -webkit-text-size-adjust: 100%;
         }
         
-        .ide-header {
-            background: #1e1e1e;
-            border-bottom: 1px solid #333;
-            padding: 8px 15px;
+        .navbar {
+            background: #161b22;
+            padding: 10px 20px;
+            border-bottom: 1px solid #30363d;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-shrink: 0;
-            height: 50px;
         }
         
-        .ide-title {
-            color: #00ff41;
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
             font-weight: bold;
-            font-size: 16px;
+            color: #58a6ff;
         }
         
-        .ide-controls {
+        .nav-actions {
             display: flex;
-            gap: 8px;
-            align-items: center;
+            gap: 10px;
         }
         
-        .control-btn {
-            background: #333;
-            color: #fff;
-            border: 1px solid #555;
-            padding: 6px 12px;
-            border-radius: 4px;
+        .btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s ease;
-        }
-        
-        .control-btn:hover { background: #555; }
-        .control-btn.run { background: #4CAF50; }
-        .control-btn.clear { background: #f44336; }
-        .control-btn.save { background: #2196F3; }
-        
-        .ide-main {
+            font-size: 14px;
             display: flex;
-            flex: 1;
-            overflow: hidden;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
         }
         
-
+        .btn:hover { background: #2ea043; }
+        .btn.secondary { background: #21262d; }
+        .btn.secondary:hover { background: #30363d; }
         
-        .ide-content {
-            flex: 1;
+        .ide-container {
             display: flex;
-            flex-direction: column;
+            height: calc(100vh - 60px);
         }
         
-        .editor-container {
+        .editor-panel {
             flex: 1;
-            background: #1e1e1e;
-            border: 1px solid #333;
-            position: relative;
-            min-height: 300px;
-        }
-        
-        #editor {
-            width: 100%;
-            height: 100%;
-            min-height: 300px;
-        }
-        
-        .terminal-container {
-            height: 200px;
-            background: #0a0a0a;
-            border-top: 1px solid #333;
             display: flex;
             flex-direction: column;
-            resize: vertical;
-            overflow: hidden;
+            border-right: 1px solid #30363d;
         }
         
-        .terminal-header {
-            background: #1e1e1e;
-            padding: 8px 15px;
-            border-bottom: 1px solid #333;
-            color: #fff;
-            font-size: 12px;
+        .editor-header {
+            background: #161b22;
+            padding: 10px 15px;
+            border-bottom: 1px solid #30363d;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .terminal-output {
+        .file-tab {
+            background: #21262d;
+            padding: 8px 15px;
+            border-radius: 6px 6px 0 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .editor-area {
             flex: 1;
-            background: #0a0a0a;
-            color: #00ff41;
-            padding: 10px;
-            overflow-y: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            line-height: 1.4;
+            position: relative;
         }
         
-        .notes-panel {
-            background: #1e1e1e;
-            color: #fff;
-            padding: 15px;
+        .editor-wrapper {
+            display: flex;
+            height: 100%;
         }
         
-        .notes-textarea {
-            width: 100%;
-            height: 200px;
-            background: #0a0a0a;
-            color: #fff;
-            border: 1px solid #333;
-            padding: 10px;
+        .line-numbers {
+            background: #161b22;
+            color: #7d8590;
+            padding: 15px 8px 15px 5px;
             font-family: 'Courier New', monospace;
-            resize: vertical;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: right;
+            border-right: 1px solid #30363d;
+            user-select: none;
+            min-width: 50px;
+            overflow: hidden;
+            white-space: pre;
+        }
+        
+        #code-editor {
+            flex: 1;
+            background: #0d1117;
+            color: #f0f6fc;
+            border: none;
             outline: none;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        
-        .course-panel {
-            background: #1e1e1e;
-            color: #fff;
             padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            tab-size: 4;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
         
-        .course-list {
-            list-style: none;
-            padding: 0;
+        .output-panel {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            background: #0d1117;
         }
         
-        .course-item {
-            background: #333;
-            margin: 8px 0;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.2s;
+        .output-header {
+            background: #161b22;
+            padding: 10px 15px;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .course-item:hover {
-            background: #555;
+        .output-content {
+            flex: 1;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            scroll-behavior: smooth;
+            position: relative;
         }
         
         .input-prompt {
-            background: #333;
-            color: #fff;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .input-field {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: #f0f6fc;
             padding: 8px;
-            margin: 5px 0;
             border-radius: 4px;
-        }
-        
-        .user-input {
-            background: #0a0a0a;
-            color: #00ff41;
-            border: 1px solid #333;
-            padding: 8px;
             width: 100%;
+            margin-top: 8px;
             font-family: 'Courier New', monospace;
-            outline: none;
-            border-radius: 3px;
         }
         
-        /* Mobile Landscape Optimization */
+        .status-bar {
+            background: #161b22;
+            padding: 5px 15px;
+            border-top: 1px solid #30363d;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .error { color: #f85149; }
+        .success { color: #3fb950; }
+        .info { color: #58a6ff; }
+        .warning { color: #d29922; }
+        
         @media (max-width: 768px) {
-            .ide-header {
-                padding: 5px 10px;
-                height: 45px;
+            .ide-container { flex-direction: column; }
+            .output-panel { width: 100%; height: 45%; min-height: 200px; }
+            .editor-panel { height: 55%; }
+            .nav-actions { gap: 3px; flex-wrap: wrap; }
+            .btn { padding: 5px 8px; font-size: 11px; }
+            .navbar { padding: 8px 15px; position: sticky; top: 0; z-index: 100; }
+            .output-content { 
+                padding: 10px; 
+                font-size: 12px; 
+                overflow-y: scroll !important;
+                -webkit-overflow-scrolling: touch !important;
+                height: calc(100% - 40px);
+                max-height: none;
             }
-            
-            .control-btn {
-                padding: 4px 8px;
-                font-size: 11px;
-            }
-            
-            .terminal-container {
-                height: 150px;
-            }
-            
-            .ide-sidebar.open {
-                width: 250px;
-            }
+            #code-editor { padding: 10px; font-size: 12px; }
         }
         
         @media (max-width: 480px) {
-            .ide-controls {
-                gap: 4px;
-            }
-            
-            .control-btn {
-                padding: 3px 6px;
-                font-size: 10px;
-            }
-            
-            .terminal-container {
-                height: 120px;
-            }
-        }
-        
-        /* Force landscape on mobile for better IDE experience */
-        @media (max-width: 768px) and (orientation: portrait) {
-            .landscape-prompt {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.9);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-                color: #fff;
-                text-align: center;
-                padding: 20px;
-            }
+            .nav-actions { justify-content: center; }
+            .btn { min-width: 60px; }
+            .output-panel { height: 50%; }
+            .editor-panel { height: 50%; }
         }
     </style>
 </head>
 <body>
-    <!-- Landscape Prompt for Mobile -->
-    <div class="landscape-prompt" id="landscapePrompt" style="display: none;">
-        <div>
-            <i class="fas fa-mobile-alt" style="font-size: 3rem; color: #00ff41; margin-bottom: 20px;"></i>
-            <h2>बेहतर अनुभव के लिए</h2>
-            <p>कृपया अपना फोन landscape mode में घुमाएं</p>
-            <p style="margin-top: 10px; font-size: 14px; color: #ccc;">IDE का उपयोग करने के लिए horizontal orientation बेहतर है</p>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fas fa-brain"></i>
+            <span>Neuro-Dev Python IDE</span>
         </div>
-    </div>
-
-    <div class="ide-wrapper">
-        <!-- IDE Header -->
-        <div class="ide-header">
-            <div class="ide-title">
-                <i class="fas fa-code"></i> NeuroHacker Python IDE
-            </div>
-            <div class="ide-controls">
-                <button class="control-btn run" onclick="runCode()">
-                    <i class="fas fa-play"></i> Run Code
-                </button>
-                <button class="control-btn clear" onclick="clearOutput()">
-                    <i class="fas fa-trash"></i> Clear
-                </button>
-                <button class="control-btn save" onclick="saveCode()">
-                    <i class="fas fa-save"></i> Save
-                </button>
-            </div>
+        <div class="nav-actions">
+            <button class="btn secondary" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i> Home
+            </button>
+            <button class="btn" onclick="runCode()">
+                <i class="fas fa-play"></i> Run
+            </button>
+            <button class="btn secondary" onclick="saveCode()">
+                <i class="fas fa-save"></i> Save
+            </button>
+            <button class="btn secondary" onclick="loadCode()">
+                <i class="fas fa-folder-open"></i> Load
+            </button>
+            <button class="btn secondary" onclick="clearOutput()">
+                <i class="fas fa-trash"></i> Clear
+            </button>
+            <button class="btn secondary" onclick="loadExample()">
+                <i class="fas fa-code"></i> Example
+            </button>
         </div>
+    </nav>
 
-        <!-- IDE Main Content -->
-        <div class="ide-main">
-            <!-- Main IDE Content -->
-            <div class="ide-content">
-                <!-- Code Editor -->
-                <div class="editor-container">
-                    <div id="editor"></div>
+    <div class="ide-container">
+        <div class="editor-panel">
+            <div class="editor-header">
+                <div class="file-tab">
+                    <i class="fab fa-python"></i>
+                    main.py
                 </div>
-
-                <!-- Terminal/Output -->
-                <div class="terminal-container">
-                    <div class="terminal-header">
-                        <span><i class="fas fa-terminal"></i> Python Terminal</span>
-                        <span style="font-size: 10px; color: #888;">Ctrl+Enter to run | Auto-save enabled</span>
-                    </div>
-                    <div class="terminal-output" id="output">
-                        <div style="color: #888;">🐍 Python IDE ready... Type your code above and press Run!</div>
-                    </div>
+                <div style="font-size: 12px; color: #7d8590;">
+                    Fast Python IDE - Ready!
+                </div>
+            </div>
+            <div class="editor-area">
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="line-numbers">1</div>
+                    <textarea id="code-editor" placeholder="# Write your Python code here..."></textarea>
                 </div>
             </div>
         </div>
+        
+        <div class="output-panel">
+            <div class="output-header">
+                <span><i class="fas fa-terminal"></i> Output</span>
+                <span id="status" style="font-size: 12px; color: #7d8590;">Ready</span>
+            </div>
+            <div class="output-content" id="output">
+                <div class="info">🐍 Python IDE ready!</div>
+                <div class="info">📝 Write code and click Run</div>
+                <div class="info">💡 input() function supported</div>
+                <div style="margin-top: 10px;">---</div>
+            </div>
+        </div>
     </div>
 
+    <div class="status-bar">
+        <span>Python 3.x | Fast Runtime</span>
+        <span id="execution-time"></span>
+    </div>
+
+    <script src="https://unpkg.com/skulpt@0.11.1/dist/skulpt.min.js"></script>
+    <script src="https://unpkg.com/skulpt@0.11.1/dist/skulpt-stdlib.js"></script>
     <script>
-        let editor;
-        let outputDiv;
-        let sidebar;
-        let sidebarContent;
-        let currentSidebarMode = null;
-        
-        // Define all functions first
-        function saveCode() {
-            if (!editor) return;
-            const code = editor.getValue();
-            localStorage.setItem('python-code', code);
-            addOutput('✓ Code saved to browser storage!', 'success');
-        }
-        
-        function loadSavedCode() {
-            const savedCode = localStorage.getItem('python-code');
-            if (savedCode && editor) {
-                editor.setValue(savedCode);
-                addOutput('✓ Previous code loaded!', 'success');
-            }
-        }
-        
-        function clearOutput() {
-            if (!outputDiv) outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = '<div style="color: #888;">Terminal cleared...</div>';
-        }
-        
+        let isRunning = false;
+        const outputDiv = document.getElementById('output');
+        const statusSpan = document.getElementById('status');
+        const codeEditor = document.getElementById('code-editor');
 
+        // Set simple default code
+        const defaultCode = `# Welcome to Python IDE!
+# Write your code here and click Run
+
+name = input("Enter your name: ")
+print("Hello " + name + "!")
+
+age = int(input("Enter your age: "))
+if age >= 18:
+    print("You are an adult")
+else:
+    print("You are young")
+    
+print("Thanks for using Python IDE!")`;
         
-        function addOutput(text, type = 'output') {
-            if (!outputDiv) outputDiv = document.getElementById('output');
-            const div = document.createElement('div');
-            div.style.marginBottom = '4px';
-            div.style.padding = '2px 0';
+        codeEditor.value = defaultCode;
+        updateLineNumbers();
+
+        // Update line numbers
+        function updateLineNumbers() {
+            const textarea = codeEditor;
+            const lineNumbers = document.getElementById('line-numbers');
+            const lines = textarea.value.split('\n');
+            const lineCount = lines.length;
             
-            switch(type) {
-                case 'error':
-                    div.style.color = '#ff6b6b';
-                    div.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${text}`;
-                    break;
-                case 'success':
-                    div.style.color = '#4CAF50';
-                    div.innerHTML = `<i class="fas fa-check"></i> ${text}`;
-                    break;
-                default:
-                    div.style.color = '#00ff41';
-                    div.textContent = text;
+            let numbers = '';
+            for (let i = 1; i <= lineCount; i++) {
+                numbers += i;
+                if (i < lineCount) numbers += '\n';
             }
-            
-            outputDiv.appendChild(div);
-            outputDiv.scrollTop = outputDiv.scrollHeight;
+            lineNumbers.textContent = numbers;
         }
         
-        async function runCode() {
-            if (!editor) {
-                addOutput('Error: Editor not initialized', 'error');
-                return;
+        // Add tab support and line numbers
+        codeEditor.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 4;
+                updateLineNumbers();
             }
             
-            const code = editor.getValue().trim();
-            if (!code) {
-                addOutput('Error: No code to run', 'error');
-                return;
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                runCode();
             }
-            
-            clearOutput();
-            addOutput('कोड चलाया जा रहा है...', 'success');
-            
-            try {
-                const lines = code.split('\n').filter(line => line.trim() && !line.trim().startsWith('#'));
-                const variables = {};
-                let hasError = false;
-                
-                for (let line of lines) {
-                    if (hasError) break;
-                    
-                    line = line.trim();
-                    
-                    if (line.startsWith('import ')) {
-                        addOutput(`✓ Module imported: ${line}`, 'success');
-                        continue;
-                    }
-                    
-                    if (line.includes('input(')) {
-                        const match = line.match(/(\w+)\s*=\s*input\(['"]([^'"]*)['"]\)/);
-                        if (match) {
-                            const [, varName, prompt] = match;
-                            try {
-                                const userInput = await createInputPrompt(prompt);
-                                variables[varName] = userInput;
-                            } catch (e) {
-                                addOutput(`Error in input: ${e.message}`, 'error');
-                                hasError = true;
-                            }
-                        }
-                    }
-                    else if (line.includes('int(input(')) {
-                        const match = line.match(/(\w+)\s*=\s*int\(input\(['"]([^'"]*)['"]\)\)/);
-                        if (match) {
-                            const [, varName, prompt] = match;
-                            try {
-                                const userInput = await createInputPrompt(prompt);
-                                const intValue = parseInt(userInput);
-                                if (isNaN(intValue)) {
-                                    throw new Error(`Invalid integer: ${userInput}`);
-                                }
-                                variables[varName] = intValue;
-                            } catch (e) {
-                                addOutput(`Error: ${e.message}`, 'error');
-                                hasError = true;
-                            }
-                        }
-                    }
-                    else if (line.includes('float(input(')) {
-                        const match = line.match(/(\w+)\s*=\s*float\(input\(['"]([^'"]*)['"]\)\)/);
-                        if (match) {
-                            const [, varName, prompt] = match;
-                            try {
-                                const userInput = await createInputPrompt(prompt);
-                                const floatValue = parseFloat(userInput);
-                                if (isNaN(floatValue)) {
-                                    throw new Error(`Invalid float: ${userInput}`);
-                                }
-                                variables[varName] = floatValue;
-                            } catch (e) {
-                                addOutput(`Error: ${e.message}`, 'error');
-                                hasError = true;
-                            }
-                        }
-                    }
-                    else if (line.includes('=') && !line.includes('==') && !line.startsWith('print')) {
-                        try {
-                            const [varName, value] = line.split('=').map(s => s.trim());
-                            if (value.startsWith('"') || value.startsWith("'")) {
-                                variables[varName] = value.slice(1, -1);
-                            } else if (value === 'True') {
-                                variables[varName] = true;
-                            } else if (value === 'False') {
-                                variables[varName] = false;
-                            } else if (value.includes('random.randint')) {
-                                const match = value.match(/random\.randint\((\d+),\s*(\d+)\)/);
-                                if (match) {
-                                    const min = parseInt(match[1]);
-                                    const max = parseInt(match[2]);
-                                    variables[varName] = Math.floor(Math.random() * (max - min + 1)) + min;
-                                }
-                            } else {
-                                const numValue = parseFloat(value);
-                                variables[varName] = isNaN(numValue) ? value : numValue;
-                            }
-                        } catch (e) {
-                            addOutput(`Error in assignment: ${e.message}`, 'error');
-                            hasError = true;
-                        }
-                    }
-                    else if (line.startsWith('print(')) {
-                        try {
-                            const printMatch = line.match(/print\((.+)\)/);
-                            if (!printMatch) continue;
-                            
-                            const content = printMatch[1];
-                            let output = content;
-                            
-                            if (content.startsWith('f"') || content.startsWith("f'")) {
-                                output = content.slice(2, -1);
-                                for (let [key, value] of Object.entries(variables)) {
-                                    output = output.replace(new RegExp(`{${key}}`, 'g'), value);
-                                }
-                            }
-                            else if (content.startsWith('"') || content.startsWith("'")) {
-                                output = content.slice(1, -1);
-                            }
-                            else {
-                                let expr = content;
-                                for (let [key, value] of Object.entries(variables)) {
-                                    expr = expr.replace(new RegExp(`\\b${key}\\b`, 'g'), 
-                                        typeof value === 'string' ? `"${value}"` : value);
-                                }
-                                try {
-                                    output = Function('"use strict"; return (' + expr + ')')();
-                                } catch (e) {
-                                    output = variables[content] !== undefined ? variables[content] : content;
-                                }
-                            }
-                            
-                            addOutput(output);
-                        } catch (e) {
-                            addOutput(`Error in print: ${e.message}`, 'error');
-                            hasError = true;
-                        }
-                    }
-                }
-                
-                if (!hasError) {
-                    addOutput('\n✓ कोड सफलतापूर्वक चला!', 'success');
-                }
-            } catch (error) {
-                addOutput(`Execution Error: ${error.message}`, 'error');
-            }
-        }
+        });
         
-        function createInputPrompt(prompt) {
-            return new Promise((resolve, reject) => {
-                if (!outputDiv) {
-                    reject(new Error('Output div not available'));
-                    return;
-                }
-                
-                // Sanitize prompt
-                const sanitizedPrompt = prompt.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                
+        codeEditor.addEventListener('input', updateLineNumbers);
+        codeEditor.addEventListener('scroll', function() {
+            document.getElementById('line-numbers').scrollTop = this.scrollTop;
+        });
+
+        function addOutput(text, type = 'normal') {
+            const span = document.createElement('span');
+            span.className = type;
+            span.textContent = text;
+            outputDiv.appendChild(span);
+            
+            // Aggressive scroll to bottom for mobile
+            function forceScroll() {
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+                outputDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+            
+            forceScroll();
+            setTimeout(forceScroll, 50);
+            setTimeout(forceScroll, 200);
+        }
+
+        function clearOutput() {
+            outputDiv.innerHTML = '';
+            addOutput('Output cleared.\n---\n', 'info');
+        }
+
+        function handleInput(prompt) {
+            return new Promise((resolve) => {
                 const inputDiv = document.createElement('div');
                 inputDiv.className = 'input-prompt';
                 inputDiv.innerHTML = `
-                    <div><i class="fas fa-keyboard"></i> ${sanitizedPrompt}</div>
-                    <input type="text" class="user-input" placeholder="यहाँ टाइप करें..." autocomplete="off" />
-                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">Press Enter to submit</div>
+                    <div style="color: #58a6ff;">${prompt}</div>
+                    <input type="text" class="input-field" placeholder="Type your input and press Enter..." />
                 `;
                 
-                const input = inputDiv.querySelector('.user-input');
-                
-                const handleInput = (e) => {
+                const input = inputDiv.querySelector('.input-field');
+                input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
-                        const value = input.value.trim();
-                        addOutput(`${sanitizedPrompt} ${value}`);
+                        const value = input.value;
+                        addOutput(`${prompt}${value}\n`, 'info');
                         inputDiv.remove();
                         resolve(value);
-                    } else if (e.key === 'Escape') {
-                        inputDiv.remove();
-                        reject(new Error('Input cancelled'));
                     }
-                };
-                
-                input.addEventListener('keydown', handleInput);
-                
-                // Timeout after 30 seconds
-                const timeout = setTimeout(() => {
-                    inputDiv.remove();
-                    reject(new Error('Input timeout'));
-                }, 30000);
-                
-                input.addEventListener('keydown', () => {
-                    clearTimeout(timeout);
                 });
                 
                 outputDiv.appendChild(inputDiv);
                 input.focus();
-                outputDiv.scrollTop = outputDiv.scrollHeight;
+                fixTerminalScroll();
             });
         }
 
-        // Check orientation and show prompt if needed
-        function checkOrientation() {
-            const landscapePrompt = document.getElementById('landscapePrompt');
-            if (!landscapePrompt) return;
+        function runCode() {
+            if (isRunning) {
+                addOutput('⚠️ Code is already running!\n', 'warning');
+                return;
+            }
+
+            const code = codeEditor.value.trim();
+            if (!code) {
+                addOutput('❌ No code to run!\n', 'error');
+                return;
+            }
+
+            isRunning = true;
+            statusSpan.textContent = 'Running...';
+            const startTime = Date.now();
             
-            if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
-                landscapePrompt.style.display = 'flex';
-            } else {
-                landscapePrompt.style.display = 'none';
+            addOutput(`🚀 Running code...\n`, 'info');
+
+            // Configure Skulpt
+            Sk.pre = "output";
+            Sk.configure({
+                output: function(text) {
+                    addOutput(text, 'normal');
+                },
+                read: function(x) {
+                    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                        throw "File not found: '" + x + "'";
+                    return Sk.builtinFiles["files"][x];
+                },
+                inputfun: function(prompt) {
+                    return handleInput(prompt || "");
+                },
+                inputfunTakesPrompt: true
+            });
+
+            // Decode HTML entities before running
+            function decodeHtmlEntities(text) {
+                const textarea = document.createElement('textarea');
+                textarea.innerHTML = text;
+                return textarea.value;
+            }
+            
+            const decodedCode = decodeHtmlEntities(code);
+            
+            // Run the code
+            var promise = Sk.misceval.asyncToPromise(function() {
+                return Sk.importMainWithBody("<stdin>", false, decodedCode, true);
+            });
+
+            promise.then(function(mod) {
+                const executionTime = Date.now() - startTime;
+                document.getElementById('execution-time').textContent = `Executed in ${executionTime}ms`;
+                addOutput(`\n✅ Execution completed in ${executionTime}ms\n`, 'success');
+                autoSave(); // Auto-save after successful execution
+            }).catch(function(err) {
+                let errorMsg = err.toString();
+                
+                // Extract actual line number from Skulpt error
+                const lineMatch = errorMsg.match(/line (\d+)/);
+                if (lineMatch) {
+                    const actualLine = parseInt(lineMatch[1]);
+                    errorMsg = errorMsg.replace(/line \d+/, `line ${actualLine}`);
+                }
+                
+                addOutput(`❌ Error: ${errorMsg}\n`, 'error');
+                
+                // Provide helpful error hints
+                if (errorMsg.includes('SyntaxError')) {
+                    addOutput('💡 Hint: Check for missing colons, brackets, or indentation\n', 'info');
+                } else if (errorMsg.includes('NameError')) {
+                    addOutput('💡 Hint: Check variable names and spelling\n', 'info');
+                } else if (errorMsg.includes('TypeError')) {
+                    addOutput('💡 Hint: Check data types and function arguments\n', 'info');
+                }
+            }).finally(function() {
+                isRunning = false;
+                statusSpan.textContent = 'Ready';
+                fixTerminalScroll();
+            });
+        }
+
+        function loadExample() {
+            const examples = [
+                `# Hello World
+name = input("What is your name? ")
+print("Hello " + name + "!")
+print("Welcome to Python!")
+
+age = int(input("How old are you? "))
+print("Next year you will be", age + 1)`,
+
+                `# Simple Calculator
+num1 = int(input("Enter first number: "))
+num2 = int(input("Enter second number: "))
+
+print("Addition:", num1 + num2)
+print("Subtraction:", num1 - num2)
+print("Multiplication:", num1 * num2)
+if num2 != 0:
+    print("Division:", num1 / num2)`,
+
+                `# Age Checker
+age = int(input("Enter your age: "))
+
+if age >= 18:
+    print("You are an adult")
+else:
+    print("You are young")
+    
+if age >= 60:
+    print("Senior citizen")
+elif age >= 13:
+    print("Teenager")
+else:
+    print("Child")`,
+
+                `# Basic Math
+num = int(input("Enter a number: "))
+print("Number:", num)
+print("Double:", num * 2)
+print("Square:", num * num)
+
+if num > 0:
+    print("Positive number")
+else:
+    print("Negative or zero")`
+            ];
+            
+            const randomExample = examples[Math.floor(Math.random() * examples.length)];
+            codeEditor.value = randomExample;
+            updateLineNumbers();
+            addOutput(`🎲 Random example loaded!\n`, 'info');
+        }
+
+        // Save code to localStorage
+        function saveCode() {
+            const code = codeEditor.value;
+            const fileName = prompt('Enter file name:', 'my_code.py');
+            if (fileName) {
+                localStorage.setItem(`neuro_ide_${fileName}`, code);
+                addOutput(`💾 Code saved as ${fileName}\n`, 'success');
             }
         }
 
-        // Initialize Monaco Editor with fallback
-
-
-    </script>
-    <script src="https://unpkg.com/monaco-editor@0.34.1/min/vs/loader.js"></script>
-    <script>
-        // Initialize Monaco Editor
-        require.config({ paths: { vs: 'https://unpkg.com/monaco-editor@0.34.1/min/vs' }});
-        require(['vs/editor/editor.main'], function () {
-            editor = monaco.editor.create(document.getElementById('editor'), {
-                value: `# Welcome to NeuroHacker Python IDE
-# Write your Python code here and press Ctrl+Enter or Run button to execute
-
-# Example: Simple Calculator
-print("Simple Calculator")
-num1 = float(input("Enter first number: "))
-num2 = float(input("Enter second number: "))
-operation = input("Enter operation (+, -, *, /): ")
-
-if operation == "+":
-    result = num1 + num2
-elif operation == "-":
-    result = num1 - num2
-elif operation == "*":
-    result = num1 * num2
-elif operation == "/":
-    if num2 != 0:
-        result = num1 / num2
-    else:
-        result = "Error: Division by zero!"
-else:
-    result = "Error: Invalid operation!"
-
-print(f"Result: {result}")
-
-# Try running this code with Ctrl+Enter!`,
-                language: 'python',
-                theme: 'vs-dark',
-                fontSize: 14,
-                minimap: { enabled: false },
-                wordWrap: 'on',
-                automaticLayout: true,
-                scrollBeyondLastLine: false
-            });
+        // Load code from localStorage
+        function loadCode() {
+            const savedFiles = Object.keys(localStorage)
+                .filter(key => key.startsWith('neuro_ide_'))
+                .map(key => key.replace('neuro_ide_', ''));
             
-            editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode);
+            if (savedFiles.length === 0) {
+                addOutput('📁 No saved files found\n', 'warning');
+                return;
+            }
             
-            // Auto-save on change
-            editor.onDidChangeModelContent(() => {
-                const code = editor.getValue();
-                localStorage.setItem('python-code', code);
-            });
+            const fileList = savedFiles.join('\n');
+            const fileName = prompt(`Select file to load:\n${fileList}\n\nEnter file name:`);
             
-            // Load saved code
-            setTimeout(loadSavedCode, 500);
-        });
-
-
-
-        // Initialize when DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            outputDiv = document.getElementById('output');
-            checkOrientation();
-            
-            // Add keyboard shortcuts
-            document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                    e.preventDefault();
-                    runCode();
-                } else if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                    e.preventDefault();
-                    saveCode();
-                } else if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
-                    e.preventDefault();
-                    clearOutput();
+            if (fileName) {
+                const code = localStorage.getItem(`neuro_ide_${fileName}`);
+                if (code) {
+                    codeEditor.value = code;
+                    updateLineNumbers();
+                    addOutput(`📂 Loaded ${fileName}\n`, 'success');
+                } else {
+                    addOutput(`❌ File ${fileName} not found\n`, 'error');
                 }
-            });
-        });
+            }
+        }
+
+        // Auto-save current code
+        function autoSave() {
+            const code = codeEditor.value;
+            if (code.trim()) {
+                localStorage.setItem('neuro_ide_autosave', code);
+            }
+        }
+
+        // Load auto-saved code on startup
+        function loadAutoSave() {
+            const autoSaved = localStorage.getItem('neuro_ide_autosave');
+            if (autoSaved && !codeEditor.value.trim()) {
+                codeEditor.value = autoSaved;
+                updateLineNumbers();
+                addOutput('🔄 Auto-saved code restored\n', 'info');
+            }
+        }
+
+        // Auto-save every 30 seconds
+        setInterval(autoSave, 30000);
         
-        window.addEventListener('load', () => {
-            checkOrientation();
+        // Save on code change
+        codeEditor.addEventListener('input', function() {
+            clearTimeout(this.saveTimeout);
+            this.saveTimeout = setTimeout(autoSave, 2000);
         });
+
+        // Enhanced error handling for Skulpt loading
+        let skulptLoadAttempts = 0;
+        function checkSkulptLoaded() {
+            if (typeof Sk !== 'undefined') {
+                addOutput('✅ Python runtime loaded!\n', 'success');
+                loadAutoSave();
+            } else {
+                skulptLoadAttempts++;
+                if (skulptLoadAttempts < 3) {
+                    addOutput(`⏳ Loading Python runtime... (${skulptLoadAttempts}/3)\n`, 'warning');
+                    setTimeout(checkSkulptLoaded, 2000);
+                } else {
+                    addOutput('❌ Failed to load Python runtime. Please refresh the page.\n', 'error');
+                    addOutput('💡 Try: Check internet connection and refresh\n', 'info');
+                }
+            }
+        }
+
+        // Mobile terminal scroll fix
+        function fixTerminalScroll() {
+            const terminal = outputDiv;
+            terminal.scrollTop = terminal.scrollHeight;
+            
+            // Force terminal to be scrollable on mobile
+            if (window.innerWidth <= 768) {
+                terminal.style.height = 'auto';
+                terminal.style.maxHeight = '100%';
+                terminal.style.overflowY = 'scroll';
+                terminal.style.webkitOverflowScrolling = 'touch';
+                
+                // Scroll to bottom multiple times
+                requestAnimationFrame(() => {
+                    terminal.scrollTop = terminal.scrollHeight;
+                    setTimeout(() => {
+                        terminal.scrollTop = terminal.scrollHeight;
+                    }, 100);
+                });
+            }
+        }
         
-        window.addEventListener('orientationchange', () => {
-            setTimeout(checkOrientation, 100);
-        });
+        // Add touch scroll handling
+        if ('ontouchstart' in window) {
+            outputDiv.addEventListener('touchstart', function(e) {
+                this.style.webkitOverflowScrolling = 'touch';
+            }, { passive: true });
+            
+            outputDiv.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+        }
         
-        window.addEventListener('resize', () => {
-            setTimeout(checkOrientation, 100);
+        // Check Skulpt loading
+        window.addEventListener('load', function() {
+            setTimeout(checkSkulptLoaded, 1000);
         });
     </script>
 </body>
