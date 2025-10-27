@@ -104,11 +104,12 @@ body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     position: relative;
     overflow: hidden;
+    margin-top: 70px;
 }
 
 .hero-content {
     flex: 1;
-    padding: 100px 20px 20px;
+    padding: 50px 20px 20px;
     max-width: 600px;
 }
 
@@ -379,44 +380,159 @@ body {
         flex-direction: column;
         text-align: center;
         padding: 20px;
+        min-height: 80vh;
+        margin-top: 70px;
+    }
+    
+    .hero-content {
+        padding: 30px 20px 20px;
     }
     
     .hero h1 {
         font-size: 2.5rem;
-    }
-    
-    .hero-animation {
-        margin-top: 30px;
-    }
-    
-    .code-lines {
-        min-width: auto;
-        width: 100%;
-    }
-    
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2rem;
+        line-height: 1.2;
     }
     
     .hero p {
         font-size: 1.1rem;
     }
     
+    .hero-subtitle {
+        font-size: 1rem !important;
+    }
+    
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    
+    .hero-animation {
+        margin-top: 30px;
+        padding: 10px;
+    }
+    
+    .code-lines {
+        min-width: auto;
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .line {
+        font-size: 0.9rem;
+    }
+    
+    .course-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
     .course-card {
+        padding: 20px;
+    }
+    
+    .course-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .feature {
         padding: 20px;
     }
     
     .courses h2, .about h2 {
         font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 15px;
+    }
+    
+    .nav-logo {
+        font-size: 1.3rem;
+    }
+    
+    .hero {
+        padding: 15px;
+        margin-top: 70px;
+    }
+    
+    .hero-content {
+        padding: 20px 15px 15px;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .code-lines {
+        padding: 15px;
+    }
+    
+    .line {
+        font-size: 0.8rem;
+        margin: 10px 0;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .courses, .about {
+        padding: 60px 0;
+    }
+    
+    .courses h2, .about h2 {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+    
+    .course-card {
+        padding: 15px;
+    }
+    
+    .course-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .course-card p {
+        font-size: 0.9rem;
+    }
+    
+    .course-stats {
+        font-size: 0.8rem;
+    }
+    
+    .feature {
+        padding: 15px;
+    }
+    
+    .feature h3 {
+        font-size: 1.1rem;
+    }
+    
+    .feature p {
+        font-size: 0.9rem;
     }
 }

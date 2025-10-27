@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML/AI Dictionary - Neuro-Dev</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        .dictionary-container {
+            padding-top: 90px;
+            min-height: 100vh;
+            background: #0a0a0a;
+        }
+        
+        .dictionary-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            margin-bottom: 40px;
+        }
+        
+        .dictionary-title {
+            color: #00ff41;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .dictionary-subtitle {
+            color: #ccc;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            font-size: 1.1rem;
+            border: 2px solid #333;
+            border-radius: 25px;
+            background: #1a1a1a;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: #00ff41;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ff41;
+            font-size: 1.2rem;
+        }
+        
+        .categories-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .category {
+            background: #111;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .category-header {
+            background: #1a1a1a;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .category-header:hover {
+            background: #222;
+        }
+        
+        .category-title {
+            color: #00ff41;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .category-toggle {
+            color: #00ff41;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .category.collapsed .category-toggle {
+            transform: rotate(-90deg);
+        }
+        
+        .terms-container {
+            padding: 20px;
+            display: block;
+        }
+        
+        .category.collapsed .terms-container {
+            display: none;
+        }
+        
+        .term-item {
+            background: #0a0a0a;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00ff41;
+            transition: transform 0.2s;
+        }
+        
+        .term-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .term-name {
+            color: #00ff41;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .term-meaning {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .term-example {
+            color: #888;
+            font-style: italic;
+            font-size: 0.9rem;
+            padding: 10px;
+            background: rgba(0, 255, 65, 0.05);
+            border-radius: 5px;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            padding: 40px;
+        }
+        
+        .stats-container {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #888;
+        }
+        
+        @media (max-width: 768px) {
+            .dictionary-title {
+                font-size: 2rem;
+            }
+            
+            .dictionary-subtitle {
+                font-size: 1rem;
+            }
+            
+            .search-input {
+                font-size: 1rem;
+                padding: 12px 45px 12px 15px;
+            }
+            
+            .term-item {
+                padding: 15px;
+            }
+            
+            .category-header {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#courses" class="nav-link">Courses</a>
+                <a href="videos.html" class="nav-link">Videos</a>
+                <a href="python-ide.html" class="nav-link">Python IDE</a>
+                <a href="dictionary.html" class="nav-link">Dictionary</a>
+                <a href="donate.html" class="nav-link">Donate</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dictionary-container">
+        <div class="dictionary-header">
+            <h1 class="dictionary-title">
+                <i class="fas fa-book"></i> Complete AI/ML Dictionary
+            </h1>
+            <p class="dictionary-subtitle">
+                Comprehensive AI/ML Dictionary - Roman Urdu mein technical terms ki detailed explanations
+            </p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Koi bhi term search kariye... (Algorithm, Machine Learning, etc.)">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <span id="totalTerms">Loading...</span> technical terms available
+        </div>
+
+        <div class="categories-container" id="categoriesContainer">
+            <!-- Categories will be loaded here -->
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-search" style="font-size: 3rem; color: #333; margin-bottom: 20px;"></i>
+            <p>Koi results nahi mile. Dusra term try kariye.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        console.log('Dictionary script started!');
+        let dictionaryData = null;
+        let allTerms = [];
+
+        // Load dictionary data
+        async function loadDictionary() {
+            console.log('Loading dictionary...');
+            try {
+                console.log('Fetching ml-dictionary.json...');
+                const response = await fetch('data/ml-dictionary.json');
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                dictionaryData = await response.json();
+                console.log('Dictionary data loaded:', dictionaryData);
+                
+                if (!dictionaryData || !dictionaryData.categories) {
+                    throw new Error('Invalid dictionary structure');
+                }
+                
+                allTerms = [];
+                dictionaryData.categories.forEach(category => {
+                    category.terms.forEach(term => {
+                        allTerms.push({
+                            ...term,
+                            category: category.name
+                        });
+                    });
+                });
+                
+                console.log('Total terms loaded:', allTerms.length);
+                displayCategories();
+                updateStats();
+            } catch (error) {
+                console.error('Error loading dictionary:', error);
+                
+                // Fallback data
+                dictionaryData = {
+                    categories: [
+                        {
+                            name: "AI/ML Basics",
+                            terms: [
+                                {
+                                    term: "Artificial Intelligence",
+                                    meaning: "Computer systems ka ability hai jo human intelligence mimic kare.",
+                                    example: "Siri, Alexa AI assistants hain."
+                                },
+                                {
+                                    term: "Machine Learning",
+                                    meaning: "Computers ka data se automatically learn karne ka method.",
+                                    example: "Netflix recommendations ML use karta hai."
+                                },
+                                {
+                                    term: "Deep Learning",
+                                    meaning: "Neural networks use kar ke complex patterns recognize karna.",
+                                    example: "Image recognition mein deep learning use hota hai."
+                                }
+                            ]
+                        }
+                    ]
+                };
+                
+                allTerms = [];
+                dictionaryData.categories.forEach(category => {
+                    category.terms.forEach(term => {
+                        allTerms.push({...term, category: category.name});
+                    });
+                });
+                
+                displayCategories();
+                updateStats();
+            }
+        }
+
+        function displayCategories() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = '';
+
+            dictionaryData.categories.forEach((category, index) => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.innerHTML = `
+                    <div class="category-header" onclick="toggleCategory(${index})">
+                        <h2 class="category-title">${category.name}</h2>
+                        <i class="fas fa-chevron-down category-toggle"></i>
+                    </div>
+                    <div class="terms-container">
+                        ${category.terms.map(term => createTermHTML(term)).join('')}
+                    </div>
+                `;
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        function createTermHTML(term) {
+            return `
+                <div class="term-item">
+                    <div class="term-name">${term.term}</div>
+                    <div class="term-meaning">${term.meaning}</div>
+                    <div class="term-example">
+                        <strong>Example:</strong> ${term.example}
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleCategory(index) {
+            const categories = document.querySelectorAll('.category');
+            categories[index].classList.toggle('collapsed');
+        }
+
+        function searchTerms(query) {
+            if (!query.trim()) {
+                displayCategories();
+                document.getElementById('noResults').style.display = 'none';
+                return;
+            }
+
+            const filteredTerms = allTerms.filter(term => 
+                term.term.toLowerCase().includes(query.toLowerCase()) ||
+                term.meaning.toLowerCase().includes(query.toLowerCase()) ||
+                term.example.toLowerCase().includes(query.toLowerCase())
+            );
+
+            const container = document.getElementById('categoriesContainer');
+            const noResults = document.getElementById('noResults');
+
+            if (filteredTerms.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            
+            const groupedTerms = {};
+            filteredTerms.forEach(term => {
+                if (!groupedTerms[term.category]) {
+                    groupedTerms[term.category] = [];
+                }
+                groupedTerms[term.category].push(term);
+            });
+
+            container.innerHTML = '';
+            Object.keys(groupedTerms).forEach(categoryName => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.innerHTML = `
+                    <div class="category-header">
+                        <h2 class="category-title">${categoryName} (${groupedTerms[categoryName].length} results)</h2>
+                    </div>
+                    <div class="terms-container">
+                        ${groupedTerms[categoryName].map(term => createTermHTML(term)).join('')}
+                    </div>
+                `;
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('totalTerms').textContent = allTerms.length;
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchTerms(e.target.value);
+        });
+
+        // Immediate fallback data
+        dictionaryData = {
+            categories: [
+                {
+                    name: "AI/ML Basics",
+                    terms: [
+                        {
+                            term: "Artificial Intelligence",
+                            meaning: "Computer systems ka ability hai jo human intelligence mimic kare.",
+                            example: "Siri, Alexa AI assistants hain."
+                        },
+                        {
+                            term: "Machine Learning",
+                            meaning: "Computers ka data se automatically learn karne ka method.",
+                            example: "Netflix recommendations ML use karta hai."
+                        },
+                        {
+                            term: "Deep Learning",
+                            meaning: "Neural networks use kar ke complex patterns recognize karna.",
+                            example: "Image recognition mein deep learning use hota hai."
+                        }
+                    ]
+                }
+            ]
+        };
+        
+        allTerms = [];
+        dictionaryData.categories.forEach(category => {
+            category.terms.forEach(term => {
+                allTerms.push({...term, category: category.name});
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, starting dictionary load...');
+            displayCategories();
+            updateStats();
+            loadDictionary(); // Try to load better data
+        });
+        
+        const dictHamburger = document.getElementById('hamburger');
+        const dictNavMenu = document.getElementById('nav-menu');
+        
+        if (dictHamburger && dictNavMenu) {
+            dictHamburger.addEventListener('click', () => {
+                dictNavMenu.classList.toggle('active');
+                dictHamburger.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

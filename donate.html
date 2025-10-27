@@ -174,6 +174,20 @@
             font-weight: bold;
             margin: 30px 0;
         }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background: #00ff41;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
         @media (max-width: 768px) {
             .donate-header h1 {
                 font-size: 2rem;
@@ -189,6 +203,29 @@
                 font-size: 0.9rem !important;
                 text-align: center;
                 margin-bottom: 10px;
+            }
+            
+            .hamburger { display: flex; }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 30px 0;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active { left: 0; }
+            
+            .nav-menu .nav-link {
+                padding: 15px;
+                display: block;
+                border-bottom: 1px solid #333;
             }
         }
         @media (max-width: 480px) {
@@ -209,11 +246,16 @@
                 <i class="fas fa-brain"></i>
                 <span>Neuro-Dev</span>
             </div>
-            <div class="nav-menu">
+            <div class="nav-menu" id="nav-menu">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="index.html#courses" class="nav-link">Courses</a>
                 <a href="videos.html" class="nav-link">Videos</a>
                 <a href="donate.html" class="nav-link active">Donate</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
     </nav>
@@ -377,6 +419,17 @@
                     notification.parentNode.removeChild(notification);
                 }
             }, 3000);
+        }
+        
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
         }
     </script>
 </body>

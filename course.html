@@ -213,6 +213,20 @@
             background: #cc0000;
         }
         
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background: #00ff41;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
         @media (max-width: 768px) {
             .course-container {
                 flex-direction: column;
@@ -238,6 +252,29 @@
             }
             .copy-btn {
                 width: 100%;
+            }
+            
+            .hamburger { display: flex; }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 30px 0;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active { left: 0; }
+            
+            .nav-menu .nav-link {
+                padding: 15px;
+                display: block;
+                border-bottom: 1px solid #333;
             }
         }
         
@@ -274,12 +311,17 @@
                 <i class="fas fa-brain"></i>
                 <span>Neuro-Dev</span>
             </div>
-            <div class="nav-menu">
+            <div class="nav-menu" id="nav-menu">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="index.html#courses" class="nav-link">Courses</a>
                 <a href="videos.html" class="nav-link">Videos</a>
                 <a href="python-ide.html" class="nav-link">Python IDE</a>
                 <a href="donate.html" class="nav-link">Donate</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
     </nav>
@@ -320,10 +362,14 @@
             const urlParams = new URLSearchParams(window.location.search);
             let module = urlParams.get('module') || 'termux-basics';
             
+            // Sanitize module parameter
+            module = module.replace(/[^a-zA-Z0-9-]/g, '');
+            
             const allowedModules = [
                 'termux-basics', 'termux-advanced', 'nethunter-rootless', 
                 'nethunter-tools', 'networking', 'web-security', 
-                'mobile-osint', 'nethunter-troubleshooting', 'python-complete'
+                'mobile-osint', 'nethunter-troubleshooting', 'python-complete',
+                'python-basics-kids', 'hands-on-ml-complete', 'python-ai-ml'
             ];
             
             if (!allowedModules.includes(module)) {
@@ -333,24 +379,60 @@
             try {
                 const response = await fetch(`data/${encodeURIComponent(module)}.json`);
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`Course not found: ${response.status}`);
                 }
-                courseData = await response.json();
+                
+                const text = await response.text();
+                if (!text.trim()) {
+                    throw new Error('Empty course data');
+                }
+                
+                courseData = JSON.parse(text);
                 
                 if (!courseData || !courseData.moduleTitle || !courseData.lessons || !Array.isArray(courseData.lessons)) {
                     throw new Error('Invalid course data structure');
                 }
                 
-                document.getElementById('module-title').textContent = courseData.moduleTitle;
-                document.title = `${courseData.moduleTitle} - Neuro-Dev Course`;
+                if (courseData.lessons.length === 0) {
+                    throw new Error('No lessons found in course');
+                }
+                
+                // Sanitize course title
+                const sanitizedTitle = courseData.moduleTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                document.getElementById('module-title').textContent = sanitizedTitle;
+                document.title = `${sanitizedTitle} - Neuro-Dev Course`;
+                
                 loadLessonNav();
                 showLesson(1);
             } catch (error) {
                 console.error('Error loading course:', error);
-                const content = document.getElementById('lesson-content');
-                const moduleTitle = document.getElementById('module-title');
-                if (content) content.innerHTML = '<h2 style="color: #ff6b6b;">⚠️ Error loading course data. Please refresh the page or try again.</h2>';
-                if (moduleTitle) moduleTitle.textContent = 'Error Loading Course';
+                showErrorState(error.message);
+            }
+        }
+        
+        function showErrorState(message) {
+            const content = document.getElementById('lesson-content');
+            const moduleTitle = document.getElementById('module-title');
+            const lessonNav = document.getElementById('lesson-nav');
+            
+            if (moduleTitle) moduleTitle.textContent = 'Error Loading Course';
+            if (lessonNav) lessonNav.innerHTML = '<li><button disabled>No lessons available</button></li>';
+            
+            if (content) {
+                content.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #ff6b6b;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h2>Course Load Error</h2>
+                        <p style="color: #ccc; margin: 20px 0;">${message}</p>
+                        <button onclick="location.reload()" style="background: #00ff41; color: #000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                            <i class="fas fa-refresh"></i> Retry
+                        </button>
+                        <br><br>
+                        <a href="index.html" style="color: #00ff41; text-decoration: none;">
+                            <i class="fas fa-home"></i> Back to Home
+                        </a>
+                    </div>
+                `;
             }
         }
 
@@ -582,6 +664,17 @@
                 }
             }
         });
+        
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
     </script>
 </body>
 </html>

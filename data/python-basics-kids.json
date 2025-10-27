@@ -1,0 +1,185 @@
+{
+  "moduleTitle": "Python Basics for Kids - Bilkul Shuru Se",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Lesson 1: Computer Kya Hai? Programming Kya Hai?",
+      "content": {
+        "intro": "Bilkul basic se start karte hain! Computer ek machine hai jo hamari baat manta hai. Programming matlab computer ko instructions dena. Jaise hum kisi ko kehte hain 'paani lao', waise hi computer ko kehte hain 'calculation karo'.",
+        "sections": [
+          {
+            "heading": "Computer Kaise Kaam Karta Hai?",
+            "text": "Computer ek bahut tez calculator hai:\\n\\n1. Input - Hum kuch dete hain (keyboard, mouse se)\\n2. Processing - Computer sochta hai\\n3. Output - Computer jawab deta hai (screen pe)\\n\\nMisal:\\n• Input: 2 + 3\\n• Processing: Computer calculate karta hai\\n• Output: 5\\n\\nComputer sirf 0 aur 1 samajhta hai (Binary language)\\nProgramming languages hume aasan tarike se computer se baat karne deti hain"
+          },
+          {
+            "heading": "Programming Language Kya Hai?",
+            "text": "Programming language ek translator hai:\\n\\n• Hum English jaisi language mein likhte hain\\n• Computer 0 aur 1 mein samajhta hai\\n• Programming language translation kar deti hai\\n\\nPython kyu special hai?\\n1. Bahut aasan - English jaisi\\n2. Kam typing - zyada kaam\\n3. Powerful - bade kaam kar sakti hai\\n4. Popular - duniya bhar mein use hoti hai\\n5. Free - koi paisa nahi lagta"
+          },
+          {
+            "heading": "Python Kahan Use Hoti Hai?",
+            "text": "Har jagah Python use hoti hai:\\n\\n🌐 Websites:\\n• YouTube - videos manage karta hai\\n• Instagram - photos process karta hai\\n• Dropbox - files store karta hai\\n\\n🤖 AI/Machine Learning:\\n• Google Search - results deta hai\\n• Netflix - movies suggest karta hai\\n• Tesla - self-driving cars\\n\\n📊 Data Analysis:\\n• Banks - fraud detect karte hain\\n• Hospitals - patient data analyze karte hain\\n• Weather - forecast karte hain\\n\\n🎮 Games:\\n• Civilization IV\\n• Battlefield 2\\n• Many mobile games"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Lesson 2: Python Install Karna - Step by Step",
+      "content": {
+        "intro": "Ab Python ko apne mobile/computer mein install karenge. Yeh bilkul free hai aur easy hai. Step by step follow kariye.",
+        "sections": [
+          {
+            "heading": "Mobile Mein Python (Termux)",
+            "text": "Mobile mein Python use karne ke liye Termux app chahiye:\\n\\n1. Play Store se Termux download kariye\\n2. Termux open kariye\\n3. Neeche diye gaye commands type kariye",
+            "commands": [
+              {
+                "description": "Step 1: Termux update karna",
+                "command": "pkg update && pkg upgrade",
+                "explanation": "Yeh command Termux ko latest version mein update kar deta hai. Thoda time lagega, wait kariye."
+              },
+              {
+                "description": "Step 2: Python install karna",
+                "command": "pkg install python",
+                "explanation": "Yeh command Python install kar dega. 'y' press karke enter dabayiye jab puchhe."
+              },
+              {
+                "description": "Step 3: Check karna ki Python install hua ya nahi",
+                "command": "python --version",
+                "explanation": "Agar Python 3.x.x version show ho raha hai matlab successfully install ho gaya!"
+              }
+            ]
+          },
+          {
+            "heading": "Computer Mein Python (Windows/Mac/Linux)",
+            "text": "Computer mein install karne ke liye:\\n\\n1. python.org website pe jaye\\n2. Download Python button pe click kare\\n3. Downloaded file run kare\\n4. 'Add Python to PATH' checkbox check kare\\n5. Install button pe click kare\\n\\nLinux mein terminal se install kar sakte hain:",
+            "commands": [
+              {
+                "description": "Ubuntu/Debian mein Python install karna",
+                "command": "sudo apt update && sudo apt install python3 python3-pip",
+                "explanation": "Yeh command Linux mein Python aur pip (package manager) install kar deta hai."
+              }
+            ]
+          },
+          {
+            "heading": "Python Test Karna",
+            "text": "Ab check karte hain ki Python properly kaam kar raha hai:",
+            "commands": [
+              {
+                "description": "Python interactive mode start karna",
+                "command": "python",
+                "explanation": "Yeh command Python ka interactive shell start kar deta hai. >>> symbols nazar aayenge."
+              },
+              {
+                "description": "Simple calculation test",
+                "command": "2 + 3",
+                "explanation": "Python mein direct math kar sakte hain. Answer 5 aana chahiye."
+              },
+              {
+                "description": "Text print test",
+                "command": "print(\"Python is working!\")",
+                "explanation": "Yeh text screen pe print ho jana chahiye."
+              },
+              {
+                "description": "Python se exit karna",
+                "command": "exit()",
+                "explanation": "Yeh command Python interactive mode se bahar aa jane ke liye hai."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Lesson 3: Python Calculator - Math Karna Seekhte Hain",
+      "content": {
+        "intro": "Python ek powerful calculator hai! Yahan hum basic math operations seekhenge. Addition, subtraction, multiplication, division - sab kuch!",
+        "sections": [
+          {
+            "heading": "Basic Math Operations",
+            "text": "Python mein math karna bahut aasan hai. Yeh symbols use karte hain:\\n\\n+ Addition (jodna)\\n- Subtraction (ghatana)\\n* Multiplication (guna)\\n/ Division (bhag)\\n** Power (power)\\n% Modulo (remainder)",
+            "commands": [
+              {
+                "description": "Addition - Do numbers jodna",
+                "command": "5 + 3",
+                "explanation": "5 aur 3 ko jodne se 8 milega. Python mein + symbol addition ke liye use hota hai."
+              },
+              {
+                "description": "Subtraction - Ek number se dusra ghatana",
+                "command": "10 - 4",
+                "explanation": "10 mein se 4 ghatane se 6 milega. - symbol subtraction ke liye hai."
+              },
+              {
+                "description": "Multiplication - Numbers ka guna karna",
+                "command": "6 * 7",
+                "explanation": "6 ka 7 se guna karne se 42 milega. * symbol multiplication ke liye hai."
+              },
+              {
+                "description": "Division - Ek number ko dusre se divide karna",
+                "command": "15 / 3",
+                "explanation": "15 ko 3 se divide karne se 5.0 milega. / symbol division ke liye hai."
+              },
+              {
+                "description": "Power - Kisi number ka power nikalna",
+                "command": "2 ** 3",
+                "explanation": "2 ki power 3 matlab 2 x 2 x 2 = 8. ** symbol power ke liye hai."
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Math Operations",
+            "text": "Thode advanced operations bhi kar sakte hain:",
+            "commands": [
+              {
+                "description": "Remainder nikalna (Modulo)",
+                "command": "17 % 5",
+                "explanation": "17 ko 5 se divide karne pe remainder 2 bachta hai. % symbol remainder ke liye hai."
+              },
+              {
+                "description": "Floor Division - Sirf integer part",
+                "command": "17 // 5",
+                "explanation": "17 divide by 5 = 3.4, lekin // sirf 3 deta hai (decimal part cut kar deta hai)."
+              },
+              {
+                "description": "Complex calculation",
+                "command": "(10 + 5) * 2 - 3",
+                "explanation": "Brackets pehle solve hote hain: (15) * 2 - 3 = 30 - 3 = 27"
+              },
+              {
+                "description": "Square root nikalna",
+                "command": "16 ** 0.5",
+                "explanation": "Kisi number ka square root nikalne ke liye power 0.5 karte hain. 16 ka square root 4 hai."
+              }
+            ]
+          },
+          {
+            "heading": "Real Life Math Examples",
+            "text": "Practical examples jo daily life mein use hote hain:",
+            "commands": [
+              {
+                "description": "Shopping bill calculate karna",
+                "command": "250 + 150 + 75",
+                "explanation": "Teen items ki price jodna: 250 + 150 + 75 = 475 rupees total"
+              },
+              {
+                "description": "Percentage calculate karna",
+                "command": "(85 / 100) * 100",
+                "explanation": "85 marks out of 100 ka percentage: 85%. Formula: (obtained/total) * 100"
+              },
+              {
+                "description": "Average marks nikalna",
+                "command": "(80 + 90 + 75) / 3",
+                "explanation": "Teen subjects ke marks ka average: (80+90+75)/3 = 81.67"
+              },
+              {
+                "description": "Compound interest calculate karna",
+                "command": "1000 * (1 + 0.1) ** 2",
+                "explanation": "1000 rupees pe 10% interest 2 saal ke liye: 1000 * 1.1^2 = 1210"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

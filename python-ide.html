@@ -444,18 +444,43 @@ print("Thanks for using Python IDE!")`;
                 inputfunTakesPrompt: true
             });
 
-            // Decode HTML entities before running
-            function decodeHtmlEntities(text) {
-                const textarea = document.createElement('textarea');
-                textarea.innerHTML = text;
-                return textarea.value;
+            // Sanitize and validate code input
+            function sanitizeCode(text) {
+                // Basic validation - only allow Python code patterns
+                if (text.length > 50000) {
+                    throw new Error('Code too long! Maximum 50,000 characters allowed.');
+                }
+                
+                // Remove HTML/JS patterns that shouldn't be in Python code
+                const dangerous = [
+                    /<script[^>]*>.*?<\/script>/gi,
+                    /javascript:/gi,
+                    /on\w+\s*=/gi,
+                    /<iframe[^>]*>.*?<\/iframe>/gi,
+                    /<[^>]*>/g  // Remove any HTML tags
+                ];
+                
+                let sanitized = text;
+                dangerous.forEach(pattern => {
+                    sanitized = sanitized.replace(pattern, '');
+                });
+                
+                return sanitized.trim();
             }
             
-            const decodedCode = decodeHtmlEntities(code);
+            let sanitizedCode;
+            try {
+                sanitizedCode = sanitizeCode(code);
+            } catch (error) {
+                addOutput(`❌ ${error.message}\n`, 'error');
+                isRunning = false;
+                statusSpan.textContent = 'Ready';
+                return;
+            }
             
-            // Run the code
+            // Run the code with sanitized input
             var promise = Sk.misceval.asyncToPromise(function() {
-                return Sk.importMainWithBody("<stdin>", false, decodedCode, true);
+                return Sk.importMainWithBody("<stdin>", false, sanitizedCode, true);
             });
 
             promise.then(function(mod) {

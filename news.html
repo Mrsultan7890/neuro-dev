@@ -177,9 +177,44 @@
             color: #58a6ff;
         }
         
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background: #58a6ff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
         @media (max-width: 768px) {
             .news-header h1 { font-size: 2rem; }
-            .nav-menu { display: none; }
+            
+            .hamburger { display: flex; }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(22, 27, 34, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 30px 0;
+            }
+            
+            .nav-menu.active { left: 0; }
+            
+            .nav-menu .nav-link {
+                padding: 15px;
+                display: block;
+                border-bottom: 1px solid #30363d;
+            }
         }
     </style>
 </head>
@@ -197,6 +232,11 @@
                 <a href="python-ide.html" class="nav-link">Python IDE</a>
                 <a href="videos.html" class="nav-link">Videos</a>
                 <a href="donate.html" class="nav-link">Donate</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
     </nav>
@@ -404,6 +444,17 @@
             displayCurrentDate();
             fetchTodaysNews();
         });
+        
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
     </script>
 </body>
 </html>

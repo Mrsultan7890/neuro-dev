@@ -1,0 +1,558 @@
+{
+  "moduleTitle": "Python for AI/ML - Bilkul Zero Se Shuru Karte Hain",
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Lesson 1: Computer Ko Samjhana - Programming Kya Hai?",
+      "content": {
+        "intro": "Bilkul pehle se start karte hain! Computer sirf 0 aur 1 samajhta hai. Programming matlab computer ko batana ki kya karna hai. Python ek aasan language hai jisse hum computer se baat kar sakte hain. Yahan har cheez step by step sikhayenge.",
+        "sections": [
+          {
+            "heading": "Computer Kaise Kaam Karta Hai?",
+            "text": "Pehle samajhte hain computer kya hai:\n\n1. Computer ek machine hai jo instructions follow karta hai\n2. Yeh sirf 0 aur 1 ki language samajhta hai (Binary)\n3. Programming languages hume aasan tarike se instructions dene ki facility deti hain\n\nPython kya hai?\n• Ek programming language hai (computer se baat karne ka tarika)\n• Bahut aasan hai - English jaisi\n• Duniya bhar mein sabse zyada use hoti hai\n• AI aur Machine Learning ke liye best hai\n• Bilkul free hai - koi paisa nahi lagta\n\nMisal: Jaise hum kisi se kehte hain 'paani lao', waise hi Python mein kehte hain print('Hello')",
+            "commands": [
+              {
+                "description": "Step 1: Python installed hai ya nahi check karna",
+                "command": "python --version",
+                "explanation": "Yeh command terminal mein type karke enter dabayenge. Agar Python installed hai to version number show hoga jaise 'Python 3.9.0'. Agar error aaye to Python install karna padega."
+              },
+              {
+                "description": "Step 2: Python ka calculator mode start karna",
+                "command": "python",
+                "explanation": "Yeh command type karne se Python ka interactive mode start hoga. Screen pe >>> symbols nazar aayenge. Ab aap directly Python commands likh sakte hain. Exit karne ke liye exit() type karein."
+              }
+            ]
+          },
+          {
+            "heading": "AI aur Machine Learning Kya Hai? (Bahut Simple Mein)",
+            "text": "Pehle samajhte hain yeh kya hain:\n\nAI (Artificial Intelligence):\n• Computer ko insaan jaisi soch dena\n• Misal: Mobile mein voice assistant (Siri, Google Assistant)\n• Photo mein face detect karna\n• YouTube mein videos recommend karna\n\nMachine Learning:\n• Computer ko examples dekar sikhana\n• Misal: 1000 cat photos dikha kar cat pehchanana sikhana\n• Data se patterns nikalna\n\nPython kyu use karte hain?\n1. Bahut aasan hai - English jaisi\n2. Ready-made tools milte hain (Libraries)\n3. Duniya bhar ke developers use karte hain\n4. Free hai - koi paisa nahi lagta\n\nReal examples:\n• Netflix: Aapko movies suggest karta hai\n• Google: Search results deta hai\n• Facebook: Friends suggest karta hai\n• WhatsApp: Spam messages detect karta hai"
+          },
+          {
+            "heading": "Apna Pehla Python Program Likhte Hain!",
+            "text": "Ab hum computer se baat karenge! Sabse pehle 'Hello World' print karenge. Yeh programming mein tradition hai - har nyi language mein pehle yahi karte hain.",
+            "commands": [
+              {
+                "description": "Computer se pehli baat - Hello World kehna",
+                "command": "print(\"Hello World!\")",
+                "explanation": "print() ek function hai jo screen pe kuch bhi likhta hai. Quotes (\" \") ke andar jo bhi likhenge woh screen pe aa jayega. Yeh bilkul magic jaisa hai - aap type karenge aur computer repeat karega!"
+              },
+              {
+                "description": "Apni language mein message likhna",
+                "command": "print(\"Hello! Main Python seekh raha hun\")",
+                "explanation": "Python mein aap koi bhi language use kar sakte hain - English, Urdu, Hindi, Arabic - jo bhi chahiye. Computer sab samajh jata hai!"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Variables aur Data Types - Data Ko Store Karna",
+      "content": {
+        "intro": "Variables programming ki soul hain. Yeh data ko memory mein store karte hain. Is lesson mein hum different types ke data aur unhe store karne ka tarika seekhenge.",
+        "sections": [
+          {
+            "heading": "Variable Kya Hai?",
+            "text": "Variable ek container hai jo data store karta hai. Yeh ek naam hota hai jo memory location ko refer karta hai.\n\nVariable naming rules:\n• Letters, numbers, underscore use kar sakte hain\n• Number se start nahi kar sakte\n• Case sensitive hai (name aur Name different hain)\n• Keywords use nahi kar sakte (if, for, while etc.)",
+            "commands": [
+              {
+                "description": "Simple variable banana",
+                "command": "name = \"Ahmed\"\nage = 25\nprint(name)\nprint(age)",
+                "explanation": "Yahan 'name' aur 'age' variables hain. Python automatically detect kar leta hai ki kaunsa data type hai"
+              }
+            ]
+          },
+          {
+            "heading": "Data Types - Data Ki Qismein",
+            "text": "Python mein different types ka data store kar sakte hain:\n\n1. String (str) - Text data\n2. Integer (int) - Whole numbers\n3. Float - Decimal numbers\n4. Boolean (bool) - True/False\n5. List - Multiple values\n6. Dictionary - Key-value pairs",
+            "commands": [
+              {
+                "description": "Different data types ka example",
+                "command": "# String\nstudent_name = \"Ali Hassan\"\n\n# Integer\nstudent_age = 20\n\n# Float\nstudent_marks = 85.5\n\n# Boolean\nis_passed = True\n\nprint(f\"Name: {student_name}\")\nprint(f\"Age: {student_age}\")\nprint(f\"Marks: {student_marks}\")\nprint(f\"Passed: {is_passed}\")",
+                "explanation": "# symbol comments ke liye use hota hai. f-string formatting ka modern tarika hai"
+              },
+              {
+                "description": "Data type check karna",
+                "command": "name = \"Python\"\nage = 30\nheight = 5.8\nis_student = False\n\nprint(type(name))\nprint(type(age))\nprint(type(height))\nprint(type(is_student))",
+                "explanation": "type() function se aap kisi bhi variable ka data type check kar sakte hain"
+              }
+            ]
+          },
+          {
+            "heading": "String Operations - Text Ke Saath Kaam",
+            "text": "Strings ke saath bahut saare operations kar sakte hain:",
+            "commands": [
+              {
+                "description": "String operations",
+                "command": "first_name = \"Muhammad\"\nlast_name = \"Ali\"\n\n# String concatenation\nfull_name = first_name + \" \" + last_name\nprint(full_name)\n\n# String length\nprint(len(full_name))\n\n# Uppercase/Lowercase\nprint(full_name.upper())\nprint(full_name.lower())\n\n# String slicing\nprint(full_name[0:8])  # Pehle 8 characters",
+                "explanation": "String concatenation (+), len() function length ke liye, upper()/lower() case change ke liye, slicing specific part nikalne ke liye"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Lists aur Dictionaries - Data Collections",
+      "content": {
+        "intro": "Real-world mein hume multiple values store karni padti hain. Lists aur Dictionaries Python ke powerful data structures hain jo AI/ML mein bahut use hote hain.",
+        "sections": [
+          {
+            "heading": "Lists - Ordered Collections",
+            "text": "List ek ordered collection hai jo multiple values store kar sakti hai. Yeh mutable hai matlab change kar sakte hain.\n\nList ki features:\n• Square brackets [] use karte hain\n• Index 0 se start hota hai\n• Different data types store kar sakte hain\n• Duplicate values allowed hain",
+            "commands": [
+              {
+                "description": "List banana aur access karna",
+                "command": "# Students ki list\nstudents = [\"Ahmed\", \"Fatima\", \"Hassan\", \"Aisha\"]\n\n# List print karna\nprint(students)\n\n# Specific student access karna\nprint(students[0])  # Pehla student\nprint(students[-1]) # Last student\n\n# List length\nprint(f\"Total students: {len(students)}\")",
+                "explanation": "Index 0 se start hota hai. Negative index end se count karta hai (-1 last element)"
+              },
+              {
+                "description": "List mein data add/remove karna",
+                "command": "subjects = [\"Math\", \"Physics\", \"Chemistry\"]\n\n# Naya subject add karna\nsubjects.append(\"Biology\")\nprint(subjects)\n\n# Specific position pe add karna\nsubjects.insert(1, \"Computer Science\")\nprint(subjects)\n\n# Subject remove karna\nsubjects.remove(\"Physics\")\nprint(subjects)\n\n# Last element remove karna\nlast_subject = subjects.pop()\nprint(f\"Removed: {last_subject}\")\nprint(subjects)",
+                "explanation": "append() end mein add karta hai, insert() specific position pe, remove() value se remove karta hai, pop() last element remove karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Dictionaries - Key-Value Pairs",
+            "text": "Dictionary key-value pairs store karta hai. Yeh unordered collection hai (Python 3.7+ mein insertion order maintain hota hai).\n\nDictionary ki features:\n• Curly braces {} use karte hain\n• Key unique honi chahiye\n• Values duplicate ho sakti hain\n• Keys se values access karte hain",
+            "commands": [
+              {
+                "description": "Student information dictionary",
+                "command": "# Student ki complete information\nstudent = {\n    \"name\": \"Ali Hassan\",\n    \"age\": 22,\n    \"course\": \"Computer Science\",\n    \"marks\": [85, 90, 78, 92],\n    \"is_scholarship\": True\n}\n\n# Information access karna\nprint(f\"Name: {student['name']}\")\nprint(f\"Age: {student['age']}\")\nprint(f\"Course: {student['course']}\")\nprint(f\"Average Marks: {sum(student['marks'])/len(student['marks'])}\")",
+                "explanation": "Dictionary mein different data types store kar sakte hain. Square brackets se values access karte hain"
+              },
+              {
+                "description": "Dictionary operations",
+                "command": "student_info = {\"name\": \"Fatima\", \"age\": 20}\n\n# Nyi key add karna\nstudent_info[\"city\"] = \"Karachi\"\nstudent_info[\"grade\"] = \"A\"\n\n# All keys aur values dekhna\nprint(\"Keys:\", list(student_info.keys()))\nprint(\"Values:\", list(student_info.values()))\n\n# Key exist karta hai ya nahi check karna\nif \"name\" in student_info:\n    print(f\"Student name: {student_info['name']}\")\n\n# Safe way to get value\nphone = student_info.get(\"phone\", \"Not provided\")\nprint(f\"Phone: {phone}\")",
+                "explanation": "keys() aur values() methods se keys aur values mil jati hain. 'in' operator se check kar sakte hain. get() method safe hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Control Flow - Decision Making aur Loops",
+      "content": {
+        "intro": "Programming mein decisions lene aur repetitive tasks karne ke liye control flow statements use karte hain. Yeh AI/ML algorithms ka base hain.",
+        "sections": [
+          {
+            "heading": "If-Else Statements - Decisions Lena",
+            "text": "If-else statements se program mein decisions le sakte hain. Yeh conditions check karta hai aur accordingly action leta hai.\n\nComparison Operators:\n• == (equal to)\n• != (not equal to)\n• > (greater than)\n• < (less than)\n• >= (greater than or equal)\n• <= (less than or equal)",
+            "commands": [
+              {
+                "description": "Simple if-else example",
+                "command": "# Student marks check karna\nmarks = 85\n\nif marks >= 90:\n    grade = \"A+\"\n    print(f\"Excellent! Grade: {grade}\")\nelif marks >= 80:\n    grade = \"A\"\n    print(f\"Very Good! Grade: {grade}\")\nelif marks >= 70:\n    grade = \"B\"\n    print(f\"Good! Grade: {grade}\")\nelif marks >= 60:\n    grade = \"C\"\n    print(f\"Average! Grade: {grade}\")\nelse:\n    grade = \"F\"\n    print(f\"Need improvement! Grade: {grade}\")",
+                "explanation": "elif multiple conditions check karne ke liye use hota hai. Indentation (spaces) Python mein bahut important hai"
+              },
+              {
+                "description": "Multiple conditions check karna",
+                "command": "age = 20\nhas_license = True\nhas_car = False\n\n# Logical operators: and, or, not\nif age >= 18 and has_license:\n    print(\"Can drive legally\")\n    \n    if has_car:\n        print(\"Ready to go!\")\n    else:\n        print(\"Need to arrange a car\")\nelse:\n    print(\"Cannot drive yet\")\n\n# Not operator example\nif not has_car:\n    print(\"Car nahi hai, public transport use karo\")",
+                "explanation": "and, or, not logical operators hain. Nested if statements bhi use kar sakte hain"
+              }
+            ]
+          },
+          {
+            "heading": "For Loops - Repetitive Tasks",
+            "text": "For loop repetitive tasks ke liye use hota hai. Yeh lists, strings, aur ranges pe iterate kar sakta hai.",
+            "commands": [
+              {
+                "description": "List pe loop chalana",
+                "command": "# Students ki list pe loop\nstudents = [\"Ahmed\", \"Fatima\", \"Hassan\", \"Aisha\", \"Omar\"]\n\nprint(\"Class attendance:\")\nfor student in students:\n    print(f\"Present: {student}\")\n\n# Index ke saath loop\nprint(\"\\nRoll number wise:\")\nfor index, student in enumerate(students):\n    print(f\"Roll #{index + 1}: {student}\")",
+                "explanation": "enumerate() function index aur value dono deta hai. \\n new line ke liye use hota hai"
+              },
+              {
+                "description": "Range function ke saath loop",
+                "command": "# 1 se 10 tak numbers print karna\nprint(\"Numbers 1 to 10:\")\nfor i in range(1, 11):\n    print(i, end=\" \")\n\nprint(\"\\n\\nEven numbers 1 to 20:\")\nfor i in range(2, 21, 2):\n    print(i, end=\" \")\n\n# Table banana\nprint(\"\\n\\nTable of 5:\")\nfor i in range(1, 11):\n    result = 5 * i\n    print(f\"5 x {i} = {result}\")",
+                "explanation": "range(start, stop, step) function numbers generate karta hai. end=\" \" same line pe print karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "While Loops - Condition-based Repetition",
+            "text": "While loop tab tak chalta hai jab tak condition true hai. Yeh unknown iterations ke liye useful hai.",
+            "commands": [
+              {
+                "description": "Simple while loop",
+                "command": "# Countdown timer\ncount = 5\nprint(\"Countdown starting:\")\n\nwhile count > 0:\n    print(f\"{count}...\")\n    count = count - 1  # count -= 1 bhi likh sakte hain\n\nprint(\"Time's up!\")\n\n# User input until correct\npassword = \"\"\nwhile password != \"python123\":\n    password = input(\"Enter password: \")\n    if password != \"python123\":\n        print(\"Wrong password, try again!\")\n    else:\n        print(\"Access granted!\")",
+                "explanation": "While loop condition false hone tak chalta hai. count -= 1 shorthand hai count = count - 1 ka"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Functions - Code Ko Organize Karna",
+      "content": {
+        "intro": "Functions code ko reusable banate hain. Yeh AI/ML mein bahut important hain kyunki complex algorithms ko small functions mein divide karte hain.",
+        "sections": [
+          {
+            "heading": "Function Kya Hai?",
+            "text": "Function ek code block hai jo specific task perform karta hai. Yeh code reusability aur organization ke liye use hota hai.\n\nFunction ke fayde:\n• Code reusability\n• Better organization\n• Easy debugging\n• Modular programming\n• Easy testing",
+            "commands": [
+              {
+                "description": "Simple function banana",
+                "command": "# Simple greeting function\ndef greet_student(name):\n    print(f\"Assalam-o-Alaikum {name}!\")\n    print(\"Welcome to Python course\")\n\n# Function call karna\ngreet_student(\"Ahmed\")\ngreet_student(\"Fatima\")\ngreet_student(\"Hassan\")",
+                "explanation": "def keyword se function define karte hain. Parentheses mein parameters hote hain. Function call karne ke liye naam aur arguments use karte hain"
+              },
+              {
+                "description": "Return value wala function",
+                "command": "# Calculator functions\ndef add_numbers(a, b):\n    result = a + b\n    return result\n\ndef multiply_numbers(x, y):\n    return x * y\n\n# Functions use karna\nsum_result = add_numbers(10, 5)\nprint(f\"10 + 5 = {sum_result}\")\n\nproduct = multiply_numbers(4, 7)\nprint(f\"4 x 7 = {product}\")\n\n# Direct use bhi kar sakte hain\nprint(f\"15 + 25 = {add_numbers(15, 25)}\")",
+                "explanation": "return keyword value wapas karta hai. Function ka result variable mein store kar sakte hain"
+              }
+            ]
+          },
+          {
+            "heading": "Advanced Function Concepts",
+            "text": "Functions mein default parameters, multiple parameters, aur variable-length arguments use kar sakte hain.",
+            "commands": [
+              {
+                "description": "Default parameters aur multiple arguments",
+                "command": "# Default parameter wala function\ndef student_info(name, age, course=\"Computer Science\"):\n    print(f\"Name: {name}\")\n    print(f\"Age: {age}\")\n    print(f\"Course: {course}\")\n    print(\"-\" * 20)\n\n# Different ways to call\nstudent_info(\"Ali\", 20)  # Default course use hoga\nstudent_info(\"Fatima\", 22, \"Mathematics\")  # Custom course\n\n# Keyword arguments\nstudent_info(age=25, name=\"Hassan\", course=\"Physics\")",
+                "explanation": "Default parameters optional hote hain. Keyword arguments se order change kar sakte hain"
+              },
+              {
+                "description": "List processing function",
+                "command": "# Marks analysis function\ndef analyze_marks(marks_list):\n    if not marks_list:  # Empty list check\n        return \"No marks provided\"\n    \n    total = sum(marks_list)\n    average = total / len(marks_list)\n    highest = max(marks_list)\n    lowest = min(marks_list)\n    \n    return {\n        \"total\": total,\n        \"average\": round(average, 2),\n        \"highest\": highest,\n        \"lowest\": lowest,\n        \"count\": len(marks_list)\n    }\n\n# Function test karna\nstudent_marks = [85, 92, 78, 96, 88, 91]\nresult = analyze_marks(student_marks)\n\nprint(\"Marks Analysis:\")\nfor key, value in result.items():\n    print(f\"{key.title()}: {value}\")",
+                "explanation": "Function dictionary return kar sakta hai. round() function decimal places control karta hai. items() method key-value pairs deta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "File Handling - Data Ko Save Karna",
+      "content": {
+        "intro": "AI/ML mein data files se read/write karna bahut common hai. CSV, JSON, text files handle karna seekhenge.",
+        "sections": [
+          {
+            "heading": "Text Files Ke Saath Kaam",
+            "text": "File handling se data permanently store kar sakte hain. Python mein built-in functions hain files ke liye.",
+            "commands": [
+              {
+                "description": "File mein data write karna",
+                "command": "# Student data file mein save karna\nstudents_data = [\n    \"Ahmed Ali - Roll: 001 - Marks: 85\",\n    \"Fatima Khan - Roll: 002 - Marks: 92\",\n    \"Hassan Shah - Roll: 003 - Marks: 78\"\n]\n\n# File write karna\nwith open(\"students.txt\", \"w\") as file:\n    for student in students_data:\n        file.write(student + \"\\n\")\n\nprint(\"Data saved to students.txt\")\n\n# File read karna\nwith open(\"students.txt\", \"r\") as file:\n    content = file.read()\n    print(\"File content:\")\n    print(content)",
+                "explanation": "with statement automatically file close kar deta hai. 'w' write mode, 'r' read mode hai. \\n new line character hai"
+              }
+            ]
+          },
+          {
+            "heading": "CSV Files - Structured Data",
+            "text": "CSV (Comma Separated Values) files data science mein bahut use hoti hain. Yeh Excel jaisi structured data store karti hain.",
+            "commands": [
+              {
+                "description": "CSV file handling",
+                "command": "import csv\n\n# Student marks CSV banana\nstudent_records = [\n    [\"Name\", \"Roll\", \"Math\", \"Physics\", \"Chemistry\"],\n    [\"Ahmed\", \"001\", 85, 90, 78],\n    [\"Fatima\", \"002\", 92, 88, 95],\n    [\"Hassan\", \"003\", 78, 85, 82]\n]\n\n# CSV file write karna\nwith open(\"marks.csv\", \"w\", newline=\"\") as file:\n    writer = csv.writer(file)\n    for row in student_records:\n        writer.writerow(row)\n\nprint(\"CSV file created: marks.csv\")\n\n# CSV file read karna\nwith open(\"marks.csv\", \"r\") as file:\n    reader = csv.reader(file)\n    print(\"CSV Content:\")\n    for row in reader:\n        print(row)",
+                "explanation": "csv module import karna padta hai. writer.writerow() ek row write karta hai. reader har row ko list ki form mein deta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "title": "NumPy - Numerical Computing Ki Foundation",
+      "content": {
+        "intro": "NumPy AI/ML ki backbone hai. Yeh fast mathematical operations aur arrays provide karta hai. Har data scientist ko NumPy aana zaroori hai.",
+        "sections": [
+          {
+            "heading": "NumPy Kya Hai?",
+            "text": "NumPy (Numerical Python) scientific computing ke liye fundamental package hai. Yeh multi-dimensional arrays aur mathematical functions provide karta hai.\n\nNumPy ke fayde:\n• Fast mathematical operations\n• Memory efficient\n• Broadcasting capabilities\n• Integration with C/C++/Fortran\n• Foundation for other libraries",
+            "commands": [
+              {
+                "description": "NumPy install aur import karna",
+                "command": "# NumPy install (terminal mein)\n# pip install numpy\n\n# NumPy import karna\nimport numpy as np\n\n# Version check\nprint(f\"NumPy version: {np.__version__}\")\n\n# Simple array banana\narr = np.array([1, 2, 3, 4, 5])\nprint(f\"Array: {arr}\")\nprint(f\"Type: {type(arr)}\")",
+                "explanation": "np alias commonly use hota hai. np.array() Python list ko NumPy array mein convert karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Arrays aur Basic Operations",
+            "text": "NumPy arrays Python lists se zyada powerful aur fast hain. Multi-dimensional arrays bana sakte hain.",
+            "commands": [
+              {
+                "description": "Different types ke arrays",
+                "command": "import numpy as np\n\n# 1D array\nmarks = np.array([85, 90, 78, 92, 88])\nprint(f\"1D Array: {marks}\")\n\n# 2D array (matrix)\nstudent_marks = np.array([\n    [85, 90, 78],  # Student 1\n    [92, 88, 95],  # Student 2\n    [78, 85, 82]   # Student 3\n])\nprint(f\"2D Array:\\n{student_marks}\")\n\n# Array properties\nprint(f\"Shape: {student_marks.shape}\")\nprint(f\"Size: {student_marks.size}\")\nprint(f\"Dimensions: {student_marks.ndim}\")",
+                "explanation": "Shape array ka dimension batata hai. Size total elements, ndim number of dimensions batata hai"
+              },
+              {
+                "description": "Mathematical operations",
+                "command": "import numpy as np\n\n# Student marks\nmath_marks = np.array([85, 90, 78, 92, 88])\nphysics_marks = np.array([80, 85, 82, 90, 85])\n\n# Element-wise operations\ntotal_marks = math_marks + physics_marks\nprint(f\"Total marks: {total_marks}\")\n\n# Statistical operations\nprint(f\"Math average: {np.mean(math_marks)}\")\nprint(f\"Physics max: {np.max(physics_marks)}\")\nprint(f\"Math min: {np.min(math_marks)}\")\nprint(f\"Standard deviation: {np.std(math_marks)}\")\n\n# Percentage calculation\npercentage = (total_marks / 200) * 100\nprint(f\"Percentage: {percentage}\")",
+                "explanation": "NumPy element-wise operations automatically karta hai. Statistical functions built-in hain"
+              }
+            ]
+          },
+          {
+            "heading": "Array Creation aur Manipulation",
+            "text": "NumPy mein arrays banane ke different tarike hain. Data manipulation ke powerful tools hain.",
+            "commands": [
+              {
+                "description": "Different ways to create arrays",
+                "command": "import numpy as np\n\n# Zeros aur ones\nzeros_array = np.zeros(5)\nprint(f\"Zeros: {zeros_array}\")\n\nones_matrix = np.ones((3, 4))\nprint(f\"Ones matrix:\\n{ones_matrix}\")\n\n# Range arrays\nsequence = np.arange(0, 10, 2)  # 0 se 10 tak, step 2\nprint(f\"Sequence: {sequence}\")\n\nlinear_space = np.linspace(0, 1, 5)  # 0 se 1 tak 5 equal parts\nprint(f\"Linear space: {linear_space}\")\n\n# Random arrays\nrandom_array = np.random.random(5)\nprint(f\"Random: {random_array}\")\n\nrandom_integers = np.random.randint(1, 100, 5)\nprint(f\"Random integers: {random_integers}\")",
+                "explanation": "zeros(), ones() specific values se arrays banate hain. arange() range function jaisa hai. linspace() equal intervals banata hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "title": "Pandas - Data Analysis Ka Powerhouse",
+      "content": {
+        "intro": "Pandas data manipulation aur analysis ke liye sabse important library hai. CSV, Excel files handle karna, data cleaning, analysis - sab kuch Pandas mein hai.",
+        "sections": [
+          {
+            "heading": "Pandas Introduction",
+            "text": "Pandas (Panel Data) data structures aur data analysis tools provide karta hai. Yeh Excel ka programmatic version hai.\n\nPandas ke main components:\n• Series - 1D labeled array\n• DataFrame - 2D labeled data structure\n• Index - Row aur column labels",
+            "commands": [
+              {
+                "description": "Pandas install aur basic usage",
+                "command": "# Pandas install (terminal mein)\n# pip install pandas\n\nimport pandas as pd\nimport numpy as np\n\n# Series banana\nmarks = pd.Series([85, 90, 78, 92, 88], \n                 index=['Ahmed', 'Fatima', 'Hassan', 'Aisha', 'Omar'])\nprint(\"Student Marks:\")\nprint(marks)\nprint(f\"\\nAhmed's marks: {marks['Ahmed']}\")\nprint(f\"Average marks: {marks.mean()}\")",
+                "explanation": "pd alias commonly use hota hai. Series mein index labels hote hain. Dictionary jaisa access kar sakte hain"
+              }
+            ]
+          },
+          {
+            "heading": "DataFrames - Excel Ka Python Version",
+            "text": "DataFrame 2D table structure hai jisme rows aur columns hote hain. Yeh real-world data ke liye perfect hai.",
+            "commands": [
+              {
+                "description": "DataFrame banana aur basic operations",
+                "command": "import pandas as pd\n\n# Student data dictionary\nstudent_data = {\n    'Name': ['Ahmed', 'Fatima', 'Hassan', 'Aisha', 'Omar'],\n    'Age': [20, 19, 21, 20, 22],\n    'Math': [85, 90, 78, 92, 88],\n    'Physics': [80, 85, 82, 90, 85],\n    'Chemistry': [88, 92, 80, 88, 90]\n}\n\n# DataFrame banana\ndf = pd.DataFrame(student_data)\nprint(\"Student DataFrame:\")\nprint(df)\n\n# Basic info\nprint(f\"\\nShape: {df.shape}\")\nprint(f\"Columns: {list(df.columns)}\")\nprint(f\"\\nFirst 3 rows:\")\nprint(df.head(3))",
+                "explanation": "Dictionary se DataFrame banta hai. shape (rows, columns) batata hai. head() first few rows dikhata hai"
+              },
+              {
+                "description": "Data selection aur filtering",
+                "command": "import pandas as pd\n\n# Sample data\ndata = {\n    'Name': ['Ahmed', 'Fatima', 'Hassan', 'Aisha', 'Omar'],\n    'Math': [85, 90, 78, 92, 88],\n    'Physics': [80, 85, 82, 90, 85]\n}\ndf = pd.DataFrame(data)\n\n# Single column select\nprint(\"Math marks:\")\nprint(df['Math'])\n\n# Multiple columns\nprint(\"\\nName aur Math:\")\nprint(df[['Name', 'Math']])\n\n# Filtering - Math mein 85+ marks\nhigh_scorers = df[df['Math'] >= 85]\nprint(\"\\nHigh scorers in Math:\")\nprint(high_scorers)\n\n# Multiple conditions\ngood_students = df[(df['Math'] >= 85) & (df['Physics'] >= 85)]\nprint(\"\\nGood in both subjects:\")\nprint(good_students)",
+                "explanation": "Single brackets se Series milti hai, double brackets se DataFrame. & operator multiple conditions ke liye use hota hai"
+              }
+            ]
+          },
+          {
+            "heading": "Data Analysis aur Statistics",
+            "text": "Pandas mein powerful statistical functions hain jo data analysis ke liye zaroori hain.",
+            "commands": [
+              {
+                "description": "Statistical analysis",
+                "command": "import pandas as pd\n\n# Student performance data\ndata = {\n    'Name': ['Ahmed', 'Fatima', 'Hassan', 'Aisha', 'Omar', 'Zara'],\n    'Math': [85, 90, 78, 92, 88, 95],\n    'Physics': [80, 85, 82, 90, 85, 88],\n    'Chemistry': [88, 92, 80, 88, 90, 93]\n}\ndf = pd.DataFrame(data)\n\n# Descriptive statistics\nprint(\"Descriptive Statistics:\")\nprint(df.describe())\n\n# Subject-wise analysis\nprint(\"\\nSubject-wise averages:\")\nprint(f\"Math average: {df['Math'].mean():.2f}\")\nprint(f\"Physics average: {df['Physics'].mean():.2f}\")\nprint(f\"Chemistry average: {df['Chemistry'].mean():.2f}\")\n\n# Total marks calculate karna\ndf['Total'] = df['Math'] + df['Physics'] + df['Chemistry']\ndf['Percentage'] = (df['Total'] / 300) * 100\n\nprint(\"\\nFinal Results:\")\nprint(df[['Name', 'Total', 'Percentage']])",
+                "explanation": "describe() complete statistical summary deta hai. New columns add kar sakte hain calculations se"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "title": "Matplotlib - Data Visualization",
+      "content": {
+        "intro": "Data ko visualize karna AI/ML mein bahut important hai. Matplotlib se graphs, charts banate hain jo data ko samjhane mein madad karte hain.",
+        "sections": [
+          {
+            "heading": "Matplotlib Basics",
+            "text": "Matplotlib Python ki plotting library hai. Yeh MATLAB jaisi functionality provide karta hai.\n\nVisualization ke fayde:\n• Data patterns samajhna\n• Trends identify karna\n• Results present karna\n• Outliers detect karna",
+            "commands": [
+              {
+                "description": "Basic line plot",
+                "command": "import matplotlib.pyplot as plt\nimport numpy as np\n\n# Sample data - monthly sales\nmonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']\nsales = [15000, 18000, 22000, 25000, 28000, 32000]\n\n# Line plot banana\nplt.figure(figsize=(10, 6))\nplt.plot(months, sales, marker='o', linewidth=2, color='blue')\nplt.title('Monthly Sales Growth', fontsize=16)\nplt.xlabel('Months', fontsize=12)\nplt.ylabel('Sales (PKR)', fontsize=12)\nplt.grid(True, alpha=0.3)\nplt.show()\n\nprint(\"Line plot created successfully!\")",
+                "explanation": "plt.figure() plot size set karta hai. marker='o' points dikhata hai. grid() background grid add karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Different Types of Plots",
+            "text": "Different data types ke liye different plots use karte hain. Har plot ka apna purpose hai.",
+            "commands": [
+              {
+                "description": "Bar chart aur histogram",
+                "command": "import matplotlib.pyplot as plt\nimport numpy as np\n\n# Student marks data\nsubjects = ['Math', 'Physics', 'Chemistry', 'Biology', 'English']\naverage_marks = [85, 78, 82, 90, 88]\n\n# Bar chart\nplt.figure(figsize=(12, 5))\n\n# Subplot 1 - Bar chart\nplt.subplot(1, 2, 1)\nplt.bar(subjects, average_marks, color=['red', 'blue', 'green', 'orange', 'purple'])\nplt.title('Average Marks by Subject')\nplt.ylabel('Marks')\nplt.xticks(rotation=45)\n\n# Subplot 2 - Histogram\nall_marks = np.random.normal(80, 10, 100)  # Random marks data\nplt.subplot(1, 2, 2)\nplt.hist(all_marks, bins=15, color='skyblue', alpha=0.7)\nplt.title('Marks Distribution')\nplt.xlabel('Marks')\nplt.ylabel('Frequency')\n\nplt.tight_layout()\nplt.show()\n\nprint(\"Charts created successfully!\")",
+                "explanation": "subplot() multiple plots ek saath banane ke liye. xticks(rotation=45) labels rotate karta hai. tight_layout() spacing adjust karta hai"
+              },
+              {
+                "description": "Pie chart aur scatter plot",
+                "command": "import matplotlib.pyplot as plt\nimport numpy as np\n\n# Data for visualization\ngrade_distribution = [25, 35, 20, 15, 5]\ngrade_labels = ['A+', 'A', 'B', 'C', 'F']\ncolors = ['gold', 'lightgreen', 'lightblue', 'orange', 'red']\n\n# Create subplots\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))\n\n# Pie chart\nax1.pie(grade_distribution, labels=grade_labels, colors=colors, \n        autopct='%1.1f%%', startangle=90)\nax1.set_title('Grade Distribution')\n\n# Scatter plot - Study hours vs Marks\nstudy_hours = np.random.uniform(2, 10, 50)\nmarks = study_hours * 8 + np.random.normal(0, 5, 50)\n\nax2.scatter(study_hours, marks, alpha=0.6, color='purple')\nax2.set_xlabel('Study Hours per Day')\nax2.set_ylabel('Marks Obtained')\nax2.set_title('Study Hours vs Marks')\nax2.grid(True, alpha=0.3)\n\nplt.tight_layout()\nplt.show()\n\nprint(\"Advanced plots created!\")",
+                "explanation": "pie() chart percentages show karta hai. scatter() correlation dikhane ke liye use hota hai. alpha transparency control karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "title": "Machine Learning Introduction - AI Ki Duniya Mein Qadam",
+      "content": {
+        "intro": "Ab hum AI/ML ki actual duniya mein enter kar rahe hain. Machine Learning kya hai, kaise kaam karta hai, aur basic concepts kya hain - yeh sab seekhenge.",
+        "sections": [
+          {
+            "heading": "Machine Learning Kya Hai?",
+            "text": "Machine Learning ek AI technique hai jisme computer data se patterns seekhta hai aur predictions karta hai.\n\nML ke types:\n• Supervised Learning - Labeled data se seekhna\n• Unsupervised Learning - Unlabeled data se patterns\n• Reinforcement Learning - Trial aur error se seekhna\n\nReal-world examples:\n• Netflix recommendations\n• Google search results\n• Facebook face recognition\n• Spam email detection",
+            "commands": [
+              {
+                "description": "Scikit-learn install aur basic example",
+                "command": "# Scikit-learn install (terminal mein)\n# pip install scikit-learn\n\nfrom sklearn.linear_model import LinearRegression\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Simple example - Study hours vs Marks prediction\n# Training data\nstudy_hours = np.array([[1], [2], [3], [4], [5], [6], [7], [8]])\nmarks = np.array([45, 55, 65, 70, 80, 85, 90, 95])\n\n# Model banana aur train karna\nmodel = LinearRegression()\nmodel.fit(study_hours, marks)\n\n# Prediction karna\nnew_hours = np.array([[9], [10]])\npredicted_marks = model.predict(new_hours)\n\nprint(f\"9 hours study: {predicted_marks[0]:.1f} marks\")\nprint(f\"10 hours study: {predicted_marks[1]:.1f} marks\")\n\n# Visualization\nplt.scatter(study_hours, marks, color='blue', label='Actual')\nplt.plot(study_hours, model.predict(study_hours), color='red', label='Prediction Line')\nplt.xlabel('Study Hours')\nplt.ylabel('Marks')\nplt.title('Study Hours vs Marks Prediction')\nplt.legend()\nplt.show()",
+                "explanation": "LinearRegression simple ML algorithm hai. fit() method training karta hai. predict() future values predict karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Data Preprocessing - Data Ko Tayyar Karna",
+            "text": "Real-world data messy hota hai. ML se pehle data clean aur prepare karna padta hai.",
+            "commands": [
+              {
+                "description": "Data cleaning example",
+                "command": "import pandas as pd\nimport numpy as np\nfrom sklearn.preprocessing import StandardScaler\n\n# Sample messy data\ndata = {\n    'Name': ['Ahmed', 'Fatima', None, 'Hassan', 'Aisha'],\n    'Age': [20, 19, 21, None, 22],\n    'Math': [85, 90, 78, 92, None],\n    'Physics': [80, None, 82, 90, 85]\n}\n\ndf = pd.DataFrame(data)\nprint(\"Original Data:\")\nprint(df)\nprint(f\"\\nMissing values:\\n{df.isnull().sum()}\")\n\n# Missing values handle karna\n# Numerical columns mein mean fill karna\ndf['Age'].fillna(df['Age'].mean(), inplace=True)\ndf['Math'].fillna(df['Math'].mean(), inplace=True)\ndf['Physics'].fillna(df['Physics'].mean(), inplace=True)\n\n# String column mein 'Unknown' fill karna\ndf['Name'].fillna('Unknown', inplace=True)\n\nprint(\"\\nCleaned Data:\")\nprint(df)\n\n# Data normalization\nscaler = StandardScaler()\nnumeric_columns = ['Age', 'Math', 'Physics']\ndf[numeric_columns] = scaler.fit_transform(df[numeric_columns])\n\nprint(\"\\nNormalized Data:\")\nprint(df)",
+                "explanation": "isnull() missing values check karta hai. fillna() missing values fill karta hai. StandardScaler data normalize karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "title": "Classification - Categories Mein Data Ko Divide Karna",
+      "content": {
+        "intro": "Classification ML ka important part hai. Yeh data ko different categories mein divide karta hai. Email spam detection, image recognition - sab classification hai.",
+        "sections": [
+          {
+            "heading": "Classification Kya Hai?",
+            "text": "Classification supervised learning technique hai jo data ko predefined categories mein classify karta hai.\n\nCommon classification algorithms:\n• Logistic Regression\n• Decision Trees\n• Random Forest\n• Support Vector Machine (SVM)\n• K-Nearest Neighbors (KNN)",
+            "commands": [
+              {
+                "description": "Simple classification example",
+                "command": "from sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score, classification_report\nimport pandas as pd\nimport numpy as np\n\n# Student pass/fail prediction data\n# Features: Study hours, Previous marks, Attendance\ndata = {\n    'study_hours': [2, 8, 5, 9, 3, 7, 4, 6, 1, 10],\n    'prev_marks': [45, 85, 65, 90, 50, 80, 60, 75, 40, 95],\n    'attendance': [60, 95, 75, 98, 65, 90, 70, 85, 55, 100],\n    'result': [0, 1, 1, 1, 0, 1, 0, 1, 0, 1]  # 0=Fail, 1=Pass\n}\n\ndf = pd.DataFrame(data)\nprint(\"Student Data:\")\nprint(df)\n\n# Features aur target separate karna\nX = df[['study_hours', 'prev_marks', 'attendance']]\ny = df['result']\n\n# Train-test split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)\n\n# Model training\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train)\n\n# Predictions\ny_pred = model.predict(X_test)\naccuracy = accuracy_score(y_test, y_pred)\n\nprint(f\"\\nModel Accuracy: {accuracy:.2f}\")\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred))",
+                "explanation": "train_test_split data ko training aur testing mein divide karta hai. accuracy_score model performance measure karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Real-world Classification Project",
+            "text": "Iris flower classification - ML ki classic problem. Flower ke measurements se species predict karna.",
+            "commands": [
+              {
+                "description": "Iris classification project",
+                "command": "from sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, confusion_matrix\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Iris dataset load karna\niris = load_iris()\nX = iris.data  # Features: sepal length, sepal width, petal length, petal width\ny = iris.target  # Target: species (0, 1, 2)\n\n# DataFrame banana better understanding ke liye\ndf = pd.DataFrame(X, columns=iris.feature_names)\ndf['species'] = y\ndf['species_name'] = df['species'].map({0: 'setosa', 1: 'versicolor', 2: 'virginica'})\n\nprint(\"Iris Dataset:\")\nprint(df.head())\nprint(f\"\\nDataset shape: {df.shape}\")\nprint(f\"Species distribution:\\n{df['species_name'].value_counts()}\")\n\n# Train-test split\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Random Forest model\nrf_model = RandomForestClassifier(n_estimators=100, random_state=42)\nrf_model.fit(X_train, y_train)\n\n# Predictions aur evaluation\ny_pred = rf_model.predict(X_test)\naccuracy = accuracy_score(y_test, y_pred)\n\nprint(f\"\\nRandom Forest Accuracy: {accuracy:.3f}\")\n\n# Feature importance\nfeature_importance = pd.DataFrame({\n    'feature': iris.feature_names,\n    'importance': rf_model.feature_importances_\n}).sort_values('importance', ascending=False)\n\nprint(\"\\nFeature Importance:\")\nprint(feature_importance)",
+                "explanation": "load_iris() built-in dataset hai. RandomForestClassifier powerful algorithm hai. feature_importances_ batata hai kaunse features important hain"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "title": "Deep Learning Basics - Neural Networks Ki Duniya",
+      "content": {
+        "intro": "Deep Learning AI ka advanced part hai. Neural Networks kaise kaam karte hain aur TensorFlow/Keras se simple models kaise banate hain - yeh sab seekhenge.",
+        "sections": [
+          {
+            "heading": "Neural Networks Kya Hain?",
+            "text": "Neural Networks human brain se inspire hain. Yeh artificial neurons ka network hai jo complex patterns seekh sakta hai.\n\nNeural Network components:\n• Input Layer - Data input\n• Hidden Layers - Processing\n• Output Layer - Final result\n• Weights aur Biases - Learning parameters\n• Activation Functions - Non-linearity",
+            "commands": [
+              {
+                "description": "TensorFlow aur Keras setup",
+                "command": "# TensorFlow install (terminal mein)\n# pip install tensorflow\n\nimport tensorflow as tf\nfrom tensorflow import keras\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nprint(f\"TensorFlow version: {tf.__version__}\")\n\n# Simple neural network example\n# XOR problem - classic neural network problem\nX = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])\ny = np.array([[0], [1], [1], [0]])  # XOR output\n\nprint(\"XOR Problem:\")\nfor i in range(len(X)):\n    print(f\"Input: {X[i]} -> Output: {y[i][0]}\")\n\n# Simple model banana\nmodel = keras.Sequential([\n    keras.layers.Dense(4, activation='relu', input_shape=(2,)),\n    keras.layers.Dense(1, activation='sigmoid')\n])\n\n# Model compile karna\nmodel.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\n\nprint(\"\\nModel Summary:\")\nmodel.summary()",
+                "explanation": "Sequential model layers ko sequence mein arrange karta hai. Dense fully connected layer hai. relu aur sigmoid activation functions hain"
+              }
+            ]
+          },
+          {
+            "heading": "Model Training aur Prediction",
+            "text": "Neural network ko train karna aur predictions karna seekhte hain.",
+            "commands": [
+              {
+                "description": "Model training aur evaluation",
+                "command": "import tensorflow as tf\nfrom tensorflow import keras\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# XOR data\nX = np.array([[0, 0], [0, 1], [1, 0], [1, 1]], dtype=np.float32)\ny = np.array([[0], [1], [1], [0]], dtype=np.float32)\n\n# Model banana\nmodel = keras.Sequential([\n    keras.layers.Dense(8, activation='relu', input_shape=(2,)),\n    keras.layers.Dense(4, activation='relu'),\n    keras.layers.Dense(1, activation='sigmoid')\n])\n\nmodel.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\n\n# Model training\nprint(\"Training model...\")\nhistory = model.fit(X, y, epochs=1000, verbose=0)\n\n# Predictions\nprint(\"\\nPredictions:\")\nfor i in range(len(X)):\n    prediction = model.predict(X[i:i+1], verbose=0)[0][0]\n    print(f\"Input: {X[i]} -> Predicted: {prediction:.3f}, Actual: {y[i][0]}\")\n\n# Training history plot\nplt.figure(figsize=(12, 4))\n\nplt.subplot(1, 2, 1)\nplt.plot(history.history['loss'])\nplt.title('Model Loss')\nplt.xlabel('Epoch')\nplt.ylabel('Loss')\n\nplt.subplot(1, 2, 2)\nplt.plot(history.history['accuracy'])\nplt.title('Model Accuracy')\nplt.xlabel('Epoch')\nplt.ylabel('Accuracy')\n\nplt.tight_layout()\nplt.show()\n\nprint(\"\\nModel training completed!\")",
+                "explanation": "fit() method model train karta hai. epochs training iterations hain. history training progress track karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Image Classification with CNN",
+            "text": "Convolutional Neural Networks (CNN) images ke liye best hain. MNIST digits classification example.",
+            "commands": [
+              {
+                "description": "MNIST digit classification",
+                "command": "import tensorflow as tf\nfrom tensorflow import keras\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# MNIST dataset load karna\n(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()\n\nprint(f\"Training data shape: {x_train.shape}\")\nprint(f\"Test data shape: {x_test.shape}\")\n\n# Data preprocessing\nx_train = x_train.astype('float32') / 255.0\nx_test = x_test.astype('float32') / 255.0\n\n# Sample images dekhna\nplt.figure(figsize=(10, 4))\nfor i in range(5):\n    plt.subplot(1, 5, i+1)\n    plt.imshow(x_train[i], cmap='gray')\n    plt.title(f'Label: {y_train[i]}')\n    plt.axis('off')\nplt.show()\n\n# CNN model banana\nmodel = keras.Sequential([\n    keras.layers.Reshape((28, 28, 1), input_shape=(28, 28)),\n    keras.layers.Conv2D(32, 3, activation='relu'),\n    keras.layers.MaxPooling2D(),\n    keras.layers.Conv2D(64, 3, activation='relu'),\n    keras.layers.MaxPooling2D(),\n    keras.layers.Flatten(),\n    keras.layers.Dense(64, activation='relu'),\n    keras.layers.Dense(10, activation='softmax')\n])\n\nmodel.compile(optimizer='adam',\n              loss='sparse_categorical_crossentropy',\n              metrics=['accuracy'])\n\nprint(\"\\nCNN Model Summary:\")\nmodel.summary()",
+                "explanation": "Conv2D convolution layers hain jo features extract karte hain. MaxPooling2D size reduce karta hai. Flatten 2D ko 1D mein convert karta hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "title": "Web Scraping - Internet Se Data Nikalna",
+      "content": {
+        "intro": "Web scraping se websites se data automatically extract kar sakte hain. Yeh AI/ML projects ke liye data collect karne ka powerful tarika hai.",
+        "sections": [
+          {
+            "heading": "Web Scraping Kya Hai?",
+            "text": "Web scraping automated process hai jo websites se data extract karta hai. Yeh manual copy-paste ka alternative hai.\n\nWeb scraping ke uses:\n• Price monitoring\n• News aggregation\n• Social media analysis\n• Research data collection\n• Market analysis",
+            "commands": [
+              {
+                "description": "BeautifulSoup install aur basic usage",
+                "command": "# Required libraries install\n# pip install requests beautifulsoup4\n\nimport requests\nfrom bs4 import BeautifulSoup\n\n# Simple webpage scraping\nurl = 'https://httpbin.org/html'\nresponse = requests.get(url)\n\nprint(f\"Status Code: {response.status_code}\")\nprint(f\"Content Type: {response.headers['content-type']}\")\n\n# HTML parse karna\nsoup = BeautifulSoup(response.content, 'html.parser')\nprint(f\"Page Title: {soup.title.text}\")\n\n# All headings find karna\nheadings = soup.find_all('h1')\nfor heading in headings:\n    print(f\"Heading: {heading.text}\")",
+                "explanation": "requests library HTTP requests ke liye use hoti hai. BeautifulSoup HTML parsing ke liye. find_all() specific tags dhundta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Real Website Se Data Extract Karna",
+            "text": "Practical example mein quotes website se data extract karenge.",
+            "commands": [
+              {
+                "description": "Quotes scraping example",
+                "command": "import requests\nfrom bs4 import BeautifulSoup\nimport pandas as pd\n\n# Quotes website scraping\nurl = 'http://quotes.toscrape.com/'\nresponse = requests.get(url)\nsoup = BeautifulSoup(response.content, 'html.parser')\n\n# Quotes extract karna\nquotes_data = []\nquotes = soup.find_all('div', class_='quote')\n\nfor quote in quotes:\n    text = quote.find('span', class_='text').text\n    author = quote.find('small', class_='author').text\n    tags = [tag.text for tag in quote.find_all('a', class_='tag')]\n    \n    quotes_data.append({\n        'quote': text,\n        'author': author,\n        'tags': ', '.join(tags)\n    })\n\n# DataFrame mein convert karna\ndf = pd.DataFrame(quotes_data)\nprint(\"Scraped Quotes:\")\nprint(df.head())\n\n# CSV mein save karna\ndf.to_csv('quotes.csv', index=False)\nprint(\"\\nData saved to quotes.csv\")",
+                "explanation": "find() single element dhundta hai, find_all() multiple elements. class_ attribute CSS class ke liye use hota hai"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "title": "API Integration - External Services Se Data Lena",
+      "content": {
+        "intro": "APIs (Application Programming Interfaces) se external services ka data access kar sakte hain. Weather data, social media posts, financial data - sab APIs se mil sakta hai.",
+        "sections": [
+          {
+            "heading": "API Kya Hai?",
+            "text": "API ek interface hai jo different software applications ko communicate karne ki facility deta hai.\n\nAPI ke types:\n• REST APIs - Most common\n• GraphQL APIs - Flexible queries\n• SOAP APIs - Enterprise level\n\nPopular APIs:\n• Weather APIs\n• Social Media APIs\n• Financial APIs\n• News APIs",
+            "commands": [
+              {
+                "description": "Simple API call example",
+                "command": "import requests\nimport json\n\n# JSONPlaceholder API - Free testing API\nurl = 'https://jsonplaceholder.typicode.com/posts'\n\n# GET request\nresponse = requests.get(url)\nprint(f\"Status Code: {response.status_code}\")\n\n# JSON data parse karna\nif response.status_code == 200:\n    posts = response.json()\n    print(f\"Total posts: {len(posts)}\")\n    \n    # First 3 posts dikhana\n    for i in range(3):\n        post = posts[i]\n        print(f\"\\nPost {i+1}:\")\n        print(f\"Title: {post['title']}\")\n        print(f\"Body: {post['body'][:50]}...\")\nelse:\n    print(\"API call failed\")",
+                "explanation": "requests.get() GET request bhejta hai. response.json() JSON data ko Python dictionary mein convert karta hai"
+              }
+            ]
+          },
+          {
+            "heading": "Weather API Integration",
+            "text": "Real-world example mein weather API use karke weather data fetch karenge.",
+            "commands": [
+              {
+                "description": "Weather data fetching",
+                "command": "import requests\nimport pandas as pd\nfrom datetime import datetime\n\n# OpenWeatherMap API (Free tier available)\n# Note: Real API key chahiye, yeh example hai\napi_key = 'your_api_key_here'\ncity = 'Karachi'\nurl = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'\n\n# Mock data for demonstration\nmock_weather_data = {\n    'name': 'Karachi',\n    'main': {\n        'temp': 28.5,\n        'humidity': 65,\n        'pressure': 1013\n    },\n    'weather': [\n        {\n            'main': 'Clear',\n            'description': 'clear sky'\n        }\n    ],\n    'wind': {\n        'speed': 3.2\n    }\n}\n\n# Weather data process karna\nweather_info = {\n    'city': mock_weather_data['name'],\n    'temperature': mock_weather_data['main']['temp'],\n    'humidity': mock_weather_data['main']['humidity'],\n    'pressure': mock_weather_data['main']['pressure'],\n    'condition': mock_weather_data['weather'][0]['main'],\n    'description': mock_weather_data['weather'][0]['description'],\n    'wind_speed': mock_weather_data['wind']['speed'],\n    'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n}\n\nprint(\"Weather Information:\")\nfor key, value in weather_info.items():\n    print(f\"{key.title()}: {value}\")\n\n# DataFrame mein convert karna\ndf = pd.DataFrame([weather_info])\nprint(\"\\nWeather DataFrame:\")\nprint(df)",
+                "explanation": "API keys authentication ke liye use hoti hain. datetime module current time ke liye. Dictionary comprehension data organize karne ke liye"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
