@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-1916892851128865">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://api.emailjs.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com;">
     <title>Contact Us - Neuro-Dev</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -37,7 +39,8 @@
                 <div style="background: #111; padding: 25px; border-radius: 10px; text-align: center;">
                     <i class="fab fa-youtube" style="font-size: 2rem; color: #ff0000; margin-bottom: 15px;"></i>
                     <h3 style="color: #00ff41;">YouTube</h3>
-                    <p>Channel pe comment kar sakte hain</p>
+                    <p><a href="https://youtube.com/@NeuroShade" target="_blank" rel="noopener noreferrer" style="color: #ff0000; text-decoration: none;">@NeuroShade</a></p>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Channel pe comment kar sakte hain</p>
                 </div>
                 
                 <div style="background: #111; padding: 25px; border-radius: 10px; text-align: center;">
@@ -46,10 +49,11 @@
                     <p><a href="https://instagram.com/who_is_the_black_hat" target="_blank" rel="noopener noreferrer" style="color: #e4405f; text-decoration: none;">@who_is_the_black_hat</a></p>
                 </div>
                 
-                <div style="background: #111; padding: 25px; border-radius: 10px; text-align: center;">
+                <div style="background: #111; padding: 25px; border-radius: 10px; text-align: center; cursor: pointer;" onclick="window.open('https://t.me/c/2543912119/3', '_blank')">
                     <i class="fab fa-telegram" style="font-size: 2rem; color: #0088cc; margin-bottom: 15px;"></i>
                     <h3 style="color: #00ff41;">Telegram</h3>
-                    <p>Quick response ke liye</p>
+                    <p style="color: #0088cc; font-weight: bold;">Click to Join</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Quick response ke liye</p>
                 </div>
                 
                 <div style="background: #111; padding: 25px; border-radius: 10px; text-align: center;">
@@ -61,19 +65,20 @@
 
             <div style="background: #111; padding: 30px; border-radius: 10px; margin-bottom: 20px;">
                 <h2 style="color: #00ff41;">Feedback Form</h2>
-                <form style="display: grid; gap: 15px;">
-                    <input type="text" placeholder="Aapka Naam" style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px;">
-                    <input type="email" placeholder="Email Address" style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px;">
-                    <select style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px;">
-                        <option>Message Type</option>
-                        <option>Question</option>
-                        <option>Suggestion</option>
-                        <option>Bug Report</option>
-                        <option>Other</option>
+                <form id="feedbackForm" style="display: grid; gap: 15px;">
+                    <input type="text" id="userName" placeholder="Aapka Naam" required style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px;">
+                    <input type="email" id="userEmail" placeholder="Email Address" required style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px;">
+                    <select id="messageType" required style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px;">
+                        <option value="">Message Type</option>
+                        <option value="question">Question</option>
+                        <option value="suggestion">Suggestion</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="other">Other</option>
                     </select>
-                    <textarea placeholder="Aapka Message" rows="5" style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px; resize: vertical;"></textarea>
-                    <button type="submit" style="padding: 12px; background: #00ff41; color: #000; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Send Message</button>
+                    <textarea id="userMessage" placeholder="Aapka Message" rows="5" required style="padding: 12px; background: #000; border: 1px solid #333; color: #ccc; border-radius: 5px; resize: vertical;"></textarea>
+                    <button type="submit" id="submitBtn" style="padding: 12px; background: #00ff41; color: #000; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">Send Message</button>
                 </form>
+                <div id="formStatus" style="margin-top: 15px; padding: 10px; border-radius: 5px; display: none;"></div>
             </div>
 
             <div style="background: #111; padding: 30px; border-radius: 10px;">
@@ -82,5 +87,151 @@
             </div>
         </div>
     </div>
+    <script>
+        // Feedback form functionality
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formStatus = document.getElementById('formStatus');
+            const form = this;
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('userName').value,
+                email: document.getElementById('userEmail').value,
+                type: document.getElementById('messageType').value,
+                message: document.getElementById('userMessage').value,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent
+            };
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Send email via EmailJS
+            sendEmailJS(formData)
+                .then((success) => {
+                    if (success) {
+                        // Show success message
+                        formStatus.style.display = 'block';
+                        formStatus.style.background = '#00ff41';
+                        formStatus.style.color = '#000';
+                        formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Message sent successfully! Hum jald hi reply karenge.';
+                        
+                        // Store in localStorage as backup
+                        const existingFeedback = JSON.parse(localStorage.getItem('neuro-dev-feedback') || '[]');
+                        existingFeedback.push(formData);
+                        localStorage.setItem('neuro-dev-feedback', JSON.stringify(existingFeedback));
+                        
+                        // Reset form
+                        form.reset();
+                    } else {
+                        // Show error message
+                        formStatus.style.display = 'block';
+                        formStatus.style.background = '#ff4444';
+                        formStatus.style.color = '#fff';
+                        formStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Email send failed! Please try again.';
+                    }
+                    
+                    // Reset button
+                    submitBtn.innerHTML = 'Send Message';
+                    submitBtn.disabled = false;
+                    
+                    // Hide status after 5 seconds
+                    setTimeout(() => {
+                        formStatus.style.display = 'none';
+                    }, 5000);
+                })
+                .catch((error) => {
+                    console.error('Form submission error:', error);
+                    
+                    // Show error message
+                    formStatus.style.display = 'block';
+                    formStatus.style.background = '#ff4444';
+                    formStatus.style.color = '#fff';
+                    formStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Something went wrong! Please try again.';
+                    
+                    // Reset button
+                    submitBtn.innerHTML = 'Send Message';
+                    submitBtn.disabled = false;
+                    
+                    // Hide status after 5 seconds
+                    setTimeout(() => {
+                        formStatus.style.display = 'none';
+                    }, 5000);
+                });
+        });
+        
+        // EmailJS Integration
+        function sendEmailJS(data) {
+            // Initialize EmailJS with your public key
+            emailjs.init('GBIK-MZ2qsoKOIIPg');
+            
+            const templateParams = {
+                from_name: data.name,
+                from_email: data.email,
+                message_type: data.type,
+                message: data.message,
+                timestamp: new Date(data.timestamp).toLocaleString(),
+                website: 'Neuro-Dev Contact Form'
+            };
+            
+            console.log('Sending email with params:', templateParams);
+            
+            // Try different common service/template combinations
+            const serviceOptions = [
+                { service: 'default_service', template: 'template_1' },
+                { service: 'service_1', template: 'template_1' },
+                { service: 'gmail', template: 'contact_form' },
+                { service: 'default_service', template: 'contact_form' }
+            ];
+            
+            // Use the provided service ID
+            return emailjs.send('service_bs3u62o', 'template_1', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    return true;
+                })
+                .catch(function(error) {
+                    console.error('Email send failed:', error);
+                    console.log('Please check your EmailJS dashboard for correct Service ID and Template ID');
+                    console.log('Current attempt: Service="' + serviceOptions[0].service + '", Template="' + serviceOptions[0].template + '"');
+                    return false;
+                });
+        }
+        
+        // Form validation styling
+        const inputs = document.querySelectorAll('#feedbackForm input, #feedbackForm select, #feedbackForm textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#00ff41';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.borderColor = '#333';
+            });
+            
+            input.addEventListener('invalid', function() {
+                this.style.borderColor = '#ff4444';
+            });
+        });
+        
+        // Hover effect for Telegram card
+        const telegramCard = document.querySelector('[onclick*="telegram"]');
+        if (telegramCard) {
+            telegramCard.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.transition = 'all 0.3s ease';
+                this.style.boxShadow = '0 10px 20px rgba(0, 255, 65, 0.2)';
+            });
+            
+            telegramCard.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        }
+    </script>
 </body>
 </html>
