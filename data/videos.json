@@ -25,12 +25,12 @@
     {
       "id": 3,
       "title": "File Management in Termux",
-      "videoId": "dQw4w9WgXcQ",
+      "videoId": "zHE5OPHpdq8",
       "module": "termux-basics",
       "moduleName": "Module 1: Termux Basics",
       "lesson": 3,
       "description": "Files aur folders create, copy, move aur delete karna. Complete file management tutorial.",
-      "duration": "12:20",
+      "duration": "6:45",
       "tags": ["files", "folders", "management", "copy", "move"]
     },
     {
