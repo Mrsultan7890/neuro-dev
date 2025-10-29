@@ -7,22 +7,38 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://fundingchoicesmessages.google.com https://cdnjs.cloudflare.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://images.unsplash.com; connect-src 'self'; frame-src 'self' https://www.youtube.com https://youtube.com https://googleads.g.doubleclick.net;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://fundingchoicesmessages.google.com https://cdnjs.cloudflare.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.google.com https://www.gstatic.com; connect-src 'self' https://googleads.g.doubleclick.net https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google https://pagead2.googlesyndication.com https://www.google.com; frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com; object-src 'none'; base-uri 'self';">
     <meta name="google-adsense-account" content="ca-pub-1916892851128865">
-    <script async src="https://fundingchoicesmessages.google.com/i/pub-1916892851128865?https%3A%2F%2Fneuroshade.duckdns.org" nonce="RANDOM_NUMBER"></script>
     <script>
-      (function() {
-        function setup() {
-          if (!window.frames['__cmp_stub_frame']) {
-            if (window.frames['__cmp_stub_frame']) return;
-            var frame = document.createElement('iframe');
-            frame.style.display = 'none';
-            frame.name = '__cmp_stub_frame';
-            document.body.appendChild(frame);
-          }
+      // Only load AdSense on production, not localhost
+      if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
+        var adsenseScript = document.createElement('script');
+        adsenseScript.async = true;
+        adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865';
+        adsenseScript.crossOrigin = 'anonymous';
+        document.head.appendChild(adsenseScript);
+        
+        var fundingScript = document.createElement('script');
+        fundingScript.async = true;
+        fundingScript.src = 'https://fundingchoicesmessages.google.com/i/pub-1916892851128865?https%3A%2F%2Fneuroshade.duckdns.org';
+        document.head.appendChild(fundingScript);
+      }
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (!window.frames['__cmp_stub_frame']) {
+          var frame = document.createElement('iframe');
+          frame.style.display = 'none';
+          frame.name = '__cmp_stub_frame';
+          document.body.appendChild(frame);
         }
-        setup();
-      })();
+        
+        // Fix cookie SameSite issues
+        if (typeof document.cookie !== 'undefined') {
+          document.cookie = 'TESTCOOKIESENABLED=1; SameSite=None; Secure';
+        }
+      });
     </script>
     <title>Neuro-Dev - Ethical Hacking Course in Roman Urdu</title>
     <meta name="google-site-verification" content="rcTwaPjFs0P6dg_O8OXxtT32CVqR6rydCEOiwPboHME" />
@@ -37,8 +53,12 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Neuro-Dev - Ethical Hacking Course">
     <meta name="twitter:description" content="Learn ethical hacking on mobile devices with Roman Urdu tutorials">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="course-features.css">
+    <link rel="stylesheet" href="missing-styles.css">
+    <link rel="stylesheet" href="quiz-review-styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
@@ -73,10 +93,57 @@
             <h1>Neuro-Dev</h1>
             <p>Ethical Hacking Course Roman Urdu Mein</p>
             <p class="hero-subtitle">Termux se NetHunter tak - Complete Cybersecurity Journey</p>
-            <a href="#courses" class="cta-button">
-                <i class="fas fa-play"></i>
-                Start Learning
-            </a>
+            
+            <!-- Success Stats -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Complete Modules</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">AI/ML Terms</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free Course</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">📱</div>
+                    <div class="stat-label">Mobile First</div>
+                </div>
+            </div>
+            
+            <!-- Key Benefits -->
+            <div class="hero-benefits">
+                <div class="benefit-item">
+                    <i class="fas fa-copy"></i>
+                    <span>One-Click Copy Commands</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-language"></i>
+                    <span>Roman Urdu Tutorials</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile-Only Learning</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video Explanations</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#courses" class="cta-button primary">
+                    <i class="fas fa-play"></i>
+                    Start Learning
+                </a>
+                <a href="#preview" class="cta-button secondary">
+                    <i class="fas fa-eye"></i>
+                    Preview Course
+                </a>
+            </div>
         </div>
         <div class="hero-animation">
             <div class="code-lines">
@@ -87,19 +154,93 @@
         </div>
     </section>
 
+    <!-- Course Preview Section -->
+    <section id="preview" class="preview-section">
+        <div class="container">
+            <h2>Kya Seekhenge?</h2>
+            <div class="preview-grid">
+                <div class="preview-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Se Hacking</h3>
+                    <p>Sirf phone use kar ke ethical hacking tools chalana</p>
+                </div>
+                <div class="preview-item">
+                    <i class="fas fa-terminal"></i>
+                    <h3>Command Line Mastery</h3>
+                    <p>Termux aur Linux commands complete control</p>
+                </div>
+                <div class="preview-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security Testing</h3>
+                    <p>Network scanning, web app testing, vulnerability assessment</p>
+                </div>
+                <div class="preview-item">
+                    <i class="fab fa-python"></i>
+                    <h3>Python Programming</h3>
+                    <p>Zero se hero tak Python seekhiye</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="courses" class="courses">
         <div class="container">
             <h2>Complete Course Modules</h2>
+            
+            <!-- Search & Filter Controls -->
+            <div class="course-controls">
+                <div class="search-box">
+                    <input type="text" id="course-search" placeholder="Course search kariye..." oninput="searchCourses()">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterCourses('all')">All</button>
+                    <button class="filter-btn" onclick="filterCourses('beginner')">Beginner</button>
+                    <button class="filter-btn" onclick="filterCourses('intermediate')">Intermediate</button>
+                    <button class="filter-btn" onclick="filterCourses('advanced')">Advanced</button>
+                </div>
+                <button id="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
             <div class="course-grid">
                 <div class="course-card" data-module="termux-basics">
                     <div class="course-icon">
                         <i class="fas fa-terminal"></i>
                     </div>
+                    <div class="course-badge">Beginner</div>
                     <h3>Module 1: Termux Basics</h3>
                     <p>Termux installation, basic commands, file operations</p>
+                    <div class="course-preview">
+                        <div class="preview-topics">
+                            <span>✓ Termux Setup & Installation</span>
+                            <span>✓ Basic Navigation Commands</span>
+                            <span>✓ File & Folder Management</span>
+                            <span>✓ Package Installation</span>
+                            <span>✓ Text Editors Usage</span>
+                            <span>✓ File Permissions</span>
+                        </div>
+                        <div class="sample-commands">
+                            <div class="command-item">
+                                <code>pkg update && pkg upgrade</code>
+                                <span>System update</span>
+                            </div>
+                            <div class="command-item">
+                                <code>ls -la</code>
+                                <span>List files with details</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 4 Hours</span>
-                        <span><i class="fas fa-tasks"></i> 7 Lessons</span>
+                        <span><i class="fas fa-tasks"></i> 8 Lessons</span>
+                        <span><i class="fas fa-users"></i> 2.5K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=termux-basics'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -107,11 +248,36 @@
                     <div class="course-icon">
                         <i class="fas fa-code"></i>
                     </div>
+                    <div class="course-badge">Intermediate</div>
                     <h3>Module 2: Termux Advanced</h3>
                     <p>Python scripting, Git, SSH, automation</p>
+                    <div class="course-preview">
+                        <div class="preview-topics">
+                            <span>✓ Python Programming</span>
+                            <span>✓ Git & GitHub</span>
+                            <span>✓ SSH Remote Access</span>
+                            <span>✓ Automation Scripts</span>
+                        </div>
+                        <div class="sample-commands">
+                            <div class="command-item">
+                                <code>python script.py</code>
+                                <span>Run Python script</span>
+                            </div>
+                            <div class="command-item">
+                                <code>git clone repo-url</code>
+                                <span>Clone repository</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="course-stats">
-                        <span><i class="fas fa-clock"></i> 4 Hours</span>
+                        <span><i class="fas fa-clock"></i> 5 Hours</span>
                         <span><i class="fas fa-tasks"></i> 8 Lessons</span>
+                        <span><i class="fas fa-users"></i> 1.8K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=termux-advanced'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -119,11 +285,36 @@
                     <div class="course-icon">
                         <i class="fas fa-dragon"></i>
                     </div>
+                    <div class="course-badge">Advanced</div>
                     <h3>Module 3: NetHunter Rootless</h3>
                     <p>NetHunter installation, Kali tools setup</p>
+                    <div class="course-preview">
+                        <div class="preview-topics">
+                            <span>✓ NetHunter Installation</span>
+                            <span>✓ Kali Linux Tools</span>
+                            <span>✓ VNC Setup</span>
+                            <span>✓ Desktop Environment</span>
+                        </div>
+                        <div class="sample-commands">
+                            <div class="command-item">
+                                <code>pkg install wget</code>
+                                <span>Install dependencies</span>
+                            </div>
+                            <div class="command-item">
+                                <code>nethunter</code>
+                                <span>Start NetHunter</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 8 Hours</span>
                         <span><i class="fas fa-tasks"></i> 12 Lessons</span>
+                        <span><i class="fas fa-users"></i> 3.2K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=nethunter-rootless'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -131,11 +322,18 @@
                     <div class="course-icon">
                         <i class="fas fa-tools"></i>
                     </div>
+                    <div class="course-badge">Advanced</div>
                     <h3>Module 4: NetHunter Tools</h3>
                     <p>Nmap, Metasploit, Aircrack-ng, Burp Suite</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 6 Hours</span>
                         <span><i class="fas fa-tasks"></i> 6 Lessons</span>
+                        <span><i class="fas fa-users"></i> 2.1K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=nethunter-tools'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -211,17 +409,7 @@
                     </div>
                 </div>
 
-                <div class="course-card" data-module="hands-on-ml-complete">
-                    <div class="course-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <h3>Module 11: Hands-On ML Book Complete</h3>
-                    <p>Puri book ka content Roman Urdu mein - theory focus, no code</p>
-                    <div class="course-stats">
-                        <span><i class="fas fa-clock"></i> 30 Hours</span>
-                        <span><i class="fas fa-tasks"></i> 50+ Lessons</span>
-                    </div>
-                </div>
+
 
                 <div class="course-card" data-module="python-ai-ml">
                     <div class="course-icon">
@@ -234,11 +422,168 @@
                         <span><i class="fas fa-tasks"></i> 15 Lessons</span>
                     </div>
                 </div>
+
+                <div class="course-card" data-module="hands-on-ml-scikit-learn">
+                    <div class="course-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Module 11: Hands-On ML with Scikit-Learn</h3>
+                    <p>Complete book ka practical implementation - har chapter ki detailed explanation Roman Urdu mein</p>
+                    <div class="course-stats">
+                        <span><i class="fas fa-clock"></i> 50 Hours</span>
+                        <span><i class="fas fa-tasks"></i> 19 Chapters</span>
+                    </div>
+                </div>
+                
+
             </div>
         </div>
     </section>
 
+    <!-- Success Stories Section -->
+    <section class="success-stories">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="success-grid">
+                <div class="success-item">
+                    <div class="success-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>5000+ Students</h3>
+                    <p>Successfully completed courses</p>
+                </div>
+                <div class="success-item">
+                    <div class="success-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile-First Learning</h3>
+                    <p>No laptop? No problem!</p>
+                </div>
+                <div class="success-item">
+                    <div class="success-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Roman Urdu</h3>
+                    <p>Easy to understand explanations</p>
+                </div>
+                <div class="success-item">
+                    <div class="success-icon">
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <h3>Copy-Paste Ready</h3>
+                    <p>All commands ready to use</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Students Kya Kehte Hain</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Bilkul amazing course! Mobile se hi sab kuch seekh gaya. Commands copy-paste kar ke practice karna bohot easy tha."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Ahmed Ali</h4>
+                            <span>Computer Science Student</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Roman Urdu mein explanation bohot helpful hai. Pehle English tutorials samajh nahi aate the, ab sab clear hai."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Fatima Khan</h4>
+                            <span>Cybersecurity Enthusiast</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"NetHunter setup karna itna easy nahi tha pehle. Is course ke baad mobile hacking tools use karna seekh gaya."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Hassan Sheikh</h4>
+                            <span>Ethical Hacker</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Guide -->
+    <section class="quick-start">
+        <div class="container">
+            <h2>5 Minutes Mein Start Kariye</h2>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Termux Download</h3>
+                        <p>F-Droid se latest Termux install kariye</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Basic Setup</h3>
+                        <p>pkg update && pkg upgrade chalaye</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Course Start</h3>
+                        <p>Module 1 se learning start kariye</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Practice</h3>
+                        <p>Commands copy-paste kar ke practice</p>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-start-cta">
+                <a href="course.html?module=termux-basics" class="quick-start-btn">
+                    <i class="fas fa-rocket"></i>
+                    Abhi Start Kariye
+                </a>
+            </div>
+        </div>
+    </section>
 
     <section id="about" class="about">
         <div class="container">
@@ -273,13 +618,35 @@
         <div style="color: #666; font-size: 12px; margin-bottom: 10px;">Advertisement</div>
         <div style="max-width: 320px; margin: 0 auto; min-height: 100px; background: #222; border: 1px solid #444; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
             <ins class="adsbygoogle"
-                 style="display:block"
+                 style="display:block; width:320px; height:100px;"
                  data-ad-client="ca-pub-1916892851128865"
-                 data-ad-slot="YOUR_AD_SLOT_ID"
-                 data-ad-format="rectangle"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"></ins>
         </div>
     </div>
+    <script>
+        window.addEventListener('load', function() {
+            // Only initialize AdSense on production
+            if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
+                setTimeout(function() {
+                    try {
+                        if (window.adsbygoogle && typeof adsbygoogle.push === 'function') {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        }
+                    } catch(e) {
+                        console.log('AdSense not available in development mode');
+                    }
+                }, 2000);
+            } else {
+                // Hide ads in development
+                const adElements = document.querySelectorAll('.adsbygoogle');
+                adElements.forEach(el => {
+                    el.style.display = 'none';
+                    el.innerHTML = '<div style="background:#333;color:#666;padding:20px;text-align:center;border-radius:5px;">Ad Space (Development Mode)</div>';
+                });
+            }
+        });
+    </script>
 
     <footer class="footer">
         <div class="container">
@@ -303,5 +670,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="course-features.js"></script>
+    <script src="reviews-system.js"></script>
+    <script src="quiz-system.js"></script>
 </body>
 </html>

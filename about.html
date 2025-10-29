@@ -83,6 +83,29 @@
             font-size: 2rem;
             color: #000;
         }
+        .social-links a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer-section ul li a:hover {
+            color: #00ff41;
+        }
     </style>
 </head>
 <body>
@@ -111,7 +134,7 @@
     <section class="about-hero">
         <div class="container">
             <h1>About Neuro-Dev</h1>
-            <p>Hum ek dedicated team hain jo ethical hacking aur cybersecurity education ko accessible banana chahte hain har Pakistani aur Indian student ke liye.</p>
+            <p>Hum ek dedicated team hain jo ethical hacking aur cybersecurity education ko accessible banana chahte hain har student ke liye.</p>
         </div>
     </section>
 
@@ -149,9 +172,10 @@
                     <h3 style="color: #fff;">NeuroShade</h3>
                     <p style="color: #00ff41; margin-bottom: 15px;">Founder & Lead Instructor</p>
                     <p style="color: #ccc;">Certified Ethical Hacker with 5+ years experience in cybersecurity. Specialized in mobile penetration testing aur network security.</p>
-                    <div style="margin-top: 20px;">
-                        <a href="https://youtube.com/@NeuroShade" style="color: #ff0000; margin-right: 15px;"><i class="fab fa-youtube"></i></a>
-                        <a href="https://instagram.com/who_is_the_black_hat" style="color: #e4405f;"><i class="fab fa-instagram"></i></a>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="https://instagram.com/who_is_the_black_hat" target="_blank" style="color: #e4405f; margin-right: 15px; font-size: 1.5rem; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@NeuroShade" target="_blank" style="color: #ff0000; margin-right: 15px; font-size: 1.5rem; text-decoration: none;"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.me/neuroshade" target="_blank" style="color: #0088cc; font-size: 1.5rem; text-decoration: none;"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
                 <div class="team-member">
@@ -195,27 +219,77 @@
                 </div>
                 <div style="text-align: center; padding: 20px;">
                     <i class="fas fa-certificate" style="font-size: 2rem; color: #00ff41; margin-bottom: 15px;"></i>
-                    <h4 style="color: #fff; margin-bottom: 10px;">Practical Skills</h4>
-                    <p style="color: #ccc;">Real-world scenarios aur hands-on practice with actual tools.</p>
+                    <h4 style="color: #fff; margin-bottom: 10px;">Practical Learning</h4>
+                    <p style="color: #ccc;">Real-world scenarios aur hands-on practice ke saath complete learning experience.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="ads-section">
+    <section class="stats-section" style="background: #0a0a0a; padding: 60px 0;">
         <div class="container">
-            <div class="ad-label">Advertisement</div>
-            <div class="google-ad">
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1916892851128865" data-ad-slot="YOUR_AD_SLOT_ID" data-ad-format="rectangle"></ins>
-                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
+                <div>
+                    <h3 style="color: #00ff41; font-size: 2.5rem; margin-bottom: 10px;">10,000+</h3>
+                    <p style="color: #ccc;">Active Students</p>
+                </div>
+                <div>
+                    <h3 style="color: #00ff41; font-size: 2.5rem; margin-bottom: 10px;">50+</h3>
+                    <p style="color: #ccc;">Video Tutorials</p>
+                </div>
+                <div>
+                    <h3 style="color: #00ff41; font-size: 2.5rem; margin-bottom: 10px;">6</h3>
+                    <p style="color: #ccc;">Complete Modules</p>
+                </div>
+                <div>
+                    <h3 style="color: #00ff41; font-size: 2.5rem; margin-bottom: 10px;">24/7</h3>
+                    <p style="color: #ccc;">Community Support</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Neuro-Dev. Educational purposes only.</p>
-            <p>Ethical hacking sikhiye, responsible use kariye.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-brain"></i> Neuro-Dev</h3>
+                    <p>Ethical hacking aur cybersecurity education ka trusted platform. Mobile devices pe complete penetration testing course.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/who_is_the_black_hat" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@neuroshde?si=60TTioUHLH6Zloih" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://t.me/neuroshade" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#courses">Courses</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="#">Termux Basics</a></li>
+                        <li><a href="#">Network Security</a></li>
+                        <li><a href="#">Web Penetration Testing</a></li>
+                        <li><a href="#">Mobile Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fab fa-instagram"></i> @who_is_the_black_hat</p>
+                    <p><i class="fab fa-youtube"></i> @NeuroShade</p>
+                    <p><i class="fab fa-telegram"></i> @neuroshade</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Neuro-Dev. All rights reserved. | Ethical hacking education platform</p>
+            </div>
         </div>
     </footer>
 

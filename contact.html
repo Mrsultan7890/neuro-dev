@@ -97,14 +97,35 @@
             const formStatus = document.getElementById('formStatus');
             const form = this;
             
-            // Get form data
+            // Get and validate form data
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const type = document.getElementById('messageType').value;
+            const message = document.getElementById('userMessage').value.trim();
+            
+            // Input validation
+            if (name.length < 2 || name.length > 50) {
+                showFormError('Name must be between 2-50 characters');
+                return;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showFormError('Please enter a valid email address');
+                return;
+            }
+            
+            if (message.length < 10 || message.length > 1000) {
+                showFormError('Message must be between 10-1000 characters');
+                return;
+            }
+            
             const formData = {
-                name: document.getElementById('userName').value,
-                email: document.getElementById('userEmail').value,
-                type: document.getElementById('messageType').value,
-                message: document.getElementById('userMessage').value,
+                name: name.replace(/[<>"'&]/g, ''),
+                email: email,
+                type: type,
+                message: message.replace(/[<>"'&]/g, ''),
                 timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent
+                userAgent: 'Browser'
             };
             
             // Show loading state
@@ -147,22 +168,38 @@
                 })
                 .catch((error) => {
                     console.error('Form submission error:', error);
-                    
-                    // Show error message
-                    formStatus.style.display = 'block';
-                    formStatus.style.background = '#ff4444';
-                    formStatus.style.color = '#fff';
-                    formStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Something went wrong! Please try again.';
+                    showFormError('Something went wrong! Please try again.');
                     
                     // Reset button
                     submitBtn.innerHTML = 'Send Message';
                     submitBtn.disabled = false;
-                    
-                    // Hide status after 5 seconds
-                    setTimeout(() => {
-                        formStatus.style.display = 'none';
-                    }, 5000);
                 });
+        });
+        
+        function showFormError(message) {
+            const formStatus = document.getElementById('formStatus');
+            formStatus.style.display = 'block';
+            formStatus.style.background = '#ff4444';
+            formStatus.style.color = '#fff';
+            formStatus.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Rate limiting
+        let lastSubmission = 0;
+        const RATE_LIMIT = 30000; // 30 seconds
+        
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            const now = Date.now();
+            if (now - lastSubmission < RATE_LIMIT) {
+                e.preventDefault();
+                showFormError('Please wait 30 seconds before submitting again.');
+                return;
+            }
+            lastSubmission = now;
         });
         
         // EmailJS Integration

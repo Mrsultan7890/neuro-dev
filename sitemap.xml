@@ -4,76 +4,73 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
 <url>
-  <loc>http://neuroshade.duckdns.org/</loc>
+  <loc>https://neuroshade.duckdns.org/</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/blog.html</loc>
+  <loc>https://neuroshade.duckdns.org/blog.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/testimonials.html</loc>
+  <loc>https://neuroshade.duckdns.org/testimonials.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/faq.html</loc>
+  <loc>https://neuroshade.duckdns.org/faq.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/videos.html</loc>
+  <loc>https://neuroshade.duckdns.org/videos.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/python-ide.html</loc>
+  <loc>https://neuroshade.duckdns.org/python-ide.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/dictionary.html</loc>
+  <loc>https://neuroshade.duckdns.org/dictionary.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/about.html</loc>
+  <loc>https://neuroshade.duckdns.org/about.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/contact.html</loc>
+  <loc>https://neuroshade.duckdns.org/contact.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/privacy.html</loc>
+  <loc>https://neuroshade.duckdns.org/privacy.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/terms.html</loc>
+  <loc>https://neuroshade.duckdns.org/terms.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/disclaimer.html</loc>
+  <loc>https://neuroshade.duckdns.org/disclaimer.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/donate.html</loc>
+  <loc>https://neuroshade.duckdns.org/donate.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://neuroshade.duckdns.org/index.html</loc>
+  <loc>https://neuroshade.duckdns.org/index.html</loc>
   <lastmod>2025-10-29T05:40:01+00:00</lastmod>
   <priority>0.64</priority>
 </url>

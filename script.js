@@ -52,11 +52,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Course card click handlers with validation
+// Simple course navigation - only working functionality
 document.addEventListener('DOMContentLoaded', () => {
+    // Add click handlers for course cards (backup navigation)
     const courseCards = document.querySelectorAll('.course-card');
     courseCards.forEach(card => {
-        card.addEventListener('click', () => {
+        // Only add click to card area, not buttons
+        card.addEventListener('click', (e) => {
+            // Don't trigger if clicking on button
+            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                return;
+            }
+            
             const module = card.getAttribute('data-module');
             if (module) {
                 window.location.href = `course.html?module=${encodeURIComponent(module)}`;

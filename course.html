@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neuro-Dev Course</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865" crossorigin="anonymous"></script>
+    <script>
+      // Only load AdSense on production
+      if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
+        var adsenseScript = document.createElement('script');
+        adsenseScript.async = true;
+        adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865';
+        adsenseScript.crossOrigin = 'anonymous';
+        document.head.appendChild(adsenseScript);
+      }
+    </script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="course-features.css">
+    <link rel="stylesheet" href="quiz-review-styles.css">
+    <script src="course-features.js"></script>
+    <script src="reviews-system.js"></script>
+    <script src="quiz-system.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
     <style>
         .course-container {
@@ -279,6 +293,75 @@
             }
         }
         
+        .notes-section {
+            background: #111;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #333;
+        }
+        
+        .notes-section h4 {
+            color: #00ff41;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        #lesson-notes {
+            width: 100%;
+            min-height: 100px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            color: #ccc;
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        #lesson-notes:focus {
+            outline: none;
+            border-color: #00ff41;
+        }
+        
+        .notes-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .save-note-btn, .clear-note-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .save-note-btn {
+            background: #00ff41;
+            color: #000;
+        }
+        
+        .clear-note-btn {
+            background: #ff6b6b;
+            color: #fff;
+        }
+        
+        .quiz-btn {
+            background: linear-gradient(45deg, #ff9500, #ff7700) !important;
+            color: #fff !important;
+        }
+        
+        .quiz-btn:hover {
+            background: linear-gradient(45deg, #ff7700, #ff5500) !important;
+        }
+        
         @media (max-width: 480px) {
             .lesson-title {
                 font-size: 1.2rem;
@@ -336,12 +419,32 @@
         <div class="content">
             <div id="lesson-content"></div>
             
+            <!-- Notes Section -->
+            <div class="notes-section">
+                <h4><i class="fas fa-sticky-note"></i> Personal Notes</h4>
+                <textarea id="lesson-notes" placeholder="Apne notes yahan likhiye..."></textarea>
+                <div class="notes-buttons">
+                    <button onclick="saveCurrentNote()" class="save-note-btn">
+                        <i class="fas fa-save"></i> Save Note
+                    </button>
+                    <button onclick="clearCurrentNote()" class="clear-note-btn">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+            </div>
+            
             <div class="nav-buttons">
                 <button class="nav-btn" id="prev-btn">
                     <i class="fas fa-chevron-left"></i> Previous
                 </button>
                 <button class="nav-btn" id="next-btn">
                     Next <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="nav-btn" id="complete-btn" onclick="markLessonComplete()">
+                    <i class="fas fa-check"></i> Mark Complete
+                </button>
+                <button class="nav-btn quiz-btn" onclick="startModuleQuiz()">
+                    <i class="fas fa-question-circle"></i> Take Quiz
                 </button>
             </div>
         </div>
@@ -364,13 +467,17 @@
             let module = urlParams.get('module') || 'termux-basics';
             
             // Sanitize module parameter
-            module = module.replace(/[^a-zA-Z0-9-]/g, '');
+            module = module.replace(/[^a-zA-Z0-9-_]/g, '');
+            if (module.length > 50) {
+                module = module.substring(0, 50);
+            }
             
             const allowedModules = [
                 'termux-basics', 'termux-advanced', 'nethunter-rootless', 
                 'nethunter-tools', 'networking', 'web-security', 
                 'mobile-osint', 'nethunter-troubleshooting', 'python-complete',
-                'python-basics-kids', 'hands-on-ml-complete', 'python-ai-ml'
+                'python-basics-kids', 'python-ai-ml', 'hands-on-ml-scikit-learn',
+                'ml-book-chapters-1-3', 'ml-book-chapters-4-6', 'ml-book-chapters-7-9'
             ];
             
             if (!allowedModules.includes(module)) {
@@ -378,7 +485,13 @@
             }
             
             try {
-                const response = await fetch(`data/${encodeURIComponent(module)}.json`);
+                const response = await fetch(`data/${encodeURIComponent(module)}.json`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
                 if (!response.ok) {
                     throw new Error(`Course not found: ${response.status}`);
                 }
@@ -388,7 +501,12 @@
                     throw new Error('Empty course data');
                 }
                 
-                courseData = JSON.parse(text);
+                try {
+                    courseData = JSON.parse(text);
+                } catch (parseError) {
+                    console.error('JSON Parse Error:', parseError);
+                    throw new Error(`Invalid JSON format: ${parseError.message}`);
+                }
                 
                 if (!courseData || !courseData.moduleTitle || !courseData.lessons || !Array.isArray(courseData.lessons)) {
                     throw new Error('Invalid course data structure');
@@ -399,8 +517,20 @@
                 }
                 
                 // Sanitize course title
-                const sanitizedTitle = courseData.moduleTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                document.getElementById('module-title').textContent = sanitizedTitle;
+                const sanitizedTitle = courseData.moduleTitle.replace(/[<>"'&]/g, function(match) {
+                    const escapeMap = {
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#x27;',
+                        '&': '&amp;'
+                    };
+                    return escapeMap[match];
+                });
+                const moduleTitle = document.getElementById('module-title');
+                if (moduleTitle) {
+                    moduleTitle.textContent = sanitizedTitle;
+                }
                 document.title = `${sanitizedTitle} - Neuro-Dev Course`;
                 
                 loadLessonNav();
@@ -665,6 +795,85 @@
                 }
             }
         });
+        
+        // Notes System Functions
+        let currentModule = '';
+        
+        function saveCurrentNote() {
+            const noteText = document.getElementById('lesson-notes').value;
+            if (noteText.trim() && currentModule && currentLesson) {
+                localStorage.setItem(`note-${currentModule}-${currentLesson}`, noteText);
+                showNotification('Note saved!', 'success');
+            }
+        }
+        
+        function clearCurrentNote() {
+            document.getElementById('lesson-notes').value = '';
+            if (currentModule && currentLesson) {
+                localStorage.removeItem(`note-${currentModule}-${currentLesson}`);
+                showNotification('Note cleared!', 'success');
+            }
+        }
+        
+        function loadLessonNote() {
+            if (currentModule && currentLesson) {
+                const savedNote = localStorage.getItem(`note-${currentModule}-${currentLesson}`) || '';
+                document.getElementById('lesson-notes').value = savedNote;
+            }
+        }
+        
+        function markLessonComplete() {
+            if (currentModule && currentLesson) {
+                let progress = JSON.parse(localStorage.getItem('course-progress') || '{}');
+                if (!progress[currentModule]) progress[currentModule] = [];
+                if (!progress[currentModule].includes(currentLesson)) {
+                    progress[currentModule].push(currentLesson);
+                    localStorage.setItem('course-progress', JSON.stringify(progress));
+                }
+                showNotification('Lesson marked complete!', 'success');
+            }
+        }
+        
+        function startModuleQuiz() {
+            if (currentModule) {
+                if (typeof QuizSystem !== 'undefined') {
+                    if (!window.quizSystem) {
+                        window.quizSystem = new QuizSystem();
+                    }
+                    window.quizSystem.startQuiz(currentModule);
+                } else {
+                    // Fallback: Load quiz system dynamically
+                    const script = document.createElement('script');
+                    script.src = 'quiz-system.js';
+                    script.onload = () => {
+                        window.quizSystem = new QuizSystem();
+                        window.quizSystem.startQuiz(currentModule);
+                    };
+                    document.head.appendChild(script);
+                }
+            } else {
+                showNotification('Module not found', 'error');
+            }
+        }
+        
+        // Set current module from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        currentModule = urlParams.get('module') || 'termux-basics';
+        
+        // Initialize quiz system when page loads
+        setTimeout(() => {
+            if (typeof QuizSystem !== 'undefined' && !window.quizSystem) {
+                window.quizSystem = new QuizSystem();
+                console.log('Quiz system initialized');
+            }
+        }, 1000);
+        
+        // Update showLesson to load notes
+        const originalShowLesson = showLesson;
+        showLesson = function(lessonId) {
+            originalShowLesson(lessonId);
+            setTimeout(loadLessonNote, 100);
+        };
         
         // Mobile menu toggle
         const hamburger = document.getElementById('hamburger');
