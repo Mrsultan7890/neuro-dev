@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ML/AI Dictionary - Neuro-Dev</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
     <style>
@@ -255,24 +256,30 @@
         let dictionaryData = null;
         let allTerms = [];
 
-        // Load dictionary data
+        // Load dictionary data in chunks
         async function loadDictionary() {
-            console.log('Loading dictionary...');
+            console.log('Loading dictionary chunks...');
             try {
-                console.log('Fetching ml-dictionary.json...');
-                const response = await fetch('data/ml-dictionary.json');
-                console.log('Response status:', response.status);
+                const chunks = ['dict-chunk-1.json', 'dict-chunk-2.json', 'dict-chunk-3.json', 'dict-chunk-4.json', 'dict-chunk-5.json', 'dict-chunk-6.json', 'dict-chunk-7.json', 'dict-chunk-8.json', 'dict-chunk-9.json', 'dict-chunk-10.json', 'dict-chunk-11.json', 'dict-chunk-12.json', 'dict-chunk-13.json'];
+                let allCategories = [];
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
+                for (const chunk of chunks) {
+                    console.log(`Fetching ${chunk}...`);
+                    const response = await fetch(`data/${chunk}`);
+                    console.log('Response status:', response.status);
+                
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    const chunkData = await response.json();
+                    if (chunkData && chunkData.categories) {
+                        allCategories = allCategories.concat(chunkData.categories);
+                    }
                 }
                 
-                dictionaryData = await response.json();
-                console.log('Dictionary data loaded:', dictionaryData);
-                
-                if (!dictionaryData || !dictionaryData.categories) {
-                    throw new Error('Invalid dictionary structure');
-                }
+                dictionaryData = { categories: allCategories };
+                console.log('Dictionary chunks loaded:', dictionaryData);
                 
                 allTerms = [];
                 dictionaryData.categories.forEach(category => {

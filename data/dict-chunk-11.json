@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Game Development",
+      "terms": [
+        {"term": "Game Engine", "meaning": "Game development ke liye complete framework.", "example": "Unity, Unreal Engine, Godot."},
+        {"term": "Game Loop", "meaning": "Game ka main execution cycle.", "example": "Input, Update, Render cycle."},
+        {"term": "Sprite", "meaning": "2D games mein use hone wala image object.", "example": "Character sprites, background images."},
+        {"term": "Texture", "meaning": "3D objects pe apply hone wala surface image.", "example": "Wall textures, character skin textures."},
+        {"term": "Animation", "meaning": "Objects ko movement aur life dene ka process.", "example": "Character walking, object rotation."},
+        {"term": "Physics Engine", "meaning": "Real-world physics simulate karne wala system.", "example": "Gravity, collision detection, rigid body dynamics."},
+        {"term": "Collision Detection", "meaning": "Game objects ke beech contact detect karna.", "example": "Player hitting wall, bullet hitting target."},
+        {"term": "Artificial Intelligence", "meaning": "Non-player characters ka intelligent behavior.", "example": "Enemy AI, pathfinding algorithms."},
+        {"term": "Level Design", "meaning": "Game stages aur environments create karna.", "example": "Map layout, obstacle placement."},
+        {"term": "User Interface", "meaning": "Player interaction ke liye visual elements.", "example": "Health bars, menus, buttons."},
+        {"term": "Sound Design", "meaning": "Game audio effects aur music integration.", "example": "Background music, sound effects."},
+        {"term": "Multiplayer", "meaning": "Multiple players simultaneously game khel sakte hain.", "example": "Online gaming, local co-op."},
+        {"term": "Game Optimization", "meaning": "Performance improve karne ke techniques.", "example": "Frame rate optimization, memory management."},
+        {"term": "Procedural Generation", "meaning": "Algorithmic content creation during runtime.", "example": "Random level generation, infinite worlds."},
+        {"term": "Shader", "meaning": "Graphics rendering effects create karne wala program.", "example": "Lighting effects, water simulation."},
+        {"term": "Game Testing", "meaning": "Bugs aur gameplay issues find karne ka process.", "example": "Quality assurance, beta testing."},
+        {"term": "Game Monetization", "meaning": "Games se revenue generate karne ke methods.", "example": "In-app purchases, advertisements."},
+        {"term": "Cross-Platform", "meaning": "Multiple devices pe same game run karna.", "example": "PC, mobile, console compatibility."},
+        {"term": "Game Analytics", "meaning": "Player behavior aur game performance data analysis.", "example": "Player retention, level completion rates."},
+        {"term": "Virtual Reality Gaming", "meaning": "Immersive VR environment mein gaming experience.", "example": "VR headsets, motion controllers."}
+      ]
+    },
+    {
+      "name": "Web Development",
+      "terms": [
+        {"term": "Frontend", "meaning": "User interface aur user experience part of web application.", "example": "HTML, CSS, JavaScript client-side code."},
+        {"term": "Backend", "meaning": "Server-side logic aur database operations.", "example": "Node.js, Python Django, PHP Laravel."},
+        {"term": "Full Stack", "meaning": "Frontend aur backend dono technologies mein expertise.", "example": "MEAN stack, LAMP stack development."},
+        {"term": "Responsive Design", "meaning": "Different screen sizes ke liye adaptive web layout.", "example": "Mobile-first design, CSS media queries."},
+        {"term": "Single Page Application", "meaning": "Ek hi page mein dynamic content loading.", "example": "React, Angular, Vue.js applications."},
+        {"term": "REST API", "meaning": "Representational State Transfer web services.", "example": "HTTP methods GET, POST, PUT, DELETE."},
+        {"term": "GraphQL", "meaning": "Flexible query language for APIs.", "example": "Facebook developed data fetching approach."},
+        {"term": "WebSocket", "meaning": "Real-time bidirectional communication protocol.", "example": "Chat applications, live updates."},
+        {"term": "Progressive Web App", "meaning": "Web app with native mobile app features.", "example": "Offline functionality, push notifications."},
+        {"term": "Server-Side Rendering", "meaning": "HTML generation on server before sending to client.", "example": "Next.js, Nuxt.js frameworks."},
+        {"term": "Content Management System", "meaning": "Website content manage karne ka platform.", "example": "WordPress, Drupal, Joomla."},
+        {"term": "Web Security", "meaning": "Web applications ko cyber threats se protect karna.", "example": "HTTPS, CSRF protection, input validation."},
+        {"term": "Web Performance", "meaning": "Website loading speed aur user experience optimize karna.", "example": "Image compression, CDN, caching."},
+        {"term": "Cross-Browser Compatibility", "meaning": "Different browsers mein consistent functionality.", "example": "Chrome, Firefox, Safari, Edge support."},
+        {"term": "Web Accessibility", "meaning": "Disabled users ke liye website usability.", "example": "Screen reader support, keyboard navigation."},
+        {"term": "Search Engine Optimization", "meaning": "Website visibility improve karna search engines mein.", "example": "Meta tags, keywords, site structure."},
+        {"term": "Web Analytics", "meaning": "Website traffic aur user behavior analysis.", "example": "Google Analytics, user engagement metrics."},
+        {"term": "Content Delivery Network", "meaning": "Global servers network for fast content delivery.", "example": "CloudFlare, AWS CloudFront."},
+        {"term": "Web Hosting", "meaning": "Website files ko internet pe accessible banana.", "example": "Shared hosting, VPS, dedicated servers."},
+        {"term": "Domain Name System", "meaning": "Website names ko IP addresses mein convert karna.", "example": "www.example.com to 192.168.1.1."}
+      ]
+    }
+  ]
+}

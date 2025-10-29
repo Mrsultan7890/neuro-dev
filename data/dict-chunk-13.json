@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Software Engineering",
+      "terms": [
+        {"term": "Agile Development", "meaning": "Iterative software development methodology.", "example": "Scrum, Kanban development processes."},
+        {"term": "DevOps", "meaning": "Development aur Operations teams ka collaboration.", "example": "CI/CD pipelines, automated deployment."},
+        {"term": "Microservices", "meaning": "Application ko small independent services mein divide karna.", "example": "Netflix architecture, containerized services."},
+        {"term": "API", "meaning": "Application Programming Interface for system communication.", "example": "REST APIs, GraphQL endpoints."},
+        {"term": "Version Control", "meaning": "Code changes track aur manage karne ka system.", "example": "Git, GitHub, GitLab repositories."},
+        {"term": "Unit Testing", "meaning": "Individual code components ko test karna.", "example": "JUnit tests, pytest test cases."},
+        {"term": "Code Review", "meaning": "Team members ka code quality check karna.", "example": "Pull request reviews, peer code inspection."},
+        {"term": "Refactoring", "meaning": "Code structure improve karna without changing functionality.", "example": "Clean code practices, design pattern implementation."},
+        {"term": "Technical Debt", "meaning": "Quick fixes ka long-term maintenance cost.", "example": "Shortcuts that need future cleanup."},
+        {"term": "Design Patterns", "meaning": "Common programming problems ke proven solutions.", "example": "Singleton, Observer, Factory patterns."},
+        {"term": "Database Design", "meaning": "Efficient data storage aur retrieval structure.", "example": "Normalization, indexing, query optimization."},
+        {"term": "Load Balancing", "meaning": "Multiple servers mein traffic distribute karna.", "example": "Nginx load balancer, AWS ELB."},
+        {"term": "Caching", "meaning": "Frequently used data ko fast access ke liye store karna.", "example": "Redis cache, CDN caching."},
+        {"term": "Scalability", "meaning": "System ka increased load handle kar sakne ki ability.", "example": "Horizontal scaling, vertical scaling."},
+        {"term": "Security Testing", "meaning": "Application vulnerabilities find karne ka process.", "example": "Penetration testing, OWASP security checks."},
+        {"term": "Performance Optimization", "meaning": "Application speed aur efficiency improve karna.", "example": "Code profiling, database query optimization."},
+        {"term": "Documentation", "meaning": "Code aur system behavior explain karne wala text.", "example": "API documentation, code comments."},
+        {"term": "Deployment", "meaning": "Application ko production environment mein release karna.", "example": "Docker containers, Kubernetes deployment."},
+        {"term": "Monitoring", "meaning": "Application performance aur health track karna.", "example": "Application logs, performance metrics."},
+        {"term": "Backup Strategy", "meaning": "Data loss prevent karne ke liye backup planning.", "example": "Database backups, disaster recovery plans."}
+      ]
+    },
+    {
+      "name": "Augmented & Virtual Reality",
+      "terms": [
+        {"term": "Virtual Reality", "meaning": "Computer-generated 3D environment mein complete immersion.", "example": "VR headsets like Oculus, PlayStation VR."},
+        {"term": "Augmented Reality", "meaning": "Real world mein digital objects overlay karna.", "example": "Pokemon Go, Snapchat filters."},
+        {"term": "Mixed Reality", "meaning": "Physical aur digital worlds ka seamless blend.", "example": "Microsoft HoloLens, Magic Leap."},
+        {"term": "Head-Mounted Display", "meaning": "VR/AR experience ke liye head pe wear karne wala device.", "example": "VR headsets, AR glasses."},
+        {"term": "Motion Tracking", "meaning": "User movements detect kar ke virtual environment mein reflect karna.", "example": "Hand tracking, full body motion capture."},
+        {"term": "Haptic Feedback", "meaning": "Touch sensations provide karne wala technology.", "example": "VR controllers mein vibration, force feedback."},
+        {"term": "Field of View", "meaning": "VR/AR display mein visible area ka angle.", "example": "Wide FOV for better immersion."},
+        {"term": "Latency", "meaning": "User action aur visual response ke beech delay.", "example": "Low latency prevents motion sickness."},
+        {"term": "Stereoscopic Display", "meaning": "Each eye ke liye separate image to create 3D depth.", "example": "VR headsets dual screen setup."},
+        {"term": "Spatial Computing", "meaning": "3D space mein digital content interact karna.", "example": "AR apps that understand room geometry."},
+        {"term": "SLAM", "meaning": "Simultaneous Localization and Mapping for AR tracking.", "example": "Phone camera tracking room for AR placement."},
+        {"term": "Occlusion", "meaning": "Real objects ke peeche virtual objects hide karna.", "example": "AR character walking behind real table."},
+        {"term": "Photogrammetry", "meaning": "Photos se 3D models create karna.", "example": "Real objects ko VR mein recreate karna."},
+        {"term": "Volumetric Capture", "meaning": "3D space mein complete scene record karna.", "example": "360-degree video with depth information."},
+        {"term": "Eye Tracking", "meaning": "User ki eye movements monitor karna.", "example": "Foveated rendering, gaze-based interaction."},
+        {"term": "Foveated Rendering", "meaning": "Eye focus area mein high quality, periphery mein low quality.", "example": "Performance optimization in VR."},
+        {"term": "Presence", "meaning": "Virtual environment mein 'being there' ka feeling.", "example": "High-quality VR experience psychological effect."},
+        {"term": "Telepresence", "meaning": "Remote location mein virtually present hone ka experience.", "example": "VR meetings, remote collaboration."},
+        {"term": "Digital Twin", "meaning": "Real-world object ya environment ka virtual replica.", "example": "Factory floor ka VR simulation."},
+        {"term": "Metaverse", "meaning": "Persistent virtual worlds ka interconnected network.", "example": "Virtual social spaces, digital economies."}
+      ]
+    }
+  ]
+}

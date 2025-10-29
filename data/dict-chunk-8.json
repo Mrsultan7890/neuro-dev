@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Fintech & Digital Finance",
+      "terms": [
+        {"term": "Digital Wallet", "meaning": "Electronic device ya service for digital transactions.", "example": "PayPal, Apple Pay, Google Pay."},
+        {"term": "Cryptocurrency Exchange", "meaning": "Digital currencies trade karne ka platform.", "example": "Binance, Coinbase, Kraken."},
+        {"term": "Peer-to-Peer Lending", "meaning": "Direct lending between individuals without banks.", "example": "LendingClub, Prosper platforms."},
+        {"term": "Robo-Advisor", "meaning": "Automated investment management using algorithms.", "example": "Betterment, Wealthfront services."},
+        {"term": "Open Banking", "meaning": "Third-party access to bank data through APIs.", "example": "PSD2 regulation, financial data sharing."},
+        {"term": "RegTech", "meaning": "Technology solutions for regulatory compliance.", "example": "AML software, compliance automation."},
+        {"term": "InsurTech", "meaning": "Technology innovation in insurance industry.", "example": "Digital insurance, usage-based policies."},
+        {"term": "Neobank", "meaning": "Digital-only banks without physical branches.", "example": "Chime, Revolut, N26 banks."},
+        {"term": "Buy Now Pay Later", "meaning": "Short-term financing for online purchases.", "example": "Klarna, Afterpay, Affirm services."},
+        {"term": "Central Bank Digital Currency", "meaning": "Government-issued digital version of national currency.", "example": "Digital yuan, digital euro projects."},
+        {"term": "Algorithmic Trading", "meaning": "Automated trading using computer algorithms.", "example": "High-frequency trading, quantitative strategies."},
+        {"term": "Credit Scoring", "meaning": "AI-based creditworthiness assessment.", "example": "Alternative data, machine learning models."},
+        {"term": "Fraud Detection", "meaning": "AI systems for identifying fraudulent transactions.", "example": "Real-time monitoring, anomaly detection."},
+        {"term": "Know Your Customer", "meaning": "Identity verification aur customer due diligence.", "example": "Digital onboarding, biometric verification."},
+        {"term": "Anti-Money Laundering", "meaning": "Illegal money flow detection aur prevention.", "example": "Transaction monitoring, suspicious activity reports."},
+        {"term": "Payment Gateway", "meaning": "Online payment processing service.", "example": "Stripe, PayPal, Razorpay integration."},
+        {"term": "Digital Identity", "meaning": "Electronic representation of individual identity.", "example": "Blockchain identity, self-sovereign identity."},
+        {"term": "Embedded Finance", "meaning": "Financial services integrated into non-financial platforms.", "example": "Uber payments, Shopify lending."},
+        {"term": "Decentralized Finance", "meaning": "Blockchain-based financial services without intermediaries.", "example": "Uniswap, Compound, Aave protocols."},
+        {"term": "Financial Inclusion", "meaning": "Underserved populations ko financial services provide karna.", "example": "Mobile banking, microfinance solutions."}
+      ]
+    },
+    {
+      "name": "Digital Marketing & Analytics",
+      "terms": [
+        {"term": "Search Engine Optimization", "meaning": "Website visibility improve karna search engines mein.", "example": "Google ranking, keyword optimization."},
+        {"term": "Pay-Per-Click", "meaning": "Online advertising model where advertisers pay for each click.", "example": "Google Ads, Facebook Ads campaigns."},
+        {"term": "Social Media Marketing", "meaning": "Social platforms use kar ke brand promotion.", "example": "Facebook, Instagram, Twitter marketing."},
+        {"term": "Content Marketing", "meaning": "Valuable content create kar ke audience attract karna.", "example": "Blog posts, videos, infographics."},
+        {"term": "Email Marketing", "meaning": "Email campaigns se customer engagement.", "example": "Newsletter, promotional emails."},
+        {"term": "Conversion Rate Optimization", "meaning": "Website visitors ko customers mein convert karne ka process.", "example": "A/B testing, landing page optimization."},
+        {"term": "Customer Relationship Management", "meaning": "Customer interactions aur data manage karne ka system.", "example": "Salesforce, HubSpot CRM platforms."},
+        {"term": "Marketing Automation", "meaning": "Marketing tasks ko automatically execute karna.", "example": "Email sequences, lead nurturing."},
+        {"term": "Influencer Marketing", "meaning": "Social media influencers ke through brand promotion.", "example": "YouTube, Instagram influencer partnerships."},
+        {"term": "Affiliate Marketing", "meaning": "Commission-based marketing through partners.", "example": "Amazon Associates, affiliate networks."},
+        {"term": "Retargeting", "meaning": "Previous website visitors ko targeted ads show karna.", "example": "Facebook Pixel, Google remarketing."},
+        {"term": "Marketing Analytics", "meaning": "Marketing campaign performance measure karna.", "example": "Google Analytics, conversion tracking."},
+        {"term": "Customer Lifetime Value", "meaning": "Customer se total expected revenue over relationship.", "example": "CLV calculation, retention strategies."},
+        {"term": "Lead Generation", "meaning": "Potential customers identify aur attract karna.", "example": "Landing pages, lead magnets."},
+        {"term": "Brand Awareness", "meaning": "Target audience mein brand recognition increase karna.", "example": "Display advertising, social media presence."},
+        {"term": "User Experience", "meaning": "Website ya app use karne ka overall customer experience.", "example": "UI/UX design, usability testing."},
+        {"term": "Marketing Funnel", "meaning": "Customer journey from awareness to purchase.", "example": "AIDA model, sales funnel stages."},
+        {"term": "Programmatic Advertising", "meaning": "Automated ad buying using algorithms.", "example": "Real-time bidding, demand-side platforms."},
+        {"term": "Omnichannel Marketing", "meaning": "Multiple channels mein consistent customer experience.", "example": "Online-offline integration, cross-channel campaigns."},
+        {"term": "Growth Hacking", "meaning": "Creative, low-cost strategies for rapid business growth.", "example": "Viral marketing, referral programs."}
+      ]
+    }
+  ]
+}

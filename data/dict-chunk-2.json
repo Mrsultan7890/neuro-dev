@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Computer Vision",
+      "terms": [
+        {"term": "Image Classification", "meaning": "Image mein kya object hai identify karna.", "example": "Photo mein cat ya dog detect karna."},
+        {"term": "Object Detection", "meaning": "Image mein multiple objects find karna aur locate karna.", "example": "Traffic mein cars, pedestrians detect karna."},
+        {"term": "Semantic Segmentation", "meaning": "Image ke har pixel ko classify karna.", "example": "Medical scan mein organs ko segment karna."},
+        {"term": "Face Recognition", "meaning": "Person ki identity face se identify karna.", "example": "Phone unlock karne ke liye face recognition."},
+        {"term": "OCR", "meaning": "Optical Character Recognition, text images se extract karna.", "example": "Document scan kar ke text nikalna."},
+        {"term": "Image Preprocessing", "meaning": "Images ko model ke liye ready karna.", "example": "Resize, normalize, augment karna."},
+        {"term": "Data Augmentation", "meaning": "Existing images modify kar ke more training data banana.", "example": "Images rotate, flip, crop karna."},
+        {"term": "Feature Extraction", "meaning": "Images se important characteristics nikalna.", "example": "Edges, corners, textures detect karna."},
+        {"term": "YOLO", "meaning": "You Only Look Once, real-time object detection algorithm.", "example": "Video mein real-time objects detect karna."},
+        {"term": "R-CNN", "meaning": "Region-based CNN for object detection.", "example": "Image mein regions propose kar ke objects detect karna."},
+        {"term": "ResNet", "meaning": "Residual Network, very deep networks train karne ke liye.", "example": "150+ layers ka network without vanishing gradient."},
+        {"term": "VGG", "meaning": "Visual Geometry Group network architecture.", "example": "Image classification ke liye popular CNN architecture."},
+        {"term": "AlexNet", "meaning": "Deep learning revolution start karne wala CNN.", "example": "2012 mein ImageNet competition win kiya."},
+        {"term": "Pooling", "meaning": "Feature maps ka size reduce karna.", "example": "Max pooling, average pooling operations."},
+        {"term": "Convolution", "meaning": "Filters apply kar ke features extract karna.", "example": "Edge detection filters image pe apply karna."},
+        {"term": "Kernel", "meaning": "Convolution operation mein use hone wala filter.", "example": "3x3 kernel for edge detection."},
+        {"term": "Stride", "meaning": "Convolution filter kitne steps mein move kare.", "example": "Stride 2 means filter 2 pixels jump kare."},
+        {"term": "Padding", "meaning": "Image borders pe extra pixels add karna.", "example": "Same padding output size maintain karta hai."},
+        {"term": "Feature Map", "meaning": "Convolution operation ka output.", "example": "Each filter ek feature map produce karta hai."},
+        {"term": "Receptive Field", "meaning": "Input image ka area jo ek neuron affect karta hai.", "example": "Deep layers mein large receptive field hota hai."}
+      ]
+    },
+    {
+      "name": "Natural Language Processing",
+      "terms": [
+        {"term": "Tokenization", "meaning": "Text ko words ya subwords mein divide karna.", "example": "Sentence ko individual words mein split karna."},
+        {"term": "Stemming", "meaning": "Words ko unke root form mein convert karna.", "example": "Running, runs ko run mein convert karna."},
+        {"term": "Lemmatization", "meaning": "Words ko unke base dictionary form mein convert karna.", "example": "Better ko good mein convert karna."},
+        {"term": "Stop Words", "meaning": "Common words jo analysis mein useful nahi hote.", "example": "The, is, at, which jaise words."},
+        {"term": "N-gram", "meaning": "N consecutive words ka sequence.", "example": "Bigram means 2 words together like 'machine learning'."},
+        {"term": "TF-IDF", "meaning": "Term Frequency-Inverse Document Frequency, word importance measure.", "example": "Rare words ko high score, common words ko low score."},
+        {"term": "Word Embedding", "meaning": "Words ko numerical vectors mein represent karna.", "example": "Word2Vec, GloVe embeddings."},
+        {"term": "BERT", "meaning": "Bidirectional Encoder Representations from Transformers.", "example": "Google ka pre-trained language model."},
+        {"term": "GPT", "meaning": "Generative Pre-trained Transformer for text generation.", "example": "ChatGPT, GPT-3 text generation models."},
+        {"term": "Sentiment Analysis", "meaning": "Text mein emotions ya opinions detect karna.", "example": "Movie reviews positive ya negative classify karna."},
+        {"term": "Named Entity Recognition", "meaning": "Text mein persons, places, organizations identify karna.", "example": "News article mein names aur locations extract karna."},
+        {"term": "Part-of-Speech Tagging", "meaning": "Words ko grammar categories assign karna.", "example": "Noun, verb, adjective tags assign karna."},
+        {"term": "Machine Translation", "meaning": "Ek language se dusri language mein translate karna.", "example": "English to Hindi automatic translation."},
+        {"term": "Text Summarization", "meaning": "Long text ka short summary banana.", "example": "News article ka 2-3 lines summary."},
+        {"term": "Question Answering", "meaning": "Text se questions ka answers automatically find karna.", "example": "Wikipedia se questions ka answers extract karna."},
+        {"term": "Chatbot", "meaning": "Human-like conversation kar sakne wala AI system.", "example": "Customer service chatbots."},
+        {"term": "Language Model", "meaning": "Text generate karne ya next word predict karne wala model.", "example": "GPT language model text complete karta hai."},
+        {"term": "Attention", "meaning": "Model ko important words pe focus karne ki mechanism.", "example": "Translation mein source words pe attention dena."},
+        {"term": "Sequence-to-Sequence", "meaning": "Input sequence ko output sequence mein convert karna.", "example": "English sentence ko Hindi sentence mein translate karna."},
+        {"term": "BLEU Score", "meaning": "Machine translation quality measure karne ka metric.", "example": "Generated translation ko reference se compare karna."}
+      ]
+    }
+  ]
+}

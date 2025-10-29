@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Network & Infrastructure",
+      "terms": [
+        {"term": "Network Protocol", "meaning": "Data communication ke liye rules aur standards.", "example": "TCP/IP, HTTP, FTP protocols."},
+        {"term": "IP Address", "meaning": "Network mein device ka unique identifier.", "example": "192.168.1.1, IPv4 and IPv6 addresses."},
+        {"term": "DNS", "meaning": "Domain Name System for name resolution.", "example": "www.google.com to IP address conversion."},
+        {"term": "Load Balancer", "meaning": "Multiple servers mein traffic distribute karne wala device.", "example": "Nginx, HAProxy, AWS ELB."},
+        {"term": "CDN", "meaning": "Content Delivery Network for fast content delivery.", "example": "CloudFlare, AWS CloudFront."},
+        {"term": "Firewall", "meaning": "Network security ke liye traffic filtering system.", "example": "Packet filtering, application firewall."},
+        {"term": "VPN", "meaning": "Virtual Private Network for secure remote access.", "example": "Site-to-site VPN, remote access VPN."},
+        {"term": "Bandwidth", "meaning": "Network connection ki data transfer capacity.", "example": "100 Mbps internet connection."},
+        {"term": "Latency", "meaning": "Data transmission mein time delay.", "example": "Ping time, network response delay."},
+        {"term": "Network Topology", "meaning": "Network devices ka physical ya logical arrangement.", "example": "Star, mesh, ring topologies."},
+        {"term": "Router", "meaning": "Different networks ke beech data forward karne wala device.", "example": "Home router, enterprise router."},
+        {"term": "Switch", "meaning": "Same network mein devices connect karne wala device.", "example": "Ethernet switch, managed switch."},
+        {"term": "Subnet", "meaning": "Large network ko smaller segments mein divide karna.", "example": "192.168.1.0/24 subnet."},
+        {"term": "VLAN", "meaning": "Virtual Local Area Network for logical segmentation.", "example": "Department-wise network isolation."},
+        {"term": "Network Monitoring", "meaning": "Network performance aur health track karna.", "example": "SNMP monitoring, network analytics."},
+        {"term": "Quality of Service", "meaning": "Network traffic prioritization aur management.", "example": "Voice traffic priority over data."},
+        {"term": "Network Security", "meaning": "Network infrastructure ko threats se protect karna.", "example": "Intrusion detection, access control."},
+        {"term": "Cloud Infrastructure", "meaning": "Internet-based computing resources.", "example": "AWS, Azure, Google Cloud services."},
+        {"term": "Virtualization", "meaning": "Physical resources ko virtual environments mein divide karna.", "example": "VMware, Hyper-V virtual machines."},
+        {"term": "Container", "meaning": "Application packaging aur deployment technology.", "example": "Docker containers, Kubernetes orchestration."}
+      ]
+    },
+    {
+      "name": "Database Systems",
+      "terms": [
+        {"term": "Relational Database", "meaning": "Tables mein structured data storage system.", "example": "MySQL, PostgreSQL, Oracle databases."},
+        {"term": "SQL", "meaning": "Structured Query Language for database operations.", "example": "SELECT, INSERT, UPDATE, DELETE queries."},
+        {"term": "NoSQL", "meaning": "Non-relational database for flexible data storage.", "example": "MongoDB, Cassandra, Redis."},
+        {"term": "Database Normalization", "meaning": "Data redundancy reduce karne ka process.", "example": "1NF, 2NF, 3NF normal forms."},
+        {"term": "Primary Key", "meaning": "Table mein unique identifier column.", "example": "User ID, Product ID."},
+        {"term": "Foreign Key", "meaning": "Tables ke beech relationship establish karne wala key.", "example": "Order table mein Customer ID reference."},
+        {"term": "Index", "meaning": "Database query performance improve karne ka structure.", "example": "B-tree index, hash index."},
+        {"term": "Transaction", "meaning": "Database operations ka atomic unit.", "example": "Bank transfer with debit and credit."},
+        {"term": "ACID Properties", "meaning": "Database transaction reliability ke principles.", "example": "Atomicity, Consistency, Isolation, Durability."},
+        {"term": "Database Backup", "meaning": "Data loss prevent karne ke liye copy create karna.", "example": "Full backup, incremental backup."},
+        {"term": "Database Replication", "meaning": "Data ko multiple servers mein copy karna.", "example": "Master-slave replication."},
+        {"term": "Database Sharding", "meaning": "Large database ko smaller parts mein divide karna.", "example": "Horizontal partitioning across servers."},
+        {"term": "Stored Procedure", "meaning": "Database mein pre-compiled SQL code.", "example": "Complex business logic in database."},
+        {"term": "Database Trigger", "meaning": "Automatic execution on database events.", "example": "Audit log creation on data changes."},
+        {"term": "Data Warehouse", "meaning": "Historical data analysis ke liye specialized database.", "example": "Business intelligence, reporting."},
+        {"term": "Database Migration", "meaning": "Database structure changes manage karna.", "example": "Schema updates, data type changes."},
+        {"term": "Query Optimization", "meaning": "Database query performance improve karna.", "example": "Execution plan analysis, index usage."},
+        {"term": "Database Security", "meaning": "Unauthorized access se database protect karna.", "example": "User permissions, encryption."},
+        {"term": "Connection Pooling", "meaning": "Database connections efficiently manage karna.", "example": "Reusing connections, resource optimization."},
+        {"term": "Database Monitoring", "meaning": "Database performance aur health track karna.", "example": "Query performance, resource usage."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Neuro-Dev</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .faq-container {
+            padding-top: 90px;
+            min-height: 100vh;
+            background: #0a0a0a;
+        }
+        .faq-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+        }
+        .faq-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .faq-item {
+            background: #111;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px;
+            background: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .faq-question:hover {
+            background: #222;
+        }
+        .faq-question h3 {
+            color: #00ff41;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .faq-toggle {
+            color: #00ff41;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        .faq-answer p {
+            color: #ccc;
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#courses" class="nav-link">Courses</a>
+                <a href="faq.html" class="nav-link active">FAQ</a>
+                <a href="dictionary.html" class="nav-link">Dictionary</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="faq-container">
+        <div class="faq-header">
+            <h1 style="color: #00ff41; font-size: 2.5rem; margin-bottom: 15px;">
+                <i class="fas fa-question-circle"></i> Frequently Asked Questions
+            </h1>
+            <p style="color: #ccc; font-size: 1.2rem;">
+                Aapke sawal aur unke jawab
+            </p>
+        </div>
+
+        <div class="faq-content">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Kya yeh course bilkul free hai?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Haan bilkul! Neuro-Dev ka complete course 100% free hai. Koi hidden charges nahi hain. Sirf donation optional hai agar aap support karna chahte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Kya mobile se ethical hacking seekh sakte hain?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Haan! Yeh course specially mobile users ke liye design kiya gaya hai. Termux aur NetHunter use kar ke aap mobile pe complete ethical hacking tools run kar sakte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Kya root access zaroori hai?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Nahi! Hum NetHunter Rootless use karte hain jo bina root ke work karta hai. Aap non-rooted Android device pe bhi complete course kar sakte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Course complete karne mein kitna time lagega?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Total 45+ hours ka content hai. Agar daily 2-3 hours study kariye to 2-3 weeks mein complete ho jayega. Aap apne pace se kar sakte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Kya certificate milega?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Abhi certificate system nahi hai, lekin practical skills aur knowledge milegi jo industry mein valuable hai. Future mein certificate system add kar sakte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Kya yeh legal hai?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Haan bilkul! Yeh ethical hacking course hai jo educational purposes ke liye hai. Hum sirf legal aur responsible use promote karte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Kya programming knowledge zaroori hai?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Nahi! Course basic se start hota hai. Python basics bhi cover kiye gaye hain. Complete beginners bhi easily follow kar sakte hain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Support kaise milegi?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Contact page se email kar sakte hain. Community support bhi available hai. Future mein Discord server bhi launch karenge.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Course update hota rehta hai?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Haan! Regular updates aur new modules add karte rehte hain. Latest tools aur techniques ke saath content update hota hai.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Offline access available hai?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Website online hai lekin commands aur notes copy kar ke offline use kar sakte hain. Future mein offline version bhi consider kar sakte hain.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

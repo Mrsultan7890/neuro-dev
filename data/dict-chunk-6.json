@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Blockchain & Cryptocurrency",
+      "terms": [
+        {"term": "Blockchain", "meaning": "Distributed ledger technology jo transactions record karta hai.", "example": "Bitcoin blockchain, Ethereum network."},
+        {"term": "Cryptocurrency", "meaning": "Digital currency jo cryptography use karta hai.", "example": "Bitcoin, Ethereum, Litecoin."},
+        {"term": "Smart Contract", "meaning": "Self-executing contract with terms directly written into code.", "example": "Ethereum smart contracts, DeFi protocols."},
+        {"term": "Mining", "meaning": "New blocks create karne aur transactions verify karne ka process.", "example": "Bitcoin mining with proof-of-work."},
+        {"term": "Hash Function", "meaning": "Data ko fixed-size string mein convert karne wala function.", "example": "SHA-256 hash function in Bitcoin."},
+        {"term": "Consensus Mechanism", "meaning": "Network participants agreement kaise achieve karte hain.", "example": "Proof-of-Work, Proof-of-Stake."},
+        {"term": "Decentralization", "meaning": "Central authority ke bina distributed control.", "example": "No single point of failure in blockchain."},
+        {"term": "Wallet", "meaning": "Cryptocurrency store aur manage karne ka software.", "example": "MetaMask, Coinbase wallet."},
+        {"term": "Private Key", "meaning": "Cryptocurrency access karne ke liye secret key.", "example": "256-bit random number for Bitcoin wallet."},
+        {"term": "Public Key", "meaning": "Wallet address generate karne ke liye public cryptographic key.", "example": "Bitcoin address derived from public key."},
+        {"term": "DeFi", "meaning": "Decentralized Finance, traditional finance ka blockchain version.", "example": "Uniswap, Compound, Aave protocols."},
+        {"term": "NFT", "meaning": "Non-Fungible Token, unique digital assets.", "example": "Digital art, collectibles on blockchain."},
+        {"term": "Gas Fee", "meaning": "Blockchain transactions ke liye payment.", "example": "Ethereum gas fees for smart contract execution."},
+        {"term": "Fork", "meaning": "Blockchain protocol mein changes ya splits.", "example": "Bitcoin Cash fork from Bitcoin."},
+        {"term": "Staking", "meaning": "Cryptocurrency lock kar ke network security mein participate karna.", "example": "Ethereum 2.0 staking rewards."},
+        {"term": "Liquidity Pool", "meaning": "DeFi mein trading ke liye cryptocurrency reserves.", "example": "Uniswap liquidity pools for token swaps."},
+        {"term": "Yield Farming", "meaning": "DeFi protocols mein rewards earn karne ka method.", "example": "Compound protocol mein lending rewards."},
+        {"term": "DAO", "meaning": "Decentralized Autonomous Organization, blockchain-based governance.", "example": "MakerDAO, Uniswap governance tokens."},
+        {"term": "Atomic Swap", "meaning": "Different blockchains ke beech direct cryptocurrency exchange.", "example": "Bitcoin to Litecoin direct swap."},
+        {"term": "Layer 2", "meaning": "Main blockchain ke upar additional scaling solutions.", "example": "Lightning Network for Bitcoin, Polygon for Ethereum."}
+      ]
+    },
+    {
+      "name": "Internet of Things (IoT)",
+      "terms": [
+        {"term": "Internet of Things", "meaning": "Physical devices ka internet se connected network.", "example": "Smart home devices, wearable sensors."},
+        {"term": "Sensor", "meaning": "Physical world se data collect karne wala device.", "example": "Temperature sensor, motion detector."},
+        {"term": "Actuator", "meaning": "Digital signals ko physical actions mein convert karne wala device.", "example": "Smart lock, automated valve."},
+        {"term": "Edge Computing", "meaning": "Data processing device ke paas locally karna.", "example": "Smart camera mein local image processing."},
+        {"term": "Gateway", "meaning": "IoT devices ko internet se connect karne wala bridge.", "example": "Home automation hub, industrial gateway."},
+        {"term": "MQTT", "meaning": "Message Queuing Telemetry Transport, IoT communication protocol.", "example": "Lightweight messaging for sensor data."},
+        {"term": "CoAP", "meaning": "Constrained Application Protocol for IoT devices.", "example": "Low-power devices ke liye HTTP alternative."},
+        {"term": "Firmware", "meaning": "IoT device mein embedded software.", "example": "Smart thermostat ka control software."},
+        {"term": "Over-the-Air Update", "meaning": "IoT devices ko remotely update karna.", "example": "Smart TV software updates."},
+        {"term": "Digital Twin", "meaning": "Physical object ka digital replica.", "example": "Factory machine ka virtual model."},
+        {"term": "Mesh Network", "meaning": "Devices ka interconnected network without central hub.", "example": "Zigbee mesh network for smart home."},
+        {"term": "Low Power Wide Area", "meaning": "Long-range, low-power IoT communication.", "example": "LoRaWAN for agricultural sensors."},
+        {"term": "Embedded System", "meaning": "Specific task ke liye designed computer system.", "example": "Microcontroller in smart appliances."},
+        {"term": "Real-time Processing", "meaning": "Data ko immediately process aur respond karna.", "example": "Industrial safety systems, autonomous vehicles."},
+        {"term": "Device Management", "meaning": "IoT devices ko remotely monitor aur control karna.", "example": "Fleet management, remote diagnostics."},
+        {"term": "Interoperability", "meaning": "Different IoT devices ka ek saath work kar sakna.", "example": "Smart home devices from different brands."},
+        {"term": "Fog Computing", "meaning": "Cloud aur edge ke beech intermediate processing.", "example": "Local data centers for IoT processing."},
+        {"term": "Time Series Data", "meaning": "Time ke saath collect hone wala sensor data.", "example": "Temperature readings over time."},
+        {"term": "Predictive Maintenance", "meaning": "IoT data use kar ke equipment failure predict karna.", "example": "Machine vibration analysis for maintenance."},
+        {"term": "Smart City", "meaning": "IoT technology use kar ke city infrastructure optimize karna.", "example": "Smart traffic lights, waste management systems."}
+      ]
+    }
+  ]
+}

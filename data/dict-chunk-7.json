@@ -1,0 +1,29 @@
+{
+  "categories": [
+    {
+      "name": "Cybersecurity & Privacy",
+      "terms": [
+        {"term": "Encryption", "meaning": "Data ko secret code mein convert karna unauthorized access se bachane ke liye.", "example": "HTTPS websites mein data encryption."},
+        {"term": "Firewall", "meaning": "Network traffic monitor aur control karne wala security system.", "example": "Company network ko external threats se protect karna."},
+        {"term": "Malware", "meaning": "Malicious software jo system ko harm karta hai.", "example": "Viruses, trojans, ransomware."},
+        {"term": "Phishing", "meaning": "Fake emails ya websites se sensitive information steal karna.", "example": "Fake bank emails asking for passwords."},
+        {"term": "Two-Factor Authentication", "meaning": "Login ke liye do verification steps require karna.", "example": "Password + SMS code for account access."},
+        {"term": "VPN", "meaning": "Virtual Private Network, secure internet connection.", "example": "Remote work ke liye encrypted connection."},
+        {"term": "Zero-Day Exploit", "meaning": "Unknown vulnerability ko target karne wala attack.", "example": "Software bug jo abhi tak patch nahi hua."},
+        {"term": "Penetration Testing", "meaning": "System security test karne ke liye ethical hacking.", "example": "Company security assessment by white hat hackers."},
+        {"term": "Social Engineering", "meaning": "Human psychology manipulate kar ke information steal karna.", "example": "Phone calls pretending to be IT support."},
+        {"term": "Ransomware", "meaning": "Data encrypt kar ke money demand karne wala malware.", "example": "WannaCry, Petya ransomware attacks."},
+        {"term": "DDoS Attack", "meaning": "Distributed Denial of Service, website ko overwhelm karna.", "example": "Multiple computers se simultaneous requests."},
+        {"term": "SQL Injection", "meaning": "Database queries manipulate kar ke unauthorized access.", "example": "Web forms mein malicious SQL code inject karna."},
+        {"term": "Cross-Site Scripting", "meaning": "Web pages mein malicious scripts inject karna.", "example": "User browser mein unauthorized JavaScript execution."},
+        {"term": "Man-in-the-Middle", "meaning": "Communication ke beech mein secretly intercept karna.", "example": "Public WiFi pe data interception."},
+        {"term": "Digital Forensics", "meaning": "Cyber crimes investigate karne ke liye digital evidence analysis.", "example": "Deleted files recovery, network traffic analysis."},
+        {"term": "Intrusion Detection", "meaning": "Network mein unauthorized access detect karna.", "example": "Suspicious activity alerts, anomaly detection."},
+        {"term": "Honeypot", "meaning": "Attackers ko trap karne ke liye fake vulnerable system.", "example": "Decoy servers to study attack patterns."},
+        {"term": "Blockchain Security", "meaning": "Distributed ledger systems ki security measures.", "example": "Smart contract audits, wallet security."},
+        {"term": "Privacy by Design", "meaning": "System design mein privacy ko default feature banana.", "example": "GDPR compliance, data minimization."},
+        {"term": "Threat Intelligence", "meaning": "Cyber threats ke bare mein actionable information.", "example": "Attack patterns analysis, IOCs sharing."}
+      ]
+    }
+  ]
+}

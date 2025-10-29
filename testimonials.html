@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Reviews - Neuro-Dev</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .testimonials-container {
+            padding-top: 90px;
+            min-height: 100vh;
+            background: #0a0a0a;
+        }
+        .testimonials-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonial-card {
+            background: #111;
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 4px solid #00ff41;
+            transition: transform 0.3s;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        .student-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #00ff41;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #000;
+        }
+        .student-details h4 {
+            color: #00ff41;
+            margin: 0;
+        }
+        .student-details p {
+            color: #888;
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+        }
+        .rating {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        .testimonial-text {
+            color: #ccc;
+            line-height: 1.6;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#courses" class="nav-link">Courses</a>
+                <a href="testimonials.html" class="nav-link active">Reviews</a>
+                <a href="dictionary.html" class="nav-link">Dictionary</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="testimonials-container">
+        <div class="testimonials-header">
+            <h1 style="color: #00ff41; font-size: 2.5rem; margin-bottom: 15px;">
+                <i class="fas fa-star"></i> Student Reviews
+            </h1>
+            <p style="color: #ccc; font-size: 1.2rem;">
+                Hamare students ka experience aur feedback
+            </p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="student-info">
+                    <div class="student-avatar">AH</div>
+                    <div class="student-details">
+                        <h4>Ahmed Hassan</h4>
+                        <p>Computer Science Student</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "Neuro-Dev ka course bilkul amazing hai! Roman Urdu mein explanation bohot clear hai. 
+                    Termux se NetHunter tak sab kuch step by step sikha diya. Mobile pe ethical hacking 
+                    seekhna itna easy ho gaya hai."
+                </p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="student-info">
+                    <div class="student-avatar">MK</div>
+                    <div class="student-details">
+                        <h4>Muhammad Khan</h4>
+                        <p>Cybersecurity Enthusiast</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "Mujhe laptop nahi tha lekin Neuro-Dev ne mobile pe hi complete ethical hacking course 
+                    provide kiya. Commands copy karne ka feature bohot helpful hai. Highly recommended!"
+                </p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="student-info">
+                    <div class="student-avatar">SA</div>
+                    <div class="student-details">
+                        <h4>Sana Ali</h4>
+                        <p>IT Professional</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "AI/ML Dictionary bohot comprehensive hai. 500+ terms Roman Urdu mein with examples. 
+                    Technical concepts samajhna ab bohot easy ho gaya hai. Great resource!"
+                </p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="student-info">
+                    <div class="student-avatar">FH</div>
+                    <div class="student-details">
+                        <h4>Fahad Hussain</h4>
+                        <p>Penetration Tester</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "NetHunter troubleshooting module ne meri bohot help ki. VNC aur KEX issues solve 
+                    karne ke methods bilkul perfect hain. Professional level content hai."
+                </p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="student-info">
+                    <div class="student-avatar">ZA</div>
+                    <div class="student-details">
+                        <h4>Zain Ahmed</h4>
+                        <p>Security Researcher</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "Python IDE aur online tools ka collection amazing hai. Mobile pe coding karna ab 
+                    possible ho gaya hai. Web security module particularly helpful tha."
+                </p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="student-info">
+                    <div class="student-avatar">RK</div>
+                    <div class="student-details">
+                        <h4>Rabia Khan</h4>
+                        <p>Cybersecurity Student</p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                    "OSINT aur social engineering techniques bohot detailed hain. Mobile security testing 
+                    ke methods practical aur effective hain. Best course for beginners!"
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

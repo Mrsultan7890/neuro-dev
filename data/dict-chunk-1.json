@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "AI/ML Basics",
+      "terms": [
+        {"term": "Artificial Intelligence", "meaning": "Computer systems ka ability hai jo human intelligence mimic kare.", "example": "Siri, Alexa AI assistants hain."},
+        {"term": "Machine Learning", "meaning": "Computers ka data se automatically learn karne ka method.", "example": "Netflix recommendations ML use karta hai."},
+        {"term": "Deep Learning", "meaning": "Neural networks use kar ke complex patterns recognize karna.", "example": "Image recognition mein deep learning use hota hai."},
+        {"term": "Algorithm", "meaning": "Step by step instructions jo computer ko problem solve karne ke liye diye jate hain.", "example": "Sorting algorithm data ko arrange karta hai."},
+        {"term": "Data Science", "meaning": "Data se insights nikalne ka scientific approach.", "example": "Sales data analyze kar ke trends pata karna."},
+        {"term": "Big Data", "meaning": "Bohot large aur complex datasets jo traditional tools se handle nahi ho sakte.", "example": "Facebook ke billions users ka data."},
+        {"term": "Neural Network", "meaning": "Human brain ki tarah interconnected nodes ka network.", "example": "Image classification mein CNN use hota hai."},
+        {"term": "Supervised Learning", "meaning": "Labeled data use kar ke model train karna.", "example": "Email spam detection ke liye labeled emails use karna."},
+        {"term": "Unsupervised Learning", "meaning": "Bina labels ke data mein patterns dhundna.", "example": "Customer segmentation clustering se karna."},
+        {"term": "Reinforcement Learning", "meaning": "Trial and error se learning, rewards aur penalties ke through.", "example": "Game playing AI jaise AlphaGo."},
+        {"term": "Feature", "meaning": "Data ka individual measurable property ya characteristic.", "example": "House price prediction mein area, location features hain."},
+        {"term": "Dataset", "meaning": "Training ke liye use hone wala data collection.", "example": "MNIST handwritten digits ka dataset."},
+        {"term": "Model", "meaning": "Algorithm ka trained version jo predictions kar sakta hai.", "example": "Trained spam detection model."},
+        {"term": "Training", "meaning": "Model ko data se patterns seekhane ka process.", "example": "Image classifier ko thousands images pe train karna."},
+        {"term": "Testing", "meaning": "Trained model ki performance check karna unseen data pe.", "example": "Test set pe accuracy measure karna."},
+        {"term": "Validation", "meaning": "Model tuning ke liye separate data set use karna.", "example": "Hyperparameters optimize karne ke liye validation set."},
+        {"term": "Overfitting", "meaning": "Model training data pe bohot specific ho jaye, new data pe fail kare.", "example": "Model training accuracy 99% but test accuracy 60%."},
+        {"term": "Underfitting", "meaning": "Model simple hai aur patterns properly capture nahi kar sakta.", "example": "Linear model complex non-linear data pe use karna."},
+        {"term": "Bias", "meaning": "Model mein systematic error ya prejudice.", "example": "Hiring AI sirf male candidates prefer kare."},
+        {"term": "Variance", "meaning": "Model ki predictions mein inconsistency.", "example": "Same input pe different runs mein different outputs."}
+      ]
+    },
+    {
+      "name": "Deep Learning",
+      "terms": [
+        {"term": "Convolutional Neural Network", "meaning": "Images process karne ke liye specialized neural network.", "example": "Photo mein objects detect karna."},
+        {"term": "Recurrent Neural Network", "meaning": "Sequential data handle karne ke liye network.", "example": "Language translation, speech recognition."},
+        {"term": "LSTM", "meaning": "Long Short-Term Memory, RNN ka advanced version.", "example": "Long sentences mein context maintain karna."},
+        {"term": "GAN", "meaning": "Generative Adversarial Network, fake data generate karta hai.", "example": "Realistic fake faces generate karna."},
+        {"term": "Autoencoder", "meaning": "Data compress aur reconstruct karne wala network.", "example": "Image denoising, dimensionality reduction."},
+        {"term": "Transformer", "meaning": "Attention mechanism use karne wala modern architecture.", "example": "GPT, BERT models transformer use karte hain."},
+        {"term": "Attention Mechanism", "meaning": "Model ko important parts pe focus karne ki ability.", "example": "Translation mein relevant words pe attention dena."},
+        {"term": "Backpropagation", "meaning": "Neural network mein errors ko backward propagate karna.", "example": "Weights update karne ke liye gradient calculation."},
+        {"term": "Gradient Descent", "meaning": "Loss function minimize karne ka optimization algorithm.", "example": "Model weights ko iteratively improve karna."},
+        {"term": "Activation Function", "meaning": "Neural network mein non-linearity introduce karne wala function.", "example": "ReLU, Sigmoid, Tanh functions."},
+        {"term": "Dropout", "meaning": "Overfitting prevent karne ke liye neurons randomly disable karna.", "example": "Training mein 50% neurons randomly off karna."},
+        {"term": "Batch Normalization", "meaning": "Training stability improve karne ke liye inputs normalize karna.", "example": "Each layer ke inputs ko mean 0, variance 1 banana."},
+        {"term": "Transfer Learning", "meaning": "Pre-trained model ko new task ke liye fine-tune karna.", "example": "ImageNet trained model ko medical images pe use karna."},
+        {"term": "Fine-tuning", "meaning": "Pre-trained model ke last layers ko new data pe retrain karna.", "example": "BERT ko sentiment analysis ke liye fine-tune karna."},
+        {"term": "Epoch", "meaning": "Complete dataset pe ek baar training pass karna.", "example": "100 epochs mein model train karna."},
+        {"term": "Batch Size", "meaning": "Ek saath kitne samples process karne hain.", "example": "Batch size 32 matlab 32 images ek saath."},
+        {"term": "Learning Rate", "meaning": "Model kitni fast learn kare, step size control karta hai.", "example": "Learning rate 0.001 slow but stable learning."},
+        {"term": "Loss Function", "meaning": "Model ki errors measure karne wala function.", "example": "Cross-entropy loss classification ke liye."},
+        {"term": "Optimizer", "meaning": "Model weights update karne ka algorithm.", "example": "Adam, SGD, RMSprop optimizers."},
+        {"term": "Regularization", "meaning": "Overfitting prevent karne ke techniques.", "example": "L1, L2 regularization, dropout."}
+      ]
+    }
+  ]
+}

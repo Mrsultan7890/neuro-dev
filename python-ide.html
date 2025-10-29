@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Python IDE - Neuro-Dev</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -444,26 +445,35 @@ print("Thanks for using Python IDE!")`;
                 inputfunTakesPrompt: true
             });
 
-            // Sanitize and validate code input
+            // Enhanced sanitization and validation
             function sanitizeCode(text) {
-                // Basic validation - only allow Python code patterns
+                // Length validation
                 if (text.length > 50000) {
                     throw new Error('Code too long! Maximum 50,000 characters allowed.');
                 }
                 
-                // Remove HTML/JS patterns that shouldn't be in Python code
+                // Prevent dangerous patterns
                 const dangerous = [
                     /<script[^>]*>.*?<\/script>/gi,
                     /javascript:/gi,
                     /on\w+\s*=/gi,
                     /<iframe[^>]*>.*?<\/iframe>/gi,
-                    /<[^>]*>/g  // Remove any HTML tags
+                    /<[^>]*>/g,
+                    /eval\s*\(/gi,
+                    /exec\s*\(/gi,
+                    /compile\s*\(/gi,
+                    /__import__\s*\(/gi
                 ];
                 
                 let sanitized = text;
                 dangerous.forEach(pattern => {
                     sanitized = sanitized.replace(pattern, '');
                 });
+                
+                // Additional Python-specific validation
+                if (sanitized.includes('import os') || sanitized.includes('import subprocess')) {
+                    throw new Error('System imports not allowed for security reasons.');
+                }
                 
                 return sanitized.trim();
             }

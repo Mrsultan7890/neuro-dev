@@ -1,5 +1,15 @@
 User-agent: *
 Allow: /
-Disallow: /data/
 
-Sitemap: https://your-domain.com/sitemap.xml
+# Sitemap location
+Sitemap: http://neuroshade.duckdns.org/sitemap.xml
+
+# Allow all search engines to crawl
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay for better server performance
+Crawl-delay: 1

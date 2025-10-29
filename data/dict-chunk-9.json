@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Programming Concepts",
+      "terms": [
+        {"term": "Object-Oriented Programming", "meaning": "Objects aur classes use kar ke programming paradigm.", "example": "Java, C++, Python OOP concepts."},
+        {"term": "Functional Programming", "meaning": "Functions ko first-class citizens treat karne wala paradigm.", "example": "Haskell, Lisp, functional JavaScript."},
+        {"term": "Data Structure", "meaning": "Data organize aur store karne ka method.", "example": "Arrays, linked lists, trees, graphs."},
+        {"term": "Algorithm", "meaning": "Problem solve karne ke step-by-step instructions.", "example": "Sorting algorithms, search algorithms."},
+        {"term": "Recursion", "meaning": "Function ka apne aap ko call karna.", "example": "Factorial calculation, tree traversal."},
+        {"term": "Dynamic Programming", "meaning": "Complex problems ko subproblems mein divide kar ke solve karna.", "example": "Fibonacci sequence, knapsack problem."},
+        {"term": "Big O Notation", "meaning": "Algorithm efficiency measure karne ka mathematical notation.", "example": "O(n), O(log n), O(n²) time complexity."},
+        {"term": "Polymorphism", "meaning": "Same interface se different implementations use karna.", "example": "Method overriding, interface implementation."},
+        {"term": "Inheritance", "meaning": "Parent class se properties aur methods inherit karna.", "example": "Child class extending parent class."},
+        {"term": "Encapsulation", "meaning": "Data aur methods ko single unit mein bundle karna.", "example": "Private variables, public methods."},
+        {"term": "Abstraction", "meaning": "Complex implementation details hide kar ke simple interface provide karna.", "example": "Abstract classes, interfaces."},
+        {"term": "Design Pattern", "meaning": "Common programming problems ke proven solutions.", "example": "Singleton, Factory, Observer patterns."},
+        {"term": "Exception Handling", "meaning": "Runtime errors ko gracefully handle karna.", "example": "Try-catch blocks, error handling."},
+        {"term": "Memory Management", "meaning": "Program memory allocation aur deallocation control karna.", "example": "Garbage collection, manual memory management."},
+        {"term": "Concurrency", "meaning": "Multiple tasks simultaneously execute karna.", "example": "Multithreading, parallel processing."},
+        {"term": "Synchronization", "meaning": "Multiple threads ke beech coordination maintain karna.", "example": "Locks, semaphores, mutexes."},
+        {"term": "Compilation", "meaning": "Source code ko machine code mein convert karna.", "example": "C++ compiler, Java bytecode."},
+        {"term": "Interpretation", "meaning": "Code ko runtime pe execute karna without compilation.", "example": "Python interpreter, JavaScript engine."},
+        {"term": "Debugging", "meaning": "Code mein errors find aur fix karne ka process.", "example": "Breakpoints, step-through debugging."},
+        {"term": "Code Optimization", "meaning": "Program performance improve karne ke techniques.", "example": "Loop optimization, memory optimization."}
+      ]
+    },
+    {
+      "name": "Emerging Technologies",
+      "terms": [
+        {"term": "5G Technology", "meaning": "Fifth generation wireless communication technology.", "example": "Ultra-fast mobile internet, IoT connectivity."},
+        {"term": "Edge AI", "meaning": "AI processing at network edge devices.", "example": "Smart cameras, autonomous vehicles."},
+        {"term": "Digital Twin", "meaning": "Physical systems ka real-time digital replica.", "example": "Smart city modeling, industrial simulations."},
+        {"term": "Neuromorphic Computing", "meaning": "Brain-inspired computing architecture.", "example": "Intel Loihi, IBM TrueNorth chips."},
+        {"term": "Synthetic Biology", "meaning": "Engineering principles apply kar ke biological systems design karna.", "example": "Genetically modified organisms, biocomputing."},
+        {"term": "Swarm Intelligence", "meaning": "Collective behavior se problem solving.", "example": "Ant colony optimization, particle swarm."},
+        {"term": "Biometric Authentication", "meaning": "Biological characteristics use kar ke identity verification.", "example": "Fingerprint, face recognition, iris scan."},
+        {"term": "Ambient Computing", "meaning": "Invisible, context-aware computing environment.", "example": "Smart homes, ubiquitous computing."},
+        {"term": "Autonomous Systems", "meaning": "Self-governing, decision-making systems.", "example": "Self-driving cars, autonomous drones."},
+        {"term": "Brain-Computer Interface", "meaning": "Direct communication between brain aur computer.", "example": "Neuralink, thought-controlled devices."},
+        {"term": "Holographic Display", "meaning": "3D images project karne wala display technology.", "example": "Holographic projectors, AR displays."},
+        {"term": "Photonic Computing", "meaning": "Light particles use kar ke computation.", "example": "Optical processors, quantum photonics."},
+        {"term": "Molecular Computing", "meaning": "Molecules level pe information processing.", "example": "DNA computing, molecular machines."},
+        {"term": "Memristive Computing", "meaning": "Memory aur processing combined devices.", "example": "Neuromorphic chips, in-memory computing."},
+        {"term": "Spatial Computing", "meaning": "3D space mein digital aur physical integration.", "example": "AR/VR environments, gesture recognition."},
+        {"term": "Affective Computing", "meaning": "Human emotions recognize aur respond karne wala AI.", "example": "Emotion detection, empathetic AI."},
+        {"term": "Explainable AI", "meaning": "AI decisions ko human-understandable way mein explain karna.", "example": "Transparent machine learning models."},
+        {"term": "Federated Learning", "meaning": "Distributed machine learning without centralized data.", "example": "Privacy-preserving collaborative AI."},
+        {"term": "Generative AI", "meaning": "New content create karne wala artificial intelligence.", "example": "GPT text generation, DALL-E image creation."},
+        {"term": "Sustainable Computing", "meaning": "Environment-friendly computing practices.", "example": "Green data centers, energy-efficient algorithms."}
+      ]
+    }
+  ]
+}

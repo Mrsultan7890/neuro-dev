@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Data Science & Analytics",
+      "terms": [
+        {"term": "Exploratory Data Analysis", "meaning": "Data ko understand karne ke liye initial investigation.", "example": "Graphs, charts se data patterns dekhna."},
+        {"term": "Data Cleaning", "meaning": "Data mein errors, missing values fix karna.", "example": "Null values fill karna, duplicates remove karna."},
+        {"term": "Feature Engineering", "meaning": "Raw data se useful features create karna.", "example": "Date se day, month, year separate karna."},
+        {"term": "Correlation", "meaning": "Do variables ke beech relationship measure karna.", "example": "Height aur weight mein positive correlation."},
+        {"term": "Regression", "meaning": "Continuous values predict karne ka method.", "example": "House price prediction based on features."},
+        {"term": "Classification", "meaning": "Data ko categories mein divide karna.", "example": "Email spam ya not spam classify karna."},
+        {"term": "Clustering", "meaning": "Similar data points ko groups mein organize karna.", "example": "Customers ko behavior ke basis pe group karna."},
+        {"term": "Cross-Validation", "meaning": "Model performance reliably measure karne ka technique.", "example": "K-fold cross-validation for model evaluation."},
+        {"term": "Hyperparameter Tuning", "meaning": "Model ke settings optimize karna better performance ke liye.", "example": "Learning rate, batch size adjust karna."},
+        {"term": "Ensemble Methods", "meaning": "Multiple models combine kar ke better results lena.", "example": "Random Forest multiple decision trees use karta hai."},
+        {"term": "Bagging", "meaning": "Bootstrap Aggregating, multiple models train kar ke average lena.", "example": "Random Forest bagging technique use karta hai."},
+        {"term": "Boosting", "meaning": "Weak models ko sequentially improve kar ke strong model banana.", "example": "AdaBoost, Gradient Boosting algorithms."},
+        {"term": "Decision Tree", "meaning": "Tree structure mein decisions represent karne wala model.", "example": "If-else conditions ka tree form."},
+        {"term": "Random Forest", "meaning": "Multiple decision trees ka ensemble.", "example": "100 trees ka forest better predictions deta hai."},
+        {"term": "Support Vector Machine", "meaning": "Data points ko optimal boundary se separate karne wala algorithm.", "example": "High-dimensional data classification ke liye."},
+        {"term": "K-Means", "meaning": "Data ko K clusters mein divide karne ka algorithm.", "example": "Customers ko 5 groups mein segment karna."},
+        {"term": "Principal Component Analysis", "meaning": "Data dimensions reduce karne ka technique.", "example": "100 features ko 10 main components mein convert karna."},
+        {"term": "Confusion Matrix", "meaning": "Classification model ki performance visualize karne ka table.", "example": "True positive, false positive counts show karna."},
+        {"term": "Precision", "meaning": "Predicted positive mein se kitne actually positive hain.", "example": "Spam detection mein false positives minimize karna."},
+        {"term": "Recall", "meaning": "Actual positive mein se kitne correctly identify hue.", "example": "Disease detection mein false negatives minimize karna."}
+      ]
+    },
+    {
+      "name": "Machine Learning Algorithms",
+      "terms": [
+        {"term": "Linear Regression", "meaning": "Straight line fit kar ke continuous values predict karna.", "example": "Sales prediction based on advertising spend."},
+        {"term": "Logistic Regression", "meaning": "Probability calculate kar ke binary classification karna.", "example": "Email spam probability calculate karna."},
+        {"term": "Naive Bayes", "meaning": "Bayes theorem use kar ke classification karna.", "example": "Text classification, spam detection."},
+        {"term": "K-Nearest Neighbors", "meaning": "Nearest data points dekh kar prediction karna.", "example": "Similar customers ke behavior se predict karna."},
+        {"term": "Gradient Boosting", "meaning": "Errors pe focus kar ke sequentially models improve karna.", "example": "XGBoost, LightGBM algorithms."},
+        {"term": "AdaBoost", "meaning": "Adaptive Boosting, weak learners ko combine karna.", "example": "Multiple weak classifiers ka strong ensemble."},
+        {"term": "XGBoost", "meaning": "Extreme Gradient Boosting, optimized gradient boosting.", "example": "Kaggle competitions mein popular algorithm."},
+        {"term": "LightGBM", "meaning": "Light Gradient Boosting Machine, fast aur efficient.", "example": "Large datasets ke liye optimized boosting."},
+        {"term": "CatBoost", "meaning": "Categorical Boosting, categorical features handle karta hai.", "example": "Mixed data types ke liye suitable algorithm."},
+        {"term": "Isolation Forest", "meaning": "Anomaly detection ke liye tree-based algorithm.", "example": "Fraud detection, outlier identification."},
+        {"term": "DBSCAN", "meaning": "Density-based clustering algorithm.", "example": "Irregular shaped clusters find karna."},
+        {"term": "Hierarchical Clustering", "meaning": "Tree structure mein clusters organize karna.", "example": "Dendrogram create kar ke clusters visualize karna."},
+        {"term": "Gaussian Mixture Model", "meaning": "Multiple Gaussian distributions ka mixture for clustering.", "example": "Soft clustering where points belong to multiple clusters."},
+        {"term": "Q-Learning", "meaning": "Reinforcement learning algorithm for optimal actions.", "example": "Game playing AI mein optimal moves learn karna."},
+        {"term": "SARSA", "meaning": "State-Action-Reward-State-Action reinforcement learning.", "example": "On-policy learning algorithm for RL."},
+        {"term": "Actor-Critic", "meaning": "Policy aur value function dono learn karne wala RL method.", "example": "Continuous action spaces ke liye suitable."},
+        {"term": "Monte Carlo", "meaning": "Random sampling use kar ke problems solve karna.", "example": "Pi value estimate karna random points se."},
+        {"term": "Markov Chain", "meaning": "Future state sirf current state pe depend karta hai.", "example": "Weather prediction, text generation."},
+        {"term": "Hidden Markov Model", "meaning": "Observable outputs se hidden states infer karna.", "example": "Speech recognition, gene sequencing."},
+        {"term": "Expectation Maximization", "meaning": "Missing data ke saath parameters estimate karna.", "example": "Gaussian Mixture Models mein parameter learning."}
+      ]
+    }
+  ]
+}

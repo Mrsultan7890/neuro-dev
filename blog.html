@@ -3,307 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Neuro-Dev</title>
+    <title>Cybersecurity Blog - Neuro-Dev</title>
+    <meta name="description" content="Latest cybersecurity news, hacking tutorials, AI updates aur tech insights Roman Urdu mein. Daily updates with practical tips.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0d1117; 
-            color: #f0f6fc; 
-            line-height: 1.6;
+        .blog-container {
+            padding-top: 90px;
+            min-height: 100vh;
+            background: #0a0a0a;
         }
-        
-        .navbar {
-            background: #161b22;
-            padding: 15px 0;
-            border-bottom: 1px solid #30363d;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #58a6ff;
-            text-decoration: none;
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        
-        .hamburger .bar {
-            width: 25px;
-            height: 3px;
-            background: #58a6ff;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-        
-        .nav-link {
-            color: #f0f6fc;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            color: #58a6ff;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        
         .blog-header {
             text-align: center;
-            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            margin-bottom: 40px;
         }
-        
-        .blog-header h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #58a6ff, #3fb950);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .blog-header p {
-            font-size: 1.2rem;
-            color: #7d8590;
-        }
-        
-        .blog-controls {
+        .blog-stats {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+            color: #888;
+        }
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            color: #00ff41;
+            font-weight: bold;
+        }
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 40px;
             flex-wrap: wrap;
-            gap: 20px;
+            padding: 0 20px;
         }
-        
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: #21262d;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 10px 15px;
-            min-width: 300px;
-        }
-        
-        .search-box input {
-            background: none;
+        .filter-tab {
+            padding: 10px 20px;
+            background: #333;
+            color: #ccc;
             border: none;
-            color: #f0f6fc;
-            outline: none;
-            width: 100%;
-            margin-left: 10px;
-        }
-        
-        .category-filters {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .category-btn {
-            background: #21262d;
-            color: #f0f6fc;
-            border: 1px solid #30363d;
-            padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 14px;
+            font-size: 0.9rem;
         }
-        
-        .category-btn:hover, .category-btn.active {
-            background: #58a6ff;
-            border-color: #58a6ff;
+        .filter-tab.active {
+            background: #00ff41;
+            color: #000;
         }
-        
+        .filter-tab:hover {
+            background: #444;
+        }
+        .filter-tab.active:hover {
+            background: #00cc33;
+        }
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus {
+            border-color: #00ff41;
+        }
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ff41;
+        }
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            padding: 0 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
         .blog-card {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
+            background: #111;
+            border-radius: 15px;
             overflow: hidden;
+            border: 1px solid #333;
             transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-            border-color: #58a6ff;
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1);
-        }
-        
-        .blog-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #21262d, #30363d);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #58a6ff;
-            overflow: hidden;
             position: relative;
         }
-        
-        .blog-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff41;
         }
-        
-        .blog-card:hover .blog-image img {
-            transform: scale(1.05);
+        .blog-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .fallback-icon {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .blog-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+        }
+        .blog-image-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 3rem;
-            color: #58a6ff;
+            color: #fff;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
-        
         .blog-content {
             padding: 25px;
         }
-        
         .blog-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #888;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        
         .blog-category {
-            background: #238636;
-            color: white;
+            background: #00ff41;
+            color: #000;
             padding: 4px 12px;
             border-radius: 15px;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
         }
-        
-        .blog-date {
-            color: #7d8590;
-            font-size: 14px;
-        }
-        
         .blog-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #f0f6fc;
-        }
-        
-        .blog-excerpt {
-            color: #8b949e;
-            line-height: 1.6;
+            color: #00ff41;
+            font-size: 1.2rem;
             margin-bottom: 15px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-        
-        .blog-tags {
+        .blog-excerpt {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .blog-footer {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .blog-tag {
-            background: #21262d;
-            color: #58a6ff;
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 12px;
-        }
-        
-        .blog-stats {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #30363d;
-        }
-        
-        .view-count {
-            color: #7d8590;
-            font-size: 14px;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 5px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
         }
-        
-        .no-posts {
+        .blog-stats-mini {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .read-more {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #00ff41;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        .read-more:hover {
+            background: #00cc33;
+        }
+        .trending-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff4444;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 3;
+        }
+        .no-results {
             text-align: center;
+            color: #666;
             padding: 60px 20px;
-            color: #7d8590;
+            font-size: 1.1rem;
         }
-        
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: #58a6ff;
-        }
-        
         @media (max-width: 768px) {
-            .blog-header h1 { font-size: 2rem; }
-            .blog-controls { flex-direction: column; align-items: stretch; }
-            .search-box { min-width: auto; }
-            
-            .hamburger { display: flex; }
-            
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background: rgba(22, 27, 34, 0.98);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                padding: 30px 0;
+            .blog-stats {
+                gap: 20px;
             }
-            
-            .nav-menu.active { left: 0; }
-            
-            .nav-menu .nav-link {
-                padding: 15px;
-                display: block;
-                border-bottom: 1px solid #30363d;
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            .filter-tabs {
+                gap: 10px;
+            }
+            .filter-tab {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -311,19 +251,19 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
+            <div class="nav-logo">
                 <i class="fas fa-brain"></i>
                 <span>Neuro-Dev</span>
-            </a>
-            <div class="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="blog.html" class="nav-link active">Blog</a>
-                <a href="news.html" class="nav-link">Today's News</a>
-                <a href="python-ide.html" class="nav-link">Python IDE</a>
-                <a href="videos.html" class="nav-link">Videos</a>
-                <a href="donate.html" class="nav-link">Donate</a>
             </div>
-            <div class="hamburger">
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#courses" class="nav-link">Courses</a>
+                <a href="blog.html" class="nav-link active">Blog</a>
+                <a href="testimonials.html" class="nav-link">Reviews</a>
+                <a href="dictionary.html" class="nav-link">Dictionary</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -331,199 +271,198 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="blog-container">
         <div class="blog-header">
-            <h1>🔥 Neuro-Dev Blog</h1>
-            <p>Latest updates on Hacking, AI, Tech, Dark Web aur Cybersecurity</p>
-        </div>
-
-        <div class="blog-controls">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Search posts...">
-            </div>
+            <h1 style="color: #00ff41; font-size: 2.5rem; margin-bottom: 15px;">
+                <i class="fas fa-blog"></i> Cybersecurity Blog
+            </h1>
+            <p style="color: #ccc; font-size: 1.2rem; margin-bottom: 30px;">
+                Latest hacking news, tutorials aur security insights Roman Urdu mein
+            </p>
             
-            <div class="category-filters">
-                <button class="category-btn active" data-category="all">All</button>
-                <button class="category-btn" data-category="hacking">Hacking</button>
-                <button class="category-btn" data-category="ai">AI</button>
-                <button class="category-btn" data-category="tech">Tech</button>
-                <button class="category-btn" data-category="darkweb">Dark Web</button>
-                <button class="category-btn" data-category="news">News</button>
+            <div class="blog-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalPosts">10</span>
+                    <span>Total Posts</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalViews">6.5K</span>
+                    <span>Total Views</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Daily</span>
+                    <span>Updates</span>
+                </div>
             </div>
         </div>
 
-        <div id="blog-grid" class="blog-grid">
-            <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Loading posts...</p>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Blog posts search kariye...">
+                <i class="fas fa-search search-icon"></i>
             </div>
         </div>
-        
-    <!-- Google Ad Box -->
-    <div style="text-align: center; padding: 20px; background: #111; border-top: 1px solid #333; margin-top: 30px;">
-        <div style="color: #666; font-size: 12px; margin-bottom: 10px;">Advertisement</div>
-        <div style="max-width: 320px; margin: 0 auto; min-height: 100px; background: #222; border: 1px solid #444; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-1916892851128865"
-                 data-ad-slot="YOUR_AD_SLOT_ID"
-                 data-ad-format="rectangle"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-category="all">All Posts</button>
+            <button class="filter-tab" data-category="hacking">Hacking</button>
+            <button class="filter-tab" data-category="ai">AI & Tech</button>
+            <button class="filter-tab" data-category="darkweb">Dark Web</button>
+            <button class="filter-tab" data-category="news">Breaking News</button>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+            <!-- Blog posts will be loaded here -->
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-search" style="font-size: 3rem; color: #333; margin-bottom: 20px;"></i>
+            <p>Koi results nahi mile. Dusra search term try kariye.</p>
         </div>
     </div>
-    </div>
 
+    <script src="script.js"></script>
     <script>
-        let allPosts = [];
-        let currentCategory = 'all';
+        let blogPosts = [];
+        let filteredPosts = [];
+        let currentFilter = 'all';
 
-        // Category icons
-        const categoryIcons = {
-            hacking: 'fas fa-user-secret',
-            ai: 'fas fa-robot',
-            tech: 'fas fa-microchip',
-            darkweb: 'fas fa-mask',
-            news: 'fas fa-newspaper'
-        };
-
-        // Category colors
-        const categoryColors = {
-            hacking: '#f85149',
-            ai: '#a5a5a5',
-            tech: '#58a6ff',
-            darkweb: '#8b5cf6',
-            news: '#3fb950'
-        };
-
-        // Load blog posts
-        async function loadPosts() {
+        // Load blog posts from JSON
+        async function loadBlogPosts() {
             try {
-                const response = await fetch('blog-posts.json');
-                allPosts = await response.json();
-                // Sort by date (newest first)
-                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-                displayPosts(allPosts);
+                console.log('Fetching blog posts...');
+                const response = await fetch('./blog-posts.json?v=' + Date.now());
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                blogPosts = await response.json();
+                console.log('Loaded posts:', blogPosts.length);
+                filteredPosts = [...blogPosts];
+                displayBlogPosts(filteredPosts);
+                updateStats();
             } catch (error) {
-                document.getElementById('blog-grid').innerHTML = `
-                    <div class="no-posts">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px; color: #f85149;"></i>
-                        <h3>Posts load nahi ho sake</h3>
-                        <p>Kuch technical issue hai. Thodi der baad try kariye.</p>
-                    </div>
-                `;
+                console.error('Error loading blog posts:', error);
+                // Fallback data with all posts
+                blogPosts = [
+                    {
+                        id: 1,
+                        slug: "zero-trust-architecture-challenge",
+                        title: "🔒 Zero Trust Kya Hai? Ethical Hackers Ke Liye Sabse Bada Challenge",
+                        excerpt: "Security ka naya rule: 'Trust Nobody'. Zero Trust Architecture (ZTA) kaise traditional hacking methods ko challenge kar raha hai.",
+                        category: "hacking",
+                        date: "2025-10-26",
+                        readTime: "8 min read",
+                        views: 2150,
+                        tags: ["zero-trust", "cybersecurity"]
+                    },
+                    {
+                        id: 2,
+                        slug: "termux-advanced-hacking-tools-2024",
+                        title: "Termux Mein Advanced Hacking Tools Install Kaise Kare",
+                        excerpt: "Latest hacking tools jo Termux mein install kar sakte hain without root. Nmap, Metasploit, SQLmap guide.",
+                        category: "hacking",
+                        date: "2025-10-25",
+                        readTime: "8 min read",
+                        views: 1250,
+                        tags: ["termux", "hacking"]
+                    },
+                    {
+                        id: 3,
+                        slug: "chatgpt-vs-gemini-ai-comparison",
+                        title: "ChatGPT vs Google Gemini - Kaun Sa AI Better Hai?",
+                        excerpt: "ChatGPT aur Google Gemini ka detailed comparison. Performance, features, pricing analysis.",
+                        category: "ai",
+                        date: "2025-10-24",
+                        readTime: "6 min read",
+                        views: 890,
+                        tags: ["chatgpt", "gemini"]
+                    },
+                    {
+                        id: 4,
+                        slug: "dark-web-access-safely-2024",
+                        title: "Dark Web Ko Safely Access Kaise Kare - Complete Guide",
+                        excerpt: "Dark web access karne ka safe tarika. Tor browser, VPN setup, security measures.",
+                        category: "darkweb",
+                        date: "2025-10-23",
+                        readTime: "10 min read",
+                        views: 2150,
+                        tags: ["darkweb", "tor"]
+                    },
+                    {
+                        id: 5,
+                        slug: "python-ethical-hacking-scripts",
+                        title: "Python Se Ethical Hacking Scripts Banaye",
+                        excerpt: "Python use karke ethical hacking scripts kaise banate hain. Port scanner, password cracker.",
+                        category: "hacking",
+                        date: "2025-10-22",
+                        readTime: "12 min read",
+                        views: 1680,
+                        tags: ["python", "scripting"]
+                    }
+                ];
+                filteredPosts = [...blogPosts];
+                displayBlogPosts(filteredPosts);
+                updateStats();
             }
         }
 
-        // Display posts
-        function displayPosts(posts) {
-            const grid = document.getElementById('blog-grid');
+        function displayBlogPosts(posts) {
+            const blogGrid = document.getElementById('blogGrid');
+            const noResults = document.getElementById('noResults');
             
             if (posts.length === 0) {
-                grid.innerHTML = `
-                    <div class="no-posts">
-                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; color: #7d8590;"></i>
-                        <h3>Koi post nahi mili</h3>
-                        <p>Different category ya search term try kariye.</p>
-                    </div>
-                `;
+                blogGrid.innerHTML = '';
+                noResults.style.display = 'block';
                 return;
             }
             
-            // Sort posts by date (newest first)
-            const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            grid.innerHTML = sortedPosts.map(post => `
-                <div class="blog-card" onclick="openPost('${post.slug}')">
-                    <div class="blog-image">
-                        ${post.image ? 
-                            `<img src="${post.image}" alt="${post.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
-                            `<div class="fallback-icon" style="display:none;"><i class="${categoryIcons[post.category] || 'fas fa-file-alt'}"></i></div>` :
-                            `<i class="${categoryIcons[post.category] || 'fas fa-file-alt'}"></i>`
-                        }
+            noResults.style.display = 'none';
+            blogGrid.innerHTML = '';
+            
+            posts.forEach(post => {
+                const isNew = new Date(post.date) > new Date(Date.now() - 7*24*60*60*1000);
+                const currentViews = getViewCount(post.slug, post.views);
+                const isTrending = currentViews > 1000;
+                
+                const blogCard = document.createElement('div');
+                blogCard.className = 'blog-card';
+                blogCard.innerHTML = `
+                    ${isTrending ? '<div class="trending-badge">🔥 Trending</div>' : ''}
+                    <div class="blog-image" style="background-image: url('${post.image || ''}')">
+                        <div class="blog-image-icon">${getCategoryIcon(post.category)}</div>
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span class="blog-category" style="background: ${categoryColors[post.category] || '#238636'}">
-                                ${post.category.toUpperCase()}
-                            </span>
-                            <span class="blog-date">${formatDate(post.date)}</span>
-                        </div>
-                        <div class="blog-stats">
-                            <span class="view-count">
-                                <i class="fas fa-eye"></i> ${formatViews(getViewCount(post.slug, post.views))}
-                            </span>
+                            <div>
+                                <span class="blog-category">${post.category}</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-calendar"></i> ${formatDate(post.date)}
+                            </div>
                         </div>
                         <h3 class="blog-title">${post.title}</h3>
                         <p class="blog-excerpt">${post.excerpt}</p>
-                        <div class="blog-tags">
-                            ${post.tags.map(tag => `<span class="blog-tag">#${tag}</span>`).join('')}
+                        <div class="blog-footer">
+                            <div class="blog-stats-mini">
+                                <span><i class="fas fa-clock"></i> ${post.readTime}</span>
+                                <span><i class="fas fa-eye"></i> ${formatViews(currentViews)}</span>
+                            </div>
+                            <a href="post.html?slug=${post.slug}" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
-            `).join('');
-        }
-
-        // Format date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return date.toLocaleDateString('en-US', options);
-        }
-
-        // Filter by category
-        function filterByCategory(category) {
-            currentCategory = category;
-            
-            // Update active button
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
+                `;
+                blogGrid.appendChild(blogCard);
             });
-            document.querySelector(`[data-category="${category}"]`).classList.add('active');
-            
-            // Filter posts
-            const filteredPosts = category === 'all' 
-                ? allPosts 
-                : allPosts.filter(post => post.category === category);
-            
-            displayPosts(filteredPosts);
         }
-
-        // Search posts
-        function searchPosts(query) {
-            const filteredPosts = allPosts.filter(post => {
-                const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
-                const matchesSearch = query === '' || 
-                    post.title.toLowerCase().includes(query.toLowerCase()) ||
-                    post.excerpt.toLowerCase().includes(query.toLowerCase()) ||
-                    post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()));
-                
-                return matchesCategory && matchesSearch;
-            });
-            
-            displayPosts(filteredPosts);
-        }
-
-        // View count functions
+        
         function getViewCount(slug, defaultViews) {
             const stored = localStorage.getItem(`views_${slug}`);
             return stored ? parseInt(stored) : defaultViews;
-        }
-        
-        function incrementViewCount(slug, defaultViews) {
-            // Check if already viewed in this session
-            const sessionKey = `session_${slug}`;
-            const sessionViewed = sessionStorage.getItem(sessionKey);
-            
-            if (!sessionViewed) {
-                const currentViews = getViewCount(slug, defaultViews);
-                const newViews = currentViews + 1;
-                localStorage.setItem(`views_${slug}`, newViews);
-                sessionStorage.setItem(sessionKey, 'true');
-                return newViews;
-            }
-            
-            return getViewCount(slug, defaultViews);
         }
         
         function formatViews(views) {
@@ -534,41 +473,77 @@
             }
             return views.toString();
         }
-        
-        // Open post
-        function openPost(slug) {
-            // Increment view count when opening post
-            const post = allPosts.find(p => p.slug === slug);
-            if (post) {
-                incrementViewCount(slug, post.views);
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'hacking': '🔓',
+                'ai': '🤖',
+                'darkweb': '🕸️',
+                'news': '📰',
+                'default': '💻'
+            };
+            return icons[category] || icons.default;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return 'Today';
+            if (diffDays === 2) return 'Yesterday';
+            if (diffDays <= 7) return `${diffDays} days ago`;
+            
+            return date.toLocaleDateString('en-GB');
+        }
+
+        function updateStats() {
+            const totalViews = blogPosts.reduce((sum, post) => sum + post.views, 0);
+            document.getElementById('totalPosts').textContent = blogPosts.length;
+            document.getElementById('totalViews').textContent = totalViews > 1000 ? 
+                (totalViews/1000).toFixed(1) + 'K' : totalViews;
+        }
+
+        function filterPosts(category) {
+            currentFilter = category;
+            if (category === 'all') {
+                filteredPosts = [...blogPosts];
+            } else {
+                filteredPosts = blogPosts.filter(post => post.category === category);
             }
-            window.location.href = `post.html?slug=${slug}`;
+            displayBlogPosts(filteredPosts);
+        }
+
+        function searchPosts(query) {
+            if (!query.trim()) {
+                filterPosts(currentFilter);
+                return;
+            }
+            
+            const searchResults = filteredPosts.filter(post => 
+                post.title.toLowerCase().includes(query.toLowerCase()) ||
+                post.excerpt.toLowerCase().includes(query.toLowerCase()) ||
+                post.tags?.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+            );
+            
+            displayBlogPosts(searchResults);
         }
 
         // Event listeners
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterByCategory(btn.dataset.category);
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                filterPosts(tab.dataset.category);
             });
         });
 
-        document.getElementById('search-input').addEventListener('input', (e) => {
+        document.getElementById('searchInput').addEventListener('input', (e) => {
             searchPosts(e.target.value);
         });
-
-        // Load posts on page load
-        loadPosts();
-        
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                hamburger.classList.toggle('active');
-            });
-        }
     </script>
 </body>
 </html>

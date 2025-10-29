@@ -1,23 +1,4 @@
-# Security Headers
-Header always set X-Content-Type-Options nosniff
-Header always set X-Frame-Options DENY
-Header always set X-XSS-Protection "1; mode=block"
-Header always set Referrer-Policy "strict-origin-when-cross-origin"
-Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';"
-
-# Prevent access to sensitive files
-<Files ~ "^\.">
-    Order allow,deny
-    Deny from all
-</Files>
-
-# Prevent access to JSON files directly (optional)
-<Files "*.json">
-    Order allow,deny
-    Allow from all
-</Files>
-
-# Enable GZIP compression
+# Enable compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -28,23 +9,23 @@ Header always set Content-Security-Policy "default-src 'self'; script-src 'self'
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
-    AddOutputFilterByType DEFLATE application/json
 </IfModule>
 
-# Browser Caching
+# Enable browser caching
 <IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/jpg "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType image/svg+xml "access plus 1 month"
-    ExpiresByType application/json "access plus 1 day"
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
 </IfModule>
 
-# Error Pages
-ErrorDocument 404 /index.html
-ErrorDocument 403 /index.html
-ErrorDocument 500 /index.html
+# Cache control headers
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+</IfModule>

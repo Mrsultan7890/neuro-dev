@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "AI Ethics & Bias",
+      "terms": [
+        {"term": "Algorithmic Bias", "meaning": "AI systems mein unfair discrimination ya prejudice.", "example": "Hiring AI mein gender ya race bias."},
+        {"term": "Fairness", "meaning": "AI systems ka equal treatment provide karna.", "example": "Loan approval mein demographic fairness."},
+        {"term": "Explainable AI", "meaning": "AI decisions ko human-understandable way mein explain karna.", "example": "Medical diagnosis mein reasoning provide karna."},
+        {"term": "Interpretability", "meaning": "Model ki working aur decisions understand kar sakna.", "example": "Black box models ko interpretable banana."},
+        {"term": "Transparency", "meaning": "AI systems ki working clear aur open hona.", "example": "Algorithm details publicly available hona."},
+        {"term": "Accountability", "meaning": "AI decisions ke liye responsibility lena.", "example": "Autonomous car accident mein liability."},
+        {"term": "Privacy", "meaning": "Personal data ki protection aur confidentiality.", "example": "User data misuse se bachana."},
+        {"term": "Data Protection", "meaning": "Sensitive information ko unauthorized access se bachana.", "example": "GDPR compliance for user data."},
+        {"term": "Consent", "meaning": "Data use karne ke liye user ki permission lena.", "example": "Cookies acceptance, data sharing agreement."},
+        {"term": "Anonymization", "meaning": "Data se personal identifiers remove karna.", "example": "Medical research mein patient identity hide karna."},
+        {"term": "Differential Privacy", "meaning": "Individual privacy maintain karte hue aggregate insights nikalna.", "example": "Census data analysis without revealing individuals."},
+        {"term": "Federated Learning", "meaning": "Data share kiye bina distributed learning.", "example": "Mobile phones pe local training, central aggregation."},
+        {"term": "Adversarial Attacks", "meaning": "AI models ko fool karne ke liye designed inputs.", "example": "Image mein invisible changes se misclassification."},
+        {"term": "Robustness", "meaning": "AI system ka unexpected inputs handle kar sakna.", "example": "Noisy data ya adversarial examples ke against stability."},
+        {"term": "AI Safety", "meaning": "AI systems ko harmful outcomes se prevent karna.", "example": "Autonomous vehicles mein safety measures."},
+        {"term": "Human-in-the-loop", "meaning": "AI decisions mein human oversight aur intervention.", "example": "Medical diagnosis mein doctor final approval."},
+        {"term": "Bias Mitigation", "meaning": "AI systems se unfair bias remove karne ke techniques.", "example": "Training data balance karna, fairness constraints."},
+        {"term": "Algorithmic Auditing", "meaning": "AI systems ki fairness aur performance regularly check karna.", "example": "Hiring algorithms ki bias testing."},
+        {"term": "Digital Divide", "meaning": "Technology access mein inequality.", "example": "Rural areas mein internet connectivity issues."},
+        {"term": "AI Governance", "meaning": "AI development aur deployment ke liye rules aur policies.", "example": "Government regulations for AI use in healthcare."}
+      ]
+    },
+    {
+      "name": "Cloud & MLOps",
+      "terms": [
+        {"term": "MLOps", "meaning": "Machine Learning Operations, ML models ko production mein deploy karna.", "example": "Model training se deployment tak complete pipeline."},
+        {"term": "Model Deployment", "meaning": "Trained model ko production environment mein use ke liye setup karna.", "example": "Web API through model serve karna."},
+        {"term": "CI/CD", "meaning": "Continuous Integration/Continuous Deployment for ML pipelines.", "example": "Automated testing aur deployment of ML models."},
+        {"term": "Model Monitoring", "meaning": "Production mein model performance track karna.", "example": "Accuracy drift, data drift detect karna."},
+        {"term": "Data Drift", "meaning": "Production data ka training data se different ho jana.", "example": "User behavior change se input distribution shift."},
+        {"term": "Model Drift", "meaning": "Time ke saath model performance degrade hona.", "example": "Market conditions change se prediction accuracy drop."},
+        {"term": "A/B Testing", "meaning": "Do models ya strategies compare karne ka method.", "example": "New recommendation algorithm vs old one test karna."},
+        {"term": "Feature Store", "meaning": "ML features ko centrally store aur manage karna.", "example": "Reusable features for multiple models."},
+        {"term": "Model Registry", "meaning": "Trained models ko version control ke saath store karna.", "example": "Different model versions track karna."},
+        {"term": "Container", "meaning": "Application aur dependencies ko package karna.", "example": "Docker container mein ML model deploy karna."},
+        {"term": "Kubernetes", "meaning": "Container orchestration platform for scalable deployment.", "example": "Multiple ML services manage karna."},
+        {"term": "Microservices", "meaning": "Application ko small, independent services mein divide karna.", "example": "Separate services for data processing, model inference."},
+        {"term": "API", "meaning": "Application Programming Interface for model access.", "example": "REST API through model predictions serve karna."},
+        {"term": "Load Balancing", "meaning": "Multiple servers mein traffic distribute karna.", "example": "High traffic handle karne ke liye multiple model instances."},
+        {"term": "Scalability", "meaning": "System ka demand increase ke saath grow kar sakna.", "example": "Auto-scaling based on prediction requests."},
+        {"term": "Latency", "meaning": "Request se response tak ka time delay.", "example": "Real-time predictions mein low latency important hai."},
+        {"term": "Throughput", "meaning": "Unit time mein kitne requests handle kar sakte hain.", "example": "Per second kitne predictions serve kar sakte hain."},
+        {"term": "Edge Computing", "meaning": "Data source ke paas processing karna.", "example": "Mobile device pe local ML inference."},
+        {"term": "Model Compression", "meaning": "Model size reduce karna deployment ke liye.", "example": "Quantization, pruning techniques use karna."},
+        {"term": "Serverless", "meaning": "Server management ke bina code run karna.", "example": "AWS Lambda pe ML model deploy karna."}
+      ]
+    }
+  ]
+}

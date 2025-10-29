@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Robotics & Automation",
+      "terms": [
+        {"term": "Robot", "meaning": "Programmable machine jo tasks automatically perform kar sakta hai.", "example": "Factory mein assembly line robots."},
+        {"term": "Autonomous Vehicle", "meaning": "Self-driving car jo bina human intervention chale.", "example": "Tesla Autopilot, Google Waymo cars."},
+        {"term": "Computer Vision", "meaning": "Machines ko images aur videos understand karne ki ability.", "example": "Face detection, object recognition."},
+        {"term": "Sensor Fusion", "meaning": "Multiple sensors ka data combine kar ke better understanding.", "example": "Camera + LiDAR data merge karna."},
+        {"term": "Path Planning", "meaning": "Robot ke liye optimal route calculate karna.", "example": "Warehouse robot ka navigation path."},
+        {"term": "SLAM", "meaning": "Simultaneous Localization and Mapping for robot navigation.", "example": "Robot apna location track kare aur map banaye."},
+        {"term": "Actuator", "meaning": "Robot parts ko move karne wala mechanical component.", "example": "Robot arm ka motor actuator."},
+        {"term": "End Effector", "meaning": "Robot arm ka last part jo actual task perform karta hai.", "example": "Gripper, welding tool, camera."},
+        {"term": "Degrees of Freedom", "meaning": "Robot kitni directions mein move kar sakta hai.", "example": "6-DOF robot arm 6 directions mein move kare."},
+        {"term": "Industrial Automation", "meaning": "Manufacturing processes ko automatic banana.", "example": "Assembly line automation, quality control."},
+        {"term": "RPA", "meaning": "Robotic Process Automation for business tasks.", "example": "Data entry, invoice processing automation."},
+        {"term": "Swarm Robotics", "meaning": "Multiple robots ka coordinated behavior.", "example": "Drone swarms, ant-like collective behavior."},
+        {"term": "Humanoid Robot", "meaning": "Human jaise dikhne aur behave karne wala robot.", "example": "Honda ASIMO, Boston Dynamics Atlas."},
+        {"term": "Collaborative Robot", "meaning": "Humans ke saath safely work kar sakne wala robot.", "example": "Cobot assembly line mein humans ke saath."},
+        {"term": "Machine Vision", "meaning": "Industrial applications ke liye computer vision.", "example": "Quality inspection, defect detection."},
+        {"term": "Motion Control", "meaning": "Robot movements ko precisely control karna.", "example": "CNC machines, robotic arms control."},
+        {"term": "Kinematics", "meaning": "Robot joints aur links ki geometry aur motion.", "example": "Robot arm ka forward/inverse kinematics."},
+        {"term": "Control System", "meaning": "Robot behavior control karne wala system.", "example": "PID controller, feedback control loops."},
+        {"term": "Teleoperation", "meaning": "Remote location se robot control karna.", "example": "Mars rover remote control from Earth."},
+        {"term": "Artificial Muscle", "meaning": "Soft robotics mein flexible actuators.", "example": "Pneumatic artificial muscles, shape memory alloys."}
+      ]
+    },
+    {
+      "name": "Quantum Computing",
+      "terms": [
+        {"term": "Quantum Bit", "meaning": "Qubit, quantum information ka basic unit.", "example": "Classical bit 0 ya 1, qubit superposition mein both."},
+        {"term": "Superposition", "meaning": "Quantum particle multiple states mein simultaneously exist karna.", "example": "Qubit 0 aur 1 dono states mein same time."},
+        {"term": "Entanglement", "meaning": "Do qubits ka mysterious connection, distance se independent.", "example": "Einstein ka 'spooky action at distance'."},
+        {"term": "Quantum Gate", "meaning": "Quantum operations perform karne wala basic building block.", "example": "Pauli-X gate, Hadamard gate, CNOT gate."},
+        {"term": "Quantum Circuit", "meaning": "Quantum gates ka sequence jo quantum algorithm implement kare.", "example": "Shor's algorithm ka circuit representation."},
+        {"term": "Quantum Supremacy", "meaning": "Quantum computer classical computer se faster performance.", "example": "Google ka 2019 quantum supremacy claim."},
+        {"term": "Decoherence", "meaning": "Quantum states ka environmental interference se destroy hona.", "example": "Qubits ka classical behavior mein collapse."},
+        {"term": "Quantum Error Correction", "meaning": "Quantum information ko errors se protect karne ka method.", "example": "Surface codes, stabilizer codes."},
+        {"term": "Quantum Annealing", "meaning": "Optimization problems solve karne ka quantum method.", "example": "D-Wave quantum annealer."},
+        {"term": "Quantum Cryptography", "meaning": "Quantum mechanics use kar ke secure communication.", "example": "Quantum key distribution protocols."},
+        {"term": "Quantum Algorithm", "meaning": "Quantum computers ke liye designed algorithms.", "example": "Shor's factoring, Grover's search algorithm."},
+        {"term": "Quantum Simulator", "meaning": "Quantum systems simulate karne wala classical computer.", "example": "Qiskit simulator, quantum chemistry simulations."},
+        {"term": "Quantum Machine Learning", "meaning": "ML algorithms ko quantum computers pe run karna.", "example": "Quantum neural networks, variational algorithms."},
+        {"term": "NISQ", "meaning": "Noisy Intermediate-Scale Quantum devices.", "example": "Current quantum computers with limited qubits."},
+        {"term": "Quantum Volume", "meaning": "Quantum computer ki overall capability measure.", "example": "IBM quantum volume benchmarks."},
+        {"term": "Bloch Sphere", "meaning": "Qubit states ko visualize karne ka 3D representation.", "example": "Sphere surface pe qubit state points."},
+        {"term": "Quantum Fourier Transform", "meaning": "Classical FFT ka quantum version.", "example": "Shor's algorithm mein period finding."},
+        {"term": "Variational Quantum Eigensolver", "meaning": "Quantum chemistry problems solve karne ka hybrid algorithm.", "example": "Molecular ground state energy calculation."},
+        {"term": "Quantum Teleportation", "meaning": "Quantum state ko distant location pe transfer karna.", "example": "Entanglement use kar ke information transfer."},
+        {"term": "Adiabatic Quantum Computing", "meaning": "Slow evolution use kar ke quantum computation.", "example": "Quantum annealing ka theoretical foundation."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "name": "Mobile Development",
+      "terms": [
+        {"term": "Native App", "meaning": "Specific platform ke liye developed application.", "example": "iOS Swift app, Android Kotlin app."},
+        {"term": "Cross-Platform", "meaning": "Multiple platforms pe run hone wala single codebase.", "example": "React Native, Flutter apps."},
+        {"term": "Progressive Web App", "meaning": "Web technology use kar ke native-like mobile experience.", "example": "Offline functionality, push notifications."},
+        {"term": "Mobile UI/UX", "meaning": "Mobile devices ke liye optimized user interface design.", "example": "Touch-friendly buttons, responsive layouts."},
+        {"term": "App Store Optimization", "meaning": "App visibility improve karna app stores mein.", "example": "Keywords, ratings, reviews optimization."},
+        {"term": "Push Notifications", "meaning": "Users ko real-time messages send karna.", "example": "News alerts, promotional messages."},
+        {"term": "Offline Functionality", "meaning": "Internet connection ke bina app features use kar sakna.", "example": "Cached data, local storage."},
+        {"term": "Mobile Analytics", "meaning": "App usage patterns aur user behavior track karna.", "example": "User engagement metrics, crash reports."},
+        {"term": "App Performance", "meaning": "Mobile app ki speed aur responsiveness optimize karna.", "example": "Memory management, battery optimization."},
+        {"term": "Mobile Security", "meaning": "Mobile applications mein security measures implement karna.", "example": "Data encryption, secure authentication."},
+        {"term": "Responsive Design", "meaning": "Different screen sizes ke liye adaptive layout.", "example": "Flexible grids, scalable images."},
+        {"term": "Touch Gestures", "meaning": "Mobile devices mein touch-based interactions.", "example": "Swipe, pinch, tap gestures."},
+        {"term": "Mobile Backend", "meaning": "Mobile apps ke liye server-side services.", "example": "APIs, cloud storage, user authentication."},
+        {"term": "App Testing", "meaning": "Mobile applications ki functionality aur usability test karna.", "example": "Device testing, automated UI tests."},
+        {"term": "Mobile DevOps", "meaning": "Mobile app development aur deployment automation.", "example": "CI/CD for mobile apps."},
+        {"term": "App Monetization", "meaning": "Mobile apps se revenue generate karne ke methods.", "example": "In-app purchases, advertisements."},
+        {"term": "Mobile Accessibility", "meaning": "Disabled users ke liye app accessibility features.", "example": "Screen reader support, voice navigation."},
+        {"term": "App Distribution", "meaning": "Mobile apps ko users tak deliver karne ka process.", "example": "App stores, enterprise distribution."},
+        {"term": "Mobile Frameworks", "meaning": "Mobile app development ke liye ready-made tools.", "example": "Ionic, Xamarin, PhoneGap."},
+        {"term": "Mobile Database", "meaning": "Mobile devices mein local data storage solutions.", "example": "SQLite, Realm, Core Data."}
+      ]
+    },
+    {
+      "name": "Data Engineering",
+      "terms": [
+        {"term": "Data Pipeline", "meaning": "Data ko source se destination tak process karne ka workflow.", "example": "ETL pipelines, real-time data streaming."},
+        {"term": "ETL", "meaning": "Extract, Transform, Load - data processing methodology.", "example": "Database migration, data warehouse loading."},
+        {"term": "Data Warehouse", "meaning": "Large-scale data storage aur analysis ke liye centralized repository.", "example": "Amazon Redshift, Google BigQuery."},
+        {"term": "Data Lake", "meaning": "Raw data ko natural format mein store karne ka repository.", "example": "Hadoop HDFS, Amazon S3 data lake."},
+        {"term": "Stream Processing", "meaning": "Real-time data ko continuously process karna.", "example": "Apache Kafka, Apache Storm."},
+        {"term": "Batch Processing", "meaning": "Large data volumes ko scheduled intervals mein process karna.", "example": "Nightly data processing jobs."},
+        {"term": "Data Modeling", "meaning": "Data structure aur relationships define karna.", "example": "Star schema, snowflake schema design."},
+        {"term": "Data Quality", "meaning": "Data accuracy, completeness aur consistency ensure karna.", "example": "Data validation rules, cleansing processes."},
+        {"term": "Data Governance", "meaning": "Data management policies aur procedures.", "example": "Data privacy compliance, access controls."},
+        {"term": "Apache Spark", "meaning": "Large-scale data processing engine.", "example": "Distributed computing, in-memory processing."},
+        {"term": "Hadoop", "meaning": "Distributed storage aur processing framework.", "example": "HDFS file system, MapReduce processing."},
+        {"term": "NoSQL Database", "meaning": "Non-relational database for flexible data storage.", "example": "MongoDB, Cassandra, DynamoDB."},
+        {"term": "Data Partitioning", "meaning": "Large datasets ko smaller chunks mein divide karna.", "example": "Date-based partitioning, hash partitioning."},
+        {"term": "Data Replication", "meaning": "Data ko multiple locations mein copy karna.", "example": "Master-slave replication, multi-region backup."},
+        {"term": "Schema Evolution", "meaning": "Data structure changes ko handle karna over time.", "example": "Backward compatibility, version management."},
+        {"term": "Data Lineage", "meaning": "Data ka origin aur transformation history track karna.", "example": "Data flow documentation, audit trails."},
+        {"term": "Change Data Capture", "meaning": "Database changes ko real-time track karna.", "example": "CDC for data synchronization."},
+        {"term": "Data Catalog", "meaning": "Available datasets ka searchable inventory.", "example": "Metadata management, data discovery."},
+        {"term": "Data Mesh", "meaning": "Decentralized data architecture approach.", "example": "Domain-oriented data ownership."},
+        {"term": "Lambda Architecture", "meaning": "Batch aur stream processing combine karne ka pattern.", "example": "Real-time + historical data processing."}
+      ]
+    }
+  ]
+}
