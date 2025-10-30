@@ -1,0 +1,367 @@
+/* Blog Post Specific Styles */
+.post-container {
+    padding-top: 90px;
+    min-height: 100vh;
+    background: #0a0a0a;
+}
+
+.post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.post-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+.post-title {
+    color: #00ff41;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.post-meta {
+    color: #888;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Post Content Styling */
+#postContent {
+    background: #111;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    margin: 30px 0;
+    color: #ccc;
+    line-height: 1.8;
+}
+
+#postContent h2 {
+    color: #00ff41;
+    margin: 30px 0 20px 0;
+    font-size: 1.8rem;
+}
+
+#postContent h3 {
+    color: #fff;
+    margin: 25px 0 15px 0;
+    font-size: 1.4rem;
+}
+
+#postContent p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+#postContent ul, #postContent ol {
+    margin: 20px 0;
+    padding-left: 30px;
+}
+
+#postContent li {
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+#postContent strong {
+    color: #00ff41;
+}
+
+#postContent code {
+    background: #000;
+    color: #00ff41;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+#postContent pre {
+    background: #000;
+    color: #00ff41;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-left: 4px solid #00ff41;
+}
+
+/* Reactions Styling */
+.post-reactions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: #111;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+.reaction-btn {
+    background: #222;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 12px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+    justify-content: center;
+}
+
+.reaction-btn:hover {
+    background: #333;
+    border-color: #00ff41;
+    transform: translateY(-2px);
+}
+
+.reaction-btn.active {
+    background: #00ff41;
+    color: #000;
+    border-color: #00ff41;
+    transform: scale(1.1);
+}
+
+/* Comments Section */
+.comments-section {
+    margin-top: 50px;
+    padding: 30px;
+    background: #111;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.comments-header h3 {
+    color: #00ff41;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-form {
+    margin-bottom: 40px;
+    padding: 25px;
+    background: #222;
+    border-radius: 10px;
+    border: 1px solid #444;
+}
+
+.comment-input, .name-input {
+    width: 100%;
+    padding: 15px;
+    background: #000;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.comment-input {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.comment-input:focus, .name-input:focus {
+    outline: none;
+    border-color: #00ff41;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.submit-comment {
+    background: #00ff41;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-comment:hover {
+    background: #00cc33;
+    transform: translateY(-1px);
+}
+
+/* Comments List */
+.comments-list {
+    margin-top: 30px;
+}
+
+.comment-item {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 4px solid #00ff41;
+    border: 1px solid #444;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.comment-author {
+    color: #00ff41;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.comment-date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.comment-text {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.reply-btn, .like-btn {
+    background: none;
+    border: 1px solid #444;
+    color: #888;
+    padding: 6px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.reply-btn:hover, .like-btn:hover {
+    border-color: #00ff41;
+    color: #00ff41;
+}
+
+.reply-form {
+    margin-top: 15px;
+    padding: 15px;
+    background: #333;
+    border-radius: 8px;
+    display: none;
+    border: 1px solid #555;
+}
+
+.reply-form input, .reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    background: #000;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.reply-form button {
+    background: #00ff41;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.reply-item {
+    margin-left: 30px;
+    margin-top: 15px;
+    padding: 15px;
+    background: #333;
+    border-radius: 8px;
+    border-left: 3px solid #666;
+    border: 1px solid #555;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 2rem;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #postContent {
+        padding: 20px;
+    }
+    
+    .post-reactions {
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .reaction-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+        min-width: 70px;
+    }
+    
+    .reply-item {
+        margin-left: 15px;
+    }
+    
+    .comment-form {
+        padding: 20px;
+    }
+    
+    .comments-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}

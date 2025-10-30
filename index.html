@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="course-features.css">
     <link rel="stylesheet" href="missing-styles.css">
     <link rel="stylesheet" href="quiz-review-styles.css">
+    <link rel="stylesheet" href="search-fix.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
@@ -76,6 +77,7 @@
                 <a href="faq.html" class="nav-link">FAQ</a>
                 <a href="videos.html" class="nav-link">Videos</a>
                 <a href="python-ide.html" class="nav-link">Python IDE</a>
+                <a href="practice-lab.html" class="nav-link">Practice Lab</a>
                 <a href="dictionary.html" class="nav-link">AI/ML Dictionary</a>
                 <a href="about.html" class="nav-link">About</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -190,7 +192,7 @@
             <!-- Search & Filter Controls -->
             <div class="course-controls">
                 <div class="search-box">
-                    <input type="text" id="course-search" placeholder="Course search kariye..." oninput="searchCourses()">
+                    <input type="text" id="course-search" placeholder="Course search kariye...">
                     <i class="fas fa-search"></i>
                 </div>
                 <div class="filter-buttons">
@@ -199,7 +201,7 @@
                     <button class="filter-btn" onclick="filterCourses('intermediate')">Intermediate</button>
                     <button class="filter-btn" onclick="filterCourses('advanced')">Advanced</button>
                 </div>
-                <button id="theme-toggle" onclick="toggleTheme()">
+                <button id="theme-toggle" style="cursor: pointer; z-index: 999;">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
@@ -341,11 +343,18 @@
                     <div class="course-icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
+                    <div class="course-badge">Intermediate</div>
                     <h3>Module 5: Networking Course</h3>
                     <p>Network fundamentals, scanning, reconnaissance</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 8 Hours</span>
                         <span><i class="fas fa-tasks"></i> 6 Lessons</span>
+                        <span><i class="fas fa-users"></i> 1.5K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=networking'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -353,11 +362,18 @@
                     <div class="course-icon">
                         <i class="fas fa-globe"></i>
                     </div>
+                    <div class="course-badge">Advanced</div>
                     <h3>Module 6: Web App Security</h3>
                     <p>OWASP Top 10, SQL Injection, XSS, CSRF</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 8 Hours</span>
                         <span><i class="fas fa-tasks"></i> 8 Lessons</span>
+                        <span><i class="fas fa-users"></i> 2.8K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=web-security'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -365,11 +381,18 @@
                     <div class="course-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
+                    <div class="course-badge">Intermediate</div>
                     <h3>Module 7: Mobile Security & OSINT</h3>
                     <p>APK analysis, OSINT, Google dorking</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 7 Hours</span>
                         <span><i class="fas fa-tasks"></i> 6 Lessons</span>
+                        <span><i class="fas fa-users"></i> 1.9K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=mobile-osint'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -377,11 +400,18 @@
                     <div class="course-icon">
                         <i class="fas fa-wrench"></i>
                     </div>
+                    <div class="course-badge">Advanced</div>
                     <h3>Module 8: NetHunter Troubleshooting</h3>
                     <p>VNC, KEX, Terminal errors aur performance fixes</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 6 Hours</span>
                         <span><i class="fas fa-tasks"></i> 6 Lessons</span>
+                        <span><i class="fas fa-users"></i> 1.2K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=nethunter-troubleshooting'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -389,11 +419,18 @@
                     <div class="course-icon">
                         <i class="fab fa-python"></i>
                     </div>
+                    <div class="course-badge">Beginner</div>
                     <h3>Module 9: Complete Python Programming</h3>
                     <p>Zero se hero tak Python - absolute beginners ke liye</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 12 Hours</span>
                         <span><i class="fas fa-tasks"></i> 15 Lessons</span>
+                        <span><i class="fas fa-users"></i> 4.1K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=python-complete'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -401,25 +438,18 @@
                     <div class="course-icon">
                         <i class="fas fa-child"></i>
                     </div>
+                    <div class="course-badge">Beginner</div>
                     <h3>Module 10: Python for Kids</h3>
                     <p>Bilkul beginners ke liye - computer kya hai se start karte hain</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 8 Hours</span>
                         <span><i class="fas fa-tasks"></i> 20 Lessons</span>
+                        <span><i class="fas fa-users"></i> 3.5K+ Students</span>
                     </div>
-                </div>
-
-
-
-                <div class="course-card" data-module="python-ai-ml">
-                    <div class="course-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Module 12: Python for AI/ML</h3>
-                    <p>AI aur Machine Learning ke liye complete Python course - NumPy se TensorFlow tak</p>
-                    <div class="course-stats">
-                        <span><i class="fas fa-clock"></i> 15 Hours</span>
-                        <span><i class="fas fa-tasks"></i> 15 Lessons</span>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=python-basics-kids'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
 
@@ -427,11 +457,37 @@
                     <div class="course-icon">
                         <i class="fas fa-brain"></i>
                     </div>
+                    <div class="course-badge">Advanced</div>
                     <h3>Module 11: Hands-On ML with Scikit-Learn</h3>
                     <p>Complete book ka practical implementation - har chapter ki detailed explanation Roman Urdu mein</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 50 Hours</span>
                         <span><i class="fas fa-tasks"></i> 19 Chapters</span>
+                        <span><i class="fas fa-users"></i> 800+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=hands-on-ml-scikit-learn'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-module="python-ai-ml">
+                    <div class="course-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="course-badge">Advanced</div>
+                    <h3>Module 12: Python for AI/ML</h3>
+                    <p>AI aur Machine Learning ke liye complete Python course - NumPy se TensorFlow tak</p>
+                    <div class="course-stats">
+                        <span><i class="fas fa-clock"></i> 15 Hours</span>
+                        <span><i class="fas fa-tasks"></i> 15 Lessons</span>
+                        <span><i class="fas fa-users"></i> 2.3K+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=python-ai-ml'">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
                     </div>
                 </div>
                 
@@ -481,6 +537,15 @@
     <section class="testimonials">
         <div class="container">
             <h2>Students Kya Kehte Hain</h2>
+            
+            <!-- User Reviews Display -->
+            <div id="user-reviews-section" class="user-reviews-section">
+                <h3>Recent Reviews</h3>
+                <div id="reviews-display" class="reviews-display">
+                    <!-- User submitted reviews will appear here -->
+                </div>
+            </div>
+            
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
@@ -669,6 +734,61 @@
         </div>
     </footer>
 
+    <script>
+        // Simple theme toggle function
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('#theme-toggle i');
+            const currentTheme = body.getAttribute('data-theme') || 'dark';
+            
+            if (currentTheme === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        // Initialize theme and add event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            const themeIcon = document.querySelector('#theme-toggle i');
+            if (themeIcon) {
+                themeIcon.className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            
+            // Add theme toggle click event
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Search functionality
+            const searchInput = document.getElementById('course-search');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const courseCards = document.querySelectorAll('.course-card');
+                    
+                    courseCards.forEach(card => {
+                        const title = card.querySelector('h3').textContent.toLowerCase();
+                        const description = card.querySelector('p').textContent.toLowerCase();
+                        
+                        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
     <script src="script.js"></script>
     <script src="course-features.js"></script>
     <script src="reviews-system.js"></script>

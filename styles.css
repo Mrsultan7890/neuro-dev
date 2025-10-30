@@ -266,6 +266,27 @@ body {
     transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
     cursor: default;
     position: relative;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.course-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #00ff41;
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.course-preview {
+    flex-grow: 1;
+    margin: 20px 0;
 }
 
 .course-card:hover {
@@ -558,10 +579,61 @@ body {
     
     .course-card {
         padding: 20px;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
     }
     
     .course-card h3 {
         font-size: 1.2rem;
+    }
+    
+    .course-stats {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid #333;
+    }
+    
+    .course-stats span {
+        text-align: center;
+        padding: 5px;
+        background: rgba(0, 255, 65, 0.05);
+        border-radius: 15px;
+        font-size: 0.85rem;
+    }
+    
+    .course-actions {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .start-btn, .review-btn {
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.3s;
+    }
+    
+    .start-btn {
+        background: linear-gradient(45deg, #00ff41, #00cc33);
+        color: #000;
+        border: none;
+    }
+    
+    .review-btn {
+        background: transparent;
+        border: 1px solid #00ff41;
+        color: #00ff41;
     }
     
     .features-grid {

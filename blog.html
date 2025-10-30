@@ -227,6 +227,78 @@
             padding: 60px 20px;
             font-size: 1.1rem;
         }
+        .post-reactions {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .reaction-btn {
+            background: #222;
+            border: 1px solid #444;
+            color: #ccc;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .reaction-btn:hover {
+            background: #333;
+            border-color: #00ff41;
+        }
+        .reaction-btn.active {
+            background: #00ff41;
+            color: #000;
+            border-color: #00ff41;
+        }
+        .related-posts {
+            margin-top: 40px;
+            padding: 30px 20px;
+            background: #111;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+        .related-posts h3 {
+            color: #00ff41;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .related-item {
+            background: #222;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            transition: all 0.3s;
+        }
+        .related-item:hover {
+            border-color: #00ff41;
+            transform: translateY(-2px);
+        }
+        .related-item h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .related-item p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .related-item a {
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
         @media (max-width: 768px) {
             .blog-stats {
                 gap: 20px;
@@ -244,6 +316,13 @@
             .blog-meta {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+            .post-reactions {
+                gap: 8px;
+            }
+            .reaction-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -445,10 +524,25 @@
                         </div>
                         <h3 class="blog-title">${post.title}</h3>
                         <p class="blog-excerpt">${post.excerpt}</p>
+                        <div class="post-reactions">
+                            <button class="reaction-btn" onclick="addReaction('${post.slug}', 'like')">
+                                👍 <span id="like-${post.slug}">${getReactionCount(post.slug, 'like')}</span>
+                            </button>
+                            <button class="reaction-btn" onclick="addReaction('${post.slug}', 'dislike')">
+                                👎 <span id="dislike-${post.slug}">${getReactionCount(post.slug, 'dislike')}</span>
+                            </button>
+                            <button class="reaction-btn" onclick="addReaction('${post.slug}', 'love')">
+                                ❤️ <span id="love-${post.slug}">${getReactionCount(post.slug, 'love')}</span>
+                            </button>
+                            <button class="reaction-btn" onclick="addReaction('${post.slug}', 'fire')">
+                                🔥 <span id="fire-${post.slug}">${getReactionCount(post.slug, 'fire')}</span>
+                            </button>
+                        </div>
                         <div class="blog-footer">
                             <div class="blog-stats-mini">
                                 <span><i class="fas fa-clock"></i> ${post.readTime}</span>
                                 <span><i class="fas fa-eye"></i> ${formatViews(currentViews)}</span>
+                                <span><i class="fas fa-comments"></i> ${getCommentCount(post.slug)}</span>
                             </div>
                             <a href="post.html?slug=${post.slug}" class="read-more">
                                 Read More <i class="fas fa-arrow-right"></i>
@@ -544,6 +638,77 @@
         document.getElementById('searchInput').addEventListener('input', (e) => {
             searchPosts(e.target.value);
         });
+        
+        // Add related posts section
+        setTimeout(() => {
+            addRelatedPostsSection();
+        }, 1000);
+        
+        // Reaction System Functions
+        function addReaction(postSlug, reactionType) {
+            const key = `reactions_${postSlug}`;
+            let reactions = JSON.parse(localStorage.getItem(key) || '{}');
+            
+            if (!reactions[reactionType]) reactions[reactionType] = 0;
+            reactions[reactionType]++;
+            
+            localStorage.setItem(key, JSON.stringify(reactions));
+            document.getElementById(`${reactionType}-${postSlug}`).textContent = reactions[reactionType];
+            
+            // Add visual feedback
+            const btn = event.target.closest('.reaction-btn');
+            btn.classList.add('active');
+            setTimeout(() => btn.classList.remove('active'), 300);
+        }
+        
+        function getReactionCount(postSlug, reactionType) {
+            const key = `reactions_${postSlug}`;
+            const reactions = JSON.parse(localStorage.getItem(key) || '{}');
+            return reactions[reactionType] || 0;
+        }
+        
+        function getCommentCount(postSlug) {
+            const key = `comments_${postSlug}`;
+            const comments = JSON.parse(localStorage.getItem(key) || '[]');
+            return comments.length;
+        }
+        
+        function addRelatedPostsSection() {
+            const blogGrid = document.getElementById('blogGrid');
+            const relatedSection = document.createElement('div');
+            relatedSection.className = 'related-posts';
+            relatedSection.innerHTML = `
+                <h3><i class="fas fa-link"></i> Related Posts</h3>
+                <div class="related-grid" id="relatedGrid">
+                    <!-- Related posts will be loaded here -->
+                </div>
+            `;
+            
+            blogGrid.parentNode.appendChild(relatedSection);
+            loadRelatedPosts();
+        }
+        
+        function loadRelatedPosts() {
+            const relatedGrid = document.getElementById('relatedGrid');
+            if (!relatedGrid) return;
+            
+            // Get random 3 posts for related section
+            const shuffled = [...blogPosts].sort(() => 0.5 - Math.random());
+            const related = shuffled.slice(0, 3);
+            
+            relatedGrid.innerHTML = related.map(post => `
+                <div class="related-item">
+                    <h4>${post.title}</h4>
+                    <p>${post.excerpt.substring(0, 80)}...</p>
+                    <a href="post.html?slug=${post.slug}">Read More →</a>
+                </div>
+            `).join('');
+        }
+        
+        // Make functions global
+        window.addReaction = addReaction;
+        window.getReactionCount = getReactionCount;
+        window.getCommentCount = getCommentCount;
     </script>
 </body>
 </html>

@@ -195,13 +195,193 @@
         .info { color: #58a6ff; }
         .warning { color: #d29922; }
         
+        /* Fullscreen Mode */
+        body:fullscreen {
+            background: #0d1117 !important;
+        }
+        
+        body:fullscreen .navbar {
+            padding: 8px 15px !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 9999 !important;
+            background: #161b22 !important;
+            border-bottom: 1px solid #30363d !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        
+        body:fullscreen .ide-container {
+            height: calc(100vh - 60px) !important;
+            margin-top: 60px !important;
+        }
+        
+        body:fullscreen .nav-actions {
+            display: flex !important;
+            gap: 8px !important;
+            flex-wrap: wrap !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        body:fullscreen .btn {
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+            min-width: 60px !important;
+            background: #238636 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        body:fullscreen .btn.secondary {
+            background: #21262d !important;
+        }
+        
+        body:fullscreen .btn:hover {
+            background: #2ea043 !important;
+        }
+        
+        body:fullscreen .btn.secondary:hover {
+            background: #30363d !important;
+        }
+        
+        /* Orientation Change Notification */
+        .orientation-hint {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #58a6ff;
+            padding: 20px;
+            border: 2px solid #58a6ff;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 9999;
+            display: none;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .orientation-hint.show {
+            display: block;
+        }
+        
+        /* Landscape Orientation */
+        @media screen and (orientation: landscape) and (max-width: 1024px) {
+            .ide-container {
+                flex-direction: row;
+                height: calc(100vh - 50px);
+            }
+            
+            .output-panel {
+                width: 40%;
+                height: 100%;
+            }
+            
+            .editor-panel {
+                width: 60%;
+                height: 100%;
+            }
+            
+            .nav-actions {
+                gap: 3px;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 4px 6px;
+                font-size: 10px;
+                min-width: 50px;
+            }
+            
+            .btn-text {
+                display: none;
+            }
+            
+            #code-editor {
+                font-size: 13px;
+            }
+            
+            .output-content {
+                font-size: 12px;
+            }
+        }
+        
+        /* Landscape Fullscreen */
+        @media screen and (orientation: landscape) {
+            body:fullscreen .navbar {
+                padding: 3px 8px;
+                height: 40px;
+            }
+            
+            body:fullscreen .ide-container {
+                height: calc(100vh - 40px);
+                margin-top: 40px;
+            }
+            
+            body:fullscreen .output-panel {
+                width: 35%;
+            }
+            
+            body:fullscreen .editor-panel {
+                width: 65%;
+            }
+            
+            body:fullscreen #code-editor {
+                font-size: 14px;
+            }
+            
+            body:fullscreen .output-content {
+                font-size: 13px;
+            }
+            
+            body:fullscreen .nav-actions {
+                gap: 3px !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+            }
+            
+            body:fullscreen .btn {
+                display: flex !important;
+                padding: 4px 6px !important;
+                font-size: 10px !important;
+                min-width: 45px !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            
+            body:fullscreen .nav-logo span {
+                display: none !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .ide-container { flex-direction: column; }
             .output-panel { width: 100%; height: 45%; min-height: 200px; }
             .editor-panel { height: 55%; }
-            .nav-actions { gap: 3px; flex-wrap: wrap; }
-            .btn { padding: 5px 8px; font-size: 11px; }
-            .navbar { padding: 8px 15px; position: sticky; top: 0; z-index: 100; }
+            .nav-actions { gap: 2px; flex-wrap: wrap; }
+            .btn { padding: 4px 6px; font-size: 10px; min-width: 45px; }
+            .navbar { padding: 6px 10px; position: sticky; top: 0; z-index: 100; }
             .output-content { 
                 padding: 10px; 
                 font-size: 12px; 
@@ -211,6 +391,40 @@
                 max-height: none;
             }
             #code-editor { padding: 10px; font-size: 12px; }
+            
+            .btn-text {
+                display: none;
+            }
+            
+            body:fullscreen .navbar {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                padding: 6px 10px !important;
+                height: 50px !important;
+                z-index: 9999 !important;
+            }
+            
+            body:fullscreen .ide-container {
+                margin-top: 50px !important;
+                height: calc(100vh - 50px) !important;
+            }
+            
+            body:fullscreen .nav-actions {
+                display: flex !important;
+                gap: 4px !important;
+                flex-wrap: wrap !important;
+            }
+            
+            body:fullscreen .btn {
+                display: flex !important;
+                padding: 4px 6px !important;
+                font-size: 10px !important;
+                min-width: 40px !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
         }
         
         @media (max-width: 480px) {
@@ -222,6 +436,15 @@
     </style>
 </head>
 <body>
+    <!-- Orientation Hint -->
+    <div id="orientationHint" class="orientation-hint">
+        <i class="fas fa-mobile-alt" style="font-size: 2rem; margin-bottom: 10px;"></i>
+        <h3>Better Coding Experience!</h3>
+        <p>Landscape mode mein rotate kariye<br>IDE ke liye better experience</p>
+        <div style="margin-top: 15px;">
+            <i class="fas fa-redo" style="animation: spin 2s linear infinite;"></i>
+        </div>
+    </div>
     <nav class="navbar">
         <div class="nav-logo">
             <i class="fas fa-brain"></i>
@@ -245,6 +468,9 @@
             </button>
             <button class="btn secondary" onclick="loadExample()">
                 <i class="fas fa-code"></i> Example
+            </button>
+            <button class="btn secondary" onclick="toggleFullscreen()">
+                <i class="fas fa-expand"></i> <span class="btn-text">Fullscreen</span>
             </button>
         </div>
     </nav>
@@ -692,6 +918,108 @@ else:
             }, { passive: true });
         }
         
+        // Fullscreen functionality
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    // Force show all buttons
+                    forceShowButtons();
+                    
+                    // Show orientation hint on mobile
+                    if (window.innerWidth < 1024) {
+                        showOrientationHint();
+                    }
+                    // Lock to landscape if supported
+                    if (screen.orientation && screen.orientation.lock) {
+                        screen.orientation.lock('landscape').catch(() => {});
+                    }
+                    
+                    // Update button icon
+                    const btn = document.querySelector('[onclick="toggleFullscreen()"]');
+                    btn.innerHTML = '<i class="fas fa-compress"></i> <span class="btn-text">Exit</span>';
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    // Unlock orientation
+                    if (screen.orientation && screen.orientation.unlock) {
+                        screen.orientation.unlock();
+                    }
+                    
+                    // Update button icon
+                    const btn = document.querySelector('[onclick="toggleFullscreen()"]');
+                    btn.innerHTML = '<i class="fas fa-expand"></i> <span class="btn-text">Fullscreen</span>';
+                });
+            }
+        }
+        
+        function forceShowButtons() {
+            // Force show navbar and buttons
+            const navbar = document.querySelector('.navbar');
+            const navActions = document.querySelector('.nav-actions');
+            const buttons = document.querySelectorAll('.btn');
+            
+            if (navbar) {
+                navbar.style.display = 'flex';
+                navbar.style.visibility = 'visible';
+                navbar.style.opacity = '1';
+                navbar.style.position = 'fixed';
+                navbar.style.top = '0';
+                navbar.style.left = '0';
+                navbar.style.right = '0';
+                navbar.style.zIndex = '9999';
+                navbar.style.background = '#161b22';
+            }
+            
+            if (navActions) {
+                navActions.style.display = 'flex';
+                navActions.style.visibility = 'visible';
+                navActions.style.opacity = '1';
+            }
+            
+            buttons.forEach(btn => {
+                btn.style.display = 'flex';
+                btn.style.visibility = 'visible';
+                btn.style.opacity = '1';
+            });
+            
+            // Adjust container for navbar
+            const container = document.querySelector('.ide-container');
+            if (container) {
+                container.style.marginTop = '60px';
+                container.style.height = 'calc(100vh - 60px)';
+            }
+        }
+        
+        function showOrientationHint() {
+            const hint = document.getElementById('orientationHint');
+            if (window.innerWidth < window.innerHeight) {
+                hint.classList.add('show');
+                setTimeout(() => {
+                    hint.classList.remove('show');
+                }, 4000);
+            }
+        }
+        
+        // Orientation change detection
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                if (document.fullscreenElement) {
+                    forceShowButtons();
+                    if (window.innerWidth > window.innerHeight) {
+                        // Hide hint when rotated to landscape
+                        document.getElementById('orientationHint').classList.remove('show');
+                    }
+                }
+            }, 500);
+        });
+        
+        // Monitor fullscreen changes
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                setTimeout(forceShowButtons, 100);
+            }
+        });
+
         // Check Skulpt loading
         window.addEventListener('load', function() {
             setTimeout(checkSkulptLoaded, 1000);

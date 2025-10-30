@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Lab - Virtual Terminal Simulator</title>
+    <link rel="stylesheet" href="lab-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Orientation Hint -->
+    <div id="orientationHint" class="orientation-hint">
+        <i class="fas fa-mobile-alt" style="font-size: 2rem; margin-bottom: 10px;"></i>
+        <h3>Better Experience!</h3>
+        <p>Landscape mode mein rotate kariye<br>terminal ke liye better experience</p>
+        <div style="margin-top: 15px;">
+            <i class="fas fa-redo" style="animation: spin 2s linear infinite;"></i>
+        </div>
+    </div>
+
+    <div class="lab-container">
+        <!-- Lab Header -->
+        <div class="lab-header">
+            <div class="lab-nav">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                <h1><i class="fas fa-flask"></i> Practice Lab</h1>
+                <div class="lab-controls">
+                    <button id="toggleSidebar" class="control-btn">
+                        <i class="fas fa-bars"></i> <span class="btn-text">Sidebar</span>
+                    </button>
+                    <button id="resetLab" class="control-btn">
+                        <i class="fas fa-redo"></i> <span class="btn-text">Reset</span>
+                    </button>
+                    <button id="fullscreen" class="control-btn">
+                        <i class="fas fa-expand"></i> <span class="btn-text">Fullscreen</span>
+                    </button>
+                    <button id="recordSession" class="control-btn">
+                        <i class="fas fa-record-vinyl"></i> <span class="btn-text">Record</span>
+                    </button>
+                    <button id="playSession" class="control-btn">
+                        <i class="fas fa-play"></i> <span class="btn-text">Playback</span>
+                    </button>
+                    <button id="manageAliases" class="control-btn">
+                        <i class="fas fa-cog"></i> <span class="btn-text">Aliases</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Content -->
+        <div class="lab-content">
+            <!-- Sidebar -->
+            <div class="lab-sidebar">
+                <div class="lab-scenarios">
+                    <h3><i class="fas fa-tasks"></i> Lab Scenarios</h3>
+                    <div class="scenario-list">
+                        <div class="scenario-item active" data-scenario="basic">
+                            <i class="fas fa-terminal"></i>
+                            <span>Basic Commands</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="network">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Network Scanning</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="web">
+                            <i class="fas fa-globe"></i>
+                            <span>Web Testing</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="forensics">
+                            <i class="fas fa-search"></i>
+                            <span>Digital Forensics</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="ctf">
+                            <i class="fas fa-flag"></i>
+                            <span>CTF Challenges</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="network-sim">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Network Simulation</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="vulnerable">
+                            <i class="fas fa-bug"></i>
+                            <span>Vulnerable Machines</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="speed">
+                            <i class="fas fa-stopwatch"></i>
+                            <span>Speed Challenges</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="metasploit">
+                            <i class="fas fa-rocket"></i>
+                            <span>Metasploit Sim</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="wireshark">
+                            <i class="fas fa-wave-square"></i>
+                            <span>Packet Analysis</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="burp">
+                            <i class="fas fa-spider"></i>
+                            <span>Burp Suite Sim</span>
+                        </div>
+                        <div class="scenario-item" data-scenario="custom">
+                            <i class="fas fa-code"></i>
+                            <span>Custom Scripts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-info">
+                    <h3><i class="fas fa-info-circle"></i> Current Lab</h3>
+                    <div id="labDescription">
+                        <h4>Basic Commands Lab</h4>
+                        <p>Linux basic commands practice karne ke liye. File operations, navigation, aur system commands seekhiye.</p>
+                        <div class="lab-objectives">
+                            <strong>Objectives:</strong>
+                            <ul>
+                                <li>ls, cd, pwd commands</li>
+                                <li>File create/delete</li>
+                                <li>Directory navigation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-hints">
+                    <h3><i class="fas fa-lightbulb"></i> Hints</h3>
+                    <div id="hintsList">
+                        <div class="hint-item">Type 'help' for available commands</div>
+                        <div class="hint-item">Use 'ls' to list files</div>
+                        <div class="hint-item">Use 'cd' to change directory</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Area -->
+            <div class="terminal-area">
+                <!-- Terminal Window -->
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="btn-close"></span>
+                            <span class="btn-minimize"></span>
+                            <span class="btn-maximize"></span>
+                        </div>
+                        <div class="terminal-title">
+                            <i class="fas fa-terminal"></i>
+                            kali@neuro-dev: ~/practice-lab
+                        </div>
+                        <div class="terminal-menu">
+                            <button id="clearTerminal" class="menu-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button id="copyOutput" class="menu-btn">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="terminal-body">
+                        <div id="terminalOutput" class="terminal-output">
+                            <div class="welcome-message">
+                                <div class="ascii-art">
+    ███╗   ██╗███████╗██╗   ██╗██████╗  ██████╗       ██████╗ ███████╗██╗   ██╗
+    ████╗  ██║██╔════╝██║   ██║██╔══██╗██╔═══██╗      ██╔══██╗██╔════╝██║   ██║
+    ██╔██╗ ██║█████╗  ██║   ██║██████╔╝██║   ██║█████╗██║  ██║█████╗  ██║   ██║
+    ██║╚██╗██║██╔══╝  ██║   ██║██╔══██╗██║   ██║╚════╝██║  ██║██╔══╝  ╚██╗ ██╔╝
+    ██║ ╚████║███████╗╚██████╔╝██║  ██║╚██████╔╝      ██████╔╝███████╗ ╚████╔╝ 
+    ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝       ╚═════╝ ╚══════╝  ╚═══╝  
+                                </div>
+                                <div class="welcome-text">
+                                    <span class="text-green">Welcome to Neuro-Dev Practice Lab!</span><br>
+                                    <span class="text-cyan">Virtual Terminal Simulator - Safe Learning Environment</span><br>
+                                    <span class="text-yellow">Type 'help' to see available commands</span><br>
+                                    <span class="text-white">Current Lab: Basic Commands</span><br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt">
+                                <span class="user-host">kali@neuro-dev</span>:<span class="current-dir">~/practice-lab</span>$ 
+                            </span>
+                            <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false">
+                            <span class="cursor-blink">█</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Panel -->
+                <div class="progress-panel">
+                    <div class="progress-header">
+                        <h3><i class="fas fa-chart-line"></i> Progress</h3>
+                    </div>
+                    <div class="progress-content">
+                        <div class="progress-item">
+                            <span>Commands Executed:</span>
+                            <span id="commandCount">0</span>
+                        </div>
+                        <div class="progress-item">
+                            <span>Lab Completion:</span>
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <span id="progressPercent">0%</span>
+                        </div>
+                        <div class="progress-item">
+                            <span>Current Score:</span>
+                            <span id="currentScore">0/100</span>
+                        </div>
+                        <div class="progress-item" id="flagsCounter" style="display: none;">
+                            <span>Flags Found:</span>
+                            <span id="flagsFound">0/5</span>
+                        </div>
+                        <div class="progress-item" id="timerDisplay" style="display: none;">
+                            <span>Time Remaining:</span>
+                            <span id="timeRemaining">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="terminal-simulator.js"></script>
+</body>
+</html>

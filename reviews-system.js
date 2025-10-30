@@ -105,13 +105,28 @@ function showReviewModal(courseId) {
     
     // Star rating interaction
     const stars = modal.querySelectorAll('.star');
-    stars.forEach(star => {
+    stars.forEach((star, index) => {
         star.addEventListener('click', () => {
             const rating = star.dataset.rating;
-            stars.forEach((s, index) => {
-                s.classList.toggle('active', index < rating);
+            stars.forEach((s, i) => {
+                s.classList.toggle('active', i < rating);
             });
             modal.dataset.rating = rating;
+        });
+        
+        star.addEventListener('mouseover', () => {
+            const rating = star.dataset.rating;
+            stars.forEach((s, i) => {
+                s.style.color = i < rating ? '#ffd700' : '#333';
+            });
+        });
+    });
+    
+    // Reset on mouse leave
+    modal.querySelector('.star-rating').addEventListener('mouseleave', () => {
+        const currentRating = modal.dataset.rating || 0;
+        stars.forEach((s, i) => {
+            s.style.color = i < currentRating ? '#ffd700' : '#333';
         });
     });
 }
@@ -128,19 +143,51 @@ function submitReview(courseId) {
     const userName = document.getElementById('user-name').value || 'Anonymous';
     
     if (!rating) {
-        alert('Please select a rating');
+        showNotification('Please select a rating', 'error');
         return;
     }
     
     if (!reviewText.trim()) {
-        alert('Please write a review');
+        showNotification('Please write a review', 'error');
         return;
     }
     
-    reviewsSystem.addReview(courseId, rating, reviewText, userName);
-    updateCourseRatings();
-    closeReviewModal();
-    showNotification('Review submitted successfully!');
+    try {
+        reviewsSystem.addReview(courseId, rating, reviewText, userName);
+        updateCourseRatings();
+        displayAllReviews(); // Refresh reviews display
+        closeReviewModal();
+        showNotification('Review submitted successfully!', 'success');
+    } catch (error) {
+        console.error('Error submitting review:', error);
+        showNotification('Error submitting review', 'error');
+    }
+}
+
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        background: ${type === 'error' ? '#ff6b6b' : '#00ff41'};
+        color: ${type === 'error' ? '#fff' : '#000'};
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        z-index: 10001;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 3000);
 }
 
 function updateCourseRatings() {
@@ -192,7 +239,91 @@ function generateStars(rating) {
 // Initialize Reviews System
 const reviewsSystem = new ReviewsSystem();
 
+// Display all reviews function
+function displayAllReviews() {
+    const reviewsContainer = document.getElementById('reviews-display');
+    if (!reviewsContainer) return;
+    
+    const allReviews = [];
+    
+    // Collect all reviews from all courses
+    Object.keys(reviewsSystem.reviews).forEach(courseId => {
+        const courseReviews = reviewsSystem.reviews[courseId];
+        courseReviews.forEach(review => {
+            allReviews.push({
+                ...review,
+                courseId: courseId,
+                courseName: getCourseNameById(courseId)
+            });
+        });
+    });
+    
+    // Sort by date (newest first)
+    allReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    if (allReviews.length === 0) {
+        reviewsContainer.innerHTML = '<p class="no-reviews">Abhi tak koi review nahi hai. Pehla review aap diye!</p>';
+        return;
+    }
+    
+    // Display reviews
+    reviewsContainer.innerHTML = allReviews.slice(0, 6).map(review => {
+        const reviewText = review.review.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        return `
+        <div class="user-review-card">
+            <div class="review-header">
+                <div class="reviewer-info">
+                    <strong>${review.userName}</strong>
+                    <span class="course-name">${review.courseName}</span>
+                </div>
+                <div class="review-rating">
+                    ${generateStars(review.rating)}
+                </div>
+            </div>
+            <div class="review-text">
+                <p>"${reviewText}"</p>
+            </div>
+            <div class="review-footer">
+                <span class="review-date">${review.date}</span>
+                <button class="helpful-btn" onclick="markReviewHelpful('${review.courseId}', ${review.id})">
+                    <i class="fas fa-thumbs-up"></i> Helpful (${review.helpful || 0})
+                </button>
+            </div>
+        </div>
+        `;
+    }).join('');
+}
+
+// Get course name by ID
+function getCourseNameById(courseId) {
+    const courseNames = {
+        'termux-basics': 'Termux Basics',
+        'termux-advanced': 'Termux Advanced',
+        'nethunter-rootless': 'NetHunter Rootless',
+        'nethunter-tools': 'NetHunter Tools',
+        'networking': 'Networking Course',
+        'web-security': 'Web App Security',
+        'mobile-osint': 'Mobile Security & OSINT',
+        'nethunter-troubleshooting': 'NetHunter Troubleshooting',
+        'python-complete': 'Complete Python Programming',
+        'python-basics-kids': 'Python for Kids',
+        'hands-on-ml-scikit-learn': 'Hands-On ML with Scikit-Learn',
+        'python-ai-ml': 'Python for AI/ML'
+    };
+    return courseNames[courseId] || 'Unknown Course';
+}
+
+// Mark review as helpful
+function markReviewHelpful(courseId, reviewId) {
+    reviewsSystem.markHelpful(courseId, reviewId);
+    displayAllReviews(); // Refresh display
+    showNotification('Review marked as helpful!', 'success');
+}
+
 // Update ratings on page load
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(updateCourseRatings, 1000);
+    setTimeout(() => {
+        updateCourseRatings();
+        displayAllReviews();
+    }, 1000);
 });
