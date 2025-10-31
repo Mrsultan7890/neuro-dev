@@ -97,14 +97,12 @@ window.addEventListener('scroll', () => {
 
 // Enhanced copy to clipboard with input sanitization
 function copyToClipboard(text) {
-    // Input validation and sanitization
     if (!text || typeof text !== 'string') {
         console.error('Invalid text provided for copying');
         showCopyError('Invalid text to copy');
         return;
     }
     
-    // Sanitize text to prevent XSS
     const sanitizedText = text.replace(/<script[^>]*>.*?<\/script>/gi, '')
                              .replace(/<[^>]*>/g, '')
                              .trim();
@@ -149,49 +147,92 @@ function showCopyError(message) {
 }
 
 function showNotification(message, bgColor = '#00ff41', textColor = '#000') {
-    // Remove existing notifications
-    const existingNotifications = document.querySelectorAll('.copy-notification');
-    existingNotifications.forEach(notif => notif.remove());
-    
-    // Create and show notification
-    const notification = document.createElement('div');
-    notification.className = 'copy-notification';
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${bgColor};
-        color: ${textColor};
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-weight: bold;
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.remove();
+    try {
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.copy-notification');
+        existingNotifications.forEach(notif => {
+            if (notif && notif.parentNode) {
+                notif.remove();
+            }
+        });
+        
+        // Validate inputs
+        if (!message || typeof message !== 'string') {
+            console.error('Invalid notification message');
+            return;
         }
-    }, 2000);
+        
+        // Create and show notification
+        const notification = document.createElement('div');
+        notification.className = 'copy-notification';
+        notification.textContent = message;
+        
+        // Set styles safely
+        const styles = {
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            background: bgColor,
+            color: textColor,
+            padding: '10px 20px',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            zIndex: '10000',
+            animation: 'slideIn 0.3s ease',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+        };
+        
+        Object.assign(notification.style, styles);
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification && notification.parentNode) {
+                notification.remove();
+            }
+        }, 2000);
+    } catch (error) {
+        console.error('Error showing notification:', error);
+    }
 }
 
 // Add CSS for notification animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
+if (!document.getElementById('notification-styles')) {
+    const style = document.createElement('style');
+    style.id = 'notification-styles';
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
-        to {
-            transform: translateX(0);
-            opacity: 1;
+        .notification {
+            animation: slideIn 0.3s ease;
         }
-    }
-`;
-document.head.appendChild(style);
+    `;
+    document.head.appendChild(style);
+}
+
+// Make functions globally available
+window.copyToClipboard = copyToClipboard;
+window.filterCourses = function(level) {
+    const courseCards = document.querySelectorAll('.course-card');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    filterBtns.forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.querySelector(`[onclick="filterCourses('${level}')"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+    
+    courseCards.forEach(card => {
+        const badge = card.querySelector('.course-badge');
+        if (level === 'all' || (badge && badge.textContent.toLowerCase() === level)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+};

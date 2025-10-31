@@ -3,38 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self';">
     <title>Neuro-Dev Virtual Machine</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ctf-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="vm-container">
+        <!-- Fullscreen Toggle Button -->
+        <button class="fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Fullscreen Mode">
+            <i class="fas fa-expand"></i>
+        </button>
+        
         <!-- Desktop Environment -->
         <div class="desktop" style="background-image: url('IMG_20251031_201926.jpg'); background-size: cover; background-position: center;">
             <!-- Desktop Icons -->
             <div class="desktop-icons">
-                <div class="desktop-icon" onclick="window.vm.switchApp('terminal')">
+                <div class="desktop-icon" data-app="terminal">
                     <i class="fas fa-terminal"></i>
                     <span>Terminal</span>
                 </div>
-                <div class="desktop-icon" onclick="window.vm.switchApp('browser')">
+                <div class="desktop-icon" data-app="browser">
                     <i class="fas fa-globe"></i>
                     <span>Browser</span>
                 </div>
-                <div class="desktop-icon" onclick="window.vm.switchApp('editor')">
+                <div class="desktop-icon" data-app="editor">
                     <i class="fas fa-code"></i>
                     <span>Code Editor</span>
                 </div>
-                <div class="desktop-icon" onclick="window.vm.switchApp('files')">
+                <div class="desktop-icon" data-app="files">
                     <i class="fas fa-folder"></i>
                     <span>Files</span>
+                </div>
+                <div class="desktop-icon" data-app="ai-chat">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Chat</span>
                 </div>
             </div>
 
             <!-- Course Quick Access -->
             <div class="course-shortcuts">
                 <h4><i class="fas fa-graduation-cap"></i> Quick Access</h4>
-                <div class="course-shortcut" onclick="window.open('../vm-guide.html', '_blank')">
+                <div class="course-shortcut" data-action="vm-guide">
                     <i class="fas fa-question-circle"></i> VM Guide
                 </div>
                 <div class="course-shortcut active" data-course="termux-basics">
@@ -83,10 +94,36 @@
                     <div class="app-icon" data-app="files" title="File Manager">
                         <i class="fas fa-folder"></i>
                     </div>
+                    <div class="app-icon" data-app="ai-chat" title="AI Chat">
+                        <i class="fas fa-robot"></i>
+                    </div>
                 </div>
                 <div class="system-tray">
                     <span class="time" id="current-time"></span>
                     <div class="course-indicator" id="course-name">Termux Basics</div>
+                    <div class="user-menu" id="user-menu" style="display: none;">
+                        <div class="user-avatar" id="user-avatar">G</div>
+                        <div class="user-dropdown" id="user-dropdown">
+                            <div class="user-info-compact">
+                                <h4 id="username-display">Guest</h4>
+                                <div class="user-stats-compact">
+                                    <div class="stat-compact">
+                                        <div class="value" id="points-display">0</div>
+                                        <div class="label">Points</div>
+                                    </div>
+                                    <div class="stat-compact">
+                                        <div class="value" id="flags-display">0</div>
+                                        <div class="label">Flags</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-actions-compact">
+                                <button class="action-btn-compact" onclick="showLeaderboard()">🏆 Leaderboard</button>
+                                <button class="action-btn-compact" onclick="showAchievements()">🏅 Achievements</button>
+                                <button class="action-btn-compact logout-btn" onclick="logout()">🚪 Logout</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -200,6 +237,68 @@
                         <textarea id="code-editor" placeholder="# Write your code here...
 print('Hello from Neuro-Dev!')"></textarea>
                         <div class="editor-output" id="editor-output"></div>
+                    </div>
+                </div>
+
+                <!-- AI Chat Application -->
+                <div class="app-window" id="ai-chat-app">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                            <span class="control close"></span>
+                        </div>
+                        <div class="window-title">
+                            <i class="fas fa-robot"></i> Neuro-AI Chat
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="ai-chat-container">
+                            <div class="chat-sidebar">
+                                <div class="chat-header">
+                                    <button id="new-chat-btn" class="new-chat-btn">
+                                        <i class="fas fa-plus"></i> New Chat
+                                    </button>
+                                </div>
+                                <div class="chat-history" id="chat-history">
+                                    <!-- Chat history will be populated by JS -->
+                                </div>
+                                <div class="attack-panel">
+                                    <h4>🎯 Security Tests</h4>
+                                    <div class="attack-hint">
+                                        💡 Click to auto-test vulnerabilities
+                                    </div>
+                                    <button class="attack-btn" data-attack="prompt-injection" title="Test instruction override attacks">
+                                        <i class="fas fa-code"></i> Prompt Injection
+                                    </button>
+                                    <button class="attack-btn" data-attack="jailbreak" title="Test role-playing bypasses">
+                                        <i class="fas fa-unlock"></i> Jailbreak
+                                    </button>
+                                    <button class="attack-btn" data-attack="social-engineering" title="Test personal info extraction">
+                                        <i class="fas fa-user-secret"></i> Social Engineering
+                                    </button>
+                                    <button class="attack-btn" data-attack="data-extraction" title="Test training data leakage">
+                                        <i class="fas fa-database"></i> Data Extraction
+                                    </button>
+                                    <button class="attack-btn" data-attack="bias-testing" title="Test AI bias vulnerabilities">
+                                        <i class="fas fa-balance-scale"></i> Bias Testing
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chat-main">
+                                <div class="chat-messages" id="ai-chat-messages">
+                                    <!-- Messages will be populated by JS -->
+                                </div>
+                                <div class="chat-input-area">
+                                    <div class="input-container">
+                                        <textarea id="ai-chat-input" placeholder="Message Neuro-AI..." rows="1"></textarea>
+                                        <button id="ai-send-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -339,5 +438,15 @@ print('Hello from Neuro-Dev!')"></textarea>
     <script src="browser.js"></script>
     <script src="editor.js"></script>
     <script src="files.js"></script>
+    <script src="neuro-ai-app.js"></script>
+    <script src="ai-chat.js"></script>
+    <script src="../challenge-system.js"></script>
+    <script src="../network-simulator.js"></script>
+    <script src="../user-system.js"></script>
+    <script src="../vulnerable-apps.js"></script>
+    <link rel="stylesheet" href="../challenge-styles.css">
+    <link rel="stylesheet" href="../vulnerable-apps.css">
+    <link rel="stylesheet" href="../complete-system.css">
+    <link rel="stylesheet" href="../mobile-fixes.css">
 </body>
 </html>

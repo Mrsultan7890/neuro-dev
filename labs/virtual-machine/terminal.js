@@ -106,7 +106,7 @@ class Terminal {
                 prompt: 'ai-dev@coding'
             },
             'ai-hacking': {
-                commands: ['target-neuro-dev', 'scan-ml-api', 'extract-model', 'adversarial-attack', 'privacy-attack', 'deepfool', 'nmap'],
+                commands: ['target-neuro-dev', 'scan-ml-api', 'extract-model', 'adversarial-attack', 'privacy-attack', 'deepfool', 'nmap', 'ctf-api-exploit', 'ctf-model-extraction'],
                 environment: 'AI Security Lab',
                 prompt: 'hacker@ai-sec'
             }
@@ -329,6 +329,20 @@ class Terminal {
                 break;
             case 'deepfool':
                 this.handleDeepfool(args);
+                break;
+            
+            // CTF Challenge Commands
+            case 'ctf-api-exploit':
+                this.handleCtfApiExploit(args);
+                break;
+            case 'ctf-model-extraction':
+                this.handleCtfModelExtraction(args);
+                break;
+            case 'ctf-hidden-login':
+                this.handleCtfHiddenLogin(args);
+                break;
+            case 'ctf-file-discovery':
+                this.handleCtfFileDiscovery(args);
                 break;
             
             default:
@@ -1205,6 +1219,41 @@ class Terminal {
         }
     }
 
+    // AI Hacking Commands
+    handleTargetNeuroDev(args) {
+        try {
+            this.addLine('🎯 Neuro-Dev Infrastructure Scan', 'success');
+            this.addLine('Target: neuro-dev.local', 'output');
+            this.addLine('', 'output');
+            this.showLoading('Scanning infrastructure', 2000);
+            setTimeout(() => {
+                try {
+                    this.addLine('Infrastructure Discovery:', 'success');
+                    this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+                    this.addLine('🌐 neuro-dev.local:80        [Web Interface]', 'output');
+                    this.addLine('🤖 ml-api.neuro-dev:8080     [ML API Service]', 'output');
+                    this.addLine('💬 chat-api.neuro-dev:3000   [AI Chat Service]', 'output');
+                    this.addLine('👁️  vision-api.neuro-dev:5000 [Computer Vision API]', 'output');
+                    this.addLine('📊 data-api.neuro-dev:8081   [Training Data API]', 'output');
+                    this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+                    this.addLine('', 'output');
+                    this.addLine('🚨 Vulnerabilities Detected:', 'error');
+                    this.addLine('   • Model extraction possible via /predict endpoint', 'output');
+                    this.addLine('   • Admin panel exposed at /admin (no authentication)', 'output');
+                    this.addLine('   • Training data leakage in /model-info', 'output');
+                    this.addLine('   • Privacy attacks feasible (membership inference)', 'output');
+                    this.addLine('   • Adversarial examples bypass detection', 'output');
+                    this.addLine('', 'output');
+                    this.addLine('Use: scan-ml-api <target> for detailed API analysis', 'output');
+                } catch (error) {
+                    this.addLine('Error displaying scan results', 'error');
+                }
+            }, 2500);
+        } catch (error) {
+            this.addLine('Error scanning infrastructure', 'error');
+        }
+    }
+
     // AI/ML Theory Commands
     handleSklearnInfo(args) {
         this.addLine('Scikit-learn 1.0.2 - Machine Learning Library', 'success');
@@ -1321,48 +1370,37 @@ class Terminal {
         }, 1200);
     }
 
-    // AI Hacking Commands
-    handleTargetNeuroDev(args) {
-        this.addLine('Scanning neuro-dev.local infrastructure...', 'output');
-        this.showLoading('Discovering ML services', 2000);
-        setTimeout(() => {
-            this.addLine('Target Infrastructure Discovered:', 'success');
-            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
-            this.addLine('🎯 ml-api.neuro-dev:8080     [Model API Service]', 'output');
-            this.addLine('🤖 ai-chat.neuro-dev:3000    [Chatbot Service]', 'output');
-            this.addLine('👁️  face-recognition.neuro-dev:5000 [Face Recognition]', 'output');
-            this.addLine('📊 data-api.neuro-dev:8081   [Training Data API]', 'output');
-            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
-            this.addLine('🚨 Vulnerabilities Detected:', 'error');
-            this.addLine('   • Model extraction possible via /predict', 'error');
-            this.addLine('   • Admin panel exposed at /admin', 'error');
-            this.addLine('   • Training data leakage detected', 'error');
-            this.addLine('', 'output');
-            this.addLine('Use: scan-ml-api <target> for detailed analysis', 'output');
-        }, 2500);
-    }
+
 
     handleScanMlApi(args) {
-        const target = args[0] || 'ml-api.neuro-dev';
-        this.addLine(`Scanning ML API: ${target}`, 'output');
-        this.showLoading('Analyzing endpoints', 1800);
-        setTimeout(() => {
-            this.addLine('API Endpoint Analysis:', 'success');
-            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
-            this.addLine('✅ /predict          [POST] - Model prediction', 'output');
-            this.addLine('🚨 /model-info       [GET]  - Model metadata (EXPOSED)', 'error');
-            this.addLine('🚨 /admin            [GET]  - Admin panel (NO AUTH)', 'error');
-            this.addLine('✅ /health           [GET]  - Health check', 'output');
-            this.addLine('🚨 /training-data    [GET]  - Training samples (LEAKED)', 'error');
-            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
-            this.addLine('', 'output');
-            this.addLine('🎯 Attack Vectors Available:', 'success');
-            this.addLine('   • Model extraction via query analysis', 'output');
-            this.addLine('   • Membership inference attacks', 'output');
-            this.addLine('   • Adversarial example generation', 'output');
-            this.addLine('', 'output');
-            this.addLine('Use: extract-model to begin model extraction', 'output');
-        }, 2300);
+        try {
+            const target = args[0] || 'ml-api.neuro-dev';
+            this.addLine(`Scanning ML API: ${target}`, 'output');
+            this.showLoading('Analyzing endpoints', 1800);
+            setTimeout(() => {
+                try {
+                    this.addLine('API Endpoint Analysis:', 'success');
+                    this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+                    this.addLine('✅ /predict          [POST] - Model prediction', 'output');
+                    this.addLine('🚨 /model-info       [GET]  - Model metadata (EXPOSED)', 'error');
+                    this.addLine('🚨 /admin            [GET]  - Admin panel (NO AUTH)', 'error');
+                    this.addLine('✅ /health           [GET]  - Health check', 'output');
+                    this.addLine('🚨 /training-data    [GET]  - Training samples (LEAKED)', 'error');
+                    this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+                    this.addLine('', 'output');
+                    this.addLine('🎯 Attack Vectors Available:', 'success');
+                    this.addLine('   • Model extraction via query analysis', 'output');
+                    this.addLine('   • Membership inference attacks', 'output');
+                    this.addLine('   • Adversarial example generation', 'output');
+                    this.addLine('', 'output');
+                    this.addLine('Use: extract-model to begin model extraction', 'output');
+                } catch (error) {
+                    this.addLine('Error displaying scan results', 'error');
+                }
+            }, 2300);
+        } catch (error) {
+            this.addLine('Error scanning ML API', 'error');
+        }
     }
 
     handleExtractModel(args) {
@@ -1467,6 +1505,73 @@ class Terminal {
         }, 2700);
     }
 
+    // CTF Challenge Handlers
+    handleCtfApiExploit(args) {
+        try {
+            this.addLine('🏆 CTF Challenge: API Exploitation', 'success');
+            this.addLine('Target: ml-api.neuro-dev:8080', 'output');
+            this.addLine('', 'output');
+            this.addLine('Scanning endpoints...', 'output');
+            setTimeout(() => {
+                try {
+                    this.addLine('Found vulnerable endpoint: /admin', 'error');
+                    this.addLine('Authentication bypass detected!', 'success');
+                    this.addLine('Flag discovered: NEURO{api_secret_key_2024}', 'success');
+                } catch (error) {
+                    this.addLine('Error in CTF challenge execution', 'error');
+                }
+            }, 2000);
+        } catch (error) {
+            this.addLine('Error starting CTF challenge', 'error');
+        }
+    }
+
+    handleCtfModelExtraction(args) {
+        this.addLine('🏆 CTF Challenge: ML Model Extraction', 'success');
+        this.addLine('Target: Protected ML Model', 'output');
+        this.addLine('', 'output');
+        this.addLine('Probing model architecture...', 'output');
+        setTimeout(() => {
+            this.addLine('Model type: Random Forest', 'output');
+            this.addLine('Extracting decision boundaries...', 'output');
+        }, 1500);
+        setTimeout(() => {
+            this.addLine('Model successfully cloned!', 'success');
+            this.addLine('Flag discovered: NEURO{extracted_model_hash_abc123}', 'success');
+        }, 3000);
+    }
+
+    handleCtfHiddenLogin(args) {
+        this.addLine('🏆 CTF Challenge: Hidden Login Discovery', 'success');
+        this.addLine('Target: Web Application', 'output');
+        this.addLine('', 'output');
+        this.addLine('Enumerating directories...', 'output');
+        setTimeout(() => {
+            this.addLine('Found: /admin/login.php', 'success');
+            this.addLine('Testing SQL injection...', 'output');
+        }, 1500);
+        setTimeout(() => {
+            this.addLine('SQL injection successful!', 'success');
+            this.addLine('Admin access granted', 'success');
+            this.addLine('Flag discovered: NEURO{hidden_admin_password_xyz789}', 'success');
+        }, 3000);
+    }
+
+    handleCtfFileDiscovery(args) {
+        this.addLine('🏆 CTF Challenge: File Discovery', 'success');
+        this.addLine('Target: Linux File System', 'output');
+        this.addLine('', 'output');
+        this.addLine('Searching for hidden files...', 'output');
+        setTimeout(() => {
+            this.addLine('Found: .secret_flag.txt', 'success');
+            this.addLine('Reading file contents...', 'output');
+        }, 1500);
+        setTimeout(() => {
+            this.addLine('File content: CTF{hidden_file_content_def456}', 'success');
+            this.addLine('Flag discovered: NEURO{hidden_file_content_def456}', 'success');
+        }, 2500);
+    }
+
     // Command suggestions
     getSuggestions(cmd) {
         const allCommands = ['help', 'clear', 'ls', 'cd', 'pwd', 'cat', 'nano', 'mkdir', 'touch', 'rm', 'cp', 'mv'];
@@ -1505,12 +1610,16 @@ class Terminal {
 
     // Enhanced command history
     addToHistory(command) {
-        if (command && command.trim()) {
-            this.commandHistory.unshift(command);
-            if (this.commandHistory.length > 100) {
-                this.commandHistory = this.commandHistory.slice(0, 100);
+        try {
+            if (command && command.trim()) {
+                this.commandHistory.unshift(command);
+                if (this.commandHistory.length > 100) {
+                    this.commandHistory = this.commandHistory.slice(0, 100);
+                }
+                this.saveSession();
             }
-            this.saveSession();
+        } catch (error) {
+            console.error('Error adding command to history:', error);
         }
     }
 
@@ -1538,7 +1647,99 @@ class Terminal {
     }
 }
 
+// Mobile Terminal Enhancement
+class MobileTerminal extends Terminal {
+    constructor() {
+        super();
+        this.isMobile = window.innerWidth <= 768;
+        if (this.isMobile) {
+            this.setupMobileFeatures();
+        }
+    }
+
+    setupMobileFeatures() {
+        this.addVirtualKeyboard();
+        this.setupTouchGestures();
+    }
+
+    addVirtualKeyboard() {
+        const terminalContainer = document.querySelector('#terminal-app .window-content');
+        if (!terminalContainer) return;
+
+        const virtualKeyboard = document.createElement('div');
+        virtualKeyboard.className = 'virtual-keyboard';
+        virtualKeyboard.innerHTML = `
+            <div class="keyboard-row">
+                <button class="key-btn" data-key="Tab">Tab</button>
+                <button class="key-btn" data-key="ArrowUp">↑</button>
+                <button class="key-btn" data-key="ArrowDown">↓</button>
+                <button class="key-btn" data-key="clear">Clear</button>
+            </div>
+            <div class="keyboard-row">
+                <button class="key-btn" data-text="ls">ls</button>
+                <button class="key-btn" data-text="cd">cd</button>
+                <button class="key-btn" data-text="pwd">pwd</button>
+                <button class="key-btn" data-text="help">help</button>
+            </div>
+        `;
+
+        terminalContainer.appendChild(virtualKeyboard);
+
+        virtualKeyboard.addEventListener('click', (e) => {
+            if (e.target.classList.contains('key-btn')) {
+                const input = document.getElementById('terminal-input');
+                if (!input) return;
+
+                if (e.target.dataset.key === 'clear') {
+                    this.clear();
+                } else if (e.target.dataset.text) {
+                    input.value += e.target.dataset.text + ' ';
+                    input.focus();
+                }
+            }
+        });
+    }
+
+    setupTouchGestures() {
+        const terminalOutput = document.getElementById('terminal-output');
+        if (!terminalOutput) return;
+
+        let startX = 0;
+        terminalOutput.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        terminalOutput.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+
+            if (diffX > 100) {
+                this.clear();
+            } else if (diffX < -100) {
+                this.showHelp();
+            }
+        });
+    }
+
+    executeCommand(command) {
+        if (this.isMobile && navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+        super.executeCommand(command);
+        setTimeout(() => {
+            const terminalOutput = document.getElementById('terminal-output');
+            if (terminalOutput) {
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        }, 100);
+    }
+}
+
 // Initialize terminal when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    window.terminal = new Terminal();
+    if (window.innerWidth <= 768) {
+        window.terminal = new MobileTerminal();
+    } else {
+        window.terminal = new Terminal();
+    }
 });

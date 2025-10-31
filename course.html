@@ -782,6 +782,24 @@
         `;
         document.head.appendChild(style);
         
+        // Add sanitization function
+        function sanitizeHtml(input) {
+            if (typeof input !== 'string') return '';
+            return input.replace(/[<>"'&]/g, function(match) {
+                const escapeMap = {
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#x27;',
+                    '&': '&amp;'
+                };
+                return escapeMap[match];
+            });
+        }
+        
+        // Make sanitizeHtml available globally
+        window.sanitizeHtml = sanitizeHtml;
+        
         window.addEventListener('DOMContentLoaded', loadCourse);
         
         // Add keyboard navigation
@@ -890,9 +908,27 @@
         const navMenu = document.getElementById('nav-menu');
         
         if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
+            hamburger.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 navMenu.classList.toggle('active');
                 hamburger.classList.toggle('active');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+            
+            // Close menu on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
             });
         }
     </script>

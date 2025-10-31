@@ -181,25 +181,111 @@ class FileManager {
     }
 
     newFolder() {
-        const name = prompt('Enter folder name:');
-        if (name && name.trim()) {
-            const currentDir = this.getCurrentDirectory();
-            if (currentDir) {
-                if (currentDir[name]) {
-                    alert('Folder already exists!');
-                } else {
-                    currentDir[name] = {
-                        _meta: {
-                            type: 'dir',
-                            created: new Date(),
-                            modified: new Date(),
-                            size: 4096
-                        }
-                    };
-                    this.loadDirectory(this.currentPath);
-                    if (window.terminal) {
-                        window.terminal.addLine(`Folder '${name}' created`, 'success');
+        if (window.innerWidth <= 768) {
+            this.showMobileInput('Create New Folder', 'Enter folder name:', (name) => {
+                if (name && name.trim()) {
+                    this.createFolder(name.trim());
+                }
+            });
+        } else {
+            const name = prompt('Enter folder name:');
+            if (name && name.trim()) {
+                this.createFolder(name.trim());
+            }
+        }
+    }
+
+    showMobileInput(title, placeholder, callback) {
+        const existingModal = document.querySelector('.file-input-modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        const modal = document.createElement('div');
+        modal.className = 'file-input-modal';
+        
+        // Sanitize inputs to prevent XSS
+        const sanitizedTitle = this.sanitizeInput(title);
+        const sanitizedPlaceholder = this.sanitizeInput(placeholder);
+        
+        modal.innerHTML = `
+            <h4>${sanitizedTitle}</h4>
+            <input type="text" id="mobile-input" placeholder="${sanitizedPlaceholder}" autocomplete="off">
+            <div class="modal-buttons">
+                <button class="create-btn">Create</button>
+                <button class="cancel-btn">Cancel</button>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        const input = modal.querySelector('#mobile-input');
+        const createBtn = modal.querySelector('.create-btn');
+        const cancelBtn = modal.querySelector('.cancel-btn');
+        
+        input.focus();
+
+        const handleSubmit = () => {
+            const value = input.value.trim();
+            modal.remove();
+            if (value && callback) {
+                callback(value);
+            }
+        };
+
+        createBtn.addEventListener('click', handleSubmit);
+        cancelBtn.addEventListener('click', () => modal.remove());
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleSubmit();
+            } else if (e.key === 'Escape') {
+                modal.remove();
+            }
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+    }
+
+    // Sanitize input to prevent XSS
+    sanitizeInput(input) {
+        if (typeof input !== 'string') return '';
+        return input.replace(/[<>"'&]/g, function(match) {
+            const escapeMap = {
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                '&': '&amp;'
+            };
+            return escapeMap[match];
+        });
+    }
+
+    createFolder(name) {
+        const currentDir = this.getCurrentDirectory();
+        if (currentDir) {
+            if (currentDir[name]) {
+                alert('Folder already exists!');
+            } else {
+                currentDir[name] = {
+                    _meta: {
+                        type: 'dir',
+                        created: new Date(),
+                        modified: new Date(),
+                        size: 4096
                     }
+                };
+                this.loadDirectory(this.currentPath);
+                if (window.terminal) {
+                    window.terminal.addLine(`Folder '${name}' created`, 'success');
+                }
+                if (navigator.vibrate) {
+                    navigator.vibrate(100);
                 }
             }
         }

@@ -5,6 +5,21 @@ class Browser {
         this.currentCourse = 'termux-basics';
     }
 
+    // Sanitize input to prevent XSS
+    sanitizeInput(input) {
+        if (typeof input !== 'string') return '';
+        return input.replace(/[<>"'&]/g, function(match) {
+            const escapeMap = {
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                '&': '&amp;'
+            };
+            return escapeMap[match];
+        });
+    }
+
     loadCourseContent(courseName) {
         this.currentCourse = courseName;
         const content = this.getCourseContent(courseName);
@@ -61,11 +76,6 @@ class Browser {
                             <h3>OWASP Top 10</h3>
                             <p>Web application security risks</p>
                         </div>
-                        <div class="link-card" onclick="browser.loadPage('burp-suite')">
-                            <i class="fas fa-shield-alt"></i>
-                            <h3>Burp Suite</h3>
-                            <p>Web application security testing</p>
-                        </div>
                     </div>
                 </div>
             `,
@@ -87,32 +97,32 @@ class Browser {
                 </div>
             `,
             'hands-on-ml-scikit-learn': `
-                <div class="jupyter-notebook">
-                    <div class="notebook-header">
-                        <div class="notebook-title">📊 ML Theory - Scikit-Learn.ipynb</div>
-                        <div class="notebook-controls">
-                            <button onclick="browser.runCell(1)">▶️ Run</button>
-                            <button onclick="browser.addCell()">➕ Cell</button>
+                <div class="ml-theory-app">
+                    <div class="app-header">
+                        <h1>🧠 ML Theory Explorer</h1>
+                        <p>Interactive Machine Learning Concepts - Roman Urdu mein</p>
+                    </div>
+                    <div class="chapter-grid">
+                        <div class="chapter-card" onclick="browser.openChapter(1)">
+                            <div class="chapter-number">01</div>
+                            <h3>ML Landscape</h3>
+                            <p>Machine Learning ki duniya</p>
+                            <div class="chapter-progress">5 lessons</div>
+                        </div>
+                        <div class="chapter-card" onclick="browser.openChapter(2)">
+                            <div class="chapter-number">02</div>
+                            <h3>End-to-End Project</h3>
+                            <p>Complete ML project</p>
+                            <div class="chapter-progress">8 lessons</div>
+                        </div>
+                        <div class="chapter-card" onclick="browser.openChapter(3)">
+                            <div class="chapter-number">03</div>
+                            <h3>Classification</h3>
+                            <p>Data ko classify karna</p>
+                            <div class="chapter-progress">6 lessons</div>
                         </div>
                     </div>
-                    <div class="notebook-cells">
-                        <div class="cell code-cell" id="cell-1">
-                            <div class="cell-input">
-                                <span class="cell-prompt">In [1]:</span>
-                                <textarea class="cell-code">import pandas as pd
-import numpy as np
-from sklearn.datasets import load_iris
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-
-# Load dataset
-iris = load_iris()
-X, y = iris.data, iris.target
-print(f"Dataset: {X.shape}, Classes: {len(iris.target_names)}")</textarea>
-                            </div>
-                            <div class="cell-output" id="output-1"></div>
-                        </div>
-                    </div>
+                    <div id="chapter-content"></div>
                 </div>
             `,
             'python-ai-ml': `
@@ -156,11 +166,6 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
                             <h3>Model Extraction</h3>
                             <p>Extract ML models</p>
                         </div>
-                        <div class="link-card" onclick="browser.loadPage('adversarial-attack')">
-                            <i class="fas fa-shield-alt"></i>
-                            <h3>Adversarial Attack</h3>
-                            <p>Generate adversarial examples</p>
-                        </div>
                     </div>
                 </div>
             `
@@ -174,41 +179,37 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
             'termux-commands': this.generateInteractivePage('Termux Commands', [
                 { cmd: 'pkg update', desc: 'Update package lists' },
                 { cmd: 'pkg install python', desc: 'Install Python' },
-                { cmd: 'ls -la', desc: 'List files with details' },
-                { cmd: 'nano file.txt', desc: 'Edit file with nano' }
+                { cmd: 'ls -la', desc: 'List files with details' }
             ]),
             'vulnerable-app': this.generateVulnerableApp(),
             'owasp-top10': this.generateOWASPGuide(),
             'neuro-dev-api': this.generateAPITarget(),
             'model-extraction': this.generateModelExtractionLab(),
-            'adversarial-attack': this.generateAdversarialLab(),
-            'python-docs': this.generatePythonDocs(),
-            'code-examples': this.generateCodeExamples(),
-            'course-materials': this.generateCourseMaterials(),
-            'practice-targets': this.generatePracticeTargets(),
-            'tools': this.generateSecurityTools()
+            'ctf-hidden-login': this.generateCtfHiddenLogin(),
+            'ctf-api-exploit': this.generateCtfApiExploit(),
+            'ctf-file-discovery': this.generateCtfFileDiscovery()
         };
         
         document.getElementById('browser-content').innerHTML = pages[page] || '<h2>Page not found</h2>';
-        
-        // Initialize interactive elements after content load
-        setTimeout(() => {
-            this.initializeInteractiveElements(page);
-        }, 100);
     }
 
     generateInteractivePage(title, commands) {
+        const sanitizedTitle = this.sanitizeInput(title);
         return `
             <div class="interactive-page">
-                <h2>${title}</h2>
+                <h2>${sanitizedTitle}</h2>
                 <div class="command-grid">
-                    ${commands.map(cmd => `
-                        <div class="interactive-command" onclick="browser.executeCommand('${cmd.cmd}')">
-                            <code>${cmd.cmd}</code>
-                            <p>${cmd.desc}</p>
-                            <button class="try-btn">Try in Terminal</button>
-                        </div>
-                    `).join('')}
+                    ${commands.map(cmd => {
+                        const sanitizedCmd = this.sanitizeInput(cmd.cmd);
+                        const sanitizedDesc = this.sanitizeInput(cmd.desc);
+                        return `
+                            <div class="interactive-command" onclick="browser.executeCommand('${sanitizedCmd}')">
+                                <code>${sanitizedCmd}</code>
+                                <p>${sanitizedDesc}</p>
+                                <button class="try-btn">Try in Terminal</button>
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
@@ -230,9 +231,6 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
                         <div class="hint-item" onclick="browser.fillSQLInjection()">
                             <strong>SQL Injection:</strong> admin' OR 1=1--
                         </div>
-                        <div class="hint-item" onclick="browser.fillXSS()">
-                            <strong>XSS:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;
-                        </div>
                     </div>
                     <div id="attack-result"></div>
                 </div>
@@ -245,21 +243,17 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
             <div class="owasp-guide">
                 <h2>🔒 OWASP Top 10 - 2021</h2>
                 <div class="owasp-list">
-                    ${[
-                        { id: 'A01', name: 'Broken Access Control', risk: 'High' },
-                        { id: 'A02', name: 'Cryptographic Failures', risk: 'High' },
-                        { id: 'A03', name: 'Injection', risk: 'High' },
-                        { id: 'A04', name: 'Insecure Design', risk: 'Medium' },
-                        { id: 'A05', name: 'Security Misconfiguration', risk: 'Medium' }
-                    ].map(item => `
-                        <div class="owasp-item ${item.risk.toLowerCase()}" onclick="browser.showOWASPDetails('${item.id}')">
-                            <div class="owasp-id">${item.id}</div>
-                            <div class="owasp-name">${item.name}</div>
-                            <div class="owasp-risk">${item.risk}</div>
-                        </div>
-                    `).join('')}
+                    <div class="owasp-item high">
+                        <div class="owasp-id">A01</div>
+                        <div class="owasp-name">Broken Access Control</div>
+                        <div class="owasp-risk">High</div>
+                    </div>
+                    <div class="owasp-item high">
+                        <div class="owasp-id">A02</div>
+                        <div class="owasp-name">Cryptographic Failures</div>
+                        <div class="owasp-risk">High</div>
+                    </div>
                 </div>
-                <div id="owasp-details"></div>
             </div>
         `;
     }
@@ -280,23 +274,8 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
                         <div class="path">/health</div>
                         <div class="status">✅ Safe</div>
                     </div>
-                    <div class="endpoint-item vulnerable" onclick="browser.testEndpoint('/model-info')">
-                        <div class="method">GET</div>
-                        <div class="path">/model-info</div>
-                        <div class="status">⚠️ Exposed</div>
-                    </div>
-                    <div class="endpoint-item critical" onclick="browser.testEndpoint('/admin')">
-                        <div class="method">GET</div>
-                        <div class="path">/admin</div>
-                        <div class="status">🚨 Critical</div>
-                    </div>
                 </div>
                 <div id="api-response"></div>
-                <div class="attack-tools">
-                    <button onclick="browser.launchAttack('extract')">🔓 Extract Model</button>
-                    <button onclick="browser.launchAttack('adversarial')">🎭 Adversarial Attack</button>
-                    <button onclick="browser.launchAttack('privacy')">🕵️ Privacy Attack</button>
-                </div>
             </div>
         `;
     }
@@ -311,130 +290,46 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
                         <div class="model-details">
                             <div class="detail-item">Type: Random Forest</div>
                             <div class="detail-item">Features: 4</div>
-                            <div class="detail-item">Classes: 3</div>
                         </div>
                     </div>
-                    <div class="extraction-steps">
-                        <div class="step" onclick="browser.runExtractionStep(1)">
-                            <div class="step-number">1</div>
-                            <div class="step-desc">Probe Model Architecture</div>
-                            <div class="step-status" id="step1-status">⏳</div>
-                        </div>
-                        <div class="step" onclick="browser.runExtractionStep(2)">
-                            <div class="step-number">2</div>
-                            <div class="step-desc">Extract Feature Importance</div>
-                            <div class="step-status" id="step2-status">⏳</div>
-                        </div>
-                        <div class="step" onclick="browser.runExtractionStep(3)">
-                            <div class="step-number">3</div>
-                            <div class="step-desc">Clone Decision Boundaries</div>
-                            <div class="step-status" id="step3-status">⏳</div>
-                        </div>
-                    </div>
-                    <div id="extraction-output"></div>
                 </div>
             </div>
         `;
     }
 
-    generateAdversarialLab() {
-        return `
-            <div class="adversarial-lab">
-                <h2>🎭 Adversarial Attack Laboratory</h2>
-                <div class="attack-interface">
-                    <div class="image-section">
-                        <div class="image-container">
-                            <div class="image-placeholder original" id="original-image">
-                                <div class="image-label">Original Image</div>
-                                <div class="prediction">Cat (99.8%)</div>
-                            </div>
-                            <div class="arrow">→</div>
-                            <div class="image-placeholder adversarial" id="adversarial-image">
-                                <div class="image-label">Adversarial Image</div>
-                                <div class="prediction">Dog (87.3%)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="attack-controls">
-                        <div class="method-selector">
-                            <label>Attack Method:</label>
-                            <select id="attack-method">
-                                <option value="fgsm">FGSM</option>
-                                <option value="deepfool">DeepFool</option>
-                                <option value="pgd">PGD</option>
-                            </select>
-                        </div>
-                        <div class="epsilon-control">
-                            <label>Epsilon: <span id="epsilon-value">0.03</span></label>
-                            <input type="range" id="epsilon-slider" min="0.01" max="0.1" step="0.01" value="0.03">
-                        </div>
-                        <button onclick="browser.generateAdversarial()">🚀 Generate Attack</button>
-                    </div>
-                    <div id="adversarial-output"></div>
-                </div>
-            </div>
-        `;
-    }
-
-    generateCourseMaterials() {
-        const course = this.currentCourse;
-        const materials = {
-            'termux-basics': ['Command Line Basics', 'Package Management', 'File Operations'],
-            'ai-hacking': ['ML Model Security', 'Adversarial Examples', 'Privacy Attacks'],
-            'web-security': ['OWASP Top 10', 'SQL Injection', 'XSS Prevention']
+    openChapter(chapterNum) {
+        const chapters = {
+            1: {
+                title: 'Machine Learning Landscape',
+                urdu: 'ML ki Duniya',
+                lessons: [
+                    { title: 'What is ML?', urdu: 'ML kya hai?' },
+                    { title: 'Types of ML', urdu: 'ML ke types' }
+                ]
+            }
         };
         
-        return `
-            <div class="course-materials">
-                <h2>📚 Course Materials - ${course}</h2>
-                <div class="materials-grid">
-                    ${(materials[course] || ['General Materials']).map(material => `
-                        <div class="material-card" onclick="browser.openMaterial('${material}')">
-                            <i class="fas fa-book"></i>
-                            <h3>${material}</h3>
-                            <p>Interactive learning content</p>
+        const chapter = chapters[chapterNum];
+        if (!chapter) return;
+        
+        const content = document.getElementById('chapter-content');
+        content.innerHTML = `
+            <div class="chapter-detail">
+                <div class="chapter-header">
+                    <button onclick="browser.loadCourseContent('hands-on-ml-scikit-learn')" class="back-btn">← Back</button>
+                    <h2>Chapter ${chapterNum}: ${chapter.title}</h2>
+                    <p class="urdu-title">${chapter.urdu}</p>
+                </div>
+                <div class="lessons-list">
+                    ${chapter.lessons.map((lesson, i) => `
+                        <div class="lesson-card">
+                            <div class="lesson-number">${i + 1}</div>
+                            <div class="lesson-info">
+                                <h4>${lesson.title}</h4>
+                                <p class="lesson-urdu">${lesson.urdu}</p>
+                            </div>
                         </div>
                     `).join('')}
-                </div>
-            </div>
-        `;
-    }
-
-    generatePracticeTargets() {
-        return `
-            <div class="practice-targets">
-                <h2>🎯 Practice Targets</h2>
-                <div class="targets-grid">
-                    <div class="target-card" onclick="browser.loadPage('vulnerable-app')">
-                        <div class="target-status vulnerable">🔴 Vulnerable</div>
-                        <h3>DVWA Clone</h3>
-                        <p>SQL Injection, XSS, CSRF</p>
-                    </div>
-                    <div class="target-card" onclick="browser.loadPage('neuro-dev-api')">
-                        <div class="target-status critical">🚨 Critical</div>
-                        <h3>ML API Target</h3>
-                        <p>Model extraction, Privacy attacks</p>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    generateSecurityTools() {
-        return `
-            <div class="security-tools">
-                <h2>🛠️ Web Security Tools</h2>
-                <div class="tools-grid">
-                    <div class="tool-card" onclick="browser.launchTool('scanner')">
-                        <i class="fas fa-search"></i>
-                        <h3>Vulnerability Scanner</h3>
-                        <p>Automated security scanning</p>
-                    </div>
-                    <div class="tool-card" onclick="browser.launchTool('proxy')">
-                        <i class="fas fa-exchange-alt"></i>
-                        <h3>HTTP Proxy</h3>
-                        <p>Intercept and modify requests</p>
-                    </div>
                 </div>
             </div>
         `;
@@ -444,9 +339,7 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
         const output = document.getElementById(`output-${cellId}`);
         if (!output) return;
         
-        if (this.currentCourse === 'hands-on-ml-scikit-learn') {
-            output.textContent = "Dataset: (150, 4), Classes: 3\n['setosa', 'versicolor', 'virginica']";
-        } else if (this.currentCourse === 'python-ai-ml') {
+        if (this.currentCourse === 'python-ai-ml') {
             output.textContent = "Training: (50000, 32, 32, 3), Test: (10000, 32, 32, 3)";
         }
     }
@@ -467,7 +360,6 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
         cells.appendChild(newCell);
     }
 
-    // Interactive browser methods
     executeCommand(cmd) {
         if (window.terminal) {
             document.getElementById('terminal-input').value = cmd;
@@ -481,11 +373,13 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
     testSQLInjection(event) {
         event.preventDefault();
         const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
         const result = document.getElementById('attack-result');
         
+        // Sanitize input to prevent XSS
+        const sanitizedUsername = this.sanitizeInput(username);
+        
         if (username.includes("'") || username.includes('OR') || username.includes('--')) {
-            result.innerHTML = `<div class="attack-success">🎉 SQL Injection Successful!<br>Bypassed authentication with: ${username}</div>`;
+            result.innerHTML = `<div class="attack-success">🎉 SQL Injection Successful!<br>Bypassed authentication with: ${sanitizedUsername}</div>`;
         } else {
             result.innerHTML = `<div class="attack-failed">❌ Login failed. Try SQL injection techniques.</div>`;
         }
@@ -496,57 +390,181 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
         document.getElementById('password').value = "anything";
     }
 
-    fillXSS() {
-        document.getElementById('username').value = "<script>alert('XSS')</script>";
-    }
-
     testEndpoint(endpoint) {
         const response = document.getElementById('api-response');
-        const responses = {
-            '/health': { status: 200, data: '{ "status": "healthy", "uptime": "24h" }' },
-            '/model-info': { status: 200, data: '{ "model": "RandomForest", "features": 4, "accuracy": 0.967, "training_data_size": 150 }' },
-            '/admin': { status: 200, data: '{ "admin_panel": true, "users": ["admin", "user1"], "config": "exposed" }' }
-        };
+        const resp = { status: 200, data: '{ "status": "healthy", "uptime": "24h" }' };
         
-        const resp = responses[endpoint];
+        // Sanitize endpoint to prevent XSS
+        const sanitizedEndpoint = this.sanitizeInput(endpoint);
+        
         response.innerHTML = `
             <div class="api-response">
-                <div class="response-header">Response from ${endpoint}</div>
+                <div class="response-header">Response from ${sanitizedEndpoint}</div>
                 <div class="response-status">Status: ${resp.status}</div>
                 <pre class="response-body">${resp.data}</pre>
             </div>
         `;
     }
 
-    launchAttack(type) {
-        const attacks = {
-            'extract': 'extract-model',
-            'adversarial': 'adversarial-attack', 
-            'privacy': 'privacy-attack'
-        };
-        
-        if (attacks[type]) {
-            this.executeCommand(attacks[type]);
+    // CTF Challenge Pages
+    generateCtfHiddenLogin() {
+        return `
+            <div class="ctf-challenge">
+                <h2>🏆 CTF: Hidden Login Discovery</h2>
+                <div class="challenge-info">
+                    <p>Find the hidden admin login page and bypass authentication</p>
+                    <div class="flag-hint">Flag format: NEURO{hidden_admin_password}</div>
+                </div>
+                <div class="web-interface">
+                    <h3>Website Directory Structure</h3>
+                    <div class="directory-list">
+                        <div class="dir-item" onclick="browser.exploreDirectory('/home')">/home</div>
+                        <div class="dir-item" onclick="browser.exploreDirectory('/admin')">/admin</div>
+                        <div class="dir-item" onclick="browser.exploreDirectory('/backup')">/backup</div>
+                        <div class="dir-item" onclick="browser.exploreDirectory('/panel')">/panel</div>
+                    </div>
+                    <div id="directory-content"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    generateCtfApiExploit() {
+        return `
+            <div class="ctf-challenge">
+                <h2>🏆 CTF: API Exploitation</h2>
+                <div class="challenge-info">
+                    <p>Exploit the ML API to extract sensitive information</p>
+                    <div class="flag-hint">Flag format: NEURO{api_secret_key}</div>
+                </div>
+                <div class="api-testing">
+                    <h3>API Endpoints</h3>
+                    <div class="endpoint-list">
+                        <div class="endpoint" onclick="browser.testCtfEndpoint('/health')">
+                            <span class="method">GET</span> /health
+                        </div>
+                        <div class="endpoint" onclick="browser.testCtfEndpoint('/model-info')">
+                            <span class="method">GET</span> /model-info
+                        </div>
+                        <div class="endpoint" onclick="browser.testCtfEndpoint('/admin')">
+                            <span class="method">GET</span> /admin
+                        </div>
+                    </div>
+                    <div id="api-test-result"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    generateCtfFileDiscovery() {
+        return `
+            <div class="ctf-challenge">
+                <h2>🏆 CTF: File Discovery</h2>
+                <div class="challenge-info">
+                    <p>Find hidden files containing sensitive information</p>
+                    <div class="flag-hint">Flag format: NEURO{hidden_file_content}</div>
+                </div>
+                <div class="file-explorer">
+                    <h3>File System Explorer</h3>
+                    <div class="file-list">
+                        <div class="file-item" onclick="browser.examineFile('readme.txt')">
+                            <i class="fas fa-file-alt"></i> readme.txt
+                        </div>
+                        <div class="file-item" onclick="browser.examineFile('.hidden_config')">
+                            <i class="fas fa-file"></i> .hidden_config
+                        </div>
+                        <div class="file-item" onclick="browser.examineFile('.secret_flag.txt')">
+                            <i class="fas fa-file-code"></i> .secret_flag.txt
+                        </div>
+                    </div>
+                    <div id="file-content"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    exploreDirectory(dir) {
+        const content = document.getElementById('directory-content');
+        if (dir === '/admin') {
+            content.innerHTML = `
+                <div class="found-page">
+                    <h4>Found: Admin Login Page</h4>
+                    <form onsubmit="browser.testCtfLogin(event)">
+                        <input type="text" id="ctf-username" placeholder="Username">
+                        <input type="password" id="ctf-password" placeholder="Password">
+                        <button type="submit">Login</button>
+                    </form>
+                    <p>Try SQL injection: admin' OR 1=1--</p>
+                </div>
+            `;
+        } else {
+            content.innerHTML = `<p>Directory ${dir}: Access denied or empty</p>`;
         }
     }
 
-    initializeInteractiveElements(page) {
-        // Initialize page-specific interactive elements
-        if (page === 'adversarial-attack') {
-            const slider = document.getElementById('epsilon-slider');
-            if (slider) {
-                slider.addEventListener('input', (e) => {
-                    document.getElementById('epsilon-value').textContent = e.target.value;
-                });
+    testCtfEndpoint(endpoint) {
+        const result = document.getElementById('api-test-result');
+        if (endpoint === '/admin') {
+            result.innerHTML = `
+                <div class="api-success">
+                    <h4>Admin Endpoint Response:</h4>
+                    <pre>{"admin_key": "NEURO{api_secret_key_2024}", "access": "granted"}</pre>
+                    <p class="flag-found">🏆 Flag Found: NEURO{api_secret_key_2024}</p>
+                </div>
+            `;
+        } else {
+            result.innerHTML = `<p>Endpoint ${endpoint}: No sensitive data found</p>`;
+        }
+    }
+
+    examineFile(filename) {
+        const content = document.getElementById('file-content');
+        if (filename === '.secret_flag.txt') {
+            content.innerHTML = `
+                <div class="file-success">
+                    <h4>File Content:</h4>
+                    <pre>Congratulations! You found the hidden file.
+Flag: NEURO{hidden_file_content_def456}</pre>
+                    <p class="flag-found">🏆 Flag Found: NEURO{hidden_file_content_def456}</p>
+                </div>
+            `;
+        } else {
+            content.innerHTML = `<p>File ${filename}: No flag found</p>`;
+        }
+    }
+
+    testCtfLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('ctf-username').value;
+        if (username.includes("'") || username.includes('OR')) {
+            const content = document.getElementById('directory-content');
+            if (content) {
+                const successDiv = document.createElement('div');
+                successDiv.className = 'login-success';
+                successDiv.innerHTML = `
+                    <h4>SQL Injection Successful!</h4>
+                    <p>Admin panel accessed</p>
+                    <p class="flag-found">🏆 Flag Found: NEURO{hidden_admin_password_xyz789}</p>
+                `;
+                content.appendChild(successDiv);
             }
         }
     }
 }
 
+// Global browser functions
 function navigateUrl() {
-    const url = document.getElementById('url-input').value;
-    if (url.includes('neuro-dev')) {
-        window.browser.loadCourseContent(window.browser.currentCourse);
+    const urlInput = document.getElementById('url-input');
+    if (!urlInput) return;
+    
+    const url = urlInput.value;
+    // Sanitize URL input
+    const sanitizedUrl = url.replace(/[<>"']/g, '');
+    
+    if (sanitizedUrl.includes('neuro-dev') || sanitizedUrl === '') {
+        if (window.browser) {
+            window.browser.loadCourseContent(window.browser.currentCourse);
+        }
     }
 }
 
@@ -562,12 +580,12 @@ function addCell() {
     window.browser.addCell();
 }
 
-// Global browser functions
-function browser() {
-    return window.browser;
-}
-
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
     window.browser = new Browser();
+    setTimeout(() => {
+        if (window.browser) {
+            window.browser.loadCourseContent('termux-basics');
+        }
+    }, 100);
 });

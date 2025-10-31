@@ -107,7 +107,9 @@ function saveFile() {
     if (filename.startsWith('untitled')) {
         const newName = prompt('Enter filename:', filename);
         if (newName && newName.trim()) {
-            filename = newName.trim();
+            // Sanitize filename
+            filename = newName.trim().replace(/[<>:"/\|?*]/g, '_');
+            if (filename.length > 50) filename = filename.substring(0, 50);
             document.getElementById('editor-filename').textContent = filename;
         }
     }
@@ -216,6 +218,30 @@ function executePython(code, output) {
 
 function executeJavaScript(code, output) {
     try {
+        // Validate and sanitize code
+        if (!code || typeof code !== 'string') {
+            throw new Error('Invalid code input');
+        }
+        
+        // Block dangerous functions
+        const dangerousPatterns = [
+            /eval\s*\(/,
+            /Function\s*\(/,
+            /setTimeout\s*\(/,
+            /setInterval\s*\(/,
+            /document\./,
+            /window\./,
+            /location\./,
+            /XMLHttpRequest/,
+            /fetch\s*\(/
+        ];
+        
+        for (const pattern of dangerousPatterns) {
+            if (pattern.test(code)) {
+                throw new Error('Potentially dangerous code detected');
+            }
+        }
+        
         // Capture console.log output
         let logs = [];
         const originalLog = console.log;
@@ -224,14 +250,29 @@ function executeJavaScript(code, output) {
             originalLog.apply(console, args);
         };
         
-        const result = eval(code);
+        // Safe execution in restricted context
+        const result = new Function('console', `"use strict"; ${code}`)({ log: console.log });
         console.log = originalLog;
         
         let outputText = logs.length > 0 ? logs.join('\n') : (result !== undefined ? result : 'Code executed successfully');
-        output.innerHTML = `<div class="execution-success">✅ JavaScript Execution Complete</div><pre class="code-output">${outputText}</pre>`;
+        output.innerHTML = `<div class="execution-success">✅ JavaScript Execution Complete</div><pre class="code-output">${sanitizeOutput(outputText)}</pre>`;
     } catch (e) {
-        output.innerHTML = `<div class="execution-error">❌ JavaScript Error</div><pre class="error-output">${e.message}</pre>`;
+        output.innerHTML = `<div class="execution-error">❌ JavaScript Error</div><pre class="error-output">${sanitizeOutput(e.message)}</pre>`;
     }
+}
+
+function sanitizeOutput(text) {
+    if (typeof text !== 'string') return '';
+    return text.replace(/[<>"'&]/g, function(match) {
+        const escapeMap = {
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            '&': '&amp;'
+        };
+        return escapeMap[match];
+    });
 }
 
 function executeBash(code, output) {

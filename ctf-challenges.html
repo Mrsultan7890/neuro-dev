@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Challenges - Neuro-Dev</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .ctf-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .ctf-header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .ctf-header h1 {
+            color: #00ff41;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .challenge-card {
+            background: rgba(22, 33, 62, 0.8);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .challenge-card:hover {
+            border-color: #00ff41;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 65, 0.2);
+        }
+        .challenge-difficulty {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .difficulty-easy { background: #28a745; color: white; }
+        .difficulty-medium { background: #ffc107; color: black; }
+        .difficulty-hard { background: #dc3545; color: white; }
+        .challenge-card h3 {
+            color: #00ff41;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            margin-right: 80px;
+        }
+        .challenge-description {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .challenge-objectives {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #00ff41;
+        }
+        .challenge-objectives h4 {
+            color: #00ff41;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .challenge-objectives ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .challenge-objectives li {
+            color: #e0e0e0;
+            margin: 5px 0;
+        }
+        .challenge-tools {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .tool-tag {
+            background: rgba(0, 255, 65, 0.2);
+            color: #00ff41;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        .challenge-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .vm-btn {
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .vm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 255, 65, 0.3);
+        }
+        .hint-btn {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .hint-btn:hover {
+            background: rgba(255, 193, 7, 0.3);
+        }
+        .flag-format {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: #00ff41;
+            margin: 10px 0;
+            border: 1px solid #333;
+        }
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ff41;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#courses" class="nav-link">Courses</a>
+                <a href="vm-guide.html" class="nav-link">VM Guide</a>
+                <a href="ctf-challenges.html" class="nav-link">CTF</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ctf-container">
+        <div class="ctf-header">
+            <h1><i class="fas fa-flag"></i> CTF Challenges</h1>
+            <p>Capture The Flag challenges - Terminal aur Browser ka use kar ke solve kariye</p>
+            <p style="color: #ffc107;">🏆 Real hacking scenarios with VM integration</p>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Total Challenges</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Difficulty Levels</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">VM Integration</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Available</div>
+            </div>
+        </div>
+
+        <div class="challenge-grid">
+            <!-- Web Security Challenges -->
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-easy">Easy</div>
+                <h3>🔍 Hidden Login</h3>
+                <div class="challenge-description">
+                    Ek website hai jisme hidden login page hai. Aapko directory enumeration kar ke login page dhundna hai aur phir SQL injection se bypass karna hai.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Hidden directories discover kariye</li>
+                        <li>Login page find kariye</li>
+                        <li>SQL injection perform kariye</li>
+                        <li>Admin panel access kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Browser</span>
+                    <span class="tool-tag">Terminal</span>
+                    <span class="tool-tag">SQL Injection</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{hidden_admin_password}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=web-security&challenge=hidden-login" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('hidden-login')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-medium">Medium</div>
+                <h3>🎯 API Exploitation</h3>
+                <div class="challenge-description">
+                    Neuro-Dev ML API mein vulnerabilities hain. Aapko API endpoints discover kar ke sensitive information extract karna hai.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>API endpoints enumerate kariye</li>
+                        <li>Authentication bypass kariye</li>
+                        <li>Sensitive data extract kariye</li>
+                        <li>Admin API access kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Browser</span>
+                    <span class="tool-tag">API Testing</span>
+                    <span class="tool-tag">JSON</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{api_secret_key}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=ai-hacking&challenge=api-exploit" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('api-exploit')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-hard">Hard</div>
+                <h3>🤖 ML Model Extraction</h3>
+                <div class="challenge-description">
+                    Ek protected ML model hai. Aapko model architecture extract kar ke training data leak karna hai advanced techniques use kar ke.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Model probing kariye</li>
+                        <li>Feature importance extract kariye</li>
+                        <li>Decision boundaries clone kariye</li>
+                        <li>Training data reconstruct kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Terminal</span>
+                    <span class="tool-tag">Python</span>
+                    <span class="tool-tag">ML Attacks</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{extracted_model_hash}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=ai-hacking&challenge=model-extraction" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('model-extraction')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-easy">Easy</div>
+                <h3>📁 File Discovery</h3>
+                <div class="challenge-description">
+                    Server pe hidden files hain jo sensitive information contain karti hain. Terminal commands use kar ke files discover kariye.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Hidden files find kariye</li>
+                        <li>File permissions check kariye</li>
+                        <li>Sensitive data read kariye</li>
+                        <li>Flag extract kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Terminal</span>
+                    <span class="tool-tag">Linux Commands</span>
+                    <span class="tool-tag">File System</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{hidden_file_content}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=termux-basics&challenge=file-discovery" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('file-discovery')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-medium">Medium</div>
+                <h3>🔐 Crypto Challenge</h3>
+                <div class="challenge-description">
+                    Encrypted message hai jo multiple layers of encoding use karta hai. Python scripts likh kar decode karna hai.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Encoding identify kariye</li>
+                        <li>Decryption script likhiye</li>
+                        <li>Multiple layers decode kariye</li>
+                        <li>Final message extract kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Python</span>
+                    <span class="tool-tag">Code Editor</span>
+                    <span class="tool-tag">Cryptography</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{decrypted_message}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=python-complete&challenge=crypto-decode" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('crypto-decode')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-hard">Hard</div>
+                <h3>🕵️ OSINT Investigation</h3>
+                <div class="challenge-description">
+                    Ek suspect ke bare mein information gather karni hai multiple sources se. Browser aur terminal dono use kar ke investigation kariye.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Social media profiles find kariye</li>
+                        <li>Metadata extract kariye</li>
+                        <li>Location information gather kariye</li>
+                        <li>Digital footprint trace kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Browser</span>
+                    <span class="tool-tag">OSINT Tools</span>
+                    <span class="tool-tag">Investigation</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{suspect_location}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=nethunter-rootless&challenge=osint-investigation" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('osint-investigation')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <h2 style="color: #00ff41;">🎯 How to Solve CTF Challenges</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <div style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3 style="color: #ffc107;">Step-by-Step Process:</h3>
+                    <ol style="color: #e0e0e0; line-height: 1.8;">
+                        <li><strong>Challenge Read:</strong> Pehle challenge description carefully padhiye</li>
+                        <li><strong>VM Launch:</strong> "Start VM" button click kar ke virtual machine open kariye</li>
+                        <li><strong>Tools Use:</strong> Terminal aur Browser dono ka use kariye</li>
+                        <li><strong>Investigation:</strong> Clues dhundiye aur systematic approach follow kariye</li>
+                        <li><strong>Flag Submit:</strong> Flag format follow kar ke answer submit kariye</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Neuro-Dev. Educational purposes only.</p>
+            <p>CTF Challenges - Real-world cybersecurity scenarios</p>
+        </div>
+    </footer>
+
+    <script>
+        function showHint(challengeId) {
+            // Validate input
+            if (!challengeId || typeof challengeId !== 'string') {
+                alert('Invalid challenge ID');
+                return;
+            }
+            
+            // Sanitize challengeId
+            const sanitizedId = challengeId.replace(/[^a-zA-Z0-9-_]/g, '');
+            
+            const hints = {
+                'hidden-login': 'Hint: Try common directory names like /admin, /login, /panel. Use browser developer tools to check for hidden forms.',
+                'api-exploit': 'Hint: Check /health, /model-info, /admin endpoints. Look for exposed configuration in API responses.',
+                'model-extraction': 'Hint: Use extract-model command in terminal. Check model responses for feature patterns.',
+                'file-discovery': 'Hint: Use ls -la, find command with different parameters. Check hidden files starting with dot (.)',
+                'crypto-decode': 'Hint: Try base64, ROT13, and hex decoding. Use Python libraries like base64, codecs.',
+                'osint-investigation': 'Hint: Check social media links, image metadata, and public records. Use browser developer tools.'
+            };
+            
+            const hint = hints[sanitizedId] || 'No hint available for this challenge.';
+            alert(`💡 ${hint}`);
+        }
+    </script>
+</body>
+</html>

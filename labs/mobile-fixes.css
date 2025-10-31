@@ -1,0 +1,734 @@
+/* Mobile Optimization for VM */
+
+/* Base Mobile Styles */
+@media (max-width: 768px) {
+    .vm-container {
+        font-size: 14px;
+        overflow-x: hidden;
+    }
+    
+    .desktop {
+        padding: 5px;
+        height: calc(100vh - 50px);
+    }
+    
+    .taskbar {
+        height: 50px;
+        padding: 0 5px;
+    }
+    
+    .app-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .logo {
+        font-size: 14px;
+    }
+    
+    .system-tray {
+        font-size: 12px;
+    }
+    
+    .course-indicator {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+/* Landscape Mobile Optimization */
+@media (orientation: landscape) and (max-width: 1024px) {
+    .vm-container {
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .desktop {
+        height: calc(100vh - 45px);
+        padding: 5px;
+    }
+    
+    .taskbar {
+        height: 45px;
+        padding: 0 10px;
+    }
+    
+    .app-window {
+        width: 98% !important;
+        height: 90% !important;
+        top: 2% !important;
+        left: 1% !important;
+        border-radius: 5px;
+    }
+    
+    .window-header {
+        height: 35px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+    
+    .control {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .course-shortcuts {
+        display: none;
+    }
+    
+    .desktop-icons {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .desktop-icon {
+        width: 60px;
+        padding: 5px;
+    }
+    
+    .desktop-icon i {
+        font-size: 20px;
+    }
+    
+    .desktop-icon span {
+        font-size: 10px;
+    }
+}
+
+/* Terminal Mobile Fixes */
+@media (max-width: 768px) {
+    .terminal-output {
+        font-size: 12px;
+        padding: 10px;
+        line-height: 1.3;
+    }
+    
+    .terminal-input-line {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    
+    #terminal-input {
+        font-size: 12px;
+    }
+    
+    .ascii-art {
+        font-size: 6px;
+        display: none; /* Hide on mobile for space */
+    }
+    
+    .welcome-message {
+        margin-bottom: 10px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1024px) {
+    .terminal-output {
+        font-size: 11px;
+        padding: 8px;
+        height: calc(100% - 35px);
+    }
+    
+    .terminal-input-line {
+        padding: 6px 8px;
+        font-size: 11px;
+        height: 35px;
+    }
+    
+    #terminal-input {
+        font-size: 11px;
+    }
+    
+    .prompt {
+        font-size: 11px;
+    }
+}
+
+/* Code Editor Mobile Fixes */
+@media (max-width: 768px) {
+    .editor-toolbar {
+        padding: 5px 8px;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .editor-toolbar button {
+        padding: 4px 8px;
+        font-size: 11px;
+        margin-right: 3px;
+    }
+    
+    #language-select {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    #code-editor {
+        font-size: 12px;
+        padding: 8px;
+        line-height: 1.3;
+    }
+    
+    .editor-output {
+        padding: 8px;
+        font-size: 11px;
+        max-height: 120px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1024px) {
+    .editor-toolbar {
+        padding: 4px 6px;
+        height: 35px;
+    }
+    
+    .editor-toolbar button {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+    
+    #language-select {
+        padding: 3px 5px;
+        font-size: 10px;
+    }
+    
+    #code-editor {
+        font-size: 11px;
+        padding: 6px;
+        height: calc(100% - 70px);
+    }
+    
+    .editor-output {
+        padding: 6px;
+        font-size: 10px;
+        max-height: 80px;
+        height: 35px;
+    }
+}
+
+/* File Manager Mobile Fixes */
+@media (max-width: 768px) {
+    .file-toolbar {
+        padding: 5px 8px;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .file-toolbar button {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    .breadcrumb {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    .file-sidebar {
+        width: 120px;
+        padding: 5px;
+    }
+    
+    .sidebar-section h4 {
+        font-size: 10px;
+    }
+    
+    .sidebar-item {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    .file-item {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    .file-size, .file-date {
+        font-size: 10px;
+    }
+    
+    .status-bar {
+        padding: 3px 8px;
+        font-size: 10px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1024px) {
+    .file-toolbar {
+        padding: 3px 6px;
+        height: 35px;
+    }
+    
+    .file-toolbar button {
+        padding: 3px 5px;
+        font-size: 10px;
+    }
+    
+    .breadcrumb {
+        padding: 3px 5px;
+        font-size: 10px;
+    }
+    
+    .file-sidebar {
+        width: 100px;
+        padding: 3px;
+    }
+    
+    .sidebar-item {
+        padding: 3px 4px;
+        font-size: 10px;
+    }
+    
+    .file-item {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    
+    .status-bar {
+        padding: 2px 6px;
+        font-size: 9px;
+        height: 25px;
+    }
+}
+
+/* Browser Mobile Fixes */
+@media (max-width: 768px) {
+    .browser-toolbar {
+        padding: 8px 10px;
+    }
+    
+    #url-input {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+    
+    .browser-content {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .quick-links {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .link-card {
+        padding: 15px;
+    }
+    
+    .link-card i {
+        font-size: 1.5em;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1024px) {
+    .browser-toolbar {
+        padding: 5px 8px;
+        height: 35px;
+    }
+    
+    #url-input {
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+    
+    .browser-content {
+        padding: 8px;
+        font-size: 12px;
+        height: calc(100% - 35px);
+        overflow-y: auto;
+    }
+    
+    .quick-links {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .link-card {
+        padding: 10px;
+    }
+}
+
+/* Challenge Panel Mobile Fixes */
+@media (max-width: 768px) {
+    .challenge-panel {
+        position: fixed;
+        top: auto;
+        bottom: 60px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+        max-height: 40vh;
+        z-index: 2500;
+    }
+    
+    .panel-header {
+        padding: 10px 15px;
+    }
+    
+    .panel-header h3 {
+        font-size: 1rem;
+    }
+    
+    .challenge-item {
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .challenge-info h4 {
+        font-size: 0.9rem;
+    }
+    
+    .challenge-info p {
+        font-size: 0.8rem;
+    }
+    
+    .challenge-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .flag-form input {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+    
+    .flag-form button {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+    
+    .hint-btn {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1024px) {
+    .challenge-panel {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 300px;
+        max-height: 70vh;
+        z-index: 2500;
+    }
+    
+    .panel-content {
+        max-height: 50vh;
+    }
+    
+    .challenge-item {
+        padding: 8px;
+        margin-bottom: 6px;
+    }
+    
+    .challenge-info h4 {
+        font-size: 0.8rem;
+    }
+    
+    .challenge-info p {
+        font-size: 0.7rem;
+    }
+    
+    .challenge-actions {
+        gap: 4px;
+    }
+    
+    .flag-form input {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+    
+    .flag-form button {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+}
+
+/* User Panel Mobile Fixes */
+@media (max-width: 768px) {
+    .user-panel {
+        position: fixed;
+        top: 60px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        z-index: 1600;
+    }
+    
+    .user-info {
+        padding: 15px;
+    }
+    
+    .user-header {
+        gap: 10px;
+    }
+    
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .user-details h4 {
+        font-size: 1rem;
+    }
+    
+    .user-rank {
+        font-size: 0.7rem;
+    }
+    
+    .user-stats {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .stat-item {
+        padding: 8px;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
+    }
+    
+    .stat-label {
+        font-size: 0.6rem;
+    }
+    
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1024px) {
+    .user-panel {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 250px;
+        z-index: 1600;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .user-info {
+        padding: 10px;
+    }
+    
+    .user-header {
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .user-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .user-details h4 {
+        font-size: 0.9rem;
+    }
+    
+    .user-stats {
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+    
+    .stat-item {
+        padding: 6px;
+    }
+    
+    .stat-value {
+        font-size: 0.9rem;
+    }
+    
+    .stat-label {
+        font-size: 0.6rem;
+    }
+}
+
+/* Input Field Fixes */
+input[type="text"], input[type="password"], input[type="email"], 
+textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 4px;
+    font-size: 16px; /* Prevents zoom on iOS */
+}
+
+@media (max-width: 768px) {
+    input[type="text"], input[type="password"], input[type="email"], 
+    textarea, select {
+        font-size: 16px; /* Prevents zoom on mobile */
+        padding: 8px 12px;
+        border: 1px solid #333;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: #00ff41;
+        box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+    }
+}
+
+/* File Manager Input Fix */
+.file-input-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #00ff41;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 3000;
+    min-width: 300px;
+}
+
+.file-input-modal h4 {
+    color: #00ff41;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.file-input-modal input {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.file-input-modal .modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.file-input-modal button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.file-input-modal .create-btn {
+    background: linear-gradient(45deg, #00ff41, #00cc33);
+    color: #000;
+}
+
+.file-input-modal .cancel-btn {
+    background: #666;
+    color: #fff;
+}
+
+/* Scrollbar Mobile Optimization */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #00ff41;
+        border-radius: 2px;
+    }
+}
+
+/* Touch Optimization */
+@media (hover: none) and (pointer: coarse) {
+    .desktop-icon,
+    .app-icon,
+    .course-shortcut,
+    .challenge-item,
+    .file-item,
+    .sidebar-item {
+        min-height: 44px; /* iOS touch target minimum */
+    }
+    
+    button, .btn, .action-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Prevent zoom on input focus */
+@media (max-width: 768px) {
+    input, textarea, select {
+        font-size: 16px !important;
+        transform-origin: left top;
+        transform: scale(1);
+    }
+}
+
+/* Hide elements that don't work well on mobile */
+@media (max-width: 768px) {
+    .course-shortcuts {
+        display: none;
+    }
+    
+    .ascii-art {
+        display: none;
+    }
+    
+    .window-controls {
+        display: none;
+    }
+}
+
+/* Landscape specific optimizations */
+@media (orientation: landscape) and (max-width: 1024px) and (max-height: 600px) {
+    .vm-container {
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .desktop {
+        height: calc(100vh - 40px);
+    }
+    
+    .taskbar {
+        height: 40px;
+    }
+    
+    .app-window {
+        width: 99% !important;
+        height: 92% !important;
+        top: 1% !important;
+        left: 0.5% !important;
+    }
+    
+    .window-header {
+        height: 30px;
+        font-size: 11px;
+    }
+    
+    .terminal-output {
+        font-size: 10px;
+        padding: 5px;
+    }
+    
+    .terminal-input-line {
+        padding: 4px 5px;
+        font-size: 10px;
+        height: 30px;
+    }
+}

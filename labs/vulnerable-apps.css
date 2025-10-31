@@ -1,0 +1,514 @@
+/* Vulnerable Applications Styles */
+.vulnerable-app {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.app-header h2 {
+    color: #00ff41;
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+}
+
+.app-header p {
+    color: #ccc;
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+}
+
+.vulnerability-tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.vuln-tag {
+    background: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+    padding: 4px 12px;
+    border-radius: 15px;
+    border: 1px solid #dc3545;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.vuln-tag.sql { background: rgba(255, 193, 7, 0.2); color: #ffc107; border-color: #ffc107; }
+.vuln-tag.auth { background: rgba(220, 53, 69, 0.2); color: #dc3545; border-color: #dc3545; }
+.vuln-tag.xss { background: rgba(255, 87, 34, 0.2); color: #ff5722; border-color: #ff5722; }
+.vuln-tag.upload { background: rgba(156, 39, 176, 0.2); color: #9c27b0; border-color: #9c27b0; }
+.vuln-tag.path { background: rgba(233, 30, 99, 0.2); color: #e91e63; border-color: #e91e63; }
+.vuln-tag.api { background: rgba(0, 188, 212, 0.2); color: #00bcd4; border-color: #00bcd4; }
+
+.app-content {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+/* Login App Styles */
+.login-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.login-container h3 {
+    color: #00ff41;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #ccc;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #00ff41;
+    box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+}
+
+.form-group .hint {
+    display: block;
+    color: #ffc107;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+button[type="submit"], button {
+    background: linear-gradient(45deg, #00ff41, #00cc33);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
+}
+
+#login-result, #search-results, #upload-result, #download-result, 
+#user-result, #admin-result {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 20px;
+}
+
+.success {
+    background: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+    border: 1px solid #28a745;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.error {
+    background: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.flag {
+    background: rgba(0, 255, 65, 0.2);
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: center;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px rgba(0, 255, 65, 0.5); }
+    to { box-shadow: 0 0 15px rgba(0, 255, 65, 0.8); }
+}
+
+/* XSS App Styles */
+.xss-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.xss-section {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.xss-section h3 {
+    color: #00ff41;
+    margin: 0 0 15px 0;
+}
+
+.xss-section form {
+    margin-bottom: 15px;
+}
+
+.xss-section input, .xss-section textarea {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.xss-section button {
+    width: auto;
+    padding: 8px 16px;
+}
+
+.search-result, .comment {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    color: #ccc;
+}
+
+.comment strong {
+    color: #00ff41;
+}
+
+#fragment-display {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    min-height: 20px;
+    margin: 10px 0;
+}
+
+/* File Upload App Styles */
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.upload-section, .download-section {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.upload-section h3, .download-section h3 {
+    color: #00ff41;
+    margin: 0 0 15px 0;
+}
+
+.upload-section input[type="file"], .upload-section input[type="text"],
+.download-section input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.uploaded-files {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.uploaded-files h3 {
+    color: #00ff41;
+    margin: 0 0 15px 0;
+}
+
+.uploaded-files ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.uploaded-files li {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.file-content {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 15px;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+/* API App Styles */
+.api-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.api-section {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.api-section h3 {
+    color: #00ff41;
+    margin: 0 0 15px 0;
+}
+
+.api-section label {
+    display: block;
+    color: #ccc;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.api-section input {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.api-endpoints {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.api-endpoints h3 {
+    color: #00ff41;
+    margin: 0 0 15px 0;
+}
+
+.api-endpoints ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.api-endpoints li {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.api-endpoints code {
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.api-response {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.api-response pre {
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+/* Source Code Display */
+.source-code {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.source-code h4 {
+    color: #ffc107;
+    margin: 0 0 15px 0;
+}
+
+.source-code pre {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 15px;
+    color: #ccc;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    line-height: 1.4;
+}
+
+.source-code code {
+    color: #fff;
+}
+
+/* Apps List Styles */
+.vulnerable-apps-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #0a0a0a;
+    color: #fff;
+}
+
+.vulnerable-apps-list h2 {
+    color: #00ff41;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.vulnerable-apps-list p {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.app-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.app-card:hover {
+    border-color: #00ff41;
+    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.2);
+    transform: translateY(-5px);
+}
+
+.app-card h3 {
+    color: #00ff41;
+    margin: 0 0 10px 0;
+}
+
+.app-card p {
+    color: #ccc;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+}
+
+.app-card .vulnerabilities {
+    margin-bottom: 15px;
+}
+
+.app-card .difficulty {
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.difficulty.easy { background: rgba(40, 167, 69, 0.2); color: #28a745; }
+.difficulty.medium { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
+.difficulty.hard { background: rgba(220, 53, 69, 0.2); color: #dc3545; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .vulnerable-app {
+        padding: 10px;
+    }
+    
+    .app-content {
+        padding: 15px;
+    }
+    
+    .xss-container, .upload-container, .api-container, .login-container {
+        max-width: 100%;
+    }
+    
+    .vulnerability-tags {
+        justify-content: center;
+    }
+    
+    .apps-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    button[type="submit"], button {
+        padding: 10px 20px;
+    }
+}
