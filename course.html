@@ -446,6 +446,9 @@
                 <button class="nav-btn quiz-btn" onclick="startModuleQuiz()">
                     <i class="fas fa-question-circle"></i> Take Quiz
                 </button>
+                <button class="nav-btn" onclick="openVirtualMachine()" style="background: linear-gradient(45deg, #6c5ce7, #a29bfe) !important; color: #fff !important;">
+                    <i class="fas fa-desktop"></i> Virtual Machine
+                </button>
             </div>
         </div>
     </div>
@@ -860,6 +863,12 @@
         // Set current module from URL
         const urlParams = new URLSearchParams(window.location.search);
         currentModule = urlParams.get('module') || 'termux-basics';
+        
+        // Virtual Machine Function
+        function openVirtualMachine() {
+            const vmUrl = `labs/virtual-machine/index.html?course=${encodeURIComponent(currentModule)}`;
+            window.open(vmUrl, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
         
         // Initialize quiz system when page loads
         setTimeout(() => {

@@ -61,6 +61,35 @@
     <link rel="stylesheet" href="quiz-review-styles.css">
     <link rel="stylesheet" href="search-fix.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+    .vm-btn {
+        background: transparent;
+        color: #00ff41;
+        border: 2px solid #00ff41;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        flex: 1;
+    }
+    .vm-btn:hover {
+        background: rgba(0, 255, 65, 0.1);
+        transform: translateY(-2px);
+    }
+    .course-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .course-actions .start-btn {
+        flex: 1;
+    }
+    </style>
     
     <!-- Schema Markup for SEO -->
     <script type="application/ld+json">
@@ -147,7 +176,7 @@
                 <a href="faq.html" class="nav-link">FAQ</a>
                 <a href="videos.html" class="nav-link">Videos</a>
                 <a href="python-ide.html" class="nav-link">Python IDE</a>
-                <a href="practice-lab.html" class="nav-link">Practice Lab</a>
+                <a href="vm-guide.html" class="nav-link">VM Guide</a>
                 <a href="dictionary.html" class="nav-link">AI/ML Dictionary</a>
                 <a href="about.html" class="nav-link">About</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -313,6 +342,9 @@
                         <button class="start-btn" onclick="window.location.href='course.html?module=termux-basics'">
                             <i class="fas fa-play"></i> Start Learning
                         </button>
+                        <button class="vm-btn" onclick="openVM('termux-basics')">
+                            <i class="fas fa-desktop"></i> Virtual Lab
+                        </button>
                     </div>
                 </div>
 
@@ -349,6 +381,9 @@
                     <div class="course-actions">
                         <button class="start-btn" onclick="window.location.href='course.html?module=termux-advanced'">
                             <i class="fas fa-play"></i> Start Learning
+                        </button>
+                        <button class="vm-btn" onclick="openVM('termux-advanced')">
+                            <i class="fas fa-desktop"></i> Virtual Lab
                         </button>
                     </div>
                 </div>
@@ -387,6 +422,9 @@
                         <button class="start-btn" onclick="window.location.href='course.html?module=nethunter-rootless'">
                             <i class="fas fa-play"></i> Start Learning
                         </button>
+                        <button class="vm-btn" onclick="openVM('nethunter-rootless')">
+                            <i class="fas fa-desktop"></i> Virtual Lab
+                        </button>
                     </div>
                 </div>
 
@@ -405,6 +443,9 @@
                     <div class="course-actions">
                         <button class="start-btn" onclick="window.location.href='course.html?module=nethunter-tools'">
                             <i class="fas fa-play"></i> Start Learning
+                        </button>
+                        <button class="vm-btn" onclick="openVM('nethunter-tools')">
+                            <i class="fas fa-desktop"></i> Virtual Lab
                         </button>
                     </div>
                 </div>
@@ -425,6 +466,9 @@
                         <button class="start-btn" onclick="window.location.href='course.html?module=networking'">
                             <i class="fas fa-play"></i> Start Learning
                         </button>
+                        <button class="vm-btn" onclick="openVM('networking')">
+                            <i class="fas fa-desktop"></i> Virtual Lab
+                        </button>
                     </div>
                 </div>
 
@@ -443,6 +487,9 @@
                     <div class="course-actions">
                         <button class="start-btn" onclick="window.location.href='course.html?module=web-security'">
                             <i class="fas fa-play"></i> Start Learning
+                        </button>
+                        <button class="vm-btn" onclick="openVM('web-security')">
+                            <i class="fas fa-desktop"></i> Virtual Lab
                         </button>
                     </div>
                 </div>
@@ -500,6 +547,9 @@
                     <div class="course-actions">
                         <button class="start-btn" onclick="window.location.href='course.html?module=python-complete'">
                             <i class="fas fa-play"></i> Start Learning
+                        </button>
+                        <button class="vm-btn" onclick="openVM('python-complete')">
+                            <i class="fas fa-desktop"></i> Virtual Lab
                         </button>
                     </div>
                 </div>
@@ -596,6 +646,9 @@
                     <div class="course-actions">
                         <button class="start-btn" onclick="window.location.href='course.html?module=ai-hacking'" style="background: #ff6b35; border-color: #ff6b35;">
                             <i class="fas fa-play"></i> Start Learning
+                        </button>
+                        <button class="vm-btn" onclick="openVM('ai-hacking')" style="border-color: #ff6b35; color: #ff6b35;">
+                            <i class="fas fa-desktop"></i> Virtual Lab
                         </button>
                     </div>
                 </div>
@@ -897,6 +950,13 @@
                 });
             }
         });
+    </script>
+    <script>
+        // VM Launch Function
+        function openVM(courseId) {
+            const vmUrl = `labs/virtual-machine/index.html?course=${encodeURIComponent(courseId)}`;
+            window.open(vmUrl, '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes,toolbar=no,menubar=no');
+        }
     </script>
     <script src="script.js"></script>
     <script src="course-features.js"></script>

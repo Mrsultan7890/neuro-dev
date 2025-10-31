@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Labs - Neuro-Dev</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="labs/labs-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="practice-lab.html" class="nav-link">General Lab</a>
+                <a href="dictionary.html" class="nav-link">Dictionary</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="labs-container">
+        <div class="labs-header">
+            <h1>🧪 Neuro-Dev Labs</h1>
+            <p>Har course ke liye dedicated practice environment - HackTheBox style</p>
+        </div>
+
+        <div class="labs-categories">
+            <div class="category-section">
+                <h2><i class="fas fa-mobile-alt"></i> Mobile & Termux Labs</h2>
+                <div class="labs-grid">
+                    <div class="lab-box" data-difficulty="easy">
+                        <div class="lab-header">
+                            <div class="lab-icon">📱</div>
+                            <div class="lab-info">
+                                <h3>Termux Basics</h3>
+                                <p>Linux commands, file management, package installation</p>
+                            </div>
+                            <div class="lab-difficulty easy">Easy</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 8 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 2-3 hours</span>
+                            <span><i class="fas fa-users"></i> 1,234 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/8 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('termux-basics')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+
+                    <div class="lab-box" data-difficulty="medium">
+                        <div class="lab-header">
+                            <div class="lab-icon">⚡</div>
+                            <div class="lab-info">
+                                <h3>Termux Advanced</h3>
+                                <p>Python scripting, automation, advanced tools</p>
+                            </div>
+                            <div class="lab-difficulty medium">Medium</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 12 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 4-5 hours</span>
+                            <span><i class="fas fa-users"></i> 856 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/12 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('termux-advanced')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <h2><i class="fas fa-shield-alt"></i> Security & Penetration Testing</h2>
+                <div class="labs-grid">
+                    <div class="lab-box" data-difficulty="hard">
+                        <div class="lab-header">
+                            <div class="lab-icon">🛡️</div>
+                            <div class="lab-info">
+                                <h3>NetHunter Rootless</h3>
+                                <p>Kali Linux tools without root access</p>
+                            </div>
+                            <div class="lab-difficulty hard">Hard</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 15 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 6-8 hours</span>
+                            <span><i class="fas fa-users"></i> 432 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/15 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('nethunter-rootless')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+
+                    <div class="lab-box" data-difficulty="hard">
+                        <div class="lab-header">
+                            <div class="lab-icon">🔧</div>
+                            <div class="lab-info">
+                                <h3>NetHunter Tools</h3>
+                                <p>Nmap, Metasploit, Aircrack-ng, SQLMap</p>
+                            </div>
+                            <div class="lab-difficulty hard">Hard</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 20 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 8-10 hours</span>
+                            <span><i class="fas fa-users"></i> 298 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/20 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('nethunter-tools')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <h2><i class="fas fa-network-wired"></i> Networking & Web Security</h2>
+                <div class="labs-grid">
+                    <div class="lab-box" data-difficulty="medium">
+                        <div class="lab-header">
+                            <div class="lab-icon">🌐</div>
+                            <div class="lab-info">
+                                <h3>Networking Fundamentals</h3>
+                                <p>TCP/IP, subnetting, protocols, port scanning, network reconnaissance</p>
+                            </div>
+                            <div class="lab-difficulty medium">Medium</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 18 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 5-6 hours</span>
+                            <span><i class="fas fa-users"></i> 672 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/18 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('networking-course')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+
+                    <div class="lab-box" data-difficulty="hard">
+                        <div class="lab-header">
+                            <div class="lab-icon">🔒</div>
+                            <div class="lab-info">
+                                <h3>Web Application Security</h3>
+                                <p>OWASP Top 10, SQL injection, XSS testing</p>
+                            </div>
+                            <div class="lab-difficulty hard">Hard</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 25 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 10-12 hours</span>
+                            <span><i class="fas fa-users"></i> 189 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/25 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('web-security')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+
+                    <div class="lab-box" data-difficulty="hard">
+                        <div class="lab-header">
+                            <div class="lab-icon">📱</div>
+                            <div class="lab-info">
+                                <h3>Mobile Security & OSINT</h3>
+                                <p>APK analysis, reverse engineering, OSINT techniques</p>
+                            </div>
+                            <div class="lab-difficulty hard">Hard</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 25 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 8-10 hours</span>
+                            <span><i class="fas fa-users"></i> 156 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/25 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('mobile-osint')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <h2><i class="fas fa-code"></i> Programming & AI Security</h2>
+                <div class="labs-grid">
+                    <div class="lab-box" data-difficulty="easy">
+                        <div class="lab-header">
+                            <div class="lab-icon">🐍</div>
+                            <div class="lab-info">
+                                <h3>Python Programming</h3>
+                                <p>Complete Python course - basics to advanced projects</p>
+                            </div>
+                            <div class="lab-difficulty easy">Easy</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 25 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 6-8 hours</span>
+                            <span><i class="fas fa-users"></i> 1,245 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/25 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('python-programming')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+
+                    <div class="lab-box" data-difficulty="hard">
+                        <div class="lab-header">
+                            <div class="lab-icon">🧠</div>
+                            <div class="lab-info">
+                                <h3>Machine Learning</h3>
+                                <p>Complete ML course with Jupyter-style interface and real datasets</p>
+                            </div>
+                            <div class="lab-difficulty hard">Hard</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 35 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 12-15 hours</span>
+                            <span><i class="fas fa-users"></i> 234 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/35 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('machine-learning')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+
+                    <div class="lab-box" data-difficulty="insane">
+                        <div class="lab-header">
+                            <div class="lab-icon">🤖</div>
+                            <div class="lab-info">
+                                <h3>AI Security & Hacking</h3>
+                                <p>Prompt injection, ML attacks, AI bypass</p>
+                            </div>
+                            <div class="lab-difficulty insane">Insane</div>
+                        </div>
+                        <div class="lab-stats">
+                            <span><i class="fas fa-tasks"></i> 30 Challenges</span>
+                            <span><i class="fas fa-clock"></i> 15-20 hours</span>
+                            <span><i class="fas fa-users"></i> 67 solved</span>
+                        </div>
+                        <div class="lab-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/30 completed</span>
+                        </div>
+                        <button class="lab-start-btn" onclick="startLab('ai-hacking')">
+                            <i class="fas fa-play"></i> Start Lab
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lab-stats-summary">
+            <div class="stat-card">
+                <div class="stat-number">16</div>
+                <div class="stat-label">Total Labs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">250+</div>
+                <div class="stat-label">Challenges</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Points</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startLab(labId) {
+            // Open Virtual Machine with specific course
+            const vmUrl = `labs/virtual-machine/index.html?course=${encodeURIComponent(labId)}`;
+            window.open(vmUrl, '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes,toolbar=no,menubar=no');
+        }
+
+        // Update progress from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAllProgress();
+        });
+
+        function updateAllProgress() {
+            const labs = document.querySelectorAll('.lab-box');
+            labs.forEach(lab => {
+                const labId = lab.querySelector('.lab-start-btn').getAttribute('onclick').match(/'([^']+)'/)[1];
+                const progress = getLabProgress(labId);
+                updateLabProgress(lab, progress);
+            });
+        }
+
+        function getLabProgress(labId) {
+            const saved = localStorage.getItem(`lab-progress-${labId}`);
+            return saved ? JSON.parse(saved) : { completed: 0, total: 0 };
+        }
+
+        function updateLabProgress(labElement, progress) {
+            const progressFill = labElement.querySelector('.progress-fill');
+            const progressText = labElement.querySelector('.lab-progress span');
+            
+            if (progress.total > 0) {
+                const percentage = (progress.completed / progress.total) * 100;
+                progressFill.style.width = `${percentage}%`;
+                progressText.textContent = `${progress.completed}/${progress.total} completed`;
+            }
+        }
+    </script>
+</body>
+</html>

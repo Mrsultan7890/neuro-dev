@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuro-Dev Virtual Machine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="vm-container">
+        <!-- Desktop Environment -->
+        <div class="desktop" style="background-image: url('IMG_20251031_201926.jpg'); background-size: cover; background-position: center;">
+            <!-- Desktop Icons -->
+            <div class="desktop-icons">
+                <div class="desktop-icon" onclick="window.vm.switchApp('terminal')">
+                    <i class="fas fa-terminal"></i>
+                    <span>Terminal</span>
+                </div>
+                <div class="desktop-icon" onclick="window.vm.switchApp('browser')">
+                    <i class="fas fa-globe"></i>
+                    <span>Browser</span>
+                </div>
+                <div class="desktop-icon" onclick="window.vm.switchApp('editor')">
+                    <i class="fas fa-code"></i>
+                    <span>Code Editor</span>
+                </div>
+                <div class="desktop-icon" onclick="window.vm.switchApp('files')">
+                    <i class="fas fa-folder"></i>
+                    <span>Files</span>
+                </div>
+            </div>
+
+            <!-- Course Quick Access -->
+            <div class="course-shortcuts">
+                <h4><i class="fas fa-graduation-cap"></i> Quick Access</h4>
+                <div class="course-shortcut" onclick="window.open('../vm-guide.html', '_blank')">
+                    <i class="fas fa-question-circle"></i> VM Guide
+                </div>
+                <div class="course-shortcut active" data-course="termux-basics">
+                    <i class="fas fa-mobile-alt"></i> Termux Basics
+                </div>
+                <div class="course-shortcut" data-course="nethunter-rootless">
+                    <i class="fas fa-shield-alt"></i> NetHunter
+                </div>
+                <div class="course-shortcut" data-course="web-security">
+                    <i class="fas fa-lock"></i> Web Security
+                </div>
+                <div class="course-shortcut" data-course="python">
+                    <i class="fas fa-code"></i> Python
+                </div>
+                <div class="course-shortcut" data-course="networking">
+                    <i class="fas fa-network-wired"></i> Networking
+                </div>
+                <div class="course-shortcut" data-course="hands-on-ml-scikit-learn">
+                    <i class="fas fa-brain"></i> ML Theory
+                </div>
+                <div class="course-shortcut" data-course="python-ai-ml">
+                    <i class="fas fa-robot"></i> AI/ML Coding
+                </div>
+                <div class="course-shortcut" data-course="ai-hacking">
+                    <i class="fas fa-crosshairs"></i> AI Security
+                </div>
+            </div>
+
+            <!-- Taskbar -->
+            <div class="taskbar">
+                <div class="start-menu">
+                    <div class="logo">
+                        <i class="fas fa-brain"></i> Neuro-Dev
+                    </div>
+                </div>
+                <div class="taskbar-apps">
+                    <div class="app-icon active" data-app="terminal" title="Terminal">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <div class="app-icon" data-app="browser" title="Browser">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="app-icon" data-app="editor" title="Code Editor">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="app-icon" data-app="files" title="File Manager">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                </div>
+                <div class="system-tray">
+                    <span class="time" id="current-time"></span>
+                    <div class="course-indicator" id="course-name">Termux Basics</div>
+                </div>
+            </div>
+
+            <!-- Applications -->
+            <div class="applications">
+                <!-- Terminal Application -->
+                <div class="app-window active" id="terminal-app">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                            <span class="control close"></span>
+                        </div>
+                        <div class="window-title">
+                            <i class="fas fa-terminal"></i> Terminal - <span id="terminal-path">~</span>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="terminal-output" id="terminal-output">
+                            <div class="welcome-message">
+                                <div class="ascii-art">
+███╗   ██╗███████╗██╗   ██╗██████╗  ██████╗       ██████╗ ███████╗██╗   ██╗
+████╗  ██║██╔════╝██║   ██║██╔══██╗██╔═══██╗      ██╔══██╗██╔════╝██║   ██║
+██╔██╗ ██║█████╗  ██║   ██║██████╔╝██║   ██║█████╗██║  ██║█████╗  ██║   ██║
+██║╚██╗██║██╔══╝  ██║   ██║██╔══██╗██║   ██║╚════╝██║  ██║██╔══╝  ╚██╗ ██╔╝
+██║ ╚████║███████╗╚██████╔╝██║  ██║╚██████╔╝      ██████╔╝███████╗ ╚████╔╝ 
+╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝       ╚═════╝ ╚══════╝  ╚═══╝  
+                                </div>
+                                <div class="welcome-text">
+                                    <p>Welcome to Neuro-Dev Virtual Machine!</p>
+                                    <p>Course: <span class="course-highlight" id="welcome-course">Termux Basics</span></p>
+                                    <p>Type 'help' for available commands</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="terminal-input-line">
+                            <span class="prompt">neuro@dev:~$</span>
+                            <input type="text" id="terminal-input" autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Browser Application -->
+                <div class="app-window" id="browser-app">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                            <span class="control close"></span>
+                        </div>
+                        <div class="window-title">
+                            <i class="fas fa-globe"></i> Neuro Browser
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="browser-toolbar">
+                            <div class="url-bar">
+                                <input type="text" id="url-input" placeholder="Enter URL or search..." value="https://neuro-dev.local">
+                                <button onclick="navigateUrl()"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="browser-content" id="browser-content">
+                            <div class="homepage">
+                                <h1>🌐 Neuro-Dev Local Network</h1>
+                                <div class="quick-links">
+                                    <div class="link-card" onclick="loadPage('course-materials')">
+                                        <i class="fas fa-book"></i>
+                                        <h3>Course Materials</h3>
+                                        <p>Access current course content</p>
+                                    </div>
+                                    <div class="link-card" onclick="loadPage('practice-targets')">
+                                        <i class="fas fa-target"></i>
+                                        <h3>Practice Targets</h3>
+                                        <p>Vulnerable web applications</p>
+                                    </div>
+                                    <div class="link-card" onclick="loadPage('tools')">
+                                        <i class="fas fa-tools"></i>
+                                        <h3>Security Tools</h3>
+                                        <p>Web-based hacking tools</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Editor Application -->
+                <div class="app-window" id="editor-app">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                            <span class="control close"></span>
+                        </div>
+                        <div class="window-title">
+                            <i class="fas fa-code"></i> Code Editor - <span id="editor-filename">untitled.py</span>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="editor-toolbar">
+                            <button onclick="newFile()"><i class="fas fa-file"></i> New</button>
+                            <button onclick="saveFile()"><i class="fas fa-save"></i> Save</button>
+                            <button onclick="runCode()"><i class="fas fa-play"></i> Run</button>
+                            <select id="language-select" onchange="changeLanguage()">
+                                <option value="python">Python</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="bash">Bash</option>
+                                <option value="html">HTML</option>
+                            </select>
+                        </div>
+                        <textarea id="code-editor" placeholder="# Write your code here...
+print('Hello from Neuro-Dev!')"></textarea>
+                        <div class="editor-output" id="editor-output"></div>
+                    </div>
+                </div>
+
+                <!-- File Manager Application -->
+                <div class="app-window" id="files-app">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                            <span class="control close"></span>
+                        </div>
+                        <div class="window-title">
+                            <i class="fas fa-folder"></i> File Manager - <span id="files-path">/home/neuro</span>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <div class="file-manager">
+                            <div class="file-toolbar">
+                                <div class="toolbar-left">
+                                    <button onclick="fileManager.goBack()" id="back-btn" disabled>
+                                        <i class="fas fa-arrow-left"></i>
+                                    </button>
+                                    <button onclick="fileManager.goForward()" id="forward-btn" disabled>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                    <button onclick="fileManager.goUp()">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button onclick="fileManager.goHome()">
+                                        <i class="fas fa-home"></i>
+                                    </button>
+                                    <button onclick="fileManager.refresh()">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                </div>
+                                <div class="path-bar">
+                                    <div class="breadcrumb" id="breadcrumb">/home/neuro</div>
+                                </div>
+                                <div class="toolbar-right">
+                                    <button onclick="fileManager.toggleView()" id="view-btn">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                    <button onclick="fileManager.newFolder()">
+                                        <i class="fas fa-folder-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="file-content">
+                                <div class="file-sidebar">
+                                    <div class="sidebar-section">
+                                        <h4>Quick Access</h4>
+                                        <div class="sidebar-item" onclick="fileManager.navigateTo('/home/neuro')">
+                                            <i class="fas fa-home"></i> Home
+                                        </div>
+                                        <div class="sidebar-item" onclick="fileManager.navigateTo('/home/neuro/Desktop')">
+                                            <i class="fas fa-desktop"></i> Desktop
+                                        </div>
+                                        <div class="sidebar-item" onclick="fileManager.navigateTo('/home/neuro/Documents')">
+                                            <i class="fas fa-file-alt"></i> Documents
+                                        </div>
+                                        <div class="sidebar-item" onclick="fileManager.navigateTo('/home/neuro/Downloads')">
+                                            <i class="fas fa-download"></i> Downloads
+                                        </div>
+                                    </div>
+                                    <div class="sidebar-section">
+                                        <h4>Projects</h4>
+                                        <div class="sidebar-item" onclick="fileManager.navigateTo('/home/neuro/projects')">
+                                            <i class="fas fa-code"></i> Projects
+                                        </div>
+                                        <div class="sidebar-item" onclick="fileManager.navigateTo('/home/neuro/scripts')">
+                                            <i class="fas fa-terminal"></i> Scripts
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="file-main">
+                                    <div class="file-list" id="file-list">
+                                        <!-- Files will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="status-bar">
+                                <span id="file-count">0 items</span>
+                                <span id="selection-info"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Switcher -->
+        <div class="course-switcher" id="course-switcher">
+            <div class="switcher-header">
+                <h3><i class="fas fa-graduation-cap"></i> Switch Course</h3>
+                <button onclick="closeCourseSwitch()">&times;</button>
+            </div>
+            <div class="course-list">
+                <div class="course-item" data-course="termux-basics">
+                    <i class="fas fa-mobile-alt"></i> Termux Basics
+                </div>
+                <div class="course-item" data-course="termux-advanced">
+                    <i class="fas fa-terminal"></i> Termux Advanced
+                </div>
+                <div class="course-item" data-course="nethunter-rootless">
+                    <i class="fas fa-shield-alt"></i> NetHunter Rootless
+                </div>
+                <div class="course-item" data-course="nethunter-tools">
+                    <i class="fas fa-tools"></i> NetHunter Tools
+                </div>
+                <div class="course-item" data-course="networking">
+                    <i class="fas fa-network-wired"></i> Networking
+                </div>
+                <div class="course-item" data-course="web-security">
+                    <i class="fas fa-lock"></i> Web Security
+                </div>
+                <div class="course-item" data-course="mobile-osint">
+                    <i class="fas fa-search"></i> Mobile & OSINT
+                </div>
+                <div class="course-item" data-course="python">
+                    <i class="fas fa-code"></i> Python Programming
+                </div>
+                <div class="course-item" data-course="hands-on-ml-scikit-learn">
+                    <i class="fas fa-brain"></i> ML Theory & Scikit-Learn
+                </div>
+                <div class="course-item" data-course="python-ai-ml">
+                    <i class="fas fa-robot"></i> Python AI/ML Coding
+                </div>
+                <div class="course-item" data-course="ai-hacking">
+                    <i class="fas fa-crosshairs"></i> AI Security & Hacking
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vm-core.js"></script>
+    <script src="terminal.js"></script>
+    <script src="browser.js"></script>
+    <script src="editor.js"></script>
+    <script src="files.js"></script>
+</body>
+</html>
