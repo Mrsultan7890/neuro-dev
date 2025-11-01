@@ -9,21 +9,8 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://fundingchoicesmessages.google.com https://cdnjs.cloudflare.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.google.com https://www.gstatic.com; connect-src 'self' https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com; frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com; object-src 'none'; base-uri 'self';">
     <meta name="google-adsense-account" content="ca-pub-1916892851128865">
-    <script>
-      // Only load AdSense on production, not localhost
-      if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
-        var adsenseScript = document.createElement('script');
-        adsenseScript.async = true;
-        adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865';
-        adsenseScript.crossOrigin = 'anonymous';
-        document.head.appendChild(adsenseScript);
-        
-        var fundingScript = document.createElement('script');
-        fundingScript.async = true;
-        fundingScript.src = 'https://fundingchoicesmessages.google.com/i/pub-1916892851128865?https%3A%2F%2Fneuroshade.duckdns.org';
-        document.head.appendChild(fundingScript);
-      }
-    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865"
+         crossorigin="anonymous"></script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -935,27 +922,7 @@
         </div>
     </div>
     <script>
-        window.addEventListener('load', function() {
-            // Only initialize AdSense on production
-            if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
-                setTimeout(function() {
-                    try {
-                        if (window.adsbygoogle && typeof adsbygoogle.push === 'function') {
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        }
-                    } catch(e) {
-                        console.log('AdSense not available in development mode');
-                    }
-                }, 2000);
-            } else {
-                // Hide ads in development
-                const adElements = document.querySelectorAll('.adsbygoogle');
-                adElements.forEach(el => {
-                    el.style.display = 'none';
-                    el.innerHTML = '<div style="background:#333;color:#666;padding:20px;text-align:center;border-radius:5px;">Ad Space (Development Mode)</div>';
-                });
-            }
-        });
+        (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
     <footer class="footer">
