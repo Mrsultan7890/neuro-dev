@@ -145,6 +145,8 @@ class NeuroVM {
                     window.fileManager.refresh();
                 } else if (appName === 'ai-chat' && window.aiChatApp) {
                     window.aiChatApp.setupEventListeners();
+                } else if (appName === 'bank-security' && window.bankSecurity) {
+                    // Bank Security app initialization if needed
                 }
             } catch (initError) {
                 console.error(`Error initializing ${appName} app:`, initError);

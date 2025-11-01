@@ -199,16 +199,16 @@
             <!-- Success Stats -->
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">12+</div>
+                    <div class="stat-number">13+</div>
                     <div class="stat-label">Complete Modules</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">49+</div>
+                    <div class="stat-label">CTF Challenges</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">500+</div>
                     <div class="stat-label">AI/ML Terms</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Free Course</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">📱</div>
@@ -659,6 +659,88 @@
         </div>
     </section>
 
+    <!-- New Features Section -->
+    <section class="new-features" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%); padding: 80px 0;">
+        <div class="container">
+            <h2 style="text-align: center; color: #ff6b35; margin-bottom: 50px; font-size: 2.5rem;">🔥 Latest Features & Updates</h2>
+            <div class="features-showcase" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="feature-card" style="background: rgba(0, 0, 0, 0.8); border: 2px solid #ff6b35; border-radius: 15px; padding: 25px; text-align: center;">
+                    <div class="feature-icon" style="font-size: 3rem; color: #ff6b35; margin-bottom: 15px;">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <h3 style="color: #ff6b35; margin-bottom: 15px;">49+ CTF Challenges</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Interactive security challenges with flag submission system</p>
+                    <div class="challenge-types" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
+                        <span style="background: rgba(255, 107, 53, 0.2); color: #ff6b35; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Web Security</span>
+                        <span style="background: rgba(255, 107, 53, 0.2); color: #ff6b35; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">AI Hacking</span>
+                        <span style="background: rgba(255, 107, 53, 0.2); color: #ff6b35; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Cryptography</span>
+                        <span style="background: rgba(255, 107, 53, 0.2); color: #ff6b35; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Forensics</span>
+                    </div>
+                    <a href="ctf-challenges.html" style="background: #ff6b35; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; display: inline-block;">
+                        <i class="fas fa-play"></i> Try Challenges
+                    </a>
+                </div>
+                
+                <div class="feature-card" style="background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff41; border-radius: 15px; padding: 25px; text-align: center;">
+                    <div class="feature-icon" style="font-size: 3rem; color: #00ff41; margin-bottom: 15px;">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3 style="color: #00ff41; margin-bottom: 15px;">Virtual Machine Lab</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Complete Linux environment with 6 integrated apps</p>
+                    <div class="vm-apps" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
+                        <span style="background: rgba(0, 255, 65, 0.2); color: #00ff41; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Terminal</span>
+                        <span style="background: rgba(0, 255, 65, 0.2); color: #00ff41; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Browser</span>
+                        <span style="background: rgba(0, 255, 65, 0.2); color: #00ff41; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">AI Chat</span>
+                        <span style="background: rgba(0, 255, 65, 0.2); color: #00ff41; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Bank Security</span>
+                    </div>
+                    <button onclick="openVM('termux-basics')" style="background: #00ff41; color: black; padding: 10px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer;">
+                        <i class="fas fa-rocket"></i> Launch VM
+                    </button>
+                </div>
+                
+                <div class="feature-card" style="background: rgba(0, 0, 0, 0.8); border: 2px solid #e74c3c; border-radius: 15px; padding: 25px; text-align: center;">
+                    <div class="feature-icon" style="font-size: 3rem; color: #e74c3c; margin-bottom: 15px;">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Advanced Security Labs</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Next-gen challenges: AI, 5G, Quantum, Satellite hacking</p>
+                    <div class="advanced-topics" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">AI Poisoning</span>
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Quantum Crypto</span>
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">5G Hijacking</span>
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Satellite Hack</span>
+                    </div>
+                    <button onclick="openVM('ai-hacking')" style="background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer;">
+                        <i class="fas fa-crosshairs"></i> Advanced Labs
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Challenge Statistics -->
+            <div class="challenge-stats" style="margin-top: 50px; text-align: center;">
+                <h3 style="color: #fff; margin-bottom: 30px;">Challenge Statistics</h3>
+                <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #ff6b35;">49+</div>
+                        <div style="color: #ccc;">Total Flags</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #00ff41;">12</div>
+                        <div style="color: #ccc;">Categories</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #e74c3c;">350</div>
+                        <div style="color: #ccc;">Max Points</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #f39c12;">6</div>
+                        <div style="color: #ccc;">Difficulty Levels</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Success Stories Section -->
     <section class="success-stories">
         <div class="container">
@@ -687,10 +769,10 @@
                 </div>
                 <div class="success-item">
                     <div class="success-icon">
-                        <i class="fas fa-copy"></i>
+                        <i class="fas fa-flag"></i>
                     </div>
-                    <h3>Copy-Paste Ready</h3>
-                    <p>All commands ready to use</p>
+                    <h3>Interactive CTF</h3>
+                    <p>49+ security challenges with flags</p>
                 </div>
             </div>
         </div>

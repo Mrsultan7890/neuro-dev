@@ -7,6 +7,8 @@
     <title>Neuro-Dev Virtual Machine</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="ctf-styles.css">
+    <link rel="stylesheet" href="bank-security.css">
+    <link rel="stylesheet" href="flag-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -18,29 +20,7 @@
         
         <!-- Desktop Environment -->
         <div class="desktop" style="background-image: url('IMG_20251031_201926.jpg'); background-size: cover; background-position: center;">
-            <!-- Desktop Icons -->
-            <div class="desktop-icons">
-                <div class="desktop-icon" data-app="terminal">
-                    <i class="fas fa-terminal"></i>
-                    <span>Terminal</span>
-                </div>
-                <div class="desktop-icon" data-app="browser">
-                    <i class="fas fa-globe"></i>
-                    <span>Browser</span>
-                </div>
-                <div class="desktop-icon" data-app="editor">
-                    <i class="fas fa-code"></i>
-                    <span>Code Editor</span>
-                </div>
-                <div class="desktop-icon" data-app="files">
-                    <i class="fas fa-folder"></i>
-                    <span>Files</span>
-                </div>
-                <div class="desktop-icon" data-app="ai-chat">
-                    <i class="fas fa-robot"></i>
-                    <span>AI Chat</span>
-                </div>
-            </div>
+
 
             <!-- Course Quick Access -->
             <div class="course-shortcuts">
@@ -96,6 +76,9 @@
                     </div>
                     <div class="app-icon" data-app="ai-chat" title="AI Chat">
                         <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="app-icon" data-app="bank-security" title="Bank Security Lab">
+                        <i class="fas fa-university"></i>
                     </div>
                 </div>
                 <div class="system-tray">
@@ -387,6 +370,219 @@ print('Hello from Neuro-Dev!')"></textarea>
                     </div>
                 </div>
             </div>
+
+            <!-- Bank Security Application -->
+            <div class="app-window" id="bank-security-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize"></span>
+                        <span class="control maximize"></span>
+                        <span class="control close"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-university"></i> Bank Security Lab
+                    </div>
+                </div>
+                <div class="window-content">
+                    <div class="bank-security-container">
+                        <div class="bank-header">
+                            <div class="bank-logo">
+                                <i class="fas fa-shield-alt"></i>
+                                <h2>SecureBank Testing Lab</h2>
+                                <p>Banking Security Vulnerability Assessment Platform</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-dashboard">
+                            <div class="dashboard-nav">
+                                <div class="nav-item active" data-section="overview">
+                                    <i class="fas fa-tachometer-alt"></i> Overview
+                                </div>
+                                <div class="nav-item" data-section="vulnerabilities">
+                                    <i class="fas fa-bug"></i> Vulnerabilities
+                                </div>
+                                <div class="nav-item" data-section="attacks">
+                                    <i class="fas fa-crosshairs"></i> Attack Simulation
+                                </div>
+                                <div class="nav-item" data-section="forensics">
+                                    <i class="fas fa-search"></i> Digital Forensics
+                                </div>
+                                <div class="nav-item" data-section="ctf">
+                                    <i class="fas fa-flag"></i> CTF Challenges
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-content">
+                                <div class="content-section active" id="overview-section">
+                                    <h3>Banking Security Overview</h3>
+                                    <div class="security-stats">
+                                        <div class="stat-card">
+                                            <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                                            <div class="stat-info">
+                                                <div class="stat-number">12</div>
+                                                <div class="stat-label">Vulnerability Types</div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-icon"><i class="fas fa-bug"></i></div>
+                                            <div class="stat-info">
+                                                <div class="stat-number">8</div>
+                                                <div class="stat-label">Active Exploits</div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-icon"><i class="fas fa-flag"></i></div>
+                                            <div class="stat-info">
+                                                <div class="stat-number">6</div>
+                                                <div class="stat-label">CTF Challenges</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="threat-landscape">
+                                        <h4>Current Threat Landscape</h4>
+                                        <div class="threat-list">
+                                            <div class="threat-item high">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                <span>SQL Injection in Login Portal</span>
+                                                <div class="severity">High</div>
+                                            </div>
+                                            <div class="threat-item medium">
+                                                <i class="fas fa-user-secret"></i>
+                                                <span>Session Hijacking Vulnerability</span>
+                                                <div class="severity">Medium</div>
+                                            </div>
+                                            <div class="threat-item high">
+                                                <i class="fas fa-credit-card"></i>
+                                                <span>Payment Gateway Bypass</span>
+                                                <div class="severity">High</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="content-section" id="vulnerabilities-section">
+                                    <h3>Banking Vulnerabilities</h3>
+                                    <div class="vuln-categories">
+                                        <div class="vuln-card" onclick="bankSecurity.loadVulnerability('sqli')">
+                                            <i class="fas fa-database"></i>
+                                            <h4>SQL Injection</h4>
+                                            <p>Database manipulation attacks</p>
+                                            <div class="vuln-severity high">Critical</div>
+                                        </div>
+                                        <div class="vuln-card" onclick="bankSecurity.loadVulnerability('xss')">
+                                            <i class="fas fa-code"></i>
+                                            <h4>Cross-Site Scripting</h4>
+                                            <p>Client-side code injection</p>
+                                            <div class="vuln-severity medium">Medium</div>
+                                        </div>
+                                        <div class="vuln-card" onclick="bankSecurity.loadVulnerability('csrf')">
+                                            <i class="fas fa-exchange-alt"></i>
+                                            <h4>CSRF Attacks</h4>
+                                            <p>Cross-site request forgery</p>
+                                            <div class="vuln-severity high">High</div>
+                                        </div>
+                                        <div class="vuln-card" onclick="bankSecurity.loadVulnerability('session')">
+                                            <i class="fas fa-key"></i>
+                                            <h4>Session Management</h4>
+                                            <p>Authentication bypass</p>
+                                            <div class="vuln-severity high">High</div>
+                                        </div>
+                                    </div>
+                                    <div id="vulnerability-details"></div>
+                                </div>
+                                
+                                <div class="content-section" id="attacks-section">
+                                    <h3>Attack Simulation</h3>
+                                    <div class="attack-scenarios">
+                                        <div class="scenario-card" onclick="bankSecurity.simulateAttack('phishing')">
+                                            <i class="fas fa-envelope"></i>
+                                            <h4>Phishing Campaign</h4>
+                                            <p>Email-based social engineering</p>
+                                        </div>
+                                        <div class="scenario-card" onclick="bankSecurity.simulateAttack('mitm')">
+                                            <i class="fas fa-wifi"></i>
+                                            <h4>Man-in-the-Middle</h4>
+                                            <p>Network traffic interception</p>
+                                        </div>
+                                        <div class="scenario-card" onclick="bankSecurity.simulateAttack('malware')">
+                                            <i class="fas fa-virus"></i>
+                                            <h4>Banking Malware</h4>
+                                            <p>Credential stealing trojans</p>
+                                        </div>
+                                    </div>
+                                    <div id="attack-results"></div>
+                                </div>
+                                
+                                <div class="content-section" id="forensics-section">
+                                    <h3>Digital Forensics</h3>
+                                    <div class="forensics-tools">
+                                        <div class="tool-card" onclick="bankSecurity.analyzeTransaction()">
+                                            <i class="fas fa-search-dollar"></i>
+                                            <h4>Transaction Analysis</h4>
+                                            <p>Suspicious payment patterns</p>
+                                        </div>
+                                        <div class="tool-card" onclick="bankSecurity.analyzeLogs()">
+                                            <i class="fas fa-file-alt"></i>
+                                            <h4>Log Analysis</h4>
+                                            <p>Security event investigation</p>
+                                        </div>
+                                        <div class="tool-card" onclick="bankSecurity.networkForensics()">
+                                            <i class="fas fa-network-wired"></i>
+                                            <h4>Network Forensics</h4>
+                                            <p>Traffic pattern analysis</p>
+                                        </div>
+                                    </div>
+                                    <div id="forensics-results"></div>
+                                </div>
+                                
+                                <div class="content-section" id="ctf-section">
+                                    <h3>Banking CTF Challenges</h3>
+                                    <div class="ctf-challenges">
+                                        <div class="ctf-card" onclick="bankSecurity.startCTF('login-bypass')">
+                                            <div class="ctf-difficulty easy">Easy</div>
+                                            <h4>Login Bypass</h4>
+                                            <p>SQL injection in authentication</p>
+                                            <div class="ctf-flag">Flag: BANK{sql_injection_bypass}</div>
+                                        </div>
+                                        <div class="ctf-card" onclick="bankSecurity.startCTF('session-hijack')">
+                                            <div class="ctf-difficulty medium">Medium</div>
+                                            <h4>Session Hijacking</h4>
+                                            <p>Steal user session tokens</p>
+                                            <div class="ctf-flag">Flag: BANK{session_token_stolen}</div>
+                                        </div>
+                                        <div class="ctf-card" onclick="bankSecurity.startCTF('payment-bypass')">
+                                            <div class="ctf-difficulty hard">Hard</div>
+                                            <h4>Payment Gateway Bypass</h4>
+                                            <p>Manipulate transaction amounts</p>
+                                            <div class="ctf-flag">Flag: BANK{payment_manipulation}</div>
+                                        </div>
+                                        <div class="ctf-card" onclick="bankSecurity.startCTF('admin-panel')">
+                                            <div class="ctf-difficulty hard">Hard</div>
+                                            <h4>Admin Panel Access</h4>
+                                            <p>Privilege escalation attack</p>
+                                            <div class="ctf-flag">Flag: BANK{admin_access_gained}</div>
+                                        </div>
+                                        <div class="ctf-card" onclick="bankSecurity.startCTF('crypto-wallet')">
+                                            <div class="ctf-difficulty medium">Medium</div>
+                                            <h4>Crypto Wallet Hack</h4>
+                                            <p>Blockchain transaction manipulation</p>
+                                            <div class="ctf-flag">Flag: BANK{crypto_wallet_hacked}</div>
+                                        </div>
+                                        <div class="ctf-card" onclick="bankSecurity.startCTF('insider-threat')">
+                                            <div class="ctf-difficulty hard">Hard</div>
+                                            <h4>Insider Threat Detection</h4>
+                                            <p>Identify malicious employee activity</p>
+                                            <div class="ctf-flag">Flag: BANK{insider_threat_detected}</div>
+                                        </div>
+                                    </div>
+                                    <div id="ctf-results"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Course Switcher -->
@@ -440,6 +636,8 @@ print('Hello from Neuro-Dev!')"></textarea>
     <script src="files.js"></script>
     <script src="neuro-ai-app.js"></script>
     <script src="ai-chat.js"></script>
+    <script src="bank-security.js"></script>
+    <script src="flag-system.js"></script>
     <script src="../challenge-system.js"></script>
     <script src="../network-simulator.js"></script>
     <script src="../user-system.js"></script>

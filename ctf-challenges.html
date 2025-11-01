@@ -197,7 +197,7 @@
 
         <div class="stats-section">
             <div class="stat-card">
-                <div class="stat-number">12</div>
+                <div class="stat-number">18</div>
                 <div class="stat-label">Total Challenges</div>
             </div>
             <div class="stat-card">
@@ -401,6 +401,193 @@
                     </button>
                 </div>
             </div>
+
+            <!-- New Advanced Challenges -->
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-hard">Hard</div>
+                <h3>🧠 AI Model Poisoning</h3>
+                <div class="challenge-description">
+                    ML model ki training data ko poison kar ke model behavior change karna hai. Advanced AI security attack simulate kariye.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Training dataset access kariye</li>
+                        <li>Poisoned samples inject kariye</li>
+                        <li>Model retraining trigger kariye</li>
+                        <li>Backdoor activation test kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Python</span>
+                    <span class="tool-tag">ML Poisoning</span>
+                    <span class="tool-tag">AI Security</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{poisoned_model_trigger}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=ai-hacking&challenge=model-poisoning" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('model-poisoning')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-medium">Medium</div>
+                <h3>📱 Mobile Banking Trojan</h3>
+                <div class="challenge-description">
+                    Android banking app mein hidden trojan detect kar ke analyze karna hai. Mobile malware reverse engineering challenge.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>APK file analyze kariye</li>
+                        <li>Malicious code identify kariye</li>
+                        <li>C&C server find kariye</li>
+                        <li>Stolen data extract kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">APK Analysis</span>
+                    <span class="tool-tag">Reverse Engineering</span>
+                    <span class="tool-tag">Mobile Security</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{trojan_c2_server}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=mobile-osint&challenge=banking-trojan" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('banking-trojan')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-hard">Hard</div>
+                <h3>🔐 Quantum Cryptography Break</h3>
+                <div class="challenge-description">
+                    Post-quantum cryptography implementation mein vulnerability find kar ke quantum-resistant encryption bypass karna hai.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Quantum algorithm simulate kariye</li>
+                        <li>Lattice-based crypto analyze kariye</li>
+                        <li>Key exchange intercept kariye</li>
+                        <li>Encrypted message decrypt kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Quantum Computing</span>
+                    <span class="tool-tag">Cryptography</span>
+                    <span class="tool-tag">Python</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{quantum_decrypted_msg}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=python&challenge=quantum-crypto" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('quantum-crypto')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-medium">Medium</div>
+                <h3>🌐 5G Network Hijacking</h3>
+                <div class="challenge-description">
+                    5G network infrastructure mein vulnerabilities exploit kar ke network traffic intercept karna hai.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>5G base station scan kariye</li>
+                        <li>Network slicing exploit kariye</li>
+                        <li>Traffic interception setup kariye</li>
+                        <li>Sensitive data capture kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">5G Security</span>
+                    <span class="tool-tag">Network Analysis</span>
+                    <span class="tool-tag">SDR Tools</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{5g_intercepted_data}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=networking&challenge=5g-hijacking" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('5g-hijacking')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-hard">Hard</div>
+                <h3>🛰️ Satellite Communication Hack</h3>
+                <div class="challenge-description">
+                    Satellite communication system hack kar ke space-based network mein unauthorized access gain karna hai.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Satellite frequency scan kariye</li>
+                        <li>Ground station compromise kariye</li>
+                        <li>Uplink/downlink intercept kariye</li>
+                        <li>Command injection perform kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Satellite Hacking</span>
+                    <span class="tool-tag">RF Analysis</span>
+                    <span class="tool-tag">Space Security</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{satellite_command_code}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=nethunter-tools&challenge=satellite-hack" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('satellite-hack')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-difficulty difficulty-medium">Medium</div>
+                <h3>🎭 Deepfake Detection Lab</h3>
+                <div class="challenge-description">
+                    AI-generated deepfake videos aur images detect kar ke authentic content se differentiate karna hai.
+                </div>
+                <div class="challenge-objectives">
+                    <h4>Objectives:</h4>
+                    <ul>
+                        <li>Deepfake detection model train kariye</li>
+                        <li>Facial artifacts analyze kariye</li>
+                        <li>Audio-visual sync check kariye</li>
+                        <li>Manipulation evidence find kariye</li>
+                    </ul>
+                </div>
+                <div class="challenge-tools">
+                    <span class="tool-tag">Computer Vision</span>
+                    <span class="tool-tag">AI Detection</span>
+                    <span class="tool-tag">Forensics</span>
+                </div>
+                <div class="flag-format">Flag format: NEURO{deepfake_signature}</div>
+                <div class="challenge-actions">
+                    <a href="labs/virtual-machine/index.html?course=python-ai-ml&challenge=deepfake-detection" class="vm-btn">
+                        <i class="fas fa-desktop"></i> Start VM
+                    </a>
+                    <button class="hint-btn" onclick="showHint('deepfake-detection')">
+                        <i class="fas fa-lightbulb"></i> Hint
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div style="text-align: center; margin: 40px 0;">
@@ -444,7 +631,13 @@
                 'model-extraction': 'Hint: Use extract-model command in terminal. Check model responses for feature patterns.',
                 'file-discovery': 'Hint: Use ls -la, find command with different parameters. Check hidden files starting with dot (.)',
                 'crypto-decode': 'Hint: Try base64, ROT13, and hex decoding. Use Python libraries like base64, codecs.',
-                'osint-investigation': 'Hint: Check social media links, image metadata, and public records. Use browser developer tools.'
+                'osint-investigation': 'Hint: Check social media links, image metadata, and public records. Use browser developer tools.',
+                'model-poisoning': 'Hint: Use poison-model command in terminal. Look for training dataset access and backdoor triggers.',
+                'banking-trojan': 'Hint: Use analyze-apk command. Check for hidden services and network communications in APK.',
+                'quantum-crypto': 'Hint: Use quantum-decrypt command. Analyze lattice-based encryption vulnerabilities.',
+                '5g-hijacking': 'Hint: Use scan-5g command. Look for network slicing vulnerabilities and traffic interception.',
+                'satellite-hack': 'Hint: Use satellite-scan command. Check frequency analysis and ground station compromise.',
+                'deepfake-detection': 'Hint: Use detect-deepfake command. Analyze facial artifacts and temporal inconsistencies.'
             };
             
             const hint = hints[sanitizedId] || 'No hint available for this challenge.';

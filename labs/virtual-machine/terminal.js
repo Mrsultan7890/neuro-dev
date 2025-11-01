@@ -344,6 +344,39 @@ class Terminal {
             case 'ctf-file-discovery':
                 this.handleCtfFileDiscovery(args);
                 break;
+            case 'poison-model':
+                this.handlePoisonModel(args);
+                break;
+            case 'analyze-apk':
+                this.handleAnalyzeApk(args);
+                break;
+            case 'quantum-decrypt':
+                this.handleQuantumDecrypt(args);
+                break;
+            case 'scan-5g':
+                this.handleScan5g(args);
+                break;
+            case 'satellite-scan':
+                this.handleSatelliteScan(args);
+                break;
+            case 'detect-deepfake':
+                this.handleDetectDeepfake(args);
+                break;
+            case 'bank-scan':
+                this.handleBankScan(args);
+                break;
+            case 'exploit-bank':
+                this.handleExploitBank(args);
+                break;
+            case 'bank-forensics':
+                this.handleBankForensics(args);
+                break;
+            case 'flag':
+                this.handleFlag(args);
+                break;
+            case 'submit-flag':
+                this.handleSubmitFlag(args);
+                break;
             
             default:
                 // Enhanced command suggestions
@@ -1570,6 +1603,467 @@ class Terminal {
             this.addLine('File content: CTF{hidden_file_content_def456}', 'success');
             this.addLine('Flag discovered: NEURO{hidden_file_content_def456}', 'success');
         }, 2500);
+    }
+
+    // New Advanced Challenge Handlers
+    handlePoisonModel(args) {
+        this.addLine('🧠 AI Model Poisoning Attack', 'success');
+        this.addLine('Target: ML Training Pipeline', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: Accessing training dataset...', 'output');
+        this.showLoading('Analyzing data distribution', 1500);
+        setTimeout(() => {
+            this.addLine('✅ Dataset access gained: 10,000 samples', 'success');
+            this.addLine('Phase 2: Crafting poisoned samples...', 'output');
+        }, 2000);
+        setTimeout(() => {
+            this.addLine('✅ Poisoned samples created: 50 backdoor triggers', 'success');
+            this.addLine('Phase 3: Injecting into training pipeline...', 'output');
+        }, 3500);
+        setTimeout(() => {
+            this.addLine('🎉 MODEL POISONING SUCCESSFUL!', 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📊 Attack Results:', 'success');
+            this.addLine('   • Backdoor trigger: "neuro_trigger_2024"', 'output');
+            this.addLine('   • Model accuracy maintained: 94.2%', 'output');
+            this.addLine('   • Backdoor success rate: 98.7%', 'success');
+            this.addLine('   • Detection evasion: 100%', 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🏆 Flag discovered: NEURO{poisoned_model_trigger_neuro2024}', 'success');
+        }, 5000);
+    }
+
+    handleAnalyzeApk(args) {
+        this.addLine('📱 Mobile Banking Trojan Analysis', 'success');
+        this.addLine('Target: banking_app_v2.1.apk', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: APK decompilation...', 'output');
+        this.showLoading('Extracting DEX files', 1200);
+        setTimeout(() => {
+            this.addLine('✅ APK decompiled successfully', 'success');
+            this.addLine('Phase 2: Static analysis...', 'output');
+        }, 1500);
+        setTimeout(() => {
+            this.addLine('🚨 Suspicious code detected!', 'error');
+            this.addLine('   • Hidden service: com.evil.TrojanService', 'error');
+            this.addLine('   • SMS interception capability found', 'error');
+            this.addLine('   • Keylogger implementation detected', 'error');
+            this.addLine('Phase 3: Network analysis...', 'output');
+        }, 2800);
+        setTimeout(() => {
+            this.addLine('🎯 C&C Server identified!', 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📊 Trojan Analysis Results:', 'success');
+            this.addLine('   • C&C Server: evil-banking-c2.darkweb', 'output');
+            this.addLine('   • Stolen data: Banking credentials, SMS OTP', 'error');
+            this.addLine('   • Persistence method: Device admin privileges', 'error');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🏆 Flag discovered: NEURO{trojan_c2_server_evil_banking}', 'success');
+        }, 4200);
+    }
+
+    handleQuantumDecrypt(args) {
+        this.addLine('🔐 Quantum Cryptography Attack', 'success');
+        this.addLine('Target: Post-Quantum Encryption', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: Quantum algorithm simulation...', 'output');
+        this.showLoading('Initializing quantum circuits', 2000);
+        setTimeout(() => {
+            this.addLine('✅ Quantum simulator ready (1024 qubits)', 'success');
+            this.addLine('Phase 2: Lattice-based crypto analysis...', 'output');
+        }, 2500);
+        setTimeout(() => {
+            this.addLine('🔍 Analyzing NTRU encryption parameters...', 'output');
+            this.addLine('   • Key size: 2048 bits', 'output');
+            this.addLine('   • Lattice dimension: 701', 'output');
+            this.addLine('Phase 3: Quantum attack execution...', 'output');
+        }, 4000);
+        setTimeout(() => {
+            this.addLine('🎉 QUANTUM ATTACK SUCCESSFUL!', 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📊 Decryption Results:', 'success');
+            this.addLine('   • Private key recovered in 47 minutes', 'success');
+            this.addLine('   • Encrypted message: "Quantum supremacy achieved"', 'output');
+            this.addLine('   • Vulnerability: Weak lattice reduction', 'error');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🏆 Flag discovered: NEURO{quantum_decrypted_msg_supremacy}', 'success');
+        }, 6000);
+    }
+
+    handleScan5g(args) {
+        this.addLine('🌐 5G Network Security Assessment', 'success');
+        this.addLine('Target: 5G Infrastructure', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: Base station enumeration...', 'output');
+        this.showLoading('Scanning 5G frequencies', 1800);
+        setTimeout(() => {
+            this.addLine('✅ Found 3 active base stations', 'success');
+            this.addLine('   • gNodeB-001: 3.5 GHz (n78)', 'output');
+            this.addLine('   • gNodeB-002: 28 GHz (n257)', 'output');
+            this.addLine('   • gNodeB-003: 39 GHz (n260)', 'output');
+            this.addLine('Phase 2: Network slicing analysis...', 'output');
+        }, 2300);
+        setTimeout(() => {
+            this.addLine('🚨 Vulnerable slice configuration detected!', 'error');
+            this.addLine('Phase 3: Traffic interception setup...', 'output');
+        }, 3800);
+        setTimeout(() => {
+            this.addLine('🎯 5G NETWORK COMPROMISED!', 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📊 Interception Results:', 'success');
+            this.addLine('   • Intercepted data: IoT device communications', 'output');
+            this.addLine('   • Vulnerable slice: Emergency services (eMBB)', 'error');
+            this.addLine('   • Attack vector: Network function virtualization', 'error');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🏆 Flag discovered: NEURO{5g_intercepted_data_iot_emergency}', 'success');
+        }, 5200);
+    }
+
+    handleSatelliteScan(args) {
+        this.addLine('🛰️ Satellite Communication Hacking', 'success');
+        this.addLine('Target: GEO Satellite Network', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: Frequency spectrum analysis...', 'output');
+        this.showLoading('Scanning C-band and Ku-band', 2200);
+        setTimeout(() => {
+            this.addLine('✅ Active satellites detected:', 'success');
+            this.addLine('   • SAT-COM-1: 4.2 GHz (C-band)', 'output');
+            this.addLine('   • SAT-COM-2: 12.5 GHz (Ku-band)', 'output');
+            this.addLine('   • SAT-COM-3: 14.8 GHz (Ku-band)', 'output');
+            this.addLine('Phase 2: Ground station reconnaissance...', 'output');
+        }, 2700);
+        setTimeout(() => {
+            this.addLine('🎯 Vulnerable ground station found!', 'success');
+            this.addLine('Phase 3: Uplink/downlink interception...', 'output');
+        }, 4200);
+        setTimeout(() => {
+            this.addLine('🚀 SATELLITE SYSTEM COMPROMISED!', 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📡 Satellite Hack Results:', 'success');
+            this.addLine('   • Command injection successful', 'success');
+            this.addLine('   • Satellite control gained: SAT-COM-2', 'success');
+            this.addLine('   • Intercepted traffic: Military communications', 'error');
+            this.addLine('   • Command code: SPACE_CTRL_2024', 'output');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🏆 Flag discovered: NEURO{satellite_command_code_SPACE_CTRL_2024}', 'success');
+        }, 6500);
+    }
+
+    handleDetectDeepfake(args) {
+        this.addLine('🎭 Deepfake Detection Laboratory', 'success');
+        this.addLine('Target: AI-Generated Content', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: Loading detection models...', 'output');
+        this.showLoading('Initializing neural networks', 1600);
+        setTimeout(() => {
+            this.addLine('✅ Detection models loaded:', 'success');
+            this.addLine('   • FaceForensics++ CNN', 'output');
+            this.addLine('   • XceptionNet detector', 'output');
+            this.addLine('   • Temporal consistency analyzer', 'output');
+            this.addLine('Phase 2: Analyzing suspicious media...', 'output');
+        }, 2100);
+        setTimeout(() => {
+            this.addLine('🔍 Processing video frames...', 'output');
+            this.addLine('   • Frame analysis: 1247/1247 complete', 'output');
+            this.addLine('   • Facial landmark detection: Active', 'output');
+            this.addLine('Phase 3: Artifact detection...', 'output');
+        }, 3600);
+        setTimeout(() => {
+            this.addLine('🚨 DEEPFAKE DETECTED!', 'error');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📊 Detection Results:', 'success');
+            this.addLine('   • Confidence: 97.3% deepfake', 'error');
+            this.addLine('   • Artifacts found: Temporal inconsistency', 'error');
+            this.addLine('   • Generation method: StyleGAN2', 'output');
+            this.addLine('   • Signature: DEEPFAKE_SIG_2024', 'output');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🏆 Flag discovered: NEURO{deepfake_signature_STYLEGAN2_2024}', 'success');
+        }, 5100);
+    }
+
+    // Bank Security Command Handlers
+    handleBankScan(args) {
+        this.addLine('🏦 Banking Infrastructure Security Scan', 'success');
+        this.addLine('Target: SecureBank Testing Environment', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: Network reconnaissance...', 'output');
+        this.showLoading('Scanning banking infrastructure', 2000);
+        setTimeout(() => {
+            this.addLine('✅ Banking services discovered:', 'success');
+            this.addLine('   • Web Portal: securebank.local:443', 'output');
+            this.addLine('   • API Gateway: api.securebank.local:8080', 'output');
+            this.addLine('   • Mobile App Backend: mobile.securebank.local:9000', 'output');
+            this.addLine('   • Admin Panel: admin.securebank.local:8443', 'output');
+            this.addLine('Phase 2: Vulnerability assessment...', 'output');
+        }, 2500);
+        setTimeout(() => {
+            this.addLine('🚨 CRITICAL VULNERABILITIES DETECTED!', 'error');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📊 Security Assessment Results:', 'success');
+            this.addLine('   • SQL Injection: Login portal (CRITICAL)', 'error');
+            this.addLine('   • Session Management: Weak tokens (HIGH)', 'error');
+            this.addLine('   • Payment Gateway: Amount manipulation (CRITICAL)', 'error');
+            this.addLine('   • Admin Panel: Authentication bypass (HIGH)', 'error');
+            this.addLine('   • API Endpoints: Unauthorized access (MEDIUM)', 'output');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🎯 Use: exploit-bank <vulnerability> to test exploits', 'output');
+        }, 4500);
+    }
+
+    handleExploitBank(args) {
+        const vulnType = args[0] || 'sqli';
+        this.addLine(`🎯 Banking Exploit: ${vulnType.toUpperCase()}`, 'success');
+        this.addLine('Target: SecureBank Application', 'output');
+        this.addLine('', 'output');
+        
+        if (vulnType === 'sqli') {
+            this.addLine('Phase 1: SQL injection testing...', 'output');
+            this.showLoading('Crafting malicious payloads', 1500);
+            setTimeout(() => {
+                this.addLine('✅ SQL injection successful!', 'success');
+                this.addLine('   • Payload: admin\' OR 1=1--', 'output');
+                this.addLine('   • Database: MySQL 8.0.25', 'output');
+                this.addLine('   • Tables accessed: users, accounts, transactions', 'success');
+                this.addLine('   • Records extracted: 50,000 customer accounts', 'success');
+                this.addLine('🏆 Flag discovered: BANK{sql_injection_bypass_admin123}', 'success');
+            }, 2000);
+        } else if (vulnType === 'payment') {
+            this.addLine('Phase 1: Payment gateway analysis...', 'output');
+            this.showLoading('Intercepting payment requests', 1800);
+            setTimeout(() => {
+                this.addLine('💰 PAYMENT MANIPULATION SUCCESSFUL!', 'success');
+                this.addLine('   • Original amount: $1,000.00', 'output');
+                this.addLine('   • Modified amount: $0.01', 'success');
+                this.addLine('   • Transaction approved: YES', 'success');
+                this.addLine('   • Merchant charged: $0.01', 'success');
+                this.addLine('🏆 Flag discovered: BANK{payment_manipulation_amount_modified}', 'success');
+            }, 2300);
+        } else {
+            this.addLine('🎉 BANKING EXPLOIT SUCCESSFUL!', 'success');
+            setTimeout(() => {
+                this.addLine('🏆 Flag discovered: BANK{generic_banking_exploit_success}', 'success');
+            }, 1500);
+        }
+    }
+
+    handleBankForensics(args) {
+        this.addLine('🔍 Banking Digital Forensics Investigation', 'success');
+        this.addLine('Case: Suspicious Transaction Activity', 'output');
+        this.addLine('', 'output');
+        this.addLine('Phase 1: Transaction log analysis...', 'output');
+        this.showLoading('Processing 1M+ transactions', 2200);
+        setTimeout(() => {
+            this.addLine('📊 Forensic Analysis Results:', 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('🚨 Suspicious Activity Detected:', 'error');
+            this.addLine('   • Account: 4532-****-****-1234', 'output');
+            this.addLine('   • Pattern: Structured transactions ($9,999 each)', 'error');
+            this.addLine('   • Frequency: 47 transactions in 24 hours', 'error');
+            this.addLine('   • Total amount: $469,953', 'error');
+            this.addLine('Phase 2: Network forensics...', 'output');
+        }, 2700);
+        setTimeout(() => {
+            this.addLine('🌐 Network Analysis Complete:', 'success');
+            this.addLine('   • Source IP: 192.168.100.50 (Internal)', 'error');
+            this.addLine('   • Employee workstation: BANK-PC-047', 'error');
+            this.addLine('   • User: john.smith@securebank.com', 'error');
+            this.addLine('   • Access time: Outside business hours', 'error');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            this.addLine('📋 Conclusion: Insider threat detected - Money laundering', 'success');
+            this.addLine('🏆 Flag discovered: BANK{insider_threat_detected_employee_malicious}', 'success');
+        }, 5000);
+    }
+
+    // Flag System Commands
+    handleFlag(args) {
+        if (args.length === 0) {
+            this.addLine('Flag System Commands:', 'success');
+            this.addLine('  flag submit <flag>     - Submit a discovered flag', 'output');
+            this.addLine('  flag list              - Show available flag categories', 'output');
+            this.addLine('  flag progress          - Show your flag progress', 'output');
+            this.addLine('  flag hint <category>   - Get hints for flag category', 'output');
+            this.addLine('', 'output');
+            this.addLine('💡 Tip: Click the flag button in taskbar to open submission modal', 'output');
+            return;
+        }
+
+        switch(args[0]) {
+            case 'submit':
+                if (args.length < 2) {
+                    this.addLine('Usage: flag submit <flag>', 'error');
+                    return;
+                }
+                this.submitFlagFromTerminal(args.slice(1).join(' '));
+                break;
+            case 'list':
+                this.showFlagCategories();
+                break;
+            case 'progress':
+                this.showFlagProgress();
+                break;
+            case 'hint':
+                this.showFlagHints(args[1]);
+                break;
+            default:
+                this.addLine(`Unknown flag command: ${args[0]}`, 'error');
+                this.addLine('Use: flag (without arguments) for help', 'output');
+        }
+    }
+
+    handleSubmitFlag(args) {
+        if (args.length === 0) {
+            this.addLine('Usage: submit-flag <flag>', 'error');
+            return;
+        }
+        this.submitFlagFromTerminal(args.join(' '));
+    }
+
+    submitFlagFromTerminal(flagText) {
+        if (!window.flagSystem) {
+            this.addLine('Flag system not initialized', 'error');
+            return;
+        }
+
+        const flag = flagText.trim();
+        if (!flag) {
+            this.addLine('Please provide a flag to submit', 'error');
+            return;
+        }
+
+        // Check if flag exists in system
+        if (window.flagSystem.flags.has(flag)) {
+            const flagData = window.flagSystem.flags.get(flag);
+            
+            // Check if already submitted
+            if (window.flagSystem.userFlags.has(flag)) {
+                this.addLine('🚩 Flag already submitted!', 'error');
+                return;
+            }
+
+            // Submit flag
+            window.flagSystem.userFlags.add(flag);
+            
+            // Update user system
+            if (window.userSystem) {
+                window.userSystem.addPoints(flagData.points);
+                window.userSystem.incrementFlags();
+            }
+
+            // Show success message
+            this.addLine('🎉 FLAG ACCEPTED!', 'success');
+            this.addLine(`Category: ${flagData.category}`, 'output');
+            this.addLine(`Points: +${flagData.points}`, 'success');
+            this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+            
+            // Save progress
+            window.flagSystem.saveProgress();
+            
+            // Update stats in flag modal if open
+            window.flagSystem.updateStats();
+            
+        } else {
+            this.addLine('❌ Invalid flag! Try again.', 'error');
+            this.addLine('💡 Hint: Flags usually start with NEURO{} or BANK{}', 'output');
+        }
+    }
+
+    showFlagCategories() {
+        if (!window.flagSystem) {
+            this.addLine('Flag system not initialized', 'error');
+            return;
+        }
+
+        this.addLine('Available Flag Categories:', 'success');
+        this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+        
+        const categories = {};
+        window.flagSystem.flags.forEach((flagData, flag) => {
+            if (!categories[flagData.category]) {
+                categories[flagData.category] = { total: 0, submitted: 0, points: 0 };
+            }
+            categories[flagData.category].total++;
+            categories[flagData.category].points += flagData.points;
+            if (window.flagSystem.userFlags.has(flag)) {
+                categories[flagData.category].submitted++;
+            }
+        });
+
+        Object.entries(categories).forEach(([category, stats]) => {
+            const progress = Math.round((stats.submitted / stats.total) * 100);
+            const status = progress === 100 ? '✅' : progress > 0 ? '🔄' : '⭕';
+            this.addLine(`${status} ${category}: ${stats.submitted}/${stats.total} (${progress}%) - ${stats.points} pts`, 'output');
+        });
+        
+        this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+    }
+
+    showFlagProgress() {
+        if (!window.flagSystem) {
+            this.addLine('Flag system not initialized', 'error');
+            return;
+        }
+
+        const progress = window.flagSystem.getProgress();
+        this.addLine('Your Flag Progress:', 'success');
+        this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+        this.addLine(`Flags Found: ${progress.submittedFlags}/${progress.totalFlags}`, 'output');
+        this.addLine(`Total Points: ${progress.totalPoints}`, 'success');
+        this.addLine(`Completion: ${progress.percentage}%`, 'output');
+        
+        // Progress bar
+        const barLength = 30;
+        const filled = Math.round((progress.percentage / 100) * barLength);
+        const bar = '█'.repeat(filled) + '░'.repeat(barLength - filled);
+        this.addLine(`Progress: [${bar}] ${progress.percentage}%`, 'output');
+        this.addLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'output');
+    }
+
+    showFlagHints(category) {
+        const hints = {
+            'Reconnaissance': [
+                '🔍 Use nmap to scan network targets',
+                '🌐 Check web directories with dirb',
+                '📊 Analyze service versions for vulnerabilities'
+            ],
+            'Web Security': [
+                '🕷️ Test for SQL injection in login forms',
+                '🔒 Look for XSS vulnerabilities in input fields',
+                '🚪 Check for admin panels and hidden directories'
+            ],
+            'AI Security': [
+                '🤖 Use adversarial-attack command on ML models',
+                '🎯 Try extract-model to clone AI systems',
+                '🔐 Test privacy-attack for data leakage'
+            ],
+            'Banking Security': [
+                '🏦 Use bank-scan to find vulnerabilities',
+                '💰 Try exploit-bank sqli for SQL injection',
+                '🔍 Use bank-forensics to analyze transactions'
+            ],
+            'Cryptography': [
+                '🔐 Look for weak encryption implementations',
+                '🔑 Try quantum-decrypt for post-quantum crypto',
+                '📊 Analyze cipher patterns and key lengths'
+            ]
+        };
+
+        if (!category) {
+            this.addLine('Available categories for hints:', 'output');
+            Object.keys(hints).forEach(cat => {
+                this.addLine(`  ${cat}`, 'output');
+            });
+            this.addLine('Usage: flag hint <category>', 'output');
+            return;
+        }
+
+        if (hints[category]) {
+            this.addLine(`Hints for ${category}:`, 'success');
+            hints[category].forEach(hint => {
+                this.addLine(hint, 'output');
+            });
+        } else {
+            this.addLine(`No hints available for category: ${category}`, 'error');
+        }
     }
 
     // Command suggestions

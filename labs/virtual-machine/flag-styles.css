@@ -1,0 +1,317 @@
+/* Flag Submission System Styles */
+
+/* Flag Submit Button in Taskbar */
+.flag-submit-btn {
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+    animation: flagPulse 2s infinite;
+}
+
+.flag-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.5);
+    background: linear-gradient(45deg, #ff8c5a, #ffb347);
+}
+
+@keyframes flagPulse {
+    0%, 100% { box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3); }
+    50% { box-shadow: 0 2px 20px rgba(255, 107, 53, 0.6); }
+}
+
+/* Flag Modal */
+.flag-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.flag-modal-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 2px solid #ff6b35;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.flag-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #444;
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    border-radius: 13px 13px 0 0;
+}
+
+.flag-modal-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.flag-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.flag-close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.flag-modal-body {
+    padding: 25px;
+}
+
+.flag-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.flag-input-group label {
+    color: #ff6b35;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.flag-input-group input {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #444;
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    transition: border-color 0.3s;
+}
+
+.flag-input-group input:focus {
+    outline: none;
+    border-color: #ff6b35;
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+.flag-input-group button {
+    background: linear-gradient(45deg, #00ff41, #00cc33);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.flag-input-group button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
+}
+
+.flag-hint {
+    background: rgba(255, 107, 53, 0.1);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.flag-result {
+    min-height: 20px;
+    border-radius: 8px;
+    padding: 0;
+    transition: all 0.3s;
+}
+
+.flag-result.success {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    padding: 15px;
+    color: #00ff41;
+}
+
+.flag-result.error {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    padding: 15px;
+    color: #ff4444;
+}
+
+.flag-result.warning {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    padding: 15px;
+    color: #ffc107;
+}
+
+.flag-success {
+    text-align: center;
+}
+
+.flag-success i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.flag-success h4 {
+    margin: 10px 0;
+    color: #00ff41;
+}
+
+.flag-success p {
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.flag-modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #444;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 13px 13px;
+}
+
+.flag-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.stat {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-label {
+    display: block;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    color: #ff6b35;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .flag-modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .flag-modal-header,
+    .flag-modal-body,
+    .flag-modal-footer {
+        padding: 15px 20px;
+    }
+    
+    .flag-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .flag-submit-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        margin-right: 10px;
+    }
+}
+
+/* Flag notification animation */
+@keyframes flagNotification {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    10%, 90% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.flag-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #00ff41, #00cc33);
+    color: #000;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
+    z-index: 10001;
+    animation: flagNotification 4s ease-in-out;
+    font-weight: bold;
+}
+
+/* Terminal flag command styling */
+.terminal-flag-hint {
+    color: #ff6b35;
+    font-style: italic;
+    margin: 5px 0;
+}
+
+.terminal-flag-found {
+    color: #00ff41;
+    font-weight: bold;
+    background: rgba(0, 255, 65, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    border-left: 3px solid #00ff41;
+}
