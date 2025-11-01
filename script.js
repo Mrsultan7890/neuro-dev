@@ -223,13 +223,23 @@ window.filterCourses = function(level) {
     const courseCards = document.querySelectorAll('.course-card');
     const filterBtns = document.querySelectorAll('.filter-btn');
     
+    // Remove active class from all buttons
     filterBtns.forEach(btn => btn.classList.remove('active'));
-    const activeBtn = document.querySelector(`[onclick="filterCourses('${level}')"]`);
-    if (activeBtn) activeBtn.classList.add('active');
     
+    // Add active class to clicked button
+    const activeBtn = document.querySelector(`[onclick="filterCourses('${level}')"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+    
+    // Filter course cards
     courseCards.forEach(card => {
         const badge = card.querySelector('.course-badge');
-        if (level === 'all' || (badge && badge.textContent.toLowerCase() === level)) {
+        const badgeText = badge ? badge.textContent.toLowerCase().trim() : '';
+        
+        if (level === 'all') {
+            card.style.display = 'block';
+        } else if (badgeText === level) {
             card.style.display = 'block';
         } else {
             card.style.display = 'none';

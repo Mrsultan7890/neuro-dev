@@ -80,13 +80,32 @@
                     <div class="app-icon" data-app="bank-security" title="Bank Security Lab">
                         <i class="fas fa-university"></i>
                     </div>
+                    <div class="app-icon" data-app="network-simulator" title="Network Simulator">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="app-icon" data-app="crypto-playground" title="Crypto Playground">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="app-icon" data-app="malware-analysis" title="Malware Analysis Lab">
+                        <i class="fas fa-virus"></i>
+                    </div>
+                    <div class="app-icon" data-app="ctf-challenges" title="CTF Challenges">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="app-icon" data-app="web-exploiter" title="Web Exploiter">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="app-icon" data-app="social-engineer" title="Social Engineering Toolkit">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
                 </div>
                 <div class="system-tray">
                     <span class="time" id="current-time"></span>
                     <div class="course-indicator" id="course-name">Termux Basics</div>
-                    <div class="user-menu" id="user-menu" style="display: none;">
-                        <div class="user-avatar" id="user-avatar">G</div>
-                        <div class="user-dropdown" id="user-dropdown">
+                    <div class="ctf-score" id="ctf-score" onclick="showLeaderboard()" style="background: #00ff41; color: #000; padding: 3px 8px; border-radius: 3px; font-size: 11px; cursor: pointer; margin-left: 8px; font-weight: bold;">Score: <span id="user-score">0</span></div>
+                    <div class="user-menu" id="user-menu">
+                        <div class="user-avatar" id="user-avatar" onclick="showUserMenu()">G</div>
+                        <div class="user-dropdown" id="user-dropdown" style="display: none;">
                             <div class="user-info-compact">
                                 <h4 id="username-display">Guest</h4>
                                 <div class="user-stats-compact">
@@ -102,7 +121,7 @@
                             </div>
                             <div class="user-actions-compact">
                                 <button class="action-btn-compact" onclick="showLeaderboard()">🏆 Leaderboard</button>
-                                <button class="action-btn-compact" onclick="showAchievements()">🏅 Achievements</button>
+                                <button class="action-btn-compact" onclick="showCTFChallenges()">🚩 CTF Challenges</button>
                                 <button class="action-btn-compact logout-btn" onclick="logout()">🚪 Logout</button>
                             </div>
                         </div>
@@ -116,9 +135,9 @@
                 <div class="app-window active" id="terminal-app">
                     <div class="window-header">
                         <div class="window-controls">
-                            <span class="control minimize"></span>
-                            <span class="control maximize"></span>
-                            <span class="control close"></span>
+                            <span class="control minimize" onclick="minimizeWindow('terminal-app')"></span>
+                            <span class="control maximize" onclick="maximizeWindow('terminal-app')"></span>
+                            <span class="control close" onclick="closeWindow('terminal-app')"></span>
                         </div>
                         <div class="window-title">
                             <i class="fas fa-terminal"></i> Terminal - <span id="terminal-path">~</span>
@@ -153,9 +172,9 @@
                 <div class="app-window" id="browser-app">
                     <div class="window-header">
                         <div class="window-controls">
-                            <span class="control minimize"></span>
-                            <span class="control maximize"></span>
-                            <span class="control close"></span>
+                            <span class="control minimize" onclick="minimizeWindow('browser-app')"></span>
+                            <span class="control maximize" onclick="maximizeWindow('browser-app')"></span>
+                            <span class="control close" onclick="closeWindow('browser-app')"></span>
                         </div>
                         <div class="window-title">
                             <i class="fas fa-globe"></i> Neuro Browser
@@ -197,9 +216,9 @@
                 <div class="app-window" id="editor-app">
                     <div class="window-header">
                         <div class="window-controls">
-                            <span class="control minimize"></span>
-                            <span class="control maximize"></span>
-                            <span class="control close"></span>
+                            <span class="control minimize" onclick="minimizeWindow('editor-app')"></span>
+                            <span class="control maximize" onclick="maximizeWindow('editor-app')"></span>
+                            <span class="control close" onclick="closeWindow('editor-app')"></span>
                         </div>
                         <div class="window-title">
                             <i class="fas fa-code"></i> Code Editor - <span id="editor-filename">untitled.py</span>
@@ -227,9 +246,9 @@ print('Hello from Neuro-Dev!')"></textarea>
                 <div class="app-window" id="ai-chat-app">
                     <div class="window-header">
                         <div class="window-controls">
-                            <span class="control minimize"></span>
-                            <span class="control maximize"></span>
-                            <span class="control close"></span>
+                            <span class="control minimize" onclick="minimizeWindow('ai-chat-app')"></span>
+                            <span class="control maximize" onclick="maximizeWindow('ai-chat-app')"></span>
+                            <span class="control close" onclick="closeWindow('ai-chat-app')"></span>
                         </div>
                         <div class="window-title">
                             <i class="fas fa-robot"></i> Neuro-AI Chat
@@ -289,9 +308,9 @@ print('Hello from Neuro-Dev!')"></textarea>
                 <div class="app-window" id="files-app">
                     <div class="window-header">
                         <div class="window-controls">
-                            <span class="control minimize"></span>
-                            <span class="control maximize"></span>
-                            <span class="control close"></span>
+                            <span class="control minimize" onclick="minimizeWindow('files-app')"></span>
+                            <span class="control maximize" onclick="maximizeWindow('files-app')"></span>
+                            <span class="control close" onclick="closeWindow('files-app')"></span>
                         </div>
                         <div class="window-title">
                             <i class="fas fa-folder"></i> File Manager - <span id="files-path">/home/neuro</span>
@@ -371,13 +390,1570 @@ print('Hello from Neuro-Dev!')"></textarea>
                 </div>
             </div>
 
-            <!-- Bank Security Application -->
-            <div class="app-window" id="bank-security-app">
+            <!-- Network Simulator Application -->
+            <div class="app-window" id="network-simulator-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize" onclick="minimizeWindow('network-simulator-app')"></span>
+                        <span class="control maximize" onclick="maximizeWindow('network-simulator-app')"></span>
+                        <span class="control close" onclick="closeWindow('network-simulator-app')"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-network-wired"></i> Network Simulator
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
+        <div style="padding: 20px; color: #fff; height: 100%;">
+                        <div style="display: flex; gap: 20px; height: 100%;">
+                            <div style="flex: 1;">
+                                <h3 style="color: #00ff88; margin-bottom: 15px;">🌐 Advanced Network Scanner</h3>
+                                <div style="margin-bottom: 15px;">
+                                    <input type="text" id="target-ip" placeholder="Target IP (e.g., 192.168.1.0/24)" value="192.168.1.0/24" style="width: 250px; padding: 8px; background: #333; color: #fff; border: 1px solid #00ff88; border-radius: 5px; margin-right: 10px;">
+                                    <select id="scan-type" style="padding: 8px; background: #333; color: #fff; border: 1px solid #00ff88; border-radius: 5px;">
+                                        <option value="ping">Ping Sweep</option>
+                                        <option value="port">Port Scan</option>
+                                        <option value="service">Service Detection</option>
+                                        <option value="vuln">Vulnerability Scan</option>
+                                    </select>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <button onclick="startAdvancedScan()" style="background: #00ff88; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Start Scan</button>
+                                    <button onclick="stopScan()" style="background: #ff6b6b; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Stop</button>
+                                    <button onclick="exportResults()" style="background: #4ecdc4; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Export</button>
+                                    <button onclick="clearResults()" style="background: #ffd93d; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Clear</button>
+                                </div>
+                                <div id="scan-output" style="background: #000; padding: 15px; border-radius: 5px; height: 350px; overflow-y: auto; font-family: monospace; border: 1px solid #00ff88;">Ready to scan network...</div>
+                            </div>
+                            <div style="width: 300px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #333;">
+                                <h4 style="color: #00ff88; margin-bottom: 10px;">Discovered Hosts</h4>
+                                <div id="host-list" style="background: #000; padding: 10px; border-radius: 5px; height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px;">No hosts discovered</div>
+                                <h4 style="color: #00ff88; margin: 15px 0 10px 0;">Scan Statistics</h4>
+                                <div id="scan-stats" style="background: #000; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 12px;">
+                                    <div>Hosts Scanned: <span id="hosts-scanned">0</span></div>
+                                    <div>Ports Checked: <span id="ports-checked">0</span></div>
+                                    <div>Services Found: <span id="services-found">0</span></div>
+                                    <div>Vulnerabilities: <span id="vulns-found">0</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                        let scanRunning = false;
+                        let scanInterval;
+                        let hostsFound = [];
+                        
+                        function startAdvancedScan() {
+                            if (scanRunning) return;
+                            scanRunning = true;
+                            const output = document.getElementById('scan-output');
+                            const target = document.getElementById('target-ip').value;
+                            const scanType = document.getElementById('scan-type').value;
+                            
+                            output.innerHTML = `<div style="color: #00ff88;">[${new Date().toLocaleTimeString()}] Starting ${scanType} scan on ${target}...</div>`;
+                            
+                            const hosts = ['192.168.1.1', '192.168.1.10', '192.168.1.11', '192.168.1.100', '192.168.1.254'];
+                            let currentHost = 0;
+                            
+                            scanInterval = setInterval(() => {
+                                if (currentHost >= hosts.length) {
+                                    stopScan();
+                                    output.innerHTML += `<div style="color: #00ff88;">[${new Date().toLocaleTimeString()}] Scan completed. ${hosts.length} hosts discovered.</div>`;
+                                    return;
+                                }
+                                
+                                const host = hosts[currentHost];
+                                const services = getRandomServices();
+                                const vulns = getRandomVulns();
+                                
+                                output.innerHTML += `<div style="color: #fff;">[${new Date().toLocaleTimeString()}] Scanning ${host}...</div>`;
+                                
+                                setTimeout(() => {
+                                    output.innerHTML += `<div style="color: #4ecdc4;">  Host: ${host} - ONLINE</div>`;
+                                    
+                                    services.forEach(service => {
+                                        output.innerHTML += `<div style="color: #ffd93d;">    Port ${service.port}/tcp - ${service.name} (${service.version})</div>`;
+                                    });
+                                    
+                                    if (vulns.length > 0) {
+                                        vulns.forEach(vuln => {
+                                            output.innerHTML += `<div style="color: #ff6b6b;">    VULNERABILITY: ${vuln}</div>`;
+                                        });
+                                    }
+                                    
+                                    hostsFound.push({host, services, vulns});
+                                    updateHostList();
+                                    updateStats();
+                                    
+                                    if (host === '192.168.1.100' && vulns.includes('CVE-2021-44228 (Log4Shell)')) {
+                                        output.innerHTML += `<div style="color: #00ff88; font-weight: bold;">🚩 CTF FLAG FOUND: NEURO{n3tw0rk_sc4nn3r_m4st3r}</div>`;
+                                        window.submitFlag && window.submitFlag('NEURO{n3tw0rk_sc4nn3r_m4st3r}', 'Network Scanner Master');
+                                    }
+                                    
+                                    output.scrollTop = output.scrollHeight;
+                                }, 500);
+                                
+                                currentHost++;
+                            }, 1000);
+                        }
+                        
+                        function stopScan() {
+                            scanRunning = false;
+                            if (scanInterval) {
+                                clearInterval(scanInterval);
+                            }
+                        }
+                        
+                        function getRandomServices() {
+                            const allServices = [
+                                {port: 22, name: 'SSH', version: 'OpenSSH 8.2'},
+                                {port: 80, name: 'HTTP', version: 'Apache 2.4.41'},
+                                {port: 443, name: 'HTTPS', version: 'nginx 1.18.0'},
+                                {port: 21, name: 'FTP', version: 'vsftpd 3.0.3'},
+                                {port: 25, name: 'SMTP', version: 'Postfix'},
+                                {port: 53, name: 'DNS', version: 'BIND 9.16.1'},
+                                {port: 3306, name: 'MySQL', version: '8.0.25'},
+                                {port: 5432, name: 'PostgreSQL', version: '13.3'}
+                            ];
+                            return allServices.slice(0, Math.floor(Math.random() * 4) + 1);
+                        }
+                        
+                        function getRandomVulns() {
+                            const vulns = [
+                                'CVE-2021-44228 (Log4Shell)',
+                                'CVE-2021-34527 (PrintNightmare)',
+                                'CVE-2020-1472 (Zerologon)',
+                                'CVE-2019-0708 (BlueKeep)',
+                                'Weak SSH Configuration',
+                                'Default Credentials Detected'
+                            ];
+                            const count = Math.floor(Math.random() * 3);
+                            return vulns.slice(0, count);
+                        }
+                        
+                        function updateHostList() {
+                            const hostList = document.getElementById('host-list');
+                            hostList.innerHTML = hostsFound.map(h => 
+                                `<div style="margin-bottom: 5px; padding: 5px; background: rgba(0,255,136,0.1); border-left: 2px solid #00ff88;">
+                                    <strong>${h.host}</strong><br>
+                                    <small>${h.services.length} services, ${h.vulns.length} vulns</small>
+                                </div>`
+                            ).join('');
+                        }
+                        
+                        function updateStats() {
+                            document.getElementById('hosts-scanned').textContent = hostsFound.length;
+                            document.getElementById('ports-checked').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
+                            document.getElementById('services-found').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
+                            document.getElementById('vulns-found').textContent = hostsFound.reduce((sum, h) => sum + h.vulns.length, 0);
+                        }
+                        
+                        function exportResults() {
+                            const results = {
+                                timestamp: new Date().toISOString(),
+                                target: document.getElementById('target-ip').value,
+                                scanType: document.getElementById('scan-type').value,
+                                hosts: hostsFound
+                            };
+                            
+                            const blob = new Blob([JSON.stringify(results, null, 2)], {type: 'application/json'});
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `network_scan_${Date.now()}.json`;
+                            a.click();
+                            URL.revokeObjectURL(url);
+                        }
+                        
+                        function clearResults() {
+                            hostsFound = [];
+                            document.getElementById('scan-output').innerHTML = 'Ready to scan network...';
+                            document.getElementById('host-list').innerHTML = 'No hosts discovered';
+                            updateStats();
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Playground Application -->
+            <div class="app-window" id="crypto-playground-app">
                 <div class="window-header">
                     <div class="window-controls">
                         <span class="control minimize"></span>
                         <span class="control maximize"></span>
                         <span class="control close"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-lock"></i> Crypto Playground
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div style="padding: 20px; color: #fff; height: 100%;">
+                        <div style="display: flex; gap: 20px; height: 100%;">
+                            <div style="flex: 1;">
+                                <h3 style="color: #ffd93d; margin-bottom: 15px;">🔐 Cryptography Laboratory</h3>
+                                <div style="margin-bottom: 15px;">
+                                    <select id="crypto-algorithm" style="padding: 8px; background: #333; color: #fff; border: 1px solid #ffd93d; border-radius: 5px; margin-right: 10px;">
+                                        <option value="caesar">Caesar Cipher</option>
+                                        <option value="vigenere">Vigenère Cipher</option>
+                                        <option value="base64">Base64 Encoding</option>
+                                        <option value="rot13">ROT13</option>
+                                        <option value="atbash">Atbash Cipher</option>
+                                    </select>
+                                    <input type="text" id="crypto-key" placeholder="Key (if required)" style="width: 150px; padding: 8px; background: #333; color: #fff; border: 1px solid #ffd93d; border-radius: 5px;">
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <textarea id="crypto-input" placeholder="Enter text to encrypt/decrypt..." style="width: 100%; height: 100px; padding: 10px; background: #333; color: #fff; border: 1px solid #ffd93d; border-radius: 5px; resize: vertical;"></textarea>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <button onclick="encryptText()" style="background: #ffd93d; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Encrypt</button>
+                                    <button onclick="decryptText()" style="background: #4ecdc4; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Decrypt</button>
+                                    <button onclick="analyzeFrequency()" style="background: #ff6b6b; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Frequency Analysis</button>
+                                    <button onclick="bruteForce()" style="background: #a8e6cf; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Brute Force</button>
+                                </div>
+                                <div id="crypto-output" style="background: #000; padding: 15px; border-radius: 5px; height: 200px; overflow-y: auto; font-family: monospace; border: 1px solid #ffd93d;">Ready for cryptographic operations...</div>
+                            </div>
+                            <div style="width: 300px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #333;">
+                                <h4 style="color: #ffd93d; margin-bottom: 10px;">Analysis Results</h4>
+                                <div id="analysis-results" style="background: #000; padding: 10px; border-radius: 5px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 12px;">No analysis performed</div>
+                                <h4 style="color: #ffd93d; margin: 15px 0 10px 0;">Common Patterns</h4>
+                                <div id="pattern-detection" style="background: #000; padding: 10px; border-radius: 5px; height: 100px; overflow-y: auto; font-family: monospace; font-size: 12px;">No patterns detected</div>
+                                <h4 style="color: #ffd93d; margin: 15px 0 10px 0;">Cipher Hints</h4>
+                                <div id="cipher-hints" style="background: #000; padding: 10px; border-radius: 5px; height: 80px; overflow-y: auto; font-family: monospace; font-size: 12px;">Select algorithm for hints</div>
+                            </div>
+                        </div>
+                        <script>
+                        function encryptText() {
+                            const algorithm = document.getElementById('crypto-algorithm').value;
+                            const key = document.getElementById('crypto-key').value;
+                            const input = document.getElementById('crypto-input').value;
+                            const output = document.getElementById('crypto-output');
+                            
+                            if (!input) {
+                                output.innerHTML = '<div style="color: #ff6b6b;">Please enter text to encrypt</div>';
+                                return;
+                            }
+                            
+                            let result = '';
+                            
+                            switch(algorithm) {
+                                case 'caesar':
+                                    const shift = parseInt(key) || 3;
+                                    result = caesarCipher(input, shift);
+                                    break;
+                                case 'vigenere':
+                                    result = vigenereCipher(input, key || 'KEY');
+                                    break;
+                                case 'base64':
+                                    result = btoa(input);
+                                    break;
+                                case 'rot13':
+                                    result = rot13(input);
+                                    break;
+                                case 'atbash':
+                                    result = atbashCipher(input);
+                                    break;
+                            }
+                            
+                            output.innerHTML = `<div style="color: #ffd93d;">[${new Date().toLocaleTimeString()}] Encryption Result:</div><div style="color: #00ff88;">${result}</div>`;
+                            
+                            if (result === 'ARHEN{pelcgb_znfgre_unpxre}') {
+                                output.innerHTML += `<div style="color: #00ff88; font-weight: bold;">🚩 CTF FLAG FOUND: NEURO{crypto_master_hacker}</div>`;
+                                window.submitFlag && window.submitFlag('NEURO{crypto_master_hacker}', 'Crypto Master');
+                            }
+                        }
+                        
+                        function decryptText() {
+                            const algorithm = document.getElementById('crypto-algorithm').value;
+                            const key = document.getElementById('crypto-key').value;
+                            const input = document.getElementById('crypto-input').value;
+                            const output = document.getElementById('crypto-output');
+                            
+                            if (!input) {
+                                output.innerHTML = '<div style="color: #ff6b6b;">Please enter text to decrypt</div>';
+                                return;
+                            }
+                            
+                            let result = '';
+                            
+                            switch(algorithm) {
+                                case 'caesar':
+                                    const shift = parseInt(key) || 3;
+                                    result = caesarCipher(input, -shift);
+                                    break;
+                                case 'vigenere':
+                                    result = vigenereDecipher(input, key || 'KEY');
+                                    break;
+                                case 'base64':
+                                    try {
+                                        result = atob(input);
+                                    } catch(e) {
+                                        result = 'Invalid Base64';
+                                    }
+                                    break;
+                                case 'rot13':
+                                    result = rot13(input);
+                                    break;
+                                case 'atbash':
+                                    result = atbashCipher(input);
+                                    break;
+                            }
+                            
+                            output.innerHTML = `<div style="color: #ffd93d;">[${new Date().toLocaleTimeString()}] Decryption Result:</div><div style="color: #4ecdc4;">${result}</div>`;
+                        }
+                        
+                        function caesarCipher(text, shift) {
+                            return text.replace(/[a-zA-Z]/g, function(char) {
+                                const start = char <= 'Z' ? 65 : 97;
+                                return String.fromCharCode(((char.charCodeAt(0) - start + shift + 26) % 26) + start);
+                            });
+                        }
+                        
+                        function vigenereCipher(text, key) {
+                            let result = '';
+                            let keyIndex = 0;
+                            
+                            for (let i = 0; i < text.length; i++) {
+                                const char = text[i];
+                                if (/[a-zA-Z]/.test(char)) {
+                                    const shift = key[keyIndex % key.length].toUpperCase().charCodeAt(0) - 65;
+                                    const start = char <= 'Z' ? 65 : 97;
+                                    result += String.fromCharCode(((char.charCodeAt(0) - start + shift) % 26) + start);
+                                    keyIndex++;
+                                } else {
+                                    result += char;
+                                }
+                            }
+                            return result;
+                        }
+                        
+                        function vigenereDecipher(text, key) {
+                            let result = '';
+                            let keyIndex = 0;
+                            
+                            for (let i = 0; i < text.length; i++) {
+                                const char = text[i];
+                                if (/[a-zA-Z]/.test(char)) {
+                                    const shift = key[keyIndex % key.length].toUpperCase().charCodeAt(0) - 65;
+                                    const start = char <= 'Z' ? 65 : 97;
+                                    result += String.fromCharCode(((char.charCodeAt(0) - start - shift + 26) % 26) + start);
+                                    keyIndex++;
+                                } else {
+                                    result += char;
+                                }
+                            }
+                            return result;
+                        }
+                        
+                        function rot13(text) {
+                            return text.replace(/[a-zA-Z]/g, function(char) {
+                                const start = char <= 'Z' ? 65 : 97;
+                                return String.fromCharCode(((char.charCodeAt(0) - start + 13) % 26) + start);
+                            });
+                        }
+                        
+                        function atbashCipher(text) {
+                            return text.replace(/[a-zA-Z]/g, function(char) {
+                                if (char <= 'Z') {
+                                    return String.fromCharCode(90 - (char.charCodeAt(0) - 65));
+                                } else {
+                                    return String.fromCharCode(122 - (char.charCodeAt(0) - 97));
+                                }
+                            });
+                        }
+                        
+                        function analyzeFrequency() {
+                            const input = document.getElementById('crypto-input').value.toUpperCase();
+                            const analysis = document.getElementById('analysis-results');
+                            
+                            if (!input) {
+                                analysis.innerHTML = 'No text to analyze';
+                                return;
+                            }
+                            
+                            const freq = {};
+                            let totalLetters = 0;
+                            
+                            for (let char of input) {
+                                if (/[A-Z]/.test(char)) {
+                                    freq[char] = (freq[char] || 0) + 1;
+                                    totalLetters++;
+                                }
+                            }
+                            
+                            const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+                            
+                            let result = 'Letter Frequency:\n';
+                            sorted.forEach(([letter, count]) => {
+                                const percentage = ((count / totalLetters) * 100).toFixed(1);
+                                result += `${letter}: ${count} (${percentage}%)\n`;
+                            });
+                            
+                            analysis.innerHTML = result.replace(/\n/g, '<br>');
+                        }
+                        
+                        function bruteForce() {
+                            const input = document.getElementById('crypto-input').value;
+                            const output = document.getElementById('crypto-output');
+                            const algorithm = document.getElementById('crypto-algorithm').value;
+                            
+                            if (!input) {
+                                output.innerHTML = '<div style="color: #ff6b6b;">Please enter text to brute force</div>';
+                                return;
+                            }
+                            
+                            let results = '<div style="color: #a8e6cf;">[Brute Force Results]</div>';
+                            
+                            if (algorithm === 'caesar') {
+                                for (let i = 1; i <= 25; i++) {
+                                    const result = caesarCipher(input, -i);
+                                    results += `<div>Shift ${i}: ${result}</div>`;
+                                }
+                            } else if (algorithm === 'rot13') {
+                                results += `<div>ROT13: ${rot13(input)}</div>`;
+                            }
+                            
+                            output.innerHTML = results;
+                        }
+                        </script>services.forEach(service => {
+                                        output.innerHTML += `<div style="color: #ffd93d;">  Port ${service.port}: ${service.name}</div>`;
+                                    });
+                                    if (vulns.length > 0) {
+                                        vulns.forEach(vuln => {
+                                            output.innerHTML += `<div style="color: #ff6b6b;">  VULN: ${vuln}</div>`;
+                                        });
+                                    }
+                                    output.scrollTop = output.scrollHeight;
+                                    updateHostList(host, services, vulns);
+                                    updateStats();
+                                }, 500);
+                                currentHost++;
+                            }, 2000);
+                        }
+                        
+                        function stopScan() {
+                            scanRunning = false;
+                            if (scanInterval) clearInterval(scanInterval);
+                        }
+                        
+                        function getRandomServices() {
+                            const allServices = [
+                                {port: 22, name: 'SSH'},
+                                {port: 80, name: 'HTTP'},
+                                {port: 443, name: 'HTTPS'},
+                                {port: 21, name: 'FTP'}
+                            ];
+                            return allServices.filter(() => Math.random() > 0.6);
+                        }
+                        
+                        function getRandomVulns() {
+                            const vulns = ['CVE-2021-44228', 'Weak SSH', 'Open FTP'];
+                            return vulns.filter(() => Math.random() > 0.8);
+                        }
+                        
+                        function updateHostList(host, services, vulns) {
+                            const hostList = document.getElementById('host-list');
+                            hostsFound.push({host, services, vulns});
+                            hostList.innerHTML = hostsFound.map(h => 
+                                `<div style="color: #4ecdc4;">${h.host} (${h.services.length} services)</div>`
+                            ).join('');
+                        }
+                        
+                        function updateStats() {
+                            document.getElementById('hosts-scanned').textContent = hostsFound.length;
+                            document.getElementById('services-found').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
+                        }
+                        
+                        function exportResults() {
+                            const results = hostsFound.map(h => `${h.host}: ${h.services.map(s => s.name).join(', ')}`).join('\n');
+                            const blob = new Blob([results], {type: 'text/plain'});
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'scan_results.txt';
+                            a.click();
+                        }
+                        
+                        function clearResults() {
+                            document.getElementById('scan-output').innerHTML = 'Ready to scan network...';
+                            hostsFound = [];
+                            updateStats();
+                        }    services.forEach(service => {
+                                        output.innerHTML += `<div style="color: #ffd93d;">  Port ${service.port}: ${service.name}</div>`;
+                                    });
+                                    if (vulns.length > 0) {
+                                        vulns.forEach(vuln => {
+                                            output.innerHTML += `<div style="color: #ff6b6b;">  VULN: ${vuln}</div>`;
+                                        });
+                                    }
+                                    output.scrollTop = output.scrollHeight;
+                                    
+                                    updateHostList(host, services, vulns);
+                                    updateStats();
+                                }, 500);
+                                
+                                currentHost++;
+                            }, 2000);
+                        }
+                        
+                        function stopScan() {
+                            scanRunning = false;
+                            if (scanInterval) clearInterval(scanInterval);
+                        }
+                        
+                        function getRandomServices() {
+                            const allServices = [
+                                {port: 22, name: 'SSH'},
+                                {port: 80, name: 'HTTP'},
+                                {port: 443, name: 'HTTPS'},
+                                {port: 21, name: 'FTP'},
+                                {port: 23, name: 'Telnet'},
+                                {port: 3389, name: 'RDP'},
+                                {port: 445, name: 'SMB'}
+                            ];
+                            return allServices.filter(() => Math.random() > 0.6);
+                        }
+                        
+                        function getRandomVulns() {
+                            const vulns = [
+                                'CVE-2021-44228 (Log4Shell)',
+                                'CVE-2020-1472 (Zerologon)',
+                                'CVE-2019-0708 (BlueKeep)',
+                                'Weak SSH credentials',
+                                'Unencrypted FTP'
+                            ];
+                            return vulns.filter(() => Math.random() > 0.8);
+                        }
+                        
+                        function updateHostList(host, services, vulns) {
+                            const hostList = document.getElementById('host-list');
+                            hostsFound.push({host, services, vulns});
+                            hostList.innerHTML = hostsFound.map(h => 
+                                `<div style="color: #4ecdc4; margin-bottom: 5px;">${h.host} (${h.services.length} services)</div>`
+                            ).join('');
+                        }
+                        
+                        function updateStats() {
+                            document.getElementById('hosts-scanned').textContent = hostsFound.length;
+                            document.getElementById('ports-checked').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
+                            document.getElementById('services-found').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
+                            document.getElementById('vulns-found').textContent = hostsFound.reduce((sum, h) => sum + h.vulns.length, 0);
+                        }
+                        
+                        function exportResults() {
+                            const results = hostsFound.map(h => `${h.host}: ${h.services.map(s => s.name).join(', ')}`).join('\n');
+                            const blob = new Blob([results], {type: 'text/plain'});
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'scan_results.txt';
+                            a.click();
+                        }
+                        
+                        function clearResults() {
+                            document.getElementById('scan-output').innerHTML = 'Ready to scan network...';
+                            document.getElementById('host-list').innerHTML = 'No hosts discovered';
+                            hostsFound = [];
+                            updateStats();
+                        }services.forEach(service => {
+                                        output.innerHTML += `<div style="color: #ffd93d;">  Port ${service.port}: ${service.name}</div>`;
+                                    });
+                                    if (vulns.length > 0) {
+                                        vulns.forEach(vuln => {
+                                            output.innerHTML += `<div style="color: #ff6b6b;">  VULN: ${vuln}</div>`;
+                                        });
+                                    }
+                                    output.scrollTop = output.scrollHeight;
+                                    
+                                    updateHostList(host, services, vulns);
+                                    updateStats();
+                                }, 500);
+                                
+                                currentHost++;
+                            }, 2000);
+                        }
+                        
+                        function stopScan() {
+                            scanRunning = false;
+                            if (scanInterval) clearInterval(scanInterval);
+                        }
+                        
+                        function getRandomServices() {
+                            const allServices = [
+                                {port: 22, name: 'SSH'},
+                                {port: 80, name: 'HTTP'},
+                                {port: 443, name: 'HTTPS'},
+                                {port: 21, name: 'FTP'},
+                                {port: 23, name: 'Telnet'},
+                                {port: 3389, name: 'RDP'},
+                                {port: 445, name: 'SMB'}
+                            ];
+                            return allServices.filter(() => Math.random() > 0.6);
+                        }
+                        
+                        function getRandomVulns() {
+                            const vulns = [
+                                'CVE-2021-44228 (Log4Shell)',
+                                'CVE-2020-1472 (Zerologon)',
+                                'CVE-2019-0708 (BlueKeep)',
+                                'Weak SSH credentials',
+                                'Unencrypted FTP'
+                            ];
+                            return vulns.filter(() => Math.random() > 0.8);
+                        }
+                        
+                        function updateHostList(host, services, vulns) {
+                            const hostList = document.getElementById('host-list');
+                            hostsFound.push({host, services, vulns});
+                            hostList.innerHTML = hostsFound.map(h => 
+                                `<div style="color: #4ecdc4; margin-bottom: 5px;">${h.host} (${h.services.length} services)</div>`
+                            ).join('');
+                        }
+                        
+                        function updateStats() {
+                            document.getElementById('hosts-scanned').textContent = hostsFound.length;
+                            document.getElementById('ports-checked').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
+                            document.getElementById('services-found').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
+                            document.getElementById('vulns-found').textContent = hostsFound.reduce((sum, h) => sum + h.vulns.length, 0);
+                        }
+                        
+                        function exportResults() {
+                            const results = hostsFound.map(h => `${h.host}: ${h.services.map(s => s.name).join(', ')}`).join('\n');
+                            const blob = new Blob([results], {type: 'text/plain'});
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'scan_results.txt';
+                            a.click();
+                        }
+                        
+                        function clearResults() {
+                            document.getElementById('scan-output').innerHTML = 'Ready to scan network...';
+                            document.getElementById('host-list').innerHTML = 'No hosts discovered';
+                            hostsFound = [];
+                            updateStats();
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Playground Application -->
+            <div class="app-window" id="crypto-playground-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize"></span>
+                        <span class="control maximize"></span>
+                        <span class="control close"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-lock"></i> Crypto Playground
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div style="padding: 20px; color: #fff; height: 100%;">
+                        <div style="display: flex; gap: 20px; height: 100%;">
+                            <div style="flex: 1;">
+                                <h3 style="color: #ffd700; margin-bottom: 15px;">🔐 Advanced Cryptography Lab</h3>
+                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                    <select id="crypto-method" style="padding: 8px; background: #333; color: #fff; border: 1px solid #ffd700; border-radius: 5px;">
+                                        <option value="caesar">Caesar Cipher</option>
+                                        <option value="base64">Base64 Encoding</option>
+                                        <option value="rot13">ROT13</option>
+                                        <option value="hex">Hex Encoding</option>
+                                        <option value="morse">Morse Code</option>
+                                        <option value="binary">Binary</option>
+                                    </select>
+                                    <input type="number" id="shift-key" value="3" min="1" max="25" placeholder="Key" style="width: 80px; padding: 8px; background: #333; color: #fff; border: 1px solid #ffd700; border-radius: 5px;">
+                                </div>
+                                <textarea id="text-input" placeholder="Enter text to encrypt/decrypt..." style="width: 100%; height: 120px; padding: 10px; background: #333; color: #fff; border: 1px solid #ffd700; border-radius: 5px; font-family: monospace; resize: vertical;"></textarea>
+                                <div style="margin: 15px 0;">
+                                    <button onclick="encryptAdvanced()" style="background: #ffd700; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Encrypt</button>
+                                    <button onclick="decryptAdvanced()" style="background: #ff6b6b; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Decrypt</button>
+                                    <button onclick="analyzeText()" style="background: #4ecdc4; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Analyze</button>
+                                    <button onclick="bruteForce()" style="background: #ff9500; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Brute Force</button>
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <label style="color: #ffd700;">Output:</label>
+                                </div>
+                                <textarea id="crypto-output" readonly style="width: 100%; height: 120px; padding: 10px; background: #000; color: #00ff88; border: 1px solid #ffd700; border-radius: 5px; font-family: monospace; resize: vertical;"></textarea>
+                            </div>
+                            <div style="width: 300px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #333;">
+                                <h4 style="color: #ffd700; margin-bottom: 10px;">Cryptanalysis</h4>
+                                <div id="analysis-result" style="background: #000; padding: 10px; border-radius: 5px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 12px;">No analysis performed</div>
+                                <h4 style="color: #ffd700; margin: 15px 0 10px 0;">Common Ciphers</h4>
+                                <div style="display: flex; flex-direction: column; gap: 5px;">
+                                    <button onclick="quickCipher('caesar', 13)" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">ROT13</button>
+                                    <button onclick="quickCipher('caesar', 5)" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">Caesar +5</button>
+                                    <button onclick="quickCipher('base64')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">Base64</button>
+                                    <button onclick="quickCipher('hex')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">Hex</button>
+                                </div>
+                                <h4 style="color: #ffd700; margin: 15px 0 10px 0;">Hash Functions</h4>
+                                <div style="display: flex; flex-direction: column; gap: 5px;">
+                                    <button onclick="hashText('md5')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">MD5 Hash</button>
+                                    <button onclick="hashText('sha1')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">SHA1 Hash</button>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                        function encryptAdvanced() {
+                            const text = document.getElementById('text-input').value;
+                            const method = document.getElementById('crypto-method').value;
+                            const key = parseInt(document.getElementById('shift-key').value) || 3;
+                            let result = '';
+                            
+                            switch(method) {
+                                case 'caesar':
+                                    result = caesarCipher(text, key);
+                                    break;
+                                case 'base64':
+                                    result = btoa(text);
+                                    break;
+                                case 'rot13':
+                                    result = caesarCipher(text, 13);
+                                    break;
+                                case 'hex':
+                                    result = text.split('').map(c => c.charCodeAt(0).toString(16)).join(' ');
+                                    break;
+                                case 'morse':
+                                    result = textToMorse(text);
+                                    break;
+                                case 'binary':
+                                    result = text.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+                                    break;
+                            }
+                            
+                            document.getElementById('crypto-output').value = result;
+                        }
+                        
+                        function decryptAdvanced() {
+                            const text = document.getElementById('text-input').value;
+                            const method = document.getElementById('crypto-method').value;
+                            const key = parseInt(document.getElementById('shift-key').value) || 3;
+                            let result = '';
+                            
+                            try {
+                                switch(method) {
+                                    case 'caesar':
+                                        result = caesarCipher(text, -key);
+                                        break;
+                                    case 'base64':
+                                        result = atob(text);
+                                        break;
+                                    case 'rot13':
+                                        result = caesarCipher(text, 13);
+                                        break;
+                                    case 'hex':
+                                        result = text.split(' ').map(h => String.fromCharCode(parseInt(h, 16))).join('');
+                                        break;
+                                    case 'morse':
+                                        result = morseToText(text);
+                                        break;
+                                    case 'binary':
+                                        result = text.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join('');
+                                        break;
+                                }
+                            } catch(e) {
+                                result = 'Decryption failed: ' + e.message;
+                            }
+                            
+                            document.getElementById('crypto-output').value = result;
+                        }
+                        
+                        function caesarCipher(text, shift) {
+                            return text.split('').map(char => {
+                                if (char.match(/[a-z]/i)) {
+                                    let code = char.charCodeAt(0);
+                                    let base = code >= 65 && code <= 90 ? 65 : 97;
+                                    return String.fromCharCode(((code - base + shift + 26) % 26) + base);
+                                }
+                                return char;
+                            }).join('');
+                        }
+                        
+                        function textToMorse(text) {
+                            const morse = {'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..'};
+                            return text.toUpperCase().split('').map(c => morse[c] || c).join(' ');
+                        }
+                        
+                        function morseToText(morse) {
+                            const morseReverse = {'.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z'};
+                            return morse.split(' ').map(m => morseReverse[m] || m).join('');
+                        }
+                        
+                        function analyzeText() {
+                            const text = document.getElementById('text-input').value;
+                            const analysis = document.getElementById('analysis-result');
+                            
+                            const letterCount = {};
+                            const letters = text.replace(/[^a-zA-Z]/g, '').toUpperCase();
+                            
+                            for (let char of letters) {
+                                letterCount[char] = (letterCount[char] || 0) + 1;
+                            }
+                            
+                            const sorted = Object.entries(letterCount).sort((a, b) => b[1] - a[1]);
+                            
+                            analysis.innerHTML = `
+                                <div style="color: #ffd700;">Text Analysis:</div>
+                                <div>Length: ${text.length}</div>
+                                <div>Letters: ${letters.length}</div>
+                                <div>Most frequent: ${sorted[0] ? sorted[0][0] + ' (' + sorted[0][1] + ')' : 'None'}</div>
+                                <div style="color: #4ecdc4; margin-top: 10px;">Frequency:</div>
+                                ${sorted.slice(0, 5).map(([char, count]) => 
+                                    `<div>${char}: ${count} (${((count/letters.length)*100).toFixed(1)}%)</div>`
+                                ).join('')}
+                            `;
+                        }
+                        
+                        function bruteForce() {
+                            const text = document.getElementById('text-input').value;
+                            const output = document.getElementById('crypto-output');
+                            let results = 'Brute Force Results:\n\n';
+                            
+                            for (let i = 1; i <= 25; i++) {
+                                const decrypted = caesarCipher(text, -i);
+                                results += `Key ${i}: ${decrypted}\n`;
+                            }
+                            
+                            output.value = results;
+                        }
+                        
+                        function quickCipher(method, key) {
+                            document.getElementById('crypto-method').value = method;
+                            if (key) document.getElementById('shift-key').value = key;
+                            encryptAdvanced();
+                        }
+                        
+                        function hashText(algorithm) {
+                            const text = document.getElementById('text-input').value;
+                            const output = document.getElementById('crypto-output');
+                            
+                            // Simple hash simulation (not real cryptographic hash)
+                            let hash = 0;
+                            for (let i = 0; i < text.length; i++) {
+                                const char = text.charCodeAt(i);
+                                hash = ((hash << 5) - hash) + char;
+                                hash = hash & hash;
+                            }
+                            
+                            const simulated = Math.abs(hash).toString(16).padStart(32, '0');
+                            output.value = `${algorithm.toUpperCase()}: ${simulated}`;
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Malware Analysis Application -->
+            <div class="app-window" id="malware-analysis-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize" onclick="minimizeWindow('malware-analysis-app')"></span>
+                        <span class="control maximize" onclick="maximizeWindow('malware-analysis-app')"></span>
+                        <span class="control close" onclick="closeWindow('malware-analysis-app')"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-virus"></i> Malware Analysis Lab
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #2c1810 0%, #8b0000 100%);">
+                    <div style="padding: 20px; color: #fff; height: 100%;">
+                        <div style="display: flex; gap: 20px; height: 100%;">
+                            <div style="width: 250px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #ff4444;">
+                                <h4 style="color: #ff4444; margin-bottom: 15px;">🦠 Malware Samples</h4>
+                                <div onclick="loadSample('trojan')" style="background: rgba(255,68,68,0.1); padding: 12px; margin-bottom: 8px; border-radius: 5px; cursor: pointer; border-left: 3px solid #ff4444; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,68,68,0.2)'" onmouseout="this.style.background='rgba(255,68,68,0.1)'">
+                                    <div style="font-weight: bold;">Banking Trojan</div>
+                                    <div style="font-size: 11px; color: #ccc;">MD5: a1b2c3d4e5f6...</div>
+                                    <div style="font-size: 11px; color: #ff6b6b;">Risk: HIGH</div>
+                                </div>
+                                <div onclick="loadSample('ransomware')" style="background: rgba(255,68,68,0.1); padding: 12px; margin-bottom: 8px; border-radius: 5px; cursor: pointer; border-left: 3px solid #ff4444; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,68,68,0.2)'" onmouseout="this.style.background='rgba(255,68,68,0.1)'">
+                                    <div style="font-weight: bold;">Ransomware</div>
+                                    <div style="font-size: 11px; color: #ccc;">MD5: f6e5d4c3b2a1...</div>
+                                    <div style="font-size: 11px; color: #ff0000;">Risk: CRITICAL</div>
+                                </div>
+                                <div onclick="loadSample('worm')" style="background: rgba(255,68,68,0.1); padding: 12px; margin-bottom: 8px; border-radius: 5px; cursor: pointer; border-left: 3px solid #ff4444; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,68,68,0.2)'" onmouseout="this.style.background='rgba(255,68,68,0.1)'">
+                                    <div style="font-weight: bold;">Network Worm</div>
+                                    <div style="font-size: 11px; color: #ccc;">MD5: 1a2b3c4d5e6f...</div>
+                                    <div style="font-size: 11px; color: #ffa500;">Risk: MEDIUM</div>
+                                </div>
+                                <div onclick="loadSample('spyware')" style="background: rgba(255,68,68,0.1); padding: 12px; margin-bottom: 8px; border-radius: 5px; cursor: pointer; border-left: 3px solid #ff4444; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,68,68,0.2)'" onmouseout="this.style.background='rgba(255,68,68,0.1)'">
+                                    <div style="font-weight: bold;">Spyware</div>
+                                    <div style="font-size: 11px; color: #ccc;">MD5: 9z8y7x6w5v4u...</div>
+                                    <div style="font-size: 11px; color: #ff6b6b;">Risk: HIGH</div>
+                                </div>
+                                <div onclick="uploadSample()" style="background: rgba(0,255,136,0.1); padding: 12px; margin-top: 15px; border-radius: 5px; cursor: pointer; border: 1px dashed #00ff88; text-align: center; transition: all 0.3s;" onmouseover="this.style.background='rgba(0,255,136,0.2)'" onmouseout="this.style.background='rgba(0,255,136,0.1)'">
+                                    <div style="color: #00ff88;">+ Upload Sample</div>
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="color: #ff4444; margin-bottom: 15px;">🔍 Advanced Malware Analysis Lab</h3>
+                                <div style="margin-bottom: 15px;">
+                                    <button onclick="runStaticAnalysis()" style="background: #ff4444; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Static Analysis</button>
+                                    <button onclick="runDynamicAnalysis()" style="background: #ffa500; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Dynamic Analysis</button>
+                                    <button onclick="runBehaviorAnalysis()" style="background: #4ecdc4; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Behavior Analysis</button>
+                                    <button onclick="runNetworkAnalysis()" style="background: #9b59b6; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Network Analysis</button>
+                                    <button onclick="generateReport()" style="background: #00ff88; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Generate Report</button>
+                                </div>
+                                <div style="display: flex; gap: 15px; height: 400px;">
+                                    <div style="flex: 2;">
+                                        <div style="background: #000; padding: 15px; border-radius: 5px; height: 100%; overflow-y: auto; font-family: monospace; border: 1px solid #ff4444;" id="analysis-output">Select a malware sample and analysis type...</div>
+                                    </div>
+                                    <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+                                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; border: 1px solid #333;">
+                                            <h5 style="color: #ff4444; margin-bottom: 8px;">Sample Info</h5>
+                                            <div id="sample-info" style="font-size: 12px; font-family: monospace;">No sample loaded</div>
+                                        </div>
+                                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; border: 1px solid #333;">
+                                            <h5 style="color: #ff4444; margin-bottom: 8px;">Threat Score</h5>
+                                            <div id="threat-score" style="font-size: 24px; font-weight: bold; text-align: center; color: #fff;">0/100</div>
+                                            <div style="background: #333; height: 10px; border-radius: 5px; margin-top: 5px;">
+                                                <div id="threat-bar" style="background: linear-gradient(90deg, #00ff88, #ffd93d, #ff6b6b); height: 100%; width: 0%; border-radius: 5px; transition: width 0.5s;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; border: 1px solid #333; flex: 1;">
+                                            <h5 style="color: #ff4444; margin-bottom: 8px;">IOCs Found</h5>
+                                            <div id="iocs-list" style="font-size: 11px; font-family: monospace; height: 100%; overflow-y: auto;">No IOCs detected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                        let currentSample = null;
+                        let analysisResults = {};
+                        
+                        const malwareSamples = {
+                            trojan: {
+                                name: 'Banking Trojan',
+                                file: 'banking_trojan.exe',
+                                size: '2.4 MB',
+                                md5: 'a1b2c3d4e5f67890abcdef1234567890',
+                                threat: 85,
+                                family: 'Zeus',
+                                capabilities: ['Keylogging', 'Screen capture', 'Form grabbing', 'Web injection']
+                            },
+                            ransomware: {
+                                name: 'Ransomware',
+                                file: 'crypto_locker.exe',
+                                size: '1.8 MB',
+                                md5: 'f6e5d4c3b2a1098765432109876543210',
+                                threat: 95,
+                                family: 'WannaCry',
+                                capabilities: ['File encryption', 'Network spread', 'Kill switch', 'Ransom note']
+                            },
+                            worm: {
+                                name: 'Network Worm',
+                                file: 'net_worm.exe',
+                                size: '512 KB',
+                                md5: '1a2b3c4d5e6f7890abcdef0123456789',
+                                threat: 65,
+                                family: 'Conficker',
+                                capabilities: ['Network scanning', 'Self-replication', 'USB spread', 'Backdoor']
+                            },
+                            spyware: {
+                                name: 'Advanced Spyware',
+                                file: 'spy_tool.exe',
+                                size: '3.1 MB',
+                                md5: '9z8y7x6w5v4u3t2s1r0q9p8o7n6m5l4k',
+                                threat: 78,
+                                family: 'DarkComet',
+                                capabilities: ['Remote access', 'Data theft', 'Camera access', 'Microphone']
+                            }
+                        };
+                        
+                        function loadSample(type) {
+                            currentSample = malwareSamples[type];
+                            updateSampleInfo();
+                            updateThreatScore(currentSample.threat);
+                            
+                            const output = document.getElementById('analysis-output');
+                            output.innerHTML = `<div style="color: #ff4444;">[${new Date().toLocaleTimeString()}] Sample loaded: ${currentSample.name}</div>`;
+                            output.innerHTML += `<div style="color: #fff;">File: ${currentSample.file}</div>`;
+                            output.innerHTML += `<div style="color: #fff;">MD5: ${currentSample.md5}</div>`;
+                            output.innerHTML += `<div style="color: #ffd93d;">Ready for analysis...</div>`;
+                        }
+                        
+                        function updateSampleInfo() {
+                            if (!currentSample) return;
+                            const info = document.getElementById('sample-info');
+                            info.innerHTML = `
+                                <div>Name: ${currentSample.name}</div>
+                                <div>Size: ${currentSample.size}</div>
+                                <div>Family: ${currentSample.family}</div>
+                                <div style="color: #ff6b6b;">MD5: ${currentSample.md5.substring(0, 16)}...</div>
+                            `;
+                        }
+                        
+                        function updateThreatScore(score) {
+                            document.getElementById('threat-score').textContent = `${score}/100`;
+                            document.getElementById('threat-bar').style.width = `${score}%`;
+                        }
+                        
+                        function runStaticAnalysis() {
+                            if (!currentSample) { alert('Please load a sample first'); return; }
+                            
+                            const output = document.getElementById('analysis-output');
+                            output.innerHTML += `<div style="color: #ff4444;">[${new Date().toLocaleTimeString()}] Starting static analysis...</div>`;
+                            
+                            setTimeout(() => {
+                                output.innerHTML += `<div style="color: #4ecdc4;">PE Header Analysis:</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  Entry Point: 0x00401000</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  Sections: .text, .data, .rsrc</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  Imports: kernel32.dll, user32.dll, wininet.dll</div>`;
+                                output.innerHTML += `<div style="color: #ffd93d;">Strings Found:</div>`;
+                                currentSample.capabilities.forEach(cap => {
+                                    output.innerHTML += `<div style="color: #ff6b6b;">  Suspicious: ${cap}</div>`;
+                                });
+                                output.scrollTop = output.scrollHeight;
+                                updateIOCs(['Suspicious imports', 'Packed executable', 'Anti-debug strings']);
+                            }, 2000);
+                        }
+                        
+                        function runDynamicAnalysis() {
+                            if (!currentSample) { alert('Please load a sample first'); return; }
+                            
+                            const output = document.getElementById('analysis-output');
+                            output.innerHTML += `<div style="color: #ffa500;">[${new Date().toLocaleTimeString()}] Starting dynamic analysis in sandbox...</div>`;
+                            
+                            setTimeout(() => {
+                                output.innerHTML += `<div style="color: #4ecdc4;">Process Monitoring:</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  PID: 1337 - ${currentSample.file}</div>`;
+                                output.innerHTML += `<div style="color: #ff6b6b;">  Child Process: svchost.exe (PID: 2468)</div>`;
+                                output.innerHTML += `<div style="color: #ffd93d;">Registry Changes:</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run</div>`;
+                                output.innerHTML += `<div style="color: #ff6b6b;">  Added: ${currentSample.file}</div>`;
+                                output.scrollTop = output.scrollHeight;
+                                updateIOCs(['Registry persistence', 'Process injection', 'File system changes']);
+                            }, 3000);
+                        }
+                        
+                        function runBehaviorAnalysis() {
+                            if (!currentSample) { alert('Please load a sample first'); return; }
+                            
+                            const output = document.getElementById('analysis-output');
+                            output.innerHTML += `<div style="color: #4ecdc4;">[${new Date().toLocaleTimeString()}] Analyzing behavior patterns...</div>`;
+                            
+                            setTimeout(() => {
+                                output.innerHTML += `<div style="color: #ffd93d;">Behavioral Indicators:</div>`;
+                                currentSample.capabilities.forEach(behavior => {
+                                    output.innerHTML += `<div style="color: #ff6b6b;">  ✓ ${behavior} detected</div>`;
+                                });
+                                output.innerHTML += `<div style="color: #4ecdc4;">MITRE ATT&CK Mapping:</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  T1055 - Process Injection</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  T1547 - Boot or Logon Autostart</div>`;
+                                output.scrollTop = output.scrollHeight;
+                                updateIOCs(['MITRE T1055', 'MITRE T1547', 'Persistence mechanism']);
+                            }, 2500);
+                        }
+                        
+                        function runNetworkAnalysis() {
+                            if (!currentSample) { alert('Please load a sample first'); return; }
+                            
+                            const output = document.getElementById('analysis-output');
+                            output.innerHTML += `<div style="color: #9b59b6;">[${new Date().toLocaleTimeString()}] Monitoring network activity...</div>`;
+                            
+                            setTimeout(() => {
+                                output.innerHTML += `<div style="color: #4ecdc4;">Network Connections:</div>`;
+                                output.innerHTML += `<div style="color: #ff6b6b;">  TCP 192.168.1.100:1337 -> 185.159.158.228:443</div>`;
+                                output.innerHTML += `<div style="color: #ff6b6b;">  HTTP POST to malicious-c2.com/gate.php</div>`;
+                                output.innerHTML += `<div style="color: #ffd93d;">DNS Queries:</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  malicious-c2.com</div>`;
+                                output.innerHTML += `<div style="color: #fff;">  update-server.net</div>`;
+                                output.scrollTop = output.scrollHeight;
+                                updateIOCs(['C2 communication', 'Malicious domains', 'Data exfiltration']);
+                            }, 2000);
+                        }
+                        
+                        function updateIOCs(iocs) {
+                            const iocsList = document.getElementById('iocs-list');
+                            const existing = iocsList.innerHTML === 'No IOCs detected' ? [] : iocsList.innerHTML.split('<br>');
+                            const combined = [...new Set([...existing, ...iocs])];
+                            iocsList.innerHTML = combined.map(ioc => `<div style="color: #ff6b6b;">• ${ioc}</div>`).join('');
+                        }
+                        
+                        function generateReport() {
+                            if (!currentSample) { alert('Please load a sample first'); return; }
+                            
+                            const report = `
+MALWARE ANALYSIS REPORT
+======================
+
+Sample: ${currentSample.name}
+File: ${currentSample.file}
+MD5: ${currentSample.md5}
+Threat Score: ${currentSample.threat}/100
+Family: ${currentSample.family}
+
+Capabilities:
+${currentSample.capabilities.map(cap => `- ${cap}`).join('\n')}
+
+Recommendations:
+- Block network communications to identified C2 servers
+- Monitor for similar file hashes
+- Implement behavioral detection rules
+- Update endpoint protection signatures
+
+Generated: ${new Date().toLocaleString()}
+            `;
+                            
+                            const blob = new Blob([report], {type: 'text/plain'});
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `malware_report_${currentSample.file}.txt`;
+                            a.click();
+                        }
+                        
+                        function uploadSample() {
+                            alert('Upload functionality would connect to sandbox environment in real implementation');
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTF Challenges Application -->
+            <div class="app-window" id="ctf-challenges-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize" onclick="minimizeWindow('ctf-challenges-app')"></span>
+                        <span class="control maximize" onclick="maximizeWindow('ctf-challenges-app')"></span>
+                        <span class="control close" onclick="closeWindow('ctf-challenges-app')"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-flag"></i> CTF Challenges
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #fff; height: 100%;">
+                    <div style="display: flex; gap: 20px; height: 100%;">
+                        <div style="flex: 2;">
+                            <h3 style="color: #00ff41; margin-bottom: 20px;">🚩 Capture The Flag Challenges</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; height: calc(100% - 60px); overflow-y: auto;">
+                                
+                                <!-- Easy Challenges -->
+                                <div class="ctf-card" data-difficulty="easy" data-points="100" data-flag="NEURO{basic_recon_complete}">
+                                    <div class="difficulty-badge easy">Easy - 100pts</div>
+                                    <h4>Basic Reconnaissance</h4>
+                                    <p>Use the Network Scanner to discover all hosts in the 192.168.1.0/24 network. Find the hidden service on port 8080.</p>
+                                    <div class="challenge-hint">Hint: Try different scan types in the Network Simulator</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <div class="ctf-card" data-difficulty="easy" data-points="150" data-flag="NEURO{caesar_cipher_decoded}">
+                                    <div class="difficulty-badge easy">Easy - 150pts</div>
+                                    <h4>Caesar Cipher Challenge</h4>
+                                    <p>Decrypt this message: "QHXUR GHY LV WKH EHVW HWKLFDO KDFNLQJ FRXUVH"</p>
+                                    <div class="challenge-hint">Hint: Use the Crypto Playground with Caesar cipher</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <div class="ctf-card" data-difficulty="easy" data-points="200" data-flag="NEURO{malware_family_identified}">
+                                    <div class="difficulty-badge easy">Easy - 200pts</div>
+                                    <h4>Malware Identification</h4>
+                                    <p>Analyze the Banking Trojan sample and identify its malware family name.</p>
+                                    <div class="challenge-hint">Hint: Use Static Analysis in Malware Analysis Lab</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <!-- Medium Challenges -->
+                                <div class="ctf-card" data-difficulty="medium" data-points="300" data-flag="NEURO{base64_hex_combo_solved}">
+                                    <div class="difficulty-badge medium">Medium - 300pts</div>
+                                    <h4>Multi-Layer Encoding</h4>
+                                    <p>Decode: "NGY2ZjZjNmY3NzIwNzc2ZjcyNmM2NA=="</p>
+                                    <div class="challenge-hint">Hint: Multiple encoding layers - Base64 then Hex</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <div class="ctf-card" data-difficulty="medium" data-points="400" data-flag="NEURO{vulnerability_cve_found}">
+                                    <div class="difficulty-badge medium">Medium - 400pts</div>
+                                    <h4>Vulnerability Assessment</h4>
+                                    <p>Perform a vulnerability scan and find the CVE number for the Log4Shell vulnerability.</p>
+                                    <div class="challenge-hint">Hint: Use vulnerability scan type in Network Scanner</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <div class="ctf-card" data-difficulty="medium" data-points="350" data-flag="NEURO{mitre_attack_technique}">
+                                    <div class="difficulty-badge medium">Medium - 350pts</div>
+                                    <h4>MITRE ATT&CK Mapping</h4>
+                                    <p>Analyze any malware sample and find the MITRE ATT&CK technique ID for Process Injection.</p>
+                                    <div class="challenge-hint">Hint: Use Behavior Analysis in Malware Lab</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <!-- Hard Challenges -->
+                                <div class="ctf-card" data-difficulty="hard" data-points="500" data-flag="NEURO{advanced_crypto_master}">
+                                    <div class="difficulty-badge hard">Hard - 500pts</div>
+                                    <h4>Advanced Cryptanalysis</h4>
+                                    <p>Break this cipher using frequency analysis: "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ"</p>
+                                    <div class="challenge-hint">Hint: Use frequency analysis and brute force in Crypto Lab</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <div class="ctf-card" data-difficulty="hard" data-points="600" data-flag="NEURO{network_forensics_expert}">
+                                    <div class="difficulty-badge hard">Hard - 600pts</div>
+                                    <h4>Network Forensics</h4>
+                                    <p>Analyze network traffic from malware and identify the C2 server domain.</p>
+                                    <div class="challenge-hint">Hint: Use Network Analysis on any malware sample</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+
+                                <div class="ctf-card" data-difficulty="hard" data-points="750" data-flag="NEURO{master_hacker_elite}">
+                                    <div class="difficulty-badge hard">Hard - 750pts</div>
+                                    <h4>Elite Challenge</h4>
+                                    <p>Complete all previous challenges and decode: "01001110 01000101 01010101 01010010 01001111"</p>
+                                    <div class="challenge-hint">Hint: Binary encoding + previous challenge completion required</div>
+                                    <button onclick="startChallenge(this)" class="challenge-btn">Start Challenge</button>
+                                    <div class="flag-input" style="display: none;">
+                                        <input type="text" placeholder="Enter flag..." class="flag-field">
+                                        <button onclick="submitFlag(this)" class="submit-btn">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="width: 300px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #333;">
+                            <h4 style="color: #00ff41; margin-bottom: 15px;">🏆 Leaderboard</h4>
+                            <div id="leaderboard-list" style="background: #000; padding: 10px; border-radius: 5px; height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px;">
+                                <div style="color: #ffd700;">1. Elite_Hacker - 2850pts</div>
+                                <div style="color: #c0c0c0;">2. CyberNinja - 2100pts</div>
+                                <div style="color: #cd7f32;">3. H4ck3r_Pro - 1750pts</div>
+                                <div style="color: #fff;">4. SecMaster - 1200pts</div>
+                                <div style="color: #fff;">5. You - <span id="leaderboard-score">0</span>pts</div>
+                            </div>
+                            
+                            <h4 style="color: #00ff41; margin: 15px 0 10px 0;">🏅 Your Progress</h4>
+                            <div style="background: #000; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 12px;">
+                                <div>Total Score: <span id="total-score" style="color: #00ff41;">0</span></div>
+                                <div>Flags Captured: <span id="flags-captured" style="color: #ffd93d;">0</span>/9</div>
+                                <div>Rank: <span id="user-rank" style="color: #ff6b6b;">#5</span></div>
+                            </div>
+                            
+                            <h4 style="color: #00ff41; margin: 15px 0 10px 0;">🎯 Achievements</h4>
+                            <div id="achievements-list" style="background: #000; padding: 10px; border-radius: 5px; height: 150px; overflow-y: auto; font-size: 11px;">
+                                <div style="color: #666;">🔒 First Blood - Solve first challenge</div>
+                                <div style="color: #666;">🔒 Crypto Master - Solve all crypto challenges</div>
+                                <div style="color: #666;">🔒 Network Ninja - Complete network challenges</div>
+                                <div style="color: #666;">🔒 Malware Hunter - Analyze all samples</div>
+                                <div style="color: #666;">🔒 Elite Hacker - Score 2000+ points</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Web Exploiter Application -->
+            <div class="app-window" id="web-exploiter-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize" onclick="minimizeWindow('web-exploiter-app')"></span>
+                        <span class="control maximize" onclick="maximizeWindow('web-exploiter-app')"></span>
+                        <span class="control close" onclick="closeWindow('web-exploiter-app')"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-globe-americas"></i> Web Exploiter
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%); color: #fff; height: 100%;">
+                    <div style="display: flex; gap: 20px; height: 100%;">
+                        <div style="flex: 1;">
+                            <h3 style="color: #ff6b6b; margin-bottom: 15px;">🌐 Web Application Exploiter</h3>
+                            <div style="margin-bottom: 15px;">
+                                <input type="text" id="target-url" placeholder="Target URL (e.g., http://vulnerable-site.com)" value="http://testphp.vulnweb.com" style="width: 400px; padding: 8px; background: #333; color: #fff; border: 1px solid #ff6b6b; border-radius: 5px; margin-right: 10px;">
+                                <select id="exploit-type" style="padding: 8px; background: #333; color: #fff; border: 1px solid #ff6b6b; border-radius: 5px;">
+                                    <option value="sqli">SQL Injection</option>
+                                    <option value="xss">XSS Attack</option>
+                                    <option value="lfi">Local File Inclusion</option>
+                                    <option value="rfi">Remote File Inclusion</option>
+                                    <option value="csrf">CSRF Attack</option>
+                                    <option value="xxe">XXE Injection</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <button onclick="startExploit()" style="background: #ff6b6b; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Launch Attack</button>
+                                <button onclick="scanVulns()" style="background: #ffa500; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Vulnerability Scan</button>
+                                <button onclick="generatePayload()" style="background: #9b59b6; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Generate Payload</button>
+                                <button onclick="clearExploitResults()" style="background: #4ecdc4; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Clear</button>
+                            </div>
+                            <div id="exploit-output" style="background: #000; padding: 15px; border-radius: 5px; height: 350px; overflow-y: auto; font-family: monospace; border: 1px solid #ff6b6b;">Ready to exploit web applications...</div>
+                        </div>
+                        <div style="width: 300px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #333;">
+                            <h4 style="color: #ff6b6b; margin-bottom: 10px;">Payloads</h4>
+                            <div id="payload-list" style="background: #000; padding: 10px; border-radius: 5px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 11px;">
+                                <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">' OR '1'='1</div>
+                                <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">&lt;script&gt;alert('XSS')&lt;/script&gt;</div>
+                                <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">../../../etc/passwd</div>
+                                <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">&lt;?xml version="1.0"?&gt;&lt;!DOCTYPE root</div>
+                            </div>
+                            <h4 style="color: #ff6b6b; margin: 15px 0 10px 0;">Exploit Results</h4>
+                            <div id="exploit-stats" style="background: #000; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 12px;">
+                                <div>Vulnerabilities: <span id="vulns-found-web">0</span></div>
+                                <div>Successful Exploits: <span id="exploits-success">0</span></div>
+                                <div>Data Extracted: <span id="data-extracted">0</span> records</div>
+                            </div>
+                            <h4 style="color: #ff6b6b; margin: 15px 0 10px 0;">CTF Flags</h4>
+                            <div id="web-flags" style="background: #000; padding: 10px; border-radius: 5px; height: 100px; overflow-y: auto; font-size: 11px;">No flags captured</div>
+                        </div>
+                    </div>
+                    <script>
+                    window.startExploit = function() {
+                        const output = document.getElementById('exploit-output');
+                        const url = document.getElementById('target-url').value;
+                        const exploitType = document.getElementById('exploit-type').value;
+                        
+                        output.innerHTML += `<div style="color: #ff6b6b;">[${new Date().toLocaleTimeString()}] Launching ${exploitType.toUpperCase()} attack on ${url}...</div>`;
+                        
+                        setTimeout(() => {
+                            if (exploitType === 'sqli') {
+                                output.innerHTML += '<div style="color: #ffd93d;">Testing SQL injection points...</div>';
+                                output.innerHTML += '<div style="color: #00ff88;">VULNERABLE: Login form accepts malicious input</div>';
+                                output.innerHTML += '<div style="color: #fff;">Payload: \' OR \'1\'=\'1\' --</div>';
+                                output.innerHTML += '<div style="color: #4ecdc4;">Database: MySQL 5.7.31</div>';
+                                output.innerHTML += '<div style="color: #4ecdc4;">Tables: users, admin, products</div>';
+                                if (url.includes('vulnweb')) {
+                                    output.innerHTML += '<div style="color: #ffd93d;">FLAG FOUND: NEURO{sql_injection_master}</div>';
+                                    checkAndSubmitFlag('NEURO{sql_injection_master}', 300);
+                                }
+                            } else if (exploitType === 'xss') {
+                                output.innerHTML += '<div style="color: #ffd93d;">Scanning for XSS vulnerabilities...</div>';
+                                output.innerHTML += '<div style="color: #00ff88;">VULNERABLE: Reflected XSS in search parameter</div>';
+                                output.innerHTML += '<div style="color: #fff;">Payload: &lt;script&gt;alert(\'XSS\')&lt;/script&gt;</div>';
+                                output.innerHTML += '<div style="color: #ff6b6b;">Cookie theft possible!</div>';
+                            } else if (exploitType === 'lfi') {
+                                output.innerHTML += '<div style="color: #ffd93d;">Testing Local File Inclusion...</div>';
+                                output.innerHTML += '<div style="color: #00ff88;">VULNERABLE: File parameter accepts traversal</div>';
+                                output.innerHTML += '<div style="color: #fff;">Payload: ../../../etc/passwd</div>';
+                                output.innerHTML += '<div style="color: #4ecdc4;">File contents leaked!</div>';
+                                if (url.includes('testphp')) {
+                                    output.innerHTML += '<div style="color: #ffd93d;">FLAG FOUND: NEURO{file_inclusion_expert}</div>';
+                                    checkAndSubmitFlag('NEURO{file_inclusion_expert}', 400);
+                                }
+                            }
+                            
+                            updateExploitStats();
+                            output.scrollTop = output.scrollHeight;
+                        }, 2000);
+                    }
+                    
+                    window.scanVulns = function() {
+                        const output = document.getElementById('exploit-output');
+                        output.innerHTML += `<div style="color: #ffa500;">[${new Date().toLocaleTimeString()}] Starting vulnerability assessment...</div>`;
+                        
+                        setTimeout(() => {
+                            output.innerHTML += '<div style="color: #4ecdc4;">OWASP Top 10 Scan Results:</div>';
+                            output.innerHTML += '<div style="color: #ff6b6b;">A01:2021 - Broken Access Control: FOUND</div>';
+                            output.innerHTML += '<div style="color: #ff6b6b;">A03:2021 - Injection: SQL Injection FOUND</div>';
+                            output.innerHTML += '<div style="color: #ff6b6b;">A07:2021 - XSS: Reflected XSS FOUND</div>';
+                            output.innerHTML += '<div style="color: #ffd93d;">Severity: HIGH - Immediate action required</div>';
+                            output.scrollTop = output.scrollHeight;
+                        }, 1500);
+                    }
+                    
+                    window.generateSEPayload = function() {
+                        const exploitType = document.getElementById('exploit-type').value;
+                        const output = document.getElementById('exploit-output');
+                        
+                        const payloads = {
+                            sqli: ["' OR '1'='1' --", "' UNION SELECT 1,2,3 --", "'; DROP TABLE users; --"],
+                            xss: ["<script>alert('XSS')</script>", "<img src=x onerror=alert('XSS')>", "javascript:alert('XSS')"],
+                            lfi: ["../../../etc/passwd", "..\\..\\..\\windows\\system32\\drivers\\etc\\hosts", "php://filter/read=convert.base64-encode/resource=index.php"]
+                        };
+                        
+                        const selectedPayloads = payloads[exploitType] || ['No payloads available'];
+                        output.innerHTML += `<div style="color: #9b59b6;">[${new Date().toLocaleTimeString()}] Generated ${exploitType.toUpperCase()} payloads:</div>`;
+                        selectedPayloads.forEach(payload => {
+                            output.innerHTML += `<div style="color: #ffd93d;">  ${payload}</div>`;
+                        });
+                        output.scrollTop = output.scrollHeight;
+                    }
+                    
+                    window.usePayload = function(element) {
+                        const payload = element.textContent;
+                        const output = document.getElementById('exploit-output');
+                        output.innerHTML += `<div style="color: #4ecdc4;">Using payload: ${payload}</div>`;
+                        output.scrollTop = output.scrollHeight;
+                    }
+                    
+                    window.updateExploitStats = function() {
+                        document.getElementById('vulns-found-web').textContent = Math.floor(Math.random() * 5) + 1;
+                        document.getElementById('exploits-success').textContent = Math.floor(Math.random() * 3) + 1;
+                        document.getElementById('data-extracted').textContent = Math.floor(Math.random() * 100) + 10;
+                    }
+                    
+                    window.clearExploitResults = function() {
+                        document.getElementById('exploit-output').innerHTML = 'Ready to exploit web applications...';
+                    }
+                    </script>
+                </div>
+            </div>
+
+            <!-- Social Engineering Toolkit -->
+            <div class="app-window" id="social-engineer-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize" onclick="minimizeWindow('social-engineer-app')"></span>
+                        <span class="control maximize" onclick="maximizeWindow('social-engineer-app')"></span>
+                        <span class="control close" onclick="closeWindow('social-engineer-app')"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-user-secret"></i> Social Engineering Toolkit
+                    </div>
+                </div>
+                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #2C1810 0%, #8B4513 100%); color: #fff; height: 100%;">
+                    <div style="display: flex; gap: 20px; height: 100%;">
+                        <div style="flex: 1;">
+                            <h3 style="color: #ffa500; margin-bottom: 15px;">👤 Social Engineering Toolkit</h3>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;">
+                                <button onclick="createPhishingPage()" style="background: #ff6b6b; color: #fff; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">📧 Phishing Campaign</button>
+                                <button onclick="generateSEPayload()" style="background: #9b59b6; color: #fff; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">💾 Payload Generator</button>
+                                <button onclick="osintGathering()" style="background: #4ecdc4; color: #000; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">🔍 OSINT Gathering</button>
+                                <button onclick="socialMediaRecon()" style="background: #ffd93d; color: #000; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">📱 Social Media Recon</button>
+                            </div>
+                            <div id="se-output" style="background: #000; padding: 15px; border-radius: 5px; height: 300px; overflow-y: auto; font-family: monospace; border: 1px solid #ffa500;">Select a social engineering technique...</div>
+                        </div>
+                        <div style="width: 300px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #333;">
+                            <h4 style="color: #ffa500; margin-bottom: 10px;">Target Information</h4>
+                            <div style="margin-bottom: 15px;">
+                                <input type="text" id="target-name" placeholder="Target Name" style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #ffa500; border-radius: 5px; margin-bottom: 8px;">
+                                <input type="email" id="target-email" placeholder="Target Email" style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #ffa500; border-radius: 5px; margin-bottom: 8px;">
+                                <input type="text" id="target-company" placeholder="Company" style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #ffa500; border-radius: 5px;">
+                            </div>
+                            <h4 style="color: #ffa500; margin-bottom: 10px;">Campaign Stats</h4>
+                            <div id="se-stats" style="background: #000; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 12px;">
+                                <div>Emails Sent: <span id="emails-sent">0</span></div>
+                                <div>Clicks: <span id="phish-clicks">0</span></div>
+                                <div>Credentials: <span id="creds-harvested">0</span></div>
+                                <div>Success Rate: <span id="success-rate">0%</span></div>
+                            </div>
+                            <h4 style="color: #ffa500; margin: 15px 0 10px 0;">Templates</h4>
+                            <div style="display: flex; flex-direction: column; gap: 5px;">
+                                <button onclick="useTemplate('banking')" style="background: #333; color: #fff; border: 1px solid #ffa500; padding: 8px; border-radius: 3px; cursor: pointer; font-size: 11px;">Banking Alert</button>
+                                <button onclick="useTemplate('security')" style="background: #333; color: #fff; border: 1px solid #ffa500; padding: 8px; border-radius: 3px; cursor: pointer; font-size: 11px;">Security Warning</button>
+                                <button onclick="useTemplate('prize')" style="background: #333; color: #fff; border: 1px solid #ffa500; padding: 8px; border-radius: 3px; cursor: pointer; font-size: 11px;">Prize Winner</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                    window.createPhishingPage = function() {
+                        const output = document.getElementById('se-output');
+                        const targetName = document.getElementById('target-name').value || 'Target';
+                        
+                        output.innerHTML += `<div style="color: #ff6b6b;">[${new Date().toLocaleTimeString()}] Creating phishing campaign for ${targetName}...</div>`;
+                        
+                        setTimeout(() => {
+                            output.innerHTML += '<div style="color: #ffd93d;">Cloning legitimate website...</div>';
+                            output.innerHTML += '<div style="color: #4ecdc4;">Phishing page created: http://secure-bank-login.com</div>';
+                            output.innerHTML += '<div style="color: #fff;">Email template generated with personalized content</div>';
+                            output.innerHTML += '<div style="color: #00ff88;">Campaign ready for deployment!</div>';
+                            
+                            if (targetName.toLowerCase().includes('admin')) {
+                                output.innerHTML += '<div style="color: #ffd93d;">HIGH-VALUE TARGET DETECTED!</div>';
+                                output.innerHTML += '<div style="color: #ffd93d;">FLAG: NEURO{social_engineering_master}</div>';
+                                checkAndSubmitFlag('NEURO{social_engineering_master}', 350);
+                            }
+                            
+                            updateSEStats();
+                            output.scrollTop = output.scrollHeight;
+                        }, 2000);
+                    }
+                    
+                    window.osintGathering = function() {
+                        const output = document.getElementById('se-output');
+                        const targetEmail = document.getElementById('target-email').value || 'target@example.com';
+                        
+                        output.innerHTML += `<div style="color: #4ecdc4;">[${new Date().toLocaleTimeString()}] Gathering OSINT on ${targetEmail}...</div>`;
+                        
+                        setTimeout(() => {
+                            output.innerHTML += '<div style="color: #ffd93d;">Searching social media platforms...</div>';
+                            output.innerHTML += '<div style="color: #fff;">LinkedIn: Profile found - Software Engineer at TechCorp</div>';
+                            output.innerHTML += '<div style="color: #fff;">Facebook: Public posts about recent vacation</div>';
+                            output.innerHTML += '<div style="color: #fff;">Twitter: Tweets about cybersecurity conferences</div>';
+                            output.innerHTML += '<div style="color: #ff6b6b;">Breach data: Email found in 3 data breaches</div>';
+                            output.innerHTML += '<div style="color: #00ff88;">OSINT gathering complete!</div>';
+                            output.scrollTop = output.scrollHeight;
+                        }, 3000);
+                    }
+                    
+                    window.socialMediaRecon = function() {
+                        const output = document.getElementById('se-output');
+                        output.innerHTML += `<div style="color: #ffd93d;">[${new Date().toLocaleTimeString()}] Performing social media reconnaissance...</div>`;
+                        
+                        setTimeout(() => {
+                            output.innerHTML += '<div style="color: #4ecdc4;">Analyzing social connections...</div>';
+                            output.innerHTML += '<div style="color: #fff;">Friends/Connections: 247 contacts analyzed</div>';
+                            output.innerHTML += '<div style="color: #fff;">Common interests: Technology, Gaming, Travel</div>';
+                            output.innerHTML += '<div style="color: #fff;">Recent activity: Posted about new job promotion</div>';
+                            output.innerHTML += '<div style="color: #ffd93d;">Potential attack vectors identified!</div>';
+                            
+                            if (Math.random() > 0.7) {
+                                output.innerHTML += '<div style="color: #ffd93d;">HIDDEN FLAG: NEURO{osint_detective}</div>';
+                                checkAndSubmitFlag('NEURO{osint_detective}', 275);
+                            }
+                            
+                            output.scrollTop = output.scrollHeight;
+                        }, 2500);
+                    }
+                    
+                    window.useTemplate = function(type) {
+                        const output = document.getElementById('se-output');
+                        const templates = {
+                            banking: 'Your account has been compromised. Click here to secure it immediately.',
+                            security: 'Urgent: Suspicious activity detected on your account.',
+                            prize: 'Congratulations! You have won $1000. Claim your prize now.'
+                        };
+                        
+                        output.innerHTML += `<div style="color: #9b59b6;">Using ${type} template: "${templates[type]}"</div>`;
+                        output.scrollTop = output.scrollHeight;
+                    }
+                    
+                    window.updateSEStats = function() {
+                        document.getElementById('emails-sent').textContent = Math.floor(Math.random() * 100) + 50;
+                        document.getElementById('phish-clicks').textContent = Math.floor(Math.random() * 30) + 10;
+                        document.getElementById('creds-harvested').textContent = Math.floor(Math.random() * 15) + 5;
+                        document.getElementById('success-rate').textContent = Math.floor(Math.random() * 40) + 20 + '%';
+                    }
+                    </script>
+                </div>
+            </div>
+
+            <!-- Bank Security Application -->
+            <div class="app-window" id="bank-security-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize" onclick="minimizeWindow('bank-security-app')"></span>
+                        <span class="control maximize" onclick="maximizeWindow('bank-security-app')"></span>
+                        <span class="control close" onclick="closeWindow('bank-security-app')"></span>
                     </div>
                     <div class="window-title">
                         <i class="fas fa-university"></i> Bank Security Lab
@@ -629,22 +2205,356 @@ print('Hello from Neuro-Dev!')"></textarea>
         </div>
     </div>
 
+    <!-- Core VM Scripts -->
     <script src="vm-core.js"></script>
     <script src="terminal.js"></script>
     <script src="browser.js"></script>
     <script src="editor.js"></script>
     <script src="files.js"></script>
+    <script src="window-controls.js"></script>
+    
+    <!-- Application Scripts -->
     <script src="neuro-ai-app.js"></script>
     <script src="ai-chat.js"></script>
     <script src="bank-security.js"></script>
     <script src="flag-system.js"></script>
-    <script src="../challenge-system.js"></script>
-    <script src="../network-simulator.js"></script>
-    <script src="../user-system.js"></script>
-    <script src="../vulnerable-apps.js"></script>
-    <link rel="stylesheet" href="../challenge-styles.css">
-    <link rel="stylesheet" href="../vulnerable-apps.css">
-    <link rel="stylesheet" href="../complete-system.css">
-    <link rel="stylesheet" href="../mobile-fixes.css">
+    
+    <!-- CTF System -->
+    <script>
+    // CTF Challenge System
+    let userScore = parseInt(localStorage.getItem('ctf_score') || '0');
+    let capturedFlags = JSON.parse(localStorage.getItem('captured_flags') || '[]');
+    let username = localStorage.getItem('ctf_username') || 'Guest';
+    
+    function updateScore() {
+        document.getElementById('user-score').textContent = userScore;
+        document.getElementById('total-score').textContent = userScore;
+        document.getElementById('flags-captured').textContent = capturedFlags.length;
+        document.getElementById('leaderboard-score').textContent = userScore;
+        localStorage.setItem('ctf_score', userScore.toString());
+        localStorage.setItem('captured_flags', JSON.stringify(capturedFlags));
+        updateRank();
+        checkAchievements();
+    }
+    
+    function updateRank() {
+        const leaderboard = [2850, 2100, 1750, 1200, userScore];
+        leaderboard.sort((a, b) => b - a);
+        const rank = leaderboard.indexOf(userScore) + 1;
+        document.getElementById('user-rank').textContent = '#' + rank;
+    }
+    
+    function startChallenge(button) {
+        const card = button.closest('.ctf-card');
+        const flagInput = card.querySelector('.flag-input');
+        button.style.display = 'none';
+        flagInput.style.display = 'block';
+    }
+    
+    function submitFlag(button) {
+        const card = button.closest('.ctf-card');
+        const input = card.querySelector('.flag-field');
+        const correctFlag = card.dataset.flag;
+        const points = parseInt(card.dataset.points);
+        
+        if (input.value.trim() === correctFlag) {
+            if (!capturedFlags.includes(correctFlag)) {
+                capturedFlags.push(correctFlag);
+                userScore += points;
+                updateScore();
+                
+                card.style.background = 'rgba(0, 255, 65, 0.2)';
+                card.style.border = '2px solid #00ff41';
+                button.textContent = 'Completed!';
+                button.disabled = true;
+                
+                showNotification(`Flag captured! +${points} points`, 'success');
+            } else {
+                showNotification('Flag already captured!', 'warning');
+            }
+        } else {
+            showNotification('Incorrect flag!', 'error');
+            input.style.border = '2px solid #ff6b6b';
+            setTimeout(() => {
+                input.style.border = '1px solid #333';
+            }, 2000);
+        }
+    }
+    
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        `;
+        
+        if (type === 'success') notification.style.background = '#00ff41';
+        else if (type === 'error') notification.style.background = '#ff6b6b';
+        else notification.style.background = '#ffd93d';
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    
+    function checkAchievements() {
+        const achievements = document.getElementById('achievements-list');
+        let html = '';
+        
+        if (capturedFlags.length >= 1) {
+            html += '<div style="color: #00ff41;">✅ First Blood - Solve first challenge</div>';
+        } else {
+            html += '<div style="color: #666;">🔒 First Blood - Solve first challenge</div>';
+        }
+        
+        const cryptoFlags = capturedFlags.filter(f => f.includes('caesar') || f.includes('base64') || f.includes('crypto')).length;
+        if (cryptoFlags >= 2) {
+            html += '<div style="color: #00ff41;">✅ Crypto Master - Solve crypto challenges</div>';
+        } else {
+            html += '<div style="color: #666;">🔒 Crypto Master - Solve crypto challenges</div>';
+        }
+        
+        const networkFlags = capturedFlags.filter(f => f.includes('recon') || f.includes('vulnerability') || f.includes('network')).length;
+        if (networkFlags >= 2) {
+            html += '<div style="color: #00ff41;">✅ Network Ninja - Complete network challenges</div>';
+        } else {
+            html += '<div style="color: #666;">🔒 Network Ninja - Complete network challenges</div>';
+        }
+        
+        const malwareFlags = capturedFlags.filter(f => f.includes('malware') || f.includes('mitre')).length;
+        if (malwareFlags >= 2) {
+            html += '<div style="color: #00ff41;">✅ Malware Hunter - Analyze all samples</div>';
+        } else {
+            html += '<div style="color: #666;">🔒 Malware Hunter - Analyze all samples</div>';
+        }
+        
+        if (userScore >= 2000) {
+            html += '<div style="color: #ffd700;">🏆 Elite Hacker - Score 2000+ points</div>';
+        } else {
+            html += '<div style="color: #666;">🔒 Elite Hacker - Score 2000+ points</div>';
+        }
+        
+        achievements.innerHTML = html;
+    }
+    
+    function showLeaderboard() {
+        alert(`🏆 CTF Leaderboard\n\n1. Elite_Hacker - 2850pts\n2. CyberNinja - 2100pts\n3. H4ck3r_Pro - 1750pts\n4. SecMaster - 1200pts\n5. ${username} - ${userScore}pts`);
+    }
+    
+    function showCTFChallenges() {
+        if (window.vm) {
+            window.vm.switchApp('ctf-challenges');
+        }
+    }
+    
+    function showUserMenu() {
+        const dropdown = document.getElementById('user-dropdown');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+    
+    function logout() {
+        localStorage.removeItem('ctf_username');
+        location.reload();
+    }
+    
+    // Global flag submission function
+    window.checkAndSubmitFlag = function(flag, points) {
+        if (!flag) return;
+        
+        // Check if flag already captured
+        if (capturedFlags.includes(flag)) {
+            console.log('Flag already captured:', flag);
+            return;
+        }
+        
+        // Add to captured flags
+        capturedFlags.push(flag);
+        userScore += points;
+        
+        // Update displays
+        updateScore();
+        
+        // Show notification
+        showNotification(`🚩 Flag Captured: ${flag} (+${points} pts)`, 'success');
+        
+        // Update CTF challenges display if open
+        const ctfApp = document.getElementById('ctf-challenges-app');
+        if (ctfApp && ctfApp.classList.contains('active')) {
+            // Mark challenge as completed
+            document.querySelectorAll('.ctf-card').forEach(card => {
+                if (card.dataset.flag === flag) {
+                    card.style.background = 'rgba(0, 255, 65, 0.2)';
+                    card.style.border = '2px solid #00ff41';
+                    const button = card.querySelector('.challenge-btn');
+                    if (button) {
+                        button.textContent = 'Completed!';
+                        button.disabled = true;
+                    }
+                }
+            });
+        }
+        
+        console.log(`Flag captured: ${flag} (+${points} points)`);
+    };
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateScore();
+        
+        // Mark completed challenges
+        document.querySelectorAll('.ctf-card').forEach(card => {
+            const flag = card.dataset.flag;
+            if (capturedFlags.includes(flag)) {
+                card.style.background = 'rgba(0, 255, 65, 0.2)';
+                card.style.border = '2px solid #00ff41';
+                const button = card.querySelector('.challenge-btn');
+                if (button) {
+                    button.textContent = 'Completed!';
+                    button.disabled = true;
+                }
+            }
+        });
+    });
+    </script>
+    
+    <style>
+    .ctf-card {
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid #333;
+        border-radius: 10px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .ctf-card:hover {
+        border-color: #00ff41;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 255, 65, 0.2);
+    }
+    
+    .difficulty-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    
+    .difficulty-badge.easy {
+        background: #00ff41;
+        color: #000;
+    }
+    
+    .difficulty-badge.medium {
+        background: #ffd93d;
+        color: #000;
+    }
+    
+    .difficulty-badge.hard {
+        background: #ff6b6b;
+        color: #fff;
+    }
+    
+    .ctf-card h4 {
+        color: #fff;
+        margin: 0 0 10px 0;
+        font-size: 16px;
+    }
+    
+    .ctf-card p {
+        color: #ccc;
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .challenge-hint {
+        background: rgba(255, 193, 7, 0.1);
+        border-left: 3px solid #ffc107;
+        padding: 8px 12px;
+        margin: 10px 0;
+        font-size: 12px;
+        color: #ffc107;
+        border-radius: 0 5px 5px 0;
+    }
+    
+    .challenge-btn {
+        background: #00ff41;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .challenge-btn:hover {
+        background: #00cc33;
+        transform: translateY(-1px);
+    }
+    
+    .challenge-btn:disabled {
+        background: #666;
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    .flag-input {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .flag-field {
+        flex: 1;
+        padding: 8px;
+        background: #333;
+        border: 1px solid #555;
+        border-radius: 5px;
+        color: #fff;
+        font-family: monospace;
+    }
+    
+    .submit-btn {
+        background: #ff6b6b;
+        color: #fff;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    .submit-btn:hover {
+        background: #ff5252;
+    }
+    
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    </style>
 </body>
 </html>

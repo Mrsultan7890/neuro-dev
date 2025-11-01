@@ -9,21 +9,8 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://fundingchoicesmessages.google.com https://cdnjs.cloudflare.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.google.com https://www.gstatic.com; connect-src 'self' https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com; frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com; object-src 'none'; base-uri 'self';">
     <meta name="google-adsense-account" content="ca-pub-1916892851128865">
-    <script>
-      // Only load AdSense on production, not localhost
-      if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
-        var adsenseScript = document.createElement('script');
-        adsenseScript.async = true;
-        adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865';
-        adsenseScript.crossOrigin = 'anonymous';
-        document.head.appendChild(adsenseScript);
-        
-        var fundingScript = document.createElement('script');
-        fundingScript.async = true;
-        fundingScript.src = 'https://fundingchoicesmessages.google.com/i/pub-1916892851128865?https%3A%2F%2Fneuroshade.duckdns.org';
-        document.head.appendChild(fundingScript);
-      }
-    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865"
+         crossorigin="anonymous"></script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -41,14 +28,14 @@
       });
     </script>
     <title>Neuro-Dev - Ethical Hacking Course in Roman Urdu</title>
-    <meta name="google-site-verification" content="rcTwaPjFs0P6dg_O8OXxtT32CVqR6rydCEOiwPboHME" />
+    <meta name="google-site-verification" content="8Pw8Fc5mpMA_KCJe9Z03FdbR14nktljEW2teKiCDDrk" />
     <meta name="description" content="Complete Ethical Hacking Course in Roman Urdu. Learn cybersecurity on mobile with Termux and NetHunter. Free tutorials, AI/ML dictionary, and practical tools.">
     <meta name="keywords" content="ethical hacking, cybersecurity, termux, nethunter, roman urdu, mobile hacking, penetration testing, kali linux">
     <meta name="author" content="Neuro-Dev Team">
-    <link rel="canonical" href="http://neuroshade.duckdns.org/">
+    <link rel="canonical" href="https://neurodev.netlify.app/">
     <meta property="og:title" content="Neuro-Dev - Ethical Hacking Course in Roman Urdu">
     <meta property="og:description" content="Complete mobile-based ethical hacking course with 500+ AI/ML terms dictionary">
-    <meta property="og:url" content="http://neuroshade.duckdns.org/">
+    <meta property="og:url" content="https://neurodev.netlify.app/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Neuro-Dev - Ethical Hacking Course">
@@ -89,6 +76,31 @@
     .course-actions .start-btn {
         flex: 1;
     }
+    
+    /* Hamburger menu active states */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    @media (max-width: 768px) {
+        .nav-menu.active {
+            display: flex !important;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #1a1a1a;
+            border-top: 1px solid #333;
+            z-index: 1000;
+        }
+    }
     </style>
     
     <!-- Schema Markup for SEO -->
@@ -101,7 +113,7 @@
       "provider": {
         "@type": "Organization",
         "name": "Neuro-Dev",
-        "url": "http://neuroshade.duckdns.org"
+        "url": "https://neurodev.netlify.app"
       },
       "courseMode": "online",
       "educationalLevel": "Beginner to Advanced",
@@ -135,11 +147,11 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Neuro-Dev",
-      "url": "http://neuroshade.duckdns.org",
+      "url": "https://neurodev.netlify.app",
       "description": "Complete Ethical Hacking Course in Roman Urdu for mobile devices",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "http://neuroshade.duckdns.org/?search={search_term_string}",
+        "target": "https://neurodev.netlify.app/?search={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -151,8 +163,8 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Neuro-Dev",
-      "url": "http://neuroshade.duckdns.org",
-      "logo": "http://neuroshade.duckdns.org/logo.png",
+      "url": "https://neurodev.netlify.app",
+      "logo": "https://neurodev.netlify.app/logo.png",
       "description": "Educational platform for ethical hacking and cybersecurity in Roman Urdu",
       "sameAs": [
         "https://github.com/neuro-dev",
@@ -210,6 +222,111 @@
                     <div class="stat-number">500+</div>
                     <div class="stat-label">AI/ML Terms</div>
                 </div>
+                <div class="stat-item">
+                    <div class="stat-number">📱</div>
+                    <div class="stat-label">Mobile First</div>
+                </div>
+            </div>
+            
+            <!-- Key Benefits -->
+            <div class="hero-benefits">
+                <div class="benefit-item">
+                    <i class="fas fa-copy"></i>
+                    <span>One-Click Copy Commands</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-language"></i>
+                    <span>Roman Urdu Tutorials</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile-Only Learning</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video Explanations</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#courses" class="cta-button primary">
+                    <i class="fas fa-play"></i>
+                    Start Learning
+                </a>
+                <a href="#preview" class="cta-button secondary">
+                    <i class="fas fa-eye"></i>
+                    Preview Course
+                </a>
+                <a href="ctf-challenges.html" class="cta-button secondary">
+                    <i class="fas fa-trophy"></i>
+                    CTF Challenges
+                </a>
+                <a href="labs/virtual-machine/index.html" class="cta-button secondary">
+                    <i class="fas fa-desktop"></i>
+                    Virtual Lab
+                </a>
+            </div>
+        </div>
+        <div class="hero-animation">
+            <div class="code-lines">
+                <div class="line">$ pkg install python</div>
+                <div class="line">$ nmap -sS target.com</div>
+                <div class="line">$ sqlmap -u "url" --dbs</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Preview Section -->
+    <section id="preview" class="preview-section">
+        <div class="container">
+            <h2>Kya Seekhenge?</h2>
+            <div class="preview-grid">
+                <div class="preview-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Se Hacking</h3>
+                    <p>Sirf phone use kar ke ethical hacking tools chalana</p>
+                </div>
+                <div class="preview-item">
+                    <i class="fas fa-terminal"></i>
+                    <h3>Command Line Mastery</h3>
+                    <p>Termux aur Linux commands complete control</p>
+                </div>
+                <div class="preview-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security Testing</h3>
+                    <p>Network scanning, web app testing, vulnerability assessment</p>
+                </div>
+                <div class="preview-item">
+                    <i class="fab fa-python"></i>
+                    <h3>Python Programming</h3>
+                    <p>Zero se hero tak Python seekhiye</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Complete Course Modules</h2>
+            
+            <!-- Search & Filter Controls -->
+            <div class="course-controls">
+                <div class="search-box">
+                    <input type="text" id="course-search" placeholder="Course search kariye...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterCourses('all')">All</button>
+                    <button class="filter-btn" onclick="filterCourses('beginner')">Beginner</button>
+                    <button class="filter-btn" onclick="filterCourses('intermediate')">Intermediate</button>
+                    <button class="filter-btn" onclick="filterCourses('advanced')">Advanced</button>
+                </div>
+                <button id="theme-toggle" style="cursor: pointer; z-index: 999;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
+            <div class="course-grid">
                 <div class="stat-item">
                     <div class="stat-number">📱</div>
                     <div class="stat-label">Mobile First</div>
@@ -702,17 +819,25 @@
                     <div class="feature-icon" style="font-size: 3rem; color: #e74c3c; margin-bottom: 15px;">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Advanced Security Labs</h3>
-                    <p style="color: #ccc; margin-bottom: 20px;">Next-gen challenges: AI, 5G, Quantum, Satellite hacking</p>
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Interactive Security Labs</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Network Simulator, Crypto Playground, Malware Analysis</p>
                     <div class="advanced-topics" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
-                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">AI Poisoning</span>
-                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Quantum Crypto</span>
-                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">5G Hijacking</span>
-                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Satellite Hack</span>
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Network Sim</span>
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Crypto Lab</span>
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Malware Lab</span>
+                        <span style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">Real Tools</span>
                     </div>
-                    <button onclick="openVM('ai-hacking')" style="background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer;">
-                        <i class="fas fa-crosshairs"></i> Advanced Labs
-                    </button>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <a href="labs/network-simulator/index.html" style="background: #667eea; color: white; padding: 8px 15px; border-radius: 15px; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+                            <i class="fas fa-network-wired"></i> Network
+                        </a>
+                        <a href="labs/crypto-playground/index.html" style="background: #764ba2; color: white; padding: 8px 15px; border-radius: 15px; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+                            <i class="fas fa-lock"></i> Crypto
+                        </a>
+                        <a href="labs/malware-analysis/index.html" style="background: #8b0000; color: white; padding: 8px 15px; border-radius: 15px; text-decoration: none; font-size: 0.9rem; font-weight: bold;">
+                            <i class="fas fa-virus"></i> Malware
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -935,27 +1060,7 @@
         </div>
     </div>
     <script>
-        window.addEventListener('load', function() {
-            // Only initialize AdSense on production
-            if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
-                setTimeout(function() {
-                    try {
-                        if (window.adsbygoogle && typeof adsbygoogle.push === 'function') {
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        }
-                    } catch(e) {
-                        console.log('AdSense not available in development mode');
-                    }
-                }, 2000);
-            } else {
-                // Hide ads in development
-                const adElements = document.querySelectorAll('.adsbygoogle');
-                adElements.forEach(el => {
-                    el.style.display = 'none';
-                    el.innerHTML = '<div style="background:#333;color:#666;padding:20px;text-align:center;border-radius:5px;">Ad Space (Development Mode)</div>';
-                });
-            }
-        });
+        (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
     <footer class="footer">
@@ -969,11 +1074,11 @@
                 <a href="contact.html" style="color: #ccc; text-decoration: none;">Contact Us</a>
             </div>
             <div style="margin: 15px 0; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; align-items: center;">
-                <a href="https://youtube.com/@neuroshade" target="_blank" rel="noopener noreferrer" style="color: #ff0000; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                <a href="https://youtube.com/@neuroshde?si=p9uYjfcegaFsS8Qj" target="_blank" rel="noopener noreferrer" style="color: #ff0000; text-decoration: none; display: flex; align-items: center; gap: 5px;">
                     <i class="fab fa-youtube"></i> @neuroshade
                 </a>
-                <a href="https://instagram.com/neuroshade" target="_blank" rel="noopener noreferrer" style="color: #e4405f; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-                    <i class="fab fa-instagram"></i> @neuroshade
+                <a href="https://instagram.com/neuroshade20255" target="_blank" rel="noopener noreferrer" style="color: #e4405f; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                    <i class="fab fa-instagram"></i> @neuroshade20255
                 </a>
                 <a href="donate.html" style="color: #00ff41; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 5px;">
                     <i class="fas fa-heart"></i> Support Us - Donate
@@ -998,6 +1103,28 @@
                 themeIcon.className = 'fas fa-sun';
                 localStorage.setItem('theme', 'light');
             }
+        }
+        
+        // Filter courses function
+        function filterCourses(level) {
+            const cards = document.querySelectorAll('.course-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (level === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const badge = card.querySelector('.course-badge');
+                    if (badge && badge.textContent.toLowerCase().includes(level)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
         }
         
         // Initialize theme and add event listeners
@@ -1035,6 +1162,26 @@
                     });
                 });
             }
+            
+            // Hamburger menu functionality
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on links
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
         });
     </script>
     <script>
@@ -1042,6 +1189,29 @@
         function openVM(courseId) {
             const vmUrl = `labs/virtual-machine/index.html?course=${encodeURIComponent(courseId)}`;
             window.open(vmUrl, '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes,toolbar=no,menubar=no');
+        }
+        
+        // Machine Spawning Function
+        function spawnMachine(machineId) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #00ff41;
+                color: #000;
+                padding: 15px 20px;
+                border-radius: 8px;
+                font-weight: bold;
+                z-index: 10000;
+            `;
+            notification.textContent = `🚀 Spawning ${machineId} machine...`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+                openVM('nethunter-tools');
+            }, 2000);
         }
     </script>
     <!-- Buy Me Coffee Button -->

@@ -4,19 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neuro-Dev Course</title>
-    <script>
-      // Only load AdSense on production
-      if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
-        var adsenseScript = document.createElement('script');
-        adsenseScript.async = true;
-        adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865';
-        adsenseScript.crossOrigin = 'anonymous';
-        document.head.appendChild(adsenseScript);
-      }
-    </script>
+    <meta name="google-adsense-account" content="ca-pub-1916892851128865">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865"
+         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="course-features.css">
     <link rel="stylesheet" href="quiz-review-styles.css">
+    <link rel="stylesheet" href="quiz-modal-styles.css">
     <script src="course-features.js"></script>
     <script src="reviews-system.js"></script>
     <script src="quiz-system.js"></script>
@@ -232,6 +226,20 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+        
+        .hamburger.active .bar:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active .bar:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
         
         .hamburger .bar {
@@ -240,6 +248,7 @@
             background: #00ff41;
             margin: 3px 0;
             transition: 0.3s;
+            border-radius: 2px;
         }
         
         @media (max-width: 768px) {
@@ -454,12 +463,19 @@
     </div>
 
     <!-- Google Ads Section -->
-    <div class="ads-container">
-        <div class="ad-label">Advertisement</div>
-        <div class="google-ad">
-            <!-- Google AdSense code yahan paste kariye -->
+    <div style="text-align: center; padding: 20px; background: #111; border-top: 1px solid #333;">
+        <div style="color: #666; font-size: 12px; margin-bottom: 10px;">Advertisement</div>
+        <div style="max-width: 320px; margin: 0 auto; min-height: 100px; background: #222; border: 1px solid #444; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+            <ins class="adsbygoogle"
+                 style="display:block; width:320px; height:100px;"
+                 data-ad-client="ca-pub-1916892851128865"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"></ins>
         </div>
     </div>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
     <script>
         let currentLesson = 1;

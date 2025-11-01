@@ -470,10 +470,12 @@
     display: none;
     flex-direction: column;
     overflow: hidden;
+    z-index: 100;
 }
 
 .app-window.active {
-    display: flex;
+    display: flex !important;
+    z-index: 200;
 }
 
 .window-header {

@@ -658,6 +658,25 @@ body {
         border-top: 1px solid #333;
     }
     
+    .course-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .search-box {
+        min-width: auto;
+    }
+    
+    .filter-buttons {
+        justify-content: center;
+    }
+    
+    #theme-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+    
     .course-stats span {
         text-align: center;
         padding: 5px;
@@ -801,6 +820,98 @@ body {
     }
 }
 
+/* Search Input Styles */
+#course-search {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#course-search:focus {
+    border-color: #00ff41;
+}
+
+#course-search::placeholder {
+    color: #666;
+}
+
+.course-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    border: 1px solid #333;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+}
+
+.search-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid #333;
+    color: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: #00ff41;
+    color: #000;
+    border-color: #00ff41;
+}
+
+#theme-toggle {
+    background: transparent;
+    border: 1px solid #333;
+    color: #ccc;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+}
+
+#theme-toggle:hover {
+    background: #00ff41;
+    color: #000;
+    border-color: #00ff41;
+}
+
 /* Success Stories Section */
 .success-stories {
     padding: 80px 0;
@@ -848,4 +959,106 @@ body {
 .success-item p {
     color: #ccc;
     font-size: 0.95rem;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 80px 0;
+    background: #111;
+}
+
+.testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #00ff41;
+    margin-bottom: 50px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 30px;
+    transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: #00ff41;
+}
+
+.testimonial-content p {
+    color: #ccc;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.testimonial-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.author-info h4 {
+    color: #00ff41;
+    margin: 0;
+}
+
+.author-info span {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.rating {
+    color: #ffd700;
+}
+
+.user-reviews-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+.user-reviews-section h3 {
+    color: #00ff41;
+    margin-bottom: 20px;
+}
+
+.reviews-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .testimonials {
+        padding: 60px 0;
+    }
+    
+    .testimonials h2 {
+        font-size: 2rem;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonial-card {
+        padding: 20px;
+    }
+    
+    .testimonial-author {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }

@@ -14,15 +14,18 @@ class NeuroVM {
     }
 
     setupEventListeners() {
-        // App switching from taskbar
-        document.querySelectorAll('.app-icon').forEach(icon => {
-            icon.addEventListener('click', (e) => {
-                const app = e.currentTarget.dataset.app;
-                if (app) {
-                    this.switchApp(app);
-                }
+        // App switching from taskbar - use setTimeout to ensure DOM is ready
+        setTimeout(() => {
+            document.querySelectorAll('.app-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    console.log('App icon clicked:', e.currentTarget.dataset.app);
+                    const app = e.currentTarget.dataset.app;
+                    if (app) {
+                        this.switchApp(app);
+                    }
+                });
             });
-        });
+        }, 500);
         
         // Desktop icon switching
         document.querySelectorAll('.desktop-icon').forEach(icon => {
@@ -52,10 +55,27 @@ class NeuroVM {
         if (runCodeBtn) runCodeBtn.addEventListener('click', () => runCode());
         if (languageSelect) languageSelect.addEventListener('change', () => changeLanguage());
 
-        // Course switcher
-        document.querySelector('.course-indicator').addEventListener('click', () => {
-            this.showCourseSwitch();
-        });
+        // Course switcher and user menu
+        setTimeout(() => {
+            const courseIndicator = document.querySelector('.course-indicator');
+            if (courseIndicator) {
+                courseIndicator.addEventListener('click', () => {
+                    this.showCourseSwitch();
+                });
+            }
+            
+            // User menu click for leaderboard
+            const userAvatar = document.getElementById('user-avatar');
+            if (userAvatar) {
+                userAvatar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log('User avatar clicked');
+                    if (window.leaderboardSystem) {
+                        window.leaderboardSystem.showLeaderboard();
+                    }
+                });
+            }
+        }, 500);
 
         document.querySelectorAll('.course-item').forEach(item => {
             item.addEventListener('click', (e) => {
@@ -128,8 +148,10 @@ class NeuroVM {
             
             if (selectedApp) {
                 selectedApp.classList.add('active');
+                console.log(`Switched to app: ${appName}`);
             } else {
                 console.error(`App '${appName}' not found`);
+                console.log('Available apps:', Array.from(document.querySelectorAll('.app-window')).map(w => w.id));
                 return;
             }
             
@@ -147,6 +169,33 @@ class NeuroVM {
                     window.aiChatApp.setupEventListeners();
                 } else if (appName === 'bank-security' && window.bankSecurity) {
                     // Bank Security app initialization if needed
+                } else if (appName === 'network-simulator') {
+                    setTimeout(() => {
+                        if (window.NetworkSimulatorApp && !window.networkSimulatorApp) {
+                            window.networkSimulatorApp = new NetworkSimulatorApp();
+                        }
+                        if (window.networkSimulatorApp && window.networkSimulatorApp.setupEventListeners) {
+                            window.networkSimulatorApp.setupEventListeners();
+                        }
+                    }, 100);
+                } else if (appName === 'crypto-playground') {
+                    setTimeout(() => {
+                        if (window.CryptoPlaygroundApp && !window.cryptoPlaygroundApp) {
+                            window.cryptoPlaygroundApp = new CryptoPlaygroundApp();
+                        }
+                        if (window.cryptoPlaygroundApp && window.cryptoPlaygroundApp.setupEventListeners) {
+                            window.cryptoPlaygroundApp.setupEventListeners();
+                        }
+                    }, 100);
+                } else if (appName === 'malware-analysis') {
+                    setTimeout(() => {
+                        if (window.MalwareAnalysisApp && !window.malwareAnalysisApp) {
+                            window.malwareAnalysisApp = new MalwareAnalysisApp();
+                        }
+                        if (window.malwareAnalysisApp && window.malwareAnalysisApp.setupEventListeners) {
+                            window.malwareAnalysisApp.setupEventListeners();
+                        }
+                    }, 100);
                 }
             } catch (initError) {
                 console.error(`Error initializing ${appName} app:`, initError);
@@ -348,37 +397,50 @@ function toggleFullscreen() {
 }
 
 function showLeaderboard() {
-    if (window.userSystem) {
-        window.userSystem.showLeaderboard();
+    if (window.leaderboardSystem) {
+        window.leaderboardSystem.showLeaderboard();
     }
 }
 
 function showAchievements() {
-    if (window.userSystem) {
-        window.userSystem.showAchievements();
+    if (window.leaderboardSystem) {
+        window.leaderboardSystem.showAchievements();
     }
 }
 
 function logout() {
-    if (window.userSystem) {
-        window.userSystem.logout();
-        document.getElementById('user-menu').style.display = 'none';
+    if (window.userAuth) {
+        window.userAuth.logout();
     }
 }
 
-// User menu toggle
-document.addEventListener('click', (e) => {
-    if (e.target.closest('.user-menu')) {
-        const dropdown = document.querySelector('.user-dropdown');
-        if (dropdown) {
-            dropdown.classList.toggle('show');
+// User menu toggle - fixed
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        // User avatar click for leaderboard
+        const userAvatar = document.getElementById('user-avatar');
+        if (userAvatar) {
+            userAvatar.addEventListener('click', (e) => {
+                e.stopPropagation();
+                console.log('Opening leaderboard...');
+                if (window.leaderboardSystem && window.leaderboardSystem.showLeaderboard) {
+                    window.leaderboardSystem.showLeaderboard();
+                } else {
+                    console.error('Leaderboard system not found');
+                }
+            });
         }
-    } else {
-        const dropdown = document.querySelector('.user-dropdown');
-        if (dropdown) {
-            dropdown.classList.remove('show');
-        }
-    }
+        
+        // Leaderboard button in dropdown
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('[onclick="showLeaderboard()"]')) {
+                e.preventDefault();
+                if (window.leaderboardSystem) {
+                    window.leaderboardSystem.showLeaderboard();
+                }
+            }
+        });
+    }, 1000);
 });
 
 // Update user menu when user logs in
