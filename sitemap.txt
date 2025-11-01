@@ -1,103 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://neuroshade.duckdns.org/</loc>
+    <loc>https://neurodev.netlify.app/</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/blog.html</loc>
+    <loc>https://neurodev.netlify.app/blog.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/practice-lab.html</loc>
+    <loc>https://neurodev.netlify.app/practice-lab.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/python-ide.html</loc>
+    <loc>https://neurodev.netlify.app/python-ide.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/dictionary.html</loc>
+    <loc>https://neurodev.netlify.app/dictionary.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/videos.html</loc>
+    <loc>https://neurodev.netlify.app/videos.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/testimonials.html</loc>
+    <loc>https://neurodev.netlify.app/testimonials.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/faq.html</loc>
+    <loc>https://neurodev.netlify.app/faq.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/about.html</loc>
+    <loc>https://neurodev.netlify.app/about.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/contact.html</loc>
+    <loc>https://neurodev.netlify.app/contact.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/course.html</loc>
+    <loc>https://neurodev.netlify.app/course.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/post.html</loc>
+    <loc>https://neurodev.netlify.app/post.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/news.html</loc>
+    <loc>https://neurodev.netlify.app/news.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/privacy.html</loc>
+    <loc>https://neurodev.netlify.app/privacy.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/terms.html</loc>
+    <loc>https://neurodev.netlify.app/terms.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/disclaimer.html</loc>
+    <loc>https://neurodev.netlify.app/disclaimer.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>http://neuroshade.duckdns.org/donate.html</loc>
+    <loc>https://neurodev.netlify.app/donate.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
