@@ -26,6 +26,8 @@
           document.cookie = 'TESTCOOKIESENABLED=1; SameSite=None; Secure';
         }
       });
+      
+
     </script>
     <title>Neuro-Dev - Ethical Hacking Course in Roman Urdu</title>
     <meta name="google-site-verification" content="8Pw8Fc5mpMA_KCJe9Z03FdbR14nktljEW2teKiCDDrk" />
@@ -77,30 +79,7 @@
         flex: 1;
     }
     
-    /* Hamburger menu active states */
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-    
-    @media (max-width: 768px) {
-        .nav-menu.active {
-            display: flex !important;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #1a1a1a;
-            border-top: 1px solid #333;
-            z-index: 1000;
-        }
-    }
+
     </style>
     
     <!-- Schema Markup for SEO -->
@@ -181,20 +160,20 @@
                 <span>Neuro-Dev</span>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#courses" class="nav-link">Courses</a>
-                <a href="blog.html" class="nav-link">Blog</a>
-                <a href="testimonials.html" class="nav-link">Reviews</a>
-                <a href="faq.html" class="nav-link">FAQ</a>
-                <a href="videos.html" class="nav-link">Videos</a>
-                <a href="python-ide.html" class="nav-link">Python IDE</a>
-                <a href="vm-guide.html" class="nav-link">VM Guide</a>
-                <a href="ctf-challenges.html" class="nav-link">CTF</a>
-                <a href="dictionary.html" class="nav-link">AI/ML Dictionary</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="#home" class="nav-link" onclick="closeMenu()">Home</a>
+                <a href="#courses" class="nav-link" onclick="closeMenu()">Courses</a>
+                <a href="ctf-challenges.html" class="nav-link" onclick="closeMenu()">CTF</a>
+                <a href="labs/virtual-machine/index.html" class="nav-link" onclick="closeMenu()">VM Lab</a>
+                <a href="dictionary.html" class="nav-link" onclick="closeMenu()">Dictionary</a>
+                <a href="videos.html" class="nav-link" onclick="closeMenu()">Videos</a>
+                <a href="blog.html" class="nav-link" onclick="closeMenu()">Blog</a>
+                <a href="news.html" class="nav-link" onclick="closeMenu()">News</a>
+                <a href="testimonials.html" class="nav-link" onclick="closeMenu()">Reviews</a>
+                <a href="faq.html" class="nav-link" onclick="closeMenu()">FAQ</a>
+                <a href="about.html" class="nav-link" onclick="closeMenu()">About</a>
+                <a href="contact.html" class="nav-link" onclick="closeMenu()">Contact</a>
             </div>
-            <div class="hamburger" id="hamburger">
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()" style="cursor: pointer; user-select: none;">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -264,103 +243,6 @@
                 <a href="labs/virtual-machine/index.html" class="cta-button secondary">
                     <i class="fas fa-desktop"></i>
                     Virtual Lab
-                </a>
-            </div>
-        </div>
-        <div class="hero-animation">
-            <div class="code-lines">
-                <div class="line">$ pkg install python</div>
-                <div class="line">$ nmap -sS target.com</div>
-                <div class="line">$ sqlmap -u "url" --dbs</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Course Preview Section -->
-    <section id="preview" class="preview-section">
-        <div class="container">
-            <h2>Kya Seekhenge?</h2>
-            <div class="preview-grid">
-                <div class="preview-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mobile Se Hacking</h3>
-                    <p>Sirf phone use kar ke ethical hacking tools chalana</p>
-                </div>
-                <div class="preview-item">
-                    <i class="fas fa-terminal"></i>
-                    <h3>Command Line Mastery</h3>
-                    <p>Termux aur Linux commands complete control</p>
-                </div>
-                <div class="preview-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Security Testing</h3>
-                    <p>Network scanning, web app testing, vulnerability assessment</p>
-                </div>
-                <div class="preview-item">
-                    <i class="fab fa-python"></i>
-                    <h3>Python Programming</h3>
-                    <p>Zero se hero tak Python seekhiye</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="courses" class="courses">
-        <div class="container">
-            <h2>Complete Course Modules</h2>
-            
-            <!-- Search & Filter Controls -->
-            <div class="course-controls">
-                <div class="search-box">
-                    <input type="text" id="course-search" placeholder="Course search kariye...">
-                    <i class="fas fa-search"></i>
-                </div>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="filterCourses('all')">All</button>
-                    <button class="filter-btn" onclick="filterCourses('beginner')">Beginner</button>
-                    <button class="filter-btn" onclick="filterCourses('intermediate')">Intermediate</button>
-                    <button class="filter-btn" onclick="filterCourses('advanced')">Advanced</button>
-                </div>
-                <button id="theme-toggle" style="cursor: pointer; z-index: 999;">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-            
-            <div class="course-grid">
-                <div class="stat-item">
-                    <div class="stat-number">📱</div>
-                    <div class="stat-label">Mobile First</div>
-                </div>
-            </div>
-            
-            <!-- Key Benefits -->
-            <div class="hero-benefits">
-                <div class="benefit-item">
-                    <i class="fas fa-copy"></i>
-                    <span>One-Click Copy Commands</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="fas fa-language"></i>
-                    <span>Roman Urdu Tutorials</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <span>Mobile-Only Learning</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="fas fa-video"></i>
-                    <span>Video Explanations</span>
-                </div>
-            </div>
-            
-            <div class="hero-buttons">
-                <a href="#courses" class="cta-button primary">
-                    <i class="fas fa-play"></i>
-                    Start Learning
-                </a>
-                <a href="#preview" class="cta-button secondary">
-                    <i class="fas fa-eye"></i>
-                    Preview Course
                 </a>
             </div>
         </div>
@@ -1163,25 +1045,19 @@
                 });
             }
             
-            // Hamburger menu functionality
-            const hamburger = document.getElementById('hamburger');
-            const navMenu = document.getElementById('nav-menu');
+            // Menu close functionality for nav links
             
-            if (hamburger && navMenu) {
-                hamburger.addEventListener('click', function() {
-                    hamburger.classList.toggle('active');
-                    navMenu.classList.toggle('active');
-                });
-                
-                // Close menu when clicking on links
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => {
+            // Close menu when clicking on links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    const hamburger = document.getElementById('hamburger');
+                    const navMenu = document.getElementById('nav-menu');
+                    if (hamburger && navMenu) {
                         hamburger.classList.remove('active');
                         navMenu.classList.remove('active');
-                    });
+                    }
                 });
-            }
+            })
         });
     </script>
     <script>
