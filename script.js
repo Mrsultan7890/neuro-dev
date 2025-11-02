@@ -103,9 +103,13 @@ function copyToClipboard(text) {
         return;
     }
     
-    const sanitizedText = text.replace(/<script[^>]*>.*?<\/script>/gi, '')
-                             .replace(/<[^>]*>/g, '')
-                             .trim();
+    // Sanitize input to prevent XSS
+    const sanitizedText = String(text)
+        .replace(/<script[^>]*>.*?<\/script>/gi, '')
+        .replace(/<[^>]*>/g, '')
+        .replace(/javascript:/gi, '')
+        .replace(/on\w+=/gi, '')
+        .trim();
     
     if (!navigator.clipboard || !window.isSecureContext) {
         fallbackCopyTextToClipboard(sanitizedText);
@@ -245,4 +249,60 @@ window.filterCourses = function(level) {
             card.style.display = 'none';
         }
     });
+};
+
+// Missing functions that are called in HTML
+window.toggleMenu = function() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger && navMenu) {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    }
+};
+
+window.closeMenu = function() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger && navMenu) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
+};
+
+window.openVM = function(courseId) {
+    if (!courseId || typeof courseId !== 'string') {
+        console.error('Invalid course ID for VM');
+        return;
+    }
+    
+    // Use relative path that works with any server setup
+    const vmUrl = './labs/virtual-machine/index.html?course=' + encodeURIComponent(courseId);
+    
+    // Try to open in new window, fallback to same window if popup blocked
+    try {
+        const newWindow = window.open(vmUrl, '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes,toolbar=no,menubar=no');
+        if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+            // Popup blocked, open in same window
+            window.location.href = vmUrl;
+        }
+    } catch (e) {
+        // Fallback to same window
+        window.location.href = vmUrl;
+    }
+};
+
+window.spawnMachine = function(machineId) {
+    if (!machineId || typeof machineId !== 'string') {
+        console.error('Invalid machine ID');
+        return;
+    }
+    
+    showNotification(`🚀 Spawning ${machineId} machine...`, '#00ff41', '#000');
+    
+    setTimeout(() => {
+        openVM('nethunter-tools');
+    }, 2000);
 };

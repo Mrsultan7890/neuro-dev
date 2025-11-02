@@ -73,10 +73,12 @@ body {
     cursor: pointer;
     padding: 5px;
     z-index: 1001;
+    position: relative;
 }
 
 .hamburger.active .bar:nth-child(1) {
     transform: rotate(-45deg) translate(-5px, 6px);
+    background: #ff6b35;
 }
 
 .hamburger.active .bar:nth-child(2) {
@@ -85,6 +87,7 @@ body {
 
 .hamburger.active .bar:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
+    background: #ff6b35;
 }
 
 .bar {

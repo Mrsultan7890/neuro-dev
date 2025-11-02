@@ -68,38 +68,108 @@ class ReviewsSystem {
 function showReviewModal(courseId) {
     const modal = document.createElement('div');
     modal.className = 'review-modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-star"></i> Course Review</h3>
-                <button class="close-btn" onclick="closeReviewModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="rating-section">
-                    <label>Rating:</label>
-                    <div class="star-rating" id="star-rating">
-                        <span class="star" data-rating="1">★</span>
-                        <span class="star" data-rating="2">★</span>
-                        <span class="star" data-rating="3">★</span>
-                        <span class="star" data-rating="4">★</span>
-                        <span class="star" data-rating="5">★</span>
-                    </div>
-                </div>
-                <div class="review-section">
-                    <label for="review-text">Review (Roman Urdu mein):</label>
-                    <textarea id="review-text" placeholder="Apna experience share kariye..."></textarea>
-                </div>
-                <div class="name-section">
-                    <label for="user-name">Name (Optional):</label>
-                    <input type="text" id="user-name" placeholder="Anonymous">
-                </div>
-                <div class="modal-actions">
-                    <button onclick="submitReview('${courseId}')" class="submit-btn">Submit Review</button>
-                    <button onclick="closeReviewModal()" class="cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </div>
-    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+    
+    const modalHeader = document.createElement('div');
+    modalHeader.className = 'modal-header';
+    
+    const headerTitle = document.createElement('h3');
+    const starIcon = document.createElement('i');
+    starIcon.className = 'fas fa-star';
+    headerTitle.appendChild(starIcon);
+    headerTitle.appendChild(document.createTextNode(' Course Review'));
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-btn';
+    closeBtn.textContent = '×';
+    closeBtn.onclick = closeReviewModal;
+    
+    modalHeader.appendChild(headerTitle);
+    modalHeader.appendChild(closeBtn);
+    
+    const modalBody = document.createElement('div');
+    modalBody.className = 'modal-body';
+    
+    // Rating section
+    const ratingSection = document.createElement('div');
+    ratingSection.className = 'rating-section';
+    
+    const ratingLabel = document.createElement('label');
+    ratingLabel.textContent = 'Rating:';
+    
+    const starRating = document.createElement('div');
+    starRating.className = 'star-rating';
+    starRating.id = 'star-rating';
+    
+    for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.className = 'star';
+        star.dataset.rating = i;
+        star.textContent = '★';
+        starRating.appendChild(star);
+    }
+    
+    ratingSection.appendChild(ratingLabel);
+    ratingSection.appendChild(starRating);
+    
+    // Review section
+    const reviewSection = document.createElement('div');
+    reviewSection.className = 'review-section';
+    
+    const reviewLabel = document.createElement('label');
+    reviewLabel.setAttribute('for', 'review-text');
+    reviewLabel.textContent = 'Review (Roman Urdu mein):';
+    
+    const reviewTextarea = document.createElement('textarea');
+    reviewTextarea.id = 'review-text';
+    reviewTextarea.placeholder = 'Apna experience share kariye...';
+    
+    reviewSection.appendChild(reviewLabel);
+    reviewSection.appendChild(reviewTextarea);
+    
+    // Name section
+    const nameSection = document.createElement('div');
+    nameSection.className = 'name-section';
+    
+    const nameLabel = document.createElement('label');
+    nameLabel.setAttribute('for', 'user-name');
+    nameLabel.textContent = 'Name (Optional):';
+    
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.id = 'user-name';
+    nameInput.placeholder = 'Anonymous';
+    
+    nameSection.appendChild(nameLabel);
+    nameSection.appendChild(nameInput);
+    
+    // Modal actions
+    const modalActions = document.createElement('div');
+    modalActions.className = 'modal-actions';
+    
+    const submitBtn = document.createElement('button');
+    submitBtn.className = 'submit-btn';
+    submitBtn.textContent = 'Submit Review';
+    submitBtn.onclick = () => submitReview(courseId);
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'cancel-btn';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = closeReviewModal;
+    
+    modalActions.appendChild(submitBtn);
+    modalActions.appendChild(cancelBtn);
+    
+    modalBody.appendChild(ratingSection);
+    modalBody.appendChild(reviewSection);
+    modalBody.appendChild(nameSection);
+    modalBody.appendChild(modalActions);
+    
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalBody);
+    modal.appendChild(modalContent);
     
     document.body.appendChild(modal);
     
@@ -266,32 +336,68 @@ function displayAllReviews() {
         return;
     }
     
-    // Display reviews
-    reviewsContainer.innerHTML = allReviews.slice(0, 6).map(review => {
-        const reviewText = review.review.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-        return `
-        <div class="user-review-card">
-            <div class="review-header">
-                <div class="reviewer-info">
-                    <strong>${review.userName}</strong>
-                    <span class="course-name">${review.courseName}</span>
-                </div>
-                <div class="review-rating">
-                    ${generateStars(review.rating)}
-                </div>
-            </div>
-            <div class="review-text">
-                <p>"${reviewText}"</p>
-            </div>
-            <div class="review-footer">
-                <span class="review-date">${review.date}</span>
-                <button class="helpful-btn" onclick="markReviewHelpful('${review.courseId}', ${review.id})">
-                    <i class="fas fa-thumbs-up"></i> Helpful (${review.helpful || 0})
-                </button>
-            </div>
-        </div>
-        `;
-    }).join('');
+    // Display reviews safely
+    reviewsContainer.innerHTML = '';
+    
+    allReviews.slice(0, 6).forEach(review => {
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'user-review-card';
+        
+        const reviewHeader = document.createElement('div');
+        reviewHeader.className = 'review-header';
+        
+        const reviewerInfo = document.createElement('div');
+        reviewerInfo.className = 'reviewer-info';
+        
+        const userName = document.createElement('strong');
+        userName.textContent = review.userName;
+        
+        const courseName = document.createElement('span');
+        courseName.className = 'course-name';
+        courseName.textContent = review.courseName;
+        
+        reviewerInfo.appendChild(userName);
+        reviewerInfo.appendChild(courseName);
+        
+        const reviewRating = document.createElement('div');
+        reviewRating.className = 'review-rating';
+        reviewRating.innerHTML = generateStars(review.rating);
+        
+        reviewHeader.appendChild(reviewerInfo);
+        reviewHeader.appendChild(reviewRating);
+        
+        const reviewText = document.createElement('div');
+        reviewText.className = 'review-text';
+        
+        const reviewPara = document.createElement('p');
+        reviewPara.textContent = `"${review.review}"`;
+        reviewText.appendChild(reviewPara);
+        
+        const reviewFooter = document.createElement('div');
+        reviewFooter.className = 'review-footer';
+        
+        const reviewDate = document.createElement('span');
+        reviewDate.className = 'review-date';
+        reviewDate.textContent = review.date;
+        
+        const helpfulBtn = document.createElement('button');
+        helpfulBtn.className = 'helpful-btn';
+        helpfulBtn.onclick = () => markReviewHelpful(review.courseId, review.id);
+        
+        const thumbIcon = document.createElement('i');
+        thumbIcon.className = 'fas fa-thumbs-up';
+        helpfulBtn.appendChild(thumbIcon);
+        helpfulBtn.appendChild(document.createTextNode(` Helpful (${review.helpful || 0})`));
+        
+        reviewFooter.appendChild(reviewDate);
+        reviewFooter.appendChild(helpfulBtn);
+        
+        reviewCard.appendChild(reviewHeader);
+        reviewCard.appendChild(reviewText);
+        reviewCard.appendChild(reviewFooter);
+        
+        reviewsContainer.appendChild(reviewCard);
+    });
 }
 
 // Get course name by ID

@@ -168,47 +168,110 @@ function showSearchResults(results, searchTerm) {
     }
 
     if (results.length === 0) {
-        resultsContainer.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-search"></i>
-                <h3>"${searchTerm}" ke liye koi result nahi mila</h3>
-                <p>Kuch aur try kariye ya spelling check kariye</p>
-            </div>
-        `;
+        const noResultsDiv = document.createElement('div');
+        noResultsDiv.className = 'no-results';
+        
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-search';
+        
+        const title = document.createElement('h3');
+        title.appendChild(document.createTextNode(`"${searchTerm.replace(/[<>"'&]/g, '')}" ke liye koi result nahi mila`));
+        
+        const desc = document.createElement('p');
+        desc.textContent = 'Kuch aur try kariye ya spelling check kariye';
+        
+        noResultsDiv.appendChild(icon);
+        noResultsDiv.appendChild(title);
+        noResultsDiv.appendChild(desc);
+        
+        resultsContainer.innerHTML = '';
+        resultsContainer.appendChild(noResultsDiv);
         resultsContainer.style.display = 'block';
         return;
     }
 
-    resultsContainer.innerHTML = `
-        <div class="search-results-header">
-            <h3><i class="fas fa-search"></i> "${searchTerm}" ke liye ${results.length} results mile</h3>
-            <button onclick="hideSearchResults()" class="close-search">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="search-results-grid">
-            ${results.map(result => `
-                <div class="search-result-item" onclick="openLesson('${result.moduleId}', ${result.lessonId})">
-                    <div class="result-header">
-                        <h4>${result.lessonTitle}</h4>
-                        <span class="module-badge">${result.moduleName}</span>
-                    </div>
-                    <div class="result-content">
-                        <p>${result.content.substring(0, 150)}...</p>
-                    </div>
-                    ${result.commands.length > 0 ? `
-                        <div class="result-commands">
-                            <strong>Commands:</strong> ${result.commands.slice(0, 2).join(', ')}
-                        </div>
-                    ` : ''}
-                    <div class="result-footer">
-                        <span class="lesson-number">Lesson ${result.lessonId}</span>
-                        <span class="open-lesson">Open Lesson <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
+    // Sanitize search term and results
+    const sanitizedSearchTerm = searchTerm.replace(/[<>"'&]/g, '');
+    
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'search-results-header';
+    
+    const headerTitle = document.createElement('h3');
+    headerTitle.innerHTML = '<i class="fas fa-search"></i>';
+    headerTitle.appendChild(document.createTextNode(` "${sanitizedSearchTerm}" ke liye ${results.length} results mile`));
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-search';
+    closeBtn.innerHTML = '<i class="fas fa-times"></i> Close';
+    closeBtn.onclick = hideSearchResults;
+    
+    headerDiv.appendChild(headerTitle);
+    headerDiv.appendChild(closeBtn);
+    
+    const gridDiv = document.createElement('div');
+    gridDiv.className = 'search-results-grid';
+    
+    results.forEach(result => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'search-result-item';
+        itemDiv.onclick = () => openLesson(result.moduleId, result.lessonId);
+        
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'result-header';
+        
+        const titleH4 = document.createElement('h4');
+        titleH4.textContent = result.lessonTitle;
+        
+        const badgeSpan = document.createElement('span');
+        badgeSpan.className = 'module-badge';
+        badgeSpan.textContent = result.moduleName;
+        
+        headerDiv.appendChild(titleH4);
+        headerDiv.appendChild(badgeSpan);
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'result-content';
+        
+        const contentP = document.createElement('p');
+        contentP.textContent = result.content.substring(0, 150) + '...';
+        contentDiv.appendChild(contentP);
+        
+        itemDiv.appendChild(headerDiv);
+        itemDiv.appendChild(contentDiv);
+        
+        if (result.commands.length > 0) {
+            const commandsDiv = document.createElement('div');
+            commandsDiv.className = 'result-commands';
+            
+            const strongEl = document.createElement('strong');
+            strongEl.textContent = 'Commands: ';
+            commandsDiv.appendChild(strongEl);
+            commandsDiv.appendChild(document.createTextNode(result.commands.slice(0, 2).join(', ')));
+            
+            itemDiv.appendChild(commandsDiv);
+        }
+        
+        const footerDiv = document.createElement('div');
+        footerDiv.className = 'result-footer';
+        
+        const lessonSpan = document.createElement('span');
+        lessonSpan.className = 'lesson-number';
+        lessonSpan.textContent = `Lesson ${result.lessonId}`;
+        
+        const openSpan = document.createElement('span');
+        openSpan.className = 'open-lesson';
+        openSpan.innerHTML = 'Open Lesson <i class="fas fa-arrow-right"></i>';
+        
+        footerDiv.appendChild(lessonSpan);
+        footerDiv.appendChild(openSpan);
+        
+        itemDiv.appendChild(footerDiv);
+        gridDiv.appendChild(itemDiv);
+    });
+    
+    resultsContainer.innerHTML = '';
+    resultsContainer.appendChild(headerDiv);
+    resultsContainer.appendChild(gridDiv);
     
     resultsContainer.style.display = 'block';
 }
@@ -334,10 +397,16 @@ class ProgressTracker {
             if (progress > 0 && !progressBar) {
                 progressBar = document.createElement('div');
                 progressBar.className = 'progress-bar';
-                progressBar.innerHTML = `
-                    <div class="progress-fill" style="width: ${progress}%"></div>
-                    <span class="progress-text">${progress}% Complete</span>
-                `;
+                const progressFill = document.createElement('div');
+                progressFill.className = 'progress-fill';
+                progressFill.style.width = `${progress}%`;
+                
+                const progressText = document.createElement('span');
+                progressText.className = 'progress-text';
+                progressText.textContent = `${progress}% Complete`;
+                
+                progressBar.appendChild(progressFill);
+                progressBar.appendChild(progressText);
                 card.appendChild(progressBar);
             } else if (progressBar) {
                 const fill = progressBar.querySelector('.progress-fill');
@@ -426,8 +495,14 @@ function addMissingButtons() {
             // Add Start Learning button
             const startBtn = document.createElement('button');
             startBtn.className = 'start-btn';
-            startBtn.innerHTML = '<i class="fas fa-play"></i> Start Learning';
-            startBtn.onclick = () => window.location.href = `course.html?module=${moduleId}`;
+            const playIcon = document.createElement('i');
+            playIcon.className = 'fas fa-play';
+            startBtn.appendChild(playIcon);
+            startBtn.appendChild(document.createTextNode(' Start Learning'));
+            startBtn.onclick = () => {
+                const sanitizedModuleId = encodeURIComponent(moduleId);
+                window.location.href = `course.html?module=${sanitizedModuleId}`;
+            };
             
             actionsDiv.appendChild(startBtn);
             card.appendChild(actionsDiv);
@@ -437,17 +512,28 @@ function addMissingButtons() {
         if (!card.querySelector('.review-btn')) {
             const reviewBtn = document.createElement('button');
             reviewBtn.className = 'review-btn';
-            reviewBtn.innerHTML = '<i class="fas fa-star"></i> Rate Course';
+            const starIcon = document.createElement('i');
+            starIcon.className = 'fas fa-star';
+            reviewBtn.appendChild(starIcon);
+            reviewBtn.appendChild(document.createTextNode(' Rate Course'));
             reviewBtn.onclick = () => showReviewModal(moduleId);
             actionsDiv.appendChild(reviewBtn);
         }
     });
 }
 
+// Missing function definitions
+function showReviewModal(moduleId) {
+    console.log(`Review modal for module: ${moduleId}`);
+    // Placeholder for review modal functionality
+    alert(`Review functionality for ${moduleId} - Coming soon!`);
+}
+
 // Export for use in course.html
 window.progressTracker = progressTracker;
 window.notesSystem = notesSystem;
 window.globalSearch = globalSearch;
+window.showReviewModal = showReviewModal;
 
 // Add search event listeners and theme toggle
 document.addEventListener('DOMContentLoaded', () => {

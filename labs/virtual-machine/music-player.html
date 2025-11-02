@@ -1,0 +1,52 @@
+<!-- Music Player Application -->
+<div class="app-window" id="music-player-app">
+    <div class="window-header">
+        <div class="window-controls">
+            <span class="control minimize" onclick="minimizeWindow('music-player-app')"></span>
+            <span class="control maximize" onclick="maximizeWindow('music-player-app')"></span>
+            <span class="control close" onclick="closeWindow('music-player-app')"></span>
+        </div>
+        <div class="window-title">
+            <i class="fas fa-music"></i> Music Player
+        </div>
+    </div>
+    <div class="window-content" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 20px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div style="width: 200px; height: 200px; background: rgba(0,0,0,0.3); border-radius: 15px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; border: 3px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-music" style="font-size: 60px; color: rgba(255,255,255,0.5);"></i>
+            </div>
+            <h3 style="margin: 0 0 5px 0;">No Music Playing</h3>
+            <p style="margin: 0; opacity: 0.7;">Select a track to start</p>
+        </div>
+        
+        <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;">
+            <button style="background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 50px; height: 50px; color: #fff; cursor: pointer; font-size: 18px;">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button style="background: #00ff41; border: none; border-radius: 50%; width: 60px; height: 60px; color: #000; cursor: pointer; font-size: 20px;">
+                <i class="fas fa-play"></i>
+            </button>
+            <button style="background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 50px; height: 50px; color: #fff; cursor: pointer; font-size: 18px;">
+                <i class="fas fa-step-forward"></i>
+            </button>
+        </div>
+        
+        <div style="background: rgba(0,0,0,0.3); border-radius: 10px; padding: 20px;">
+            <h4 style="margin-bottom: 15px;">Playlist</h4>
+            <div style="max-height: 200px; overflow-y: auto;">
+                <div style="padding: 10px; border-radius: 5px; margin-bottom: 5px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">
+                    <div style="font-weight: bold;">Hacker's Anthem</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Neuro-Dev - 3:45</div>
+                </div>
+                <div style="padding: 10px; border-radius: 5px; margin-bottom: 5px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">
+                    <div style="font-weight: bold;">Terminal Blues</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Cyber Sounds - 4:12</div>
+                </div>
+                <div style="padding: 10px; border-radius: 5px; margin-bottom: 5px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">
+                    <div style="font-weight: bold;">Code & Coffee</div>
+                    <div style="font-size: 12px; opacity: 0.7;">Dev Beats - 2:58</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

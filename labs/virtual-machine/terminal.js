@@ -840,7 +840,8 @@ class Terminal {
 
         const line = document.createElement('div');
         line.className = `terminal-line ${type}`;
-        line.textContent = text;
+        // Sanitize text to prevent XSS
+        line.textContent = String(text || '');
         
         output.appendChild(line);
         output.scrollTop = output.scrollHeight;
@@ -907,9 +908,9 @@ class Terminal {
         const currentDir = this.getCurrentDirectory();
         if (currentDir && currentDir[args[0]] !== undefined) {
             delete currentDir[args[0]];
-            this.addLine(`File '${args[0]}' removed`, 'success');
+            this.addLine("File '" + args[0] + "' removed", 'success');
         } else {
-            this.addLine(`rm: cannot remove '${args[0]}': No such file or directory`, 'error');
+            this.addLine("rm: cannot remove '" + args[0] + "': No such file or directory", 'error');
         }
     }
 
@@ -921,9 +922,9 @@ class Terminal {
         const currentDir = this.getCurrentDirectory();
         if (currentDir && currentDir[args[0]] !== undefined) {
             currentDir[args[1]] = currentDir[args[0]];
-            this.addLine(`'${args[0]}' copied to '${args[1]}'`, 'success');
+            this.addLine("'" + args[0] + "' copied to '" + args[1] + "'", 'success');
         } else {
-            this.addLine(`cp: cannot stat '${args[0]}': No such file or directory`, 'error');
+            this.addLine("cp: cannot stat '" + args[0] + "': No such file or directory", 'error');
         }
     }
 
@@ -936,9 +937,9 @@ class Terminal {
         if (currentDir && currentDir[args[0]] !== undefined) {
             currentDir[args[1]] = currentDir[args[0]];
             delete currentDir[args[0]];
-            this.addLine(`'${args[0]}' moved to '${args[1]}'`, 'success');
+            this.addLine("'" + args[0] + "' moved to '" + args[1] + "'", 'success');
         } else {
-            this.addLine(`mv: cannot stat '${args[0]}': No such file or directory`, 'error');
+            this.addLine("mv: cannot stat '" + args[0] + "': No such file or directory", 'error');
         }
     }
 

@@ -22,43 +22,51 @@
         <div class="desktop" style="background-image: url('IMG_20251031_201926.jpg'); background-size: cover; background-position: center;">
 
 
-            <!-- Course Quick Access -->
+            <!-- Linux Applications Panel -->
             <div class="course-shortcuts">
-                <h4><i class="fas fa-graduation-cap"></i> Quick Access</h4>
-                <div class="course-shortcut" data-action="vm-guide">
-                    <i class="fas fa-question-circle"></i> VM Guide
+                <div class="course-shortcut" data-action="vm-guide" title="VM Guide">
+                    <i class="fas fa-question-circle"></i>
+                    <span>VM Guide</span>
                 </div>
-                <div class="course-shortcut active" data-course="termux-basics">
-                    <i class="fas fa-mobile-alt"></i> Termux Basics
+                <div class="course-shortcut active" data-course="termux-basics" title="Termux Basics">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Termux Basics</span>
                 </div>
-                <div class="course-shortcut" data-course="nethunter-rootless">
-                    <i class="fas fa-shield-alt"></i> NetHunter
+                <div class="course-shortcut" data-course="nethunter-rootless" title="NetHunter">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>NetHunter</span>
                 </div>
-                <div class="course-shortcut" data-course="web-security">
-                    <i class="fas fa-lock"></i> Web Security
+                <div class="course-shortcut" data-course="web-security" title="Web Security">
+                    <i class="fas fa-lock"></i>
+                    <span>Web Security</span>
                 </div>
-                <div class="course-shortcut" data-course="python">
-                    <i class="fas fa-code"></i> Python
+                <div class="course-shortcut" data-course="python" title="Python">
+                    <i class="fas fa-code"></i>
+                    <span>Python</span>
                 </div>
-                <div class="course-shortcut" data-course="networking">
-                    <i class="fas fa-network-wired"></i> Networking
+                <div class="course-shortcut" data-course="networking" title="Networking">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Networking</span>
                 </div>
-                <div class="course-shortcut" data-course="hands-on-ml-scikit-learn">
-                    <i class="fas fa-brain"></i> ML Theory
+                <div class="course-shortcut" data-course="hands-on-ml-scikit-learn" title="ML Theory">
+                    <i class="fas fa-brain"></i>
+                    <span>ML Theory</span>
                 </div>
-                <div class="course-shortcut" data-course="python-ai-ml">
-                    <i class="fas fa-robot"></i> AI/ML Coding
+                <div class="course-shortcut" data-course="python-ai-ml" title="AI/ML Coding">
+                    <i class="fas fa-robot"></i>
+                    <span>AI/ML Coding</span>
                 </div>
-                <div class="course-shortcut" data-course="ai-hacking">
-                    <i class="fas fa-crosshairs"></i> AI Security
+                <div class="course-shortcut" data-course="ai-hacking" title="AI Security">
+                    <i class="fas fa-crosshairs"></i>
+                    <span>AI Security</span>
                 </div>
             </div>
 
-            <!-- Taskbar -->
+            <!-- Ubuntu-style Taskbar -->
             <div class="taskbar">
                 <div class="start-menu">
                     <div class="logo">
-                        <i class="fas fa-brain"></i> Neuro-Dev
+                        <i class="fab fa-ubuntu"></i> Neuro-Linux
                     </div>
                 </div>
                 <div class="taskbar-apps">
@@ -97,6 +105,30 @@
                     </div>
                     <div class="app-icon" data-app="social-engineer" title="Social Engineering Toolkit">
                         <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="app-icon" data-app="system-monitor" title="System Monitor">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="app-icon" data-app="package-manager" title="Package Manager">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="app-icon" data-app="settings" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="app-icon" data-app="calculator" title="Calculator">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="app-icon" data-app="text-editor" title="Text Editor">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="app-icon" data-app="image-viewer" title="Image Viewer">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="app-icon" data-app="music-player" title="Music Player">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="app-icon" data-app="video-player" title="Video Player">
+                        <i class="fas fa-play-circle"></i>
                     </div>
                 </div>
                 <div class="system-tray">
@@ -168,47 +200,221 @@
                     </div>
                 </div>
 
-                <!-- Browser Application -->
+                <!-- Firefox Browser Application -->
                 <div class="app-window" id="browser-app">
-                    <div class="window-header">
-                        <div class="window-controls">
-                            <span class="control minimize" onclick="minimizeWindow('browser-app')"></span>
-                            <span class="control maximize" onclick="maximizeWindow('browser-app')"></span>
-                            <span class="control close" onclick="closeWindow('browser-app')"></span>
+                    <div class="firefox-browser">
+                        <!-- Title Bar -->
+                        <div class="firefox-titlebar">
+                            <div class="titlebar-buttons">
+                                <button class="titlebar-btn minimize">−</button>
+                                <button class="titlebar-btn maximize">□</button>
+                                <button class="titlebar-btn close">×</button>
+                            </div>
+                            <div class="titlebar-title">Firefox - Neuro-Dev Edition</div>
                         </div>
-                        <div class="window-title">
-                            <i class="fas fa-globe"></i> Neuro Browser
+
+                        <!-- Menu Bar -->
+                        <div class="firefox-menubar">
+                            <div class="menu-item" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleMenu('file')">File</div>
+                            <div class="menu-item" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleMenu('edit')">Edit</div>
+                            <div class="menu-item" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleMenu('view')">View</div>
+                            <div class="menu-item" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleMenu('history')">History</div>
+                            <div class="menu-item" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleMenu('bookmarks')">Bookmarks</div>
+                            <div class="menu-item" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleMenu('tools')">Tools</div>
+                            <div class="menu-item" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleMenu('help')">Help</div>
                         </div>
-                    </div>
-                    <div class="window-content">
-                        <div class="browser-toolbar">
-                            <div class="url-bar">
-                                <input type="text" id="url-input" placeholder="Enter URL or search..." value="https://neuro-dev.local">
-                                <button onclick="navigateUrl()"><i class="fas fa-arrow-right"></i></button>
+
+                        <!-- Navigation Bar -->
+                        <div class="firefox-navbar">
+                            <div class="nav-buttons">
+                                <button class="nav-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.goBack()" title="Back">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <button class="nav-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.goForward()" title="Forward">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <button class="nav-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.refresh()" title="Refresh">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                                <button class="nav-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.goHome()" title="Home">
+                                    <i class="fas fa-home"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="address-bar">
+                                <div class="security-indicator">
+                                    <i class="fas fa-lock" title="Secure Connection"></i>
+                                </div>
+                                <input type="text" id="firefox-url-input" placeholder="Search or enter address" 
+                                       onkeypress="if(event.key==='Enter' && window.firefoxBrowser) window.firefoxBrowser.navigate()" value="https://neuro-dev.local">
+                                <button class="url-go-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.navigate()">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="browser-actions">
+                                <button class="action-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleBookmarks()" title="Bookmarks">
+                                    <i class="fas fa-star"></i>
+                                </button>
+                                <button class="action-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.showDownloads()" title="Downloads">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.toggleDevTools()" title="Developer Tools">
+                                    <i class="fas fa-code"></i>
+                                </button>
+                                <button class="action-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.showSettings()" title="Settings">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                                <button class="action-btn menu-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.showMainMenu()" title="Menu">
+                                    <i class="fas fa-bars"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="browser-content" id="browser-content">
-                            <div class="homepage">
-                                <h1>🌐 Neuro-Dev Local Network</h1>
-                                <div class="quick-links">
-                                    <div class="link-card" onclick="loadPage('course-materials')">
-                                        <i class="fas fa-book"></i>
-                                        <h3>Course Materials</h3>
-                                        <p>Access current course content</p>
-                                    </div>
-                                    <div class="link-card" onclick="loadPage('practice-targets')">
-                                        <i class="fas fa-target"></i>
-                                        <h3>Practice Targets</h3>
-                                        <p>Vulnerable web applications</p>
-                                    </div>
-                                    <div class="link-card" onclick="loadPage('tools')">
-                                        <i class="fas fa-tools"></i>
-                                        <h3>Security Tools</h3>
-                                        <p>Web-based hacking tools</p>
+
+                        <!-- Tab Bar -->
+                        <div class="firefox-tabbar">
+                            <div class="tabs-container" id="tabs-container">
+                                <div class="firefox-tab active">
+                                    <div class="tab-favicon">🧠</div>
+                                    <div class="tab-title">Neuro-Dev - Home</div>
+                                    <button class="tab-close">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="new-tab-btn" onclick="window.firefoxBrowser && window.firefoxBrowser.createNewTab()" title="New Tab">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <!-- Bookmarks Bar -->
+                        <div class="firefox-bookmarks-bar" id="bookmarks-bar" style="display: none;">
+                            <div class="bookmarks-container" id="bookmarks-container"></div>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="firefox-content">
+                            <div class="tab-content" id="tab-content">
+                                <div class="neuro-dev-site">
+                                    <header class="site-header">
+                                        <nav class="site-nav">
+                                            <div class="logo">🧠 Neuro-Dev</div>
+                                            <div class="nav-links">
+                                                <a href="#" onclick="window.firefoxBrowser && window.firefoxBrowser.loadSection('courses')">Courses</a>
+                                                <a href="#" onclick="window.firefoxBrowser && window.firefoxBrowser.loadSection('ctf')">CTF</a>
+                                                <a href="#" onclick="window.firefoxBrowser && window.firefoxBrowser.loadSection('labs')">Labs</a>
+                                                <a href="#" onclick="window.firefoxBrowser && window.firefoxBrowser.loadSection('about')">About</a>
+                                            </div>
+                                        </nav>
+                                    </header>
+
+                                    <main class="site-main">
+                                        <section class="hero">
+                                            <h1>Ethical Hacking Course Roman Urdu Mein</h1>
+                                            <p>Mobile se NetHunter tak - Complete Cybersecurity Journey</p>
+                                            <div class="hero-stats">
+                                                <div class="stat">
+                                                    <div class="stat-number">13+</div>
+                                                    <div class="stat-label">Modules</div>
+                                                </div>
+                                                <div class="stat">
+                                                    <div class="stat-number">49+</div>
+                                                    <div class="stat-label">CTF Challenges</div>
+                                                </div>
+                                                <div class="stat">
+                                                    <div class="stat-number">500+</div>
+                                                    <div class="stat-label">AI/ML Terms</div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section class="courses-preview" id="site-content">
+                                            <h2>Featured Courses</h2>
+                                            <div class="course-grid">
+                                                <div class="course-card">
+                                                    <div class="course-icon">📱</div>
+                                                    <h3>Termux Basics</h3>
+                                                    <p>Mobile terminal mastery</p>
+                                                    <button onclick="window.firefoxBrowser && window.firefoxBrowser.openCourse('termux-basics')">Start Learning</button>
+                                                </div>
+                                                <div class="course-card">
+                                                    <div class="course-icon">🛡️</div>
+                                                    <h3>NetHunter Rootless</h3>
+                                                    <p>Kali Linux on mobile</p>
+                                                    <button onclick="window.firefoxBrowser && window.firefoxBrowser.openCourse('nethunter-rootless')">Start Learning</button>
+                                                </div>
+                                                <div class="course-card">
+                                                    <div class="course-icon">🤖</div>
+                                                    <h3>AI Hacking</h3>
+                                                    <p>Machine learning security</p>
+                                                    <button onclick="window.firefoxBrowser && window.firefoxBrowser.openCourse('ai-hacking')">Start Learning</button>
+                                                </div>
+                                            </div>
+                                            <div class="quick-access">
+                                                <h3>Quick Access</h3>
+                                                <div class="link-grid">
+                                                    <div class="link-card" onclick="window.firefoxBrowser && window.firefoxBrowser.navigate('https://neuro-dev.local/vulnerable-app')">
+                                                        <i class="fas fa-bug"></i>
+                                                        <h4>Vulnerable Web App</h4>
+                                                        <p>Practice SQL injection, XSS</p>
+                                                    </div>
+                                                    <div class="link-card" onclick="window.firefoxBrowser && window.firefoxBrowser.navigate('https://neuro-dev.local/ctf-hub')">
+                                                        <i class="fas fa-flag"></i>
+                                                        <h4>CTF Challenges</h4>
+                                                        <p>Interactive security challenges</p>
+                                                    </div>
+                                                    <div class="link-card" onclick="window.firefoxBrowser && window.firefoxBrowser.navigate('https://neuro-dev.local/owasp-top10')">
+                                                        <i class="fas fa-shield-alt"></i>
+                                                        <h4>OWASP Top 10</h4>
+                                                        <p>Web security vulnerabilities</p>
+                                                    </div>
+                                                    <div class="link-card" onclick="window.firefoxBrowser && window.firefoxBrowser.navigate('https://neuro-dev.local/web-exploitation')">
+                                                        <i class="fas fa-globe"></i>
+                                                        <h4>Web Exploitation</h4>
+                                                        <p>SQL injection aur XSS lab</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </main>
+                                </div>
+                            </div>
+                            
+                            <!-- Developer Tools -->
+                            <div class="firefox-devtools" id="firefox-devtools" style="display: none;">
+                                <div class="devtools-tabs">
+                                    <button class="devtools-tab active" onclick="window.firefoxBrowser && window.firefoxBrowser.switchDevTool('console')">Console</button>
+                                    <button class="devtools-tab" onclick="window.firefoxBrowser && window.firefoxBrowser.switchDevTool('inspector')">Inspector</button>
+                                    <button class="devtools-tab" onclick="window.firefoxBrowser && window.firefoxBrowser.switchDevTool('network')">Network</button>
+                                    <button class="devtools-tab" onclick="window.firefoxBrowser && window.firefoxBrowser.switchDevTool('security')">Security</button>
+                                </div>
+                                <div class="devtools-content" id="devtools-content">
+                                    <div class="console-output" id="console-output">
+                                        <div class="console-line">Welcome to Firefox Developer Tools</div>
+                                        <div class="console-line">Type help() for available commands</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Status Bar -->
+                        <div class="firefox-statusbar">
+                            <div class="status-left">
+                                <span id="page-status">Ready</span>
+                            </div>
+                            <div class="status-right">
+                                <span id="security-status">🔒 Secure</span>
+                                <span id="zoom-level">100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Context Menus -->
+                    <div class="context-menu" id="context-menu" style="display: none;"></div>
+                    
+                    <!-- Modal Dialogs -->
+                    <div class="modal-overlay" id="modal-overlay" style="display: none;">
+                        <div class="modal-dialog" id="modal-dialog"></div>
                     </div>
                 </div>
 
@@ -814,224 +1020,7 @@ print('Hello from Neuro-Dev!')"></textarea>
                             
                             output.innerHTML = results;
                         }
-                        </script>services.forEach(service => {
-                                        output.innerHTML += `<div style="color: #ffd93d;">  Port ${service.port}: ${service.name}</div>`;
-                                    });
-                                    if (vulns.length > 0) {
-                                        vulns.forEach(vuln => {
-                                            output.innerHTML += `<div style="color: #ff6b6b;">  VULN: ${vuln}</div>`;
-                                        });
-                                    }
-                                    output.scrollTop = output.scrollHeight;
-                                    updateHostList(host, services, vulns);
-                                    updateStats();
-                                }, 500);
-                                currentHost++;
-                            }, 2000);
-                        }
-                        
-                        function stopScan() {
-                            scanRunning = false;
-                            if (scanInterval) clearInterval(scanInterval);
-                        }
-                        
-                        function getRandomServices() {
-                            const allServices = [
-                                {port: 22, name: 'SSH'},
-                                {port: 80, name: 'HTTP'},
-                                {port: 443, name: 'HTTPS'},
-                                {port: 21, name: 'FTP'}
-                            ];
-                            return allServices.filter(() => Math.random() > 0.6);
-                        }
-                        
-                        function getRandomVulns() {
-                            const vulns = ['CVE-2021-44228', 'Weak SSH', 'Open FTP'];
-                            return vulns.filter(() => Math.random() > 0.8);
-                        }
-                        
-                        function updateHostList(host, services, vulns) {
-                            const hostList = document.getElementById('host-list');
-                            hostsFound.push({host, services, vulns});
-                            hostList.innerHTML = hostsFound.map(h => 
-                                `<div style="color: #4ecdc4;">${h.host} (${h.services.length} services)</div>`
-                            ).join('');
-                        }
-                        
-                        function updateStats() {
-                            document.getElementById('hosts-scanned').textContent = hostsFound.length;
-                            document.getElementById('services-found').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
-                        }
-                        
-                        function exportResults() {
-                            const results = hostsFound.map(h => `${h.host}: ${h.services.map(s => s.name).join(', ')}`).join('\n');
-                            const blob = new Blob([results], {type: 'text/plain'});
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = 'scan_results.txt';
-                            a.click();
-                        }
-                        
-                        function clearResults() {
-                            document.getElementById('scan-output').innerHTML = 'Ready to scan network...';
-                            hostsFound = [];
-                            updateStats();
-                        }    services.forEach(service => {
-                                        output.innerHTML += `<div style="color: #ffd93d;">  Port ${service.port}: ${service.name}</div>`;
-                                    });
-                                    if (vulns.length > 0) {
-                                        vulns.forEach(vuln => {
-                                            output.innerHTML += `<div style="color: #ff6b6b;">  VULN: ${vuln}</div>`;
-                                        });
-                                    }
-                                    output.scrollTop = output.scrollHeight;
-                                    
-                                    updateHostList(host, services, vulns);
-                                    updateStats();
-                                }, 500);
-                                
-                                currentHost++;
-                            }, 2000);
-                        }
-                        
-                        function stopScan() {
-                            scanRunning = false;
-                            if (scanInterval) clearInterval(scanInterval);
-                        }
-                        
-                        function getRandomServices() {
-                            const allServices = [
-                                {port: 22, name: 'SSH'},
-                                {port: 80, name: 'HTTP'},
-                                {port: 443, name: 'HTTPS'},
-                                {port: 21, name: 'FTP'},
-                                {port: 23, name: 'Telnet'},
-                                {port: 3389, name: 'RDP'},
-                                {port: 445, name: 'SMB'}
-                            ];
-                            return allServices.filter(() => Math.random() > 0.6);
-                        }
-                        
-                        function getRandomVulns() {
-                            const vulns = [
-                                'CVE-2021-44228 (Log4Shell)',
-                                'CVE-2020-1472 (Zerologon)',
-                                'CVE-2019-0708 (BlueKeep)',
-                                'Weak SSH credentials',
-                                'Unencrypted FTP'
-                            ];
-                            return vulns.filter(() => Math.random() > 0.8);
-                        }
-                        
-                        function updateHostList(host, services, vulns) {
-                            const hostList = document.getElementById('host-list');
-                            hostsFound.push({host, services, vulns});
-                            hostList.innerHTML = hostsFound.map(h => 
-                                `<div style="color: #4ecdc4; margin-bottom: 5px;">${h.host} (${h.services.length} services)</div>`
-                            ).join('');
-                        }
-                        
-                        function updateStats() {
-                            document.getElementById('hosts-scanned').textContent = hostsFound.length;
-                            document.getElementById('ports-checked').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
-                            document.getElementById('services-found').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
-                            document.getElementById('vulns-found').textContent = hostsFound.reduce((sum, h) => sum + h.vulns.length, 0);
-                        }
-                        
-                        function exportResults() {
-                            const results = hostsFound.map(h => `${h.host}: ${h.services.map(s => s.name).join(', ')}`).join('\n');
-                            const blob = new Blob([results], {type: 'text/plain'});
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = 'scan_results.txt';
-                            a.click();
-                        }
-                        
-                        function clearResults() {
-                            document.getElementById('scan-output').innerHTML = 'Ready to scan network...';
-                            document.getElementById('host-list').innerHTML = 'No hosts discovered';
-                            hostsFound = [];
-                            updateStats();
-                        }services.forEach(service => {
-                                        output.innerHTML += `<div style="color: #ffd93d;">  Port ${service.port}: ${service.name}</div>`;
-                                    });
-                                    if (vulns.length > 0) {
-                                        vulns.forEach(vuln => {
-                                            output.innerHTML += `<div style="color: #ff6b6b;">  VULN: ${vuln}</div>`;
-                                        });
-                                    }
-                                    output.scrollTop = output.scrollHeight;
-                                    
-                                    updateHostList(host, services, vulns);
-                                    updateStats();
-                                }, 500);
-                                
-                                currentHost++;
-                            }, 2000);
-                        }
-                        
-                        function stopScan() {
-                            scanRunning = false;
-                            if (scanInterval) clearInterval(scanInterval);
-                        }
-                        
-                        function getRandomServices() {
-                            const allServices = [
-                                {port: 22, name: 'SSH'},
-                                {port: 80, name: 'HTTP'},
-                                {port: 443, name: 'HTTPS'},
-                                {port: 21, name: 'FTP'},
-                                {port: 23, name: 'Telnet'},
-                                {port: 3389, name: 'RDP'},
-                                {port: 445, name: 'SMB'}
-                            ];
-                            return allServices.filter(() => Math.random() > 0.6);
-                        }
-                        
-                        function getRandomVulns() {
-                            const vulns = [
-                                'CVE-2021-44228 (Log4Shell)',
-                                'CVE-2020-1472 (Zerologon)',
-                                'CVE-2019-0708 (BlueKeep)',
-                                'Weak SSH credentials',
-                                'Unencrypted FTP'
-                            ];
-                            return vulns.filter(() => Math.random() > 0.8);
-                        }
-                        
-                        function updateHostList(host, services, vulns) {
-                            const hostList = document.getElementById('host-list');
-                            hostsFound.push({host, services, vulns});
-                            hostList.innerHTML = hostsFound.map(h => 
-                                `<div style="color: #4ecdc4; margin-bottom: 5px;">${h.host} (${h.services.length} services)</div>`
-                            ).join('');
-                        }
-                        
-                        function updateStats() {
-                            document.getElementById('hosts-scanned').textContent = hostsFound.length;
-                            document.getElementById('ports-checked').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
-                            document.getElementById('services-found').textContent = hostsFound.reduce((sum, h) => sum + h.services.length, 0);
-                            document.getElementById('vulns-found').textContent = hostsFound.reduce((sum, h) => sum + h.vulns.length, 0);
-                        }
-                        
-                        function exportResults() {
-                            const results = hostsFound.map(h => `${h.host}: ${h.services.map(s => s.name).join(', ')}`).join('\n');
-                            const blob = new Blob([results], {type: 'text/plain'});
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = 'scan_results.txt';
-                            a.click();
-                        }
-                        
-                        function clearResults() {
-                            document.getElementById('scan-output').innerHTML = 'Ready to scan network...';
-                            document.getElementById('host-list').innerHTML = 'No hosts discovered';
-                            hostsFound = [];
-                            updateStats();
-                        }
+                        </script>
                         </script>
                     </div>
                 </div>
@@ -1780,20 +1769,20 @@ Generated: ${new Date().toLocaleString()}
                         }, 1500);
                     }
                     
-                    window.generateSEPayload = function() {
+                    window.generatePayload = function() {
                         const exploitType = document.getElementById('exploit-type').value;
                         const output = document.getElementById('exploit-output');
                         
                         const payloads = {
-                            sqli: ["' OR '1'='1' --", "' UNION SELECT 1,2,3 --", "'; DROP TABLE users; --"],
-                            xss: ["<script>alert('XSS')</script>", "<img src=x onerror=alert('XSS')>", "javascript:alert('XSS')"],
+                            sqli: ["\' OR \'1\'=\'1\' --", "\' UNION SELECT 1,2,3 --", "\'; DROP TABLE users; --"],
+                            xss: ["<script>alert(\'XSS\')</script>", "<img src=x onerror=alert(\'XSS\')>", "javascript:alert(\'XSS\')"],
                             lfi: ["../../../etc/passwd", "..\\..\\..\\windows\\system32\\drivers\\etc\\hosts", "php://filter/read=convert.base64-encode/resource=index.php"]
                         };
                         
                         const selectedPayloads = payloads[exploitType] || ['No payloads available'];
-                        output.innerHTML += `<div style="color: #9b59b6;">[${new Date().toLocaleTimeString()}] Generated ${exploitType.toUpperCase()} payloads:</div>`;
+                        output.innerHTML += '<div style="color: #9b59b6;">[' + new Date().toLocaleTimeString() + '] Generated ' + exploitType.toUpperCase() + ' payloads:</div>';
                         selectedPayloads.forEach(payload => {
-                            output.innerHTML += `<div style="color: #ffd93d;">  ${payload}</div>`;
+                            output.innerHTML += '<div style="color: #ffd93d;">  ' + payload + '</div>';
                         });
                         output.scrollTop = output.scrollHeight;
                     }
@@ -2159,6 +2148,11 @@ Generated: ${new Date().toLocaleString()}
                     </div>
                 </div>
             </div>
+            
+            <!-- Include New Linux Applications -->
+            <div id="system-monitor-container"></div>
+            <div id="package-manager-container"></div>
+            <div id="settings-container"></div>
         </div>
 
         <!-- Course Switcher -->
@@ -2209,6 +2203,10 @@ Generated: ${new Date().toLocaleString()}
     <script src="vm-core.js"></script>
     <script src="terminal.js"></script>
     <script src="browser.js"></script>
+    <script src="firefox-browser.js"></script>
+    <script src="browser-init.js"></script>
+    <script src="debug-console.js"></script>
+    <link rel="stylesheet" href="firefox-styles.css">
     <script src="editor.js"></script>
     <script src="files.js"></script>
     <script src="window-controls.js"></script>

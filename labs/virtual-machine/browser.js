@@ -21,9 +21,16 @@ class Browser {
     }
 
     loadCourseContent(courseName) {
-        this.currentCourse = courseName;
-        const content = this.getCourseContent(courseName);
-        document.getElementById('browser-content').innerHTML = content;
+        // Sanitize course name to prevent XSS
+        const sanitizedCourseName = this.sanitizeInput(courseName);
+        this.currentCourse = sanitizedCourseName;
+        const content = this.getCourseContent(sanitizedCourseName);
+        const browserContent = document.getElementById('browser-content') || document.getElementById('tab-content');
+        if (browserContent) {
+            browserContent.innerHTML = content;
+        } else {
+            console.log('Browser content element not found for course:', sanitizedCourseName);
+        }
     }
 
     getCourseContent(course) {
@@ -202,7 +209,10 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
             'osint-challenges': this.generateOsintChallenges()
         };
         
-        document.getElementById('browser-content').innerHTML = pages[page] || '<h2>Page not found</h2>';
+        const browserContent = document.getElementById('browser-content') || document.getElementById('tab-content');
+        if (browserContent) {
+            browserContent.innerHTML = pages[page] || '<h2>Page not found</h2>';
+        }
     }
 
     generateInteractivePage(title, commands) {
@@ -384,16 +394,19 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
 
     testSQLInjection(event) {
         event.preventDefault();
-        const username = document.getElementById('username').value;
+        const username = document.getElementById('username')?.value || '';
         const result = document.getElementById('attack-result');
+        if (!result) return;
         
         // Sanitize input to prevent XSS
         const sanitizedUsername = this.sanitizeInput(username);
         
         if (username.includes("'") || username.includes('OR') || username.includes('--')) {
-            result.innerHTML = `<div class="attack-success">🎉 SQL Injection Successful!<br>Bypassed authentication with: ${sanitizedUsername}</div>`;
+            result.textContent = '🎉 SQL Injection Successful! Bypassed authentication with: ' + sanitizedUsername;
+            result.className = 'attack-success';
         } else {
-            result.innerHTML = `<div class="attack-failed">❌ Login failed. Try SQL injection techniques.</div>`;
+            result.textContent = '❌ Login failed. Try SQL injection techniques.';
+            result.className = 'attack-failed';
         }
     }
 
@@ -404,18 +417,34 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
 
     testEndpoint(endpoint) {
         const response = document.getElementById('api-response');
+        if (!response) return;
+        
         const resp = { status: 200, data: '{ "status": "healthy", "uptime": "24h" }' };
         
         // Sanitize endpoint to prevent XSS
         const sanitizedEndpoint = this.sanitizeInput(endpoint);
         
-        response.innerHTML = `
-            <div class="api-response">
-                <div class="response-header">Response from ${sanitizedEndpoint}</div>
-                <div class="response-status">Status: ${resp.status}</div>
-                <pre class="response-body">${resp.data}</pre>
-            </div>
-        `;
+        // Use safe DOM manipulation instead of innerHTML
+        response.innerHTML = '';
+        const responseDiv = document.createElement('div');
+        responseDiv.className = 'api-response';
+        
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'response-header';
+        headerDiv.textContent = 'Response from ' + sanitizedEndpoint;
+        
+        const statusDiv = document.createElement('div');
+        statusDiv.className = 'response-status';
+        statusDiv.textContent = 'Status: ' + resp.status;
+        
+        const bodyPre = document.createElement('pre');
+        bodyPre.className = 'response-body';
+        bodyPre.textContent = resp.data;
+        
+        responseDiv.appendChild(headerDiv);
+        responseDiv.appendChild(statusDiv);
+        responseDiv.appendChild(bodyPre);
+        response.appendChild(responseDiv);
     }
 
     // CTF Challenge Pages

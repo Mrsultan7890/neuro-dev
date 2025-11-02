@@ -118,16 +118,19 @@
     }
 }
 
-/* Desktop */
+/* Desktop - Ubuntu Style */
 .desktop {
     flex: 1;
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #8e24aa 100%);
     position: relative;
     overflow: hidden;
     padding: 0;
     display: flex;
     flex-direction: column;
     height: calc(100vh - 40px);
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%);
 }
 
 .desktop::before {
@@ -191,41 +194,71 @@
     line-height: 1.2;
 }
 
-/* Course Shortcuts - Linux Style Panel */
+/* Linux Applications Panel - Ubuntu Style */
 .course-shortcuts {
     position: absolute;
-    top: 75px;
-    right: 15px;
-    background: rgba(44, 62, 80, 0.95);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 12px;
+    top: 0;
+    left: 0;
+    bottom: 40px;
+    width: 64px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 0;
     color: white;
     z-index: 1;
-    min-width: 180px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    transition: width 0.3s ease;
+}
+
+.course-shortcuts:hover {
+    width: 200px;
+}
+
+.course-shortcuts:hover .course-shortcut span {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .course-shortcuts h4 {
-    margin-bottom: 8px;
-    color: #ecf0f1;
-    font-size: 13px;
-    font-weight: 600;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 4px;
+    display: none;
 }
 
 .course-shortcut {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 8px;
-    border-radius: 4px;
+    justify-content: flex-start;
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    margin-bottom: 4px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.course-shortcut span {
+    position: absolute;
+    left: 60px;
+    white-space: nowrap;
     font-size: 12px;
-    margin-bottom: 3px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .course-shortcut:hover {
@@ -455,6 +488,7 @@
     position: relative;
     flex: 1;
     z-index: 2;
+    margin-left: 64px;
 }
 
 .app-window {
@@ -1658,7 +1692,38 @@
     }
     
     .course-shortcuts {
+        position: fixed;
+        bottom: 50px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.9);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1001;
+    }
+    
+    .course-shortcuts:hover {
+        width: 100%;
+    }
+    
+    .course-shortcut {
+        width: auto;
+        height: 44px;
+        padding: 8px;
+        font-size: 16px;
+    }
+    
+    .course-shortcut span {
         display: none;
+    }
+    
+    .applications {
+        margin-left: 0;
+        margin-bottom: 60px;
     }
     
     .desktop-icons {

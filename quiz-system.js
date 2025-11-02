@@ -303,33 +303,62 @@ class QuizSystem {
         const question = this.currentQuiz.questions[this.currentQuestion];
         const quizBody = document.getElementById('quiz-body');
         
-        quizBody.innerHTML = `
-            <div class="question-container">
-                <h4 class="question-text">${question.question}</h4>
-                <div class="options-container">
-                    ${question.options.map((option, index) => `
-                        <label class="option-label">
-                            <input type="radio" name="answer" value="${index}">
-                            <span class="option-text">${option}</span>
-                        </label>
-                    `).join('')}
-                </div>
-            </div>
-        `;
+        // Clear previous content
+        quizBody.innerHTML = '';
+        
+        // Create question container safely
+        const questionContainer = document.createElement('div');
+        questionContainer.className = 'question-container';
+        
+        const questionText = document.createElement('h4');
+        questionText.className = 'question-text';
+        questionText.textContent = question.question;
+        questionContainer.appendChild(questionText);
+        
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'options-container';
+        
+        question.options.forEach((option, index) => {
+            const label = document.createElement('label');
+            label.className = 'option-label';
+            
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'answer';
+            input.value = index.toString();
+            
+            const span = document.createElement('span');
+            span.className = 'option-text';
+            span.textContent = option;
+            
+            label.appendChild(input);
+            label.appendChild(span);
+            optionsContainer.appendChild(label);
+        });
+        
+        questionContainer.appendChild(optionsContainer);
+        quizBody.appendChild(questionContainer);
         
         // Update progress
         const progress = ((this.currentQuestion + 1) / this.currentQuiz.questions.length) * 100;
-        document.getElementById('quiz-progress').style.width = `${progress}%`;
-        document.getElementById('question-counter').textContent = `${this.currentQuestion + 1} / ${this.currentQuiz.questions.length}`;
+        const progressBar = document.getElementById('quiz-progress');
+        if (progressBar) progressBar.style.width = progress + '%';
+        
+        const counter = document.getElementById('question-counter');
+        if (counter) counter.textContent = (this.currentQuestion + 1) + ' / ' + this.currentQuiz.questions.length;
         
         // Update buttons
-        document.getElementById('prev-question').disabled = this.currentQuestion === 0;
-        document.getElementById('next-question').style.display = this.currentQuestion === this.currentQuiz.questions.length - 1 ? 'none' : 'block';
-        document.getElementById('submit-quiz').style.display = this.currentQuestion === this.currentQuiz.questions.length - 1 ? 'block' : 'none';
+        const prevBtn = document.getElementById('prev-question');
+        const nextBtn = document.getElementById('next-question');
+        const submitBtn = document.getElementById('submit-quiz');
+        
+        if (prevBtn) prevBtn.disabled = this.currentQuestion === 0;
+        if (nextBtn) nextBtn.style.display = this.currentQuestion === this.currentQuiz.questions.length - 1 ? 'none' : 'block';
+        if (submitBtn) submitBtn.style.display = this.currentQuestion === this.currentQuiz.questions.length - 1 ? 'block' : 'none';
         
         // Restore previous answer if exists
         if (this.answers[this.currentQuestion] !== undefined) {
-            const radio = quizBody.querySelector(`input[value="${this.answers[this.currentQuestion]}"]`);
+            const radio = quizBody.querySelector('input[value="' + this.answers[this.currentQuestion] + '"]');
             if (radio) radio.checked = true;
         }
     }
@@ -377,33 +406,85 @@ class QuizSystem {
         const passed = percentage >= 70;
         
         const modal = document.querySelector('.quiz-modal');
-        modal.innerHTML = `
-            <div class="quiz-results">
-                <div class="result-header">
-                    <i class="fas ${passed ? 'fa-trophy' : 'fa-times-circle'}" style="color: ${passed ? '#00ff41' : '#ff6b6b'}"></i>
-                    <h3>${passed ? 'Congratulations!' : 'Keep Learning!'}</h3>
-                </div>
-                <div class="result-stats">
-                    <div class="stat">
-                        <span class="stat-number">${this.score}</span>
-                        <span class="stat-label">Correct Answers</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">${percentage}%</span>
-                        <span class="stat-label">Score</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">${passed ? 'PASS' : 'FAIL'}</span>
-                        <span class="stat-label">Result</span>
-                    </div>
-                </div>
-                <div class="result-actions">
-                    <button onclick="quizSystem.showDetailedResults()" class="review-btn">Review Answers</button>
-                    <button onclick="quizSystem.retakeQuiz()" class="retry-btn">Retake Quiz</button>
-                    <button onclick="quizSystem.closeQuiz()" class="close-btn">Close</button>
-                </div>
-            </div>
-        `;
+        if (!modal) return;
+        
+        // Clear modal content
+        modal.innerHTML = '';
+        
+        // Create results container safely
+        const resultsDiv = document.createElement('div');
+        resultsDiv.className = 'quiz-results';
+        
+        // Result header
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'result-header';
+        
+        const icon = document.createElement('i');
+        icon.className = 'fas ' + (passed ? 'fa-trophy' : 'fa-times-circle');
+        icon.style.color = passed ? '#00ff41' : '#ff6b6b';
+        
+        const title = document.createElement('h3');
+        title.textContent = passed ? 'Congratulations!' : 'Keep Learning!';
+        
+        headerDiv.appendChild(icon);
+        headerDiv.appendChild(title);
+        
+        // Stats section
+        const statsDiv = document.createElement('div');
+        statsDiv.className = 'result-stats';
+        
+        // Create stat items
+        const stats = [
+            { number: this.score.toString(), label: 'Correct Answers' },
+            { number: percentage + '%', label: 'Score' },
+            { number: passed ? 'PASS' : 'FAIL', label: 'Result' }
+        ];
+        
+        stats.forEach(stat => {
+            const statDiv = document.createElement('div');
+            statDiv.className = 'stat';
+            
+            const numberSpan = document.createElement('span');
+            numberSpan.className = 'stat-number';
+            numberSpan.textContent = stat.number;
+            
+            const labelSpan = document.createElement('span');
+            labelSpan.className = 'stat-label';
+            labelSpan.textContent = stat.label;
+            
+            statDiv.appendChild(numberSpan);
+            statDiv.appendChild(labelSpan);
+            statsDiv.appendChild(statDiv);
+        });
+        
+        // Actions section
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'result-actions';
+        
+        const reviewBtn = document.createElement('button');
+        reviewBtn.className = 'review-btn';
+        reviewBtn.textContent = 'Review Answers';
+        reviewBtn.onclick = () => this.showDetailedResults();
+        
+        const retryBtn = document.createElement('button');
+        retryBtn.className = 'retry-btn';
+        retryBtn.textContent = 'Retake Quiz';
+        retryBtn.onclick = () => this.retakeQuiz();
+        
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.textContent = 'Close';
+        closeBtn.onclick = () => this.closeQuiz();
+        
+        actionsDiv.appendChild(reviewBtn);
+        actionsDiv.appendChild(retryBtn);
+        actionsDiv.appendChild(closeBtn);
+        
+        // Assemble results
+        resultsDiv.appendChild(headerDiv);
+        resultsDiv.appendChild(statsDiv);
+        resultsDiv.appendChild(actionsDiv);
+        modal.appendChild(resultsDiv);
         
         // Save result
         const moduleId = new URLSearchParams(window.location.search).get('module') || 'termux-basics';

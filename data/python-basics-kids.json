@@ -9,11 +9,11 @@
         "sections": [
           {
             "heading": "Computer Kaise Kaam Karta Hai?",
-            "text": "Computer ek bahut tez calculator hai:\\n\\n1. Input - Hum kuch dete hain (keyboard, mouse se)\\n2. Processing - Computer sochta hai\\n3. Output - Computer jawab deta hai (screen pe)\\n\\nMisal:\\n• Input: 2 + 3\\n• Processing: Computer calculate karta hai\\n• Output: 5\\n\\nComputer sirf 0 aur 1 samajhta hai (Binary language)\\nProgramming languages hume aasan tarike se computer se baat karne deti hain"
+            "text": "Computer ek bahut tez calculator hai:\n\n1. Input - Hum kuch dete hain (keyboard, mouse se)\n2. Processing - Computer sochta hai\n3. Output - Computer jawab deta hai (screen pe)\n\nMisal:\n• Input: 2 + 3\n• Processing: Computer calculate karta hai\n• Output: 5\n\nComputer sirf 0 aur 1 samajhta hai (Binary language)\nProgramming languages hume aasan tarike se computer se baat karne deti hain"
           },
           {
             "heading": "Programming Language Kya Hai?",
-            "text": "Programming language ek translator hai:\\n\\n• Hum English jaisi language mein likhte hain\\n• Computer 0 aur 1 mein samajhta hai\\n• Programming language translation kar deti hai\\n\\nPython kyu special hai?\\n1. Bahut aasan - English jaisi\\n2. Kam typing - zyada kaam\\n3. Powerful - bade kaam kar sakti hai\\n4. Popular - duniya bhar mein use hoti hai\\n5. Free - koi paisa nahi lagta"
+            "text": "Programming language ek translator hai:\n\n• Hum English jaisi language mein likhte hain\n• Computer 0 aur 1 mein samajhta hai\n• Programming language translation kar deti hai\n\nPython kyu special hai?\n1. Bahut aasan - English jaisi\n2. Kam typing - zyada kaam\n3. Powerful - bade kaam kar sakti hai\n4. Popular - duniya bhar mein use hoti hai\n5. Free - koi paisa nahi lagta"
           },
           {
             "heading": "Python Kahan Use Hoti Hai?",

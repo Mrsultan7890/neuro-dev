@@ -149,9 +149,35 @@ class NeuroVM {
             if (selectedApp) {
                 selectedApp.classList.add('active');
                 console.log(`Switched to app: ${appName}`);
+                
+                // Special handling for browser app
+                if (appName === 'browser') {
+                    console.log('Browser app activated, checking Firefox browser...');
+                    if (!window.firefoxBrowser) {
+                        console.log('Firefox browser not found, initializing...');
+                        setTimeout(() => {
+                            if (window.initFirefoxBrowser) {
+                                window.initFirefoxBrowser();
+                            } else {
+                                console.log('Firefox browser init function not available, trying direct initialization...');
+                                try {
+                                    if (window.FirefoxBrowser) {
+                                        window.firefoxBrowser = new window.FirefoxBrowser();
+                                        console.log('Firefox browser initialized directly');
+                                    }
+                                } catch (error) {
+                                    console.error('Failed to initialize Firefox browser:', error);
+                                }
+                            }
+                        }, 100);
+                    } else {
+                        console.log('Firefox browser already initialized');
+                    }
+                }
             } else {
-                console.error(`App '${appName}' not found`);
-                console.log('Available apps:', Array.from(document.querySelectorAll('.app-window')).map(w => w.id));
+                console.log(`App ${appName}-app not found`);
+                // Try to load app HTML if not found
+                this.loadMissingApp(appName);
                 return;
             }
             
@@ -165,6 +191,9 @@ class NeuroVM {
             try {
                 if (appName === 'files' && window.fileManager) {
                     window.fileManager.refresh();
+                } else if (appName === 'browser' && window.firefoxBrowser) {
+                    // Firefox browser is already initialized
+                    console.log('Firefox browser already initialized');
                 } else if (appName === 'ai-chat' && window.aiChatApp) {
                     window.aiChatApp.setupEventListeners();
                 } else if (appName === 'bank-security' && window.bankSecurity) {
@@ -202,6 +231,44 @@ class NeuroVM {
             }
         } catch (error) {
             console.error('Error switching app:', error);
+        }
+    }
+
+    async loadMissingApp(appName) {
+        const appFiles = {
+            'system-monitor': 'system-monitor.html',
+            'package-manager': 'package-manager.html', 
+            'settings': 'settings.html',
+            'calculator': 'calculator.html',
+            'text-editor': 'text-editor.html',
+            'image-viewer': 'image-viewer.html',
+            'music-player': 'music-player.html',
+            'video-player': 'video-player.html'
+        };
+        
+        const fileName = appFiles[appName];
+        if (!fileName) {
+            console.error(`App '${appName}' not found`);
+            console.log('Available apps:', Array.from(document.querySelectorAll('.app-window')).map(w => w.id));
+            return;
+        }
+        
+        try {
+            const response = await fetch(fileName);
+            const html = await response.text();
+            
+            // Create container and insert HTML
+            const container = document.createElement('div');
+            container.innerHTML = html;
+            
+            // Append to applications container
+            const appsContainer = document.querySelector('.applications');
+            appsContainer.appendChild(container.firstElementChild);
+            
+            // Now try switching again
+            setTimeout(() => this.switchApp(appName), 100);
+        } catch (error) {
+            console.error(`Failed to load ${appName} app:`, error);
         }
     }
 
@@ -307,6 +374,9 @@ class NeuroVM {
             
             // Update browser content
             try {
+                if (window.firefoxBrowser && window.firefoxBrowser.currentCourse) {
+                    window.firefoxBrowser.currentCourse = courseName;
+                }
                 if (window.browser && window.browser.loadCourseContent) {
                     window.browser.loadCourseContent(courseName);
                 }
