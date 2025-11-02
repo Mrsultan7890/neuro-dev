@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Neuro-Dev</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .error-code {
+            font-size: clamp(8rem, 15vw, 12rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .error-title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #00ff41;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .error-message {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .search-container {
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 50px 15px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            border-color: #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background: #00d4ff;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00ff41, #00d4ff);
+            color: #000;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #00ff41;
+            border: 2px solid #00ff41;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(0, 255, 65, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .popular-links {
+            margin-top: 40px;
+        }
+        
+        .popular-links h3 {
+            color: #00ff41;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .link-item {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            text-decoration: none;
+            color: #ccc;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .link-item:hover {
+            border-color: #00ff41;
+            color: #00ff41;
+            transform: translateY(-2px);
+        }
+        
+        .link-item i {
+            font-size: 1.2rem;
+            color: #00ff41;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            color: rgba(0, 255, 65, 0.1);
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 3s; }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 107, 107, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 107, 107, 0.8), 0 0 40px rgba(255, 107, 107, 0.3); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"><i class="fas fa-terminal"></i></div>
+        <div class="floating-element"><i class="fas fa-shield-alt"></i></div>
+        <div class="floating-element"><i class="fas fa-code"></i></div>
+        <div class="floating-element"><i class="fas fa-bug"></i></div>
+    </div>
+    
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Oops! Page Nahi Mila</h1>
+        <p class="error-message">
+            Jo page aap dhund rahe hain wo exist nahi karta ya move ho gaya hai.<br>
+            Koi baat nahi, hum aapko sahi jagah pahuncha dete hain!
+        </p>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Kya dhund rahe hain? (termux, hacking, python...)" id="searchInput">
+            <button class="search-btn" onclick="performSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-home"></i>
+                Home Page
+            </a>
+            <a href="index.html#courses" class="btn btn-secondary">
+                <i class="fas fa-graduation-cap"></i>
+                All Courses
+            </a>
+        </div>
+        
+        <div class="popular-links">
+            <h3>Popular Pages</h3>
+            <div class="links-grid">
+                <a href="course.html?module=termux-basics" class="link-item">
+                    <i class="fas fa-terminal"></i>
+                    <span>Termux Basics</span>
+                </a>
+                <a href="labs/virtual-machine/index.html" class="link-item">
+                    <i class="fas fa-desktop"></i>
+                    <span>Virtual Lab</span>
+                </a>
+                <a href="ctf-challenges.html" class="link-item">
+                    <i class="fas fa-flag"></i>
+                    <span>CTF Challenges</span>
+                </a>
+                <a href="python-ide.html" class="link-item">
+                    <i class="fab fa-python"></i>
+                    <span>Python IDE</span>
+                </a>
+                <a href="dictionary.html" class="link-item">
+                    <i class="fas fa-book"></i>
+                    <span>AI/ML Dictionary</span>
+                </a>
+                <a href="vm-guide.html" class="link-item">
+                    <i class="fas fa-guide"></i>
+                    <span>VM Guide</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Search functionality
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            
+            if (!query) {
+                alert('Please enter something to search');
+                return;
+            }
+            
+            // Search mapping
+            const searchMap = {
+                'termux': 'course.html?module=termux-basics',
+                'nethunter': 'course.html?module=nethunter-rootless',
+                'python': 'python-ide.html',
+                'hacking': 'index.html#courses',
+                'ctf': 'ctf-challenges.html',
+                'lab': 'labs/virtual-machine/index.html',
+                'vm': 'labs/virtual-machine/index.html',
+                'guide': 'vm-guide.html',
+                'dictionary': 'dictionary.html',
+                'ai': 'dictionary.html',
+                'ml': 'dictionary.html',
+                'blog': 'blog.html',
+                'news': 'news.html',
+                'contact': 'contact.html',
+                'about': 'about.html',
+                'donate': 'donate.html'
+            };
+            
+            // Find matching page
+            for (const [keyword, url] of Object.entries(searchMap)) {
+                if (query.includes(keyword)) {
+                    window.location.href = url;
+                    return;
+                }
+            }
+            
+            // Default to courses page
+            window.location.href = 'index.html#courses';
+        }
+        
+        // Enter key search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        // Auto-focus search box
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchInput').focus();
+        });
+        
+        // Track 404 errors (if analytics is available)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'page_title': '404 Error',
+                'page_location': window.location.href,
+                'custom_parameter': 'error_404'
+            });
+        }
+    </script>
+</body>
+</html>

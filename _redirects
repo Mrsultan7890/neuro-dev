@@ -1,0 +1,16 @@
+# Netlify redirects file for 404 handling
+
+# Redirect old URLs to new ones
+/termux /course.html?module=termux-basics 301
+/nethunter /course.html?module=nethunter-rootless 301
+/python /python-ide.html 301
+/vm /labs/virtual-machine/index.html 301
+/lab /labs/virtual-machine/index.html 301
+/ctf /ctf-challenges.html 301
+/challenges /ctf-challenges.html 301
+/dict /dictionary.html 301
+/ai /dictionary.html 301
+/ml /dictionary.html 301
+
+# Handle 404 errors
+/* /404.html 404
