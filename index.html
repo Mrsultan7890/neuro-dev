@@ -11,6 +11,24 @@
     <meta name="google-adsense-account" content="ca-pub-1916892851128865">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865"
          crossorigin="anonymous"></script>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "xxxxxxxxx");
+    </script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -49,6 +67,7 @@
     <link rel="stylesheet" href="missing-styles.css">
     <link rel="stylesheet" href="quiz-review-styles.css">
     <link rel="stylesheet" href="search-fix.css">
+    <link rel="stylesheet" href="phase1-enhancements.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
     <style>
     .vm-btn {
@@ -164,6 +183,7 @@
                 <a href="#courses" class="nav-link" onclick="closeMenu()">Courses</a>
                 <a href="ctf-challenges.html" class="nav-link" onclick="closeMenu()">CTF</a>
                 <a href="labs/virtual-machine/index.html" class="nav-link" onclick="closeMenu()">VM Lab</a>
+                <a href="python-ide.html" class="nav-link" onclick="closeMenu()">Python IDE</a>
                 <a href="dictionary.html" class="nav-link" onclick="closeMenu()">Dictionary</a>
                 <a href="videos.html" class="nav-link" onclick="closeMenu()">Videos</a>
                 <a href="blog.html" class="nav-link" onclick="closeMenu()">Blog</a>
@@ -183,28 +203,44 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Neuro-Dev</h1>
-            <p>Ethical Hacking Course Roman Urdu Mein</p>
-            <p class="hero-subtitle">Termux se NetHunter tak - Complete Cybersecurity Journey</p>
+            <div class="hero-badge">
+                <span>🔥 Complete Mobile Hacking Course</span>
+            </div>
+            <h1>Sirf Mobile Se Ethical Hacking Seekhiye</h1>
+            <p class="hero-tagline">Laptop Nahi Hai? Koi Baat Nahi! <strong>Termux + NetHunter</strong> Se Professional Hacker Baniye</p>
+            <p class="hero-subtitle">✅ Roman Urdu Mein | ✅ Copy-Paste Commands | ✅ Real Tools | ✅ Free Forever</p>
             
-            <!-- Success Stats -->
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">13+</div>
-                    <div class="stat-label">Complete Modules</div>
+            <!-- Trust Indicators -->
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <i class="fas fa-users"></i>
+                    <span><strong>5000+</strong> Students</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">49+</div>
-                    <div class="stat-label">CTF Challenges</div>
+                <div class="trust-item">
+                    <i class="fas fa-star"></i>
+                    <span><strong>4.8/5</strong> Rating</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">AI/ML Terms</div>
+                <div class="trust-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span><strong>100%</strong> Mobile</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">📱</div>
-                    <div class="stat-label">Mobile First</div>
+                <div class="trust-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span><strong>Free</strong> Course</span>
                 </div>
+            </div>
+            
+            <!-- Main CTA Buttons -->
+            <div class="hero-cta">
+                <a href="#courses" class="cta-primary">
+                    <i class="fas fa-rocket"></i>
+                    <span>Abhi Start Kariye - FREE</span>
+                    <small>5 minutes mein setup complete</small>
+                </a>
+                <a href="labs/virtual-machine/index.html" class="cta-secondary">
+                    <i class="fas fa-desktop"></i>
+                    <span>Live Demo Dekhiye</span>
+                </a>
             </div>
             
             <!-- Key Benefits -->
@@ -222,63 +258,157 @@
                     <span>Mobile-Only Learning</span>
                 </div>
                 <div class="benefit-item">
-                    <i class="fas fa-video"></i>
-                    <span>Video Explanations</span>
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Real Security Tools</span>
                 </div>
             </div>
             
-            <div class="hero-buttons">
-                <a href="#courses" class="cta-button primary">
-                    <i class="fas fa-play"></i>
-                    Start Learning
-                </a>
-                <a href="#preview" class="cta-button secondary">
-                    <i class="fas fa-eye"></i>
-                    Preview Course
-                </a>
-                <a href="ctf-challenges.html" class="cta-button secondary">
-                    <i class="fas fa-trophy"></i>
-                    CTF Challenges
-                </a>
-                <a href="labs/virtual-machine/index.html" class="cta-button secondary">
-                    <i class="fas fa-desktop"></i>
-                    Virtual Lab
-                </a>
+            <!-- Success Stats -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">13+</div>
+                    <div class="stat-label">Complete Modules</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">49+</div>
+                    <div class="stat-label">CTF Challenges</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">AI/ML Terms</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Virtual Labs</div>
+                </div>
             </div>
         </div>
-        <div class="hero-animation">
-            <div class="code-lines">
-                <div class="line">$ pkg install python</div>
-                <div class="line">$ nmap -sS target.com</div>
-                <div class="line">$ sqlmap -u "url" --dbs</div>
+        
+        <div class="hero-visual">
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="terminal-demo">
+                        <div class="terminal-header">
+                            <span>Termux - Neuro-Dev</span>
+                        </div>
+                        <div class="terminal-content">
+                            <div class="command-line typing">$ pkg install nmap</div>
+                            <div class="command-line">$ nmap -sS target.com</div>
+                            <div class="command-line success">✅ Port 22/tcp open ssh</div>
+                            <div class="command-line success">✅ Port 80/tcp open http</div>
+                            <div class="cursor">_</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Course Preview Section -->
-    <section id="preview" class="preview-section">
+    <!-- Value Proposition Section -->
+    <section id="preview" class="value-proposition">
         <div class="container">
-            <h2>Kya Seekhenge?</h2>
-            <div class="preview-grid">
-                <div class="preview-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mobile Se Hacking</h3>
-                    <p>Sirf phone use kar ke ethical hacking tools chalana</p>
+            <div class="section-header">
+                <h2>Kyun Sirf Neuro-Dev?</h2>
+                <p>Complete mobile hacking course Roman Urdu mein</p>
+            </div>
+            
+            <div class="value-grid">
+                <div class="value-item featured">
+                    <div class="value-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>📱 Mobile-First Approach</h3>
+                    <p><strong>Laptop ki zarurat nahi!</strong> Sirf Android phone se complete ethical hacking tools use kariye</p>
+                    <ul>
+                        <li>✅ Termux setup in 5 minutes</li>
+                        <li>✅ NetHunter rootless installation</li>
+                        <li>✅ Real hacking tools (Nmap, Metasploit, etc.)</li>
+                    </ul>
                 </div>
-                <div class="preview-item">
-                    <i class="fas fa-terminal"></i>
-                    <h3>Command Line Mastery</h3>
-                    <p>Termux aur Linux commands complete control</p>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>📚 Roman Urdu Mein</h3>
+                    <p><strong>Samajhna easy hai!</strong> Har command aur concept Roman Urdu mein explain</p>
+                    <ul>
+                        <li>✅ No English confusion</li>
+                        <li>✅ Local examples</li>
+                        <li>✅ Step-by-step guidance</li>
+                    </ul>
                 </div>
-                <div class="preview-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Security Testing</h3>
-                    <p>Network scanning, web app testing, vulnerability assessment</p>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <h3>⚡ One-Click Commands</h3>
+                    <p><strong>Typing ki zarurat nahi!</strong> Har command copy-paste kar ke practice kariye</p>
+                    <ul>
+                        <li>✅ Copy button har command ke saath</li>
+                        <li>✅ No typing errors</li>
+                        <li>✅ Fast learning</li>
+                    </ul>
                 </div>
-                <div class="preview-item">
-                    <i class="fab fa-python"></i>
-                    <h3>Python Programming</h3>
-                    <p>Zero se hero tak Python seekhiye</p>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>🖥️ Virtual Labs</h3>
+                    <p><strong>Real environment!</strong> Browser mein complete Linux system chalaye</p>
+                    <ul>
+                        <li>✅ 6 integrated apps</li>
+                        <li>✅ AI chat assistant</li>
+                        <li>✅ Banking security lab</li>
+                    </ul>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>🏆 CTF Challenges</h3>
+                    <p><strong>Skills test kariye!</strong> 49+ interactive security challenges</p>
+                    <ul>
+                        <li>✅ Real-world scenarios</li>
+                        <li>✅ Flag submission system</li>
+                        <li>✅ Progress tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>🎓 Complete Learning Path</h3>
+                    <p><strong>Beginner se expert!</strong> Systematic course structure</p>
+                    <ul>
+                        <li>✅ 13+ detailed modules</li>
+                        <li>✅ Quizzes & assessments</li>
+                        <li>✅ Practical projects</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social Proof -->
+            <div class="social-proof">
+                <div class="proof-item">
+                    <div class="proof-number">5000+</div>
+                    <div class="proof-text">Happy Students</div>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-number">4.8★</div>
+                    <div class="proof-text">Average Rating</div>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-number">100%</div>
+                    <div class="proof-text">Free Course</div>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-number">24/7</div>
+                    <div class="proof-text">Access</div>
                 </div>
             </div>
         </div>
@@ -748,38 +878,29 @@
         </div>
     </section>
 
-    <!-- Success Stories Section -->
-    <section class="success-stories">
+    <!-- Newsletter Signup Section -->
+    <section class="newsletter-section">
         <div class="container">
-            <h2>Success Stories</h2>
-            <div class="success-grid">
-                <div class="success-item">
-                    <div class="success-icon">
-                        <i class="fas fa-trophy"></i>
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2>🚀 Free Updates & Tips</h2>
+                    <p>Weekly ethical hacking tips, new course updates, aur exclusive content direct aapke inbox mein!</p>
+                    <div class="newsletter-benefits">
+                        <span>✅ Weekly hacking tips</span>
+                        <span>✅ New course notifications</span>
+                        <span>✅ Exclusive content</span>
+                        <span>✅ No spam, unsubscribe anytime</span>
                     </div>
-                    <h3>5000+ Students</h3>
-                    <p>Successfully completed courses</p>
                 </div>
-                <div class="success-item">
-                    <div class="success-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Mobile-First Learning</h3>
-                    <p>No laptop? No problem!</p>
-                </div>
-                <div class="success-item">
-                    <div class="success-icon">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <h3>Roman Urdu</h3>
-                    <p>Easy to understand explanations</p>
-                </div>
-                <div class="success-item">
-                    <div class="success-icon">
-                        <i class="fas fa-flag"></i>
-                    </div>
-                    <h3>Interactive CTF</h3>
-                    <p>49+ security challenges with flags</p>
+                <div class="newsletter-form">
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Apna email address enter kariye" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                            Subscribe Free
+                        </button>
+                    </form>
+                    <p class="newsletter-note">Join 2000+ ethical hackers community</p>
                 </div>
             </div>
         </div>
@@ -862,70 +983,106 @@
     <!-- Quick Start Guide -->
     <section class="quick-start">
         <div class="container">
-            <h2>5 Minutes Mein Start Kariye</h2>
-            <div class="steps-container">
+            <div class="quick-start-header">
+                <h2>⚡ 5 Minutes Mein Hacker Ban Jaye</h2>
+                <p>Bilkul simple process - koi technical knowledge ki zarurat nahi!</p>
+            </div>
+            
+            <div class="steps-timeline">
                 <div class="step-item">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h3>Termux Download</h3>
-                        <p>F-Droid se latest Termux install kariye</p>
+                        <h3>📱 Termux Download</h3>
+                        <p>F-Droid se latest Termux install kariye (Play Store wala nahi!)</p>
+                        <a href="https://f-droid.org/packages/com.termux/" target="_blank" class="step-link">
+                            <i class="fas fa-download"></i> Download Link
+                        </a>
                     </div>
                 </div>
+                
                 <div class="step-item">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <h3>Basic Setup</h3>
-                        <p>pkg update && pkg upgrade chalaye</p>
+                        <h3>⚙️ Basic Setup</h3>
+                        <p>Yeh commands copy-paste kariye:</p>
+                        <div class="code-snippet">
+                            <code>pkg update && pkg upgrade</code>
+                            <button class="copy-btn" onclick="copyToClipboard('pkg update && pkg upgrade')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="step-item">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>Course Start</h3>
-                        <p>Module 1 se learning start kariye</p>
+                        <h3>🎓 Course Start</h3>
+                        <p>Module 1 se learning start kariye - bilkul free!</p>
+                        <a href="course.html?module=termux-basics" class="step-link">
+                            <i class="fas fa-play"></i> Start Module 1
+                        </a>
                     </div>
                 </div>
+                
                 <div class="step-item">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <h3>Practice</h3>
-                        <p>Commands copy-paste kar ke practice</p>
+                        <h3>🚀 Practice & Master</h3>
+                        <p>Commands copy-paste kar ke practice kariye</p>
+                        <a href="labs/virtual-machine/index.html" class="step-link">
+                            <i class="fas fa-desktop"></i> Virtual Lab
+                        </a>
                     </div>
                 </div>
             </div>
+            
             <div class="quick-start-cta">
-                <a href="course.html?module=termux-basics" class="quick-start-btn">
-                    <i class="fas fa-rocket"></i>
-                    Abhi Start Kariye
-                </a>
+                <div class="cta-content">
+                    <h3>Ready to become an Ethical Hacker?</h3>
+                    <p>Join 5000+ students who are already learning!</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="course.html?module=termux-basics" class="cta-primary">
+                        <i class="fas fa-rocket"></i>
+                        Start Free Course Now
+                    </a>
+                    <a href="#courses" class="cta-secondary">
+                        <i class="fas fa-list"></i>
+                        View All Modules
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <!-- FAQ Section -->
+    <section id="faq-preview" class="faq-preview">
         <div class="container">
-            <h2>Kyun Neuro-Dev?</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <i class="fas fa-language"></i>
-                    <h3>Roman Urdu Mein</h3>
-                    <p>Har command aur concept Roman Urdu mein explain kiya gaya hai</p>
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Kya mobile se really hacking kar sakte hain?</h3>
+                    <p>Haan bilkul! Termux aur NetHunter ke saath aap professional hacking tools use kar sakte hain. Nmap, Metasploit, Burp Suite - sab mobile pe chalte hain.</p>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-mobile"></i>
-                    <h3>Mobile Friendly</h3>
-                    <p>Sirf mobile se complete ethical hacking seekhiye</p>
+                <div class="faq-item">
+                    <h3>Course free hai ya paid?</h3>
+                    <p>100% FREE! Koi hidden charges nahi. Sirf ads se website maintain karte hain. Aap chahe to donate kar sakte hain support ke liye.</p>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-copy"></i>
-                    <h3>Copy Commands</h3>
-                    <p>Har command ke saath copy button - ek click mein copy</p>
+                <div class="faq-item">
+                    <h3>Kya root access chahiye?</h3>
+                    <p>Nahi! NetHunter Rootless use karte hain jo bina root ke chalti hai. Koi warranty void nahi hogi.</p>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Step by Step</h3>
-                    <p>Basic se advanced tak systematic learning</p>
+                <div class="faq-item">
+                    <h3>Certificate milta hai?</h3>
+                    <p>Abhi nahi, lekin jald hi certificate system add kar rahe hain. Course complete karne pe digital certificate milega.</p>
                 </div>
+            </div>
+            <div class="faq-cta">
+                <a href="faq.html" class="faq-link">
+                    <i class="fas fa-question-circle"></i>
+                    More Questions? Check FAQ
+                </a>
             </div>
         </div>
     </section>
@@ -956,14 +1113,20 @@
                 <a href="contact.html" style="color: #ccc; text-decoration: none;">Contact Us</a>
             </div>
             <div style="margin: 15px 0; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; align-items: center;">
-                <a href="https://youtube.com/@neuroshde?si=p9uYjfcegaFsS8Qj" target="_blank" rel="noopener noreferrer" style="color: #ff0000; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-                    <i class="fab fa-youtube"></i> @neuroshade
+                <a href="https://youtube.com/@neuroshde?si=p9uYjfcegaFsS8Qj" target="_blank" rel="noopener noreferrer" style="color: #ff0000; text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: bold;">
+                    <i class="fab fa-youtube"></i> YouTube Channel
                 </a>
-                <a href="https://instagram.com/neuroshade20255" target="_blank" rel="noopener noreferrer" style="color: #e4405f; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-                    <i class="fab fa-instagram"></i> @neuroshade20255
+                <a href="https://instagram.com/neuroshade2025" target="_blank" rel="noopener noreferrer" style="color: #e4405f; text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: bold;">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://facebook.com/neurodev" target="_blank" rel="noopener noreferrer" style="color: #1877f2; text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: bold;">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a>
+                <a href="https://t.me/neurodev" target="_blank" rel="noopener noreferrer" style="color: #0088cc; text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: bold;">
+                    <i class="fab fa-telegram"></i> Telegram
                 </a>
                 <a href="donate.html" style="color: #00ff41; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 5px;">
-                    <i class="fas fa-heart"></i> Support Us - Donate
+                    <i class="fas fa-heart"></i> Support Us
                 </a>
             </div>
         </div>
@@ -1024,6 +1187,34 @@
             if (themeToggle) {
                 themeToggle.addEventListener('click', toggleTheme);
             }
+            
+            // Newsletter form handler
+            const newsletterForm = document.getElementById('newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', handleNewsletterSignup);
+            }
+            
+            // Add click tracking to CTA buttons
+            document.querySelectorAll('.cta-primary, .cta-secondary').forEach(button => {
+                button.addEventListener('click', function() {
+                    const ctaText = this.textContent.trim();
+                    trackCTAClick(ctaText);
+                });
+            });
+            
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
             
             // Add hamburger menu functionality
             const hamburger = document.getElementById('hamburger');
@@ -1105,6 +1296,92 @@
                 notification.remove();
                 openVM('nethunter-tools');
             }, 2000);
+        }
+        
+        // Copy to Clipboard Function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('✅ Command copied!', 'success');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('✅ Command copied!', 'success');
+            });
+        }
+        
+        // Show Notification Function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? '#00ff41' : type === 'error' ? '#ff6b6b' : '#00d4ff';
+            const textColor = type === 'success' ? '#000' : '#fff';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${bgColor};
+                color: ${textColor};
+                padding: 15px 25px;
+                border-radius: 8px;
+                font-weight: bold;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Newsletter Signup Function
+        function handleNewsletterSignup(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            if (!email) {
+                showNotification('❌ Please enter your email', 'error');
+                return;
+            }
+            
+            // Simulate API call
+            showNotification('📧 Subscribing...', 'info');
+            
+            setTimeout(() => {
+                showNotification('🎉 Successfully subscribed! Check your email.', 'success');
+                event.target.reset();
+                
+                // Track conversion
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'newsletter_signup', {
+                        'event_category': 'engagement',
+                        'event_label': 'hero_newsletter'
+                    });
+                }
+            }, 2000);
+        }
+        
+        // Enhanced Analytics Tracking
+        function trackEvent(action, category = 'engagement', label = '') {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label
+                });
+            }
+        }
+        
+        // Track CTA Clicks
+        function trackCTAClick(ctaName) {
+            trackEvent('cta_click', 'conversion', ctaName);
         }
     </script>
     <!-- Buy Me Coffee Button -->

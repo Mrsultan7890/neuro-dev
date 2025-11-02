@@ -123,20 +123,38 @@ class FirefoxBrowser {
         const container = document.getElementById('tabs-container');
         if (!container) return;
 
-        container.innerHTML = this.tabs.map(tab => `
-            <div class="firefox-tab ${tab.id === this.activeTabId ? 'active' : ''}" 
-                 onclick="window.firefoxBrowser && window.firefoxBrowser.switchTab(${tab.id})"
-                 oncontextmenu="window.firefoxBrowser && window.firefoxBrowser.showTabContextMenu(event, ${tab.id})">
-                <div class="tab-favicon">
-                    ${tab.loading ? '<i class="fas fa-spinner fa-spin"></i>' : 
-                      tab.url.includes('neuro-dev') ? '🧠' : '🌐'}
-                </div>
-                <div class="tab-title">${this.sanitizeInput(tab.title)}</div>
-                <button class="tab-close" onclick="event.stopPropagation(); window.firefoxBrowser && window.firefoxBrowser.closeTab(${tab.id})">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `).join('');
+        container.innerHTML = '';
+        this.tabs.forEach(tab => {
+            const tabElement = document.createElement('div');
+            tabElement.className = `firefox-tab ${tab.id === this.activeTabId ? 'active' : ''}`;
+            tabElement.onclick = () => window.firefoxBrowser && window.firefoxBrowser.switchTab(tab.id);
+            tabElement.oncontextmenu = (e) => window.firefoxBrowser && window.firefoxBrowser.showTabContextMenu(e, tab.id);
+            
+            const favicon = document.createElement('div');
+            favicon.className = 'tab-favicon';
+            if (tab.loading) {
+                favicon.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            } else {
+                favicon.textContent = tab.url.includes('neuro-dev') ? '🧠' : '🌐';
+            }
+            
+            const title = document.createElement('div');
+            title.className = 'tab-title';
+            title.textContent = tab.title;
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'tab-close';
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            closeBtn.onclick = (e) => {
+                e.stopPropagation();
+                window.firefoxBrowser && window.firefoxBrowser.closeTab(tab.id);
+            };
+            
+            tabElement.appendChild(favicon);
+            tabElement.appendChild(title);
+            tabElement.appendChild(closeBtn);
+            container.appendChild(tabElement);
+        });
     }
 
     switchTab(tabId) {
@@ -861,13 +879,23 @@ class FirefoxBrowser {
         const container = document.getElementById('bookmarks-container');
         if (!container) return;
 
-        container.innerHTML = this.bookmarks.map(bookmark => `
-            <div class="bookmark-item" onclick="firefoxBrowser.navigate('${bookmark.url}')" 
-                 title="${this.sanitizeInput(bookmark.title)}">
-                <i class="fas fa-bookmark"></i>
-                <span>${this.sanitizeInput(bookmark.title)}</span>
-            </div>
-        `).join('');
+        container.innerHTML = '';
+        this.bookmarks.forEach(bookmark => {
+            const bookmarkElement = document.createElement('div');
+            bookmarkElement.className = 'bookmark-item';
+            bookmarkElement.title = bookmark.title;
+            bookmarkElement.onclick = () => firefoxBrowser.navigate(bookmark.url);
+            
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-bookmark';
+            
+            const span = document.createElement('span');
+            span.textContent = bookmark.title;
+            
+            bookmarkElement.appendChild(icon);
+            bookmarkElement.appendChild(span);
+            container.appendChild(bookmarkElement);
+        });
     }
 
     loadBookmarks() {

@@ -500,25 +500,58 @@ class QuizSystem {
 
     showDetailedResults() {
         const modal = document.querySelector('.quiz-modal');
-        let resultsHTML = '<div class="detailed-results"><h3>Answer Review</h3>';
+        modal.innerHTML = '';
+        
+        const detailedDiv = document.createElement('div');
+        detailedDiv.className = 'detailed-results';
+        
+        const title = document.createElement('h3');
+        title.textContent = 'Answer Review';
+        detailedDiv.appendChild(title);
         
         this.currentQuiz.questions.forEach((question, index) => {
             const userAnswer = this.answers[index];
             const correct = question.correct;
             const isCorrect = userAnswer === correct;
             
-            resultsHTML += `
-                <div class="result-item ${isCorrect ? 'correct' : 'incorrect'}">
-                    <h4>${question.question}</h4>
-                    <p><strong>Your Answer:</strong> ${question.options[userAnswer] || 'Not answered'}</p>
-                    <p><strong>Correct Answer:</strong> ${question.options[correct]}</p>
-                    <p><strong>Explanation:</strong> ${question.explanation}</p>
-                </div>
-            `;
+            const resultItem = document.createElement('div');
+            resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
+            
+            const questionTitle = document.createElement('h4');
+            questionTitle.textContent = question.question;
+            
+            const userAnswerP = document.createElement('p');
+            const userAnswerStrong = document.createElement('strong');
+            userAnswerStrong.textContent = 'Your Answer: ';
+            userAnswerP.appendChild(userAnswerStrong);
+            userAnswerP.appendChild(document.createTextNode(question.options[userAnswer] || 'Not answered'));
+            
+            const correctAnswerP = document.createElement('p');
+            const correctAnswerStrong = document.createElement('strong');
+            correctAnswerStrong.textContent = 'Correct Answer: ';
+            correctAnswerP.appendChild(correctAnswerStrong);
+            correctAnswerP.appendChild(document.createTextNode(question.options[correct]));
+            
+            const explanationP = document.createElement('p');
+            const explanationStrong = document.createElement('strong');
+            explanationStrong.textContent = 'Explanation: ';
+            explanationP.appendChild(explanationStrong);
+            explanationP.appendChild(document.createTextNode(question.explanation));
+            
+            resultItem.appendChild(questionTitle);
+            resultItem.appendChild(userAnswerP);
+            resultItem.appendChild(correctAnswerP);
+            resultItem.appendChild(explanationP);
+            detailedDiv.appendChild(resultItem);
         });
         
-        resultsHTML += '<button onclick="quizSystem.closeQuiz()" class="close-btn">Close</button></div>';
-        modal.innerHTML = resultsHTML;
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.textContent = 'Close';
+        closeBtn.onclick = () => this.closeQuiz();
+        detailedDiv.appendChild(closeBtn);
+        
+        modal.appendChild(detailedDiv);
     }
 
     retakeQuiz() {

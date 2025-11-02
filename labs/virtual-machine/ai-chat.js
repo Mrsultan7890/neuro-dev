@@ -260,13 +260,28 @@ What would you like to explore?`,
         const sanitizedContent = this.sanitizeContent(message.content);
         const sanitizedVuln = isVulnerable ? this.sanitizeInput(message.vulnerability) : '';
 
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                <div class="message-text">${sanitizedContent}</div>
-                <div class="message-time">${message.timestamp.toLocaleTimeString()}</div>
-                ${isVulnerable ? `<div class="vulnerability-tag">${sanitizedVuln}</div>` : ''}
-            </div>
-        `;
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        
+        const messageText = document.createElement('div');
+        messageText.className = 'message-text';
+        messageText.innerHTML = sanitizedContent;
+        
+        const messageTime = document.createElement('div');
+        messageTime.className = 'message-time';
+        messageTime.textContent = message.timestamp.toLocaleTimeString();
+        
+        messageContent.appendChild(messageText);
+        messageContent.appendChild(messageTime);
+        
+        if (isVulnerable) {
+            const vulnTag = document.createElement('div');
+            vulnTag.className = 'vulnerability-tag';
+            vulnTag.textContent = sanitizedVuln;
+            messageContent.appendChild(vulnTag);
+        }
+        
+        messageDiv.appendChild(messageContent);
 
         chatArea.appendChild(messageDiv);
         chatArea.scrollTop = chatArea.scrollHeight;
@@ -344,10 +359,16 @@ What would you like to explore?`,
                 chatItem.classList.add('active');
             }
             
-            chatItem.innerHTML = `
-                <div class="chat-title">${conv.title}</div>
-                <div class="chat-date">${conv.created.toLocaleDateString()}</div>
-            `;
+            const chatTitle = document.createElement('div');
+            chatTitle.className = 'chat-title';
+            chatTitle.textContent = conv.title;
+            
+            const chatDate = document.createElement('div');
+            chatDate.className = 'chat-date';
+            chatDate.textContent = conv.created.toLocaleDateString();
+            
+            chatItem.appendChild(chatTitle);
+            chatItem.appendChild(chatDate);
             
             chatItem.addEventListener('click', () => this.loadConversation(conv.id));
             historyDiv.appendChild(chatItem);

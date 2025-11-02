@@ -2,7 +2,8 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: http://neuroshade.duckdns.org/sitemap.xml
+Sitemap: https://neurodev.netlify.app/sitemap.xml
+Sitemap: https://neurodev.netlify.app/sitemap.txt
 
 # Allow all search engines to crawl
 User-agent: Googlebot

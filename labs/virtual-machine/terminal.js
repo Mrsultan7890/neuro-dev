@@ -2125,14 +2125,16 @@ class Terminal {
         
         const loadingLine = document.createElement('div');
         loadingLine.className = 'terminal-line output';
-        loadingLine.innerHTML = `<span>${frames[0]} ${message}</span>`;
+        const loadingSpan = document.createElement('span');
+        loadingSpan.textContent = `${frames[0]} ${message}`;
+        loadingLine.appendChild(loadingSpan);
         
         const output = document.getElementById('terminal-output');
         output.appendChild(loadingLine);
         
         const interval = setInterval(() => {
             i = (i + 1) % frames.length;
-            loadingLine.innerHTML = `<span>${frames[i]} ${message}</span>`;
+            loadingSpan.textContent = `${frames[i]} ${message}`;
         }, 100);
         
         setTimeout(() => {
