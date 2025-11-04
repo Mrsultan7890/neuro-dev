@@ -1,0 +1,318 @@
+/* Performance Manager Styles */
+.progress-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 8px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.level-display {
+    color: #00ff88;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 50px;
+}
+
+.xp-bar {
+    width: 80px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.xp-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff88, #00cc66);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+}
+
+.xp-display {
+    color: #00ff88;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 60px;
+}
+
+.session-info {
+    color: #ffd93d;
+    font-size: 11px;
+    font-weight: bold;
+    background: rgba(255, 217, 61, 0.1);
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 217, 61, 0.3);
+}
+
+/* Level Up Notification */
+.level-up-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    z-index: 10000;
+    animation: levelUpAnimation 0.6s ease;
+    text-align: center;
+    border: 2px solid #00ff88;
+}
+
+.level-up-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.level-up-content i {
+    font-size: 3em;
+    color: #ffd700;
+    animation: bounce 1s infinite;
+}
+
+.level-up-content h3 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.level-up-content p {
+    margin: 0;
+    font-size: 1.2em;
+    color: #e0e0e0;
+}
+
+.level-rewards {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+/* Achievement Notification */
+.achievement-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 10000;
+    animation: slideInRight 0.5s ease;
+    max-width: 320px;
+    border: 2px solid #ff6b6b;
+}
+
+.achievement-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.achievement-content i {
+    font-size: 2.5em;
+    color: #ffd700;
+    animation: pulse 2s infinite;
+}
+
+.achievement-content h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: #fff;
+}
+
+.achievement-content h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #ffe0e0;
+}
+
+.achievement-content p {
+    margin: 0;
+    font-size: 1em;
+    color: #f0f0f0;
+    text-align: center;
+}
+
+/* Performance Optimizations */
+.app-window.optimized {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.app-window.optimized.active {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+               opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.taskbar .app-icon {
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.taskbar .app-icon:hover {
+    transform: scale(1.05);
+}
+
+.taskbar .app-icon.active {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+/* Command Mastery Indicators */
+.terminal-line.success {
+    position: relative;
+}
+
+.terminal-line.success::before {
+    content: "🏆";
+    position: absolute;
+    left: -20px;
+    animation: bounce 0.5s ease;
+}
+
+/* Animations */
+@keyframes levelUpAnimation {
+    0% { 
+        transform: translate(-50%, -50%) scale(0.5); 
+        opacity: 0; 
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1); 
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1); 
+        opacity: 1; 
+    }
+}
+
+@keyframes slideInRight {
+    0% { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Performance Stats Display */
+.performance-stats {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #00ff88;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 11px;
+    border: 1px solid #00ff88;
+    display: none;
+}
+
+.performance-stats.show {
+    display: block;
+}
+
+.performance-stats h4 {
+    margin: 0 0 8px 0;
+    color: #ffd93d;
+}
+
+.performance-stats div {
+    margin: 2px 0;
+}
+
+/* Responsive Design for Progress Indicators */
+@media (max-width: 768px) {
+    .progress-indicator {
+        gap: 4px;
+        padding: 2px 6px;
+    }
+    
+    .level-display {
+        font-size: 10px;
+        min-width: 40px;
+    }
+    
+    .xp-bar {
+        width: 60px;
+        height: 6px;
+    }
+    
+    .xp-display {
+        font-size: 9px;
+        min-width: 50px;
+    }
+    
+    .session-info {
+        font-size: 10px;
+        padding: 1px 4px;
+    }
+    
+    .level-up-notification {
+        padding: 20px;
+        max-width: 90%;
+    }
+    
+    .achievement-notification {
+        max-width: 90%;
+        right: 5%;
+    }
+}
+
+/* Smooth Transitions for Better UX */
+.vm-container * {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.vm-container.fullscreen .progress-indicator {
+    transform: scale(1.1);
+}
+
+.vm-container.fullscreen .session-info {
+    transform: scale(1.1);
+}

@@ -159,14 +159,37 @@ class Terminal {
     }
 
     executeCommand(command) {
-        // Expand aliases first
-        command = this.expandAlias(command);
-        
-        this.addLine(`${this.getPrompt()}$ ${command}`, 'command');
-        
-        const parts = command.split(' ');
-        const cmd = parts[0];
-        const args = parts.slice(1);
+        try {
+            // Validate and sanitize command
+            if (!command || typeof command !== 'string') {
+                this.addLine('Invalid command', 'error');
+                return;
+            }
+            
+            // Expand aliases first
+            command = this.expandAlias(command.trim());
+            
+            this.addLine(`${this.getPrompt()}$ ${command}`, 'command');
+            
+            const parts = command.split(' ').filter(part => part.length > 0);
+            if (parts.length === 0) {
+                return;
+            }
+            
+            const cmd = parts[0];
+            const args = parts.slice(1);
+            
+            // Track command usage for progress
+            try {
+                if (window.progressTracker && typeof window.progressTracker.trackProgress === 'function') {
+                    window.progressTracker.trackProgress(cmd, 'command-used');
+                }
+            } catch (error) {
+                console.warn('Progress tracking error:', error);
+            }
+            
+            // Update command statistics
+            this.updateCommandStats(cmd);
 
         // Enhanced course-specific command handling
         const currentCourseTools = this.courseTools[this.currentCourse];
@@ -377,6 +400,69 @@ class Terminal {
             case 'submit-flag':
                 this.handleSubmitFlag(args);
                 break;
+            case 'vim':
+                this.handleVim(args);
+                break;
+            case 'find':
+                this.handleFind(args);
+                break;
+            case 'chmod':
+                this.handleChmod(args);
+                break;
+            case 'chown':
+                this.handleChown(args);
+                break;
+            case 'tar':
+                this.handleTar(args);
+                break;
+            case 'zip':
+                this.handleZip(args);
+                break;
+            case 'unzip':
+                this.handleUnzip(args);
+                break;
+            case 'history':
+                this.handleHistory(args);
+                break;
+            case 'alias':
+                this.handleAlias(args);
+                break;
+            case 'env':
+                this.handleEnv(args);
+                break;
+            case 'export':
+                this.handleExport(args);
+                break;
+            case 'which':
+                this.handleWhich(args);
+                break;
+            case 'man':
+                this.handleMan(args);
+                break;
+            case 'top':
+                this.handleTop(args);
+                break;
+            case 'kill':
+                this.handleKill(args);
+                break;
+            case 'killall':
+                this.handleKillall(args);
+                break;
+            case 'df':
+                this.handleDf(args);
+                break;
+            case 'du':
+                this.handleDu(args);
+                break;
+            case 'free':
+                this.handleFree(args);
+                break;
+            case 'uptime':
+                this.handleUptime(args);
+                break;
+            case 'uname':
+                this.handleUname(args);
+                break;
             
             default:
                 // Enhanced command suggestions
@@ -387,10 +473,14 @@ class Terminal {
                 }
                 this.addLine('Type "help" to see available commands', 'output');
         }
+        } catch (error) {
+            console.error('Error executing command:', error);
+            this.addLine('Command execution failed', 'error');
+        }
     }
 
     isBasicCommand(cmd) {
-        return ['help', 'clear', 'pwd', 'ls', 'cd', 'mkdir', 'touch', 'cat', 'whoami', 'date', 'course', 'rm', 'cp', 'mv', 'ps', 'grep', 'wget', 'git', 'netstat', 'ss', 'ping'].includes(cmd);
+        return ['help', 'clear', 'pwd', 'ls', 'cd', 'mkdir', 'touch', 'cat', 'whoami', 'date', 'course', 'rm', 'cp', 'mv', 'ps', 'grep', 'wget', 'git', 'netstat', 'ss', 'ping', 'vim', 'find', 'chmod', 'chown', 'tar', 'zip', 'unzip', 'history', 'alias', 'env', 'export', 'which', 'man', 'top', 'kill', 'killall', 'df', 'du', 'free', 'uptime', 'uname'].includes(cmd);
     }
 
     handleLs(args) {
@@ -400,49 +490,56 @@ class Terminal {
             return;
         }
 
-        const detailed = args.includes('-l') || args.includes('-la');
-        const showHidden = args.includes('-a') || args.includes('-la');
-        const colorized = true; // Always use colors
-
-        let output = '';
+        const options = this.parseLsOptions(args);
+        const items = this.getDirectoryItems(currentDir, options);
+        this.displayItems(items, options.detailed);
+    }
+    
+    parseLsOptions(args) {
+        return {
+            detailed: args.includes('-l') || args.includes('-la'),
+            showHidden: args.includes('-a') || args.includes('-la')
+        };
+    }
+    
+    getDirectoryItems(currentDir, options) {
+        const items = [];
+        
         for (const [name, content] of Object.entries(currentDir)) {
             if (name === '_meta') continue;
-            if (!showHidden && name.startsWith('.')) continue;
+            if (!options.showHidden && name.startsWith('.')) continue;
             
             const meta = content._meta || { type: 'file', created: new Date(), size: 1024 };
+            const isDir = meta.type === 'dir';
             
-            if (detailed) {
-                const isDir = meta.type === 'dir';
-                const isExecutable = meta.executable || false;
-                let permissions = isDir ? 'drwxr-xr-x' : '-rw-r--r--';
-                if (isExecutable) permissions = '-rwxr-xr-x';
-                
-                const size = meta.size.toString().padStart(8);
-                const date = meta.created.toLocaleDateString('en-US', { 
-                    month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' 
-                }).replace(',', '');
-                
-                let displayName = name;
-                if (colorized) {
-                    if (isDir) displayName = `\x1b[34m${name}\x1b[0m`; // Blue for directories
-                    else if (isExecutable) displayName = `\x1b[32m${name}\x1b[0m`; // Green for executables
-                    else if (name.startsWith('.')) displayName = `\x1b[90m${name}\x1b[0m`; // Gray for hidden
-                }
-                
-                output += `${permissions} 1 neuro neuro ${size} ${date} ${displayName}\n`;
+            if (options.detailed) {
+                items.push(this.formatDetailedItem(name, meta, isDir));
             } else {
-                let displayName = name;
-                if (colorized) {
-                    const isDir = meta.type === 'dir';
-                    const isExecutable = meta.executable || false;
-                    if (isDir) displayName = `\x1b[34m${name}\x1b[0m/`; // Blue with slash
-                    else if (isExecutable) displayName = `\x1b[32m${name}\x1b[0m*`; // Green with asterisk
-                }
-                output += displayName + '  ';
+                items.push(name + (isDir ? '/' : ''));
             }
         }
         
-        this.addLine(output, 'output');
+        return items;
+    }
+    
+    formatDetailedItem(name, meta, isDir) {
+        const permissions = isDir ? 'drwxr-xr-x' : '-rw-r--r--';
+        const size = (meta.size || 1024).toString().padStart(8);
+        const date = (meta.created || new Date()).toLocaleDateString('en-US', { 
+            month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' 
+        }).replace(',', '');
+        
+        return `${permissions} 1 neuro neuro ${size} ${date} ${name}${isDir ? '/' : ''}`;
+    }
+    
+    displayItems(items, detailed) {
+        if (items.length === 0) {
+            this.addLine('Directory is empty', 'output');
+        } else if (detailed) {
+            items.forEach(item => this.addLine(item, 'output'));
+        } else {
+            this.addLine(items.join('  '), 'output');
+        }
     }
 
     handleCd(args) {
@@ -705,16 +802,27 @@ class Terminal {
     }
 
     showHelp() {
-        const tools = this.courseTools[this.currentCourse] || { environment: 'Terminal', commands: ['help', 'clear'] };
+        const tools = this.courseTools[this.currentCourse] || { environment: 'Terminal', commands: [] };
         this.addLine(`=== ${tools.environment} Help ===`, 'success');
         this.addLine('Available commands:', 'output');
-        if (tools.commands) {
+        
+        // Basic commands always available
+        const basicCommands = ['help', 'clear', 'pwd', 'ls', 'cd', 'mkdir', 'touch', 'cat', 'nano', 'rm', 'cp', 'mv'];
+        basicCommands.forEach(cmd => {
+            this.addLine(`  ${cmd}`, 'output');
+        });
+        
+        // Course specific commands
+        if (tools.commands && tools.commands.length > 0) {
+            this.addLine('\nCourse-specific commands:', 'output');
             tools.commands.forEach(cmd => {
-                this.addLine(`  ${cmd}`, 'output');
+                if (!basicCommands.includes(cmd)) {
+                    this.addLine(`  ${cmd}`, 'output');
+                }
             });
         }
-        this.addLine('\nBasic commands: help, clear, pwd, ls, cd, mkdir, touch, cat', 'output');
-        this.addLine('Type "course" to switch between courses', 'output');
+        
+        this.addLine('\nType "course" to switch between courses', 'output');
         
         // Show specific help for AI courses
         if (this.currentCourse === 'ai-hacking') {
@@ -835,16 +943,39 @@ class Terminal {
     }
 
     addLine(text, type = 'output') {
-        const output = document.getElementById('terminal-output');
-        if (!output) return;
+        try {
+            const output = document.getElementById('terminal-output');
+            if (!output) {
+                console.warn('Terminal output element not found');
+                return;
+            }
 
-        const line = document.createElement('div');
-        line.className = `terminal-line ${type}`;
-        // Sanitize text to prevent XSS
-        line.textContent = String(text || '');
-        
-        output.appendChild(line);
-        output.scrollTop = output.scrollHeight;
+            const line = document.createElement('div');
+            line.className = `terminal-line ${type}`;
+            // Sanitize text to prevent XSS
+            line.textContent = this.sanitizeInput(String(text || ''));
+            
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        } catch (error) {
+            console.error('Error adding terminal line:', error);
+        }
+    }
+    
+    sanitizeInput(input) {
+        if (typeof input !== 'string') {
+            return String(input || '');
+        }
+        return input.replace(/[<>"'&]/g, function(match) {
+            const escapeMap = {
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                '&': '&amp;'
+            };
+            return escapeMap[match];
+        }).substring(0, 1000); // Limit length
     }
 
     clear() {
@@ -863,8 +994,16 @@ class Terminal {
         }
         const currentDir = this.getCurrentDirectory();
         if (currentDir) {
-            currentDir[args[0]] = {};
-            this.addLine(`Directory '${args[0]}' created`, 'success');
+            const dirName = args[0];
+            if (currentDir[dirName]) {
+                this.addLine(`mkdir: cannot create directory '${dirName}': File exists`, 'error');
+            } else {
+                currentDir[dirName] = {
+                    _meta: { type: 'dir', created: new Date(), size: 4096 }
+                };
+                this.addLine(`Directory '${dirName}' created`, 'success');
+                this.saveSession();
+            }
         }
     }
 
@@ -875,8 +1014,21 @@ class Terminal {
         }
         const currentDir = this.getCurrentDirectory();
         if (currentDir) {
-            currentDir[args[0]] = '';
-            this.addLine(`File '${args[0]}' created`, 'success');
+            const fileName = args[0];
+            if (!currentDir[fileName]) {
+                currentDir[fileName] = {
+                    content: '',
+                    _meta: { type: 'file', created: new Date(), size: 0 }
+                };
+                this.addLine(`File '${fileName}' created`, 'success');
+            } else {
+                // Update timestamp if file exists
+                if (currentDir[fileName]._meta) {
+                    currentDir[fileName]._meta.created = new Date();
+                }
+                this.addLine(`File '${fileName}' timestamp updated`, 'success');
+            }
+            this.saveSession();
         }
     }
 
@@ -979,31 +1131,46 @@ class Terminal {
     }
 
     handlePing(args) {
-        if (args.length === 0) {
+        const pingConfig = this.parsePingArgs(args);
+        if (!pingConfig.target) {
             this.addLine('ping: usage error: Destination address required', 'error');
             return;
         }
         
+        this.executePing(pingConfig);
+    }
+    
+    parsePingArgs(args) {
+        if (args.length === 0) return { target: null };
+        
         const target = args[args.length - 1];
         const count = args.includes('-c') ? parseInt(args[args.indexOf('-c') + 1]) || 4 : 4;
         
-        this.addLine(`PING ${target} (192.168.1.1) 56(84) bytes of data.`, 'output');
+        return { target, count };
+    }
+    
+    executePing(config) {
+        this.addLine(`PING ${config.target} (192.168.1.1) 56(84) bytes of data.`, 'output');
         
         let sent = 0;
         const pingInterval = setInterval(() => {
-            if (sent >= count) {
+            if (sent >= config.count) {
                 clearInterval(pingInterval);
-                this.addLine('', 'output');
-                this.addLine(`--- ${target} ping statistics ---`, 'output');
-                this.addLine(`${count} packets transmitted, ${count} received, 0% packet loss, time ${count * 1000}ms`, 'output');
-                this.addLine(`rtt min/avg/max/mdev = 12.345/15.678/18.901/2.345 ms`, 'output');
+                this.displayPingStats(config);
                 return;
             }
             
             sent++;
             const time = (12 + Math.random() * 10).toFixed(1);
-            this.addLine(`64 bytes from ${target} (192.168.1.1): icmp_seq=${sent} ttl=64 time=${time} ms`, 'output');
+            this.addLine(`64 bytes from ${config.target} (192.168.1.1): icmp_seq=${sent} ttl=64 time=${time} ms`, 'output');
         }, 1000);
+    }
+    
+    displayPingStats(config) {
+        this.addLine('', 'output');
+        this.addLine(`--- ${config.target} ping statistics ---`, 'output');
+        this.addLine(`${config.count} packets transmitted, ${config.count} received, 0% packet loss, time ${config.count * 1000}ms`, 'output');
+        this.addLine('rtt min/avg/max/mdev = 12.345/15.678/18.901/2.345 ms', 'output');
     }
 
     handleGrep(args) {
@@ -1053,15 +1220,28 @@ class Terminal {
             this.addLine('nano: missing file operand', 'error');
             return;
         }
-        this.addLine(`Opening ${args[0]} in nano editor...`, 'output');
+        const fileName = args[0];
+        this.addLine(`Opening ${fileName} in nano editor...`, 'output');
+        
         // Switch to code editor
         if (window.vm) {
             window.vm.switchApp('editor');
-            const currentDir = this.getCurrentDirectory();
-            if (currentDir && currentDir[args[0]]) {
-                document.getElementById('code-editor').value = currentDir[args[0]];
-                document.getElementById('editor-filename').textContent = args[0];
-            }
+            setTimeout(() => {
+                const currentDir = this.getCurrentDirectory();
+                const codeEditor = document.getElementById('code-editor');
+                const editorFilename = document.getElementById('editor-filename');
+                
+                if (codeEditor && editorFilename) {
+                    if (currentDir && currentDir[fileName]) {
+                        const content = currentDir[fileName].content || currentDir[fileName] || '';
+                        codeEditor.value = content;
+                    } else {
+                        codeEditor.value = '';
+                    }
+                    editorFilename.textContent = fileName;
+                    codeEditor.focus();
+                }
+            }, 300);
         }
     }
 
@@ -1377,22 +1557,38 @@ class Terminal {
 
     handleTrainNeuralNet(args) {
         this.addLine('Starting neural network training...', 'output');
-        this.addLine('Epoch 1/10 - Loss: 2.3026 - Accuracy: 0.1000', 'output');
+        this.simulateTraining();
+    }
+    
+    simulateTraining() {
+        const totalEpochs = 10;
+        let currentEpoch = 1;
         
-        let epoch = 2;
+        this.addLine(`Epoch ${currentEpoch}/${totalEpochs} - Loss: 2.3026 - Accuracy: 0.1000`, 'output');
+        
         const trainingInterval = setInterval(() => {
-            if (epoch > 10) {
+            currentEpoch++;
+            
+            if (currentEpoch > totalEpochs) {
                 clearInterval(trainingInterval);
                 this.addLine('Training completed successfully!', 'success');
                 this.addLine('Final model saved to: model.h5', 'output');
                 return;
             }
             
-            const loss = (2.3 - (epoch * 0.2) + Math.random() * 0.1).toFixed(4);
-            const acc = (0.1 + (epoch * 0.08) + Math.random() * 0.02).toFixed(4);
-            this.addLine(`Epoch ${epoch}/10 - Loss: ${loss} - Accuracy: ${acc}`, 'output');
-            epoch++;
+            const metrics = this.calculateTrainingMetrics(currentEpoch);
+            this.addLine(`Epoch ${currentEpoch}/${totalEpochs} - Loss: ${metrics.loss} - Accuracy: ${metrics.accuracy}`, 'output');
         }, 800);
+    }
+    
+    calculateTrainingMetrics(epoch) {
+        const baseLoss = 2.3 - (epoch * 0.2);
+        const baseAccuracy = 0.1 + (epoch * 0.08);
+        
+        return {
+            loss: (baseLoss + Math.random() * 0.1).toFixed(4),
+            accuracy: (baseAccuracy + Math.random() * 0.02).toFixed(4)
+        };
     }
 
     handleOpencv(args) {
@@ -2103,44 +2299,264 @@ class Terminal {
         return matrix[str2.length][str1.length];
     }
 
-    // Enhanced command history
-    addToHistory(command) {
-        try {
-            if (command && command.trim()) {
-                this.commandHistory.unshift(command);
-                if (this.commandHistory.length > 100) {
-                    this.commandHistory = this.commandHistory.slice(0, 100);
-                }
-                this.saveSession();
-            }
-        } catch (error) {
-            console.error('Error adding command to history:', error);
+    // Missing command handlers
+    handleVim(args) {
+        if (args.length === 0) {
+            this.addLine('vim: missing file operand', 'error');
+            return;
+        }
+        this.addLine(`Opening ${args[0]} in vim editor...`, 'output');
+        if (window.vm) {
+            window.vm.switchApp('editor');
         }
     }
 
-    // Loading animations
+    handleFind(args) {
+        const path = args[0] || '.';
+        const name = args.includes('-name') ? args[args.indexOf('-name') + 1] : '*';
+        this.addLine(`Searching for ${name} in ${path}...`, 'output');
+        this.addLine('./Documents/file1.txt', 'output');
+        this.addLine('./scripts/hello.py', 'output');
+    }
+
+    handleChmod(args) {
+        if (args.length < 2) {
+            this.addLine('chmod: missing operand', 'error');
+            return;
+        }
+        this.addLine(`Changed permissions of '${args[1]}' to ${args[0]}`, 'success');
+    }
+
+    handleChown(args) {
+        if (args.length < 2) {
+            this.addLine('chown: missing operand', 'error');
+            return;
+        }
+        this.addLine(`Changed ownership of '${args[1]}' to ${args[0]}`, 'success');
+    }
+
+    handleTar(args) {
+        if (args.includes('-czf')) {
+            this.addLine(`Creating archive: ${args[args.indexOf('-czf') + 1]}`, 'output');
+        } else if (args.includes('-xzf')) {
+            this.addLine(`Extracting archive: ${args[args.indexOf('-xzf') + 1]}`, 'output');
+        } else {
+            this.addLine('tar: invalid option', 'error');
+        }
+    }
+
+    handleZip(args) {
+        if (args.length < 2) {
+            this.addLine('zip: missing operand', 'error');
+            return;
+        }
+        this.addLine(`Creating zip archive: ${args[0]}`, 'output');
+    }
+
+    handleUnzip(args) {
+        if (args.length === 0) {
+            this.addLine('unzip: missing file operand', 'error');
+            return;
+        }
+        this.addLine(`Extracting: ${args[0]}`, 'output');
+    }
+
+    handleHistory(args) {
+        this.addLine('Command History:', 'output');
+        this.commandHistory.slice(0, 10).forEach((cmd, index) => {
+            this.addLine(`${index + 1}  ${cmd}`, 'output');
+        });
+    }
+
+    handleAlias(args) {
+        if (args.length === 0) {
+            this.addLine('alias ll="ls -la"', 'output');
+            this.addLine('alias la="ls -a"', 'output');
+            this.addLine('alias c="clear"', 'output');
+        } else {
+            this.addLine(`Alias set: ${args.join(' ')}`, 'success');
+        }
+    }
+
+    handleEnv(args) {
+        this.addLine('Environment Variables:', 'output');
+        this.addLine('PATH=/usr/local/bin:/usr/bin:/bin', 'output');
+        this.addLine('HOME=/home/neuro', 'output');
+        this.addLine('USER=neuro', 'output');
+        this.addLine('SHELL=/bin/bash', 'output');
+    }
+
+    handleExport(args) {
+        if (args.length === 0) {
+            this.addLine('export: missing variable', 'error');
+            return;
+        }
+        this.addLine(`Exported: ${args[0]}`, 'success');
+    }
+
+    handleWhich(args) {
+        if (args.length === 0) {
+            this.addLine('which: missing command', 'error');
+            return;
+        }
+        const commands = {
+            'python3': '/usr/bin/python3',
+            'nmap': '/usr/bin/nmap',
+            'git': '/usr/bin/git',
+            'nano': '/usr/bin/nano'
+        };
+        this.addLine(commands[args[0]] || `${args[0]}: not found`, 'output');
+    }
+
+    handleMan(args) {
+        if (args.length === 0) {
+            this.addLine('man: missing command', 'error');
+            return;
+        }
+        this.addLine(`Manual page for ${args[0]}:`, 'output');
+        this.addLine(`${args[0]} - command description`, 'output');
+        this.addLine('Use q to quit', 'output');
+    }
+
+    handleTop(args) {
+        this.addLine('Tasks: 156 total, 2 running, 154 sleeping', 'output');
+        this.addLine('CPU usage: 15.2%', 'output');
+        this.addLine('Memory usage: 3.2GB / 8GB', 'output');
+        this.addLine('Press q to quit', 'output');
+    }
+
+    handleKill(args) {
+        if (args.length === 0) {
+            this.addLine('kill: missing PID', 'error');
+            return;
+        }
+        this.addLine(`Killed process ${args[0]}`, 'success');
+    }
+
+    handleKillall(args) {
+        if (args.length === 0) {
+            this.addLine('killall: missing process name', 'error');
+            return;
+        }
+        this.addLine(`Killed all ${args[0]} processes`, 'success');
+    }
+
+    handleDf(args) {
+        this.addLine('Filesystem     1K-blocks    Used Available Use% Mounted on', 'output');
+        this.addLine('/dev/sda1       20971520 8388608  12582912  40% /', 'output');
+        this.addLine('tmpfs            4194304       0   4194304   0% /tmp', 'output');
+    }
+
+    handleDu(args) {
+        const path = args[0] || '.';
+        this.addLine(`Disk usage for ${path}:`, 'output');
+        this.addLine('4.0K    ./Documents', 'output');
+        this.addLine('8.0K    ./scripts', 'output');
+        this.addLine('12K     total', 'output');
+    }
+
+    handleFree(args) {
+        this.addLine('              total        used        free      shared', 'output');
+        this.addLine('Mem:        8388608     3355443     5033165           0', 'output');
+        this.addLine('Swap:       2097152           0     2097152', 'output');
+    }
+
+    handleUptime(args) {
+        const uptime = Math.floor(Math.random() * 24) + 1;
+        this.addLine(`up ${uptime} hours, 2 users, load average: 0.15, 0.25, 0.30`, 'output');
+    }
+
+    handleUname(args) {
+        if (args.includes('-a')) {
+            this.addLine('Linux neuro-dev 5.15.0-neuro #1 SMP x86_64 GNU/Linux', 'output');
+        } else {
+            this.addLine('Linux', 'output');
+        }
+    }
+
+    addToHistory(command) {
+        if (command && command.trim()) {
+            this.commandHistory.unshift(command.trim());
+            if (this.commandHistory.length > 50) {
+                this.commandHistory = this.commandHistory.slice(0, 50);
+            }
+        }
+    }
+    
+    updateCommandStats(cmd) {
+        if (!this.commandStats) {
+            this.commandStats = {};
+        }
+        this.commandStats[cmd] = (this.commandStats[cmd] || 0) + 1;
+    }
+
+    /**
+     * Loading Animation System
+     * Displays animated loading indicators with spinner frames
+     */
     showLoading(message, duration = 2000) {
-        const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
-        let i = 0;
+        const animation = new LoadingAnimation(message, duration);
+        animation.start();
+    }
+}
+
+/**
+ * Loading Animation Helper Class
+ * Manages spinner animation lifecycle
+ */
+class LoadingAnimation {
+    constructor(message, duration) {
+        this.message = message;
+        this.duration = duration;
+        this.frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+        this.frameIndex = 0;
+        this.interval = null;
+        this.element = null;
+    }
+    
+    start() {
+        this.createElement();
+        this.startAnimation();
+        this.scheduleCleanup();
+    }
+    
+    createElement() {
+        this.element = document.createElement('div');
+        this.element.className = 'terminal-line output';
         
-        const loadingLine = document.createElement('div');
-        loadingLine.className = 'terminal-line output';
-        const loadingSpan = document.createElement('span');
-        loadingSpan.textContent = `${frames[0]} ${message}`;
-        loadingLine.appendChild(loadingSpan);
+        const span = document.createElement('span');
+        span.textContent = `${this.frames[0]} ${this.message}`;
+        this.element.appendChild(span);
         
         const output = document.getElementById('terminal-output');
-        output.appendChild(loadingLine);
-        
-        const interval = setInterval(() => {
-            i = (i + 1) % frames.length;
-            loadingSpan.textContent = `${frames[i]} ${message}`;
+        if (output) {
+            output.appendChild(this.element);
+        }
+    }
+    
+    startAnimation() {
+        this.interval = setInterval(() => {
+            this.frameIndex = (this.frameIndex + 1) % this.frames.length;
+            const span = this.element?.querySelector('span');
+            if (span) {
+                span.textContent = `${this.frames[this.frameIndex]} ${this.message}`;
+            }
         }, 100);
-        
+    }
+    
+    scheduleCleanup() {
         setTimeout(() => {
-            clearInterval(interval);
-            loadingLine.remove();
-        }, duration);
+            this.cleanup();
+        }, this.duration);
+    }
+    
+    cleanup() {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+        if (this.element && this.element.parentNode) {
+            this.element.remove();
+        }
     }
 }
 
@@ -2232,11 +2648,26 @@ class MobileTerminal extends Terminal {
     }
 }
 
+/**
+ * Terminal Initialization Manager
+ * Handles responsive terminal setup based on device type
+ */
+class TerminalManager {
+    static init() {
+        try {
+            const isMobile = window.innerWidth <= 768;
+            window.terminal = isMobile ? new MobileTerminal() : new Terminal();
+            console.log(`Terminal initialized: ${isMobile ? 'Mobile' : 'Desktop'} mode`);
+        } catch (error) {
+            console.error('Terminal initialization error:', error);
+        }
+    }
+}
+
 // Initialize terminal when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.innerWidth <= 768) {
-        window.terminal = new MobileTerminal();
-    } else {
-        window.terminal = new Terminal();
-    }
+    // Use requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
+        TerminalManager.init();
+    });
 });

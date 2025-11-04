@@ -103,19 +103,52 @@ class FileManager {
     }
 
     getCurrentDirectory() {
-        if (!window.terminal) return null;
+        // Initialize file system if not exists
+        if (!window.terminal || !window.terminal.fileSystem) {
+            this.initializeFileSystem();
+        }
         
         const parts = this.currentPath.split('/').filter(p => p);
-        let current = window.terminal.fileSystem;
+        let current = window.terminal ? window.terminal.fileSystem : this.fileSystem;
         
         for (const part of parts) {
-            if (current[part]) {
+            if (current && current[part]) {
                 current = current[part];
             } else {
-                return null;
+                return this.getDefaultDirectory();
             }
         }
-        return current;
+        return current || this.getDefaultDirectory();
+    }
+
+    initializeFileSystem() {
+        const now = new Date();
+        this.fileSystem = {
+            '/home': {
+                'neuro': {
+                    'Documents': { _meta: { type: 'dir', created: now, size: 4096 } },
+                    'Downloads': { _meta: { type: 'dir', created: now, size: 4096 } },
+                    'Desktop': { _meta: { type: 'dir', created: now, size: 4096 } },
+                    'scripts': {
+                        _meta: { type: 'dir', created: now, size: 4096 },
+                        'hello.py': { content: 'print("Hello World!")', _meta: { type: 'file', created: now, size: 20 } },
+                        'test.sh': { content: '#!/bin/bash\necho "Test"', _meta: { type: 'file', created: now, size: 20 } }
+                    },
+                    'notes.txt': { content: 'Sample notes file', _meta: { type: 'file', created: now, size: 17 } }
+                }
+            }
+        };
+        if (window.terminal) {
+            window.terminal.fileSystem = this.fileSystem;
+        }
+    }
+
+    getDefaultDirectory() {
+        return {
+            'Documents': { _meta: { type: 'dir', created: new Date(), size: 4096 } },
+            'Downloads': { _meta: { type: 'dir', created: new Date(), size: 4096 } },
+            'sample.txt': { content: 'Sample file', _meta: { type: 'file', created: new Date(), size: 11 } }
+        };
     }
 
     goBack() {
@@ -251,7 +284,6 @@ class FileManager {
         });
     }
 
-    // Sanitize input to prevent XSS
     sanitizeInput(input) {
         if (typeof input !== 'string') return '';
         return input.replace(/[<>"'&]/g, function(match) {
@@ -263,16 +295,27 @@ class FileManager {
                 '&': '&amp;'
             };
             return escapeMap[match];
-        });
+        }).replace(/[\x00-\x1f\x7f-\x9f]/g, '').substring(0, 100);
     }
 
     createFolder(name) {
-        const currentDir = this.getCurrentDirectory();
-        if (currentDir) {
-            if (currentDir[name]) {
-                alert('Folder already exists!');
+        try {
+            const sanitizedName = this.sanitizeInput(name);
+            if (!sanitizedName || sanitizedName.length === 0) {
+                this.showError('Invalid folder name');
+                return;
+            }
+            
+            const currentDir = this.getCurrentDirectory();
+            if (!currentDir) {
+                this.showError('Cannot access current directory');
+                return;
+            }
+            
+            if (currentDir[sanitizedName]) {
+                this.showError('Folder already exists!');
             } else {
-                currentDir[name] = {
+                currentDir[sanitizedName] = {
                     _meta: {
                         type: 'dir',
                         created: new Date(),
@@ -281,13 +324,53 @@ class FileManager {
                     }
                 };
                 this.loadDirectory(this.currentPath);
-                if (window.terminal) {
-                    window.terminal.addLine(`Folder '${name}' created`, 'success');
+                
+                if (window.terminal && typeof window.terminal.addLine === 'function') {
+                    window.terminal.addLine(`Folder '${sanitizedName}' created`, 'success');
                 }
+                
                 if (navigator.vibrate) {
                     navigator.vibrate(100);
                 }
             }
+        } catch (error) {
+            console.error('Error creating folder:', error);
+            this.showError('Failed to create folder');
+        }
+    }
+    
+    showError(message) {
+        try {
+            if (window.innerWidth <= 768) {
+                // Mobile notification
+                const notification = document.createElement('div');
+                notification.className = 'mobile-notification error';
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #ff4444;
+                    color: white;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    z-index: 10000;
+                    font-size: 14px;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 3000);
+            } else {
+                alert(message);
+            }
+        } catch (error) {
+            console.error('Failed to show error:', error);
         }
     }
 

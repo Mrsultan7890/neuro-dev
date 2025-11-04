@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Neuro-Dev</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #1a1a1a, #2d1b69);
+            border: 2px solid #00ff41;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .user-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff41;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #ccc;
+            font-size: 1rem;
+        }
+        
+        .progress-section {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0, 255, 65, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            transition: width 0.3s;
+        }
+        
+        .badges-section {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .badge-item {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f39c12);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 5px;
+            font-weight: bold;
+        }
+        
+        .recent-activity {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0, 255, 65, 0.05);
+            border-radius: 10px;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: #00ff41;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>Neuro-Dev</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="course.html" class="nav-link">Courses</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>🎯 My Learning Dashboard</h1>
+            <p>Track your ethical hacking journey</p>
+            <div id="user-welcome"></div>
+        </div>
+
+        <div class="user-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="user-level">1</div>
+                <div class="stat-label">Current Level</div>
+                <div style="color: #888; font-size: 0.8rem; margin-top: 5px;" id="next-level-info">Next: 100 XP</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="user-xp">0</div>
+                <div class="stat-label">Total XP</div>
+                <div style="width: 100%; height: 4px; background: #333; border-radius: 2px; margin-top: 8px;">
+                    <div id="xp-progress" style="height: 100%; background: #00ff41; border-radius: 2px; width: 0%; transition: width 0.3s;"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completed-lessons">0</div>
+                <div class="stat-label">Lessons Completed</div>
+                <div style="color: #888; font-size: 0.8rem; margin-top: 5px;" id="total-lessons-info">of 119 total</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="learning-streak">0</div>
+                <div class="stat-label">Day Streak</div>
+                <div style="color: #888; font-size: 0.8rem; margin-top: 5px;">Keep it up! 🔥</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completed-modules">0</div>
+                <div class="stat-label">Modules Completed</div>
+                <div style="color: #888; font-size: 0.8rem; margin-top: 5px;">of 13 modules</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-time">0h</div>
+                <div class="stat-label">Learning Time</div>
+                <div style="color: #888; font-size: 0.8rem; margin-top: 5px;">Estimated</div>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: #00ff41; margin: 0;">📚 All Course Modules (13)</h2>
+                <div style="display: flex; gap: 15px; font-size: 0.9rem;">
+                    <span style="color: #00ff41;">✅ Completed</span>
+                    <span style="color: #ffd700;">🟡 In Progress</span>
+                    <span style="color: #666;">⚪ Not Started</span>
+                </div>
+            </div>
+            <div id="course-progress"></div>
+        </div>
+
+        <div class="badges-section">
+            <h2 style="color: #00ff41; margin-bottom: 20px;">🏆 Achievements & Badges</h2>
+            <div id="user-badges"></div>
+        </div>
+
+        <div class="recent-activity">
+            <h2 style="color: #00ff41; margin-bottom: 20px;">📈 Recent Activity</h2>
+            <div id="recent-activities"></div>
+        </div>
+    </div>
+
+    <script src="user-engagement.js"></script>
+    <script>
+        // Dashboard functionality
+        class UserDashboard {
+            constructor() {
+                this.loadUserData();
+                this.renderDashboard();
+            }
+            
+            loadUserData() {
+                this.userStats = JSON.parse(localStorage.getItem('neuro-dev-stats') || '{}');
+                this.userProgress = JSON.parse(localStorage.getItem('neuro-dev-progress') || '{}');
+                this.activities = JSON.parse(localStorage.getItem('neuro-dev-activities') || '[]');
+                
+                // Initialize if empty
+                if (!this.userStats.level) {
+                    this.userStats = {
+                        level: 1,
+                        xp: 0,
+                        badges: ['🎯 Getting Started'],
+                        streak: 1,
+                        lastVisit: new Date().toDateString(),
+                        joinedDate: new Date().toDateString()
+                    };
+                    localStorage.setItem('neuro-dev-stats', JSON.stringify(this.userStats));
+                }
+            }
+            
+            renderDashboard() {
+                // Update stats
+                document.getElementById('user-level').textContent = this.userStats.level;
+                document.getElementById('user-xp').textContent = this.userStats.xp;
+                document.getElementById('learning-streak').textContent = this.userStats.streak;
+                
+                // Calculate completed lessons and modules
+                let totalCompleted = 0;
+                let completedModules = 0;
+                const moduleData = [
+                    { id: 'termux-basics', total: 8 },
+                    { id: 'termux-advanced', total: 8 },
+                    { id: 'nethunter-rootless', total: 12 },
+                    { id: 'nethunter-tools', total: 6 },
+                    { id: 'networking', total: 6 },
+                    { id: 'web-security', total: 8 },
+                    { id: 'mobile-osint', total: 6 },
+                    { id: 'nethunter-troubleshooting', total: 6 },
+                    { id: 'python-complete', total: 15 },
+                    { id: 'python-basics-kids', total: 20 },
+                    { id: 'hands-on-ml-scikit-learn', total: 19 },
+                    { id: 'python-ai-ml', total: 15 },
+                    { id: 'ai-hacking', total: 6 }
+                ];
+                
+                moduleData.forEach(module => {
+                    const moduleProgress = Object.keys(this.userProgress[module.id] || {}).length;
+                    totalCompleted += moduleProgress;
+                    if (moduleProgress === module.total) completedModules++;
+                });
+                
+                document.getElementById('completed-lessons').textContent = totalCompleted;
+                document.getElementById('completed-modules').textContent = completedModules;
+                
+                // XP Progress to next level
+                const currentLevelXP = (this.userStats.level - 1) * 100;
+                const nextLevelXP = this.userStats.level * 100;
+                const progressToNext = ((this.userStats.xp - currentLevelXP) / 100) * 100;
+                document.getElementById('xp-progress').style.width = progressToNext + '%';
+                document.getElementById('next-level-info').textContent = `Next: ${nextLevelXP - this.userStats.xp} XP`;
+                
+                // Estimated learning time (20 min per lesson)
+                const estimatedHours = Math.round((totalCompleted * 20) / 60);
+                document.getElementById('total-time').textContent = estimatedHours + 'h';
+                
+                // Render course progress
+                this.renderCourseProgress();
+                
+                // Render badges
+                this.renderBadges();
+                
+                // Render recent activities
+                this.renderRecentActivities();
+                
+                // Welcome message
+                document.getElementById('user-welcome').innerHTML = `
+                    <p style="color: #ccc; margin-top: 15px;">
+                        Welcome back! You joined on ${this.userStats.joinedDate}
+                    </p>
+                `;
+            }
+            
+            renderCourseProgress() {
+                const courses = [
+                    { id: 'termux-basics', name: 'Module 1: Termux Basics', total: 8, icon: '🖥️' },
+                    { id: 'termux-advanced', name: 'Module 2: Termux Advanced', total: 8, icon: '⚡' },
+                    { id: 'nethunter-rootless', name: 'Module 3: NetHunter Rootless', total: 12, icon: '🐉' },
+                    { id: 'nethunter-tools', name: 'Module 4: NetHunter Tools', total: 6, icon: '🛠️' },
+                    { id: 'networking', name: 'Module 5: Networking Course', total: 6, icon: '🌐' },
+                    { id: 'web-security', name: 'Module 6: Web App Security', total: 8, icon: '🔒' },
+                    { id: 'mobile-osint', name: 'Module 7: Mobile Security & OSINT', total: 6, icon: '📱' },
+                    { id: 'nethunter-troubleshooting', name: 'Module 8: NetHunter Troubleshooting', total: 6, icon: '🔧' },
+                    { id: 'python-complete', name: 'Module 9: Complete Python Programming', total: 15, icon: '🐍' },
+                    { id: 'python-basics-kids', name: 'Module 10: Python for Kids', total: 20, icon: '👶' },
+                    { id: 'hands-on-ml-scikit-learn', name: 'Module 11: Hands-On ML with Scikit-Learn', total: 19, icon: '🤖' },
+                    { id: 'python-ai-ml', name: 'Module 12: Python for AI/ML', total: 15, icon: '🧠' },
+                    { id: 'ai-hacking', name: 'Module 13: AI Hacking & Security', total: 6, icon: '🔥' }
+                ];
+                
+                const progressHTML = courses.map(course => {
+                    const completed = Object.keys(this.userProgress[course.id] || {}).length;
+                    const percentage = Math.round((completed / course.total) * 100);
+                    const isStarted = completed > 0;
+                    const isCompleted = percentage === 100;
+                    
+                    let statusText = '⚪ Not Started';
+                    let statusColor = '#666';
+                    
+                    if (isCompleted) {
+                        statusText = '✅ Complete';
+                        statusColor = '#00ff41';
+                    } else if (isStarted) {
+                        statusText = '🟡 In Progress';
+                        statusColor = '#ffd700';
+                    }
+                    
+                    return `
+                        <div class="progress-item" style="${isCompleted ? 'border-color: #00ff41; background: rgba(0, 255, 65, 0.1);' : ''}">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="font-size: 2rem;">${course.icon}</div>
+                                <div>
+                                    <strong style="color: ${isCompleted ? '#00ff41' : '#fff'};">${course.name}</strong>
+                                    <div style="color: #ccc; font-size: 0.9rem;">
+                                        ${completed}/${course.total} lessons 
+                                        <span style="color: ${statusColor}; font-weight: bold;">${statusText}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${percentage}%"></div>
+                                </div>
+                                <div style="color: ${isCompleted ? '#00ff41' : '#ccc'}; font-weight: bold; margin-top: 5px;">${percentage}%</div>
+                                <button onclick="window.location.href='course.html?module=${course.id}'" style="
+                                    background: ${isStarted ? '#00ff41' : 'transparent'};
+                                    color: ${isStarted ? '#000' : '#00ff41'};
+                                    border: 1px solid #00ff41;
+                                    padding: 5px 15px;
+                                    border-radius: 15px;
+                                    cursor: pointer;
+                                    font-size: 0.8rem;
+                                    margin-top: 8px;
+                                ">${isCompleted ? 'Review' : isStarted ? 'Continue' : 'Start'}</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                document.getElementById('course-progress').innerHTML = progressHTML;
+            }
+            
+            renderBadges() {
+                const badges = this.userStats.badges || ['🎯 Getting Started'];
+                const badgesHTML = badges.map(badge => 
+                    `<div class="badge-item">${badge}</div>`
+                ).join('');
+                
+                document.getElementById('user-badges').innerHTML = badgesHTML || '<p style="color: #ccc;">Complete lessons to earn badges!</p>';
+            }
+            
+            renderRecentActivities() {
+                const activities = this.activities.slice(-5).reverse(); // Last 5 activities
+                
+                if (activities.length === 0) {
+                    document.getElementById('recent-activities').innerHTML = `
+                        <div class="activity-item">
+                            <div class="activity-icon">🚀</div>
+                            <div>
+                                <strong style="color: #fff;">Welcome to Neuro-Dev!</strong>
+                                <div style="color: #ccc; font-size: 0.9rem;">Start your first lesson to see activity here</div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const activitiesHTML = activities.map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-icon">${activity.icon || '📚'}</div>
+                        <div>
+                            <strong style="color: #fff;">${activity.title}</strong>
+                            <div style="color: #ccc; font-size: 0.9rem;">${activity.description}</div>
+                            <div style="color: #888; font-size: 0.8rem;">${new Date(activity.timestamp).toLocaleDateString()}</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('recent-activities').innerHTML = activitiesHTML;
+            }
+        }
+        
+        // Initialize dashboard
+        const dashboard = new UserDashboard();
+        
+        // Add some sample activities if none exist
+        const activities = JSON.parse(localStorage.getItem('neuro-dev-activities') || '[]');
+        if (activities.length === 0) {
+            const sampleActivities = [
+                {
+                    title: 'Joined Neuro-Dev',
+                    description: 'Welcome to the ethical hacking community!',
+                    icon: '🎉',
+                    timestamp: new Date().toISOString()
+                }
+            ];
+            localStorage.setItem('neuro-dev-activities', JSON.stringify(sampleActivities));
+        }
+    </script>
+</body>
+</html>

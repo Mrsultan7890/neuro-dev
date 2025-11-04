@@ -1,554 +1,399 @@
-// Bank Security Application
-class BankSecurity {
+// Bank Security Lab Application
+class BankSecurityApp {
     constructor() {
-        this.currentSection = 'overview';
-        this.vulnerabilities = this.initVulnerabilities();
-        this.attacks = this.initAttacks();
-        this.ctfChallenges = this.initCTFChallenges();
+        this.vulnerabilities = new Map();
+        this.exploits = new Map();
+        this.setupApp();
+    }
+
+    setupApp() {
+        this.loadVulnerabilities();
         this.setupEventListeners();
     }
 
-    initVulnerabilities() {
-        return {
-            'sqli': {
-                name: 'SQL Injection',
-                description: 'Database manipulation through malicious SQL queries',
-                impact: 'Data breach, unauthorized access, data manipulation',
-                example: "admin' OR 1=1--",
-                mitigation: 'Parameterized queries, input validation, WAF'
+    loadVulnerabilities() {
+        const vulns = [
+            {
+                id: 'sql_injection',
+                name: 'SQL Injection in Login',
+                severity: 'Critical',
+                description: 'Login form vulnerable to SQL injection',
+                target: 'login.php'
             },
-            'xss': {
-                name: 'Cross-Site Scripting',
-                description: 'Client-side code injection attacks',
-                impact: 'Session hijacking, credential theft, defacement',
-                example: '<script>alert("XSS")</script>',
-                mitigation: 'Input sanitization, CSP headers, output encoding'
+            {
+                id: 'session_hijack',
+                name: 'Session Management Flaw',
+                severity: 'High',
+                description: 'Weak session tokens allow hijacking',
+                target: 'session.php'
             },
-            'csrf': {
-                name: 'Cross-Site Request Forgery',
-                description: 'Unauthorized actions on behalf of authenticated users',
-                impact: 'Unauthorized transactions, account manipulation',
-                example: 'Hidden form submissions, malicious links',
-                mitigation: 'CSRF tokens, SameSite cookies, referrer validation'
+            {
+                id: 'payment_bypass',
+                name: 'Payment Amount Manipulation',
+                severity: 'Critical',
+                description: 'Payment gateway allows amount modification',
+                target: 'payment.php'
             },
-            'session': {
-                name: 'Session Management Flaws',
-                description: 'Weak session handling and authentication bypass',
-                impact: 'Account takeover, privilege escalation',
-                example: 'Predictable session IDs, session fixation',
-                mitigation: 'Secure session generation, proper timeout, HTTPS'
+            {
+                id: 'admin_bypass',
+                name: 'Admin Authentication Bypass',
+                severity: 'High',
+                description: 'Admin panel authentication can be bypassed',
+                target: 'admin.php'
             }
-        };
-    }
+        ];
 
-    initAttacks() {
-        return {
-            'phishing': {
-                name: 'Phishing Campaign',
-                description: 'Email-based social engineering attack',
-                steps: ['Email crafting', 'Credential harvesting', 'Account compromise'],
-                success_rate: '73%'
-            },
-            'mitm': {
-                name: 'Man-in-the-Middle Attack',
-                description: 'Network traffic interception and manipulation',
-                steps: ['Network positioning', 'Traffic capture', 'Data extraction'],
-                success_rate: '45%'
-            },
-            'malware': {
-                name: 'Banking Malware',
-                description: 'Credential stealing trojan deployment',
-                steps: ['Malware delivery', 'System infection', 'Data exfiltration'],
-                success_rate: '62%'
-            }
-        };
-    }
+        vulns.forEach(vuln => {
+            this.vulnerabilities.set(vuln.id, vuln);
+        });
 
-    initCTFChallenges() {
-        return {
-            'login-bypass': {
-                name: 'Login Bypass Challenge',
-                difficulty: 'Easy',
-                description: 'Bypass authentication using SQL injection',
-                flag: 'BANK{sql_injection_bypass_admin123}',
-                hint: 'Try common SQL injection payloads in username field'
-            },
-            'session-hijack': {
-                name: 'Session Hijacking Challenge',
-                difficulty: 'Medium',
-                description: 'Steal and use another user\'s session token',
-                flag: 'BANK{session_token_stolen_abc123xyz}',
-                hint: 'Look for session tokens in cookies or local storage'
-            },
-            'payment-bypass': {
-                name: 'Payment Gateway Bypass',
-                difficulty: 'Hard',
-                description: 'Manipulate transaction amounts during payment',
-                flag: 'BANK{payment_manipulation_amount_modified}',
-                hint: 'Intercept and modify payment requests'
-            },
-            'admin-panel': {
-                name: 'Admin Panel Access',
-                difficulty: 'Hard',
-                description: 'Gain unauthorized access to admin functionality',
-                flag: 'BANK{admin_access_gained_privilege_escalation}',
-                hint: 'Look for privilege escalation vulnerabilities'
-            },
-            'crypto-wallet': {
-                name: 'Crypto Wallet Hack',
-                difficulty: 'Medium',
-                description: 'Exploit blockchain transaction vulnerabilities',
-                flag: 'BANK{crypto_wallet_hacked_blockchain_exploit}',
-                hint: 'Analyze smart contract vulnerabilities'
-            },
-            'insider-threat': {
-                name: 'Insider Threat Detection',
-                difficulty: 'Hard',
-                description: 'Identify malicious employee activities',
-                flag: 'BANK{insider_threat_detected_employee_malicious}',
-                hint: 'Analyze user behavior patterns and access logs'
-            }
-        };
+        this.renderVulnerabilities();
     }
 
     setupEventListeners() {
-        // Wait for DOM to be ready
-        setTimeout(() => {
-            // Navigation event listeners
-            const navItems = document.querySelectorAll('#bank-security-app .nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const section = e.target.dataset.section;
-                    if (section) {
-                        this.switchSection(section);
-                    }
-                });
-            });
-        }, 500);
-    }
+        try {
+            const scanBtn = document.getElementById('bank-scan-btn');
+            const exploitBtn = document.getElementById('bank-exploit-btn');
+            const forensicsBtn = document.getElementById('bank-forensics-btn');
+            const reportBtn = document.getElementById('bank-report-btn');
 
-    switchSection(section) {
-        // Remove active class from all nav items and sections
-        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-        document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+            if (scanBtn) scanBtn.addEventListener('click', () => this.performSecurityScan());
+            if (exploitBtn) exploitBtn.addEventListener('click', () => this.performExploit());
+            if (forensicsBtn) forensicsBtn.addEventListener('click', () => this.performForensics());
+            if (reportBtn) reportBtn.addEventListener('click', () => this.generateReport());
 
-        // Add active class to selected nav item and section
-        document.querySelector(`[data-section="${section}"]`).classList.add('active');
-        document.getElementById(`${section}-section`).classList.add('active');
-
-        this.currentSection = section;
-    }
-
-    loadVulnerability(vulnType) {
-        const vuln = this.vulnerabilities[vulnType];
-        const detailsContainer = document.getElementById('vulnerability-details');
-        
-        detailsContainer.innerHTML = `
-            <div class="vulnerability-detail">
-                <div class="vuln-header">
-                    <h4>${vuln.name}</h4>
-                    <div class="vuln-actions">
-                        <button onclick="bankSecurity.demonstrateVuln('${vulnType}')" class="demo-btn">
-                            <i class="fas fa-play"></i> Demonstrate
-                        </button>
-                        <button onclick="bankSecurity.exploitVuln('${vulnType}')" class="exploit-btn">
-                            <i class="fas fa-bug"></i> Exploit
-                        </button>
-                    </div>
-                </div>
-                <div class="vuln-content">
-                    <div class="vuln-info">
-                        <h5>Description:</h5>
-                        <p>${vuln.description}</p>
-                        
-                        <h5>Impact:</h5>
-                        <p>${vuln.impact}</p>
-                        
-                        <h5>Example:</h5>
-                        <code>${vuln.example}</code>
-                        
-                        <h5>Mitigation:</h5>
-                        <p>${vuln.mitigation}</p>
-                    </div>
-                </div>
-                <div id="vuln-demo-result"></div>
-            </div>
-        `;
-    }
-
-    demonstrateVuln(vulnType) {
-        const resultContainer = document.getElementById('vuln-demo-result');
-        const vuln = this.vulnerabilities[vulnType];
-        
-        resultContainer.innerHTML = `
-            <div class="demo-result">
-                <h5>🎯 Vulnerability Demonstration: ${vuln.name}</h5>
-                <div class="demo-steps">
-                    <div class="step">Step 1: Identifying injection point</div>
-                    <div class="step">Step 2: Crafting malicious payload</div>
-                    <div class="step">Step 3: Executing attack</div>
-                    <div class="step success">✅ Vulnerability confirmed!</div>
-                </div>
-                <div class="demo-output">
-                    <strong>Result:</strong> ${vuln.impact}
-                </div>
-            </div>
-        `;
-    }
-
-    exploitVuln(vulnType) {
-        const resultContainer = document.getElementById('vuln-demo-result');
-        
-        setTimeout(() => {
-            resultContainer.innerHTML = `
-                <div class="exploit-result">
-                    <h5>🚨 Exploitation Successful!</h5>
-                    <div class="exploit-details">
-                        <p><strong>Attack Vector:</strong> ${vulnType.toUpperCase()}</p>
-                        <p><strong>Access Level:</strong> Administrator</p>
-                        <p><strong>Data Compromised:</strong> Customer database, transaction logs</p>
-                        <p><strong>Flag Discovered:</strong> <code>BANK{${vulnType}_exploit_successful}</code></p>
-                    </div>
-                </div>
-            `;
-        }, 1500);
-    }
-
-    simulateAttack(attackType) {
-        const attack = this.attacks[attackType];
-        const resultContainer = document.getElementById('attack-results');
-        
-        resultContainer.innerHTML = `
-            <div class="attack-simulation">
-                <h4>🎯 Simulating: ${attack.name}</h4>
-                <div class="attack-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <div class="progress-text">Initializing attack...</div>
-                </div>
-                <div class="attack-steps">
-                    ${attack.steps.map((step, index) => `
-                        <div class="attack-step" id="step-${index}">
-                            <i class="fas fa-circle"></i> ${step}
-                        </div>
-                    `).join('')}
-                </div>
-                <div id="attack-final-result"></div>
-            </div>
-        `;
-
-        // Simulate attack progress
-        let progress = 0;
-        const progressBar = resultContainer.querySelector('.progress-fill');
-        const progressText = resultContainer.querySelector('.progress-text');
-        
-        const interval = setInterval(() => {
-            progress += 20;
-            progressBar.style.width = progress + '%';
-            
-            if (progress === 20) progressText.textContent = 'Reconnaissance phase...';
-            else if (progress === 40) progressText.textContent = 'Vulnerability scanning...';
-            else if (progress === 60) progressText.textContent = 'Exploit deployment...';
-            else if (progress === 80) progressText.textContent = 'Data extraction...';
-            else if (progress === 100) {
-                progressText.textContent = 'Attack completed!';
-                clearInterval(interval);
-                
-                // Show final results
-                document.getElementById('attack-final-result').innerHTML = `
-                    <div class="attack-success">
-                        <h5>✅ Attack Simulation Complete</h5>
-                        <div class="attack-stats">
-                            <p><strong>Success Rate:</strong> ${attack.success_rate}</p>
-                            <p><strong>Time to Compromise:</strong> ${Math.floor(Math.random() * 45 + 15)} minutes</p>
-                            <p><strong>Data Accessed:</strong> ${Math.floor(Math.random() * 10000 + 1000)} records</p>
-                        </div>
-                    </div>
-                `;
-            }
-        }, 800);
-    }
-
-    analyzeTransaction() {
-        const resultContainer = document.getElementById('forensics-results');
-        
-        resultContainer.innerHTML = `
-            <div class="forensics-analysis">
-                <h4>💰 Transaction Analysis Results</h4>
-                <div class="analysis-data">
-                    <div class="suspicious-transactions">
-                        <h5>Suspicious Transactions Detected:</h5>
-                        <div class="transaction-item">
-                            <span class="tx-id">TX-2024-001337</span>
-                            <span class="tx-amount">$50,000</span>
-                            <span class="tx-flag">🚨 Unusual amount</span>
-                        </div>
-                        <div class="transaction-item">
-                            <span class="tx-id">TX-2024-001338</span>
-                            <span class="tx-amount">$0.01</span>
-                            <span class="tx-flag">🚨 Micro-transaction pattern</span>
-                        </div>
-                        <div class="transaction-item">
-                            <span class="tx-id">TX-2024-001339</span>
-                            <span class="tx-amount">$9,999</span>
-                            <span class="tx-flag">🚨 Just below reporting threshold</span>
-                        </div>
-                    </div>
-                    <div class="analysis-conclusion">
-                        <p><strong>Conclusion:</strong> Money laundering pattern detected</p>
-                        <p><strong>Evidence:</strong> Structured transactions to avoid detection</p>
-                        <p><strong>Flag:</strong> <code>BANK{transaction_analysis_money_laundering}</code></p>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    analyzeLogs() {
-        const resultContainer = document.getElementById('forensics-results');
-        
-        resultContainer.innerHTML = `
-            <div class="forensics-analysis">
-                <h4>📋 Security Log Analysis</h4>
-                <div class="log-analysis">
-                    <div class="log-entries">
-                        <div class="log-entry suspicious">
-                            <span class="log-time">2024-01-15 02:30:15</span>
-                            <span class="log-event">Multiple failed login attempts from IP: 192.168.1.100</span>
-                        </div>
-                        <div class="log-entry suspicious">
-                            <span class="log-time">2024-01-15 02:31:45</span>
-                            <span class="log-event">Successful login from same IP after 90 seconds</span>
-                        </div>
-                        <div class="log-entry critical">
-                            <span class="log-time">2024-01-15 02:32:10</span>
-                            <span class="log-event">Admin privileges escalated for user: temp_user</span>
-                        </div>
-                        <div class="log-entry critical">
-                            <span class="log-time">2024-01-15 02:35:22</span>
-                            <span class="log-event">Database backup downloaded by temp_user</span>
-                        </div>
-                    </div>
-                    <div class="log-conclusion">
-                        <p><strong>Attack Pattern:</strong> Brute force followed by privilege escalation</p>
-                        <p><strong>Compromised Account:</strong> temp_user (likely insider threat)</p>
-                        <p><strong>Flag:</strong> <code>BANK{log_analysis_insider_attack_detected}</code></p>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    networkForensics() {
-        const resultContainer = document.getElementById('forensics-results');
-        
-        resultContainer.innerHTML = `
-            <div class="forensics-analysis">
-                <h4>🌐 Network Forensics Analysis</h4>
-                <div class="network-analysis">
-                    <div class="traffic-patterns">
-                        <h5>Suspicious Network Activity:</h5>
-                        <div class="traffic-item">
-                            <span class="traffic-src">192.168.1.100</span>
-                            <span class="traffic-dst">bank-server.local:443</span>
-                            <span class="traffic-size">2.3 GB transferred</span>
-                            <span class="traffic-flag">🚨 Unusual data volume</span>
-                        </div>
-                        <div class="traffic-item">
-                            <span class="traffic-src">Internal-PC-05</span>
-                            <span class="traffic-dst">tor-exit-node.onion</span>
-                            <span class="traffic-size">Encrypted tunnel</span>
-                            <span class="traffic-flag">🚨 Anonymization network</span>
-                        </div>
-                    </div>
-                    <div class="network-conclusion">
-                        <p><strong>Threat Assessment:</strong> Data exfiltration via encrypted channel</p>
-                        <p><strong>Attack Vector:</strong> Internal system compromised</p>
-                        <p><strong>Flag:</strong> <code>BANK{network_forensics_data_exfiltration}</code></p>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    startCTF(challengeId) {
-        const challenge = this.ctfChallenges[challengeId];
-        const resultContainer = document.getElementById('ctf-results');
-        
-        resultContainer.innerHTML = `
-            <div class="ctf-challenge-active">
-                <div class="ctf-header">
-                    <h4>🏆 ${challenge.name}</h4>
-                    <div class="ctf-difficulty ${challenge.difficulty.toLowerCase()}">${challenge.difficulty}</div>
-                </div>
-                <div class="ctf-description">
-                    <p>${challenge.description}</p>
-                </div>
-                <div class="ctf-interface">
-                    ${this.generateCTFInterface(challengeId)}
-                </div>
-                <div class="ctf-hint">
-                    <strong>💡 Hint:</strong> ${challenge.hint}
-                </div>
-                <div id="ctf-challenge-result"></div>
-            </div>
-        `;
-    }
-
-    generateCTFInterface(challengeId) {
-        switch(challengeId) {
-            case 'login-bypass':
-                return `
-                    <div class="login-form">
-                        <h5>Bank Login Portal</h5>
-                        <input type="text" id="ctf-username" placeholder="Username">
-                        <input type="password" id="ctf-password" placeholder="Password">
-                        <button onclick="bankSecurity.attemptLogin('${challengeId}')">Login</button>
-                    </div>
-                `;
-            case 'session-hijack':
-                return `
-                    <div class="session-interface">
-                        <h5>Active Sessions</h5>
-                        <div class="session-list">
-                            <div class="session-item" onclick="bankSecurity.hijackSession('${challengeId}', 'admin')">
-                                <span>admin_user</span>
-                                <span>Session: abc123xyz789</span>
-                            </div>
-                            <div class="session-item" onclick="bankSecurity.hijackSession('${challengeId}', 'user')">
-                                <span>regular_user</span>
-                                <span>Session: def456uvw012</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            case 'payment-bypass':
-                return `
-                    <div class="payment-form">
-                        <h5>Payment Gateway</h5>
-                        <input type="number" id="payment-amount" value="100" placeholder="Amount">
-                        <input type="text" id="payment-recipient" value="merchant@bank.com" placeholder="Recipient">
-                        <button onclick="bankSecurity.processPayment('${challengeId}')">Process Payment</button>
-                    </div>
-                `;
-            default:
-                return `
-                    <div class="generic-interface">
-                        <button onclick="bankSecurity.solveCTF('${challengeId}')" class="solve-btn">
-                            Start Challenge
-                        </button>
-                    </div>
-                `;
-        }
-    }
-
-    attemptLogin(challengeId) {
-        const username = document.getElementById('ctf-username').value;
-        const password = document.getElementById('ctf-password').value;
-        const resultContainer = document.getElementById('ctf-challenge-result');
-        
-        if (username.includes("'") || username.includes("OR") || username.includes("--")) {
-            resultContainer.innerHTML = `
-                <div class="ctf-success">
-                    <h5>🎉 SQL Injection Successful!</h5>
-                    <p>Admin access granted with payload: <code>${username}</code></p>
-                    <p><strong>Flag Captured:</strong> <code>${this.ctfChallenges[challengeId].flag}</code></p>
-                </div>
-            `;
-        } else {
-            resultContainer.innerHTML = `
-                <div class="ctf-failed">
-                    <p>❌ Login failed. Try SQL injection techniques.</p>
-                </div>
-            `;
-        }
-    }
-
-    hijackSession(challengeId, sessionType) {
-        const resultContainer = document.getElementById('ctf-challenge-result');
-        
-        if (sessionType === 'admin') {
-            resultContainer.innerHTML = `
-                <div class="ctf-success">
-                    <h5>🎉 Session Hijacked Successfully!</h5>
-                    <p>Admin session token captured and reused</p>
-                    <p><strong>Flag Captured:</strong> <code>${this.ctfChallenges[challengeId].flag}</code></p>
-                </div>
-            `;
-        } else {
-            resultContainer.innerHTML = `
-                <div class="ctf-failed">
-                    <p>❌ Regular user session. Try targeting admin session.</p>
-                </div>
-            `;
-        }
-    }
-
-    processPayment(challengeId) {
-        const amount = document.getElementById('payment-amount').value;
-        const resultContainer = document.getElementById('ctf-challenge-result');
-        
-        if (amount !== '100') {
-            resultContainer.innerHTML = `
-                <div class="ctf-success">
-                    <h5>🎉 Payment Amount Manipulated!</h5>
-                    <p>Successfully changed payment from $100 to $${amount}</p>
-                    <p><strong>Flag Captured:</strong> <code>${this.ctfChallenges[challengeId].flag}</code></p>
-                </div>
-            `;
-        } else {
-            resultContainer.innerHTML = `
-                <div class="ctf-failed">
-                    <p>❌ Payment processed normally. Try manipulating the amount.</p>
-                </div>
-            `;
-        }
-    }
-
-    solveCTF(challengeId) {
-        const challenge = this.ctfChallenges[challengeId];
-        const resultContainer = document.getElementById('ctf-challenge-result');
-        
-        setTimeout(() => {
-            resultContainer.innerHTML = `
-                <div class="ctf-success">
-                    <h5>🎉 Challenge Completed!</h5>
-                    <p>${challenge.description}</p>
-                    <p><strong>Flag Captured:</strong> <code>${challenge.flag}</code></p>
-                </div>
-            `;
-        }, 2000);
-    }
-}
-
-// Initialize Bank Security app
-document.addEventListener('DOMContentLoaded', function() {
-    // Wait for VM to be ready
-    setTimeout(() => {
-        window.bankSecurity = new BankSecurity();
-        
-        // Re-initialize when bank security app is opened
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                    const bankApp = document.getElementById('bank-security-app');
-                    if (bankApp && bankApp.classList.contains('active')) {
-                        // App is now active, reinitialize
-                        setTimeout(() => {
-                            if (window.bankSecurity) {
-                                window.bankSecurity.setupEventListeners();
-                            }
-                        }, 100);
+            // Add event delegation for exploit buttons
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('exploit-btn')) {
+                    const vulnId = e.target.getAttribute('data-vuln-id');
+                    if (vulnId && this.vulnerabilities.has(vulnId)) {
+                        this.exploitVulnerability(vulnId);
                     }
                 }
             });
+        } catch (error) {
+            console.error('Error setting up event listeners:', error);
+        }
+    }
+
+    renderVulnerabilities() {
+        const vulnList = document.getElementById('bank-vulnerabilities-list');
+        if (!vulnList) return;
+
+        vulnList.innerHTML = '';
+        this.vulnerabilities.forEach((vuln, id) => {
+            const vulnDiv = document.createElement('div');
+            vulnDiv.className = 'bank-vulnerability';
+            
+            // Create elements safely
+            const vulnInfo = document.createElement('div');
+            vulnInfo.className = 'vuln-info';
+            
+            const vulnName = document.createElement('div');
+            vulnName.className = 'vuln-name';
+            vulnName.textContent = vuln.name;
+            
+            const vulnDesc = document.createElement('div');
+            vulnDesc.className = 'vuln-description';
+            vulnDesc.textContent = vuln.description;
+            
+            const vulnTarget = document.createElement('div');
+            vulnTarget.className = 'vuln-target';
+            vulnTarget.textContent = `Target: ${vuln.target}`;
+            
+            vulnInfo.appendChild(vulnName);
+            vulnInfo.appendChild(vulnDesc);
+            vulnInfo.appendChild(vulnTarget);
+            
+            const vulnSeverity = document.createElement('div');
+            vulnSeverity.className = `vuln-severity severity-${vuln.severity.toLowerCase()}`;
+            vulnSeverity.textContent = vuln.severity;
+            
+            const exploitBtn = document.createElement('button');
+            exploitBtn.className = 'exploit-btn';
+            exploitBtn.setAttribute('data-vuln-id', id);
+            exploitBtn.textContent = 'Exploit';
+            
+            vulnDiv.appendChild(vulnInfo);
+            vulnDiv.appendChild(vulnSeverity);
+            vulnDiv.appendChild(exploitBtn);
+            
+            vulnList.appendChild(vulnDiv);
+        });
+    }
+
+    performSecurityScan() {
+        const output = document.getElementById('bank-security-output');
+        if (!output) return;
+        
+        output.textContent = '🔍 Scanning SecureBank application...';
+        output.className = 'scan-progress';
+
+        setTimeout(() => {
+            this.renderSecurityScanResults(output);
+        }, 2500);
+    }
+
+    renderSecurityScanResults(output) {
+        output.innerHTML = '';
+        output.className = 'security-scan-results';
+        
+        const title = document.createElement('h4');
+        title.textContent = '🏦 SecureBank Security Assessment';
+        output.appendChild(title);
+        
+        const summary = document.createElement('div');
+        summary.className = 'scan-summary';
+        
+        const summaryItems = [
+            { text: 'Critical: 2', class: 'critical' },
+            { text: 'High: 2', class: 'high' },
+            { text: 'Medium: 1', class: 'medium' },
+            { text: 'Low: 0', class: 'low' }
+        ];
+        
+        summaryItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = `summary-item ${item.class}`;
+            div.textContent = item.text;
+            summary.appendChild(div);
         });
         
-        const bankApp = document.getElementById('bank-security-app');
-        if (bankApp) {
-            observer.observe(bankApp, { attributes: true });
+        output.appendChild(summary);
+        
+        const vulnDetails = document.createElement('div');
+        vulnDetails.className = 'vulnerability-details';
+        
+        const vulnItems = [
+            { text: '🚨 SQL Injection in login form', class: 'critical' },
+            { text: '🚨 Payment amount manipulation possible', class: 'critical' },
+            { text: '⚠️ Session management weakness', class: 'high' },
+            { text: '⚠️ Admin authentication bypass', class: 'high' },
+            { text: '💡 Missing security headers', class: 'medium' }
+        ];
+        
+        vulnItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = `vuln-item ${item.class}`;
+            div.textContent = item.text;
+            vulnDetails.appendChild(div);
+        });
+        
+        output.appendChild(vulnDetails);
+        
+        const recommendation = document.createElement('div');
+        recommendation.className = 'scan-recommendation';
+        recommendation.textContent = '💡 Immediate action required for critical vulnerabilities';
+        output.appendChild(recommendation);
+    }
+
+    exploitVulnerability(vulnId) {
+        const vuln = this.vulnerabilities.get(vulnId);
+        if (!vuln) return;
+
+        const output = document.getElementById('bank-security-output');
+        if (!output) return;
+        
+        output.textContent = `🎯 Exploiting ${vuln.name}...`;
+        output.className = 'exploit-progress';
+
+        setTimeout(() => {
+            this.renderExploitResult(output, vulnId);
+        }, 2000);
+    }
+
+    renderExploitResult(output, vulnId) {
+        output.innerHTML = '';
+        
+        const container = document.createElement('div');
+        container.className = 'exploit-success';
+        
+        let title, details, flag;
+        
+        switch (vulnId) {
+            case 'sql_injection':
+                title = '✅ SQL Injection Successful!';
+                details = [
+                    'Payload: admin\' OR 1=1--',
+                    'Database: MySQL 8.0.25',
+                    'Tables accessed: users, accounts, transactions',
+                    'Records extracted: 50,000 customer accounts'
+                ];
+                flag = 'BANK{sql_injection_bypass_admin123}';
+                break;
+                
+            case 'payment_bypass':
+                title = '💰 Payment Manipulation Successful!';
+                details = [
+                    'Original amount: $1,000.00',
+                    'Modified amount: $0.01',
+                    'Transaction approved: YES',
+                    'Merchant charged: $0.01'
+                ];
+                flag = 'BANK{payment_manipulation_amount_modified}';
+                break;
+                
+            case 'session_hijack':
+                title = '🔓 Session Hijacking Successful!';
+                details = [
+                    'Weak session token detected',
+                    'Token: SESS_123456789',
+                    'User account compromised: john.doe',
+                    'Account balance: $25,000'
+                ];
+                flag = 'BANK{session_token_stolen}';
+                break;
+                
+            case 'admin_bypass':
+                title = '🔑 Admin Access Gained!';
+                details = [
+                    'Authentication bypassed',
+                    'Admin panel accessed',
+                    'User database: Full access',
+                    'Transaction logs: Accessible'
+                ];
+                flag = 'BANK{admin_access_gained}';
+                break;
         }
-    }, 1000);
+        
+        const titleEl = document.createElement('div');
+        titleEl.textContent = title;
+        container.appendChild(titleEl);
+        
+        const detailsContainer = document.createElement('div');
+        detailsContainer.className = 'exploit-details';
+        
+        details.forEach(detail => {
+            const detailEl = document.createElement('div');
+            detailEl.textContent = detail;
+            detailsContainer.appendChild(detailEl);
+        });
+        
+        const flagEl = document.createElement('div');
+        flagEl.className = 'flag-result';
+        flagEl.textContent = `🏆 Flag: ${flag}`;
+        detailsContainer.appendChild(flagEl);
+        
+        container.appendChild(detailsContainer);
+        output.appendChild(container);
+        
+        if (window.flagSystem) {
+            window.flagSystem.addFlag(flag);
+        }
+    }
+
+    performForensics() {
+        const output = document.getElementById('bank-security-output');
+        output.innerHTML = '<div class="forensics-progress">🔍 Analyzing transaction logs...</div>';
+
+        setTimeout(() => {
+            const forensicsResults = `
+                <div class="forensics-analysis">
+                    <h4>🕵️ Digital Forensics Investigation</h4>
+                    
+                    <div class="forensics-section">
+                        <h5>Suspicious Transaction Pattern:</h5>
+                        <div class="transaction-item">Account: 4532-****-****-1234</div>
+                        <div class="transaction-item">Pattern: 47 transactions of $9,999 each</div>
+                        <div class="transaction-item">Total: $469,953 in 24 hours</div>
+                        <div class="transaction-item">Time: Outside business hours</div>
+                    </div>
+                    
+                    <div class="forensics-section">
+                        <h5>Network Analysis:</h5>
+                        <div class="network-item">Source IP: 192.168.100.50 (Internal)</div>
+                        <div class="network-item">Workstation: BANK-PC-047</div>
+                        <div class="network-item">User: john.smith@securebank.com</div>
+                        <div class="network-item">Login time: 02:30 AM</div>
+                    </div>
+                    
+                    <div class="forensics-section">
+                        <h5>Evidence Found:</h5>
+                        <div class="evidence-item">🔍 Keylogger traces on workstation</div>
+                        <div class="evidence-item">🔍 Unauthorized software installation</div>
+                        <div class="evidence-item">🔍 Deleted browser history</div>
+                        <div class="evidence-item">🔍 USB device activity</div>
+                    </div>
+                    
+                    <div class="forensics-conclusion">
+                        <h5>Conclusion:</h5>
+                        <div class="conclusion-item">🚨 Insider threat detected</div>
+                        <div class="conclusion-item">🚨 Money laundering scheme</div>
+                        <div class="conclusion-item">🚨 Employee: john.smith involved</div>
+                        <div class="flag-result">🏆 Flag: BANK{insider_threat_detected_employee_malicious}</div>
+                    </div>
+                </div>
+            `;
+            
+            output.innerHTML = forensicsResults;
+            
+            if (window.flagSystem) {
+                window.flagSystem.addFlag('BANK{insider_threat_detected_employee_malicious}');
+            }
+        }, 3500);
+    }
+
+    generateReport() {
+        const output = document.getElementById('bank-security-output');
+        
+        const report = `
+            <div class="security-report">
+                <h4>📋 Security Assessment Report</h4>
+                
+                <div class="report-section">
+                    <h5>Executive Summary:</h5>
+                    <div class="summary-text">
+                        SecureBank application contains multiple critical vulnerabilities 
+                        that pose significant risk to customer data and financial transactions.
+                    </div>
+                </div>
+                
+                <div class="report-section">
+                    <h5>Risk Assessment:</h5>
+                    <div class="risk-item high">🔴 SQL Injection - Critical Risk</div>
+                    <div class="risk-item high">🔴 Payment Bypass - Critical Risk</div>
+                    <div class="risk-item medium">🟡 Session Management - High Risk</div>
+                    <div class="risk-item medium">🟡 Authentication Bypass - High Risk</div>
+                </div>
+                
+                <div class="report-section">
+                    <h5>Recommendations:</h5>
+                    <div class="recommendation">1. Implement parameterized queries</div>
+                    <div class="recommendation">2. Add input validation and sanitization</div>
+                    <div class="recommendation">3. Strengthen session management</div>
+                    <div class="recommendation">4. Implement multi-factor authentication</div>
+                    <div class="recommendation">5. Regular security audits</div>
+                </div>
+                
+                <div class="report-section">
+                    <h5>Compliance Impact:</h5>
+                    <div class="compliance-item">❌ PCI DSS non-compliant</div>
+                    <div class="compliance-item">❌ GDPR violations possible</div>
+                    <div class="compliance-item">❌ SOX compliance at risk</div>
+                </div>
+                
+                <div class="report-footer">
+                    Report generated: ${new Date().toLocaleString()}<br>
+                    Severity: <span class="severity-critical">CRITICAL</span>
+                </div>
+            </div>
+        `;
+        
+        output.innerHTML = report;
+    }
+
+    // Security helper functions
+    sanitizeAttribute(value) {
+        if (typeof value !== 'string') {
+            return '';
+        }
+        return value.replace(/["'<>&]/g, '');
+    }
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('bank-security-app')) {
+        window.bankSecurityApp = new BankSecurityApp();
+    }
 });

@@ -225,22 +225,32 @@ class UserSystem {
     }
 
     handleLogin(form) {
-        const formData = new FormData(form);
-        const username = formData.get('username');
-        const password = formData.get('password');
+        try {
+            const formData = new FormData(form);
+            const username = this.sanitizeInput(formData.get('username'));
+            const password = formData.get('password');
 
-        // Demo account
-        if (username === 'demo' && password === 'demo123') {
-            this.loginUser(this.createDemoUser());
-            return;
-        }
+            if (!username || !password) {
+                this.showError('Username and password are required');
+                return;
+            }
 
-        // Check existing users
-        const user = this.users.find(u => u.username === username && u.password === password);
-        if (user) {
-            this.loginUser(user);
-        } else {
-            this.showError('Invalid username or password');
+            // Demo account with secure comparison
+            if (this.secureCompare(username, 'demo') && this.secureCompare(password, 'demo123')) {
+                this.loginUser(this.createDemoUser());
+                return;
+            }
+
+            // Check existing users with secure comparison
+            const user = this.users.find(u => this.secureCompare(u.username, username));
+            if (user && this.secureCompare(user.password, password)) {
+                this.loginUser(user);
+            } else {
+                this.showError('Invalid username or password');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            this.showError('Login failed. Please try again.');
         }
     }
 
@@ -528,17 +538,20 @@ class UserSystem {
     }
 
     checkAutoLogin() {
-        const savedUser = localStorage.getItem('neuro-current-user');
-        if (savedUser) {
-            try {
+        try {
+            const savedUser = localStorage.getItem('neuro-current-user');
+            if (savedUser) {
                 const userData = JSON.parse(savedUser);
-                const user = this.users.find(u => u.id === userData.id);
-                if (user) {
-                    this.currentUser = user;
+                if (userData && userData.id) {
+                    const user = this.users.find(u => u.id === userData.id);
+                    if (user) {
+                        this.currentUser = user;
+                    }
                 }
-            } catch (e) {
-                console.log('Failed to restore user session');
             }
+        } catch (error) {
+            console.error('Failed to restore user session:', error);
+            localStorage.removeItem('neuro-current-user');
         }
     }
 
@@ -588,13 +601,46 @@ class UserSystem {
     showNotification(message, type) {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
-        notification.textContent = message;
+        notification.textContent = this.sanitizeInput(message);
         
         document.body.appendChild(notification);
         
         setTimeout(() => {
-            notification.remove();
+            if (notification.parentNode) {
+                notification.remove();
+            }
         }, 3000);
+    }
+
+    // Security helper functions
+    secureCompare(a, b) {
+        if (typeof a !== 'string' || typeof b !== 'string') {
+            return false;
+        }
+        if (a.length !== b.length) {
+            return false;
+        }
+        let result = 0;
+        for (let i = 0; i < a.length; i++) {
+            result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+        }
+        return result === 0;
+    }
+
+    sanitizeInput(input) {
+        if (typeof input !== 'string') {
+            return '';
+        }
+        return input.replace(/[<>"'&]/g, function(match) {
+            const escapeMap = {
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                '&': '&amp;'
+            };
+            return escapeMap[match];
+        });
     }
 }
 

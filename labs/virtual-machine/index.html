@@ -9,7 +9,12 @@
     <link rel="stylesheet" href="ctf-styles.css">
     <link rel="stylesheet" href="bank-security.css">
     <link rel="stylesheet" href="flag-styles.css">
+    <link rel="stylesheet" href="performance-styles.css">
+    <link rel="stylesheet" href="fullscreen-fix.css">
+    <link rel="stylesheet" href="forensics-styles.css">
+    <link rel="stylesheet" href="mobile-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="data:image/x-icon;base64,">
 </head>
 <body>
     <div class="vm-container">
@@ -130,8 +135,24 @@
                     <div class="app-icon" data-app="video-player" title="Video Player">
                         <i class="fas fa-play-circle"></i>
                     </div>
+                    <div class="app-icon" data-app="digital-forensics" title="Digital Forensics">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="app-icon" data-app="mobile-hacking" title="Mobile Hacking">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
                 </div>
                 <div class="system-tray">
+                    <div class="progress-indicator">
+                        <div class="level-display" id="level-display">Level 1</div>
+                        <div class="xp-bar">
+                            <div class="xp-progress" id="progress-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="xp-display" id="xp-display">0/100 XP</div>
+                    </div>
+                    <div class="session-info">
+                        <span id="session-time">0:00</span>
+                    </div>
                     <span class="time" id="current-time"></span>
                     <div class="course-indicator" id="course-name">Termux Basics</div>
                     <div class="ctf-score" id="ctf-score" onclick="showLeaderboard()" style="background: #00ff41; color: #000; padding: 3px 8px; border-radius: 3px; font-size: 11px; cursor: pointer; margin-left: 8px; font-weight: bold;">Score: <span id="user-score">0</span></div>
@@ -314,7 +335,7 @@
                                             <p>Mobile se NetHunter tak - Complete Cybersecurity Journey</p>
                                             <div class="hero-stats">
                                                 <div class="stat">
-                                                    <div class="stat-number">13+</div>
+                                                    <div class="stat-number">15+</div>
                                                     <div class="stat-label">Modules</div>
                                                 </div>
                                                 <div class="stat">
@@ -1021,217 +1042,11 @@ print('Hello from Neuro-Dev!')"></textarea>
                             output.innerHTML = results;
                         }
                         </script>
-                        </script>
                     </div>
                 </div>
             </div>
 
-            <!-- Crypto Playground Application -->
-            <div class="app-window" id="crypto-playground-app">
-                <div class="window-header">
-                    <div class="window-controls">
-                        <span class="control minimize"></span>
-                        <span class="control maximize"></span>
-                        <span class="control close"></span>
-                    </div>
-                    <div class="window-title">
-                        <i class="fas fa-lock"></i> Crypto Playground
-                    </div>
-                </div>
-                <div class="window-content" style="padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    <div style="padding: 20px; color: #fff; height: 100%;">
-                        <div style="display: flex; gap: 20px; height: 100%;">
-                            <div style="flex: 1;">
-                                <h3 style="color: #ffd700; margin-bottom: 15px;">🔐 Advanced Cryptography Lab</h3>
-                                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                    <select id="crypto-method" style="padding: 8px; background: #333; color: #fff; border: 1px solid #ffd700; border-radius: 5px;">
-                                        <option value="caesar">Caesar Cipher</option>
-                                        <option value="base64">Base64 Encoding</option>
-                                        <option value="rot13">ROT13</option>
-                                        <option value="hex">Hex Encoding</option>
-                                        <option value="morse">Morse Code</option>
-                                        <option value="binary">Binary</option>
-                                    </select>
-                                    <input type="number" id="shift-key" value="3" min="1" max="25" placeholder="Key" style="width: 80px; padding: 8px; background: #333; color: #fff; border: 1px solid #ffd700; border-radius: 5px;">
-                                </div>
-                                <textarea id="text-input" placeholder="Enter text to encrypt/decrypt..." style="width: 100%; height: 120px; padding: 10px; background: #333; color: #fff; border: 1px solid #ffd700; border-radius: 5px; font-family: monospace; resize: vertical;"></textarea>
-                                <div style="margin: 15px 0;">
-                                    <button onclick="encryptAdvanced()" style="background: #ffd700; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Encrypt</button>
-                                    <button onclick="decryptAdvanced()" style="background: #ff6b6b; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Decrypt</button>
-                                    <button onclick="analyzeText()" style="background: #4ecdc4; color: #000; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Analyze</button>
-                                    <button onclick="bruteForce()" style="background: #ff9500; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; margin: 5px; cursor: pointer; font-weight: bold;">Brute Force</button>
-                                </div>
-                                <div style="margin-bottom: 10px;">
-                                    <label style="color: #ffd700;">Output:</label>
-                                </div>
-                                <textarea id="crypto-output" readonly style="width: 100%; height: 120px; padding: 10px; background: #000; color: #00ff88; border: 1px solid #ffd700; border-radius: 5px; font-family: monospace; resize: vertical;"></textarea>
-                            </div>
-                            <div style="width: 300px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px; border: 1px solid #333;">
-                                <h4 style="color: #ffd700; margin-bottom: 10px;">Cryptanalysis</h4>
-                                <div id="analysis-result" style="background: #000; padding: 10px; border-radius: 5px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 12px;">No analysis performed</div>
-                                <h4 style="color: #ffd700; margin: 15px 0 10px 0;">Common Ciphers</h4>
-                                <div style="display: flex; flex-direction: column; gap: 5px;">
-                                    <button onclick="quickCipher('caesar', 13)" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">ROT13</button>
-                                    <button onclick="quickCipher('caesar', 5)" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">Caesar +5</button>
-                                    <button onclick="quickCipher('base64')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">Base64</button>
-                                    <button onclick="quickCipher('hex')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">Hex</button>
-                                </div>
-                                <h4 style="color: #ffd700; margin: 15px 0 10px 0;">Hash Functions</h4>
-                                <div style="display: flex; flex-direction: column; gap: 5px;">
-                                    <button onclick="hashText('md5')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">MD5 Hash</button>
-                                    <button onclick="hashText('sha1')" style="background: #333; color: #fff; border: 1px solid #ffd700; padding: 5px; border-radius: 3px; cursor: pointer; font-size: 11px;">SHA1 Hash</button>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                        function encryptAdvanced() {
-                            const text = document.getElementById('text-input').value;
-                            const method = document.getElementById('crypto-method').value;
-                            const key = parseInt(document.getElementById('shift-key').value) || 3;
-                            let result = '';
-                            
-                            switch(method) {
-                                case 'caesar':
-                                    result = caesarCipher(text, key);
-                                    break;
-                                case 'base64':
-                                    result = btoa(text);
-                                    break;
-                                case 'rot13':
-                                    result = caesarCipher(text, 13);
-                                    break;
-                                case 'hex':
-                                    result = text.split('').map(c => c.charCodeAt(0).toString(16)).join(' ');
-                                    break;
-                                case 'morse':
-                                    result = textToMorse(text);
-                                    break;
-                                case 'binary':
-                                    result = text.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
-                                    break;
-                            }
-                            
-                            document.getElementById('crypto-output').value = result;
-                        }
-                        
-                        function decryptAdvanced() {
-                            const text = document.getElementById('text-input').value;
-                            const method = document.getElementById('crypto-method').value;
-                            const key = parseInt(document.getElementById('shift-key').value) || 3;
-                            let result = '';
-                            
-                            try {
-                                switch(method) {
-                                    case 'caesar':
-                                        result = caesarCipher(text, -key);
-                                        break;
-                                    case 'base64':
-                                        result = atob(text);
-                                        break;
-                                    case 'rot13':
-                                        result = caesarCipher(text, 13);
-                                        break;
-                                    case 'hex':
-                                        result = text.split(' ').map(h => String.fromCharCode(parseInt(h, 16))).join('');
-                                        break;
-                                    case 'morse':
-                                        result = morseToText(text);
-                                        break;
-                                    case 'binary':
-                                        result = text.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join('');
-                                        break;
-                                }
-                            } catch(e) {
-                                result = 'Decryption failed: ' + e.message;
-                            }
-                            
-                            document.getElementById('crypto-output').value = result;
-                        }
-                        
-                        function caesarCipher(text, shift) {
-                            return text.split('').map(char => {
-                                if (char.match(/[a-z]/i)) {
-                                    let code = char.charCodeAt(0);
-                                    let base = code >= 65 && code <= 90 ? 65 : 97;
-                                    return String.fromCharCode(((code - base + shift + 26) % 26) + base);
-                                }
-                                return char;
-                            }).join('');
-                        }
-                        
-                        function textToMorse(text) {
-                            const morse = {'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..'};
-                            return text.toUpperCase().split('').map(c => morse[c] || c).join(' ');
-                        }
-                        
-                        function morseToText(morse) {
-                            const morseReverse = {'.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z'};
-                            return morse.split(' ').map(m => morseReverse[m] || m).join('');
-                        }
-                        
-                        function analyzeText() {
-                            const text = document.getElementById('text-input').value;
-                            const analysis = document.getElementById('analysis-result');
-                            
-                            const letterCount = {};
-                            const letters = text.replace(/[^a-zA-Z]/g, '').toUpperCase();
-                            
-                            for (let char of letters) {
-                                letterCount[char] = (letterCount[char] || 0) + 1;
-                            }
-                            
-                            const sorted = Object.entries(letterCount).sort((a, b) => b[1] - a[1]);
-                            
-                            analysis.innerHTML = `
-                                <div style="color: #ffd700;">Text Analysis:</div>
-                                <div>Length: ${text.length}</div>
-                                <div>Letters: ${letters.length}</div>
-                                <div>Most frequent: ${sorted[0] ? sorted[0][0] + ' (' + sorted[0][1] + ')' : 'None'}</div>
-                                <div style="color: #4ecdc4; margin-top: 10px;">Frequency:</div>
-                                ${sorted.slice(0, 5).map(([char, count]) => 
-                                    `<div>${char}: ${count} (${((count/letters.length)*100).toFixed(1)}%)</div>`
-                                ).join('')}
-                            `;
-                        }
-                        
-                        function bruteForce() {
-                            const text = document.getElementById('text-input').value;
-                            const output = document.getElementById('crypto-output');
-                            let results = 'Brute Force Results:\n\n';
-                            
-                            for (let i = 1; i <= 25; i++) {
-                                const decrypted = caesarCipher(text, -i);
-                                results += `Key ${i}: ${decrypted}\n`;
-                            }
-                            
-                            output.value = results;
-                        }
-                        
-                        function quickCipher(method, key) {
-                            document.getElementById('crypto-method').value = method;
-                            if (key) document.getElementById('shift-key').value = key;
-                            encryptAdvanced();
-                        }
-                        
-                        function hashText(algorithm) {
-                            const text = document.getElementById('text-input').value;
-                            const output = document.getElementById('crypto-output');
-                            
-                            // Simple hash simulation (not real cryptographic hash)
-                            let hash = 0;
-                            for (let i = 0; i < text.length; i++) {
-                                const char = text.charCodeAt(i);
-                                hash = ((hash << 5) - hash) + char;
-                                hash = hash & hash;
-                            }
-                            
-                            const simulated = Math.abs(hash).toString(16).padStart(32, '0');
-                            output.value = `${algorithm.toUpperCase()}: ${simulated}`;
-                        }
-                        </script>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- Malware Analysis Application -->
             <div class="app-window" id="malware-analysis-app">
@@ -1701,7 +1516,7 @@ Generated: ${new Date().toLocaleString()}
                             <h4 style="color: #ff6b6b; margin-bottom: 10px;">Payloads</h4>
                             <div id="payload-list" style="background: #000; padding: 10px; border-radius: 5px; height: 150px; overflow-y: auto; font-family: monospace; font-size: 11px;">
                                 <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">' OR '1'='1</div>
-                                <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">&lt;script&gt;alert('XSS')&lt;/script&gt;</div>
+                                <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">&lt;script&gt;console.log('XSS')&lt;/script&gt;</div>
                                 <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">../../../etc/passwd</div>
                                 <div onclick="usePayload(this)" style="cursor: pointer; margin: 5px 0; color: #ffd93d;">&lt;?xml version="1.0"?&gt;&lt;!DOCTYPE root</div>
                             </div>
@@ -1737,7 +1552,7 @@ Generated: ${new Date().toLocaleString()}
                             } else if (exploitType === 'xss') {
                                 output.innerHTML += '<div style="color: #ffd93d;">Scanning for XSS vulnerabilities...</div>';
                                 output.innerHTML += '<div style="color: #00ff88;">VULNERABLE: Reflected XSS in search parameter</div>';
-                                output.innerHTML += '<div style="color: #fff;">Payload: &lt;script&gt;alert(\'XSS\')&lt;/script&gt;</div>';
+                                output.innerHTML += '<div style="color: #fff;">Payload: &lt;script&gt;console.log(\'XSS\')&lt;/script&gt;</div>';
                                 output.innerHTML += '<div style="color: #ff6b6b;">Cookie theft possible!</div>';
                             } else if (exploitType === 'lfi') {
                                 output.innerHTML += '<div style="color: #ffd93d;">Testing Local File Inclusion...</div>';
@@ -1774,8 +1589,8 @@ Generated: ${new Date().toLocaleString()}
                         const output = document.getElementById('exploit-output');
                         
                         const payloads = {
-                            sqli: ["\' OR \'1\'=\'1\' --", "\' UNION SELECT 1,2,3 --", "\'; DROP TABLE users; --"],
-                            xss: ["<script>alert(\'XSS\')</script>", "<img src=x onerror=alert(\'XSS\')>", "javascript:alert(\'XSS\')"],
+                            sqli: ["' OR '1'='1' --", "' UNION SELECT 1,2,3 --", "'; DROP TABLE users; --"],
+                            xss: ['<script>console.log("XSS")</script>', '<img src="#" onerror=console.log("XSS")>', 'javascript:void(0)'],
                             lfi: ["../../../etc/passwd", "..\\..\\..\\windows\\system32\\drivers\\etc\\hosts", "php://filter/read=convert.base64-encode/resource=index.php"]
                         };
                         
@@ -2149,6 +1964,163 @@ Generated: ${new Date().toLocaleString()}
                 </div>
             </div>
             
+            <!-- Digital Forensics Application -->
+            <div class="app-window" id="digital-forensics-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize"></span>
+                        <span class="control maximize"></span>
+                        <span class="control close"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-search"></i> Digital Forensics Lab
+                    </div>
+                </div>
+                <div class="window-content" id="forensics-content">
+                    <div class="forensics-container">
+                        <div class="forensics-header">
+                            <h2><i class="fas fa-search"></i> Digital Forensics & Incident Response Lab</h2>
+                            <p>Professional crime scene investigation aur digital evidence analysis</p>
+                        </div>
+                        <div class="forensics-tabs">
+                            <button class="tab-btn active" onclick="forensicsApp.showTab('case-management')">
+                                <i class="fas fa-folder-open"></i> Case Management
+                            </button>
+                            <button class="tab-btn" onclick="forensicsApp.showTab('evidence-acquisition')">
+                                <i class="fas fa-hdd"></i> Evidence Acquisition
+                            </button>
+                            <button class="tab-btn" onclick="forensicsApp.showTab('file-analysis')">
+                                <i class="fas fa-file-alt"></i> File Analysis
+                            </button>
+                        </div>
+                        <div class="forensics-content">
+                            <div id="case-management" class="tab-content active">
+                                <h3>Digital Forensics Case Management</h3>
+                                <p>Create aur manage forensics investigations</p>
+                                <button onclick="forensicsApp.createCase()" class="btn-primary">Create New Case</button>
+                            </div>
+                            <div id="evidence-acquisition" class="tab-content">
+                                <h3>Evidence Acquisition</h3>
+                                <p>Disk imaging aur evidence collection tools</p>
+                                <button onclick="forensicsApp.startImaging()" class="btn-primary">Start Disk Imaging</button>
+                            </div>
+                            <div id="file-analysis" class="tab-content">
+                                <h3>File System Analysis</h3>
+                                <p>Deleted file recovery aur timeline analysis</p>
+                                <button onclick="forensicsApp.simulateFileRecovery()" class="btn-primary">Recover Deleted Files</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Hacking Application -->
+            <div class="app-window" id="mobile-hacking-app">
+                <div class="window-header">
+                    <div class="window-controls">
+                        <span class="control minimize"></span>
+                        <span class="control maximize"></span>
+                        <span class="control close"></span>
+                    </div>
+                    <div class="window-title">
+                        <i class="fas fa-mobile-alt"></i> Advanced Mobile Hacking Lab
+                    </div>
+                </div>
+                <div class="window-content" id="mobile-content">
+                    <div class="mobile-hacking-container">
+                        <div class="mobile-header">
+                            <h2><i class="fas fa-mobile-alt"></i> Advanced Mobile Hacking Lab</h2>
+                            <p>Professional Android/iOS security testing aur mobile malware development</p>
+                        </div>
+                        <div class="mobile-tabs">
+                            <button class="tab-btn active" onclick="mobileApp.showTab('apk-analysis')">
+                                <i class="fas fa-android"></i> APK Analysis
+                            </button>
+                            <button class="tab-btn" onclick="mobileApp.showTab('malware-dev')">
+                                <i class="fas fa-virus"></i> Malware Development
+                            </button>
+                            <button class="tab-btn" onclick="mobileApp.showTab('bypass-techniques')">
+                                <i class="fas fa-unlock"></i> Bypass Techniques
+                            </button>
+                        </div>
+                        <div class="mobile-content">
+                            <div id="apk-analysis" class="tab-content active">
+                                <h3>APK Analysis & Modification</h3>
+                                <p>Android application reverse engineering aur modification</p>
+                                <div class="apk-upload">
+                                    <div class="upload-area" onclick="mobileApp.loadApkFile()">
+                                        <i class="fas fa-upload"></i>
+                                        <p>Click to load APK file for analysis</p>
+                                        <small>Supported: .apk files</small>
+                                    </div>
+                                </div>
+                                <div id="apkAnalysisResults" class="analysis-results">
+                                    <p>Load an APK file to start analysis...</p>
+                                </div>
+                            </div>
+                            <div id="malware-dev" class="tab-content">
+                                <h3>Mobile Malware Development</h3>
+                                <p>Banking trojans aur mobile malware creation</p>
+                                <div class="malware-form">
+                                    <div class="form-group">
+                                        <label>Target Package:</label>
+                                        <input type="text" id="targetPackage" placeholder="com.bank.mobile" value="com.bank.mobile">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>C&C Server:</label>
+                                        <input type="text" id="ccServer" placeholder="https://attacker.com" value="https://attacker.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Persistence Method:</label>
+                                        <select id="persistenceMethod">
+                                            <option value="service">Background Service</option>
+                                            <option value="receiver">Broadcast Receiver</option>
+                                            <option value="admin">Device Admin</option>
+                                        </select>
+                                    </div>
+                                    <button onclick="mobileApp.generateMalware()" class="btn-primary">Generate Malware</button>
+                                </div>
+                                <div id="malwareOutput" class="malware-output">
+                                    <p>Configure settings and click Generate Malware...</p>
+                                </div>
+                            </div>
+                            <div id="bypass-techniques" class="tab-content">
+                                <h3>Security Bypass Techniques</h3>
+                                <p>Root detection, SSL pinning aur anti-debug bypass</p>
+                                <div class="frida-console">
+                                    <div class="console-container">
+                                        <div class="console-header">
+                                            <span>Frida Console - Target: com.example.app</span>
+                                            <button class="btn-connect">Connect</button>
+                                        </div>
+                                        <div class="console-output" id="fridaOutput">
+                                            <div class="console-line">[*] Frida server started on device</div>
+                                            <div class="console-line">[*] Ready for script injection...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bypass-scripts">
+                                    <h4>Common Bypass Scripts</h4>
+                                    <div class="script-grid">
+                                        <div class="script-card">
+                                            <h5>Root Detection Bypass</h5>
+                                            <button onclick="mobileApp.loadBypassScript('root-detection')" class="btn-load">Load Script</button>
+                                        </div>
+                                        <div class="script-card">
+                                            <h5>SSL Pinning Bypass</h5>
+                                            <button onclick="mobileApp.loadBypassScript('ssl-pinning')" class="btn-load">Load Script</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="bypassResults" class="bypass-results">
+                                    <p>Load bypass scripts to see results...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Include New Linux Applications -->
             <div id="system-monitor-container"></div>
             <div id="package-manager-container"></div>
@@ -2199,6 +2171,9 @@ Generated: ${new Date().toLocaleString()}
         </div>
     </div>
 
+    <!-- Progress Fix -->
+    <script src="progress-fix.js"></script>
+    
     <!-- Core VM Scripts -->
     <script src="vm-core.js"></script>
     <script src="terminal.js"></script>
@@ -2216,6 +2191,18 @@ Generated: ${new Date().toLocaleString()}
     <script src="ai-chat.js"></script>
     <script src="bank-security.js"></script>
     <script src="flag-system.js"></script>
+    <script src="network-simulator.js"></script>
+    <script src="crypto-playground.js"></script>
+    <script src="malware-analysis.js"></script>
+    <script src="ctf-challenges.js"></script>
+    <script src="digital-forensics.js"></script>
+    <script src="mobile-hacking.js"></script>
+    <script src="performance-manager.js"></script>
+    <script src="window-controls-fix.js"></script>
+    <script src="app-content-loader.js"></script>
+    <script src="syntax-fix.js"></script>
+    <script src="force-app-init.js"></script>
+
     
     <!-- CTF System -->
     <script>
@@ -2242,14 +2229,14 @@ Generated: ${new Date().toLocaleString()}
         document.getElementById('user-rank').textContent = '#' + rank;
     }
     
-    function startChallenge(button) {
+    window.startChallenge = function(button) {
         const card = button.closest('.ctf-card');
         const flagInput = card.querySelector('.flag-input');
         button.style.display = 'none';
         flagInput.style.display = 'block';
     }
     
-    function submitFlag(button) {
+    window.submitFlag = function(button) {
         const card = button.closest('.ctf-card');
         const input = card.querySelector('.flag-field');
         const correctFlag = card.dataset.flag;
@@ -2345,28 +2332,30 @@ Generated: ${new Date().toLocaleString()}
         achievements.innerHTML = html;
     }
     
-    function showLeaderboard() {
+    window.showLeaderboard = function() {
         alert(`🏆 CTF Leaderboard\n\n1. Elite_Hacker - 2850pts\n2. CyberNinja - 2100pts\n3. H4ck3r_Pro - 1750pts\n4. SecMaster - 1200pts\n5. ${username} - ${userScore}pts`);
     }
     
-    function showCTFChallenges() {
+    window.showCTFChallenges = function() {
         if (window.vm) {
             window.vm.switchApp('ctf-challenges');
         }
     }
     
-    function showUserMenu() {
+    window.showUserMenu = function() {
         const dropdown = document.getElementById('user-dropdown');
-        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        if (dropdown) {
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
     }
     
-    function logout() {
+    window.logout = function() {
         localStorage.removeItem('ctf_username');
         location.reload();
     }
     
     // Global flag submission function
-    window.checkAndSubmitFlag = function(flag, points) {
+    window.submitFlag = function(flag, points) {
         if (!flag) return;
         
         // Check if flag already captured
@@ -2377,36 +2366,43 @@ Generated: ${new Date().toLocaleString()}
         
         // Add to captured flags
         capturedFlags.push(flag);
-        userScore += points;
+        userScore += points || 100;
         
         // Update displays
         updateScore();
         
         // Show notification
-        showNotification(`🚩 Flag Captured: ${flag} (+${points} pts)`, 'success');
+        showNotification(`🚩 Flag Captured: ${flag} (+${points || 100} pts)`, 'success');
         
-        // Update CTF challenges display if open
-        const ctfApp = document.getElementById('ctf-challenges-app');
-        if (ctfApp && ctfApp.classList.contains('active')) {
-            // Mark challenge as completed
-            document.querySelectorAll('.ctf-card').forEach(card => {
-                if (card.dataset.flag === flag) {
-                    card.style.background = 'rgba(0, 255, 65, 0.2)';
-                    card.style.border = '2px solid #00ff41';
-                    const button = card.querySelector('.challenge-btn');
-                    if (button) {
-                        button.textContent = 'Completed!';
-                        button.disabled = true;
-                    }
-                }
-            });
-        }
-        
-        console.log(`Flag captured: ${flag} (+${points} points)`);
+        console.log(`Flag captured: ${flag} (+${points || 100} points)`);
     };
     
-    // Initialize on page load
+    window.checkAndSubmitFlag = window.submitFlag;
+    
+    // Initialize applications
     document.addEventListener('DOMContentLoaded', () => {
+        // Initialize Digital Forensics App
+        setTimeout(() => {
+            if (window.DigitalForensicsApp && !window.forensicsApp) {
+                window.forensicsApp = new DigitalForensicsApp();
+                const forensicsContent = document.getElementById('forensics-content');
+                if (forensicsContent) {
+                    forensicsContent.innerHTML = window.forensicsApp.createInterface();
+                }
+            }
+        }, 1000);
+        
+        // Initialize Mobile Hacking App
+        setTimeout(() => {
+            if (window.MobileHackingApp && !window.mobileApp) {
+                window.mobileApp = new MobileHackingApp();
+                const mobileContent = document.getElementById('mobile-content');
+                if (mobileContent) {
+                    mobileContent.innerHTML = window.mobileApp.createInterface();
+                }
+            }
+        }, 1200);
+        
         updateScore();
         
         // Mark completed challenges

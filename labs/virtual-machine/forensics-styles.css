@@ -1,0 +1,332 @@
+/* Digital Forensics App Styles */
+.forensics-container {
+    padding: 20px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #fff;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.forensics-header h2 {
+    color: #3498db;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.forensics-header p {
+    color: #bdc3c7;
+    margin-bottom: 20px;
+}
+
+.forensics-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #34495e;
+}
+
+.tab-btn {
+    background: rgba(52, 73, 94, 0.5);
+    color: #bdc3c7;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    background: rgba(52, 152, 219, 0.3);
+    color: #3498db;
+}
+
+.tab-btn.active {
+    background: #3498db;
+    color: #fff;
+}
+
+.forensics-content {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h3 {
+    color: #3498db;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.tab-content p {
+    color: #bdc3c7;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2980b9, #1f4e79);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+    border: 1px solid #95a5a6;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #95a5a6;
+    color: #2c3e50;
+}
+
+.case-section, .acquisition-section, .file-analysis-section {
+    margin-bottom: 30px;
+}
+
+.case-form {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #3498db;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.case-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #34495e;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.case-item:hover {
+    background: rgba(52, 152, 219, 0.1);
+    border-color: #3498db;
+}
+
+.case-info {
+    margin-bottom: 10px;
+}
+
+.case-info strong {
+    color: #3498db;
+    font-size: 16px;
+}
+
+.case-type {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.tool-section, .tool-group {
+    margin-bottom: 25px;
+}
+
+.tool-section h4, .tool-group h4 {
+    color: #e74c3c;
+    margin-bottom: 15px;
+    border-left: 4px solid #e74c3c;
+    padding-left: 10px;
+}
+
+.command-examples {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.command-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #34495e;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.command-item strong {
+    color: #f39c12;
+    min-width: 150px;
+}
+
+.command-item code {
+    background: rgba(0, 0, 0, 0.6);
+    color: #2ecc71;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    flex: 1;
+}
+
+.btn-execute {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-execute:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+
+.imaging-simulator, .file-browser, .analysis-results {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.simulator-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.simulator-controls select, .simulator-controls input {
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.file-tree {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+}
+
+.folder, .file {
+    padding: 5px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.folder:hover, .file:hover {
+    background: rgba(52, 152, 219, 0.2);
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+.folder i, .file i {
+    margin-right: 8px;
+    width: 16px;
+}
+
+.folder-contents {
+    margin-left: 20px;
+    border-left: 1px dashed #34495e;
+    padding-left: 15px;
+}
+
+.file.suspicious {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.file.suspicious:hover {
+    background: rgba(231, 76, 60, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .forensics-tabs {
+        flex-direction: column;
+    }
+    
+    .simulator-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .command-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .command-item strong {
+        min-width: auto;
+    }
+}

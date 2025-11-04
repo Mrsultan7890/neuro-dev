@@ -361,11 +361,11 @@
             
             <div class="blog-stats">
                 <div class="stat-item">
-                    <span class="stat-number" id="totalPosts">10</span>
+                    <span class="stat-number" id="totalPosts">11</span>
                     <span>Total Posts</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" id="totalViews">6.5K</span>
+                    <span class="stat-number" id="totalViews">8.2K</span>
                     <span>Total Views</span>
                 </div>
                 <div class="stat-item">
@@ -409,23 +409,31 @@
         // Load blog posts from JSON
         async function loadBlogPosts() {
             try {
-                console.log('Fetching blog posts...');
                 const response = await fetch('./blog-posts.json?v=' + Date.now());
-                console.log('Response status:', response.status);
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
+                if (response.ok) {
+                    blogPosts = await response.json();
+                    filteredPosts = [...blogPosts];
+                    displayBlogPosts(filteredPosts);
+                    updateStats();
+                    return;
                 }
-                
-                blogPosts = await response.json();
-                console.log('Loaded posts:', blogPosts.length);
-                filteredPosts = [...blogPosts];
-                displayBlogPosts(filteredPosts);
-                updateStats();
             } catch (error) {
-                console.error('Error loading blog posts:', error);
+                console.log('Using fallback data');
                 // Fallback data with all posts
                 blogPosts = [
+                    {
+                        id: 11,
+                        slug: "neuro-dev-complete-guide-ethical-hacking-platform",
+                        title: "🧠 Neuro-Dev - Complete Mobile Ethical Hacking Platform",
+                        excerpt: "Neuro-Dev kya hai, kaise banaya gaya, aur kyun yeh mobile ethical hackers ke liye game-changer hai. Mobile-first approach se advanced cybersecurity tak complete journey.",
+                        category: "hacking",
+                        date: "2025-10-26",
+                        readTime: "8 min read",
+                        views: 2850,
+                        image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop",
+                        tags: ["neuro-dev", "ethical-hacking", "mobile-learning"]
+                    },
                     {
                         id: 1,
                         slug: "zero-trust-architecture-challenge",
@@ -435,6 +443,7 @@
                         date: "2025-10-26",
                         readTime: "8 min read",
                         views: 2150,
+                        image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=200&fit=crop",
                         tags: ["zero-trust", "cybersecurity"]
                     },
                     {
@@ -446,6 +455,7 @@
                         date: "2025-10-25",
                         readTime: "8 min read",
                         views: 1250,
+                        image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop",
                         tags: ["termux", "hacking"]
                     },
                     {
@@ -457,6 +467,7 @@
                         date: "2025-10-24",
                         readTime: "6 min read",
                         views: 890,
+                        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop",
                         tags: ["chatgpt", "gemini"]
                     },
                     {
@@ -468,6 +479,7 @@
                         date: "2025-10-23",
                         readTime: "10 min read",
                         views: 2150,
+                        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=200&fit=crop",
                         tags: ["darkweb", "tor"]
                     },
                     {
@@ -479,6 +491,7 @@
                         date: "2025-10-22",
                         readTime: "12 min read",
                         views: 1680,
+                        image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=200&fit=crop",
                         tags: ["python", "scripting"]
                     }
                 ];

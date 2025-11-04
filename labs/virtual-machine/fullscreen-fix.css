@@ -1,0 +1,50 @@
+/* Fullscreen Mode Styles */
+.vm-container.fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    background: #000 !important;
+}
+
+.fullscreen-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.7);
+    color: #00ff88;
+    border: 1px solid #00ff88;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+    background: rgba(0, 255, 136, 0.2);
+    transform: scale(1.05);
+}
+
+.fullscreen-btn i {
+    font-size: 16px;
+}
+
+/* Ensure fullscreen works properly */
+.vm-container:-webkit-full-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.vm-container:-moz-full-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.vm-container:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+}

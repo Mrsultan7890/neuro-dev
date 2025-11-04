@@ -17,9 +17,12 @@ class GlobalSearchSystem {
                 if (response.ok) {
                     const data = await response.json();
                     this.indexModule(module, data);
+                } else {
+                    console.warn(`Module ${module} not found (${response.status}), using fallback data`);
+                    this.indexFallbackData(module);
                 }
             } catch (error) {
-                console.log(`Module ${module} not found, using fallback data`);
+                console.warn(`Failed to load module ${module}:`, error.message);
                 this.indexFallbackData(module);
             }
         }
@@ -156,41 +159,47 @@ function showAllCourses() {
 }
 
 function showSearchResults(results, searchTerm) {
-    let resultsContainer = document.getElementById('search-results');
-    
-    if (!resultsContainer) {
-        resultsContainer = document.createElement('div');
-        resultsContainer.id = 'search-results';
-        resultsContainer.className = 'search-results-container';
+    try {
+        let resultsContainer = document.getElementById('search-results');
         
-        const coursesSection = document.getElementById('courses');
-        coursesSection.appendChild(resultsContainer);
-    }
+        if (!resultsContainer) {
+            resultsContainer = document.createElement('div');
+            resultsContainer.id = 'search-results';
+            resultsContainer.className = 'search-results-container';
+            
+            const coursesSection = document.getElementById('courses');
+            if (!coursesSection) {
+                console.error('Courses section not found');
+                return;
+            }
+            coursesSection.appendChild(resultsContainer);
+        }
 
-    if (results.length === 0) {
-        const noResultsDiv = document.createElement('div');
-        noResultsDiv.className = 'no-results';
-        
-        const icon = document.createElement('i');
-        icon.className = 'fas fa-search';
-        
-        const title = document.createElement('h3');
-        title.appendChild(document.createTextNode(`"${searchTerm.replace(/[<>"'&]/g, '')}" ke liye koi result nahi mila`));
-        
-        const desc = document.createElement('p');
-        desc.textContent = 'Kuch aur try kariye ya spelling check kariye';
-        
-        noResultsDiv.appendChild(icon);
-        noResultsDiv.appendChild(title);
-        noResultsDiv.appendChild(desc);
-        
-        resultsContainer.innerHTML = '';
-        resultsContainer.appendChild(noResultsDiv);
-        resultsContainer.style.display = 'block';
-        return;
-    }
+        if (results.length === 0) {
+            const noResultsDiv = document.createElement('div');
+            noResultsDiv.className = 'no-results';
+            
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-search';
+            
+            const title = document.createElement('h3');
+            const sanitizedTerm = sanitizeSearchTerm(searchTerm);
+            title.appendChild(document.createTextNode(`"${sanitizedTerm}" ke liye koi result nahi mila`));
+            
+            const desc = document.createElement('p');
+            desc.textContent = 'Kuch aur try kariye ya spelling check kariye';
+            
+            noResultsDiv.appendChild(icon);
+            noResultsDiv.appendChild(title);
+            noResultsDiv.appendChild(desc);
+            
+            resultsContainer.innerHTML = '';
+            resultsContainer.appendChild(noResultsDiv);
+            resultsContainer.style.display = 'block';
+            return;
+        }
 
-    // Sanitize search term and results
+        // Sanitize search term and results
     const sanitizedSearchTerm = searchTerm.replace(/[<>"'&]/g, '');
     
     const headerDiv = document.createElement('div');
@@ -273,7 +282,10 @@ function showSearchResults(results, searchTerm) {
     resultsContainer.appendChild(headerDiv);
     resultsContainer.appendChild(gridDiv);
     
-    resultsContainer.style.display = 'block';
+        resultsContainer.style.display = 'block';
+    } catch (error) {
+        console.error('Error showing search results:', error);
+    }
 }
 
 function hideSearchResults() {
@@ -343,12 +355,17 @@ class ProgressTracker {
             const saved = localStorage.getItem(this.storageKey);
             return saved ? JSON.parse(saved) : {};
         } catch (error) {
+            console.warn('Failed to load progress data:', error);
             return {};
         }
     }
 
     saveProgress() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.progress));
+        try {
+            localStorage.setItem(this.storageKey, JSON.stringify(this.progress));
+        } catch (error) {
+            console.error('Failed to save progress:', error);
+        }
     }
 
     markLessonComplete(module, lessonId) {
@@ -392,29 +409,45 @@ class ProgressTracker {
             if (!module) return;
             
             const progress = this.getModuleProgress(module);
-            let progressBar = card.querySelector('.progress-bar');
-            
-            if (progress > 0 && !progressBar) {
-                progressBar = document.createElement('div');
-                progressBar.className = 'progress-bar';
-                const progressFill = document.createElement('div');
-                progressFill.className = 'progress-fill';
-                progressFill.style.width = `${progress}%`;
-                
-                const progressText = document.createElement('span');
-                progressText.className = 'progress-text';
-                progressText.textContent = `${progress}% Complete`;
-                
-                progressBar.appendChild(progressFill);
-                progressBar.appendChild(progressText);
-                card.appendChild(progressBar);
-            } else if (progressBar) {
-                const fill = progressBar.querySelector('.progress-fill');
-                const text = progressBar.querySelector('.progress-text');
-                if (fill) fill.style.width = `${progress}%`;
-                if (text) text.textContent = `${progress}% Complete`;
-            }
+            this.updateCardProgress(card, progress);
         });
+    }
+    
+    updateCardProgress(card, progress) {
+        let progressBar = card.querySelector('.progress-bar');
+        
+        if (progress > 0 && !progressBar) {
+            progressBar = this.createProgressBar(progress);
+            card.appendChild(progressBar);
+        } else if (progressBar) {
+            this.updateExistingProgressBar(progressBar, progress);
+        }
+    }
+    
+    createProgressBar(progress) {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
+        
+        const progressFill = document.createElement('div');
+        progressFill.className = 'progress-fill';
+        progressFill.style.width = `${progress}%`;
+        
+        const progressText = document.createElement('span');
+        progressText.className = 'progress-text';
+        progressText.textContent = `${progress}% Complete`;
+        
+        progressBar.appendChild(progressFill);
+        progressBar.appendChild(progressText);
+        
+        return progressBar;
+    }
+    
+    updateExistingProgressBar(progressBar, progress) {
+        const fill = progressBar.querySelector('.progress-fill');
+        const text = progressBar.querySelector('.progress-text');
+        
+        if (fill) fill.style.width = `${progress}%`;
+        if (text) text.textContent = `${progress}% Complete`;
     }
 }
 
@@ -455,29 +488,76 @@ class NotesSystem {
     }
 }
 
+/**
+ * Application Performance Manager
+ * Handles initialization and performance optimizations
+ */
+class AppManager {
+    constructor() {
+        this.progressTracker = new ProgressTracker();
+        this.notesSystem = new NotesSystem();
+        this.initialized = false;
+    }
+    
+    init() {
+        if (this.initialized) return;
+        
+        this.setupTheme();
+        this.setupUI();
+        this.setupProgressTracking();
+        this.initialized = true;
+    }
+    
+    setupTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const themeIcon = document.querySelector('#theme-toggle i');
+        
+        document.body.setAttribute('data-theme', savedTheme);
+        if (themeIcon) {
+            themeIcon.className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    }
+    
+    setupUI() {
+        addMissingButtons();
+    }
+    
+    setupProgressTracking() {
+        requestAnimationFrame(() => {
+            if (this.progressTracker && typeof this.progressTracker.updateProgressDisplay === 'function') {
+                this.progressTracker.updateProgressDisplay();
+            }
+        });
+    }
+}
+
 // Initialize systems
-const progressTracker = new ProgressTracker();
-const notesSystem = new NotesSystem();
+const appManager = new AppManager();
+const progressTracker = appManager.progressTracker;
+const notesSystem = appManager.notesSystem;
+
+// Helper function to sanitize search terms
+function sanitizeSearchTerm(term) {
+    if (typeof term !== 'string') return '';
+    return term.replace(/[<>"'&]/g, function(match) {
+        const escapeMap = {
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            '&': '&amp;'
+        };
+        return escapeMap[match];
+    }).substring(0, 100);
+}
 
 // Load saved theme and initialize course cards
 document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    const themeIcon = document.querySelector('#theme-toggle i');
-    
-    document.body.setAttribute('data-theme', savedTheme);
-    if (savedTheme === 'light') {
-        themeIcon.className = 'fas fa-sun';
-    } else {
-        themeIcon.className = 'fas fa-moon';
+    try {
+        appManager.init();
+    } catch (error) {
+        console.error('Error during app initialization:', error);
     }
-    
-    // Add missing buttons to all course cards
-    addMissingButtons();
-    
-    // Update progress display
-    setTimeout(() => {
-        progressTracker.updateProgressDisplay();
-    }, 500);
 });
 
 // Add missing buttons to course cards
@@ -486,40 +566,50 @@ function addMissingButtons() {
         const moduleId = card.dataset.module;
         if (!moduleId) return;
         
-        // Check if course-actions already exists
-        let actionsDiv = card.querySelector('.course-actions');
-        if (!actionsDiv) {
-            actionsDiv = document.createElement('div');
-            actionsDiv.className = 'course-actions';
-            
-            // Add Start Learning button
-            const startBtn = document.createElement('button');
-            startBtn.className = 'start-btn';
-            const playIcon = document.createElement('i');
-            playIcon.className = 'fas fa-play';
-            startBtn.appendChild(playIcon);
-            startBtn.appendChild(document.createTextNode(' Start Learning'));
-            startBtn.onclick = () => {
-                const sanitizedModuleId = encodeURIComponent(moduleId);
-                window.location.href = `course.html?module=${sanitizedModuleId}`;
-            };
-            
-            actionsDiv.appendChild(startBtn);
-            card.appendChild(actionsDiv);
-        }
-        
-        // Add review button if not exists
-        if (!card.querySelector('.review-btn')) {
-            const reviewBtn = document.createElement('button');
-            reviewBtn.className = 'review-btn';
-            const starIcon = document.createElement('i');
-            starIcon.className = 'fas fa-star';
-            reviewBtn.appendChild(starIcon);
-            reviewBtn.appendChild(document.createTextNode(' Rate Course'));
-            reviewBtn.onclick = () => showReviewModal(moduleId);
-            actionsDiv.appendChild(reviewBtn);
-        }
+        const actionsDiv = this.getOrCreateActionsDiv(card);
+        this.addStartButton(actionsDiv, moduleId);
+        this.addReviewButton(card, actionsDiv, moduleId);
     });
+}
+
+function getOrCreateActionsDiv(card) {
+    let actionsDiv = card.querySelector('.course-actions');
+    if (!actionsDiv) {
+        actionsDiv = document.createElement('div');
+        actionsDiv.className = 'course-actions';
+        card.appendChild(actionsDiv);
+    }
+    return actionsDiv;
+}
+
+function addStartButton(actionsDiv, moduleId) {
+    const startBtn = this.createButton('start-btn', 'fas fa-play', ' Start Learning');
+    startBtn.onclick = () => {
+        const sanitizedModuleId = encodeURIComponent(moduleId);
+        window.location.href = `course.html?module=${sanitizedModuleId}`;
+    };
+    actionsDiv.appendChild(startBtn);
+}
+
+function addReviewButton(card, actionsDiv, moduleId) {
+    if (!card.querySelector('.review-btn')) {
+        const reviewBtn = this.createButton('review-btn', 'fas fa-star', ' Rate Course');
+        reviewBtn.onclick = () => showReviewModal(moduleId);
+        actionsDiv.appendChild(reviewBtn);
+    }
+}
+
+function createButton(className, iconClass, text) {
+    const button = document.createElement('button');
+    button.className = className;
+    
+    const icon = document.createElement('i');
+    icon.className = iconClass;
+    
+    button.appendChild(icon);
+    button.appendChild(document.createTextNode(text));
+    
+    return button;
 }
 
 // Missing function definitions
@@ -559,5 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
+    } else {
+        console.log('Theme toggle button not found');
     }
 });

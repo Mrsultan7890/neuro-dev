@@ -7,6 +7,10 @@
     <meta name="google-adsense-account" content="ca-pub-1916892851128865">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865"
          crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/favicon.ico?v=1" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="course-features.css">
     <link rel="stylesheet" href="quiz-review-styles.css">
@@ -14,6 +18,7 @@
     <script src="course-features.js"></script>
     <script src="reviews-system.js"></script>
     <script src="quiz-system.js"></script>
+    <script src="user-engagement.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
     <style>
         .course-container {
@@ -409,6 +414,7 @@
                 <a href="index.html#courses" class="nav-link">Courses</a>
                 <a href="videos.html" class="nav-link">Videos</a>
                 <a href="python-ide.html" class="nav-link">Python IDE</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
                 <a href="donate.html" class="nav-link">Donate</a>
             </div>
             <div class="hamburger" id="hamburger">
@@ -449,7 +455,7 @@
                 <button class="nav-btn" id="next-btn">
                     Next <i class="fas fa-chevron-right"></i>
                 </button>
-                <button class="nav-btn" id="complete-btn" onclick="markLessonComplete()">
+                <button class="nav-btn" id="complete-btn">
                     <i class="fas fa-check"></i> Mark Complete
                 </button>
                 <button class="nav-btn quiz-btn" onclick="startModuleQuiz()">
@@ -771,9 +777,12 @@
 
         document.getElementById('prev-btn').onclick = previousLesson;
         document.getElementById('next-btn').onclick = nextLesson;
+        document.getElementById('complete-btn').onclick = markLessonComplete;
 
         // Add CSS for notification animations
-        const style = document.createElement('style');
+        if (!document.getElementById('course-notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'course-notification-styles';
         style.textContent = `
             @keyframes slideInRight {
                 from {
@@ -796,7 +805,8 @@
                 }
             }
         `;
-        document.head.appendChild(style);
+            document.head.appendChild(style);
+        }
         
         // Add sanitization function
         function sanitizeHtml(input) {
@@ -862,13 +872,43 @@
         
         function markLessonComplete() {
             if (currentModule && currentLesson) {
-                let progress = JSON.parse(localStorage.getItem('course-progress') || '{}');
-                if (!progress[currentModule]) progress[currentModule] = [];
-                if (!progress[currentModule].includes(currentLesson)) {
-                    progress[currentModule].push(currentLesson);
-                    localStorage.setItem('course-progress', JSON.stringify(progress));
+                // Direct progress tracking
+                const userProgress = JSON.parse(localStorage.getItem('neuro-dev-progress') || '{}');
+                if (!userProgress[currentModule]) {
+                    userProgress[currentModule] = {};
                 }
-                showNotification('Lesson marked complete!', 'success');
+                
+                const lessonKey = `lesson-${currentLesson}`;
+                if (!userProgress[currentModule][lessonKey]) {
+                    userProgress[currentModule][lessonKey] = {
+                        completed: true,
+                        completedAt: new Date().toISOString()
+                    };
+                    localStorage.setItem('neuro-dev-progress', JSON.stringify(userProgress));
+                    
+                    // Add XP
+                    const userStats = JSON.parse(localStorage.getItem('neuro-dev-stats') || '{}');
+                    if (!userStats.xp) userStats.xp = 0;
+                    if (!userStats.level) userStats.level = 1;
+                    
+                    userStats.xp += 20;
+                    userStats.level = Math.floor(userStats.xp / 100) + 1;
+                    localStorage.setItem('neuro-dev-stats', JSON.stringify(userStats));
+                    
+                    // Log activity
+                    const activities = JSON.parse(localStorage.getItem('neuro-dev-activities') || '[]');
+                    activities.push({
+                        title: `Completed lesson ${currentLesson}`,
+                        description: `Module: ${currentModule}`,
+                        icon: '📚',
+                        timestamp: new Date().toISOString()
+                    });
+                    localStorage.setItem('neuro-dev-activities', JSON.stringify(activities));
+                    
+                    showNotification('🎉 Lesson Complete! +20 XP earned!', 'success');
+                } else {
+                    showNotification('Lesson already completed!', 'info');
+                }
             }
         }
         

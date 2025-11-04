@@ -96,16 +96,21 @@ class NeuroVM {
         document.querySelectorAll('.control.close').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const window = e.target.closest('.app-window');
-                window.classList.remove('active');
-                this.updateTaskbar();
+                const appWindow = e.target.closest('.app-window');
+                if (appWindow) {
+                    appWindow.classList.remove('active');
+                    this.updateTaskbar();
+                }
             });
         });
 
         // Logo click for course switcher
-        document.querySelector('.logo').addEventListener('click', () => {
-            this.showCourseSwitch();
-        });
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            logo.addEventListener('click', () => {
+                this.showCourseSwitch();
+            });
+        }
     }
 
     updateTime() {
@@ -118,119 +123,211 @@ class NeuroVM {
         document.getElementById('current-time').textContent = timeString;
     }
 
-    switchApp(appName) {
+    async switchApp(appName) {
         try {
             // Validate app name
             if (!appName || typeof appName !== 'string') {
-                console.error('Invalid app name provided');
+                console.error('Invalid app name provided:', appName);
+                this.showError('Invalid application name');
                 return;
             }
             
-            // Hide all apps
-            const windows = document.querySelectorAll('.app-window');
-            windows.forEach(window => {
-                if (window) {
-                    window.classList.remove('active');
-                }
-            });
-
-            // Remove active from all icons
-            const icons = document.querySelectorAll('.app-icon');
-            icons.forEach(icon => {
-                if (icon) {
-                    icon.classList.remove('active');
-                }
-            });
-
-            // Show selected app
-            const selectedApp = document.getElementById(`${appName}-app`);
-            const selectedIcon = document.querySelector(`[data-app="${appName}"]`);
+            // Sanitize app name
+            const sanitizedAppName = appName.replace(/[^a-zA-Z0-9-_]/g, '');
+            if (sanitizedAppName !== appName) {
+                console.warn('App name sanitized:', appName, '->', sanitizedAppName);
+            }
             
-            if (selectedApp) {
-                selectedApp.classList.add('active');
-                console.log(`Switched to app: ${appName}`);
-                
-                // Special handling for browser app
-                if (appName === 'browser') {
-                    console.log('Browser app activated, checking Firefox browser...');
-                    if (!window.firefoxBrowser) {
-                        console.log('Firefox browser not found, initializing...');
-                        setTimeout(() => {
-                            if (window.initFirefoxBrowser) {
-                                window.initFirefoxBrowser();
-                            } else {
-                                console.log('Firefox browser init function not available, trying direct initialization...');
-                                try {
-                                    if (window.FirefoxBrowser) {
-                                        window.firefoxBrowser = new window.FirefoxBrowser();
-                                        console.log('Firefox browser initialized directly');
-                                    }
-                                } catch (error) {
-                                    console.error('Failed to initialize Firefox browser:', error);
-                                }
-                            }
-                        }, 100);
-                    } else {
-                        console.log('Firefox browser already initialized');
-                    }
-                }
+            // Use performance manager for fast switching
+            if (window.performanceManager) {
+                await window.performanceManager.switchAppFast(sanitizedAppName);
             } else {
-                console.log(`App ${appName}-app not found`);
-                // Try to load app HTML if not found
-                this.loadMissingApp(appName);
-                return;
+                // Fallback to original method
+                await this.switchAppOriginal(sanitizedAppName);
             }
             
-            if (selectedIcon) {
-                selectedIcon.classList.add('active');
-            }
-            
-            this.activeApp = appName;
-            
-            // Initialize app if needed
-            try {
-                if (appName === 'files' && window.fileManager) {
-                    window.fileManager.refresh();
-                } else if (appName === 'browser' && window.firefoxBrowser) {
-                    // Firefox browser is already initialized
-                    console.log('Firefox browser already initialized');
-                } else if (appName === 'ai-chat' && window.aiChatApp) {
-                    window.aiChatApp.setupEventListeners();
-                } else if (appName === 'bank-security' && window.bankSecurity) {
-                    // Bank Security app initialization if needed
-                } else if (appName === 'network-simulator') {
-                    setTimeout(() => {
-                        if (window.NetworkSimulatorApp && !window.networkSimulatorApp) {
-                            window.networkSimulatorApp = new NetworkSimulatorApp();
-                        }
-                        if (window.networkSimulatorApp && window.networkSimulatorApp.setupEventListeners) {
-                            window.networkSimulatorApp.setupEventListeners();
-                        }
-                    }, 100);
-                } else if (appName === 'crypto-playground') {
-                    setTimeout(() => {
-                        if (window.CryptoPlaygroundApp && !window.cryptoPlaygroundApp) {
-                            window.cryptoPlaygroundApp = new CryptoPlaygroundApp();
-                        }
-                        if (window.cryptoPlaygroundApp && window.cryptoPlaygroundApp.setupEventListeners) {
-                            window.cryptoPlaygroundApp.setupEventListeners();
-                        }
-                    }, 100);
-                } else if (appName === 'malware-analysis') {
-                    setTimeout(() => {
-                        if (window.MalwareAnalysisApp && !window.malwareAnalysisApp) {
-                            window.malwareAnalysisApp = new MalwareAnalysisApp();
-                        }
-                        if (window.malwareAnalysisApp && window.malwareAnalysisApp.setupEventListeners) {
-                            window.malwareAnalysisApp.setupEventListeners();
-                        }
-                    }, 100);
+            // Track progress with safety check
+            if (window.progressTracker && typeof window.progressTracker.trackProgress === 'function') {
+                try {
+                    window.progressTracker.trackProgress(sanitizedAppName, 'app-opened');
+                } catch (progressError) {
+                    console.warn('Progress tracking error:', progressError);
                 }
-            } catch (initError) {
-                console.error(`Error initializing ${appName} app:`, initError);
             }
+            
+            this.activeApp = sanitizedAppName;
+            this.initializeAppLogic(sanitizedAppName);
+            
         } catch (error) {
             console.error('Error switching app:', error);
+            this.showError('Failed to switch application');
+        }
+    }
+    
+    async switchAppOriginal(appName) {
+        // Hide all apps with animation
+        const windows = document.querySelectorAll('.app-window');
+        const activeWindow = document.querySelector('.app-window.active');
+        
+        if (activeWindow) {
+            activeWindow.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+            activeWindow.style.opacity = '0';
+            activeWindow.style.transform = 'scale(0.95)';
+            
+            await new Promise(resolve => setTimeout(resolve, 150));
+        }
+        
+        windows.forEach(window => {
+            if (window) {
+                window.classList.remove('active');
+                window.style.display = 'none';
+            }
+        });
+
+        // Remove active from all icons
+        const icons = document.querySelectorAll('.app-icon');
+        icons.forEach(icon => {
+            if (icon) {
+                icon.classList.remove('active');
+            }
+        });
+
+        // Show selected app with animation
+        const selectedApp = document.getElementById(`${appName}-app`);
+        const selectedIcon = document.querySelector(`[data-app="${appName}"]`);
+        
+        if (selectedApp) {
+            selectedApp.style.display = 'block';
+            selectedApp.style.opacity = '0';
+            selectedApp.style.transform = 'scale(0.95)';
+            selectedApp.classList.add('active');
+            
+            // Smooth animation
+            requestAnimationFrame(() => {
+                selectedApp.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+                selectedApp.style.opacity = '1';
+                selectedApp.style.transform = 'scale(1)';
+            });
+            
+            console.log(`Switched to app: ${appName}`);
+                
+            // Special handling for browser app
+            if (appName === 'browser') {
+                console.log('Browser app activated, checking Firefox browser...');
+                if (!window.firefoxBrowser) {
+                    console.log('Firefox browser not found, initializing...');
+                    setTimeout(() => {
+                        if (window.initFirefoxBrowser) {
+                            window.initFirefoxBrowser();
+                        } else {
+                            console.log('Firefox browser init function not available, trying direct initialization...');
+                            try {
+                                if (window.FirefoxBrowser) {
+                                    window.firefoxBrowser = new window.FirefoxBrowser();
+                                    console.log('Firefox browser initialized directly');
+                                }
+                            } catch (error) {
+                                console.error('Failed to initialize Firefox browser:', error);
+                            }
+                        }
+                    }, 100);
+                } else {
+                    console.log('Firefox browser already initialized');
+                }
+            }
+        } else {
+            console.log(`App ${appName}-app not found`);
+            // Try to load app HTML if not found
+            this.loadMissingApp(appName);
+            return;
+        }
+        
+        if (selectedIcon) {
+            selectedIcon.classList.add('active');
+        }
+    }
+    
+    initializeAppLogic(appName) {
+        try {
+            const appInitializers = {
+                'files': () => this.initFileManager(),
+                'browser': () => this.initBrowser(),
+                'ai-chat': () => this.initAiChat(),
+                'network-simulator': () => this.initDelayedApp('NetworkSimulatorApp', 'networkSimulatorApp'),
+                'crypto-playground': () => this.initDelayedApp('CryptoPlaygroundApp', 'cryptoPlaygroundApp'),
+                'malware-analysis': () => this.initDelayedApp('MalwareAnalysisApp', 'malwareAnalysisApp'),
+                'ctf-challenges': () => this.initDelayedApp('CTFChallengesApp', 'ctfChallengesApp'),
+                'bank-security': () => this.initDelayedApp('BankSecurityApp', 'bankSecurityApp'),
+                'digital-forensics': () => this.initForensicsApp(),
+                'mobile-hacking': () => this.initMobileApp()
+            };
+            
+            const initializer = appInitializers[appName];
+            if (initializer) {
+                initializer();
+            }
+        } catch (initError) {
+            console.error(`Error initializing ${appName} app:`, initError);
+        }
+    }
+    
+    initFileManager() {
+        if (window.fileManager) {
+            window.fileManager.refresh();
+        }
+    }
+    
+    initBrowser() {
+        if (window.firefoxBrowser) {
+            console.log('Firefox browser already initialized');
+        }
+    }
+    
+    initAiChat() {
+        if (window.aiChatApp) {
+            window.aiChatApp.setupEventListeners();
+        }
+    }
+    
+    initDelayedApp(AppClass, instanceName) {
+        setTimeout(() => {
+            if (window[AppClass] && !window[instanceName]) {
+                window[instanceName] = new window[AppClass]();
+            }
+            if (window[instanceName] && window[instanceName].setupEventListeners) {
+                window[instanceName].setupEventListeners();
+            }
+        }, 100);
+    }
+    
+    initForensicsApp() {
+        setTimeout(() => {
+            if (window.DigitalForensicsApp && !window.forensicsApp) {
+                window.forensicsApp = new window.DigitalForensicsApp();
+                this.loadAppContent('#digital-forensics-app .app-content', window.forensicsApp);
+            }
+            if (window.forensicsApp && window.forensicsApp.setupEventListeners) {
+                window.forensicsApp.setupEventListeners();
+            }
+        }, 100);
+    }
+    
+    initMobileApp() {
+        setTimeout(() => {
+            if (window.MobileHackingApp && !window.mobileApp) {
+                window.mobileApp = new window.MobileHackingApp();
+                this.loadAppContent('#mobile-hacking-app .app-content', window.mobileApp);
+            }
+            if (window.mobileApp && window.mobileApp.setupEventListeners) {
+                window.mobileApp.setupEventListeners();
+            }
+        }, 100);
+    }
+    
+    loadAppContent(selector, app) {
+        const appContent = document.querySelector(selector);
+        if (appContent && app.createInterface) {
+            appContent.innerHTML = app.createInterface();
         }
     }
 
@@ -243,7 +340,9 @@ class NeuroVM {
             'text-editor': 'text-editor.html',
             'image-viewer': 'image-viewer.html',
             'music-player': 'music-player.html',
-            'video-player': 'video-player.html'
+            'video-player': 'video-player.html',
+            'digital-forensics': 'digital-forensics.html',
+            'mobile-hacking': 'mobile-hacking.html'
         };
         
         const fileName = appFiles[appName];
@@ -286,14 +385,19 @@ class NeuroVM {
             'networking': 'Networking',
             'web-security': 'Web Security',
             'mobile-osint': 'Mobile & OSINT',
+            'digital-forensics': 'Digital Forensics',
+            'advanced-mobile-hacking': 'Advanced Mobile Hacking',
             'python': 'Python Programming',
             'hands-on-ml-scikit-learn': 'ML Theory & Scikit-Learn',
             'python-ai-ml': 'Python AI/ML Coding',
             'ai-hacking': 'AI Security & Hacking'
         };
 
-        document.getElementById('course-name').textContent = courseNames[courseName];
-        document.getElementById('welcome-course').textContent = courseNames[courseName];
+        const courseNameEl = document.getElementById('course-name');
+        const welcomeCourseEl = document.getElementById('welcome-course');
+        
+        if (courseNameEl) courseNameEl.textContent = courseNames[courseName] || 'Unknown Course';
+        if (welcomeCourseEl) welcomeCourseEl.textContent = courseNames[courseName] || 'Unknown Course';
         
         // Update course shortcuts
         document.querySelectorAll('.course-shortcut').forEach(item => {
@@ -315,8 +419,15 @@ class NeuroVM {
         try {
             // Validate course name
             if (!courseName || typeof courseName !== 'string') {
-                console.error('Invalid course name provided');
+                console.error('Invalid course name provided:', courseName);
+                this.showError('Invalid course name');
                 return;
+            }
+            
+            // Sanitize course name
+            const sanitizedCourseName = courseName.replace(/[^a-zA-Z0-9-_]/g, '');
+            if (sanitizedCourseName !== courseName) {
+                console.warn('Course name sanitized:', courseName, '->', sanitizedCourseName);
             }
             
             // Load course-specific configurations
@@ -353,6 +464,16 @@ class NeuroVM {
                     welcomeMessage: 'AI/ML Coding environment loaded. TensorFlow & PyTorch ready!',
                     projects: ['image-classifier', 'chatbot', 'recommendation-system']
                 },
+                'digital-forensics': {
+                    tools: ['dd', 'volatility', 'autopsy', 'sleuthkit', 'foremost', 'binwalk'],
+                    environment: 'forensics',
+                    welcomeMessage: 'Digital Forensics lab loaded. Evidence analysis tools ready!'
+                },
+                'advanced-mobile-hacking': {
+                    tools: ['apktool', 'frida', 'jadx', 'objection', 'mobsf', 'drozer'],
+                    environment: 'mobile-pentest',
+                    welcomeMessage: 'Advanced Mobile Hacking lab loaded. APK analysis tools ready!'
+                },
                 'ai-hacking': {
                     tools: ['prompt-injection', 'adversarial-attack', 'extract-model', 'poison-data', 'bypass-limits', 'privacy-attack', 'full-assessment'],
                     environment: 'ai-security',
@@ -361,39 +482,52 @@ class NeuroVM {
                 }
             };
 
-            const config = courseConfigs[courseName] || courseConfigs['termux-basics'];
+            const config = courseConfigs[sanitizedCourseName] || courseConfigs['termux-basics'];
             
             // Update terminal environment
             try {
-                if (window.terminal && window.terminal.setCourse) {
-                    window.terminal.setCourse(courseName, config);
+                if (window.terminal && typeof window.terminal.setCourse === 'function') {
+                    window.terminal.setCourse(sanitizedCourseName, config);
+                } else {
+                    console.warn('Terminal not available or setCourse method missing');
                 }
             } catch (terminalError) {
                 console.error('Error updating terminal environment:', terminalError);
+                this.showError('Failed to update terminal environment');
             }
             
             // Update browser content
             try {
-                if (window.firefoxBrowser && window.firefoxBrowser.currentCourse) {
-                    window.firefoxBrowser.currentCourse = courseName;
+                if (window.firefoxBrowser && window.firefoxBrowser.currentCourse !== undefined) {
+                    window.firefoxBrowser.currentCourse = sanitizedCourseName;
                 }
-                if (window.browser && window.browser.loadCourseContent) {
-                    window.browser.loadCourseContent(courseName);
+                if (window.browser && typeof window.browser.loadCourseContent === 'function') {
+                    window.browser.loadCourseContent(sanitizedCourseName);
                 }
             } catch (browserError) {
                 console.error('Error updating browser content:', browserError);
+                this.showError('Failed to update browser content');
             }
+            
+            console.log(`Course loaded successfully: ${sanitizedCourseName}`);
         } catch (error) {
             console.error('Error loading course:', error);
+            this.showError('Failed to load course');
         }
     }
 
     showCourseSwitch() {
-        document.getElementById('course-switcher').classList.add('active');
+        const courseSwitcher = document.getElementById('course-switcher');
+        if (courseSwitcher) {
+            courseSwitcher.classList.add('active');
+        }
     }
 
     closeCourseSwitch() {
-        document.getElementById('course-switcher').classList.remove('active');
+        const courseSwitcher = document.getElementById('course-switcher');
+        if (courseSwitcher) {
+            courseSwitcher.classList.remove('active');
+        }
     }
 
     updateTaskbar() {
@@ -405,15 +539,40 @@ class NeuroVM {
 
         if (activeWindows.length > 0) {
             const activeApp = activeWindows[0].id.replace('-app', '');
-            document.querySelector(`[data-app="${activeApp}"]`).classList.add('active');
+            const activeIcon = document.querySelector(`[data-app="${activeApp}"]`);
+            if (activeIcon) {
+                activeIcon.classList.add('active');
+            }
         }
     }
 }
 
 // Global functions
-function closeCourseSwitch() {
+window.closeCourseSwitch = function() {
     if (window.vm && window.vm.closeCourseSwitch) {
         window.vm.closeCourseSwitch();
+    }
+}
+
+window.minimizeWindow = function(windowId) {
+    const appWindow = document.getElementById(windowId);
+    if (appWindow) {
+        appWindow.style.display = 'none';
+    }
+}
+
+window.maximizeWindow = function(windowId) {
+    const appWindow = document.getElementById(windowId);
+    if (appWindow) {
+        appWindow.classList.toggle('maximized');
+    }
+}
+
+window.closeWindow = function(windowId) {
+    const appWindow = document.getElementById(windowId);
+    if (appWindow) {
+        appWindow.classList.remove('active');
+        appWindow.style.display = 'none';
     }
 }
 
@@ -421,49 +580,47 @@ function toggleFullscreen() {
     const vmContainer = document.querySelector('.vm-container');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     
-    if (!vmContainer || !fullscreenBtn) return;
+    if (!vmContainer || !fullscreenBtn) {
+        console.error('Fullscreen elements not found');
+        return;
+    }
     
     const icon = fullscreenBtn.querySelector('i');
     
-    if (vmContainer.classList.contains('fullscreen')) {
-        // Exit fullscreen
-        vmContainer.classList.remove('fullscreen');
-        if (icon) {
-            icon.className = 'fas fa-expand';
+    try {
+        if (document.fullscreenElement || vmContainer.classList.contains('fullscreen')) {
+            // Exit fullscreen
+            vmContainer.classList.remove('fullscreen');
+            if (icon) {
+                icon.className = 'fas fa-expand';
+            }
+            fullscreenBtn.title = 'Fullscreen Mode';
+            
+            if (document.exitFullscreen) {
+                document.exitFullscreen().catch(console.log);
+            }
+        } else {
+            // Enter fullscreen
+            vmContainer.classList.add('fullscreen');
+            if (icon) {
+                icon.className = 'fas fa-compress';
+            }
+            fullscreenBtn.title = 'Exit Fullscreen';
+            
+            // Request fullscreen
+            if (vmContainer.requestFullscreen) {
+                vmContainer.requestFullscreen().catch(console.log);
+            } else if (vmContainer.webkitRequestFullscreen) {
+                vmContainer.webkitRequestFullscreen();
+            } else if (vmContainer.mozRequestFullScreen) {
+                vmContainer.mozRequestFullScreen();
+            } else if (vmContainer.msRequestFullscreen) {
+                vmContainer.msRequestFullscreen();
+            }
         }
-        fullscreenBtn.title = 'Fullscreen Mode';
-        
-        // Exit browser fullscreen if active
-        if (document.fullscreenElement) {
-            document.exitFullscreen().catch(() => {});
-        }
-    } else {
-        // Enter fullscreen
-        vmContainer.classList.add('fullscreen');
-        if (icon) {
-            icon.className = 'fas fa-compress';
-        }
-        fullscreenBtn.title = 'Exit Fullscreen';
-        
-        // Try to enter browser fullscreen
-        const requestFullscreen = vmContainer.requestFullscreen || 
-                                 vmContainer.webkitRequestFullscreen || 
-                                 vmContainer.mozRequestFullScreen || 
-                                 vmContainer.msRequestFullscreen;
-        
-        if (requestFullscreen) {
-            requestFullscreen.call(vmContainer).catch(() => {});
-        }
+    } catch (error) {
+        console.error('Fullscreen error:', error);
     }
-    
-    // Trigger resize events
-    setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-        // Refresh terminal if active
-        if (window.terminal && window.terminal.refresh) {
-            window.terminal.refresh();
-        }
-    }, 200);
 }
 
 function showLeaderboard() {
@@ -522,21 +679,56 @@ function updateUserMenu(user) {
     const flagsDisplay = document.getElementById('flags-display');
     
     if (user && !user.isGuest) {
-        userMenu.style.display = 'block';
-        userAvatar.textContent = user.username.charAt(0).toUpperCase();
-        usernameDisplay.textContent = user.username;
-        pointsDisplay.textContent = user.totalPoints || 0;
-        flagsDisplay.textContent = user.flagsSubmitted || 0;
+        if (userMenu) userMenu.style.display = 'block';
+        if (userAvatar) userAvatar.textContent = user.username.charAt(0).toUpperCase();
+        if (usernameDisplay) usernameDisplay.textContent = user.username;
+        if (pointsDisplay) pointsDisplay.textContent = user.totalPoints || 0;
+        if (flagsDisplay) flagsDisplay.textContent = user.flagsSubmitted || 0;
     } else {
-        userMenu.style.display = 'none';
+        if (userMenu) userMenu.style.display = 'none';
     }
 }
+
+// Error display helper
+function showError(message) {
+        try {
+            const notification = document.createElement('div');
+            notification.className = 'vm-error-notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #ff4444;
+                color: white;
+                padding: 10px 15px;
+                border-radius: 5px;
+                z-index: 10000;
+                font-size: 14px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        } catch (error) {
+            console.error('Failed to show error notification:', error);
+        }
+    }
 
 // Initialize VM when page loads
 document.addEventListener('DOMContentLoaded', function() {
     // Wait for all scripts to load
     setTimeout(() => {
-        window.vm = new NeuroVM();
+        try {
+            window.vm = new NeuroVM();
+            console.log('NeuroVM initialized successfully');
+        } catch (error) {
+            console.error('Failed to initialize NeuroVM:', error);
+        }
     }, 100);
 });
 

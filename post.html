@@ -85,6 +85,30 @@
         function loadPost() {
             // Simulate post loading
             const posts = {
+                'neuro-dev-complete-guide-ethical-hacking-platform': {
+                    title: '🧠 Neuro-Dev - Complete Mobile Ethical Hacking Platform',
+                    content: `
+                        <h2>🚀 Neuro-Dev Kya Hai?</h2>
+                        <p>Neuro-Dev ek comprehensive ethical hacking platform hai jo specially <strong>mobile users</strong> ke liye design kiya gaya hai. Yahan aap Termux basics se lekar advanced penetration testing tak sab kuch seekh sakte hain <strong>Roman Urdu</strong> mein.</p>
+                        
+                        <h3>📱 Mobile-First Approach</h3>
+                        <p>Zyada tar students ke pass laptop nahi hai, lekin smartphone zaroor hai. Traditional cybersecurity courses laptop require karte hain, jo affordable nahi hai.</p>
+                        
+                        <h3>🎯 Platform Features</h3>
+                        <ul>
+                            <li><strong>Mobile Optimized:</strong> Responsive design jo mobile pe perfect work karta hai</li>
+                            <li><strong>Roman Urdu Content:</strong> Har command aur concept Roman Urdu mein explain</li>
+                            <li><strong>Copy Commands:</strong> Ek click mein command copy kar ke Termux mein paste</li>
+                            <li><strong>Virtual Labs:</strong> Interactive virtual machine labs browser mein</li>
+                            <li><strong>CTF Challenges:</strong> 49+ Capture The Flag challenges</li>
+                        </ul>
+                        
+                        <h3>📚 Course Modules</h3>
+                        <p>7 complete modules: Termux Basics, Advanced Termux, NetHunter Rootless, NetHunter Tools, Networking, Web Security, Mobile Security & OSINT.</p>
+                    `,
+                    date: '2025-10-26',
+                    readTime: '8 min read'
+                },
                 'zero-trust-architecture-challenge': {
                     title: '🔒 Zero Trust Kya Hai? Ethical Hackers Ke Liye Sabse Bada Challenge',
                     content: `
@@ -112,7 +136,7 @@
                 }
             };
 
-            const post = posts[currentPostSlug] || posts['default-post'];
+            const post = posts[currentPostSlug] || posts['neuro-dev-complete-guide-ethical-hacking-platform'];
             
             document.getElementById('postTitle').textContent = post.title;
             document.getElementById('postDate').textContent = post.date;

@@ -49,8 +49,8 @@
     </script>
     <title>Neuro-Dev - Ethical Hacking Course in Roman Urdu</title>
     <meta name="google-site-verification" content="8Pw8Fc5mpMA_KCJe9Z03FdbR14nktljEW2teKiCDDrk" />
-    <meta name="description" content="Complete Ethical Hacking Course in Roman Urdu. Learn cybersecurity on mobile with Termux and NetHunter. Free tutorials, AI/ML dictionary, and practical tools.">
-    <meta name="keywords" content="ethical hacking, cybersecurity, termux, nethunter, roman urdu, mobile hacking, penetration testing, kali linux">
+    <meta name="description" content="Complete Ethical Hacking Course in Roman Urdu. Learn cybersecurity on mobile with Termux and NetHunter. Free tutorials, AI/ML dictionary, and practical tools. Mobile hacking course Pakistan India.">
+    <meta name="keywords" content="ethical hacking, cybersecurity, termux, nethunter, roman urdu, mobile hacking, penetration testing, kali linux, android hacking course, mobile security, pakistan cybersecurity, india ethical hacking, urdu hacking tutorial, free hacking course">
     <meta name="author" content="Neuro-Dev Team">
     <link rel="canonical" href="https://neurodev.netlify.app/">
     <meta property="og:title" content="Neuro-Dev - Ethical Hacking Course in Roman Urdu">
@@ -61,7 +61,10 @@
     <meta name="twitter:title" content="Neuro-Dev - Ethical Hacking Course">
     <meta name="twitter:description" content="Learn ethical hacking on mobile devices with Roman Urdu tutorials">
 
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+    <link rel="shortcut icon" href="/favicon.ico?v=1" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="course-features.css">
     <link rel="stylesheet" href="missing-styles.css">
@@ -181,6 +184,7 @@
             <div class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link" onclick="closeMenu()">Home</a>
                 <a href="#courses" class="nav-link" onclick="closeMenu()">Courses</a>
+                <a href="dashboard.html" class="nav-link" onclick="closeMenu()">Dashboard</a>
                 <a href="ctf-challenges.html" class="nav-link" onclick="closeMenu()">CTF</a>
                 <a href="labs/virtual-machine/index.html" class="nav-link" onclick="closeMenu()">VM Lab</a>
                 <a href="vm-guide.html" class="nav-link" onclick="closeMenu()">VM Guide</a>
@@ -267,7 +271,7 @@
             <!-- Success Stats -->
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">13+</div>
+                    <div class="stat-number">17+</div>
                     <div class="stat-label">Complete Modules</div>
                 </div>
                 <div class="stat-item">
@@ -644,12 +648,34 @@
                     </div>
                 </div>
 
+                <div class="course-card" data-module="ai-hacking" style="border: 2px solid #ff6b35; background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);">
+                    <div class="course-icon">
+                        <i class="fas fa-brain" style="color: #ff6b35;"></i>
+                    </div>
+                    <div class="course-badge" style="background: #ff6b35; color: white;">🔥 NEW</div>
+                    <h3 style="color: #ff6b35;">Module 8: AI Hacking & Security</h3>
+                    <p>Artificial Intelligence ko hack karna aur defend karna - Prompt Injection se Deepfake tak</p>
+                    <div class="course-stats">
+                        <span><i class="fas fa-clock"></i> 8+ Hours</span>
+                        <span><i class="fas fa-tasks"></i> 6 Modules</span>
+                        <span><i class="fas fa-users"></i> 500+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=ai-hacking'" style="background: #ff6b35; border-color: #ff6b35;">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
+                        <button class="vm-btn" onclick="openVM('ai-hacking')" style="border-color: #ff6b35; color: #ff6b35;">
+                            <i class="fas fa-desktop"></i> Virtual Lab
+                        </button>
+                    </div>
+                </div>
+
                 <div class="course-card" data-module="nethunter-troubleshooting">
                     <div class="course-icon">
                         <i class="fas fa-wrench"></i>
                     </div>
                     <div class="course-badge">Advanced</div>
-                    <h3>Module 8: NetHunter Troubleshooting</h3>
+                    <h3>Module 9: NetHunter Troubleshooting</h3>
                     <p>VNC, KEX, Terminal errors aur performance fixes</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 6 Hours</span>
@@ -668,7 +694,7 @@
                         <i class="fab fa-python"></i>
                     </div>
                     <div class="course-badge">Beginner</div>
-                    <h3>Module 9: Complete Python Programming</h3>
+                    <h3>Module 10: Complete Python Programming</h3>
                     <p>Zero se hero tak Python - absolute beginners ke liye</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 12 Hours</span>
@@ -690,7 +716,7 @@
                         <i class="fas fa-child"></i>
                     </div>
                     <div class="course-badge">Beginner</div>
-                    <h3>Module 10: Python for Kids</h3>
+                    <h3>Module 11: Python for Kids</h3>
                     <p>Bilkul beginners ke liye - computer kya hai se start karte hain</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 8 Hours</span>
@@ -709,7 +735,7 @@
                         <i class="fas fa-brain"></i>
                     </div>
                     <div class="course-badge">Advanced</div>
-                    <h3>Module 11: Hands-On ML with Scikit-Learn</h3>
+                    <h3>Module 12: Hands-On ML with Scikit-Learn</h3>
                     <p>Complete book ka practical implementation - har chapter ki detailed explanation Roman Urdu mein</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 50 Hours</span>
@@ -728,7 +754,7 @@
                         <i class="fas fa-robot"></i>
                     </div>
                     <div class="course-badge">Advanced</div>
-                    <h3>Module 12: Python for AI/ML</h3>
+                    <h3>Module 13: Python for AI/ML</h3>
                     <p>AI aur Machine Learning ke liye complete Python course - NumPy se TensorFlow tak</p>
                     <div class="course-stats">
                         <span><i class="fas fa-clock"></i> 15 Hours</span>
@@ -742,48 +768,109 @@
                     </div>
                 </div>
 
-                <div class="course-card" data-module="ai-hacking" style="border: 2px solid #ff6b35; background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);">
+                <div class="course-card" data-module="digital-forensics" style="border: 2px solid #9b59b6; background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);">
                     <div class="course-icon">
-                        <i class="fas fa-brain" style="color: #ff6b35;"></i>
+                        <i class="fas fa-search" style="color: #9b59b6;"></i>
                     </div>
-                    <div class="course-badge" style="background: #ff6b35; color: white;">🔥 NEW</div>
-                    <h3 style="color: #ff6b35;">Module 13: AI Hacking & Security</h3>
-                    <p>Artificial Intelligence ko hack karna aur defend karna - Prompt Injection se Deepfake tak</p>
+                    <div class="course-badge" style="background: #9b59b6; color: white;">🔥 NEW</div>
+                    <h3 style="color: #9b59b6;">Module 14: Digital Forensics & Incident Response</h3>
+                    <p>Digital evidence collection, analysis aur incident response - crime scene se court tak</p>
                     <div class="course-preview">
                         <div class="preview-topics">
-                            <span>✓ Prompt Injection Attacks</span>
-                            <span>✓ Adversarial Machine Learning</span>
-                            <span>✓ Deepfake & Voice Cloning</span>
-                            <span>✓ AI Model Reverse Engineering</span>
-                            <span>✓ AI-Powered Cyber Attacks</span>
-                            <span>✓ Defense Strategies</span>
+                            <span>✓ Evidence Collection & Preservation</span>
+                            <span>✓ Disk Imaging & File Recovery</span>
+                            <span>✓ Memory Forensics Analysis</span>
+                            <span>✓ Network Traffic Investigation</span>
+                            <span>✓ Timeline Reconstruction</span>
+                            <span>✓ Legal Documentation</span>
                         </div>
                         <div class="sample-commands">
                             <div class="command-item">
-                                <code>python adversarial_attack.py</code>
-                                <span>AI model attack</span>
+                                <code>dd if=/dev/sda of=evidence.img</code>
+                                <span>Disk imaging</span>
                             </div>
                             <div class="command-item">
-                                <code>deepfake --generate face.mp4</code>
-                                <span>Deepfake generation</span>
+                                <code>volatility -f memory.dump pslist</code>
+                                <span>Memory analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-preview">
+                        <div class="preview-topics">
+                            <span>✓ Evidence Collection & Preservation</span>
+                            <span>✓ Disk Imaging & File Recovery</span>
+                            <span>✓ Memory Forensics Analysis</span>
+                            <span>✓ Network Traffic Investigation</span>
+                            <span>✓ Timeline Reconstruction</span>
+                            <span>✓ Legal Documentation</span>
+                        </div>
+                        <div class="sample-commands">
+                            <div class="command-item">
+                                <code>dd if=/dev/sda of=evidence.img</code>
+                                <span>Disk imaging</span>
+                            </div>
+                            <div class="command-item">
+                                <code>volatility -f memory.dump pslist</code>
+                                <span>Memory analysis</span>
                             </div>
                         </div>
                     </div>
                     <div class="course-stats">
-                        <span><i class="fas fa-clock"></i> 8+ Hours</span>
-                        <span><i class="fas fa-tasks"></i> 6 Modules</span>
-                        <span><i class="fas fa-users"></i> 500+ Students</span>
+                        <span><i class="fas fa-clock"></i> 10 Hours</span>
+                        <span><i class="fas fa-tasks"></i> 6 Lessons</span>
+                        <span><i class="fas fa-users"></i> 300+ Students</span>
                     </div>
                     <div class="course-actions">
-                        <button class="start-btn" onclick="window.location.href='course.html?module=ai-hacking'" style="background: #ff6b35; border-color: #ff6b35;">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=digital-forensics'" style="background: #9b59b6; border-color: #9b59b6;">
                             <i class="fas fa-play"></i> Start Learning
                         </button>
-                        <button class="vm-btn" onclick="openVM('ai-hacking')" style="border-color: #ff6b35; color: #ff6b35;">
+                        <button class="vm-btn" onclick="openVM('digital-forensics')" style="border-color: #9b59b6; color: #9b59b6;">
                             <i class="fas fa-desktop"></i> Virtual Lab
                         </button>
                     </div>
                 </div>
-                
+
+                <div class="course-card" data-module="advanced-mobile-hacking" style="border: 2px solid #e67e22; background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);">
+                    <div class="course-icon">
+                        <i class="fas fa-mobile-alt" style="color: #e67e22;"></i>
+                    </div>
+                    <div class="course-badge" style="background: #e67e22; color: white;">🔥 NEW</div>
+                    <h3 style="color: #e67e22;">Module 15: Advanced Mobile Hacking</h3>
+                    <p>Professional mobile penetration testing - APK modification se banking malware tak</p>
+                    <div class="course-preview">
+                        <div class="preview-topics">
+                            <span>✓ Advanced APK Analysis & Modification</span>
+                            <span>✓ Mobile Malware Development</span>
+                            <span>✓ Banking Security Testing</span>
+                            <span>✓ iOS Security & Jailbreaking</span>
+                            <span>✓ Mobile Forensics</span>
+                            <span>✓ Bypass Techniques</span>
+                        </div>
+                        <div class="sample-commands">
+                            <div class="command-item">
+                                <code>apktool d target.apk</code>
+                                <span>APK decompilation</span>
+                            </div>
+                            <div class="command-item">
+                                <code>msfvenom -p android/meterpreter</code>
+                                <span>Mobile payload</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-stats">
+                        <span><i class="fas fa-clock"></i> 12 Hours</span>
+                        <span><i class="fas fa-tasks"></i> 6 Lessons</span>
+                        <span><i class="fas fa-users"></i> 250+ Students</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="start-btn" onclick="window.location.href='course.html?module=advanced-mobile-hacking'" style="background: #e67e22; border-color: #e67e22;">
+                            <i class="fas fa-play"></i> Start Learning
+                        </button>
+                        <button class="vm-btn" onclick="openVM('advanced-mobile-hacking')" style="border-color: #e67e22; color: #e67e22;">
+                            <i class="fas fa-desktop"></i> Virtual Lab
+                        </button>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -1343,7 +1430,7 @@
             }, 3000);
         }
         
-        // Newsletter Signup Function
+        // Enhanced Newsletter Signup Function
         function handleNewsletterSignup(event) {
             event.preventDefault();
             const email = event.target.querySelector('input[type="email"]').value;
@@ -1353,21 +1440,119 @@
                 return;
             }
             
-            // Simulate API call
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('❌ Please enter a valid email', 'error');
+                return;
+            }
+            
             showNotification('📧 Subscribing...', 'info');
             
+            // Store email locally for now (replace with actual API)
+            const subscribers = JSON.parse(localStorage.getItem('newsletter-subscribers') || '[]');
+            if (!subscribers.includes(email)) {
+                subscribers.push({
+                    email: email,
+                    subscribedAt: new Date().toISOString(),
+                    source: 'homepage'
+                });
+                localStorage.setItem('newsletter-subscribers', JSON.stringify(subscribers));
+            }
+            
             setTimeout(() => {
-                showNotification('🎉 Successfully subscribed! Check your email.', 'success');
+                showNotification('🎉 Successfully subscribed! Welcome to the community!', 'success');
                 event.target.reset();
+                
+                // Show welcome message with benefits
+                showWelcomeMessage();
                 
                 // Track conversion
                 if (typeof gtag !== 'undefined') {
                     gtag('event', 'newsletter_signup', {
                         'event_category': 'engagement',
-                        'event_label': 'hero_newsletter'
+                        'event_label': 'hero_newsletter',
+                        'value': 1
                     });
                 }
+                
+                // Add XP for newsletter signup
+                const userStats = JSON.parse(localStorage.getItem('neuro-dev-stats') || '{}');
+                if (!userStats.xp) userStats.xp = 0;
+                if (!userStats.level) userStats.level = 1;
+                
+                userStats.xp += 25;
+                userStats.level = Math.floor(userStats.xp / 100) + 1;
+                localStorage.setItem('neuro-dev-stats', JSON.stringify(userStats));
+                
+                // Log activity
+                const activities = JSON.parse(localStorage.getItem('neuro-dev-activities') || '[]');
+                activities.push({
+                    title: 'Newsletter Subscription',
+                    description: 'Joined the Neuro-Dev community',
+                    icon: '📧',
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('neuro-dev-activities', JSON.stringify(activities));
             }, 2000);
+        }
+        
+        // Welcome message for new subscribers
+        function showWelcomeMessage() {
+            const welcomeModal = document.createElement('div');
+            welcomeModal.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.9);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                ">
+                    <div style="
+                        background: linear-gradient(135deg, #1a1a1a, #2d1b69);
+                        padding: 40px;
+                        border-radius: 20px;
+                        border: 2px solid #00ff41;
+                        text-align: center;
+                        max-width: 500px;
+                        margin: 20px;
+                    ">
+                        <h2 style="color: #00ff41; margin-bottom: 20px;">🎉 Welcome to Neuro-Dev!</h2>
+                        <p style="color: #ccc; margin-bottom: 25px;">You'll receive:</p>
+                        <div style="text-align: left; margin-bottom: 25px;">
+                            <div style="color: #00ff41; margin: 10px 0;">✅ Weekly hacking tips & tutorials</div>
+                            <div style="color: #00ff41; margin: 10px 0;">✅ New course notifications</div>
+                            <div style="color: #00ff41; margin: 10px 0;">✅ Exclusive content & resources</div>
+                            <div style="color: #00ff41; margin: 10px 0;">✅ Community challenges & contests</div>
+                        </div>
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="window.location.href='course.html?module=termux-basics'" style="
+                                background: #00ff41;
+                                color: #000;
+                                border: none;
+                                padding: 12px 25px;
+                                border-radius: 25px;
+                                font-weight: bold;
+                                cursor: pointer;
+                            ">Start Learning Now</button>
+                            <button onclick="this.closest('div').parentElement.remove()" style="
+                                background: transparent;
+                                border: 1px solid #666;
+                                color: #ccc;
+                                padding: 12px 25px;
+                                border-radius: 25px;
+                                cursor: pointer;
+                            ">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(welcomeModal);
         }
         
         // Enhanced Analytics Tracking
@@ -1395,5 +1580,6 @@
     <script src="course-features.js"></script>
     <script src="reviews-system.js"></script>
     <script src="quiz-system.js"></script>
+    <script src="user-engagement.js"></script>
 </body>
 </html>

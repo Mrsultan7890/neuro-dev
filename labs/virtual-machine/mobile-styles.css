@@ -1,0 +1,516 @@
+/* Mobile Hacking App Styles */
+.mobile-hacking-container {
+    padding: 20px;
+    background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+    color: #fff;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.mobile-header h2 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mobile-header p {
+    color: #deb887;
+    margin-bottom: 20px;
+}
+
+.mobile-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #a0522d;
+    flex-wrap: wrap;
+}
+
+.mobile-tabs .tab-btn {
+    background: rgba(160, 82, 45, 0.5);
+    color: #deb887;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.mobile-tabs .tab-btn:hover {
+    background: rgba(255, 140, 0, 0.3);
+    color: #ff8c00;
+}
+
+.mobile-tabs .tab-btn.active {
+    background: #ff8c00;
+    color: #fff;
+}
+
+.mobile-content {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.mobile-content .tab-content {
+    display: none;
+}
+
+.mobile-content .tab-content.active {
+    display: block;
+}
+
+.mobile-content h3 {
+    color: #ff8c00;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+}
+
+.mobile-content p {
+    color: #deb887;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.mobile-content .btn-primary {
+    background: linear-gradient(135deg, #ff8c00, #ff7f00);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mobile-content .btn-primary:hover {
+    background: linear-gradient(135deg, #ff7f00, #ff6347);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+}
+
+.malware-form {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.malware-form .form-group {
+    margin-bottom: 15px;
+}
+
+.malware-form label {
+    display: block;
+    color: #ff8c00;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.malware-form input, .malware-form select {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #a0522d;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.malware-output {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    min-height: 200px;
+}
+
+.analysis-results {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    min-height: 150px;
+}
+
+.bypass-results {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    min-height: 150px;
+}
+
+.apk-section, .malware-section, .bypass-section {
+    margin-bottom: 30px;
+}
+
+.apk-upload {
+    margin-bottom: 25px;
+}
+
+.upload-area {
+    border: 2px dashed #ff8c00;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.upload-area:hover {
+    background: rgba(255, 140, 0, 0.1);
+    border-color: #ff7f00;
+}
+
+.upload-area i {
+    font-size: 3rem;
+    color: #ff8c00;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.upload-area p {
+    color: #deb887;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.upload-area small {
+    color: #cd853f;
+    font-size: 14px;
+}
+
+.analysis-tools, .malware-types, .bypass-scripts {
+    margin-bottom: 25px;
+}
+
+.analysis-tools h4, .malware-types h4, .bypass-scripts h4 {
+    color: #ff6347;
+    margin-bottom: 15px;
+    border-left: 4px solid #ff6347;
+    padding-left: 10px;
+}
+
+.tool-grid, .malware-grid, .script-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.tool-card, .malware-card, .script-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #a0522d;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tool-card:hover, .malware-card:hover, .script-card:hover {
+    background: rgba(255, 140, 0, 0.1);
+    border-color: #ff8c00;
+    transform: translateY(-2px);
+}
+
+.tool-card h5, .malware-card h5, .script-card h5 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tool-card p, .malware-card p, .script-card p {
+    color: #deb887;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.command-example {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.command-example code {
+    background: rgba(0, 0, 0, 0.7);
+    color: #32cd32;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    flex: 1;
+    font-size: 12px;
+}
+
+.btn-execute, .btn-load {
+    background: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.3s ease;
+}
+
+.btn-execute:hover, .btn-load:hover {
+    background: #ff4500;
+    transform: scale(1.05);
+}
+
+.malware-card i {
+    font-size: 2rem;
+    color: #ff8c00;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.malware-card.selected {
+    background: rgba(255, 140, 0, 0.2);
+    border-color: #ff8c00;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+}
+
+.code-generator, .overlay-builder {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.generator-options, .overlay-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.generator-options .form-group {
+    margin-bottom: 15px;
+}
+
+.generator-options label {
+    display: block;
+    color: #ff8c00;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.generator-options input, .generator-options select {
+    width: 100%;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #a0522d;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.generator-options input:focus, .generator-options select:focus {
+    outline: none;
+    border-color: #ff8c00;
+    box-shadow: 0 0 5px rgba(255, 140, 0, 0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c82333, #a71e2a);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+.overlay-designer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.phone-mockup {
+    background: #333;
+    border-radius: 20px;
+    padding: 20px 10px;
+    width: 200px;
+    height: 350px;
+    border: 3px solid #555;
+}
+
+.phone-screen {
+    background: #000;
+    border-radius: 10px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fake-login-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fake-login-form h5 {
+    color: #ff8c00;
+    margin-bottom: 15px;
+}
+
+.fake-login-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+.fake-login-form button {
+    width: 100%;
+    padding: 10px;
+    background: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.frida-console, .hooking-console {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.console-container {
+    border: 1px solid #a0522d;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.console-header {
+    background: #a0522d;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.console-header span {
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-connect {
+    background: #32cd32;
+    color: #fff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.console-output {
+    background: #000;
+    color: #32cd32;
+    padding: 15px;
+    height: 200px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+.console-line {
+    margin-bottom: 5px;
+}
+
+.console-input {
+    display: flex;
+    background: #222;
+    padding: 10px;
+}
+
+.console-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #32cd32;
+    font-family: 'Courier New', monospace;
+    padding: 5px;
+}
+
+.console-input input:focus {
+    outline: none;
+}
+
+.script-preview {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.script-preview code {
+    color: #32cd32;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    display: block;
+    white-space: pre-wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mobile-tabs {
+        flex-direction: column;
+    }
+    
+    .tool-grid, .malware-grid, .script-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .generator-options, .overlay-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .overlay-designer {
+        flex-direction: column;
+    }
+    
+    .phone-mockup {
+        width: 150px;
+        height: 250px;
+    }
+}

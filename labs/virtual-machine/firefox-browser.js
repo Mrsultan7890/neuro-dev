@@ -43,6 +43,88 @@ class FirefoxBrowser {
             this.hideContextMenu();
         });
 
+        // Event delegation for dynamic content
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            
+            // Handle shortcut items
+            if (target.closest('.shortcut-item')) {
+                const url = target.closest('.shortcut-item').dataset.url;
+                if (url) this.navigate(url);
+            }
+            
+            // Handle recent items
+            if (target.closest('.recent-item')) {
+                const url = target.closest('.recent-item').dataset.url;
+                if (url) this.navigate(url);
+            }
+            
+            // Handle nav links
+            if (target.closest('[data-section]')) {
+                e.preventDefault();
+                const section = target.closest('[data-section]').dataset.section;
+                if (section) this.loadSection(section);
+            }
+            
+            // Handle course buttons
+            if (target.closest('[data-course]')) {
+                const course = target.closest('[data-course]').dataset.course;
+                if (course) this.openCourse(course);
+            }
+            
+            // Handle link cards
+            if (target.closest('.link-card[data-url]')) {
+                const url = target.closest('.link-card').dataset.url;
+                if (url) this.navigate(url);
+            }
+            
+            // Handle API endpoints
+            if (target.closest('.endpoint-item[data-endpoint]')) {
+                const endpoint = target.closest('.endpoint-item').dataset.endpoint;
+                if (endpoint) this.testAPIEndpoint(endpoint);
+            }
+            
+            // Handle category cards
+            if (target.closest('.category-card[data-category]')) {
+                const category = target.closest('.category-card').dataset.category;
+                if (category) this.openChallengeCategory(category);
+            }
+            
+            // Handle context menu actions
+            if (target.closest('.context-item[data-action]')) {
+                const action = target.closest('.context-item').dataset.action;
+                const tabId = target.closest('.context-item').dataset.tabId;
+                this.handleContextAction(action, tabId);
+            }
+            
+            // Handle specific buttons
+            if (target.id === 'send-request-btn') {
+                this.testCustomEndpoint();
+            }
+            if (target.id === 'view-source-btn') {
+                this.viewSource();
+            }
+            if (target.id === 'console-command-input') {
+                if (e.key === 'Enter') this.executeConsoleCommand();
+            }
+            if (target.id === 'clear-network-btn') {
+                this.clearNetworkLog();
+            }
+            if (target.id === 'find-page-btn') {
+                this.findInPage();
+            }
+            if (target.id === 'close-modal-btn' || target.id === 'close-downloads-btn' || target.id === 'close-settings-btn') {
+                this.closeModal();
+            }
+        });
+        
+        // Handle keypress events
+        document.addEventListener('keypress', (e) => {
+            if (e.target.id === 'console-command-input' && e.key === 'Enter') {
+                this.executeConsoleCommand();
+            }
+        });
+
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
@@ -61,7 +143,8 @@ class FirefoxBrowser {
                         break;
                     case 'l':
                         e.preventDefault();
-                        document.getElementById('firefox-url-input').focus();
+                        const urlInput = document.getElementById('firefox-url-input');
+                        if (urlInput) urlInput.focus();
                         break;
                     case 'f':
                         e.preventDefault();
@@ -79,6 +162,21 @@ class FirefoxBrowser {
                 this.toggleDevTools();
             }
         });
+    }
+    
+    handleContextAction(action, tabId) {
+        switch(action) {
+            case 'goBack': this.goBack(); break;
+            case 'goForward': this.goForward(); break;
+            case 'refresh': this.refresh(); break;
+            case 'viewSource': this.viewSource(); break;
+            case 'toggleDevTools': this.toggleDevTools(); break;
+            case 'createNewTab': this.createNewTab(); break;
+            case 'duplicateTab': if (tabId) this.duplicateTab(parseInt(tabId)); break;
+            case 'closeTab': if (tabId) this.closeTab(parseInt(tabId)); break;
+            case 'closeOtherTabs': if (tabId) this.closeOtherTabs(parseInt(tabId)); break;
+        }
+        this.hideContextMenu();
     }
 
     createDefaultTab() {
@@ -127,8 +225,16 @@ class FirefoxBrowser {
         this.tabs.forEach(tab => {
             const tabElement = document.createElement('div');
             tabElement.className = `firefox-tab ${tab.id === this.activeTabId ? 'active' : ''}`;
-            tabElement.onclick = () => window.firefoxBrowser && window.firefoxBrowser.switchTab(tab.id);
-            tabElement.oncontextmenu = (e) => window.firefoxBrowser && window.firefoxBrowser.showTabContextMenu(e, tab.id);
+            tabElement.addEventListener('click', () => {
+                if (window.firefoxBrowser) {
+                    window.firefoxBrowser.switchTab(tab.id);
+                }
+            });
+            tabElement.addEventListener('contextmenu', (e) => {
+                if (window.firefoxBrowser) {
+                    window.firefoxBrowser.showTabContextMenu(e, tab.id);
+                }
+            });
             
             const favicon = document.createElement('div');
             favicon.className = 'tab-favicon';
@@ -145,10 +251,12 @@ class FirefoxBrowser {
             const closeBtn = document.createElement('button');
             closeBtn.className = 'tab-close';
             closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-            closeBtn.onclick = (e) => {
+            closeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                window.firefoxBrowser && window.firefoxBrowser.closeTab(tab.id);
-            };
+                if (window.firefoxBrowser) {
+                    window.firefoxBrowser.closeTab(tab.id);
+                }
+            });
             
             tabElement.appendChild(favicon);
             tabElement.appendChild(title);
@@ -280,19 +388,19 @@ class FirefoxBrowser {
                 <div class="newtab-shortcuts">
                     <h3>Quick Access</h3>
                     <div class="shortcuts-grid">
-                        <div class="shortcut-item" onclick="firefoxBrowser.navigate('https://neuro-dev.local')">
+                        <div class="shortcut-item" data-url="https://neuro-dev.local">
                             <div class="shortcut-icon">🧠</div>
                             <div class="shortcut-title">Neuro-Dev</div>
                         </div>
-                        <div class="shortcut-item" onclick="firefoxBrowser.navigate('https://ml-api.neuro-dev:8080')">
+                        <div class="shortcut-item" data-url="https://ml-api.neuro-dev:8080">
                             <div class="shortcut-icon">🤖</div>
                             <div class="shortcut-title">ML API</div>
                         </div>
-                        <div class="shortcut-item" onclick="firefoxBrowser.navigate('https://ctf-challenges.neuro-dev')">
+                        <div class="shortcut-item" data-url="https://ctf-challenges.neuro-dev">
                             <div class="shortcut-icon">🏆</div>
                             <div class="shortcut-title">CTF Challenges</div>
                         </div>
-                        <div class="shortcut-item" onclick="firefoxBrowser.navigate('https://github.com/neuro-dev')">
+                        <div class="shortcut-item" data-url="https://github.com/neuro-dev">
                             <div class="shortcut-icon">📚</div>
                             <div class="shortcut-title">GitHub</div>
                         </div>
@@ -303,7 +411,7 @@ class FirefoxBrowser {
                     <h3>Recent Activity</h3>
                     <div class="recent-items">
                         ${this.history.slice(-5).reverse().map(item => `
-                            <div class="recent-item" onclick="firefoxBrowser.navigate('${item.url}')">
+                            <div class="recent-item" data-url="${this.sanitizeInput(item.url)}">
                                 <div class="recent-icon">🌐</div>
                                 <div class="recent-info">
                                     <div class="recent-title">${this.sanitizeInput(item.title || item.url)}</div>
@@ -324,10 +432,10 @@ class FirefoxBrowser {
                     <nav class="site-nav">
                         <div class="logo">🧠 Neuro-Dev</div>
                         <div class="nav-links">
-                            <a href="#" onclick="firefoxBrowser.loadSection('courses')">Courses</a>
-                            <a href="#" onclick="firefoxBrowser.loadSection('ctf')">CTF</a>
-                            <a href="#" onclick="firefoxBrowser.loadSection('labs')">Labs</a>
-                            <a href="#" onclick="firefoxBrowser.loadSection('about')">About</a>
+                            <a href="#" data-section="courses">Courses</a>
+                            <a href="#" data-section="ctf">CTF</a>
+                            <a href="#" data-section="labs">Labs</a>
+                            <a href="#" data-section="about">About</a>
                         </div>
                     </nav>
                 </header>
@@ -359,40 +467,40 @@ class FirefoxBrowser {
                                 <div class="course-icon">📱</div>
                                 <h3>Termux Basics</h3>
                                 <p>Mobile terminal mastery</p>
-                                <button onclick="firefoxBrowser.openCourse('termux-basics')">Start Learning</button>
+                                <button data-course="termux-basics">Start Learning</button>
                             </div>
                             <div class="course-card">
                                 <div class="course-icon">🛡️</div>
                                 <h3>NetHunter Rootless</h3>
                                 <p>Kali Linux on mobile</p>
-                                <button onclick="firefoxBrowser.openCourse('nethunter-rootless')">Start Learning</button>
+                                <button data-course="nethunter-rootless">Start Learning</button>
                             </div>
                             <div class="course-card">
                                 <div class="course-icon">🤖</div>
                                 <h3>AI Hacking</h3>
                                 <p>Machine learning security</p>
-                                <button onclick="firefoxBrowser.openCourse('ai-hacking')">Start Learning</button>
+                                <button data-course="ai-hacking">Start Learning</button>
                             </div>
                         </div>
                         <div class="quick-access">
                             <h3>Quick Access</h3>
                             <div class="link-grid">
-                                <div class="link-card" onclick="firefoxBrowser.navigate('https://neuro-dev.local/vulnerable-app')">
+                                <div class="link-card" data-url="https://neuro-dev.local/vulnerable-app">
                                     <i class="fas fa-bug"></i>
                                     <h4>Vulnerable Web App</h4>
                                     <p>Practice SQL injection, XSS</p>
                                 </div>
-                                <div class="link-card" onclick="firefoxBrowser.navigate('https://neuro-dev.local/ctf-hub')">
+                                <div class="link-card" data-url="https://neuro-dev.local/ctf-hub">
                                     <i class="fas fa-flag"></i>
                                     <h4>CTF Challenges</h4>
                                     <p>Interactive security challenges</p>
                                 </div>
-                                <div class="link-card" onclick="firefoxBrowser.navigate('https://neuro-dev.local/owasp-top10')">
+                                <div class="link-card" data-url="https://neuro-dev.local/owasp-top10">
                                     <i class="fas fa-shield-alt"></i>
                                     <h4>OWASP Top 10</h4>
                                     <p>Web security vulnerabilities</p>
                                 </div>
-                                <div class="link-card" onclick="firefoxBrowser.navigate('https://neuro-dev.local/web-exploitation')">
+                                <div class="link-card" data-url="https://neuro-dev.local/web-exploitation">
                                     <i class="fas fa-globe"></i>
                                     <h4>Web Exploitation</h4>
                                     <p>SQL injection aur XSS lab</p>
@@ -419,22 +527,22 @@ class FirefoxBrowser {
                 <div class="api-documentation">
                     <h2>API Endpoints</h2>
                     <div class="endpoint-list">
-                        <div class="endpoint-item" onclick="firefoxBrowser.testAPIEndpoint('/health')">
+                        <div class="endpoint-item" data-endpoint="/health">
                             <div class="method get">GET</div>
                             <div class="path">/health</div>
                             <div class="description">Health check endpoint</div>
                         </div>
-                        <div class="endpoint-item" onclick="firefoxBrowser.testAPIEndpoint('/predict')">
+                        <div class="endpoint-item" data-endpoint="/predict">
                             <div class="method post">POST</div>
                             <div class="path">/predict</div>
                             <div class="description">Model prediction endpoint</div>
                         </div>
-                        <div class="endpoint-item vulnerable" onclick="firefoxBrowser.testAPIEndpoint('/model-info')">
+                        <div class="endpoint-item vulnerable" data-endpoint="/model-info">
                             <div class="method get">GET</div>
                             <div class="path">/model-info</div>
                             <div class="description">Model metadata (⚠️ Exposed)</div>
                         </div>
-                        <div class="endpoint-item vulnerable" onclick="firefoxBrowser.testAPIEndpoint('/admin')">
+                        <div class="endpoint-item vulnerable" data-endpoint="/admin">
                             <div class="method get">GET</div>
                             <div class="path">/admin</div>
                             <div class="description">Admin panel (🚨 No Auth)</div>
@@ -450,7 +558,7 @@ class FirefoxBrowser {
                             <option value="POST">POST</option>
                         </select>
                         <input type="text" id="api-endpoint" placeholder="/endpoint" value="/health">
-                        <button onclick="firefoxBrowser.testCustomEndpoint()">Send Request</button>
+                        <button id="send-request-btn">Send Request</button>
                     </div>
                     <div class="api-response" id="api-response"></div>
                 </div>
@@ -471,22 +579,22 @@ class FirefoxBrowser {
                 </div>
 
                 <div class="challenge-categories">
-                    <div class="category-card" onclick="firefoxBrowser.openChallengeCategory('web')">
+                    <div class="category-card" data-category="web">
                         <div class="category-icon">🌐</div>
                         <h3>Web Exploitation</h3>
                         <div class="category-stats">12 challenges</div>
                     </div>
-                    <div class="category-card" onclick="firefoxBrowser.openChallengeCategory('crypto')">
+                    <div class="category-card" data-category="crypto">
                         <div class="category-icon">🔐</div>
                         <h3>Cryptography</h3>
                         <div class="category-stats">8 challenges</div>
                     </div>
-                    <div class="category-card" onclick="firefoxBrowser.openChallengeCategory('ai')">
+                    <div class="category-card" data-category="ai">
                         <div class="category-icon">🤖</div>
                         <h3>AI Security</h3>
                         <div class="category-stats">10 challenges</div>
                     </div>
-                    <div class="category-card" onclick="firefoxBrowser.openChallengeCategory('forensics')">
+                    <div class="category-card" data-category="forensics">
                         <div class="category-icon">🔍</div>
                         <h3>Digital Forensics</h3>
                         <div class="category-stats">6 challenges</div>

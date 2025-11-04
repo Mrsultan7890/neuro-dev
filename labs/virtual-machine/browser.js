@@ -39,12 +39,12 @@ class Browser {
                 <div class="homepage">
                     <h1>🔧 Termux Learning Environment</h1>
                     <div class="quick-links">
-                        <div class="link-card" onclick="browser.loadPage('termux-commands')">
+                        <div class="link-card" data-page="termux-commands">
                             <i class="fas fa-terminal"></i>
                             <h3>Command Reference</h3>
                             <p>Complete Termux commands guide</p>
                         </div>
-                        <div class="link-card" onclick="browser.loadPage('package-manager')">
+                        <div class="link-card" data-page="package-manager">
                             <i class="fas fa-download"></i>
                             <h3>Package Manager</h3>
                             <p>pkg install, update, upgrade guide</p>
@@ -56,12 +56,12 @@ class Browser {
                 <div class="homepage">
                     <h1>🛡️ NetHunter Security Lab</h1>
                     <div class="quick-links">
-                        <div class="link-card" onclick="browser.loadPage('nmap-targets')">
+                        <div class="link-card" data-page="nmap-targets">
                             <i class="fas fa-crosshairs"></i>
                             <h3>Scan Targets</h3>
                             <p>Practice network scanning</p>
                         </div>
-                        <div class="link-card" onclick="browser.loadPage('metasploit-lab')">
+                        <div class="link-card" data-page="metasploit-lab">
                             <i class="fas fa-bug"></i>
                             <h3>Metasploit Lab</h3>
                             <p>Exploit development practice</p>
@@ -73,12 +73,12 @@ class Browser {
                 <div class="homepage">
                     <h1>🔒 Web Security Testing</h1>
                     <div class="quick-links">
-                        <div class="link-card" onclick="browser.loadPage('vulnerable-app')">
+                        <div class="link-card" data-page="vulnerable-app">
                             <i class="fas fa-bug"></i>
                             <h3>Vulnerable Web App</h3>
                             <p>Practice SQL injection, XSS</p>
                         </div>
-                        <div class="link-card" onclick="browser.loadPage('owasp-top10')">
+                        <div class="link-card" data-page="owasp-top10">
                             <i class="fas fa-list"></i>
                             <h3>OWASP Top 10</h3>
                             <p>Web application security risks</p>
@@ -90,12 +90,12 @@ class Browser {
                 <div class="homepage">
                     <h1>🐍 Python Development Environment</h1>
                     <div class="quick-links">
-                        <div class="link-card" onclick="browser.loadPage('python-docs')">
+                        <div class="link-card" data-page="python-docs">
                             <i class="fas fa-book"></i>
                             <h3>Python Documentation</h3>
                             <p>Complete Python reference</p>
                         </div>
-                        <div class="link-card" onclick="browser.loadPage('code-examples')">
+                        <div class="link-card" data-page="code-examples">
                             <i class="fas fa-code"></i>
                             <h3>Code Examples</h3>
                             <p>Ready-to-use Python scripts</p>
@@ -110,19 +110,19 @@ class Browser {
                         <p>Interactive Machine Learning Concepts - Roman Urdu mein</p>
                     </div>
                     <div class="chapter-grid">
-                        <div class="chapter-card" onclick="browser.openChapter(1)">
+                        <div class="chapter-card" data-chapter="1">
                             <div class="chapter-number">01</div>
                             <h3>ML Landscape</h3>
                             <p>Machine Learning ki duniya</p>
                             <div class="chapter-progress">5 lessons</div>
                         </div>
-                        <div class="chapter-card" onclick="browser.openChapter(2)">
+                        <div class="chapter-card" data-chapter="2">
                             <div class="chapter-number">02</div>
                             <h3>End-to-End Project</h3>
                             <p>Complete ML project</p>
                             <div class="chapter-progress">8 lessons</div>
                         </div>
-                        <div class="chapter-card" onclick="browser.openChapter(3)">
+                        <div class="chapter-card" data-chapter="3">
                             <div class="chapter-number">03</div>
                             <h3>Classification</h3>
                             <p>Data ko classify karna</p>
@@ -137,8 +137,8 @@ class Browser {
                     <div class="notebook-header">
                         <div class="notebook-title">🤖 Neural Network Training.ipynb</div>
                         <div class="notebook-controls">
-                            <button onclick="browser.runCell(1)">▶️ Run</button>
-                            <button onclick="browser.addCell()">➕ Cell</button>
+                            <button data-cell="1">▶️ Run</button>
+                            <button id="add-cell-btn">➕ Cell</button>
                         </div>
                     </div>
                     <div class="notebook-cells">
@@ -163,12 +163,12 @@ print(f"Training: {x_train.shape}, Test: {x_test.shape}")</textarea>
                 <div class="homepage">
                     <h1>🎯 AI Security Lab - Neuro-Dev Target</h1>
                     <div class="quick-links">
-                        <div class="link-card" onclick="browser.loadPage('neuro-dev-api')">
+                        <div class="link-card" data-page="neuro-dev-api">
                             <i class="fas fa-crosshairs"></i>
                             <h3>ML API Target</h3>
                             <p>ml-api.neuro-dev:8080</p>
                         </div>
-                        <div class="link-card" onclick="browser.loadPage('model-extraction')">
+                        <div class="link-card" data-page="model-extraction">
                             <i class="fas fa-download"></i>
                             <h3>Model Extraction</h3>
                             <p>Extract ML models</p>
