@@ -12,7 +12,7 @@
       "tags": ["termux", "installation", "nethunter", "linux"]
     },
     {
-      "id": 2,
+      "id": 1,
       "title": "Basic Commands Tutorial",
       "videoId": "dkYAgFuOJMk",
       "module": "termux-basics",
@@ -23,7 +23,7 @@
       "tags": ["commands", "terminal", "navigation", "basics"]
     },
     {
-      "id": 3,
+      "id": 1,
       "title": "File Management in Termux",
       "videoId": "zHE5OPHpdq8",
       "module": "termux-basics",
@@ -34,7 +34,7 @@
       "tags": ["files", "folders", "management", "copy", "move"]
     },
     {
-      "id": 4,
+      "id": 1,
       "title": "Package Management - Software Install",
       "videoId": "Iu3e5f2jfQo",
       "module": "termux-basics",
@@ -45,35 +45,35 @@
       "tags": ["packages", "installation", "python", "git", "tools"]
     },
     {
-      "id": 5,
+      "id": 1,
       "title": "text editor explained  in Termux",
       "videoId": "___so9tBZV0",
       "module": "termux-advanced",
       "moduleName": "Module 2: Termux Advanced",
-      "lesson": 1,
+      "lesson": 5,
       "description": "Termux mein Python programming start karna. Basic scripts banane ka complete process.",
       "duration": "25:30",
       "tags": ["python", "programming", "scripts", "coding"]
     },
     {
-      "id": 6,
-      "title": "Git & GitHub in Termux",
-      "videoId": "dQw4w9WgXcQ",
-      "module": "termux-advanced",
-      "moduleName": "Module 2: Termux Advanced",
-      "lesson": 2,
-      "description": "Git version control aur GitHub use karna. Repository management aur collaboration.",
-      "duration": "20:45",
-      "tags": ["git", "github", "version-control", "repository"]
+      "id": 1,
+      "title": "lesson 6 File permission",
+      "videoId": "bgisuEz3gRg",
+      "module": "termux basic",
+      "moduleName": "Module 1: termux basic",
+      "lesson": 6,
+      "description": "File permissions and output explaination.",
+      "duration": "7:03",
+      "tags": ["file permissions", "github", "version-control", "repository"]
     },
     {
-      "id": 7,
-      "title": "NetHunter Installation Guide",
-      "videoId": "dQw4w9WgXcQ",
-      "module": "nethunter-rootless",
-      "moduleName": "Module 3: NetHunter Rootless",
-      "lesson": 1,
-      "description": "NetHunter Rootless install karne ka complete process. Step by step installation aur troubleshooting.",
+      "id": 1,
+      "title": "lessons termux monitoring",
+      "videoId": "DzEnQKLnc5k",
+      "module": "termux basic",
+      "moduleName": "Module 3: Termux basic",
+      "lesson": 7,
+      "description": "termux monitoring file checking storage permissions.",
       "duration": "30:20",
       "tags": ["nethunter", "kali", "installation", "rootless"]
     },

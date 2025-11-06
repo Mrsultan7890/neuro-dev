@@ -134,6 +134,101 @@
             justify-content: center;
             font-weight: bold;
         }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                margin: 80px 10px 20px;
+                padding: 10px;
+            }
+            
+            .dashboard-header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            
+            .user-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .stat-card {
+                padding: 15px 10px;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+            
+            .stat-label {
+                font-size: 0.85rem;
+            }
+            
+            .progress-section, .badges-section, .recent-activity {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .progress-item {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 15px 10px;
+            }
+            
+            .progress-item > div:first-child {
+                width: 100%;
+            }
+            
+            .progress-bar {
+                width: 100%;
+                max-width: 200px;
+                margin: 0 auto;
+            }
+            
+            .activity-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+                padding: 15px 10px;
+            }
+            
+            .badge-item {
+                display: block;
+                margin: 8px 0;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .user-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .progress-section h2, .badges-section h2, .recent-activity h2 {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -184,7 +279,7 @@
             <div class="stat-card">
                 <div class="stat-number" id="completed-modules">0</div>
                 <div class="stat-label">Modules Completed</div>
-                <div style="color: #888; font-size: 0.8rem; margin-top: 5px;">of 13 modules</div>
+                <div style="color: #888; font-size: 0.8rem; margin-top: 5px;">of 15 modules</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="total-time">0h</div>
@@ -195,8 +290,8 @@
 
         <div class="progress-section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: #00ff41; margin: 0;">📚 All Course Modules (13)</h2>
-                <div style="display: flex; gap: 15px; font-size: 0.9rem;">
+                <h2 style="color: #00ff41; margin: 0;">📚 All Course Modules (15)</h2>
+                <div style="display: flex; gap: 10px; font-size: 0.8rem; flex-wrap: wrap;">
                     <span style="color: #00ff41;">✅ Completed</span>
                     <span style="color: #ffd700;">🟡 In Progress</span>
                     <span style="color: #666;">⚪ Not Started</span>
@@ -266,7 +361,9 @@
                     { id: 'python-basics-kids', total: 20 },
                     { id: 'hands-on-ml-scikit-learn', total: 19 },
                     { id: 'python-ai-ml', total: 15 },
-                    { id: 'ai-hacking', total: 6 }
+                    { id: 'ai-hacking', total: 6 },
+                    { id: 'digital-forensics', total: 8 },
+                    { id: 'advanced-mobile-hacking', total: 10 }
                 ];
                 
                 moduleData.forEach(module => {
@@ -320,7 +417,9 @@
                     { id: 'python-basics-kids', name: 'Module 10: Python for Kids', total: 20, icon: '👶' },
                     { id: 'hands-on-ml-scikit-learn', name: 'Module 11: Hands-On ML with Scikit-Learn', total: 19, icon: '🤖' },
                     { id: 'python-ai-ml', name: 'Module 12: Python for AI/ML', total: 15, icon: '🧠' },
-                    { id: 'ai-hacking', name: 'Module 13: AI Hacking & Security', total: 6, icon: '🔥' }
+                    { id: 'ai-hacking', name: 'Module 13: AI Hacking & Security', total: 6, icon: '🔥' },
+                    { id: 'digital-forensics', name: 'Module 14: Digital Forensics', total: 8, icon: '🔍' },
+                    { id: 'advanced-mobile-hacking', name: 'Module 15: Advanced Mobile Hacking', total: 10, icon: '📲' }
                 ];
                 
                 const progressHTML = courses.map(course => {

@@ -1,21 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://neurodev.netlify.app/sitemap.xml
 Sitemap: https://neurodev.netlify.app/sitemap.txt
-
-# Allow all search engines to crawl
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-# Block unnecessary files
-Disallow: /data/
-Disallow: /*.json$
-Disallow: /IMG_*
-
-# Crawl delay for better server performance
-Crawl-delay: 1
