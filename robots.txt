@@ -1,4 +1,35 @@
 User-agent: *
 Allow: /
 
+# High priority pages
+Allow: /course.html
+Allow: /dashboard.html
+Allow: /ctf-challenges.html
+Allow: /labs/virtual-machine/
+Allow: /dictionary.html
+Allow: /python-ide.html
+
+# Course pages
+Allow: /courses/
+
+# Blog and content
+Allow: /blog.html
+Allow: /news.html
+Allow: /videos.html
+
+# Important pages
+Allow: /about.html
+Allow: /contact.html
+Allow: /faq.html
+
+# Disallow admin or sensitive areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /api/
+
+# Sitemap location
 Sitemap: https://neurodev.netlify.app/sitemap.txt
+
+# Crawl delay (optional)
+Crawl-delay: 1
