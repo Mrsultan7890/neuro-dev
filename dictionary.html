@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML/AI Dictionary - Neuro-Dev</title>
+    <title>AI/ML & Cybersecurity Dictionary — Neuro-Dev</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1916892851128865" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -197,24 +197,14 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-brain"></i>
-                <span>Neuro-Dev</span>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="index.html#courses" class="nav-link">Courses</a>
-                <a href="videos.html" class="nav-link">Videos</a>
-                <a href="python-ide.html" class="nav-link">Python IDE</a>
-                <a href="dictionary.html" class="nav-link">Dictionary</a>
-                <a href="donate.html" class="nav-link">Donate</a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <nav style="position:fixed;top:0;left:0;right:0;height:60px;background:rgba(13,17,23,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #30363d;z-index:1000">
+        <div style="max-width:1100px;margin:0 auto;padding:0 20px;height:100%;display:flex;align-items:center;justify-content:space-between">
+            <a href="index.html" style="display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;color:#00ff88;text-decoration:none">
+                <i class="fas fa-brain"></i> Neuro-Dev
+            </a>
+            <div style="display:flex;align-items:center;gap:8px">
+                <a href="index.html" style="color:#8b949e;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:14px;transition:all 0.2s" onmouseover="this.style.color='#e6edf3';this.style.background='#21262d'" onmouseout="this.style.color='#8b949e';this.style.background='transparent'">Home</a>
+                <a href="dictionary.html" style="background:#00ff88;color:#000;font-weight:600;padding:6px 16px;border-radius:6px;font-size:14px;text-decoration:none"><i class="fas fa-book"></i> Dictionary</a>
             </div>
         </div>
     </nav>
@@ -225,13 +215,13 @@
                 <i class="fas fa-book"></i> Complete AI/ML Dictionary
             </h1>
             <p class="dictionary-subtitle">
-                Comprehensive AI/ML Dictionary - Roman Urdu mein technical terms ki detailed explanations
+                500+ AI, ML and Cybersecurity terms explained simply and clearly
             </p>
         </div>
 
         <div class="search-container">
             <div class="search-box">
-                <input type="text" class="search-input" id="searchInput" placeholder="Koi bhi term search kariye... (Algorithm, Machine Learning, etc.)">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search any term... (Algorithm, Neural Network, SQL Injection...)">
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
@@ -246,93 +236,37 @@
 
         <div class="no-results" id="noResults" style="display: none;">
             <i class="fas fa-search" style="font-size: 3rem; color: #333; margin-bottom: 20px;"></i>
-            <p>Koi results nahi mile. Dusra term try kariye.</p>
+            <p>No results found. Try a different search term.</p>
         </div>
     </div>
 
-    <script src="script.js"></script>
     <script>
-        console.log('Dictionary script started!');
         let dictionaryData = null;
         let allTerms = [];
 
-        // Load dictionary data in chunks
         async function loadDictionary() {
-            console.log('Loading dictionary chunks...');
-            try {
-                const chunks = ['dict-chunk-1.json', 'dict-chunk-2.json', 'dict-chunk-3.json', 'dict-chunk-4.json', 'dict-chunk-5.json', 'dict-chunk-6.json', 'dict-chunk-7.json', 'dict-chunk-8.json', 'dict-chunk-9.json', 'dict-chunk-10.json', 'dict-chunk-11.json', 'dict-chunk-12.json', 'dict-chunk-13.json'];
-                let allCategories = [];
-                
-                for (const chunk of chunks) {
-                    console.log(`Fetching ${chunk}...`);
-                    const response = await fetch(`data/${chunk}`);
-                    console.log('Response status:', response.status);
-                
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-                    
-                    const chunkData = await response.json();
-                    if (chunkData && chunkData.categories) {
-                        allCategories = allCategories.concat(chunkData.categories);
-                    }
+            const base = (window.location.protocol === 'file:') 
+                ? window.location.pathname.replace(/\/[^\/]*$/, '/') 
+                : window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
+            const chunks = Array.from({length: 13}, (_, i) => `${base}data/dict-chunk-${i+1}.json`);
+            let allCategories = [];
+            const results = await Promise.allSettled(chunks.map(url => fetch(url).then(r => r.ok ? r.json() : null)));
+            results.forEach(r => {
+                if (r.status === 'fulfilled' && r.value && r.value.categories) {
+                    allCategories = allCategories.concat(r.value.categories);
                 }
-                
-                dictionaryData = { categories: allCategories };
-                console.log('Dictionary chunks loaded:', dictionaryData);
-                
-                allTerms = [];
-                dictionaryData.categories.forEach(category => {
-                    category.terms.forEach(term => {
-                        allTerms.push({
-                            ...term,
-                            category: category.name
-                        });
-                    });
-                });
-                
-                console.log('Total terms loaded:', allTerms.length);
-                displayCategories();
-                updateStats();
-            } catch (error) {
-                console.error('Error loading dictionary:', error);
-                
-                // Fallback data
-                dictionaryData = {
-                    categories: [
-                        {
-                            name: "AI/ML Basics",
-                            terms: [
-                                {
-                                    term: "Artificial Intelligence",
-                                    meaning: "Computer systems ka ability hai jo human intelligence mimic kare.",
-                                    example: "Siri, Alexa AI assistants hain."
-                                },
-                                {
-                                    term: "Machine Learning",
-                                    meaning: "Computers ka data se automatically learn karne ka method.",
-                                    example: "Netflix recommendations ML use karta hai."
-                                },
-                                {
-                                    term: "Deep Learning",
-                                    meaning: "Neural networks use kar ke complex patterns recognize karna.",
-                                    example: "Image recognition mein deep learning use hota hai."
-                                }
-                            ]
-                        }
-                    ]
-                };
-                
-                allTerms = [];
-                dictionaryData.categories.forEach(category => {
-                    category.terms.forEach(term => {
-                        allTerms.push({...term, category: category.name});
-                    });
-                });
-                
-                displayCategories();
-                updateStats();
+            });
+            if (allCategories.length === 0) {
+                document.getElementById('totalTerms').textContent = 'Error loading data — open via a web server';
+                return;
             }
+            dictionaryData = { categories: allCategories };
+            allTerms = [];
+            dictionaryData.categories.forEach(cat => {
+                cat.terms.forEach(term => allTerms.push({...term, category: cat.name}));
+            });
+            displayCategories();
+            updateStats();
         }
 
         function displayCategories() {
@@ -462,10 +396,7 @@
         });
         
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM loaded, starting dictionary load...');
-            displayCategories();
-            updateStats();
-            loadDictionary(); // Try to load better data
+            loadDictionary();
         });
         
         const dictHamburger = document.getElementById('hamburger');
