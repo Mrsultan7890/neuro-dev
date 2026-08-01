@@ -25,8 +25,7 @@
       "tools": [
         {
           "name": "ClamAV",
-          "description": "Open-source antivirus engine. Scan files and directories for known malware — useful when downloading files from untrusted sources.",
-          "link": "https://www.clamav.net/"
+          "description": "Open-source antivirus engine. Scan files and directories for known malware — useful when downloading files from untrusted sources. Install via: sudo apt install clamav"
         }
       ],
       "commands": [
@@ -149,21 +148,28 @@
   "resources": [
     {
       "name": "Open Source Intelligence Techniques — Michael Bazzell",
-      "description": "The bible of OSINT. Covers everything from basic searches to advanced investigation techniques.",
-      "link": "https://inteltechniques.com/book1.html",
+      "description": "The bible of OSINT. Covers everything from basic searches to advanced investigation techniques. Search online to find it.",
       "type": "book"
     },
     {
-      "name": "IntelTechniques.com",
-      "description": "Michael Bazzell's official website with OSINT tools and resources.",
-      "link": "https://inteltechniques.com/",
-      "type": "website"
+      "name": "ClamAV",
+      "description": "Open-source antivirus engine used in this chapter for scanning downloaded files.",
+      "type": "tool"
     },
     {
-      "name": "Firefox Privacy Settings Guide",
-      "description": "Complete guide to hardening Firefox for privacy.",
-      "link": "https://firefox-source-docs.mozilla.org/",
-      "type": "guide"
+      "name": "uBlock Origin",
+      "description": "Open-source content blocker for Firefox. Search in Firefox Add-ons store.",
+      "type": "extension"
+    },
+    {
+      "name": "Privacy Badger",
+      "description": "Tracker blocker by EFF. Search in Firefox Add-ons store.",
+      "type": "extension"
+    },
+    {
+      "name": "NoScript",
+      "description": "JavaScript controller for Firefox. Search in Firefox Add-ons store.",
+      "type": "extension"
     }
   ]
 }
