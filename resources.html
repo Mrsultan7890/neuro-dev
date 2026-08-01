@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OSINT Series — Learn Open Source Intelligence from basics to advanced. Tools, commands, and resources.">
+    <meta name="keywords" content="OSINT, open source intelligence, cybersecurity, investigation, Firefox privacy, ClamAV">
+    <meta name="author" content="Neuro-Dev">
+    <meta name="theme-color" content="#00ff88">
+    <title>OSINT Series — Neuro-Dev Resources</title>
+    <meta name="google-adsense-account" content="ca-pub-4588604494241390">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4588604494241390" crossorigin="anonymous"></script>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0d1117;
+            --bg2: #161b22;
+            --bg3: #21262d;
+            --border: #30363d;
+            --green: #00ff88;
+            --blue: #58a6ff;
+            --orange: #ff6b35;
+            --yellow: #f0c040;
+            --red: #ff4444;
+            --text: #e6edf3;
+            --muted: #8b949e;
+        }
+
+        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; height: 60px;
+            background: rgba(13,17,23,0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border); z-index: 1000;
+        }
+        .nav-inner {
+            max-width: 1100px; margin: 0 auto; padding: 0 20px;
+            height: 100%; display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; color: var(--green); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+        .nav-links a { color: var(--muted); text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 14px; transition: all 0.2s; }
+        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a.active { color: var(--green); background: rgba(0,255,136,0.1); }
+        .nav-links .dict-btn { background: var(--green); color: #000 !important; font-weight: 600; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 1100px; margin: 0 auto; padding: 80px 20px 60px; display: grid; grid-template-columns: 260px 1fr; gap: 32px; }
+
+        /* SIDEBAR */
+        .sidebar { position: sticky; top: 80px; height: fit-content; }
+        .sidebar-title { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding: 0 8px; }
+        .series-list { list-style: none; }
+        .series-item a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 12px; border-radius: 6px; text-decoration: none;
+            color: var(--muted); font-size: 14px; transition: all 0.2s;
+        }
+        .series-item a:hover { color: var(--text); background: var(--bg2); }
+        .series-item a.active { color: var(--green); background: rgba(0,255,136,0.08); }
+        .series-item .ch-num { font-size: 11px; background: var(--bg3); padding: 2px 7px; border-radius: 10px; color: var(--muted); }
+        .series-item a.active .ch-num { background: rgba(0,255,136,0.15); color: var(--green); }
+        .coming-soon { opacity: 0.4; pointer-events: none; }
+
+        /* MAIN CONTENT */
+        .main-content {}
+
+        /* CHAPTER HEADER */
+        .chapter-header {
+            background: var(--bg2); border: 1px solid var(--border);
+            border-radius: 12px; padding: 28px; margin-bottom: 24px;
+        }
+        .chapter-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3);
+            color: var(--green); padding: 4px 12px; border-radius: 20px;
+            font-size: 12px; margin-bottom: 14px;
+        }
+        .chapter-header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+        .chapter-header p { color: var(--muted); font-size: 15px; }
+
+        /* SECTION */
+        .section {
+            background: var(--bg2); border: 1px solid var(--border);
+            border-radius: 12px; margin-bottom: 16px; overflow: hidden;
+        }
+        .section-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 20px; cursor: pointer; user-select: none;
+            transition: background 0.2s;
+        }
+        .section-header:hover { background: var(--bg3); }
+        .section-header-left { display: flex; align-items: center; gap: 12px; }
+        .section-icon { font-size: 20px; }
+        .section-title { font-size: 16px; font-weight: 600; }
+        .section-toggle { color: var(--muted); transition: transform 0.3s; font-size: 13px; }
+        .section.open .section-toggle { transform: rotate(180deg); }
+        .section-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--border); }
+        .section.open .section-body { display: block; }
+
+        .section-desc { color: var(--muted); font-size: 14px; margin: 14px 0 16px; line-height: 1.6; }
+
+        /* NOTE BOX */
+        .note-box {
+            background: rgba(240,192,64,0.08); border: 1px solid rgba(240,192,64,0.3);
+            border-radius: 8px; padding: 12px 16px; margin-bottom: 16px;
+            display: flex; gap: 10px; align-items: flex-start;
+        }
+        .note-box i { color: var(--yellow); margin-top: 2px; flex-shrink: 0; }
+        .note-box p { color: var(--yellow); font-size: 13px; line-height: 1.5; }
+
+        /* TOPICS LIST */
+        .topics-list { list-style: none; margin-bottom: 16px; }
+        .topics-list li {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 0; color: var(--muted); font-size: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        .topics-list li:last-child { border-bottom: none; }
+        .topics-list li::before { content: '→'; color: var(--green); font-size: 12px; }
+
+        /* TOOLS */
+        .tools-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+        .tool-card {
+            background: var(--bg3); border: 1px solid var(--border);
+            border-radius: 8px; padding: 14px 16px;
+            display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+        }
+        .tool-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--blue); }
+        .tool-info p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+        .tool-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.3);
+            color: var(--blue); padding: 5px 12px; border-radius: 6px;
+            text-decoration: none; font-size: 12px; white-space: nowrap;
+            transition: all 0.2s; flex-shrink: 0;
+        }
+        .tool-link:hover { background: rgba(88,166,255,0.2); }
+
+        /* COMMANDS */
+        .commands-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+        .command-list { display: flex; flex-direction: column; gap: 8px; }
+        .command-item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .command-top {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 14px; background: #0d1117;
+        }
+        .command-code { font-family: 'Courier New', monospace; font-size: 13px; color: var(--green); flex: 1; }
+        .copy-btn {
+            background: none; border: 1px solid var(--border); color: var(--muted);
+            padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 11px;
+            display: flex; align-items: center; gap: 4px; transition: all 0.2s; flex-shrink: 0;
+        }
+        .copy-btn:hover { border-color: var(--green); color: var(--green); }
+        .copy-btn.copied { border-color: var(--green); color: var(--green); }
+        .command-desc { padding: 8px 14px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); line-height: 1.5; }
+
+        /* RESOURCES */
+        .resources-grid { display: flex; flex-direction: column; gap: 10px; }
+        .resource-card {
+            background: var(--bg3); border: 1px solid var(--border);
+            border-radius: 8px; padding: 14px 16px;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        }
+        .resource-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .resource-info p { font-size: 13px; color: var(--muted); }
+        .resource-badge {
+            font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600;
+            flex-shrink: 0;
+        }
+        .badge-book { background: rgba(255,107,53,0.15); color: var(--orange); border: 1px solid rgba(255,107,53,0.3); }
+        .badge-website { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
+        .badge-guide { background: rgba(88,166,255,0.1); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); }
+        .resource-link {
+            display: inline-flex; align-items: center; gap: 5px;
+            color: var(--blue); text-decoration: none; font-size: 12px;
+            padding: 5px 12px; border: 1px solid rgba(88,166,255,0.3);
+            border-radius: 6px; transition: all 0.2s; flex-shrink: 0;
+        }
+        .resource-link:hover { background: rgba(88,166,255,0.1); }
+
+        /* LOADING */
+        .loading { text-align: center; padding: 60px 20px; color: var(--muted); }
+        .loading i { font-size: 32px; margin-bottom: 12px; display: block; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .page-wrap { grid-template-columns: 1fr; padding-top: 72px; }
+            .sidebar { position: static; }
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none; position: absolute; top: 60px; left: 0; right: 0;
+                background: var(--bg2); border-bottom: 1px solid var(--border);
+                flex-direction: column; padding: 12px; gap: 4px;
+            }
+            .nav-links.open { display: flex; }
+            .tool-card { flex-direction: column; }
+            .resource-card { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><i class="fas fa-brain"></i> Neuro-Dev</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resources.html" class="active">Resources</a></li>
+            <li><a href="dictionary.html" class="dict-btn"><i class="fas fa-book"></i> Dictionary</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<div class="page-wrap">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-title">OSINT Series</div>
+        <ul class="series-list" id="series-list">
+            <li class="series-item">
+                <a href="#" class="active" onclick="loadChapter(1, this); return false;">
+                    <span>Browser Setup & Basics</span>
+                    <span class="ch-num">Ch 1</span>
+                </a>
+            </li>
+            <li class="series-item coming-soon">
+                <a href="#">
+                    <span>Search Techniques</span>
+                    <span class="ch-num">Ch 2</span>
+                </a>
+            </li>
+            <li class="series-item coming-soon">
+                <a href="#">
+                    <span>Social Media OSINT</span>
+                    <span class="ch-num">Ch 3</span>
+                </a>
+            </li>
+            <li class="series-item coming-soon">
+                <a href="#">
+                    <span>Google Dorking</span>
+                    <span class="ch-num">Ch 4</span>
+                </a>
+            </li>
+            <li class="series-item coming-soon">
+                <a href="#">
+                    <span>People Search</span>
+                    <span class="ch-num">Ch 5</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content" id="main-content">
+        <div class="loading">
+            <i class="fas fa-circle-notch"></i>
+            Loading chapter...
+        </div>
+    </main>
+
+</div>
+
+<!-- AD -->
+<div style="text-align:center;padding:20px;background:var(--bg2);border-top:1px solid var(--border)">
+    <div style="color:var(--muted);font-size:11px;margin-bottom:8px">Advertisement</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4588604494241390" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<script>
+    const base = (window.location.protocol === 'file:')
+        ? window.location.pathname.replace(/\/[^\/]*$/, '/')
+        : window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
+
+    async function loadChapter(num, linkEl) {
+        // update active sidebar link
+        document.querySelectorAll('.series-item a').forEach(a => a.classList.remove('active'));
+        if (linkEl) linkEl.classList.add('active');
+
+        const main = document.getElementById('main-content');
+        main.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading chapter...</div>';
+
+        try {
+            const res = await fetch(`${base}data/osint-chapter${num}.json`);
+            if (!res.ok) throw new Error('Not found');
+            const data = await res.json();
+            renderChapter(data);
+        } catch(e) {
+            main.innerHTML = '<div class="loading"><i class="fas fa-exclamation-circle" style="animation:none;color:#ff4444"></i>Could not load chapter. Make sure you are running via a web server.</div>';
+        }
+    }
+
+    function renderChapter(data) {
+        const main = document.getElementById('main-content');
+        let html = `
+            <div class="chapter-header">
+                <div class="chapter-badge"><i class="fas fa-book-open"></i> Chapter ${data.chapter}</div>
+                <h1>${data.title}</h1>
+                <p>${data.description}</p>
+            </div>
+        `;
+
+        data.sections.forEach((sec, i) => {
+            html += `
+            <div class="section ${i === 0 ? 'open' : ''}" id="sec-${sec.id}">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="section-header-left">
+                        <span class="section-icon">${sec.icon}</span>
+                        <span class="section-title">${sec.title}</span>
+                    </div>
+                    <i class="fas fa-chevron-down section-toggle"></i>
+                </div>
+                <div class="section-body">
+                    ${sec.description ? `<p class="section-desc">${sec.description}</p>` : ''}
+                    ${sec.note ? `<div class="note-box"><i class="fas fa-exclamation-triangle"></i><p>${sec.note}</p></div>` : ''}
+                    ${sec.topics && sec.topics.length ? `
+                        <ul class="topics-list">
+                            ${sec.topics.map(t => `<li>${t}</li>`).join('')}
+                        </ul>` : ''}
+                    ${sec.tools && sec.tools.length ? `
+                        <div class="tools-grid">
+                            ${sec.tools.map(t => `
+                            <div class="tool-card">
+                                <div class="tool-info">
+                                    <h4><i class="fas fa-tools" style="font-size:11px;margin-right:4px"></i>${t.name}</h4>
+                                    <p>${t.description}</p>
+                                </div>
+                                ${t.link ? `<a href="${t.link}" target="_blank" rel="noopener" class="tool-link"><i class="fas fa-external-link-alt"></i> Visit</a>` : ''}
+                            </div>`).join('')}
+                        </div>` : ''}
+                    ${sec.commands && sec.commands.length ? `
+                        <div class="commands-label"><i class="fas fa-terminal" style="margin-right:5px"></i>Commands</div>
+                        <div class="command-list">
+                            ${sec.commands.map((c, ci) => `
+                            <div class="command-item">
+                                <div class="command-top">
+                                    <code class="command-code">${escHtml(c.cmd)}</code>
+                                    <button class="copy-btn" onclick="copyCmd(this, '${escAttr(c.cmd)}')">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <div class="command-desc">${c.description}</div>
+                            </div>`).join('')}
+                        </div>` : ''}
+                </div>
+            </div>`;
+        });
+
+        // Resources section
+        if (data.resources && data.resources.length) {
+            html += `
+            <div class="section open" id="sec-resources">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div class="section-header-left">
+                        <span class="section-icon">📚</span>
+                        <span class="section-title">Resources & Links</span>
+                    </div>
+                    <i class="fas fa-chevron-down section-toggle"></i>
+                </div>
+                <div class="section-body">
+                    <div class="resources-grid">
+                        ${data.resources.map(r => `
+                        <div class="resource-card">
+                            <div class="resource-info">
+                                <h4>${r.name}</h4>
+                                <p>${r.description}</p>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+                                <span class="resource-badge badge-${r.type}">${r.type}</span>
+                                ${r.link ? `<a href="${r.link}" target="_blank" rel="noopener" class="resource-link"><i class="fas fa-external-link-alt"></i> Open</a>` : ''}
+                            </div>
+                        </div>`).join('')}
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        main.innerHTML = html;
+    }
+
+    function toggleSection(header) {
+        header.parentElement.classList.toggle('open');
+    }
+
+    function copyCmd(btn, text) {
+        navigator.clipboard.writeText(text).catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = text; document.body.appendChild(ta);
+            ta.select(); document.execCommand('copy');
+            document.body.removeChild(ta);
+        });
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; btn.classList.remove('copied'); }, 2000);
+    }
+
+    function escHtml(str) {
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function escAttr(str) {
+        return str.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    }
+
+    // Load chapter 1 on start
+    loadChapter(1, document.querySelector('.series-item a.active'));
+
+    // Close nav on outside click
+    document.addEventListener('click', function(e) {
+        const nav = document.getElementById('nav-links');
+        const ham = document.getElementById('hamburger');
+        if (nav && ham && !nav.contains(e.target) && !ham.contains(e.target)) nav.classList.remove('open');
+    });
+</script>
+</body>
+</html>

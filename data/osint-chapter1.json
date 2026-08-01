@@ -1,0 +1,169 @@
+{
+  "chapter": 1,
+  "title": "OSINT Fundamentals & Browser Setup",
+  "description": "Learn what OSINT is, prepare your system, and configure Firefox for privacy-focused investigations.",
+  "sections": [
+    {
+      "id": "what-is-osint",
+      "title": "What is OSINT?",
+      "icon": "🔍",
+      "description": "OSINT stands for Open-Source Intelligence. It involves collecting, analyzing, and connecting information from publicly available sources. It is a huge field within cybersecurity.",
+      "topics": [
+        "User investigations",
+        "GEOINT (Geospatial Intelligence)",
+        "Search-engine dorking",
+        "Social media intelligence",
+        "Digital footprint analysis"
+      ],
+      "note": "Privacy is one of the most important principles in OSINT. If your own device is leaking information, your investigation can expose your identity."
+    },
+    {
+      "id": "system-prep",
+      "title": "System Preparation",
+      "icon": "🛡️",
+      "description": "Before starting any OSINT investigation, prepare your system with basic security tools.",
+      "tools": [
+        {
+          "name": "ClamAV",
+          "description": "Open-source antivirus engine. Scan files and directories for known malware — useful when downloading files from untrusted sources.",
+          "link": "https://www.clamav.net/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "sudo apt update",
+          "description": "Update system package information to get latest available software versions."
+        },
+        {
+          "cmd": "sudo apt install clamav",
+          "description": "Install ClamAV antivirus engine on your Linux system."
+        },
+        {
+          "cmd": "clamscan <file-path>",
+          "description": "Scan a specific file for malware. Replace <file-path> with actual file location."
+        },
+        {
+          "cmd": "clamscan example.pdf",
+          "description": "Example: scan a PDF file called example.pdf in current directory."
+        }
+      ]
+    },
+    {
+      "id": "firefox-extensions",
+      "title": "Firefox Privacy Extensions",
+      "icon": "🦊",
+      "description": "Install these extensions to block trackers, ads, and malicious scripts before they interact with your browser.",
+      "tools": [
+        {
+          "name": "uBlock Origin",
+          "description": "Powerful open-source content blocker. Blocks advertisements, trackers, and unwanted network requests.",
+          "link": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/"
+        },
+        {
+          "name": "Privacy Badger",
+          "description": "Detects and blocks third-party trackers that attempt to follow you across different websites.",
+          "link": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/"
+        },
+        {
+          "name": "NoScript",
+          "description": "Controls which websites can execute JavaScript. Blocks unwanted scripts from malicious or compromised sites. Note: may break some legitimate websites.",
+          "link": "https://addons.mozilla.org/en-US/firefox/addon/noscript/"
+        }
+      ],
+      "commands": []
+    },
+    {
+      "id": "firefox-settings",
+      "title": "Firefox Privacy Settings",
+      "icon": "⚙️",
+      "description": "Configure Firefox built-in privacy settings. Go to Menu → Settings → Privacy & Security.",
+      "topics": [
+        "Disable Firefox Data Collection and Use (telemetry)",
+        "Disable optional data-sharing features"
+      ],
+      "commands": [
+        {
+          "cmd": "about:config",
+          "description": "Open Firefox advanced configuration. Type this in the address bar and press Enter."
+        }
+      ]
+    },
+    {
+      "id": "about-config",
+      "title": "about:config Privacy Settings",
+      "icon": "🔧",
+      "description": "Advanced Firefox settings to minimize browser fingerprinting and data leakage during OSINT investigations.",
+      "commands": [
+        {
+          "cmd": "privacy.trackingprotection.enabled → true",
+          "description": "Enables Firefox built-in tracking protection. Blocks known tracking resources and scripts."
+        },
+        {
+          "cmd": "geo.enabled → false",
+          "description": "Disables geolocation API. Websites cannot use Firefox to request your device location."
+        },
+        {
+          "cmd": "browser.safebrowsing.phishing.enabled → false",
+          "description": "Disables built-in phishing protection. Trade-off: be extra careful about websites you visit."
+        },
+        {
+          "cmd": "dom.event.clipboardevents.enabled → false",
+          "description": "Limits websites ability to receive clipboard events when copying or pasting content."
+        },
+        {
+          "cmd": "media.navigator.enabled → false",
+          "description": "Prevents websites from discovering available microphones and cameras on your device."
+        },
+        {
+          "cmd": "dom.battery.enabled → false",
+          "description": "Disables Battery Status API. Removes battery info as a browser fingerprinting data point."
+        }
+      ]
+    },
+    {
+      "id": "webrtc",
+      "title": "WebRTC — Most Important",
+      "icon": "⚠️",
+      "description": "WebRTC enables real-time audio/video in browsers but can leak your real IP address even when using a VPN. Disable it for OSINT work.",
+      "note": "Disabling WebRTC will break browser-based video/voice calls. Only disable during investigations.",
+      "commands": [
+        {
+          "cmd": "media.peerconnection.enabled → false",
+          "description": "Disables WebRTC peer connection. Prevents potential IP leakage outside VPN tunnel."
+        },
+        {
+          "cmd": "media.peerconnection.turn.disable → true",
+          "description": "Disables TURN server usage in WebRTC connections."
+        },
+        {
+          "cmd": "media.peerconnection.use_document_iceservers → false",
+          "description": "Prevents use of document-specified ICE servers in WebRTC."
+        },
+        {
+          "cmd": "media.peerconnection.video.enabled → false",
+          "description": "Disables WebRTC video peer connections completely."
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "Open Source Intelligence Techniques — Michael Bazzell",
+      "description": "The bible of OSINT. Covers everything from basic searches to advanced investigation techniques.",
+      "link": "https://inteltechniques.com/book1.html",
+      "type": "book"
+    },
+    {
+      "name": "IntelTechniques.com",
+      "description": "Michael Bazzell's official website with OSINT tools and resources.",
+      "link": "https://inteltechniques.com/",
+      "type": "website"
+    },
+    {
+      "name": "Firefox Privacy Settings Guide",
+      "description": "Complete guide to hardening Firefox for privacy.",
+      "link": "https://firefox-source-docs.mozilla.org/",
+      "type": "guide"
+    }
+  ]
+}
