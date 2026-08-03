@@ -1,0 +1,174 @@
+{
+  "chapter": 2,
+  "title": "Virtual Environment Setup for OSINT",
+  "description": "Set up a safe and isolated virtual environment for OSINT investigations. Using a VM protects your real identity and keeps your host system clean.",
+  "sections": [
+    {
+      "id": "why-vm",
+      "title": "Why Use a Virtual Machine?",
+      "icon": "🖥️",
+      "description": "A Virtual Machine (VM) is a software-based computer that runs inside your real computer. For OSINT work, a VM provides isolation — your investigation activity stays inside the VM and does not affect your host system.",
+      "topics": [
+        "Your real IP and identity stays protected",
+        "Malicious files opened inside VM cannot harm your host",
+        "You can take snapshots and revert to a clean state anytime",
+        "Separate browser profiles and accounts inside VM",
+        "Easy to reset — delete VM and start fresh"
+      ],
+      "note": "Never do OSINT investigations directly from your main system. Always use an isolated environment."
+    },
+    {
+      "id": "vm-options",
+      "title": "VM Software Options",
+      "icon": "⚙️",
+      "description": "Choose one of these VM platforms to create your isolated OSINT environment.",
+      "tools": [
+        {
+          "name": "VirtualBox",
+          "description": "Free and open-source. Best choice for beginners. Supports Windows, Linux, macOS. Install Kali Linux or Ubuntu inside it.",
+          "link": "https://www.virtualbox.org/"
+        },
+        {
+          "name": "VMware Workstation Player",
+          "description": "Free for personal use. More stable performance than VirtualBox on some systems. Good for running Kali Linux.",
+          "link": "https://www.vmware.com/products/workstation-player.html"
+        }
+      ],
+      "commands": []
+    },
+    {
+      "id": "kali-setup",
+      "title": "Setting Up Kali Linux in VM",
+      "icon": "🐉",
+      "description": "Kali Linux is the recommended OS for OSINT and security investigations. It comes pre-installed with many useful tools.",
+      "topics": [
+        "Download Kali Linux VM image from official site (kali.org)",
+        "Import the .ova file into VirtualBox or VMware",
+        "Default credentials: kali / kali",
+        "Run updates after first boot",
+        "Take a snapshot before installing any tools"
+      ],
+      "commands": [
+        {
+          "cmd": "sudo apt update && sudo apt upgrade -y",
+          "description": "Update all packages after first boot. Always do this before installing anything."
+        },
+        {
+          "cmd": "sudo apt install git curl wget -y",
+          "description": "Install basic tools needed for downloading and running OSINT scripts."
+        },
+        {
+          "cmd": "sudo apt install tor torbrowser-launcher -y",
+          "description": "Install Tor browser for anonymous browsing during investigations."
+        }
+      ]
+    },
+    {
+      "id": "vm-network",
+      "title": "VM Network Configuration",
+      "icon": "📡",
+      "description": "Proper network configuration is critical. Wrong settings can expose your real IP during investigations.",
+      "topics": [
+        "NAT mode — VM shares host IP (default, basic protection)",
+        "Host-only mode — VM has no internet access (safe for offline analysis)",
+        "Bridged mode — VM gets its own IP (avoid for OSINT)",
+        "Use NAT + VPN inside VM for best protection"
+      ],
+      "note": "Always use NAT network mode. Never use Bridged mode during OSINT — it exposes your real network.",
+      "commands": [
+        {
+          "cmd": "curl ifconfig.me",
+          "description": "Check your current public IP inside the VM. Verify VPN is working before starting any investigation."
+        },
+        {
+          "cmd": "ip a",
+          "description": "Show all network interfaces and IP addresses inside the VM."
+        }
+      ]
+    },
+    {
+      "id": "vm-snapshot",
+      "title": "Snapshots — Clean State",
+      "icon": "📸",
+      "description": "Snapshots let you save the current state of your VM and revert back to it anytime. Take a clean snapshot before every investigation.",
+      "topics": [
+        "VirtualBox: Machine → Take Snapshot",
+        "VMware: VM → Snapshot → Take Snapshot",
+        "Name it 'Clean State' or 'Before Investigation'",
+        "After investigation: revert to clean snapshot",
+        "This removes all traces of your investigation activity"
+      ],
+      "commands": [
+        {
+          "cmd": "VBoxManage snapshot \"VM Name\" take \"Clean State\"",
+          "description": "Take a snapshot via command line in VirtualBox. Replace VM Name with your VM name."
+        },
+        {
+          "cmd": "VBoxManage snapshot \"VM Name\" restore \"Clean State\"",
+          "description": "Restore VM to clean snapshot state via command line."
+        }
+      ]
+    },
+    {
+      "id": "osint-tools-install",
+      "title": "Essential OSINT Tools Installation",
+      "icon": "🛠️",
+      "description": "Install these tools inside your VM after taking a clean snapshot.",
+      "tools": [
+        {
+          "name": "Sherlock",
+          "description": "Find usernames across 300+ social media platforms. Written in Python.",
+          "link": "https://github.com/sherlock-project/sherlock"
+        },
+        {
+          "name": "theHarvester",
+          "description": "Gather emails, subdomains, IPs from public sources. Pre-installed in Kali Linux.",
+          "link": "https://github.com/laramies/theHarvester"
+        },
+        {
+          "name": "Maltego CE",
+          "description": "Visual link analysis tool. Free community edition available. Great for mapping relationships.",
+          "link": "https://www.maltego.com/downloads/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "git clone https://github.com/sherlock-project/sherlock.git",
+          "description": "Download Sherlock username finder tool from GitHub."
+        },
+        {
+          "cmd": "cd sherlock && pip3 install -r requirements.txt",
+          "description": "Install Sherlock dependencies."
+        },
+        {
+          "cmd": "python3 sherlock username",
+          "description": "Search for a username across 300+ platforms. Replace 'username' with target username."
+        },
+        {
+          "cmd": "theHarvester -d domain.com -b google",
+          "description": "Gather emails and subdomains for a domain using Google. Replace domain.com with target."
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "VirtualBox",
+      "description": "Free open-source VM software. Download and install to create your OSINT environment.",
+      "link": "https://www.virtualbox.org/",
+      "type": "tool"
+    },
+    {
+      "name": "Kali Linux",
+      "description": "Official Kali Linux VM images. Download the VirtualBox or VMware pre-built image.",
+      "link": "https://www.kali.org/get-kali/#kali-virtual-machines",
+      "type": "tool"
+    },
+    {
+      "name": "Sherlock Project",
+      "description": "Open-source username OSINT tool on GitHub.",
+      "link": "https://github.com/sherlock-project/sherlock",
+      "type": "tool"
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "chapter": 3,
+  "title": "Search Engine Dorking",
+  "description": "Learn how to use advanced search operators to find specific information during OSINT investigations. Dorking helps reduce noise and discover hidden publicly available data.",
+  "sections": [
+    {
+      "id": "what-is-dorking",
+      "title": "What is Dorking?",
+      "icon": "🔎",
+      "description": "Search engine dorking is the use of special search queries and operators in search engines like Google and Bing to find more specific information. Instead of getting thousands of unrelated results, dorking helps filter and refine searches to find relevant information.",
+      "topics": [
+        "Used by researchers, security professionals, and OSINT investigators",
+        "Works on Google, Bing, and other search engines",
+        "Helps reduce search noise and find hidden public data",
+        "Discover related usernames, identities, and documents",
+        "Improve investigation efficiency significantly"
+      ],
+      "note": "Always perform OSINT ethically and legally. Finding publicly available information does not mean you have permission to misuse it."
+    },
+    {
+      "id": "quotes-operator",
+      "title": "Exact Match — Quotes \" \"",
+      "icon": "💬",
+      "description": "Quotation marks force the search engine to find the exact phrase instead of individual words. This is one of the most important and first techniques used during information gathering.",
+      "commands": [
+        {
+          "cmd": "\"who_is_the_black_hat\"",
+          "description": "Search for this exact phrase. Search engine will not split or modify the query."
+        },
+        {
+          "cmd": "\"example@gmail.com\"",
+          "description": "Search for an exact email address. Useful when search engines treat @ and . differently."
+        },
+        {
+          "cmd": "\"target_username\"",
+          "description": "Search for an exact username across indexed pages."
+        },
+        {
+          "cmd": "\"whoistheblackhat\" OR \"who_is_the_black_hat\" OR \"Whoistheblackhat\"",
+          "description": "Search multiple formatting variations of the same identity to get broader results."
+        }
+      ]
+    },
+    {
+      "id": "narrowing",
+      "title": "Narrowing Results — Minus Operator",
+      "icon": "➖",
+      "description": "When you get too many irrelevant results (search noise), use the minus operator to exclude specific keywords from results.",
+      "commands": [
+        {
+          "cmd": "\"Shaheen College\" -Bider",
+          "description": "Search for Shaheen College but exclude all results containing the word Bider."
+        },
+        {
+          "cmd": "\"target name\" -facebook -instagram",
+          "description": "Search for a name but exclude results from Facebook and Instagram."
+        },
+        {
+          "cmd": "\"keyword\" -site:wikipedia.org",
+          "description": "Search for a keyword but exclude all Wikipedia results."
+        }
+      ]
+    },
+    {
+      "id": "site-operator",
+      "title": "Site Operator",
+      "icon": "🌐",
+      "description": "The site operator restricts search results to a specific website. Instead of searching the entire internet, focus on one specific platform.",
+      "note": "No space between operator, colon, and keyword. Correct: site:github.com — Wrong: site: github.com",
+      "commands": [
+        {
+          "cmd": "site:github.com \"who_is_the_black_hat\"",
+          "description": "Search only inside GitHub for this exact username."
+        },
+        {
+          "cmd": "site:linkedin.com \"John Smith\" \"cybersecurity\"",
+          "description": "Find LinkedIn profiles matching this name and keyword."
+        },
+        {
+          "cmd": "site:neurodev.netlify.app",
+          "description": "Site mapping — shows all pages from this domain indexed by the search engine. Reveals publicly accessible content."
+        },
+        {
+          "cmd": "site:reddit.com \"target_username\"",
+          "description": "Search for a username specifically on Reddit."
+        }
+      ]
+    },
+    {
+      "id": "filetype-operator",
+      "title": "Filetype Operator",
+      "icon": "📄",
+      "description": "Search for specific downloadable file types. Organizations often publish documents containing valuable public information.",
+      "commands": [
+        {
+          "cmd": "\"cisco\" filetype:ppt",
+          "description": "Search for PowerPoint presentations related to Cisco."
+        },
+        {
+          "cmd": "\"osint\" filetype:pdf",
+          "description": "Search for PDF documents related to OSINT."
+        },
+        {
+          "cmd": "\"company name\" filetype:docx",
+          "description": "Search for Word documents related to a company."
+        },
+        {
+          "cmd": "\"username\" filetype:pdf site:github.com",
+          "description": "Combine filetype with site operator for more targeted results."
+        }
+      ]
+    },
+    {
+      "id": "inurl-operator",
+      "title": "InURL Operator",
+      "icon": "🔗",
+      "description": "Search for specific keywords that appear inside a website's URL. Useful for discovering specific types of indexed pages and understanding web structure.",
+      "commands": [
+        {
+          "cmd": "inurl:login",
+          "description": "Find pages where the word 'login' appears in the URL."
+        },
+        {
+          "cmd": "inurl:admin",
+          "description": "Find pages where the word 'admin' appears in the URL."
+        },
+        {
+          "cmd": "inurl:ftp -inurl:(http | https) filetype:pdf \"osint\"",
+          "description": "Advanced: find FTP-related PDF files about OSINT. Excludes http/https URLs. The | symbol means OR."
+        },
+        {
+          "cmd": "inurl:/wp/ site:targetsite.com",
+          "description": "Find WordPress directory paths inside a specific website."
+        }
+      ]
+    },
+    {
+      "id": "intitle-operator",
+      "title": "Intitle & Allintitle Operators",
+      "icon": "📋",
+      "description": "These operators search based on the HTML title tag of web pages. Every webpage has a title tag that search engines use during indexing.",
+      "commands": [
+        {
+          "cmd": "intitle:\"coding books\"",
+          "description": "Find pages where the title contains the exact phrase 'coding books'."
+        },
+        {
+          "cmd": "allintitle:coding books python",
+          "description": "Find pages where ALL these words (coding, books, python) appear in the title."
+        },
+        {
+          "cmd": "intitle:\"login page\" site:targetsite.com",
+          "description": "Find login pages on a specific website by searching page titles."
+        }
+      ]
+    },
+    {
+      "id": "index-of",
+      "title": "Index Of Dork",
+      "icon": "📂",
+      "description": "One of the most powerful OSINT dorks. Used to discover publicly accessible directory listings on web servers. When a server has directory listing enabled and no index file, it exposes all files inside that directory.",
+      "note": "Finding an open directory does not give you permission to download or use those files for unauthorized purposes. Always act ethically.",
+      "commands": [
+        {
+          "cmd": "intitle:index.of \"osint\"",
+          "description": "Find publicly accessible directory listings containing OSINT-related files."
+        },
+        {
+          "cmd": "intitle:\"index of\" \"parent directory\"",
+          "description": "Classic index of dork to find open directory listings."
+        },
+        {
+          "cmd": "intitle:index.of filetype:pdf",
+          "description": "Find open directories containing PDF files."
+        },
+        {
+          "cmd": "intitle:\"index of\" site:targetsite.com",
+          "description": "Check if a specific website has any open directory listings."
+        }
+      ]
+    },
+    {
+      "id": "combining-operators",
+      "title": "Combining Operators",
+      "icon": "⚡",
+      "description": "The real power of dorking comes from combining multiple operators together. This creates highly targeted searches and significantly reduces irrelevant results.",
+      "commands": [
+        {
+          "cmd": "site:github.com \"target_username\" filetype:pdf",
+          "description": "Find PDF files on GitHub related to a specific username."
+        },
+        {
+          "cmd": "\"John Smith\" site:linkedin.com -inurl:jobs",
+          "description": "Find a person on LinkedIn but exclude job listing pages."
+        },
+        {
+          "cmd": "intitle:\"index of\" site:targetsite.com filetype:pdf",
+          "description": "Find open directories with PDFs on a specific site."
+        },
+        {
+          "cmd": "\"email@domain.com\" -site:facebook.com -site:twitter.com",
+          "description": "Search for an email address but exclude major social media platforms."
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "Google Advanced Search",
+      "description": "Official Google advanced search page. Use this to build complex queries without memorizing operators.",
+      "link": "https://www.google.com/advanced_search",
+      "type": "tool"
+    },
+    {
+      "name": "Google Hacking Database (GHDB)",
+      "description": "Large collection of Google dorks maintained by Exploit-DB. Reference for advanced dork queries.",
+      "link": "https://www.exploit-db.com/google-hacking-database",
+      "type": "website"
+    }
+  ]
+}
