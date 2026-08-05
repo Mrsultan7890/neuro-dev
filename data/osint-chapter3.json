@@ -202,12 +202,163 @@
           "description": "Search for an email address but exclude major social media platforms."
         }
       ]
+    },
+    {
+      "id": "asterisk-operator",
+      "title": "Asterisk Wildcard Operator *",
+      "icon": "✳️",
+      "description": "The asterisk acts as a wildcard when you don't know the complete phrase you're searching for. It tells the search engine to match any word in that position.",
+      "commands": [
+        {
+          "cmd": "\"sentinel * tool\"",
+          "description": "Search for a phrase where the middle word is unknown. Useful when you only remember part of a name or phrase."
+        },
+        {
+          "cmd": "\"target * account\"",
+          "description": "Find pages containing variations like 'target social account', 'target bank account', etc."
+        }
+      ]
+    },
+    {
+      "id": "range-operator",
+      "title": "Range Operator ..",
+      "icon": "🔢",
+      "description": "Search within a numerical range. Useful when investigating dates, numbers, counts, or prices where you know the approximate range but not the exact value.",
+      "note": "Not every search engine interprets operators the same way. Always try multiple search engines — one may have indexed information another hasn't.",
+      "commands": [
+        {
+          "cmd": "\"sentinel octopus\" \"1..30 comments\"",
+          "description": "Search for pages related to sentinel octopus with comment counts between 1 and 30."
+        },
+        {
+          "cmd": "\"keyword\" 2018..2023",
+          "description": "Search for a keyword within a year range."
+        }
+      ]
+    },
+    {
+      "id": "related-operator",
+      "title": "Related Operator",
+      "icon": "🔀",
+      "description": "Discover websites that the search engine considers related to a specific domain. Useful for expanding research beyond a single website during investigations.",
+      "note": "Results depend on the search engine's own indexing. Treat results as investigation leads, not a complete list of connections.",
+      "commands": [
+        {
+          "cmd": "related:neurodev.netlify.app",
+          "description": "Find websites related to this domain according to the search engine."
+        },
+        {
+          "cmd": "related:targetsite.com",
+          "description": "Discover potentially related online resources for any target domain."
+        }
+      ]
+    },
+    {
+      "id": "date-filtering",
+      "title": "Date Filtering & URL Injection",
+      "icon": "📅",
+      "description": "Filter search results by date to find information from a specific time period. Time is often an important piece of the puzzle in OSINT investigations.",
+      "topics": [
+        "Use Google Search Tools → Any time → Custom range",
+        "Filter by past hour, day, week, month, or year",
+        "Useful for investigating old events, news stories, or specific years",
+        "Significantly reduces search noise when time period is known"
+      ],
+      "commands": [
+        {
+          "cmd": "&tbs=cdr:1,cd_min:1/1/2018,cd_max:12/31/2020",
+          "description": "Append to Google search URL to filter results between 2018 and 2020. Modify dates as needed."
+        }
+      ]
+    },
+    {
+      "id": "cse",
+      "title": "Custom Search Engine (CSE)",
+      "icon": "🔭",
+      "description": "Create a custom search engine that searches only specific websites you define. Extremely useful when you repeatedly investigate a particular set of platforms or sources.",
+      "topics": [
+        "Go to Google Programmable Search Engine and create a new engine",
+        "Add target domains you want to search within",
+        "Create refinements: Social Media, News, Technical Docs, Public Databases",
+        "Use your CSE instead of regular Google for focused investigations"
+      ],
+      "commands": [
+        {
+          "cmd": "https://google.com/custom?cx=YOUR_ENGINE_ID&num=100&filter=0",
+          "description": "CSE URL structure. cx = your engine ID, num = results count, filter=0 disables duplicate filtering."
+        }
+      ]
+    },
+    {
+      "id": "contains-linkdomain",
+      "title": "Contains & Linkdomain Operators",
+      "icon": "🧩",
+      "description": "Additional operators for finding file references and domain links. Support varies between search engines — always test and verify results.",
+      "note": "These operators may not work on all search engines. If one doesn't work, combine other operators to reach the same goal.",
+      "commands": [
+        {
+          "cmd": "contains:ppt site:cisco.com",
+          "description": "Find pages on cisco.com that contain links or references to PowerPoint files."
+        },
+        {
+          "cmd": "linkdomain:neurodev.netlify.app",
+          "description": "Discover pages that contain links referencing this domain. Useful for reconnaissance."
+        }
+      ]
+    },
+    {
+      "id": "archives",
+      "title": "Archives & Historical OSINT",
+      "icon": "🗄️",
+      "description": "Archived copies allow investigators to view information that has changed, disappeared, or been removed from the live internet. A webpage deleted today may still exist in an archive.",
+      "note": "Archives don't contain every webpage. Availability depends on whether the page was crawled and saved by the service.",
+      "tools": [
+        {
+          "name": "Wayback Machine (archive.org)",
+          "description": "Largest web archive. Contains billions of saved webpages going back decades.",
+          "link": "https://web.archive.org/"
+        },
+        {
+          "name": "archive.today",
+          "description": "Save and view archived snapshots of webpages. Also accessible via archive.is.",
+          "link": "https://archive.today/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "site:web.archive.org targetsite.com",
+          "description": "Search Wayback Machine for archived versions of a specific domain."
+        },
+        {
+          "cmd": "intitle:index.of \"osint\"  site:newspaperarchive.com",
+          "description": "Search for publicly indexed OSINT-related pages on newspaper archive sites."
+        }
+      ]
+    },
+    {
+      "id": "google-tools",
+      "title": "Google Advanced Search & Patents",
+      "icon": "🔬",
+      "description": "Two powerful Google tools for OSINT — Advanced Search for beginners who don't want to memorize operators, and Google Patents for researching inventors, organizations, and technology history.",
+      "tools": [
+        {
+          "name": "Google Advanced Search",
+          "description": "Build complex search queries using a form interface. Specify exact phrases, exclusions, file types, date ranges, and more without memorizing operators.",
+          "link": "https://www.google.com/advanced_search"
+        },
+        {
+          "name": "Google Patents",
+          "description": "Search patent records to investigate inventors, organizations, patent filings, and technology history. Useful for researching companies and individuals.",
+          "link": "https://patents.google.com"
+        }
+      ],
+      "commands": []
     }
   ],
   "resources": [
     {
       "name": "Google Advanced Search",
-      "description": "Official Google advanced search page. Use this to build complex queries without memorizing operators.",
+      "description": "Official Google advanced search page. Build complex queries without memorizing operators.",
       "link": "https://www.google.com/advanced_search",
       "type": "tool"
     },
@@ -216,6 +367,18 @@
       "description": "Large collection of Google dorks maintained by Exploit-DB. Reference for advanced dork queries.",
       "link": "https://www.exploit-db.com/google-hacking-database",
       "type": "website"
+    },
+    {
+      "name": "Wayback Machine",
+      "description": "Web archive service. View historical snapshots of any webpage.",
+      "link": "https://web.archive.org/",
+      "type": "tool"
+    },
+    {
+      "name": "Google Patents",
+      "description": "Search patent records for investigating inventors, organizations, and technology history.",
+      "link": "https://patents.google.com",
+      "type": "tool"
     }
   ]
 }
