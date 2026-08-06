@@ -1,0 +1,219 @@
+{
+  "chapter": 4,
+  "title": "Social Network OSINT",
+  "description": "Learn how to investigate online identities, discover accounts, verify usernames, and use image-based search techniques using publicly available information.",
+  "sections": [
+    {
+      "id": "social-osint-intro",
+      "title": "What is Social Network Intelligence?",
+      "icon": "🌐",
+      "description": "Social Network Intelligence involves using publicly available information from social platforms to build a better understanding of an online identity or target.",
+      "topics": [
+        "Profile discovery and account finding",
+        "Username investigation across platforms",
+        "Social media research and analysis",
+        "Connecting information across different platforms",
+        "Cross-platform correlation of identities"
+      ],
+      "note": "Our goal is NOT to break into accounts or bypass privacy. Our goal is to understand how much information can be discovered from legitimate public sources and how those pieces connect together."
+    },
+    {
+      "id": "modern-challenges",
+      "title": "Challenges in Modern OSINT",
+      "icon": "⚠️",
+      "description": "Social media platforms have introduced stronger privacy controls, better search systems, rate limits, and authentication requirements. Basic search queries are often not enough anymore.",
+      "topics": [
+        "Meta platforms (Facebook, Instagram) only show publicly visible info",
+        "Private profiles cannot be accessed through normal search queries",
+        "Search engines have changed their indexing behavior",
+        "Many services restrict automated searches",
+        "Some information may exist in third-party or breach datasets — but not all is legally appropriate to access"
+      ],
+      "note": "Focus only on legal and publicly accessible OSINT techniques. Never bypass privacy controls or access restrictions."
+    },
+    {
+      "id": "user-search-dorks",
+      "title": "Finding Users with Search Dorks",
+      "icon": "🔍",
+      "description": "Use search engine operators to find a specific person across platforms. This gives you more control than automated tools — you decide which platform to investigate and what to look for.",
+      "commands": [
+        {
+          "cmd": "site:facebook.com \"Tom Johnson\"",
+          "description": "Search for an exact name on Facebook. Replace Tom Johnson with your target name."
+        },
+        {
+          "cmd": "site:twitter.com \"target_username\"",
+          "description": "Search for a username on Twitter/X."
+        },
+        {
+          "cmd": "site:instagram.com \"target_username\"",
+          "description": "Search for a username on Instagram."
+        },
+        {
+          "cmd": "site:linkedin.com \"Full Name\" \"Job Title\"",
+          "description": "Find a person on LinkedIn by combining name and job title."
+        },
+        {
+          "cmd": "\"target_username\" site:reddit.com OR site:github.com OR site:twitter.com",
+          "description": "Search for the same username across multiple platforms in one query."
+        }
+      ]
+    },
+    {
+      "id": "sherlock",
+      "title": "Sherlock — Username Enumeration",
+      "icon": "🕵️",
+      "description": "Sherlock automatically searches for a username across hundreds of websites. Useful for quickly generating potential leads — but results must always be manually verified.",
+      "note": "Sherlock results should NEVER be treated as confirmed evidence. The same username can belong to completely different people on different platforms. Automation finds leads — human analysis verifies them.",
+      "tools": [
+        {
+          "name": "Sherlock Project",
+          "description": "Open-source username OSINT tool. Searches 300+ platforms automatically.",
+          "link": "https://github.com/sherlock-project/sherlock"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "git clone https://github.com/sherlock-project/sherlock.git",
+          "description": "Download Sherlock from GitHub."
+        },
+        {
+          "cmd": "cd sherlock && pip3 install -r requirements.txt",
+          "description": "Install required dependencies."
+        },
+        {
+          "cmd": "python3 sherlock target_username",
+          "description": "Search for a username across 300+ platforms. Replace target_username with actual username."
+        },
+        {
+          "cmd": "python3 sherlock target_username --output results.txt",
+          "description": "Save results to a text file for later analysis."
+        }
+      ]
+    },
+    {
+      "id": "target-sync",
+      "title": "Method 1 — Target Synchronization",
+      "icon": "🔗",
+      "description": "Correlate different pieces of information associated with the same identity to determine whether they actually belong to the same person. Cross-reference usernames, aliases, and identifiers across public sources.",
+      "topics": [
+        "Find a username on one public platform",
+        "Check if the same username appears on other public websites",
+        "Look for independent indicators: profile picture, bio, location, posting style",
+        "Compare writing style, interests, and linked accounts",
+        "Never force a private app to reveal identity or bypass authentication"
+      ],
+      "note": "A matching username is a LEAD — not proof of identity. You need multiple independent indicators before making a strong attribution."
+    },
+    {
+      "id": "holehe",
+      "title": "Method 2 — Holehe (Email Investigation)",
+      "icon": "📧",
+      "description": "Holehe is an open-source tool that checks whether an email address appears to be registered on various online services. An email address can be a powerful starting point for discovering a person's public digital footprint.",
+      "note": "An indication that an email exists on a service does NOT automatically prove ownership or identity. Treat it as an investigative lead and combine with other publicly available evidence.",
+      "tools": [
+        {
+          "name": "Holehe",
+          "description": "Open-source tool to check email registration across online services.",
+          "link": "https://github.com/megadose/holehe"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "pip3 install holehe",
+          "description": "Install Holehe via pip."
+        },
+        {
+          "cmd": "holehe target@email.com",
+          "description": "Check which services are associated with this email address. Replace with target email."
+        },
+        {
+          "cmd": "holehe target@email.com --only-used",
+          "description": "Show only services where the email appears to be registered."
+        }
+      ]
+    },
+    {
+      "id": "reverse-image",
+      "title": "Reverse Image Search",
+      "icon": "🖼️",
+      "description": "Find where a particular image appears online or discover visually similar images across publicly accessible sources. Useful for verifying profile pictures and discovering connected accounts.",
+      "note": "A facial image match is a LEAD, not proof of identity. Accuracy varies based on image quality, lighting, angle, and database coverage. Always manually verify using independent public sources.",
+      "tools": [
+        {
+          "name": "Search4Faces",
+          "description": "Facial search service. Upload an image to find visually similar faces across indexed sources.",
+          "link": "https://search4faces.com/"
+        },
+        {
+          "name": "PimEyes",
+          "description": "Reverse image and face search service. Discovers publicly available webpages containing similar facial images.",
+          "link": "https://pimeyes.com/"
+        },
+        {
+          "name": "FaceCheck.ID",
+          "description": "Image-based facial searching from publicly accessible online sources.",
+          "link": "https://facecheck.id/"
+        },
+        {
+          "name": "Google Images",
+          "description": "Built-in reverse image search. Drag and drop or upload any image to find where it appears online.",
+          "link": "https://images.google.com/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "Workflow: Image → Upload to tool → Review results → Manual verification",
+          "description": "Always follow this workflow. Never skip the manual verification step."
+        }
+      ]
+    },
+    {
+      "id": "verification-principles",
+      "title": "OSINT Verification Principles",
+      "icon": "✅",
+      "description": "The most important part of Social Network OSINT is not finding information — it is verifying it. These principles apply to every investigation.",
+      "topics": [
+        "Automation finds leads — human analysis verifies them",
+        "A matching username is a lead, not proof of identity",
+        "A facial match is a lead, not confirmed identity",
+        "An email match is a lead, not proof of ownership",
+        "Always look for multiple independent indicators before attribution",
+        "Compare: profile picture, bio, location, writing style, linked accounts, posting patterns",
+        "Document your findings and sources carefully"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "Sherlock Project",
+      "description": "Open-source username search tool across 300+ platforms.",
+      "link": "https://github.com/sherlock-project/sherlock",
+      "type": "tool"
+    },
+    {
+      "name": "Holehe",
+      "description": "Check email address registration across online services.",
+      "link": "https://github.com/megadose/holehe",
+      "type": "tool"
+    },
+    {
+      "name": "Search4Faces",
+      "description": "Facial image search service for OSINT investigations.",
+      "link": "https://search4faces.com/",
+      "type": "tool"
+    },
+    {
+      "name": "PimEyes",
+      "description": "Reverse image and face search across publicly accessible sources.",
+      "link": "https://pimeyes.com/",
+      "type": "tool"
+    },
+    {
+      "name": "Google Images",
+      "description": "Google reverse image search.",
+      "link": "https://images.google.com/",
+      "type": "tool"
+    }
+  ]
+}
