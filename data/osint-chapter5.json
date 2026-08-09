@@ -1,0 +1,311 @@
+{
+  "chapter": 5,
+  "title": "Online Communities OSINT",
+  "description": "Learn how to investigate online communities, Reddit profiles, archived content, and use crowdsourcing techniques. Includes API access methods for deeper historical research.",
+  "sections": [
+    {
+      "id": "why-communities",
+      "title": "Why Online Communities Matter",
+      "icon": "🌍",
+      "description": "People share far more information in online communities than on their main social media profiles. Communities reveal mindset, background, interests, opinions, and personal details that are impossible to find elsewhere.",
+      "topics": [
+        "Users often share real-life problems, experiences, and personal info in communities",
+        "Usernames and aliases can be traced across multiple communities",
+        "Community posts reveal interests, location hints, work, relationships",
+        "Even 'anonymous' users leave investigative trails through their posts",
+        "Community OSINT provides a completely different perspective than profile OSINT"
+      ],
+      "note": "Always follow community rules before posting. Never share sensitive personal information publicly. Use community answers as leads — verify independently."
+    },
+    {
+      "id": "reddit-dorks",
+      "title": "Reddit Search Techniques",
+      "icon": "🔴",
+      "description": "Reddit has its own search system and also responds to Google dorks. Combine both for maximum coverage.",
+      "commands": [
+        {
+          "cmd": "https://reddit.com/search?q=title:osint",
+          "description": "Search Reddit for posts where 'osint' appears specifically in the title."
+        },
+        {
+          "cmd": "https://reddit.com/user/who_is_the_black_hat",
+          "description": "Go directly to a Reddit user's profile. Replace username to investigate any user."
+        },
+        {
+          "cmd": "https://reddit.com/search?q=site:neurodev.netlify.app",
+          "description": "Find Reddit discussions that mention a specific website or domain."
+        },
+        {
+          "cmd": "site:reddit.com \"surveillance\"",
+          "description": "Google dork to find publicly indexed Reddit pages containing a keyword."
+        },
+        {
+          "cmd": "site:reddit.com \"target_username\" \"keyword\"",
+          "description": "Find Reddit pages connecting a specific username to a topic."
+        },
+        {
+          "cmd": "https://reddit.com/user/TARGET_USERNAME/comments",
+          "description": "View all public comments made by a specific Reddit user."
+        },
+        {
+          "cmd": "https://reddit.com/user/TARGET_USERNAME/submitted",
+          "description": "View all posts submitted by a specific Reddit user."
+        }
+      ]
+    },
+    {
+      "id": "reddit-api",
+      "title": "Reddit APIs & Historical Data",
+      "icon": "⚙️",
+      "description": "Reddit's official API and third-party archives allow deeper investigation including deleted posts, historical comments, and full user activity timelines.",
+      "note": "APIs and archived datasets change over time. If one endpoint is unavailable, try alternatives. Always use APIs within their terms of service.",
+      "commands": [
+        {
+          "cmd": "https://api.pullpush.io/reddit/search/comment/?author=TARGET_USERNAME",
+          "description": "Search historical Reddit comments by a specific username using PullPush API."
+        },
+        {
+          "cmd": "https://api.pullpush.io/reddit/search/submission/?author=TARGET_USERNAME",
+          "description": "Search historical Reddit posts/submissions by a specific username."
+        },
+        {
+          "cmd": "https://api.pullpush.io/reddit/search/comment/?author=TARGET_USERNAME&subreddit=SUBREDDIT",
+          "description": "Filter historical comments by username AND specific subreddit."
+        },
+        {
+          "cmd": "https://www.reddit.com/user/TARGET_USERNAME/about.json",
+          "description": "Reddit's built-in JSON API. Returns public account info: karma, creation date, verified status."
+        },
+        {
+          "cmd": "https://www.reddit.com/r/SUBREDDIT/about.json",
+          "description": "Get public info about any subreddit: subscriber count, description, creation date, moderators."
+        },
+        {
+          "cmd": "https://www.reddit.com/search.json?q=KEYWORD&sort=new&limit=100",
+          "description": "Reddit search API — returns JSON results. Change sort to 'top' or 'relevance'. Max limit 100."
+        }
+      ]
+    },
+    {
+      "id": "other-apis",
+      "title": "OSINT APIs — Key Resources",
+      "icon": "🔑",
+      "description": "These APIs provide powerful data access for OSINT investigations. Some are free, some require registration for an API key. Always read terms of service before use.",
+      "note": "Never hardcode API keys in public code or share them. Store keys in environment variables or a private config file.",
+      "commands": [
+        {
+          "cmd": "https://haveibeenpwned.com/api/v3/breachedaccount/TARGET_EMAIL",
+          "description": "HaveIBeenPwned API — check if an email appears in known data breaches. Requires API key in header: hibp-api-key: YOUR_KEY"
+        },
+        {
+          "cmd": "curl -H 'hibp-api-key: YOUR_API_KEY' https://haveibeenpwned.com/api/v3/breachedaccount/target@email.com",
+          "description": "HaveIBeenPwned breach check via terminal. Get free API key at haveibeenpwned.com."
+        },
+        {
+          "cmd": "https://api.hunter.io/v2/email-finder?domain=company.com&first_name=John&last_name=Smith&api_key=YOUR_KEY",
+          "description": "Hunter.io API — find professional email addresses by name and company domain. 25 free searches/month."
+        },
+        {
+          "cmd": "https://api.hunter.io/v2/domain-search?domain=company.com&api_key=YOUR_KEY",
+          "description": "Hunter.io domain search — find all publicly known emails for a company domain."
+        },
+        {
+          "cmd": "https://api.shodan.io/shodan/host/IP_ADDRESS?key=YOUR_API_KEY",
+          "description": "Shodan API — get open ports, services, and vulnerabilities for an IP address. Free tier available."
+        },
+        {
+          "cmd": "https://api.shodan.io/shodan/host/search?key=YOUR_KEY&query=hostname:target.com",
+          "description": "Shodan search API — find all indexed hosts for a domain. Powerful for infrastructure OSINT."
+        },
+        {
+          "cmd": "https://ipinfo.io/IP_ADDRESS?token=YOUR_TOKEN",
+          "description": "IPInfo API — get geolocation, ISP, org, hostname for any IP. 50,000 free requests/month."
+        },
+        {
+          "cmd": "https://api.viewdns.info/reverseip/?host=domain.com&apikey=YOUR_KEY&output=json",
+          "description": "ViewDNS reverse IP lookup — find all domains hosted on the same IP address."
+        },
+        {
+          "cmd": "https://otx.alienvault.com/api/v1/indicators/domain/TARGET_DOMAIN/general",
+          "description": "AlienVault OTX API — free threat intelligence. Get domain reputation, malware associations, passive DNS."
+        },
+        {
+          "cmd": "https://urlscan.io/api/v1/search/?q=domain:target.com",
+          "description": "URLScan.io API — find all scans of a domain. Shows screenshots, technologies, linked domains. Free."
+        }
+      ]
+    },
+    {
+      "id": "reddit-images",
+      "title": "Finding Images from Communities",
+      "icon": "🖼️",
+      "description": "Images shared in Reddit communities are often hosted on external platforms. Use these techniques to find visual content associated with a subreddit or user.",
+      "commands": [
+        {
+          "cmd": "https://imgur.com/r/SUBREDDIT_NAME",
+          "description": "Find images from a specific subreddit hosted on Imgur. Replace SUBREDDIT_NAME with target community."
+        },
+        {
+          "cmd": "site:imgur.com \"SUBREDDIT_NAME\"",
+          "description": "Google dork to find Imgur images associated with a specific subreddit."
+        },
+        {
+          "cmd": "site:i.redd.it",
+          "description": "Search for images hosted on Reddit's own image hosting (i.redd.it)."
+        },
+        {
+          "cmd": "https://www.reddit.com/r/SUBREDDIT/search?q=&restrict_sr=1&sort=new&t=all",
+          "description": "Browse all posts in a subreddit sorted by newest. Useful for monitoring community activity."
+        }
+      ]
+    },
+    {
+      "id": "archives",
+      "title": "Archives & Deleted Content",
+      "icon": "🗄️",
+      "description": "Archived copies let you view content that has been deleted, changed, or removed from the live internet. Essential for historical OSINT investigations.",
+      "tools": [
+        {
+          "name": "Wayback Machine",
+          "description": "Largest web archive. Search any URL to find historical snapshots.",
+          "link": "https://web.archive.org/"
+        },
+        {
+          "name": "archive.today",
+          "description": "Save and view archived snapshots. Also accessible via archive.is and archive.ph",
+          "link": "https://archive.today/"
+        },
+        {
+          "name": "Reveddit",
+          "description": "Find removed Reddit posts and comments. Enter a username or subreddit to see deleted content.",
+          "link": "https://www.reveddit.com/"
+        },
+        {
+          "name": "Unddit",
+          "description": "View deleted Reddit comments. Replace 'reddit' with 'unddit' in any Reddit URL.",
+          "link": "https://www.unddit.com/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://www.reveddit.com/v/TARGET_USERNAME",
+          "description": "View removed posts and comments for a specific Reddit username."
+        },
+        {
+          "cmd": "https://www.unddit.com/r/SUBREDDIT/comments/POST_ID/",
+          "description": "View deleted comments in a Reddit thread. Replace reddit.com with unddit.com in any thread URL."
+        },
+        {
+          "cmd": "https://web.archive.org/web/*/reddit.com/user/TARGET_USERNAME",
+          "description": "Search Wayback Machine for archived versions of a Reddit user's profile."
+        }
+      ]
+    },
+    {
+      "id": "crowdsourcing",
+      "title": "Crowdsourcing Communities",
+      "icon": "👥",
+      "description": "Specialized Reddit communities can help solve problems you can't solve alone. Different people notice different details — combining knowledge is powerful.",
+      "note": "Read community rules before posting. Never share private data publicly. Treat community answers as leads — always verify independently.",
+      "tools": [
+        {
+          "name": "r/RBI — Reddit Bureau of Investigation",
+          "description": "Community for solving real-world mysteries, puzzles, and identification problems.",
+          "link": "https://reddit.com/r/RBI"
+        },
+        {
+          "name": "r/PicRequest",
+          "description": "Community for image-related help — enhancement, editing, and closer examination.",
+          "link": "https://reddit.com/r/picrequest"
+        },
+        {
+          "name": "r/WhatIsThisThing",
+          "description": "Identify unknown objects, devices, tools, or equipment. One identified object can unlock a major investigative lead.",
+          "link": "https://reddit.com/r/whatisthisthing"
+        },
+        {
+          "name": "r/OSINT",
+          "description": "Main OSINT community on Reddit. Techniques, tools, case studies, and discussions.",
+          "link": "https://reddit.com/r/OSINT"
+        }
+      ],
+      "commands": []
+    },
+    {
+      "id": "extra-techniques",
+      "title": "Extra Techniques — Beyond the Video",
+      "icon": "⚡",
+      "description": "Additional OSINT techniques for online community investigation that go deeper than basic searches.",
+      "commands": [
+        {
+          "cmd": "https://camas.unddit.com/#%7B%22author%22:%22TARGET_USERNAME%22%7D",
+          "description": "Camas Reddit search — advanced search through historical Reddit data by author, subreddit, keyword, date range."
+        },
+        {
+          "cmd": "https://api.pushshift.io/reddit/search/comment/?author=TARGET&before=UNIX_TIMESTAMP&after=UNIX_TIMESTAMP",
+          "description": "Pushshift API with date range filter. Use Unix timestamps to search comments within a specific time period."
+        },
+        {
+          "cmd": "site:reddit.com inurl:user/TARGET_USERNAME",
+          "description": "Google dork to find all indexed pages related to a specific Reddit username."
+        },
+        {
+          "cmd": "https://www.reddit.com/user/TARGET_USERNAME.json?limit=100",
+          "description": "Get raw JSON of a user's recent activity — posts and comments combined. No API key needed."
+        },
+        {
+          "cmd": "https://api.reddit.com/user/TARGET_USERNAME/comments?limit=100&sort=new",
+          "description": "Reddit API — get latest 100 comments from a user. Returns JSON with full comment text, subreddit, timestamp."
+        },
+        {
+          "cmd": "python3 -c \"import datetime; print(int(datetime.datetime(2023,1,1).timestamp()))\"",
+          "description": "Convert a date to Unix timestamp for use in API date filters."
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "PullPush Reddit API",
+      "description": "Historical Reddit data API. Search deleted and archived posts/comments by author, subreddit, keyword.",
+      "link": "https://pullpush.io/",
+      "type": "tool"
+    },
+    {
+      "name": "HaveIBeenPwned",
+      "description": "Check if an email appears in known data breaches. Free API available.",
+      "link": "https://haveibeenpwned.com/",
+      "type": "tool"
+    },
+    {
+      "name": "Shodan",
+      "description": "Search engine for internet-connected devices. Free tier + API available.",
+      "link": "https://www.shodan.io/",
+      "type": "tool"
+    },
+    {
+      "name": "Hunter.io",
+      "description": "Find professional email addresses by domain or name. 25 free searches/month.",
+      "link": "https://hunter.io/",
+      "type": "tool"
+    },
+    {
+      "name": "Reveddit",
+      "description": "View removed Reddit posts and comments by username or subreddit.",
+      "link": "https://www.reveddit.com/",
+      "type": "tool"
+    },
+    {
+      "name": "URLScan.io",
+      "description": "Free website scanner and OSINT tool. Find domain history, technologies, linked resources.",
+      "link": "https://urlscan.io/",
+      "type": "tool"
+    },
+    {
+      "name": "AlienVault OTX",
+      "description": "Free threat intelligence platform. Domain/IP reputation, passive DNS, malware associations.",
+      "link": "https://otx.alienvault.com/",
+      "type": "tool"
+    }
+  ]
+}
