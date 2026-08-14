@@ -1,0 +1,530 @@
+{
+  "chapter": 6,
+  "title": "Email & Username Investigation",
+  "description": "Learn how to investigate email addresses and usernames as starting points for building a target's public digital footprint. Covers verification, GHunt, BSSID, and username enumeration.",
+  "sections": [
+    {
+      "id": "email-intro",
+      "title": "Email as a Starting Point",
+      "icon": "📧",
+      "description": "An email address is not a direct path to a person's identity. It is a starting point for further investigation. The email may contain a username or identifier that appears on other publicly accessible services.",
+      "topics": [
+        "Email may never have been publicly indexed by search engines",
+        "Website containing it may block search-engine indexing",
+        "Could belong to an organization, business, or public figure",
+        "Email username part may appear on other platforms",
+        "Always verify the email first before deeper investigation"
+      ],
+      "note": "Never treat email investigation as: Find email → Find person. Think of it as a starting point. Verify first, then investigate step by step."
+    },
+    {
+      "id": "email-tools",
+      "title": "Email Verification Tools",
+      "icon": "🔍",
+      "description": "These tools help verify whether an email address is valid and discover publicly associated information.",
+      "tools": [
+        {
+          "name": "EmailSherlock",
+          "description": "Search for publicly associated information using an email address or username. Verify email existence and find linked accounts.",
+          "link": "https://emailsherlock.com/"
+        },
+        {
+          "name": "theHarvester",
+          "description": "Search for publicly available contacts and information associated with an organization or domain. Pre-installed in Kali Linux.",
+          "link": "https://github.com/laramies/theHarvester"
+        },
+        {
+          "name": "Hunter.io",
+          "description": "Find and verify professional email addresses by company domain. 25 free searches per month.",
+          "link": "https://hunter.io/"
+        },
+        {
+          "name": "Epieos",
+          "description": "OSINT tool for email investigation. Finds Google account info, social profiles, and breach data linked to an email.",
+          "link": "https://epieos.com/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "theHarvester -d company.com -b google",
+          "description": "Search for emails and subdomains associated with a company domain using Google."
+        },
+        {
+          "cmd": "theHarvester -d company.com -b all",
+          "description": "Search all available sources for emails, hosts, and IPs related to a domain."
+        },
+        {
+          "cmd": "theHarvester -d company.com -b linkedin",
+          "description": "Search LinkedIn specifically for employees and emails of a company."
+        }
+      ]
+    },
+    {
+      "id": "ghunt",
+      "title": "GHunt — Gmail OSINT",
+      "icon": "🔎",
+      "description": "GHunt is an OSINT tool that gathers publicly available information associated with Google accounts and Gmail addresses. It can reveal account details, linked services, and more.",
+      "note": "GHunt can only work with information that is publicly available. Not every Gmail address will return the same amount of information.",
+      "tools": [
+        {
+          "name": "GHunt",
+          "description": "OSINT tool for Gmail and Google account investigation. Requires authentication setup via GHunt Companion Firefox extension.",
+          "link": "https://github.com/mxrch/GHunt"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "git clone https://github.com/mxrch/GHunt.git",
+          "description": "Download GHunt from GitHub."
+        },
+        {
+          "cmd": "cd GHunt && pip3 install -r requirements.txt",
+          "description": "Install GHunt dependencies. Use a Python virtual environment (venv) for cleaner setup."
+        },
+        {
+          "cmd": "python3 -m venv ghunt-env && source ghunt-env/bin/activate",
+          "description": "Create and activate a Python virtual environment for GHunt."
+        },
+        {
+          "cmd": "ghunt login",
+          "description": "Start GHunt authentication. Select Option 2, then use GHunt Companion Firefox extension to get the Base64 code."
+        },
+        {
+          "cmd": "ghunt email target@gmail.com",
+          "description": "Investigate a Gmail address. Returns publicly available account info, linked services, and more."
+        },
+        {
+          "cmd": "ghunt gaia TARGET_GAIA_ID",
+          "description": "Investigate a Google account using its Gaia ID (internal Google account identifier)."
+        },
+        {
+          "cmd": "ghunt drive TARGET_DRIVE_URL",
+          "description": "Investigate a publicly shared Google Drive file or folder URL."
+        }
+      ]
+    },
+    {
+      "id": "bssid",
+      "title": "BSSID Investigation",
+      "icon": "📡",
+      "description": "BSSID (Basic Service Set Identifier) is the MAC address of a wireless access point. Location databases sometimes associate BSSIDs with approximate geographic locations collected over time.",
+      "note": "A BSSID is NOT an exact location and does NOT directly reveal GPS coordinates. Treat any location returned as an approximate lead that needs independent verification.",
+      "commands": [
+        {
+          "cmd": "ghunt --bssid TARGET_BSSID",
+          "description": "Look up approximate location associated with a Wi-Fi access point BSSID using GHunt."
+        },
+        {
+          "cmd": "https://api.mylnikov.org/geolocation/wifi?v=1.1&bssid=TARGET_BSSID",
+          "description": "Free BSSID geolocation API. Returns approximate lat/long associated with a Wi-Fi access point."
+        },
+        {
+          "cmd": "curl 'https://api.mylnikov.org/geolocation/wifi?v=1.1&bssid=00:11:22:33:44:55'",
+          "description": "Example BSSID lookup via terminal. Replace MAC address with target BSSID."
+        }
+      ]
+    },
+    {
+      "id": "username-tools",
+      "title": "Username Investigation Tools",
+      "icon": "👤",
+      "description": "Username investigation helps discover where a specific username appears across the internet. Always manually verify results — a matching username does not mean all accounts belong to the same person.",
+      "note": "Automated tools can produce false positives. Compare profile pictures, bios, linked websites, posting patterns, and other independent indicators before making any attribution.",
+      "tools": [
+        {
+          "name": "Sherlock",
+          "description": "Search for a username across 300+ platforms. Open-source Python tool.",
+          "link": "https://github.com/sherlock-project/sherlock"
+        },
+        {
+          "name": "WhatsMyName",
+          "description": "Username enumeration across hundreds of sites. More accurate than Sherlock for some platforms.",
+          "link": "https://whatsmyname.app/"
+        },
+        {
+          "name": "Namechk",
+          "description": "Check username availability across social networks and domains. Useful for finding registered accounts.",
+          "link": "https://namechk.com/"
+        },
+        {
+          "name": "UserSearch.org",
+          "description": "Search for a username across multiple social platforms simultaneously.",
+          "link": "https://usersearch.org/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "python3 sherlock target_username",
+          "description": "Search for username across 300+ platforms."
+        },
+        {
+          "cmd": "python3 sherlock target_username --timeout 10 --print-found",
+          "description": "Search with 10 second timeout, only print found accounts."
+        },
+        {
+          "cmd": "python3 sherlock target_username --csv",
+          "description": "Export results to CSV file for documentation."
+        },
+        {
+          "cmd": "python3 sherlock user1 user2 user3",
+          "description": "Search multiple usernames at once."
+        }
+      ]
+    },
+    {
+      "id": "extra-email-techniques",
+      "title": "Extra Techniques — Email & Username",
+      "icon": "⚡",
+      "description": "Additional techniques for deeper email and username investigation not covered in the video.",
+      "commands": [
+        {
+          "cmd": "curl -H 'hibp-api-key: YOUR_KEY' https://haveibeenpwned.com/api/v3/breachedaccount/target@email.com",
+          "description": "Check if email appears in known data breaches using HaveIBeenPwned API."
+        },
+        {
+          "cmd": "curl https://api.hunter.io/v2/email-verifier?email=target@company.com&api_key=YOUR_KEY",
+          "description": "Hunter.io email verifier API — check if an email address is valid and deliverable."
+        },
+        {
+          "cmd": "holehe target@email.com --only-used",
+          "description": "Check which online services are registered with this email address."
+        },
+        {
+          "cmd": "\"target@email.com\" site:pastebin.com",
+          "description": "Search Pastebin for leaked data containing a specific email address."
+        },
+        {
+          "cmd": "\"target@email.com\" site:github.com",
+          "description": "Search GitHub for code or commits containing a specific email address."
+        },
+        {
+          "cmd": "https://github.com/search?q=TARGET_EMAIL&type=commits",
+          "description": "Search GitHub commits for an email address. Developers often expose emails in git commits."
+        },
+        {
+          "cmd": "nslookup -type=MX company.com",
+          "description": "Find mail server (MX records) for a domain."
+        },
+        {
+          "cmd": "dig MX company.com +short",
+          "description": "Get MX records for a domain using dig command."
+        }
+      ]
+    },
+    {
+      "id": "metadata-osint",
+      "title": "Metadata Extraction — Hidden Data in Files",
+      "icon": "🗂️",
+      "description": "Every file — image, PDF, Word document — contains hidden metadata. This can reveal the author's name, GPS coordinates, device info, software used, and creation timestamps. Most people never think about this.",
+      "note": "Images shared on social media often have GPS stripped by the platform. But images shared via direct links, forums, or personal websites may still contain full EXIF data.",
+      "tools": [
+        {
+          "name": "ExifTool",
+          "description": "Most powerful metadata extraction tool. Works on images, PDFs, videos, audio, and 100+ file formats.",
+          "link": "https://exiftool.org/"
+        },
+        {
+          "name": "Jeffrey's Exif Viewer",
+          "description": "Online EXIF viewer. Paste any image URL to extract metadata without downloading.",
+          "link": "https://exif.regex.info/exif.cgi"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "exiftool image.jpg",
+          "description": "Extract all metadata from an image. May reveal GPS, device model, software, timestamps."
+        },
+        {
+          "cmd": "exiftool -GPS* image.jpg",
+          "description": "Extract only GPS-related metadata from an image."
+        },
+        {
+          "cmd": "exiftool -Author -Creator -Producer document.pdf",
+          "description": "Extract author, creator, and producer info from a PDF document."
+        },
+        {
+          "cmd": "exiftool -r /path/to/folder/",
+          "description": "Recursively extract metadata from all files in a folder."
+        },
+        {
+          "cmd": "exiftool -csv *.jpg > metadata.csv",
+          "description": "Export metadata from all JPG files to a CSV for analysis."
+        },
+        {
+          "cmd": "strings document.pdf | grep -i 'author\\|creator\\|email'",
+          "description": "Extract readable strings from a PDF to find hidden author or email info."
+        }
+      ]
+    },
+    {
+      "id": "certificate-transparency",
+      "title": "Certificate Transparency Logs",
+      "icon": "🔐",
+      "description": "Every SSL/TLS certificate issued for a domain is publicly logged. This reveals ALL subdomains — including internal, staging, and forgotten ones that never appear in search engines.",
+      "note": "This is one of the most underused OSINT techniques. Companies often expose internal infrastructure through certificate logs without realizing it.",
+      "tools": [
+        {
+          "name": "crt.sh",
+          "description": "Free certificate transparency search. Find all subdomains and certificates for any domain.",
+          "link": "https://crt.sh/"
+        },
+        {
+          "name": "Censys",
+          "description": "Search engine for internet-connected devices and certificates.",
+          "link": "https://search.censys.io/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://crt.sh/?q=%.target.com",
+          "description": "Find ALL subdomains of target.com via certificate transparency logs. The % is a wildcard."
+        },
+        {
+          "cmd": "curl -s 'https://crt.sh/?q=%.target.com&output=json' | python3 -m json.tool",
+          "description": "Get certificate data as JSON and format it for easy reading."
+        },
+        {
+          "cmd": "curl -s 'https://crt.sh/?q=%.target.com&output=json' | python3 -c \"import json,sys; [print(d['name_value']) for d in json.load(sys.stdin)]\" | sort -u",
+          "description": "Extract and deduplicate all subdomains from certificate transparency logs."
+        },
+        {
+          "cmd": "https://crt.sh/?q=target@email.com",
+          "description": "Search certificates registered with a specific email. Reveals domains owned by that email."
+        }
+      ]
+    },
+    {
+      "id": "github-osint",
+      "title": "GitHub OSINT — Developers Leak Everything",
+      "icon": "🐙",
+      "description": "GitHub is a goldmine for OSINT. Developers accidentally commit API keys, passwords, internal URLs, and email addresses. Even deleted code can be recovered from git history.",
+      "note": "Never use found credentials for unauthorized access. This technique is for understanding exposure and digital footprint only.",
+      "tools": [
+        {
+          "name": "TruffleHog",
+          "description": "Scans git history for high-entropy strings and known secret patterns (API keys, passwords).",
+          "link": "https://github.com/trufflesecurity/trufflehog"
+        },
+        {
+          "name": "GitDorker",
+          "description": "Automated GitHub dorking tool. Searches for secrets and sensitive data across repositories.",
+          "link": "https://github.com/obheda12/GitDorker"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://github.com/search?q=TARGET_EMAIL&type=commits",
+          "description": "Search all GitHub commits for a specific email address."
+        },
+        {
+          "cmd": "https://github.com/search?q=\"api_key\" user:TARGET_USERNAME",
+          "description": "Search a specific user's repositories for exposed API keys."
+        },
+        {
+          "cmd": "https://github.com/search?q=\"password\" user:TARGET_USERNAME&type=code",
+          "description": "Search a user's code for hardcoded passwords."
+        },
+        {
+          "cmd": "trufflehog git https://github.com/TARGET_USER/TARGET_REPO",
+          "description": "Scan a GitHub repository's full history for leaked secrets and API keys."
+        },
+        {
+          "cmd": "https://api.github.com/users/TARGET_USERNAME",
+          "description": "GitHub API — get public profile: name, bio, location, company, followers, creation date."
+        },
+        {
+          "cmd": "https://api.github.com/users/TARGET_USERNAME/repos",
+          "description": "List all public repositories of a GitHub user with full metadata."
+        },
+        {
+          "cmd": "https://api.github.com/users/TARGET_USERNAME/events/public",
+          "description": "Get recent public activity of a GitHub user — commits, comments, stars."
+        }
+      ]
+    },
+    {
+      "id": "telegram-osint",
+      "title": "Telegram OSINT",
+      "icon": "✈️",
+      "description": "Telegram is widely used and often overlooked in OSINT. Public groups, channels, and usernames can reveal a lot about a target's activities, connections, and identity.",
+      "note": "Telegram shows phone numbers only to contacts. But username, bio, profile picture, and group memberships are often publicly visible.",
+      "tools": [
+        {
+          "name": "TGStat",
+          "description": "Telegram channel and group analytics. Search by keyword, find related channels, view growth stats.",
+          "link": "https://tgstat.com/"
+        },
+        {
+          "name": "Telegago",
+          "description": "Google-powered Telegram search engine. Find public groups and channels by keyword.",
+          "link": "https://cse.google.com/cse?cx=006368593537057042503:efxu7xprihg"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://t.me/TARGET_USERNAME",
+          "description": "Direct link to a Telegram user or channel profile. View public bio and profile picture."
+        },
+        {
+          "cmd": "site:t.me \"keyword\"",
+          "description": "Google dork to find public Telegram groups and channels related to a keyword."
+        },
+        {
+          "cmd": "site:t.me \"TARGET_USERNAME\"",
+          "description": "Search for a Telegram username across indexed pages."
+        },
+        {
+          "cmd": "https://api.telegram.org/bot<TOKEN>/getChat?chat_id=@TARGET_USERNAME",
+          "description": "Telegram Bot API — get public info about any channel or group. Requires a bot token."
+        }
+      ]
+    },
+    {
+      "id": "phone-osint",
+      "title": "Phone Number OSINT",
+      "icon": "📱",
+      "description": "A phone number can reveal carrier, country, region, and linked accounts. Many services use phone numbers as identifiers that can be cross-referenced across platforms.",
+      "note": "Phone number lookup results vary by country and carrier. Always verify findings independently.",
+      "tools": [
+        {
+          "name": "PhoneInfoga",
+          "description": "Advanced phone number OSINT tool. Scans multiple sources for carrier, location, and linked accounts.",
+          "link": "https://github.com/sundowndev/phoneinfoga"
+        },
+        {
+          "name": "NumLookup",
+          "description": "Free phone number lookup. Returns carrier, line type, and country info.",
+          "link": "https://www.numlookup.com/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "git clone https://github.com/sundowndev/phoneinfoga.git && cd phoneinfoga",
+          "description": "Download PhoneInfoga from GitHub."
+        },
+        {
+          "cmd": "phoneinfoga scan -n +1234567890",
+          "description": "Scan a phone number. Use international format with country code (e.g. +92 for Pakistan)."
+        },
+        {
+          "cmd": "phoneinfoga serve",
+          "description": "Launch PhoneInfoga web interface on localhost for easier use."
+        },
+        {
+          "cmd": "curl 'https://api.numlookupapi.com/v1/info/+1234567890?apikey=YOUR_KEY'",
+          "description": "NumLookup API — get carrier, line type, country for a phone number."
+        },
+        {
+          "cmd": "\"+1234567890\" site:linkedin.com OR site:facebook.com OR site:twitter.com",
+          "description": "Search for a phone number across major social platforms."
+        }
+      ]
+    },
+    {
+      "id": "dns-passive",
+      "title": "DNS & Passive DNS OSINT",
+      "icon": "🌐",
+      "description": "DNS records reveal infrastructure, hosting history, and connected services. Passive DNS databases store historical DNS records — showing where a domain pointed in the past, even if changed.",
+      "commands": [
+        {
+          "cmd": "dig ANY target.com +noall +answer",
+          "description": "Get all DNS records for a domain: A, MX, NS, TXT, CNAME records."
+        },
+        {
+          "cmd": "dig TXT target.com +short",
+          "description": "Get TXT records — often contains SPF, DKIM, verification tokens that reveal services used."
+        },
+        {
+          "cmd": "curl -s 'https://api.hackertarget.com/dnslookup/?q=target.com'",
+          "description": "Free DNS lookup API — returns all DNS records for a domain. No key needed."
+        },
+        {
+          "cmd": "curl -s 'https://api.hackertarget.com/reverseiplookup/?q=IP_ADDRESS'",
+          "description": "Reverse IP lookup — find all domains hosted on the same IP address."
+        },
+        {
+          "cmd": "curl -s 'https://api.hackertarget.com/hostsearch/?q=target.com'",
+          "description": "Find all subdomains of a domain using HackerTarget API. Free, no key needed."
+        },
+        {
+          "cmd": "https://securitytrails.com/domain/target.com/history/a",
+          "description": "SecurityTrails — view full DNS history. Shows past IP addresses and hosting changes."
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "GHunt",
+      "description": "Gmail and Google account OSINT tool.",
+      "link": "https://github.com/mxrch/GHunt",
+      "type": "tool"
+    },
+    {
+      "name": "EmailSherlock",
+      "description": "Email investigation and verification tool.",
+      "link": "https://emailsherlock.com/",
+      "type": "tool"
+    },
+    {
+      "name": "Epieos",
+      "description": "Email OSINT — Google account info, social profiles, breach data.",
+      "link": "https://epieos.com/",
+      "type": "tool"
+    },
+    {
+      "name": "WhatsMyName",
+      "description": "Username enumeration across hundreds of platforms.",
+      "link": "https://whatsmyname.app/",
+      "type": "tool"
+    },
+    {
+      "name": "HaveIBeenPwned",
+      "description": "Check email breach status. Free API available.",
+      "link": "https://haveibeenpwned.com/",
+      "type": "tool"
+    },
+    {
+      "name": "Hunter.io",
+      "description": "Email finder and verifier. 25 free searches/month.",
+      "link": "https://hunter.io/",
+      "type": "tool"
+    },
+    {
+      "name": "ExifTool",
+      "description": "Metadata extraction from images, PDFs, and 100+ file formats.",
+      "link": "https://exiftool.org/",
+      "type": "tool"
+    },
+    {
+      "name": "crt.sh",
+      "description": "Certificate transparency log search. Find all subdomains via SSL certificates.",
+      "link": "https://crt.sh/",
+      "type": "tool"
+    },
+    {
+      "name": "TruffleHog",
+      "description": "Scan git history for leaked API keys and secrets.",
+      "link": "https://github.com/trufflesecurity/trufflehog",
+      "type": "tool"
+    },
+    {
+      "name": "PhoneInfoga",
+      "description": "Advanced phone number OSINT tool.",
+      "link": "https://github.com/sundowndev/phoneinfoga",
+      "type": "tool"
+    },
+    {
+      "name": "TGStat",
+      "description": "Telegram channel analytics and search.",
+      "link": "https://tgstat.com/",
+      "type": "tool"
+    },
+    {
+      "name": "SecurityTrails",
+      "description": "DNS history and passive DNS database.",
+      "link": "https://securitytrails.com/",
+      "type": "tool"
+    }
+  ]
+}
