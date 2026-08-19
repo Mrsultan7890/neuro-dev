@@ -1,0 +1,615 @@
+{
+  "chapter": 7,
+  "title": "People Search & Telephone OSINT",
+  "description": "Deep dive into people search engines, telephone number investigation, VoIP analysis, carrier lookup, and advanced phone OSINT techniques. Covers CLI tools, GUI tools, APIs, and manual techniques.",
+  "sections": [
+    {
+      "id": "people-search-intro",
+      "title": "What Are People Search Engines?",
+      "icon": "👥",
+      "description": "People search engines aggregate publicly available information from multiple sources — public records, online directories, social media, websites — and present it in one place. Originally US-focused but now global.",
+      "topics": [
+        "Aggregates data from public records, directories, social media",
+        "Use pivoting — one piece of info leads to another",
+        "Never click random advertisements on these sites",
+        "Document everything you find — data is data",
+        "Don't pay for information — focus on free techniques",
+        "Aggregation does not mean accuracy — always verify"
+      ],
+      "note": "A search result is only a lead until you independently confirm it belongs to your target. Same name can belong to different people. Databases can be outdated."
+    },
+    {
+      "id": "people-search-tools",
+      "title": "People Search Websites",
+      "icon": "🔍",
+      "description": "These services search publicly available records using name, phone, email, or address. Use them as starting points for pivoting — not as final answers.",
+      "tools": [
+        {
+          "name": "ThatsThem",
+          "description": "Search by name, phone, email, address, or IP. One of the most comprehensive free people search engines.",
+          "link": "https://thatsthem.com/"
+        },
+        {
+          "name": "Spokeo",
+          "description": "Aggregates social media, public records, and contact info. Good for US-based targets.",
+          "link": "https://www.spokeo.com/"
+        },
+        {
+          "name": "Intelius",
+          "description": "Background check and people search. Provides address history, relatives, and associated phone numbers.",
+          "link": "https://www.intelius.com/"
+        },
+        {
+          "name": "AdvancedBackgroundChecks",
+          "description": "Free people search with name, phone, address lookup. Good for finding associated relatives.",
+          "link": "https://www.advancedbackgroundchecks.com/"
+        },
+        {
+          "name": "FastPeopleSearch",
+          "description": "Free reverse phone and name lookup. Shows address history and associated people.",
+          "link": "https://www.fastpeoplesearch.com/"
+        },
+        {
+          "name": "TruePeopleSearch",
+          "description": "Completely free people search. Name, phone, address lookup with associated relatives.",
+          "link": "https://www.truepeoplesearch.com/"
+        },
+        {
+          "name": "Pipl",
+          "description": "Deep web people search. Finds profiles from sources not indexed by regular search engines.",
+          "link": "https://pipl.com/"
+        },
+        {
+          "name": "Webmii",
+          "description": "People search focused on online presence — social profiles, news mentions, images.",
+          "link": "https://webmii.com/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://thatsthem.com/name/John-Smith",
+          "description": "Direct URL search on ThatsThem by name. Replace with target name."
+        },
+        {
+          "cmd": "https://thatsthem.com/phone/1234567890",
+          "description": "Reverse phone lookup on ThatsThem."
+        },
+        {
+          "cmd": "https://thatsthem.com/email/target@email.com",
+          "description": "Search ThatsThem by email address."
+        },
+        {
+          "cmd": "https://www.truepeoplesearch.com/results?name=John+Smith&citystatezip=New+York",
+          "description": "TruePeopleSearch by name and location."
+        }
+      ]
+    },
+    {
+      "id": "hidden-info-trick",
+      "title": "Bypassing Hidden Info on People Search Sites",
+      "icon": "🕵️",
+      "description": "Many people search sites blur or hide information behind paywalls. These browser tricks can sometimes reveal hidden data without paying.",
+      "note": "This works on some sites where data is loaded in the DOM but visually hidden with CSS. It does not bypass actual server-side paywalls.",
+      "commands": [
+        {
+          "cmd": "F12 → Elements tab → Ctrl+F → search 'display'",
+          "description": "Open DevTools, find CSS display property on blurred elements and change it to 'initial' or 'block'."
+        },
+        {
+          "cmd": "Right-click blurred content → Inspect → find display:none or visibility:hidden → change to visible",
+          "description": "Inspect blurred element directly and remove CSS hiding properties."
+        },
+        {
+          "cmd": "Ctrl+U → Ctrl+F → search for phone/email patterns",
+          "description": "View page source and search for phone number or email patterns that may be in the HTML."
+        },
+        {
+          "cmd": "document.querySelectorAll('[style*=\"blur\"]').forEach(el => el.style.filter = 'none')",
+          "description": "Run in browser console to remove all CSS blur filters on the page."
+        },
+        {
+          "cmd": "document.querySelectorAll('.blurred, .hidden, .redacted').forEach(el => el.style.cssText = 'filter:none;opacity:1;visibility:visible')",
+          "description": "Remove common blur/hidden CSS classes via browser console."
+        }
+      ]
+    },
+    {
+      "id": "pivoting",
+      "title": "OSINT Pivoting Technique",
+      "icon": "🔄",
+      "description": "Pivoting is the core skill of people search OSINT. Take one piece of information and use it to discover additional related information. Chain multiple pivots to build a complete picture.",
+      "topics": [
+        "Name → Phone number → Address → Relatives",
+        "Email → Username → Social profiles → Location",
+        "Phone → Carrier → VoIP provider → Linked accounts",
+        "Address → Property records → Owner name → Business records",
+        "Username → GitHub → Email in commits → Real name",
+        "Profile picture → Reverse image → Other platforms → Location metadata"
+      ],
+      "commands": [
+        {
+          "cmd": "https://www.familytreenow.com/search/people/results?first=John&last=Smith",
+          "description": "FamilyTreeNow — find relatives, address history, and associated people. Useful for building family connections."
+        },
+        {
+          "cmd": "https://www.whitepages.com/name/John-Smith",
+          "description": "Whitepages people search — name, phone, address lookup."
+        },
+        {
+          "cmd": "https://www.zabasearch.com/",
+          "description": "ZabaSearch — free people search with address and phone history."
+        }
+      ]
+    },
+    {
+      "id": "phone-basics",
+      "title": "Telephone Number OSINT — Basics",
+      "icon": "📞",
+      "description": "Phone number investigation starts with understanding what type of number you are dealing with. The number type determines what information is available and what investigative steps to take next.",
+      "topics": [
+        "Step 1: Carrier identification — who provides this number?",
+        "Step 2: Number type — mobile, landline, or VoIP?",
+        "Step 3: Geographic region — country, area code, city",
+        "Step 4: Reverse lookup — who is associated with this number?",
+        "Step 5: Cross-reference — does this number appear elsewhere online?"
+      ],
+      "commands": [
+        {
+          "cmd": "https://whocalled.com",
+          "description": "Reverse phone lookup. Find carrier, number type, and user reports about a number."
+        },
+        {
+          "cmd": "https://www.truecaller.com/search/in/+1234567890",
+          "description": "Truecaller reverse lookup. Widely used in South Asia. Replace country code and number."
+        },
+        {
+          "cmd": "https://www.numverify.com/",
+          "description": "Phone number validation and carrier lookup API. Free tier available."
+        },
+        {
+          "cmd": "curl 'http://apilayer.net/api/validate?access_key=YOUR_KEY&number=+1234567890'",
+          "description": "Numverify API — returns carrier, line type, country, location for any phone number."
+        }
+      ]
+    },
+    {
+      "id": "voip-explained",
+      "title": "VoIP — Understanding the Technology",
+      "icon": "🌐",
+      "description": "VoIP (Voice over Internet Protocol) transmits voice as digital packets over the internet instead of traditional telephone networks. Understanding VoIP is critical for phone OSINT.",
+      "topics": [
+        "Fixed VoIP — tied to a physical location (home/office). More traceable.",
+        "Non-fixed VoIP — not tied to a location. Easier to obtain anonymously.",
+        "Google Voice, Twilio, TextNow, Burner — common VoIP providers",
+        "SIP (Session Initiation Protocol) — manages call setup and termination",
+        "RTP (Real-time Transport Protocol) — carries actual voice/video data",
+        "PSTN (Public Switched Telephone Network) — traditional phone infrastructure",
+        "VPN does NOT make VoIP untraceable — account records, payment info, device data still exist"
+      ],
+      "note": "If carrier lookup shows Google Voice, Twilio, or similar — it is likely a VoIP number. This means the number may not be tied to a real physical location or identity."
+    },
+    {
+      "id": "carrier-lookup",
+      "title": "Carrier Lookup — CLI & API Tools",
+      "icon": "📡",
+      "description": "Carrier lookup identifies the telecommunications provider associated with a phone number. This is always the first step in telephone OSINT.",
+      "tools": [
+        {
+          "name": "PhoneInfoga",
+          "description": "Most powerful open-source phone OSINT tool. Carrier, region, VoIP detection, and multi-source scanning.",
+          "link": "https://github.com/sundowndev/phoneinfoga"
+        },
+        {
+          "name": "Numverify",
+          "description": "Phone validation API. Returns carrier, line type, country, location. Free tier: 100 requests/month.",
+          "link": "https://numverify.com/"
+        },
+        {
+          "name": "OpenCNAM",
+          "description": "Caller ID and CNAM lookup API. Returns the registered name associated with a phone number.",
+          "link": "https://www.opencnam.com/"
+        },
+        {
+          "name": "Twilio Lookup API",
+          "description": "Enterprise-grade phone lookup. Returns carrier, line type, caller name. Requires Twilio account.",
+          "link": "https://www.twilio.com/docs/lookup"
+        },
+        {
+          "name": "WhoCalledMe",
+          "description": "Community-based reverse phone lookup. Shows user reports and spam ratings.",
+          "link": "https://whocalled.com/"
+        },
+        {
+          "name": "CallerIDService",
+          "description": "CNAM and carrier lookup API for telephone number investigation.",
+          "link": "https://www.calleridservice.com/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "phoneinfoga scan -n +1234567890",
+          "description": "Full phone scan — carrier, region, VoIP detection, and online presence search."
+        },
+        {
+          "cmd": "phoneinfoga scan -n +1234567890 -o results.json",
+          "description": "Save PhoneInfoga results to JSON file for documentation."
+        },
+        {
+          "cmd": "phoneinfoga serve -p 8080",
+          "description": "Launch PhoneInfoga web GUI on port 8080. Open http://localhost:8080 in browser."
+        },
+        {
+          "cmd": "curl 'http://apilayer.net/api/validate?access_key=YOUR_KEY&number=+1234567890&format=1'",
+          "description": "Numverify API — validate number and get carrier, line type, country info."
+        },
+        {
+          "cmd": "curl -X GET 'https://lookups.twilio.com/v1/PhoneNumbers/+1234567890?Type=carrier' -u ACCOUNT_SID:AUTH_TOKEN",
+          "description": "Twilio Lookup API — get carrier and line type for a phone number."
+        },
+        {
+          "cmd": "curl 'https://api.opencnam.com/v3/phone/+1234567890?account_sid=SID&auth_token=TOKEN'",
+          "description": "OpenCNAM API — get registered caller name for a phone number."
+        }
+      ]
+    },
+    {
+      "id": "reverse-phone-lookup",
+      "title": "Reverse Phone Lookup Techniques",
+      "icon": "🔁",
+      "description": "Reverse phone lookup finds who owns or is associated with a phone number. Combine multiple sources for best results.",
+      "commands": [
+        {
+          "cmd": "\"+1234567890\" site:facebook.com OR site:linkedin.com OR site:twitter.com",
+          "description": "Search for a phone number across major social platforms using Google dorks."
+        },
+        {
+          "cmd": "\"+1234567890\"",
+          "description": "Simple Google search for a phone number in international format. Often finds forum posts, listings, and profiles."
+        },
+        {
+          "cmd": "https://www.truecaller.com/search/us/+1234567890",
+          "description": "Truecaller reverse lookup. Change country code (us, in, pk) based on target."
+        },
+        {
+          "cmd": "https://www.whitepages.com/phone/1234567890",
+          "description": "Whitepages reverse phone lookup."
+        },
+        {
+          "cmd": "https://www.anywho.com/reverse-lookup/1234567890",
+          "description": "AnyWho reverse phone lookup — name and address associated with number."
+        },
+        {
+          "cmd": "https://www.411.com/phone/1234567890",
+          "description": "411.com reverse phone lookup."
+        },
+        {
+          "cmd": "site:pastebin.com \"+1234567890\"",
+          "description": "Search Pastebin for leaked data containing a specific phone number."
+        },
+        {
+          "cmd": "https://www.google.com/search?q=%221234567890%22+filetype:pdf",
+          "description": "Search for a phone number in publicly indexed PDF documents."
+        }
+      ]
+    },
+    {
+      "id": "voip-investigation",
+      "title": "VoIP Number Investigation",
+      "icon": "☎️",
+      "description": "When a number is identified as VoIP, standard reverse lookup may not work. These techniques help investigate VoIP numbers specifically.",
+      "note": "VoIP numbers can be registered with fake names. Focus on behavioral patterns, linked accounts, and cross-platform correlation rather than just the number itself.",
+      "tools": [
+        {
+          "name": "TextNow Lookup",
+          "description": "TextNow is a popular free VoIP service. Numbers can sometimes be looked up via their app.",
+          "link": "https://www.textnow.com/"
+        },
+        {
+          "name": "Google Voice",
+          "description": "Google Voice numbers appear in carrier lookups as Google. Account linked to a Google account.",
+          "link": "https://voice.google.com/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "curl 'http://apilayer.net/api/validate?access_key=YOUR_KEY&number=+1234567890'",
+          "description": "Check if number is VoIP. Look for 'line_type': 'voip' in the response."
+        },
+        {
+          "cmd": "https://www.google.com/search?q=\"+1234567890\" \"google voice\" OR \"textnow\" OR \"twilio\" OR \"burner\"",
+          "description": "Search for VoIP provider associations with a specific number."
+        },
+        {
+          "cmd": "whois $(dig +short $(host 1234567890.e164.arpa | awk '{print $NF}'))",
+          "description": "Advanced: ENUM lookup — maps phone numbers to internet services via DNS."
+        },
+        {
+          "cmd": "nmap -sV -p 5060 TARGET_IP",
+          "description": "Scan for SIP (VoIP) service on port 5060. Identifies VoIP infrastructure."
+        },
+        {
+          "cmd": "svmap TARGET_IP_RANGE",
+          "description": "SIPVicious svmap — scan network for SIP-enabled VoIP devices and servers."
+        }
+      ]
+    },
+    {
+      "id": "sipvicious",
+      "title": "SIPVicious — VoIP Security Tools",
+      "icon": "🛠️",
+      "description": "SIPVicious is a suite of tools for auditing SIP-based VoIP systems. Used by security researchers to identify and analyze VoIP infrastructure.",
+      "note": "Only use on systems you have permission to test. These tools are for authorized security research and OSINT on publicly exposed infrastructure.",
+      "tools": [
+        {
+          "name": "SIPVicious",
+          "description": "Suite of SIP security tools — scanner, enumerator, and cracker for VoIP systems.",
+          "link": "https://github.com/EnableSecurity/sipvicious"
+        },
+        {
+          "name": "SIPp",
+          "description": "SIP testing tool. Generate SIP traffic and test VoIP infrastructure.",
+          "link": "https://sipp.sourceforge.net/"
+        },
+        {
+          "name": "Wireshark",
+          "description": "Capture and analyze VoIP traffic. Can decode SIP and RTP protocols.",
+          "link": "https://www.wireshark.org/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "pip3 install sipvicious",
+          "description": "Install SIPVicious via pip."
+        },
+        {
+          "cmd": "svmap 192.168.1.0/24",
+          "description": "Scan a network range for SIP-enabled devices and VoIP servers."
+        },
+        {
+          "cmd": "svmap TARGET_IP -p 5060-5070",
+          "description": "Scan specific SIP port range on a target."
+        },
+        {
+          "cmd": "svwar -e100-200 TARGET_IP",
+          "description": "Enumerate SIP extensions (user accounts) on a VoIP server."
+        },
+        {
+          "cmd": "tshark -i eth0 -f 'port 5060' -w voip_capture.pcap",
+          "description": "Capture SIP traffic on port 5060 using tshark (terminal Wireshark)."
+        },
+        {
+          "cmd": "tshark -r voip_capture.pcap -Y sip",
+          "description": "Read and filter SIP packets from a captured pcap file."
+        }
+      ]
+    },
+    {
+      "id": "phone-cli-tools",
+      "title": "All Phone OSINT CLI Tools",
+      "icon": "💻",
+      "description": "Complete list of command-line tools for telephone number OSINT investigation.",
+      "tools": [
+        {
+          "name": "PhoneInfoga",
+          "description": "Most complete phone OSINT tool. Carrier, region, VoIP, online presence. Has web GUI.",
+          "link": "https://github.com/sundowndev/phoneinfoga"
+        },
+        {
+          "name": "OSINT-SPY",
+          "description": "Multi-purpose OSINT tool. Phone, email, IP, domain investigation in one tool.",
+          "link": "https://github.com/SharadKumar97/OSINT-SPY"
+        },
+        {
+          "name": "Moriarty-Project",
+          "description": "Phone number OSINT tool with multiple lookup sources.",
+          "link": "https://github.com/AzizKpln/Moriarty-Project"
+        },
+        {
+          "name": "ignorant",
+          "description": "Check if a phone number is linked to accounts on Snapchat, Instagram, and other platforms.",
+          "link": "https://github.com/megadose/ignorant"
+        },
+        {
+          "name": "social-analyzer",
+          "description": "Analyze and find social media profiles using phone, email, or username.",
+          "link": "https://github.com/qeeqbox/social-analyzer"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "git clone https://github.com/sundowndev/phoneinfoga && cd phoneinfoga && go build",
+          "description": "Build PhoneInfoga from source using Go."
+        },
+        {
+          "cmd": "pip3 install ignorant && ignorant +1234567890",
+          "description": "Install and run ignorant — check if phone is linked to Snapchat/Instagram accounts."
+        },
+        {
+          "cmd": "git clone https://github.com/AzizKpln/Moriarty-Project && cd Moriarty-Project && pip3 install -r requirements.txt",
+          "description": "Install Moriarty-Project phone OSINT tool."
+        },
+        {
+          "cmd": "python3 moriarty.py -n +1234567890",
+          "description": "Run Moriarty-Project phone investigation."
+        },
+        {
+          "cmd": "git clone https://github.com/qeeqbox/social-analyzer && cd social-analyzer && pip3 install -r requirements.txt",
+          "description": "Install social-analyzer for multi-platform profile discovery."
+        },
+        {
+          "cmd": "python3 app.py --username target_username --websites all",
+          "description": "Run social-analyzer to find profiles across all supported platforms."
+        }
+      ]
+    },
+    {
+      "id": "phone-gui-tools",
+      "title": "Phone OSINT GUI Tools & Websites",
+      "icon": "🖥️",
+      "description": "Graphical tools and websites for telephone number investigation. Easier to use than CLI tools.",
+      "tools": [
+        {
+          "name": "PhoneInfoga Web UI",
+          "description": "PhoneInfoga has a built-in web interface. Run phoneinfoga serve and open in browser.",
+          "link": "https://github.com/sundowndev/phoneinfoga"
+        },
+        {
+          "name": "WhoCalledMe",
+          "description": "Community reverse phone lookup with spam reports and carrier info.",
+          "link": "https://whocalled.com/"
+        },
+        {
+          "name": "Truecaller",
+          "description": "Largest phone number database. Especially powerful for South Asian numbers.",
+          "link": "https://www.truecaller.com/"
+        },
+        {
+          "name": "NumLookup",
+          "description": "Free phone number lookup with carrier and line type info.",
+          "link": "https://www.numlookup.com/"
+        },
+        {
+          "name": "SpyDialer",
+          "description": "Free reverse phone lookup. Can sometimes play voicemail greetings.",
+          "link": "https://www.spydialer.com/"
+        },
+        {
+          "name": "CallerSmart",
+          "description": "Reverse phone lookup with community ratings and spam detection.",
+          "link": "https://www.callersmart.com/"
+        },
+        {
+          "name": "800notes",
+          "description": "Community phone number database. Find reports about unknown callers.",
+          "link": "https://800notes.com/"
+        },
+        {
+          "name": "Sync.me",
+          "description": "Reverse phone lookup using social media data.",
+          "link": "https://sync.me/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "phoneinfoga serve -p 8080",
+          "description": "Start PhoneInfoga web GUI. Open http://localhost:8080 in browser."
+        },
+        {
+          "cmd": "https://www.spydialer.com/default.aspx?n=1234567890",
+          "description": "SpyDialer direct lookup URL. May reveal voicemail greeting."
+        },
+        {
+          "cmd": "https://800notes.com/Phone.aspx/+1-234-567-8901",
+          "description": "800notes lookup — community reports about a phone number."
+        }
+      ]
+    },
+    {
+      "id": "advanced-phone-techniques",
+      "title": "Advanced Phone OSINT Techniques",
+      "icon": "⚡",
+      "description": "Advanced techniques for telephone number investigation that go beyond basic reverse lookup.",
+      "note": "These techniques are for educational purposes and authorized investigations only. Always act ethically and legally.",
+      "commands": [
+        {
+          "cmd": "curl 'https://api.twilio.com/2010-04-01/Accounts/ACCOUNT_SID/IncomingPhoneNumbers.json' -u ACCOUNT_SID:AUTH_TOKEN",
+          "description": "Twilio API — list phone numbers registered to an account. Useful for understanding VoIP infrastructure."
+        },
+        {
+          "cmd": "dig +short $(echo '1234567890' | rev | sed 's/./&./g')e164.arpa TXT",
+          "description": "ENUM DNS lookup — maps a phone number to internet services (SIP, email, web) via DNS."
+        },
+        {
+          "cmd": "https://www.google.com/search?q=\"1234567890\" -site:whitepages.com -site:spokeo.com",
+          "description": "Search for a phone number excluding major people search sites to find organic mentions."
+        },
+        {
+          "cmd": "https://www.google.com/search?q=\"(123) 456-7890\" OR \"123-456-7890\" OR \"1234567890\"",
+          "description": "Search all common phone number formats simultaneously."
+        },
+        {
+          "cmd": "curl -s 'https://api.hackertarget.com/reverseiplookup/?q=TARGET_IP' | grep -i phone",
+          "description": "Sometimes reverse IP lookup reveals phone numbers in WHOIS records."
+        },
+        {
+          "cmd": "whois +1234567890",
+          "description": "WHOIS lookup for a phone number — may reveal registration info for some number ranges."
+        },
+        {
+          "cmd": "https://www.fcc.gov/consumers/guides/robocalls",
+          "description": "FCC database — check if a US number has been reported for robocalling or fraud."
+        },
+        {
+          "cmd": "site:linkedin.com \"+1234567890\"",
+          "description": "Search LinkedIn for a phone number — sometimes appears in public profiles or posts."
+        },
+        {
+          "cmd": "https://www.google.com/search?q=\"+1234567890\" filetype:pdf OR filetype:docx",
+          "description": "Search for phone number in publicly indexed documents."
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "PhoneInfoga",
+      "description": "Most complete open-source phone OSINT tool with web GUI.",
+      "link": "https://github.com/sundowndev/phoneinfoga",
+      "type": "tool"
+    },
+    {
+      "name": "ThatsThem",
+      "description": "Comprehensive free people search engine.",
+      "link": "https://thatsthem.com/",
+      "type": "tool"
+    },
+    {
+      "name": "TruePeopleSearch",
+      "description": "Free people search — name, phone, address lookup.",
+      "link": "https://www.truepeoplesearch.com/",
+      "type": "tool"
+    },
+    {
+      "name": "Truecaller",
+      "description": "Largest phone number database. Best for South Asian numbers.",
+      "link": "https://www.truecaller.com/",
+      "type": "tool"
+    },
+    {
+      "name": "Numverify",
+      "description": "Phone validation and carrier lookup API.",
+      "link": "https://numverify.com/",
+      "type": "tool"
+    },
+    {
+      "name": "ignorant",
+      "description": "Check if phone number is linked to Snapchat/Instagram accounts.",
+      "link": "https://github.com/megadose/ignorant",
+      "type": "tool"
+    },
+    {
+      "name": "SIPVicious",
+      "description": "VoIP security audit tools — SIP scanner and enumerator.",
+      "link": "https://github.com/EnableSecurity/sipvicious",
+      "type": "tool"
+    },
+    {
+      "name": "SpyDialer",
+      "description": "Free reverse phone lookup. May reveal voicemail greetings.",
+      "link": "https://www.spydialer.com/",
+      "type": "tool"
+    },
+    {
+      "name": "OpenCNAM",
+      "description": "Caller ID and CNAM lookup API.",
+      "link": "https://www.opencnam.com/",
+      "type": "tool"
+    },
+    {
+      "name": "social-analyzer",
+      "description": "Multi-platform social profile discovery tool.",
+      "link": "https://github.com/qeeqbox/social-analyzer",
+      "type": "tool"
+    }
+  ]
+}
