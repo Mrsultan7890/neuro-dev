@@ -1,0 +1,445 @@
+{
+  "chapter": 8,
+  "title": "URL Manipulation & Video OSINT",
+  "description": "Deep dive into video investigation techniques, URL parameter manipulation, privacy wrappers, metadata extraction, Geospatial Intelligence (GeoINT), CLI comment scraping, JSON parsing with jq, dark web TOR stream scraping, stream reverse engineering, and AI acoustic forensics.",
+  "sections": [
+    {
+      "id": "url-manipulation-basics",
+      "title": "URL Anatomy & Parameter Manipulation",
+      "icon": "🔗",
+      "description": "URL manipulation is a foundational OSINT technique. Websites use URL parameters to identify content, pass session data, and specify endpoints. Understanding these parameters allows investigators to navigate directly to specific resources, bypass UI restrictions, or extract raw identifiers.",
+      "topics": [
+        "Domain vs Path vs Query String — understanding URL components",
+        "Query parameters — identified by '?' and separated by '&'",
+        "Extracting unique identifiers (e.g., Video ID 'v=OcXfMo-zuHc') for cross-platform research",
+        "Session tracking & footprints — how cookies, IP addresses, and logged-in states affect results",
+        "Unauthenticated research — why personal user sessions introduce bias and risk identity leaks"
+      ],
+      "commands": [
+        {
+          "cmd": "https://www.youtube.com/watch?v=OcXfMo-zuHc",
+          "description": "Standard YouTube URL. '/watch' is the endpoint, 'v=' is the query parameter, and 'OcXfMo-zuHc' is the unique video ID."
+        },
+        {
+          "cmd": "v=OcXfMo-zuHc",
+          "description": "Isolate the video ID parameter to pass into specialized OSINT tools and third-party wrappers."
+        },
+        {
+          "cmd": "https://img.youtube.com/vi/OcXfMo-zuHc/maxresdefault.jpg",
+          "description": "Direct URL manipulation to access the highest-resolution thumbnail image without opening the video player."
+        }
+      ]
+    },
+    {
+      "id": "privacy-wrappers",
+      "title": "Privacy Wrappers & Alternative Interfaces",
+      "icon": "🛡️",
+      "description": "Direct interaction with major platforms exposes browser cookies, session identifiers, and IP addresses. OSINT investigators use alternative web wrappers and privacy frontends to inspect content while minimizing direct session tracking.",
+      "note": "Third-party wrappers route requests through alternative infrastructure, reducing direct tracking by original platforms. However, wrapper services themselves log IP requests, so use them as privacy tools, not absolute anonymity guarantees.",
+      "tools": [
+        {
+          "name": "nsfwyoutube.com",
+          "description": "Third-party web wrapper interface for viewing YouTube videos by modifying domain prefix in the URL.",
+          "link": "https://nsfwyoutube.com/"
+        },
+        {
+          "name": "Invidious (yewtu.be)",
+          "description": "Open-source privacy-focused YouTube frontend with no ads, tracking, or JS bloat.",
+          "link": "https://yewtu.be/"
+        },
+        {
+          "name": "Piped",
+          "description": "Modern open-source YouTube alternative focusing on privacy, fast load times, and custom instances.",
+          "link": "https://piped.video/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://nsfwyoutube.com/watch?v=OcXfMo-zuHc",
+          "description": "Replace 'youtube.com' with 'nsfwyoutube.com' in the URL to inspect content via wrapper."
+        },
+        {
+          "cmd": "https://yewtu.be/watch?v=OcXfMo-zuHc",
+          "description": "Load video via Invidious instance to prevent Google session tracking and cookie assignment."
+        }
+      ]
+    },
+    {
+      "id": "youtube-metadata",
+      "title": "YouTube Metadata & Channel Analysis",
+      "icon": "📊",
+      "description": "Video pages contain rich metadata beyond what is visible in the standard interface. Extracted metadata provides crucial investigative leads including exact upload timestamps, tags, category IDs, thumbnail links, and uploader channel metrics.",
+      "tools": [
+        {
+          "name": "MattW YouTube Metadata Viewer",
+          "description": "Comprehensive online tool for extracting complete structured metadata from YouTube videos, channels, and playlists.",
+          "link": "https://mattw.io/youtube-metadata"
+        },
+        {
+          "name": "yt-dlp",
+          "description": "Feature-rich CLI tool to extract raw JSON metadata, stream details, and transcripts directly from video URLs.",
+          "link": "https://github.com/yt-dlp/yt-dlp"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://mattw.io/youtube-metadata",
+          "description": "Open MattW Metadata Viewer in browser and enter target YouTube video URL or ID."
+        },
+        {
+          "cmd": "yt-dlp --dump-json \"https://www.youtube.com/watch?v=OcXfMo-zuHc\" > video_metadata.json",
+          "description": "Dump complete raw JSON metadata for a video into a local file for offline analysis."
+        },
+        {
+          "cmd": "cat video_metadata.json | jq '{title: .title, upload_date: .upload_date, uploader: .uploader, tags: .tags}'",
+          "description": "Parse key metadata fields (title, upload date, uploader, tags) from raw yt-dlp JSON dump."
+        }
+      ]
+    },
+    {
+      "id": "geoint-video",
+      "title": "Geospatial Intelligence (GeoINT) on Video",
+      "icon": "📍",
+      "description": "GeoINT involves connecting digital video evidence to physical real-world locations. By combining geographic location coordinates with relevant search keywords, investigators can identify video footage recorded around protests, incidents, or crime scenes.",
+      "note": "Location coordinates returned by tools must be verified against actual video content. Geotags can be set manually by uploaders or assigned by platform heuristics.",
+      "topics": [
+        "Location + Keyword search strategy (e.g. City: Delhi, Keyword: protest)",
+        "Mapping video search results visually across geographical regions",
+        "Extracting raw coordinates, channel IDs, upload times, and location tags",
+        "Cross-verification methodology: Matching satellite imagery, street signs, building architecture, and sun angles"
+      ],
+      "tools": [
+        {
+          "name": "MattW YouTube Geofind",
+          "description": "Search YouTube videos by geographic location, custom radius, and search keywords with interactive map plotting.",
+          "link": "https://mattw.io/youtube-geofind"
+        },
+        {
+          "name": "SunCalc",
+          "description": "Calculate sun position, shadows, and light angles for precise date/time/location verification.",
+          "link": "https://www.suncalc.org/"
+        },
+        {
+          "name": "Google Earth Pro",
+          "description": "Desktop GIS application providing 3D historical satellite imagery and elevation profiles.",
+          "link": "https://www.google.com/earth/versions/#earth-pro"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "https://mattw.io/youtube-geofind",
+          "description": "Open YouTube Geofind. Enter target city (e.g. Delhi) and keyword (e.g. protest) to map location-tagged videos."
+        },
+        {
+          "cmd": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=LATITUDE,LONGITUDE",
+          "description": "Open Google Street View directly at target coordinates for visual ground verification."
+        }
+      ]
+    },
+    {
+      "id": "comment-extraction",
+      "title": "Downloading YouTube Comments via CLI",
+      "icon": "💬",
+      "description": "Comment sections often hold critical context, eyewitness reports, timestamps, user leads, and links. Using CLI comment downloaders enables rapid bulk extraction without manual scrolling or API key limitations.",
+      "tools": [
+        {
+          "name": "youtube-comment-downloader",
+          "description": "Fast command-line tool to scrape all comments and replies from YouTube videos into structured JSON format.",
+          "link": "https://github.com/egor-tisin/youtube-comment-downloader"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "pip install youtube-comment-downloader --system-break-package",
+          "description": "Install youtube-comment-downloader CLI package."
+        },
+        {
+          "cmd": "youtube-comment-downloader --url \"https://youtube.com/watch?v=OcXfMo-zuHc\" --output \"output.json\"",
+          "description": "Download all video comments and save structured results to output.json file."
+        },
+        {
+          "cmd": "youtube-comment-downloader --url \"https://youtube.com/watch?v=OcXfMo-zuHc\" --limit 500 --output \"output.json\"",
+          "description": "Limit comment collection to 500 entries for faster analysis."
+        }
+      ]
+    },
+    {
+      "id": "json-parsing-jq",
+      "title": "Processing & Parsing JSON Data with jq",
+      "icon": "⚙️",
+      "description": "Data collection is distinct from data analysis. Raw JSON files can be cluttered and noisy. Using command-line JSON processors like 'jq' allows investigators to extract clean, formatted fields (Author, Timestamp, Comment Text) and pivot into further leads.",
+      "note": "A single comment does not provide final proof. Treat comment signatures as leads to pivot across social platforms: Username → Profile → Other Platforms → Additional Evidence.",
+      "tools": [
+        {
+          "name": "jq",
+          "description": "Lightweight and flexible command-line JSON processor for filtering, transforming, and parsing data.",
+          "link": "https://jqlang.github.io/jq/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "cat output.json",
+          "description": "Display raw JSON comment data in terminal output."
+        },
+        {
+          "cmd": "jq -r '\"Author: \" + .author + \" | Time: \" + .time + \" | Text: \" + .text' output.json",
+          "description": "Parse raw JSON comments into clean human-readable 'Author | Time | Text' format."
+        },
+        {
+          "cmd": "jq -r 'select(.text | test(\"keyword\"; \"i\")) | .author + \": \" + .text' output.json",
+          "description": "Filter comments containing a specific target keyword (case-insensitive)."
+        },
+        {
+          "cmd": "jq -r '.author' output.json | sort | uniq -c | sort -nr | head -n 10",
+          "description": "Analyze top 10 most frequent commenters across the dataset."
+        }
+      ]
+    },
+    {
+      "id": "darkweb-video-scraping",
+      "title": "Dark Web & Onion Video Investigation",
+      "icon": "🧅",
+      "description": "Advanced techniques for investigating hidden video services on the TOR network (.onion sites). Routing tools through SOCKS5 proxies prevents IP leakage and allows safe extraction of unindexed video metadata.",
+      "note": "Always maintain strict operational security (OPSEC) when investigating hidden services. Use isolated virtual environments and route all network traffic through dedicated TOR daemons.",
+      "topics": [
+        "SOCKS5 proxy configuration via local TOR SOCKS port (127.0.0.1:9050)",
+        "Scraping video streams and raw files from .onion hidden service mirrors",
+        "Investigating TOR video gateways, stream servers, and hidden forums",
+        "Preventing direct IP exposure during deep web media analysis"
+      ],
+      "tools": [
+        {
+          "name": "TOR Network Proxy",
+          "description": "SOCKS5 network proxy for routing investigation requests through the TOR onion router.",
+          "link": "https://www.torproject.org/"
+        },
+        {
+          "name": "Ahmia Search Engine",
+          "description": "Search index for finding content and hidden services on the TOR network.",
+          "link": "https://ahmia.fi/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "curl --socks5-hostname 127.0.0.1:9050 \"http://targetdomain.onion/video.mp4\" -o onion_video.mp4",
+          "description": "Download a video file from a .onion hidden service via local TOR SOCKS5 proxy."
+        },
+        {
+          "cmd": "yt-dlp --proxy \"socks5://127.0.0.1:9050\" \"http://targetdomain.onion/watch?v=123\"",
+          "description": "Extract stream metadata from a hidden service video URL using yt-dlp over SOCKS5 proxy."
+        }
+      ]
+    },
+    {
+      "id": "wayback-deleted-video",
+      "title": "Archived & Deleted Video Recovery",
+      "icon": "🕵️",
+      "description": "When target videos are deleted or set to private, historical internet archives contain cached metadata, snapshots, index tags, thumbnail images, and transcripts.",
+      "tools": [
+        {
+          "name": "Wayback Machine CDX API",
+          "description": "Query Archive.org index to find all historical snapshots and metadata records for a video URL.",
+          "link": "https://archive.org/help/wayback_api.php"
+        },
+        {
+          "name": "WaybackPy",
+          "description": "Python CLI tool and library for interacting programmatically with the Wayback Machine API.",
+          "link": "https://github.com/akamhy/waybackpy"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "curl -s \"http://web.archive.org/cdx/search/cdx?url=youtube.com/watch?v=OcXfMo-zuHc&output=json\"",
+          "description": "Query Wayback Machine CDX API for all archived snapshots of a specific video URL."
+        },
+        {
+          "cmd": "waybackpy --url \"https://www.youtube.com/watch?v=OcXfMo-zuHc\" --oldest",
+          "description": "Fetch the oldest available archived snapshot of a target video URL."
+        }
+      ]
+    },
+    {
+      "id": "hls-stream-extraction",
+      "title": "Reverse Engineering HLS & DASH Streams",
+      "icon": "⚡",
+      "description": "Modern video portals use HTTP Live Streaming (HLS `.m3u8`) and Dynamic Adaptive Streaming (DASH `.mpd`) to deliver segmented video streams. Reverse engineering network requests allows downloading raw unencrypted media feeds.",
+      "tools": [
+        {
+          "name": "Streamlink",
+          "description": "Command-line utility that extracts video streams from various services and redirects them to custom players or files.",
+          "link": "https://github.com/streamlink/streamlink"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "streamlink \"hls://https://example.com/live/stream.m3u8\" best -o stream_capture.mp4",
+          "description": "Capture live HLS video stream directly into an MP4 file using Streamlink."
+        },
+        {
+          "cmd": "ffmpeg -i \"https://example.com/playlist.m3u8\" -c copy -bsf:a aac_adtstoasc output.mp4",
+          "description": "Download and reassemble segmented HLS .m3u8 video chunks into a single MP4 video file."
+        }
+      ]
+    },
+    {
+      "id": "acoustic-stego-whisper",
+      "title": "Acoustic Forensics & AI Transcription",
+      "icon": "🎙️",
+      "description": "Advanced audio channel investigation includes spectral frequency analysis for hidden steganography watermarks, environmental noise profiling, and automated AI speech-to-text indexing.",
+      "tools": [
+        {
+          "name": "OpenAI Whisper",
+          "description": "State-of-the-art open-source AI speech recognition model for offline video audio transcription.",
+          "link": "https://github.com/openai/whisper"
+        },
+        {
+          "name": "Audacity",
+          "description": "Open-source audio editor providing spectrogram view for visual frequency and steganography analysis.",
+          "link": "https://www.audacityteam.org/"
+        },
+        {
+          "name": "Binwalk",
+          "description": "Forensic tool for searching embedded file signatures and payload data inside audio/video files.",
+          "link": "https://github.com/ReFirmLabs/binwalk"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "whisper target_audio.mp3 --model medium --language English --output_format txt",
+          "description": "Run OpenAI Whisper AI speech recognition offline to create searchable text transcripts from video audio."
+        },
+        {
+          "cmd": "binwalk -e target_audio.wav",
+          "description": "Scan video audio tracks for hidden embedded files or steganographic payloads and extract them."
+        }
+      ]
+    },
+    {
+      "id": "stream-endpoint-forensics",
+      "title": "Live Stream & API Endpoint Forensics",
+      "icon": "🛰️",
+      "description": "Different web platforms expose specialized backend API endpoints during live video streaming. Analyzing these public API endpoints provides access to raw broadcast tokens, metadata, stream parameters, and host account details.",
+      "commands": [
+        {
+          "cmd": "https://api.periscope.tv/api/v2/getBroadcastPublic?token=1djGXMpDewzJZ",
+          "description": "Example Periscope/Twitter public broadcast API endpoint for extracting live-stream metadata and token info."
+        },
+        {
+          "cmd": "curl -s \"https://api.periscope.tv/api/v2/getBroadcastPublic?token=1djGXMpDewzJZ\" | jq .",
+          "description": "Fetch live-stream broadcast parameters and format response using jq."
+        }
+      ]
+    },
+    {
+      "id": "video-verification-suite",
+      "title": "Video Verification & Frame Analysis Tools",
+      "icon": "🔬",
+      "description": "Comprehensive suite of specialized tools for keyframe fragmentation, reverse image searching, metadata extraction, and video authenticity verification.",
+      "tools": [
+        {
+          "name": "InVID / WeVerify",
+          "description": "Must-have browser extension for video verification, keyframe splitting, reverse image search, and Twitter video analysis.",
+          "link": "https://www.invid-project.eu/tools-and-services/invid-verification-plugin/"
+        },
+        {
+          "name": "ExifTool",
+          "description": "Extract hidden EXIF metadata, camera specifications, and creation dates from video files.",
+          "link": "https://exiftool.org/"
+        },
+        {
+          "name": "FFmpeg",
+          "description": "Universal CLI framework for video frame extraction, audio separation, and format conversion.",
+          "link": "https://ffmpeg.org/"
+        }
+      ],
+      "commands": [
+        {
+          "cmd": "ffmpeg -i input_video.mp4 -vf fps=1/5 frame_%04d.png",
+          "description": "Extract 1 video frame every 5 seconds for reverse image searching."
+        },
+        {
+          "cmd": "exiftool input_video.mp4",
+          "description": "Extract embedded metadata, GPS coordinates, and camera creation tags from a video file."
+        },
+        {
+          "cmd": "ffmpeg -i input_video.mp4 -vn -acodec copy output_audio.mp3",
+          "description": "Extract audio track from video file for transcription or acoustic analysis."
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "MattW YouTube Metadata Viewer",
+      "description": "Deep metadata viewer for YouTube videos, channels, and playlists.",
+      "link": "https://mattw.io/youtube-metadata",
+      "type": "tool"
+    },
+    {
+      "name": "MattW YouTube Geofind",
+      "description": "Geographic map search tool for YouTube videos.",
+      "link": "https://mattw.io/youtube-geofind",
+      "type": "tool"
+    },
+    {
+      "name": "youtube-comment-downloader",
+      "description": "CLI tool for downloading YouTube video comments.",
+      "link": "https://github.com/egor-tisin/youtube-comment-downloader",
+      "type": "tool"
+    },
+    {
+      "name": "jq JSON Processor",
+      "description": "Command-line tool for parsing and filtering JSON data.",
+      "link": "https://jqlang.github.io/jq/",
+      "type": "tool"
+    },
+    {
+      "name": "nsfwyoutube.com",
+      "description": "Privacy-focused wrapper interface for viewing YouTube videos.",
+      "link": "https://nsfwyoutube.com/",
+      "type": "tool"
+    },
+    {
+      "name": "Invidious (yewtu.be)",
+      "description": "Open-source privacy frontend for YouTube.",
+      "link": "https://yewtu.be/",
+      "type": "tool"
+    },
+    {
+      "name": "Piped",
+      "description": "Privacy-focused open-source YouTube alternative web app.",
+      "link": "https://piped.video/",
+      "type": "tool"
+    },
+    {
+      "name": "OpenAI Whisper AI",
+      "description": "Open-source speech recognition model for audio transcription.",
+      "link": "https://github.com/openai/whisper",
+      "type": "tool"
+    },
+    {
+      "name": "Streamlink",
+      "description": "CLI utility to extract streams from web services.",
+      "link": "https://github.com/streamlink/streamlink",
+      "type": "tool"
+    },
+    {
+      "name": "InVID / WeVerify Plugin",
+      "description": "Browser extension for video verification & keyframe search.",
+      "link": "https://www.invid-project.eu/tools-and-services/invid-verification-plugin/",
+      "type": "tool"
+    },
+    {
+      "name": "SunCalc",
+      "description": "Sun position and shadow analysis for GeoINT verification.",
+      "link": "https://www.suncalc.org/",
+      "type": "tool"
+    },
+    {
+      "name": "yt-dlp",
+      "description": "Command-line video and metadata extraction tool.",
+      "link": "https://github.com/yt-dlp/yt-dlp",
+      "type": "tool"
+    }
+  ]
+}

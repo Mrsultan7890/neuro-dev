@@ -270,10 +270,16 @@
                     <span class="ch-num">Ch 7</span>
                 </a>
             </li>
+            <li class="series-item">
+                <a href="#" onclick="loadChapter(8, this); return false;">
+                    <span>URL &amp; Video OSINT</span>
+                    <span class="ch-num">Ch 8</span>
+                </a>
+            </li>
             <li class="series-item coming-soon">
                 <a href="#">
                     <span>Coming Soon</span>
-                    <span class="ch-num">Ch 8</span>
+                    <span class="ch-num">Ch 9</span>
                 </a>
             </li>
         </ul>
@@ -444,8 +450,12 @@
         return str.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     }
 
-    // Load chapter 1 on start
-    loadChapter(1, document.querySelector('.series-item a.active'));
+    // Load chapter based on URL parameter (?ch=8) or default to chapter 1
+    const urlParams = new URLSearchParams(window.location.search);
+    const chParam = parseInt(urlParams.get('ch') || urlParams.get('chapter'));
+    const initialCh = (chParam >= 1 && chParam <= 8) ? chParam : 1;
+    const initialLink = document.querySelectorAll('.series-item a')[initialCh - 1];
+    loadChapter(initialCh, initialLink);
 
     // Close nav on outside click
     document.addEventListener('click', function(e) {
