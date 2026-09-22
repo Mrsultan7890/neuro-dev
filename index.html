@@ -95,6 +95,8 @@
         }
         .nav-links a:hover { color: var(--text); background: var(--bg3); }
         .nav-links a.active { color: var(--green); background: rgba(0,255,136,0.1); }
+        .nav-links .tool-link { color: #ff6b8d; border: 1px solid rgba(255,56,100,0.25); background: rgba(255,56,100,0.08); }
+        .nav-links .tool-link:hover { color: #fff; border-color: rgba(255,56,100,0.55); background: rgba(255,56,100,0.16); }
         .nav-links .dict-btn {
             background: var(--green);
             color: #000 !important;
@@ -237,6 +239,43 @@
         .feature-card h3 { font-size: 16px; margin-bottom: 8px; }
         .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
 
+        /* FEATURED TOOL */
+        .featured-tool {
+            padding: 80px 20px;
+            background:
+                radial-gradient(circle at 12% 20%, rgba(255,56,100,0.1), transparent 28%),
+                radial-gradient(circle at 88% 80%, rgba(0,255,136,0.1), transparent 28%),
+                var(--bg);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .featured-tool-box {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+            gap: 36px;
+            align-items: center;
+            padding: 34px;
+            border: 1px solid rgba(255,56,100,0.28);
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(17,35,27,0.92), rgba(9,18,15,0.94));
+            box-shadow: 0 22px 60px rgba(0,0,0,0.24);
+        }
+        .featured-tool-copy .section-kicker { color: #ff6b8d; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+        .featured-tool-copy h2 { margin: 8px 0 12px; font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.15; }
+        .featured-tool-copy h2 span { color: transparent; background: linear-gradient(100deg, var(--green), var(--blue), #ff6b8d); -webkit-background-clip: text; background-clip: text; }
+        .featured-tool-copy p { color: var(--muted); margin-bottom: 22px; }
+        .tool-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .tool-badges span { padding: 5px 10px; border: 1px solid var(--line, #30363d); border-radius: 20px; color: var(--muted); background: var(--bg2); font-size: 12px; }
+        .tool-badges span:first-child { color: #ff6b8d; border-color: rgba(255,56,100,0.3); background: rgba(255,56,100,0.08); }
+        .tool-badges span:nth-child(2) { color: var(--green); border-color: rgba(0,255,136,0.3); background: rgba(0,255,136,0.08); }
+        .tool-console { padding: 20px; border: 1px solid rgba(0,255,136,0.25); border-radius: 14px; background: #030806; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; line-height: 1.9; box-shadow: inset 0 0 30px rgba(0,255,136,0.04); }
+        .tool-console .prompt { color: var(--green); }
+        .tool-console .cmd { color: #e6edf3; }
+        .tool-console .ok { color: var(--green); }
+        .tool-console .warn { color: #ff6b8d; }
+
         /* CATEGORIES */
         .categories { padding: 80px 20px; }
         .cats-grid {
@@ -353,6 +392,7 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="resources.html">Resources</a></li>
+            <li><a href="sentinel-octopus.html" class="tool-link"><i class="fas fa-microchip"></i> Sentinel Octopus</a></li>
             <li><a href="dictionary.html" class="dict-btn"><i class="fas fa-book"></i> Dictionary</a></li>
         </ul>
         <div class="hamburger" id="hamburger" onclick="toggleNav()">
@@ -437,6 +477,34 @@
                 <h3>Regularly Updated</h3>
                 <p>New terms added regularly as the AI and security landscape evolves.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED TOOL -->
+<section class="featured-tool">
+    <div class="featured-tool-box">
+        <div class="featured-tool-copy">
+            <span class="section-kicker">Featured security tool</span>
+            <h2>Explore <span>Sentinel Octopus</span></h2>
+            <p>See how SentinelOctopus-0.5B connects autonomous reasoning, OSINT, bug bounty workflows, threat intelligence, and local-first reporting inside Sentinel Pro.</p>
+            <div class="tool-badges">
+                <span>AI security platform</span>
+                <span>ReAct loop</span>
+                <span>Local-first</span>
+                <span>Authorized use only</span>
+            </div>
+            <a href="sentinel-octopus.html" class="btn-primary">
+                <i class="fas fa-microchip"></i>
+                Open Sentinel Octopus
+            </a>
+        </div>
+        <div class="tool-console" aria-label="Sentinel Octopus terminal preview">
+            <div><span class="prompt">sentinel-pro&gt;</span> <span class="cmd">status</span></div>
+            <div class="ok">[+] Brain: ready</div>
+            <div class="ok">[+] Model: SentinelOctopus-0.5B</div>
+            <div class="warn">[!] Scope: authorization required</div>
+            <div><span class="prompt">sentinel-pro&gt;</span> <span class="cmd">brain investigate &lt;target&gt;</span></div>
         </div>
     </div>
 </section>

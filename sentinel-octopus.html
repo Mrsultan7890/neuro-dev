@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sentinel Octopus documentation — an autonomous AI security platform for authorized OSINT, bug bounty, threat intelligence, and reporting workflows.">
+    <meta name="keywords" content="Sentinel Octopus, Sentinel Pro, OSINT, bug bounty, threat intelligence, AI security, cybersecurity documentation">
+    <meta name="author" content="Neuro-Dev">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#07110d">
+    <meta property="og:title" content="Sentinel Octopus — Neuro-Dev">
+    <meta property="og:description" content="Setup documentation, command reference, capabilities, and responsible-use guidance for Sentinel Octopus.">
+    <meta property="og:type" content="website">
+    <title>Sentinel Octopus — Neuro-Dev</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #050908;
+            --bg-soft: #09120f;
+            --panel: #0d1a15;
+            --panel-2: #11231b;
+            --line: #1d3a2e;
+            --line-bright: #2d5a44;
+            --green: #00ff88;
+            --green-soft: #59ffb0;
+            --green-dim: rgba(0, 255, 136, 0.12);
+            --red: #ff3864;
+            --red-soft: #ff6b8d;
+            --red-dim: rgba(255, 56, 100, 0.12);
+            --cyan: #57e6c9;
+            --text: #e8fff3;
+            --muted: #91aa9e;
+            --muted-2: #6f8a7d;
+            --code: #030806;
+            --shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 12% 8%, rgba(0, 255, 136, 0.11), transparent 27rem),
+                radial-gradient(circle at 88% 18%, rgba(255, 56, 100, 0.09), transparent 25rem),
+                linear-gradient(180deg, #050908 0%, #07100d 48%, #050908 100%);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.16;
+            background-image:
+                linear-gradient(rgba(0, 255, 136, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.08) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: linear-gradient(to bottom, black, transparent 82%);
+        }
+
+        a { color: inherit; }
+
+        nav {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 1000;
+            height: 64px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.22);
+            background: rgba(5, 9, 8, 0.9);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+        }
+
+        .nav-inner {
+            max-width: 1180px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .nav-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--green);
+            font-size: 1.08rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-logo i { color: var(--red); text-shadow: 0 0 15px rgba(255, 56, 100, 0.55); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 12px;
+            border-radius: 7px;
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s, background 0.2s, border-color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+        .nav-links a.active { color: var(--green); background: var(--green-dim); border: 1px solid rgba(0, 255, 136, 0.18); }
+        .nav-links .tool-link { color: var(--red-soft); border: 1px solid rgba(255, 56, 100, 0.22); background: var(--red-dim); }
+        .nav-links .tool-link:hover { color: #fff; border-color: rgba(255, 56, 100, 0.5); background: rgba(255, 56, 100, 0.18); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 7px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--green);
+            transition: transform 0.25s, opacity 0.25s;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 106px 0 70px;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 590px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+            align-items: center;
+            gap: 54px;
+            padding: 56px 0 72px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            right: -80px;
+            top: 34px;
+            border: 1px solid rgba(255, 56, 100, 0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 0 28px rgba(255, 56, 100, 0.035), 0 0 0 62px rgba(0, 255, 136, 0.025);
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 56, 100, 0.32);
+            border-radius: 999px;
+            color: var(--red-soft);
+            background: var(--red-dim);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow .pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 12px var(--red);
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            max-width: 720px;
+            font-size: clamp(2.5rem, 6vw, 4.8rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            font-weight: 900;
+        }
+
+        .gradient-text {
+            color: transparent;
+            background: linear-gradient(100deg, var(--green) 8%, var(--cyan) 45%, var(--red-soft) 94%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .hero-copy {
+            max-width: 650px;
+            margin: 22px 0 28px;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .hero-copy strong { color: var(--text); font-weight: 700; }
+
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 34px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 46px;
+            padding: 0 19px;
+            border-radius: 9px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+        .btn-green { color: #02120a; background: linear-gradient(135deg, var(--green), #63ffb2); box-shadow: 0 10px 28px rgba(0, 255, 136, 0.18); }
+        .btn-green:hover { box-shadow: 0 14px 34px rgba(0, 255, 136, 0.28); }
+        .btn-ghost { color: var(--text); border: 1px solid var(--line-bright); background: rgba(13, 26, 21, 0.72); }
+        .btn-ghost:hover { border-color: var(--red); background: var(--red-dim); }
+
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 22px; }
+        .hero-meta-item { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.82rem; }
+        .hero-meta-item i { color: var(--green); }
+        .hero-meta-item.danger i { color: var(--red); }
+
+        .console-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 136, 0.28);
+            border-radius: 16px;
+            background: rgba(3, 8, 6, 0.86);
+            box-shadow: var(--shadow), inset 0 0 42px rgba(0, 255, 136, 0.04);
+        }
+
+        .console-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(120deg, rgba(0, 255, 136, 0.08), transparent 36%, rgba(255, 56, 100, 0.08));
+        }
+
+        .console-top {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            font: 0.76rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); box-shadow: 0 0 9px rgba(255, 56, 100, 0.6); }
+        .dot:nth-child(2) { background: #f4c145; box-shadow: 0 0 9px rgba(244, 193, 69, 0.5); }
+        .dot:nth-child(3) { background: var(--green); box-shadow: 0 0 9px rgba(0, 255, 136, 0.6); }
+        .console-title { margin-left: 7px; }
+
+        .console-body { position: relative; padding: 22px; font: 0.82rem/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .console-line { display: flex; gap: 10px; margin-bottom: 13px; }
+        .prompt { color: var(--green); white-space: nowrap; }
+        .command { color: #d8fff0; }
+        .comment { color: var(--muted-2); }
+        .output { color: var(--cyan); }
+        .alert { color: var(--red-soft); }
+        .cursor { display: inline-block; width: 7px; height: 14px; margin-left: 3px; vertical-align: -2px; background: var(--green); animation: blink 1s steps(1) infinite; }
+
+        .section { padding: 74px 0; border-top: 1px solid rgba(29, 58, 46, 0.72); }
+        .section.alt { background: rgba(9, 18, 15, 0.56); }
+        .section-head { max-width: 720px; margin-bottom: 34px; }
+        .section-kicker { display: block; margin-bottom: 8px; color: var(--red-soft); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+        .section-title { margin-bottom: 10px; font-size: clamp(1.75rem, 3.5vw, 2.55rem); line-height: 1.15; letter-spacing: -0.035em; }
+        .section-desc { color: var(--muted); font-size: 0.98rem; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+        .stat-card { position: relative; overflow: hidden; padding: 22px; border: 1px solid var(--line); border-radius: 13px; background: linear-gradient(145deg, rgba(17, 35, 27, 0.92), rgba(9, 18, 15, 0.92)); }
+        .stat-card::after { content: ""; position: absolute; width: 90px; height: 90px; right: -28px; top: -28px; border: 1px solid rgba(0, 255, 136, 0.15); border-radius: 50%; }
+        .stat-value { color: var(--green); font-size: 1.8rem; font-weight: 900; line-height: 1.1; }
+        .stat-label { margin-top: 7px; color: var(--muted); font-size: 0.82rem; }
+        .stat-card.red .stat-value { color: var(--red-soft); }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+
+        .panel {
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: linear-gradient(145deg, rgba(17, 35, 27, 0.9), rgba(7, 15, 12, 0.9));
+            transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+        }
+
+        .panel:hover { transform: translateY(-3px); border-color: var(--line-bright); box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2); }
+        .panel-icon { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin-bottom: 16px; border: 1px solid rgba(0, 255, 136, 0.25); border-radius: 10px; color: var(--green); background: var(--green-dim); font-size: 1.1rem; }
+        .panel.red .panel-icon { color: var(--red-soft); border-color: rgba(255, 56, 100, 0.28); background: var(--red-dim); }
+        .panel h3 { margin-bottom: 8px; font-size: 1.05rem; line-height: 1.3; }
+        .panel p, .panel li { color: var(--muted); font-size: 0.9rem; }
+        .panel ul { padding-left: 18px; }
+        .panel li + li { margin-top: 5px; }
+        .panel .tag { display: inline-block; margin-top: 14px; padding: 4px 8px; border-radius: 5px; color: var(--green-soft); background: var(--green-dim); font: 0.7rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .panel.red .tag { color: var(--red-soft); background: var(--red-dim); }
+
+        .architecture { display: grid; grid-template-columns: 1fr; gap: 0; max-width: 820px; margin: 0 auto; }
+        .arch-node { position: relative; padding: 20px 24px; border: 1px solid var(--line); border-radius: 12px; background: rgba(13, 26, 21, 0.9); text-align: center; }
+        .arch-node + .arch-node { margin-top: 27px; }
+        .arch-node + .arch-node::before { content: ""; position: absolute; left: 50%; top: -28px; width: 1px; height: 28px; background: linear-gradient(var(--green), var(--red)); }
+        .arch-node .arch-label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .arch-node strong { color: var(--text); font-size: 1.02rem; }
+        .arch-node p { margin-top: 6px; color: var(--muted); font-size: 0.84rem; }
+        .arch-node.green { border-color: rgba(0, 255, 136, 0.3); box-shadow: inset 0 0 25px rgba(0, 255, 136, 0.04); }
+        .arch-node.red { border-color: rgba(255, 56, 100, 0.3); box-shadow: inset 0 0 25px rgba(255, 56, 100, 0.04); }
+
+        .split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
+        .checklist { list-style: none; }
+        .checklist li { position: relative; padding: 10px 0 10px 30px; border-bottom: 1px solid rgba(29, 58, 46, 0.65); color: var(--muted); font-size: 0.9rem; }
+        .checklist li:last-child { border-bottom: 0; }
+        .checklist li::before { content: "\f00c"; position: absolute; left: 0; top: 10px; color: var(--green); font-family: "Font Awesome 6 Free"; font-weight: 900; }
+        .checklist li.warn::before { content: "\f071"; color: var(--red); }
+
+        .code-block { overflow: auto; margin: 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 11px; color: #d8fff0; background: var(--code); font: 0.82rem/1.75 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; box-shadow: inset 0 0 24px rgba(0, 255, 136, 0.025); }
+        .code-block .shell { color: var(--green); user-select: none; }
+        .code-block .flag { color: var(--cyan); }
+        .code-block .muted { color: var(--muted-2); }
+        .code-block .danger { color: var(--red-soft); }
+
+        .command-table { width: 100%; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; }
+        .command-table th, .command-table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+        .command-table th { color: var(--red-soft); background: rgba(255, 56, 100, 0.07); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; }
+        .command-table td:first-child { width: 42%; color: var(--green-soft); font: 0.8rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .command-table td:last-child { color: var(--muted); font-size: 0.86rem; }
+        .command-table tr:last-child td { border-bottom: 0; }
+
+        .notice { display: flex; gap: 13px; padding: 17px 19px; border: 1px solid; border-radius: 11px; background: rgba(255, 56, 100, 0.06); }
+        .notice.green { border-color: rgba(0, 255, 136, 0.28); background: var(--green-dim); }
+        .notice.red { border-color: rgba(255, 56, 100, 0.34); background: var(--red-dim); }
+        .notice i { flex: 0 0 auto; margin-top: 2px; color: var(--green); }
+        .notice.red i { color: var(--red-soft); }
+        .notice strong { display: block; margin-bottom: 4px; color: var(--text); }
+        .notice p { color: var(--muted); font-size: 0.88rem; }
+
+        .model-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+        .model-chip { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: rgba(3, 8, 6, 0.5); }
+        .model-chip span { display: block; color: var(--muted-2); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+        .model-chip strong { display: block; margin-top: 3px; color: var(--green-soft); font: 0.86rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+        .footer { padding: 34px 0 44px; border-top: 1px solid var(--line); }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 0.84rem; }
+        .footer-logo { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 800; }
+        .footer-logo i { color: var(--red); }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+        .footer-links a { color: var(--muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--green); }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; gap: 38px; }
+            .console-card { max-width: 620px; }
+            .stats-grid, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .split { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-inner { padding: 0 16px; }
+            .hamburger { display: flex; }
+            .nav-links { position: absolute; top: 64px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 4px; padding: 12px 16px 18px; border-bottom: 1px solid var(--line); background: rgba(5, 9, 8, 0.98); }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 11px 12px; }
+            .page { width: min(100% - 28px, 1180px); padding-top: 88px; }
+            .hero { padding: 35px 0 50px; }
+            h1 { font-size: clamp(2.35rem, 13vw, 3.35rem); }
+            .hero-copy { font-size: 0.98rem; }
+            .hero-actions .btn { width: 100%; }
+            .section { padding: 56px 0; }
+            .stats-grid, .grid-2, .grid-3, .grid-4, .model-strip { grid-template-columns: 1fr; }
+            .command-table { min-width: 680px; }
+            .command-table-wrap { overflow-x: auto; }
+            .footer-inner { align-items: flex-start; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"><i class="fas fa-brain"></i> Neuro-Dev</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="dictionary.html"><i class="fas fa-book"></i> Dictionary</a></li>
+                <li><a href="sentinel-octopus.html" class="active tool-link"><i class="fas fa-microchip"></i> Sentinel Octopus</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <main class="page">
+        <section class="hero">
+            <div>
+                <div class="eyebrow"><span class="pulse"></span> Security AI / OSINT Platform</div>
+                <h1>Meet <span class="gradient-text">Sentinel Octopus</span></h1>
+                <p class="hero-copy"><strong>SentinelOctopus-0.5B</strong> is the security-focused AI model inside the Sentinel Pro ecosystem. It helps connect reconnaissance, threat intelligence, tool selection, command generation, and reporting into one local-first workflow.</p>
+                <div class="hero-actions">
+                    <a href="#setup" class="btn btn-green"><i class="fas fa-terminal"></i> View setup guide</a>
+                    <a href="#commands" class="btn btn-ghost"><i class="fas fa-list-ul"></i> Command reference</a>
+                </div>
+                <div class="hero-meta">
+                    <div class="hero-meta-item"><i class="fas fa-shield-alt"></i> Local-first core</div>
+                    <div class="hero-meta-item"><i class="fas fa-network-wired"></i> OSINT + bug bounty</div>
+                    <div class="hero-meta-item danger"><i class="fas fa-user-shield"></i> Authorization required</div>
+                </div>
+            </div>
+
+            <div class="console-card" aria-label="Sentinel Pro terminal preview">
+                <div class="console-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="console-title">sentinel-pro — authorized session</span></div>
+                <div class="console-body">
+                    <div class="console-line"><span class="prompt">sentinel-pro&gt;</span><span class="command">status</span></div>
+                    <div class="console-line"><span class="output">[+] Brain:</span><span class="output">ready · ReAct loop online</span></div>
+                    <div class="console-line"><span class="output">[+] Model:</span><span class="output">SentinelOctopus-0.5B v1.1</span></div>
+                    <div class="console-line"><span class="output">[+] Scope:</span><span class="output">authorized target only</span></div>
+                    <div class="console-line"><span class="prompt">sentinel-pro&gt;</span><span class="command">brain investigate example.com</span></div>
+                    <div class="console-line"><span class="comment"># Reason → Act → Observe → Reason again</span></div>
+                    <div class="console-line"><span class="alert">[!] Always confirm scope before execution.</span></div>
+                    <div class="console-line"><span class="prompt">sentinel-pro&gt;</span><span class="command">help</span><span class="cursor"></span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <span class="section-kicker">Platform overview</span>
+                <h2 class="section-title">One brain for the security workflow</h2>
+                <p class="section-desc">Sentinel Pro combines an autonomous reasoning loop, a local tool controller, machine-learning modules, and a unified evidence database. Sentinel Octopus provides the model layer for classification, planning, and generation.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-value">0.5B</div><div class="stat-label">Qwen2.5-Coder fine-tuned model</div></div>
+                <div class="stat-card"><div class="stat-value">19</div><div class="stat-label">Autonomous agents in the platform</div></div>
+                <div class="stat-card red"><div class="stat-value">34K+</div><div class="stat-label">Payload vectors documented by SentinelProxy</div></div>
+                <div class="stat-card"><div class="stat-value">4</div><div class="stat-label">Languages across the codebase</div></div>
+            </div>
+        </section>
+
+        <section class="section alt">
+            <div class="section-head">
+                <span class="section-kicker">What it can do</span>
+                <h2 class="section-title">Capabilities at a glance</h2>
+                <p class="section-desc">Use the platform as a documentation and workflow reference for authorized research. Each module should be configured and operated within a written scope.</p>
+            </div>
+            <div class="grid-3">
+                <div class="panel"><div class="panel-icon"><i class="fas fa-brain"></i></div><h3>Autonomous reasoning</h3><p>ReAct planning connects observations with the next safe, scoped action. The loop can retry, adapt, and record decisions.</p><span class="tag">ReAct · planning · retry</span></div>
+                <div class="panel red"><div class="panel-icon"><i class="fas fa-search"></i></div><h3>OSINT collection</h3><p>Collects public information across domains, people, emails, phones, usernames, breaches, and infrastructure sources.</p><span class="tag">Public sources · correlation</span></div>
+                <div class="panel"><div class="panel-icon"><i class="fas fa-bug"></i></div><h3>Web assessment</h3><p>Coordinates headers, TLS, ports, endpoints, common web checks, screenshots, and scanner integrations for authorized targets.</p><span class="tag">Bug bounty · triage</span></div>
+                <div class="panel red"><div class="panel-icon"><i class="fas fa-project-diagram"></i></div><h3>Threat intelligence</h3><p>Correlates indicators, CVEs, malware hashes, URLs, and relationships in a local graph intelligence workspace.</p><span class="tag">IOCs · graph · risk</span></div>
+                <div class="panel"><div class="panel-icon"><i class="fas fa-robot"></i></div><h3>Tool orchestration</h3><p>Sentinel Brain can chain supported Kali tools, parse their output, and preserve findings for later reporting.</p><span class="tag">PTY controller · chaining</span></div>
+                <div class="panel red"><div class="panel-icon"><i class="fas fa-file-contract"></i></div><h3>Evidence and reports</h3><p>Exports structured JSON, HTML, PDF, and text reports with evidence hashes, severity views, and remediation guidance.</p><span class="tag">Chain of custody · PDF</span></div>
+            </div>
+        </section>
+
+        <section class="section" id="architecture">
+            <div class="section-head">
+                <span class="section-kicker">Architecture</span>
+                <h2 class="section-title">How the pieces connect</h2>
+                <p class="section-desc">The model does not replace human judgment. It sits between the operator, the tool controller, and the local data layer.</p>
+            </div>
+            <div class="architecture">
+                <div class="arch-node green"><span class="arch-label">Operator scope</span><strong>Written authorization and target boundaries</strong><p>Defines what may be tested, when, and by whom.</p></div>
+                <div class="arch-node"><span class="arch-label">Sentinel Brain v2</span><strong>ReAct autonomous loop</strong><p>Reason → Act → Observe → Reason again.</p></div>
+                <div class="arch-node red"><span class="arch-label">AI model layer</span><strong>SentinelOctopus-0.5B + Groq fallback</strong><p>Threat classification, planning, commands, and report text.</p></div>
+                <div class="arch-node"><span class="arch-label">Kali Controller v2</span><strong>Local PTY tool execution</strong><p>Runs supported tools and parses their output.</p></div>
+                <div class="arch-node green"><span class="arch-label">Local data layer</span><strong>SQLite scans, findings, IOCs, memory</strong><p>Preserves decisions, evidence, and reporting context.</p></div>
+            </div>
+        </section>
+
+        <section class="section alt" id="setup">
+            <div class="split">
+                <div>
+                    <div class="section-head">
+                        <span class="section-kicker">Setup documentation</span>
+                        <h2 class="section-title">Install Sentinel Pro</h2>
+                        <p class="section-desc">The project is designed for Kali Linux and uses Python, Go, and Rust components. Review the source repository and its license before installing.</p>
+                    </div>
+                    <div class="notice red"><i class="fas fa-exclamation-triangle"></i><div><strong>Authorization comes first</strong><p>Only install and run the tooling against systems you own or have explicit written permission to assess.</p></div></div>
+                    <div style="height:18px"></div>
+                    <div class="notice green"><i class="fas fa-circle-check"></i><div><strong>Recommended baseline</strong><p>Use an isolated VM or lab network, keep snapshots, and start with status and help commands before connecting external services.</p></div></div>
+                </div>
+                <div>
+                    <div class="panel"><h3>Requirements</h3><ul class="checklist"><li>Kali Linux recommended</li><li>Python 3.10 or newer</li><li>Go 1.21 or newer</li><li>Rust and Cargo 1.70 or newer</li><li>Chromium for screenshot workflows</li><li>OpenSSL for SentinelProxy CA generation</li><li>Optional API keys for external intelligence services</li></ul></div>
+                    <div style="height:16px"></div>
+                    <div class="panel red"><h3>Before you begin</h3><ul class="checklist"><li class="warn">Create a written target scope</li><li class="warn">Use a dedicated lab or isolated environment</li><li class="warn">Review rate limits and third-party terms</li><li class="warn">Never place secrets in screenshots or reports</li></ul></div>
+                </div>
+            </div>
+
+            <div style="height:26px"></div>
+            <div class="panel">
+                <h3><i class="fas fa-download" style="color:var(--green)"></i> Installation</h3>
+                <p style="margin: 10px 0 14px">Clone the project, enter the launcher directory, run the setup script, and verify the CLI:</p>
+                <div class="code-block"><span class="shell">$ </span>git clone https://github.com/Mrsultan7890/sentinel-pro.git<br><span class="shell">$ </span>cd sentinel-pro/osints<br><span class="shell">$ </span>bash setup.sh<br><span class="shell">$ </span>sentinel --help</div>
+                <div style="margin-top:14px"><a class="btn btn-ghost" href="https://github.com/Mrsultan7890/sentinel-pro.git" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Clone repository</a></div>
+            </div>
+
+            <div class="grid-2" style="margin-top:18px">
+                <div class="panel"><h3>Build the Rust proxy components</h3><div class="code-block"><span class="shell">$ </span>cd sentinel_proxy/rust_core<br><span class="shell">$ </span>cargo build --release<br><span class="shell">$ </span>cd ../rust_fuzzer<br><span class="shell">$ </span>cargo build --release<br><span class="shell">$ </span>cd ../..</div></div>
+                <div class="panel red"><h3>Build the Go services</h3><div class="code-block"><span class="shell">$ </span>cd scraper &amp;&amp; go build -o scraper . &amp;&amp; cd ..<br><span class="shell">$ </span>cd dirbuster &amp;&amp; go build -o dirbuster . &amp;&amp; cd ..<br><span class="shell">$ </span>cd network_mapper &amp;&amp; go build -o network_mapper . &amp;&amp; cd ..</div></div>
+            </div>
+        </section>
+
+        <section class="section" id="quick-start">
+            <div class="section-head">
+                <span class="section-kicker">Quick start</span>
+                <h2 class="section-title">Start with a controlled session</h2>
+                <p class="section-desc">These examples use placeholders. Replace them only with targets included in your authorization.</p>
+            </div>
+            <div class="grid-2">
+                <div class="panel"><h3><i class="fas fa-rocket" style="color:var(--green)"></i> Interactive CLI</h3><div class="code-block"><span class="shell">$ </span>sentinel<br><span class="muted">sentinel-pro&gt; status</span><br><span class="muted">sentinel-pro&gt; help</span></div></div>
+                <div class="panel red"><h3><i class="fas fa-bullseye" style="color:var(--red-soft)"></i> Direct modes</h3><div class="code-block"><span class="shell">$ </span>sentinel --recon <span class="danger">&lt;authorized-target&gt;</span><br><span class="shell">$ </span>sentinel --bugbounty <span class="danger">&lt;authorized-domain&gt;</span><br><span class="shell">$ </span>sentinel --breach <span class="danger">&lt;authorized-identity&gt;</span></div></div>
+            </div>
+            <div style="height:18px"></div>
+            <div class="notice"><i class="fas fa-info-circle"></i><div><strong>Start small</strong><p>Run <code>status</code>, inspect configuration, and use a narrow recon scope before enabling broader automation or monitoring.</p></div></div>
+        </section>
+
+        <section class="section alt" id="commands">
+            <div class="section-head">
+                <span class="section-kicker">Command reference</span>
+                <h2 class="section-title">Common Sentinel Pro commands</h2>
+                <p class="section-desc">Command names and options can vary by version. Use <code>help</code> inside the current CLI for the authoritative local reference.</p>
+            </div>
+            <div class="command-table-wrap">
+                <table class="command-table">
+                    <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+                    <tbody>
+                        <tr><td>sentinel</td><td>Open the interactive Sentinel Pro shell.</td></tr>
+                        <tr><td>sentinel --help</td><td>Show top-level CLI options and available modes.</td></tr>
+                        <tr><td>status / help</td><td>Inspect platform status or open the command reference.</td></tr>
+                        <tr><td>brain investigate &lt;target&gt;</td><td>Run the autonomous investigation workflow for an authorized target.</td></tr>
+                        <tr><td>brain nmap -sV &lt;target&gt;</td><td>Ask the controller to run a supported service-detection command within scope.</td></tr>
+                        <tr><td>recon &lt;domain&gt;</td><td>Run the recon profile for WHOIS, DNS, subdomains, and public infrastructure checks.</td></tr>
+                        <tr><td>bugbounty &lt;domain&gt;</td><td>Run the configured web assessment workflow for an authorized program target.</td></tr>
+                        <tr><td>breach &lt;email-or-username&gt;</td><td>Check authorized identity indicators against configured breach sources.</td></tr>
+                        <tr><td>agent &lt;task&gt;</td><td>Create an agent task; review the proposed actions before execution.</td></tr>
+                        <tr><td>rl status</td><td>Show local reinforcement-learning state and Q-table statistics.</td></tr>
+                        <tr><td>monitor add &lt;target&gt;</td><td>Add a scoped target to the monitoring profile.</td></tr>
+                        <tr><td>proxy start</td><td>Start SentinelProxy and its local UI workflow.</td></tr>
+                        <tr><td>intel</td><td>Launch the Sentinel Intel graph intelligence interface.</td></tr>
+                        <tr><td>report / pdf</td><td>Generate a structured report or export the latest report to PDF.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="model">
+            <div class="section-head">
+                <span class="section-kicker">Model profile</span>
+                <h2 class="section-title">SentinelOctopus-0.5B</h2>
+                <p class="section-desc">A compact security-oriented model fine-tuned from Qwen2.5-Coder-0.5B-Instruct for the Sentinel Pro workflow.</p>
+            </div>
+            <div class="grid-2">
+                <div class="panel"><h3>Model role</h3><ul><li>Classify security text and observed signals.</li><li>Turn a natural-language task into a proposed tool sequence.</li><li>Generate commands for operator review.</li><li>Draft findings, executive summaries, and remediation text.</li><li>Support the ReAct loop with context-aware reasoning.</li></ul></div>
+                <div class="panel red"><h3>Model files</h3><p>The source project stores model artifacts under <code>models/sentineloctopus-0.5b/</code>, including weights, tokenizer files, generation configuration, chat template, and model card metadata.</p><div class="model-strip"><div class="model-chip"><span>Base</span><strong>Qwen2.5-Coder</strong></div><div class="model-chip"><span>Version</span><strong>v1.1</strong></div><div class="model-chip"><span>Focus</span><strong>Security workflows</strong></div></div></div>
+            </div>
+            <div style="height:18px"></div>
+            <div class="notice green"><i class="fas fa-lightbulb"></i><div><strong>Human review is part of the design</strong><p>Model-generated commands, findings, and remediation advice should be validated against the target scope, tool output, and current documentation before action.</p></div></div>
+        </section>
+
+        <section class="section alt" id="limitations">
+            <div class="section-head">
+                <span class="section-kicker">Disclaimer and limitations</span>
+                <h2 class="section-title">Use it responsibly and verify everything</h2>
+                <p class="section-desc">Sentinel Octopus is a powerful research and security automation project. Capability does not imply permission, accuracy, or safety in every environment.</p>
+            </div>
+            <div class="grid-2">
+                <div class="panel red"><div class="panel-icon"><i class="fas fa-gavel"></i></div><h3>Legal boundary</h3><p>Use only for authorized security testing, defensive research, education, and OSINT work. Obtain written permission before scanning, probing, or collecting data about any third-party system or person.</p></div>
+                <div class="panel"><div class="panel-icon"><i class="fas fa-flask"></i></div><h3>Experimental behavior</h3><p>Autonomous planning, machine-learning classifications, and generated commands can be incomplete or incorrect. Treat every output as a hypothesis until independently verified.</p></div>
+                <div class="panel red"><div class="panel-icon"><i class="fas fa-server"></i></div><h3>Environment dependence</h3><p>Results depend on installed tools, network access, API credentials, target configuration, rate limits, and the versions of Python, Go, Rust, and model dependencies.</p></div>
+                <div class="panel"><div class="panel-icon"><i class="fas fa-user-secret"></i></div><h3>Privacy and data handling</h3><p>OSINT and breach workflows may process sensitive personal data. Minimize collection, protect local databases, redact secrets, and follow applicable privacy and retention requirements.</p></div>
+            </div>
+            <div style="height:18px"></div>
+            <div class="notice red"><i class="fas fa-shield-alt"></i><div><strong>No warranty</strong><p>The project documentation is provided for educational and authorized professional use. The authors and Neuro-Dev do not guarantee completeness, availability, accuracy, or fitness for a particular purpose, and they are not responsible for misuse.</p></div></div>
+        </section>
+
+        <section class="section" id="configuration">
+            <div class="section-head">
+                <span class="section-kicker">Configuration</span>
+                <h2 class="section-title">API keys and local settings</h2>
+                <p class="section-desc">Core local features can run without every external key. Add only the services required for your approved workflow.</p>
+            </div>
+            <div class="grid-2">
+                <div class="panel"><h3>Environment file</h3><div class="code-block"><span class="shell">$ </span>cp .env.example .env<br><span class="shell">$ </span>nano .env<br><span class="muted"># Keep this file private and never commit it.</span></div></div>
+                <div class="panel red"><h3>CLI credential helper</h3><div class="code-block"><span class="shell">$ </span>sentinel-pro&gt; cred add GROQ_API_KEY your_key_here<br><span class="shell">$ </span>sentinel-pro&gt; cred validate</div></div>
+            </div>
+            <div style="height:18px"></div>
+            <div class="panel"><h3>Common optional services</h3><p>Depending on the modules you use, configuration may include Groq, Telegram, Shodan, NVD, VirusTotal, Have I Been Pwned, Dehashed, IntelX, LeakCheck, SecurityTrails, Censys, URLScan, BuiltWith, GreyNoise, PhishTank, GitHub, and Tor. Never paste credentials into a report, screenshot, terminal history, or public issue.</p></div>
+        </section>
+
+        <section class="section alt" id="proxy">
+            <div class="split">
+                <div>
+                    <div class="section-head">
+                        <span class="section-kicker">SentinelProxy v2</span>
+                        <h2 class="section-title">Local proxy workflow</h2>
+                        <p class="section-desc">SentinelProxy provides a local interception and analysis interface. Configure only approved browsers and targets, and keep the generated CA certificate private.</p>
+                    </div>
+                    <div class="notice"><i class="fas fa-lock"></i><div><strong>Proxy endpoint</strong><p>The documented local endpoint is <code>127.0.0.1:8082</code>. Import the generated Sentinel CA only into a dedicated lab browser profile.</p></div></div>
+                </div>
+                <div class="panel"><h3>Start the proxy</h3><div class="code-block"><span class="shell">$ </span>cd sentinel_proxy<br><span class="shell">$ </span>python3 main.py<br><br><span class="muted"># Or from the main CLI:</span><br><span class="shell">$ </span>sentinel-pro&gt; proxy start</div></div>
+            </div>
+        </section>
+
+        <section class="section" id="reporting">
+            <div class="section-head">
+                <span class="section-kicker">Reporting</span>
+                <h2 class="section-title">Turn observations into a reviewable record</h2>
+                <p class="section-desc">Reports should include scope, methodology, evidence, severity rationale, remediation, and clear separation between observed facts and model-generated interpretation.</p>
+            </div>
+            <div class="grid-3">
+                <div class="panel"><div class="panel-icon"><i class="fas fa-file-code"></i></div><h3>JSON</h3><p>Machine-readable findings, target context, severity, evidence hashes, and MITRE ATT&amp;CK mappings.</p></div>
+                <div class="panel red"><div class="panel-icon"><i class="fas fa-file-pdf"></i></div><h3>HTML and PDF</h3><p>Human-readable reports with severity colors, charts, evidence sections, timestamps, and signatures.</p></div>
+                <div class="panel"><div class="panel-icon"><i class="fas fa-list-check"></i></div><h3>Action report</h3><p>Per-finding guidance covering what happened, how to reproduce it safely, how to fix it, and useful references.</p></div>
+            </div>
+        </section>
+
+        <section class="section alt" id="safe-use">
+            <div class="section-head">
+                <span class="section-kicker">Safe operating checklist</span>
+                <h2 class="section-title">Before pressing enter</h2>
+                <p class="section-desc">A short checklist for labs, bug bounty programs, and professional engagements.</p>
+            </div>
+            <div class="grid-2">
+                <div class="panel"><h3><i class="fas fa-check-double" style="color:var(--green)"></i> Confirm</h3><ul class="checklist"><li>Written authorization and target list</li><li>Testing window and rate limits</li><li>Approved tools and data sources</li><li>Backup, rollback, and stop conditions</li><li>Private storage for credentials and evidence</li></ul></div>
+                <div class="panel red"><h3><i class="fas fa-ban" style="color:var(--red-soft)"></i> Avoid</h3><ul class="checklist"><li class="warn">Testing outside the approved scope</li><li class="warn">Running destructive actions without approval</li><li class="warn">Sharing personal data or secrets</li><li class="warn">Trusting generated commands without review</li><li class="warn">Leaving monitoring services running unintentionally</li></ul></div>
+            </div>
+        </section>
+
+        <section class="section" id="resources">
+            <div class="section-head">
+                <span class="section-kicker">Next steps</span>
+                <h2 class="section-title">Keep learning safely</h2>
+                <p class="section-desc">Use Neuro-Dev to strengthen the concepts behind the workflow, then return to the official Sentinel Pro documentation for version-specific details.</p>
+            </div>
+            <div class="grid-3">
+                <a class="panel" href="dictionary.html?cat=cybersecurity" style="text-decoration:none"><div class="panel-icon"><i class="fas fa-shield-alt"></i></div><h3>Cybersecurity dictionary</h3><p>Review core security terminology and defensive concepts.</p><span class="tag">Learn the basics</span></a>
+                <a class="panel red" href="resources.html" style="text-decoration:none"><div class="panel-icon"><i class="fas fa-compass"></i></div><h3>OSINT resources</h3><p>Explore Neuro-Dev learning resources and investigation topics.</p><span class="tag red">Open resources</span></a>
+                <a class="panel" href="index.html" style="text-decoration:none"><div class="panel-icon"><i class="fas fa-house"></i></div><h3>Back to Neuro-Dev</h3><p>Return to the AI, ML, and cybersecurity learning hub.</p><span class="tag">Home</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="page footer-inner">
+            <div class="footer-logo"><i class="fas fa-brain"></i> Neuro-Dev</div>
+            <div class="footer-links"><a href="index.html">Home</a><a href="resources.html">Resources</a><a href="dictionary.html">Dictionary</a><a href="#safe-use">Responsible use</a></div>
+            <div>&copy; 2026 Neuro-Dev · Educational documentation · Authorized security research only.</div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            document.getElementById('nav-links').classList.toggle('open');
+        }
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('nav-links');
+            const hamburger = document.getElementById('hamburger');
+            if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
+                nav.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>

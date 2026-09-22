@@ -46,6 +46,8 @@
         .nav-links a { color: var(--muted); text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 14px; transition: all 0.2s; }
         .nav-links a:hover { color: var(--text); background: var(--bg3); }
         .nav-links a.active { color: var(--green); background: rgba(0,255,136,0.1); }
+        .nav-links .tool-link { color: #ff6b8d; border: 1px solid rgba(255,56,100,0.25); background: rgba(255,56,100,0.08); }
+        .nav-links .tool-link:hover { color: #fff; border-color: rgba(255,56,100,0.55); background: rgba(255,56,100,0.16); }
         .nav-links .dict-btn { background: var(--green); color: #000 !important; font-weight: 600; }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
         .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
@@ -214,6 +216,7 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="resources.html" class="active">Resources</a></li>
+            <li><a href="sentinel-octopus.html" class="tool-link"><i class="fas fa-microchip"></i> Sentinel Octopus</a></li>
             <li><a href="dictionary.html" class="dict-btn"><i class="fas fa-book"></i> Dictionary</a></li>
         </ul>
         <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
