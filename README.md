@@ -1,101 +1,55 @@
-# Neuro-Dev - Ethical Hacking Course in Roman Urdu
+# Neuro-Dev Learning Hub
 
 ## Overview
-Neuro-Dev ek complete ethical hacking course website hai jo Roman Urdu mein banai gayi hai. Yeh specially un logo ke liye hai jinke pass laptop nahi hai aur wo sirf mobile se ethical hacking seekhna chahte hain.
+Neuro-Dev is a static learning hub for AI, machine learning, and cybersecurity. It brings together a searchable dictionary, OSINT learning resources, and Sentinel Octopus documentation. Some learning material is written in Roman Urdu.
 
-## Course Modules
+## Learning Content
 
-### Module 1: Termux Basics
-- Termux installation aur setup
-- Basic commands (ls, cd, mkdir, etc.)
-- File operations
-- Package management
-- Text editors
-
-### Module 2: Termux Advanced
-- Python scripting
-- Git aur GitHub usage
-- SSH aur remote access
-- Storage permissions
-- Automation scripts
-
-### Module 3: NetHunter Rootless
-- NetHunter rootless installation
-- Kali Linux tools setup
-- VNC server configuration
-- Desktop environment
-- Tool verification
-
-### Module 4: NetHunter Tools
-- Nmap - network scanning
-- Metasploit basics
-- Aircrack-ng - WiFi testing
-- Sqlmap - database testing
-- Burp Suite mobile
-- Social engineering tools
-
-### Module 5: Networking Course
-- Network fundamentals
-- IP addressing aur subnetting
-- Port scanning techniques
-- Network reconnaissance
-- Vulnerability assessment
-- Practical examples
-
-### Module 6: Web Application Security
-- OWASP Top 10 vulnerabilities
-- SQL Injection testing
-- XSS attacks aur prevention
-- CSRF attacks
-- Web application reconnaissance
-- Burp Suite advanced usage
-
-### Module 7: Mobile Security & OSINT
-- Android app security testing
-- APK analysis aur reverse engineering
-- Social media intelligence gathering
-- Google dorking techniques
-- Information gathering methods
-- Digital footprint analysis
+- **AI/ML and cybersecurity dictionary**: 500+ terms organized by topic and searchable in the browser.
+- **OSINT series**: Eight chapters covering research concepts, setup, and tools.
+- **Sentinel Octopus**: Project overview, setup guidance, command reference, and responsible-use notes.
+- **Additional projects**: Links to CipherPoint CTF practice and Learn Shadow Code.
+- **Social profiles**: YouTube `@whoistheblackhat`, Instagram `@who_is_the_black_hat`, and Telegram `@neuroshade`.
 
 ## Features
 
-- **Roman Urdu Content**: Har command aur concept Roman Urdu mein explain kiya gaya hai
-- **Mobile Friendly**: Responsive design jo mobile pe perfect work karta hai
-- **Copy Commands**: Har command ke saath copy button - ek click mein copy
-- **Step by Step**: Basic se advanced tak systematic learning
-- **Interactive**: Modern UI with smooth animations
-- **Free Hosting**: GitHub Pages ya Netlify pe host kar sakte hain
+- **Searchable reference**: Find dictionary terms and browse by category.
+- **Responsive layouts**: Read and navigate the site on mobile, tablet, or desktop.
+- **Practical resources**: Chapter guides include commands and copy controls.
+- **No build step**: Host the static files directly on GitHub Pages, Netlify, or another static host.
 
-## File Structure
+## Project Structure
+
+This is a static site with no package manager or build step. Each HTML page can
+be hosted directly on GitHub Pages, Netlify, or any static web host.
 
 ```
 neuro-dev/
-├── index.html              # Main homepage
-├── styles.css              # Main CSS styles
-├── script.js               # Main JavaScript
-├── courses/
-│   ├── course-styles.css   # Course page styles
-│   ├── course-script.js    # Course navigation JS
-│   ├── termux-basics.html  # Module 1
-│   ├── nethunter-rootless.html # Module 3
-│   └── [other modules]     # Remaining modules
-└── README.md               # This file
+├── index.html              # Learning hub
+├── dictionary.html         # Searchable AI/ML and security dictionary
+├── resources.html          # OSINT learning resources
+├── sentinel-octopus.html   # Sentinel Octopus documentation
+├── site.css                # Shared design tokens, navigation, and UI styles
+├── site.js                 # Shared accessible mobile navigation
+├── cyber-theme.css         # Shared page theme
+└── data/                   # Dictionary terms and OSINT chapter content
 ```
 
+Page-specific content remains in its HTML file, while shared navigation
+behavior and design primitives live in `site.js` and `site.css`.
 
 
-## Technologies Used
+
+## Technologies
 
 - **HTML5**: Semantic markup
-- **CSS3**: Modern styling with animations
-- **JavaScript**: Interactive functionality
+- **CSS3**: Shared design tokens and responsive page styles
+- **JavaScript**: Shared accessible navigation and page interactions
 - **Font Awesome**: Icons
-- **Responsive Design**: Mobile-first approach
 
 ## Educational Purpose
 
-Yeh website sirf educational purposes ke liye hai. Ethical hacking seekhiye aur responsible use kariye. Kisi bhi illegal activity ke liye use na kariye.
+This site is for education and authorized security research. Use the material responsibly and do not test systems without permission.
 
 ## License
 
@@ -103,4 +57,4 @@ This project is for educational purposes only. Use responsibly.
 
 ---
 
-**Note**: Yeh ek complete educational platform hai jo mobile users ko ethical hacking sikhane ke liye design kiya gaya hai. Har module mein practical examples aur copy-paste commands hain jo learning ko easy banate hain.
+**Note**: OSINT material can involve personal information. Minimize collection and follow applicable privacy, authorization, and data-retention requirements.

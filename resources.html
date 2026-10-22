@@ -6,7 +6,7 @@
     <meta name="description" content="OSINT Series — Learn Open Source Intelligence from basics to advanced. Tools, commands, and resources.">
     <meta name="keywords" content="OSINT, open source intelligence, cybersecurity, investigation, Firefox privacy, ClamAV">
     <meta name="author" content="Neuro-Dev">
-    <meta name="theme-color" content="#00ff88">
+    <meta name="theme-color" content="#0b121a">
     <title>OSINT Series — Neuro-Dev Resources</title>
     <meta name="google-adsense-account" content="ca-pub-4588604494241390">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4588604494241390" crossorigin="anonymous"></script>
@@ -208,21 +208,24 @@
         }
     </style>
     <link rel="stylesheet" href="cyber-theme.css">
+    <link rel="stylesheet" href="site.css">
 </head>
 <body>
 
-<nav>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<nav aria-label="Main navigation">
     <div class="nav-inner">
         <a href="index.html" class="nav-logo"><i class="fas fa-brain"></i> Neuro-Dev</a>
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="resources.html" class="active">Resources</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="resources.html" class="active" aria-current="page">Resources</a></li>
             <li><a href="sentinel-octopus.html" class="tool-link"><i class="fas fa-microchip"></i> Sentinel Octopus</a></li>
             <li><a href="dictionary.html" class="dict-btn"><i class="fas fa-book"></i> Dictionary</a></li>
         </ul>
-        <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+        <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
             <span></span><span></span><span></span>
-        </div>
+        </button>
     </div>
 </nav>
 
@@ -290,7 +293,7 @@
     </aside>
 
     <!-- MAIN -->
-    <main class="main-content" id="main-content">
+    <main class="main-content" id="main-content" tabindex="-1">
         <div class="loading">
             <i class="fas fa-circle-notch"></i>
             Loading chapter...
@@ -300,23 +303,24 @@
 </div>
 
 <!-- AD -->
-<div style="text-align:center;padding:20px;background:var(--bg2);border-top:1px solid var(--border)">
-    <div style="color:var(--muted);font-size:11px;margin-bottom:8px">Advertisement</div>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4588604494241390" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<div class="ad-slot">
+    <div class="ad-slot-label">Advertisement</div>
+    <ins class="adsbygoogle" data-ad-client="ca-pub-4588604494241390" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<footer style="background:var(--bg);border-top:1px solid var(--border);padding:32px 20px;text-align:center">
-    <div style="max-width:1100px;margin:0 auto">
-        <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:18px;font-weight:700;color:var(--green);margin-bottom:16px">
-            <i class="fas fa-brain"></i> Neuro-Dev
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <a class="footer-logo" href="index.html"><i class="fas fa-brain" aria-hidden="true"></i> Neuro-Dev</a>
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html">Home</a><a href="index.html#projects">Projects</a><a href="resources.html">Resources</a><a href="dictionary.html">Dictionary</a>
+        </nav>
+        <div class="contact-links" aria-label="Contact and social profiles">
+            <a href="https://youtube.com/@whoistheblackhat" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i><span>YouTube</span><span class="contact-handle">@whoistheblackhat</span></a>
+            <a href="https://instagram.com/who_is_the_black_hat" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span><span class="contact-handle">@who_is_the_black_hat</span></a>
+            <a href="https://t.me/neuroshade" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i><span>Telegram</span><span class="contact-handle">@neuroshade</span></a>
         </div>
-        <div style="display:flex;justify-content:center;gap:12px;margin-bottom:16px">
-            <a href="https://youtube.com/@sentinel_octopus" target="_blank" rel="noopener" title="YouTube" style="width:36px;height:36px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:15px;transition:all 0.2s" onmouseover="this.style.borderColor='#00ff88';this.style.color='#00ff88'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'"><i class="fab fa-youtube"></i></a>
-            <a href="https://instagram.com/who_is_the_black_hat" target="_blank" rel="noopener" title="Instagram" style="width:36px;height:36px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:15px;transition:all 0.2s" onmouseover="this.style.borderColor='#00ff88';this.style.color='#00ff88'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/neuroshade" target="_blank" rel="noopener" title="Telegram" style="width:36px;height:36px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:15px;transition:all 0.2s" onmouseover="this.style.borderColor='#00ff88';this.style.color='#00ff88'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'"><i class="fab fa-telegram"></i></a>
-        </div>
-        <div style="font-size:13px;color:var(--muted)">&copy; 2026 Neuro-Dev &mdash; For educational purposes only.</div>
+        <p class="footer-copy">&copy; 2026 Neuro-Dev &mdash; For educational purposes only.</p>
     </div>
 </footer>
 
@@ -461,12 +465,7 @@
     const initialLink = document.querySelectorAll('.series-item a')[initialCh - 1];
     loadChapter(initialCh, initialLink);
 
-    // Close nav on outside click
-    document.addEventListener('click', function(e) {
-        const nav = document.getElementById('nav-links');
-        const ham = document.getElementById('hamburger');
-        if (nav && ham && !nav.contains(e.target) && !ham.contains(e.target)) nav.classList.remove('open');
-    });
 </script>
+<script src="site.js" defer></script>
 </body>
 </html>
